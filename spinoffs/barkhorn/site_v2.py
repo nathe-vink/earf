@@ -2077,8 +2077,8 @@ MANTLE_COVER_LINE = ('Lift-off dust cover in the deck&rsquo;s own tint: 3 mm cas
 MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
-CORE_LM = {'red': 45, 'orange': 51, 'amber': 63, 'green': 30, 'blue': 39, 'violet': 33, 'ice': 95, 'black': 35}      # lm out of the ball (photometry.txt 3205c545)
-HEMI_LM = {'red': 334, 'orange': 353, 'amber': 419, 'green': 282, 'blue': 308, 'violet': 281, 'ice': 521, 'black': 260}   # lm out, the corrected method (r32-lamps-final 3205c545, photometry.txt)
+CORE_LM = {'red': 45, 'orange': 51, 'amber': 63, 'green': 38, 'blue': 39, 'violet': 33, 'ice': 95, 'black': 35}      # lm out of the ball (photometry.txt 3205c545)
+HEMI_LM = {'red': 307, 'orange': 353, 'amber': 380, 'green': 282, 'blue': 270, 'violet': 258, 'ice': 521, 'black': 260}   # lm out, the corrected method (r32-lamps-final 3205c545, photometry.txt)
 # the bar (r33-speaker-horn ac342ff0, approved as a direction 2026-11-12; with the new record wall 9e8ddccf): five Hemispheres over the counter, two Cores on it;
 # on /lighting as the room, and an "At the bar" view for the tints in it. More frames join ROOM as they pass.
 ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar-pendants',
@@ -2088,7 +2088,7 @@ ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar
          'Core in Ember on a bar table, lit, a wall of records behind', {'orb': ['red']})]
 # How Hemisphere lights (r32-lamps-final 8e07dda4): the cutaway with its labels, the words beside it, on every Hemisphere
 # page; the lamp over a table as a view on Ember's
-LIGHTS_DIR = 'renders/2026-11-12/barkhorn/lamp-site/legible/'
+LIGHTS_DIR = 'renders/2026-11-10/barkhorn/lamp-site/final/'   # the cutaway, its phone cut and the lamp in use, with the lamp mix (r32-lamps-final 5fa6ef94)
 LIGHTS_WORDS = ('Twenty-four LEDs sit on a ring at the center of the shade&rsquo;s mouth, on a small black disc level with the rim, and face '
                 'straight up into the shade. Their light lands on the white diffuser lining the dome: some passes out through the clear '
                 'shell and the tinted outer layer, so the shade glows in its color, and about two thirds of its light comes back down out of '
