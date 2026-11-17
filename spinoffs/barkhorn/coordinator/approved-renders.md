@@ -3144,6 +3144,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    with before | after crops.
    Stall guard: nothing stalled. Biomes: building the dispersed trail (new options shear, low_fade,
    puff_detail; proof expected about 06:15 UTC). Lamps: step 2 rendering. Next check about 90 minutes on.
+   17 Nov 06:04 UTC, THE DISPERSED TRAIL, FIRST PROOF: NOT GOOD ENOUGH TO SHOW AS A CHOICE (biomes lane, r48-biomes
+   dba7cf79e3, renders/2026-11-17/barkhorn/habitats/smoke-f-dispersed-proof.jpg and -notes.md with the
+   reference links; about 2 h; its own verdict: neither variant reads as a trail). References: trains minutes
+   old are far wider than what made them, widest and most sheared high up, kinked where the wind changes with
+   height, dense in knots, fading at the edges, lit warm on the low sun's side. The scene: only the last ~10 m
+   of the 975 m trail is in frame, 10 to 20 m from the camera, inside the column's depth. Variants A (2.4x
+   wide, optical depth ~0.4, kinks, drift) and B (3.8x, ~0.3): at site size a gray curdled patch right of the
+   column (A) and barely anything (B); the column's thin outer smoke shows as a speckle over the see-through
+   trail. The lane proposed to soften the column (4 to 6 h for its region). I LOOKED AT THE SHEET AND DECIDED
+   OTHERWISE: the column is not touched; the fault is the trail's geometry. NEW CONCEPT ORDERED: a distant
+   train at real scale: the near band removed (minutes on, the low end is mixed into the column), a shallow
+   entry from behind the scene and to the right so that the path's vanishing point lies in the frame's sky,
+   the train from about 1.5 to 2 km of height upward, tens of kilometers long, hundreds of meters wide, kinked
+   by winds over a kilometer or more, in knots, fading out; in the picture a pale streak thin and kinked far
+   away that widens, fades and is lost before the column; the scene's own sun and sky only; kept clear of the
+   column if the speckle shows. Proof of two variants (about five minutes old; ten to fifteen), about 90
+   minutes, one report with the lane's own verdict; no full render before the owner chooses.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
