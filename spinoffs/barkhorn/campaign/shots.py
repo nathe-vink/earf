@@ -2203,7 +2203,7 @@ def _approved(s, order=None):
 
 
 LED_K = {'red': 2200, 'green': 2700, 'ice': 2700, 'violet': 3000, 'orange': 4000, 'amber': 4000, 'blue': 4000, 'black': 4000}
-CORE_LOAD = {'orange': 1.5, 'amber': 1.5, 'blue': 1.5, 'black': 0.15}       # Dust, Acid, Ice at 3x (ae86581b); Smoke light grey
+CORE_LOAD = {'orange': 1.5, 'amber': 1.5, 'blue': 1.5, 'black': 0.3, 'green': 0.3}   # Dust, Acid, Ice at 3x (ae86581b); Smoke 0.3 and Poison 0.3 (the coordinator, 17 Nov: the mix)
 LAMPS_MODULE = 'spinoffs/barkhorn/planet/afterhours/lamps_final.py'          # the bar lane's embed (r33-planet-world 92db2b2d)
 MANTLE_DEF = 'studio/products/mantle-strata-v3.json'                         # (the old embed: NEVER again, _approved refuses it)
 # Mantle comes only from r48-mantle-design's approved asset (the coordinator, 2026-11-11 15:40): the engine's own file,
