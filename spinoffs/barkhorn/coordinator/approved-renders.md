@@ -3015,6 +3015,34 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    figures; (2) the Smoke trail, thinner or as now: the trail now beside the thinner proof. My recommendations
    stand: yes to the mix, the thinner trail. Also listed, not blocking: the lossless masters, hello@earf.world,
    going public, the Hypex plate letter and the lining, the cover's color chips and custom-cast quote.
+   17 Nov 04:05 UTC, THE OWNER'S THREE DECISIONS: "Yes for matching when turned off. The smoke trail still
+   doesn't look dispersed enough. Use reference shots of stuff burning in the atmosphere or something, and
+   account for time having passed since impact. Yes go public."
+   (1) THE LAMP MIX IS APPROVED (Hemisphere Ember 1.8, Acid 5, Ice 6, Haze 1.8 times the base pour; Core
+   Poison 0.6; Smoke as decided; Dust and Fog as built). Lamps lane told: step 1, install the staged files
+   into final/ (all but the two rows and the cluster), the mix as lamp_site.py's default, pour lines and
+   BOMs, photometry.txt as the mix, one line with the commit; step 2, render once hemisphere-row, core-row
+   and the cluster with no studio lamp's outline on any lit glass, and the lit pendants that did not change
+   but still carry the discs (Dust, Poison, Fog; hero and direct); one report.
+   (2) THE SMOKE TRAIL: neither w1 nor the thinner proof. Biomes lane briefed: references first (real smoke
+   trains minutes after a bolide or a launch at dusk: width, kinks from wind shear, puffs and gaps, how
+   see-through, the low sun's color), time since impact (the fire is established and the column has risen,
+   so the trail has drifted and spread and need not run straight into the impact point), then a proof of two
+   variants on one sheet (dispersed, clearly more dispersed), about two hours, no region render before he
+   chooses. The present final stays on the site meanwhile.
+   (3) GO PUBLIC. What I found first: production is the branch main, at 856f80d70b since 29 Oct (deployment
+   dpl_BvSJ8w7xrWeQNJu5DvZ1qajWXawZ, title "EARF · Tropos"); r49-site-rc 93515206ce is 231 commits ahead and
+   0 behind, so main can be fast-forwarded; www.earf.world is the production domain (earf.world redirects to
+   it) and is outside Vercel's sign-in wall, which covers every other deployment; the site sends "noindex,
+   nofollow" (header and robots meta) on main and on r49: LEFT AS IT IS, the owner to decide on search
+   engines; the domain's DNS (at Vercel) has no MX record, so MAIL TO hello@earf.world BOUNCES TODAY (the
+   site public since 29 Oct shows the address too): raised with the owner, the address on the site unchanged.
+   Site lane told: fast-forward main to exactly 93515206ce (the commit he previewed), no Vercel tool, no
+   vercel.json change, one report with the production deployment and what www.earf.world serves; from then on
+   nothing to main without my word.
+   Speaker lane told: test the pendants' regions of the six planet-bar frames with the mix (Hemisphere Ember
+   1.8 and Acid 5; Dust and the Cores unchanged), no final re-renders, one report with present | mix crops
+   and a proposal; CORE_LOAD 'black' and 'green' to 0.3.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
