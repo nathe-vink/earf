@@ -3204,6 +3204,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    lane prepares the no-trail version as a CANDIDATE under new names (both near trail pieces off, sun at 0,
    everything else as w1, full resolution, 48 samples, feathered into the w1 master, finish.py v1.1, audit);
    the present final files are not replaced; it goes onto the site only if he chooses it.
+   17 Nov 10:08 UTC, THE NO-TRAIL CANDIDATE IS RENDERED AND CHECKED (biomes lane, r48-biomes 0ffe803ac7, about 45 min:
+   renders/2026-11-12/barkhorn/habitats/smoke-f-notrail-portrait.jpg and -finish.jpg, 2400x3000; comparison
+   renders/2026-11-17/barkhorn/habitats/smoke-f-notrail-vs-w1.jpg; the present final files untouched). Build:
+   the saved w1 build with both near trail pieces removed, nothing added; sun 0, clip 12 km, 48 samples, step
+   2; region x 1350 to 2400, rows 0 to 1250, feathered over 48 px on its left and bottom edges; audit exit 0,
+   no lamps, 19 emitters as in w1, nothing hidden. MY CHECK at full size: the column's right flank is soft,
+   the sky right of it clean, sparks and fire as before, no seam at the feather bands (mean difference 1.06
+   and 1.57 levels there). Outside the region the two finished files are NOT bit-identical as the lane said:
+   zero-mean pixel noise (grass patch: mean 0.00, deviation 2.9, 99th percentile 11), no shift, and after an
+   8 px blur a mean of 0.27 and nowhere over 2 levels, so nothing visible changed. It passes. NOT ON THE SITE:
+   the owner has the choice (no trail / keep the present trail / more time on a distant one) and was shown the
+   whole frame, the trail now beside no trail. On his "no trail": site lane swaps the source for the home
+   tile, the color page and Tropos's Out view to the candidate's -finish file; preview, check, live.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
