@@ -3112,6 +3112,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    500 mails a day), add earf.world with his inbox as the destination; then I add the two MX records and
    the SPF record in Vercel DNS and we test. His inbox address is never put in DNS or in any request from
    here. Noted for him: a reply from his inbox shows his own address unless "send as" is set up later.
+   17 Nov 04:36 UTC, THE COPY FIX IS LIVE AND CHECKED. Site lane: r49 780f205296 (code r47 040e6916f6), preview
+   dpl_AmUWFrFrxFJnsgzVjLW87pgKbrpo; 21 site files. I checked the preview (home tiles, two color pages, every
+   gallery view of Tropos in Smoke, Hemisphere, Core and Mantle in Ember: captions as below, no gap where one
+   went, alt text on every picture, no page errors), moved main by a plain fast-forward 3830c41ce7..780f205296
+   (04:32 UTC), and checked the public site once it served the build (04:34 UTC): the same on home, /colors/smoke,
+   /colors/dust, Tropos in Ember, Hemisphere in Smoke, Core in Poison, Mantle in Ice; the sixteen lamp figures
+   unchanged. WHAT CHANGED. Removed: the eight place lines on the home tiles (the color's name alone stays);
+   the place caption on the eight color pages; on Tropos the captions of Out, At the bar, The amplifier,
+   Turning; on Hemisphere those of Lit, At the bar, Off, In a group, All eight; on Core those of Lit, At the
+   bar, All eight, By day; on Mantle those of In the studio, With its cover, At the bar. Shortened to the
+   fact: Hemisphere From below "The opal diffuser inside the shade."; Over a table "Half a meter over an oak
+   table."; The cap "Satin black anodized aluminum."; The rim "The opal diffuser within the rim."; Tropos
+   Horn, behind "Its compression driver, on four black posts.". Kept: Tropos Front "The 15-inch woofer, the
+   two ports, and the lining showing through the walls."; the tags "Shown in Ember." Untouched: headings
+   (also "Each color is a place."), product one-liners, color taglines, spec tables, "How it lights", alt
+   text. Views not shown on the site today were changed in the page data by the same rule.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
