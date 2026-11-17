@@ -3178,6 +3178,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    declared in the emitter list and audit as "the sun, already set for the ground, lighting only the high
    train"; the air between accounted for (far end fainter and nearer the sky's color). Then the A/B proof,
    with the whole frame at site size for one variant; no full render before the owner chooses.
+   17 Nov 08:45 UTC, stall guards at 07:10 and 08:43 UTC: nothing stalled. Speaker lane (06:23 UTC): the mottle in
+   Ember's denser bowl is not render noise: it stops falling after about 1152 samples (8-bit small-scale
+   deviation 2.33 at 384, 1.95 at 1152, 1.98 at 2304), repeats with another seed (correlation 0.72) and sits
+   under the grain with the denoiser off; the present final's bowl measures 1.7, the as-built shell at three
+   times the samples 1.5. ACCEPTED at the converged level; the mix regions are rendered at 1152 samples and
+   the as-built ones at three times each final's count; about 3 to 4 h instead of 70 min. Biomes lane (08:40
+   UTC): the high sun and the air are built; the first crops showed nothing because the train sits lower than
+   its crop window (about rows 500 to 700 at full size); A and B regions rendering at half resolution, about
+   an hour, then the sheet. Lamps lane: step 2 still rendering (its session active at 08:44 UTC).
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
