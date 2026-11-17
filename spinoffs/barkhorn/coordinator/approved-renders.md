@@ -3295,6 +3295,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    (bug 248119, fixed in Safari 17); on such a browser the custom cursor would never appear (confirmed on
    the preview with two dispatched moves that carry no movement values). Sent back 11:10 UTC: show on the
    first move whose position differs from the remembered one, with a five-point test.
+   17 Nov 11:24 UTC, THE CURSOR FIX IS LIVE (main a2d66f6e11 = r49-site-rc a2d66f6e11, r47-site-next 1ec327281c; pushed
+   11:20 UTC by a plain fast-forward from e4c4e0265d; changes: the inline script of the 21 pages, the same ten
+   lines in each, and the generator; vercel.json unchanged; the public site served it from 11:22 UTC).
+   What it does: on a mouse device the dot and ring stay hidden until the pointer has truly moved (the first
+   pointermove only records its position; a later one at another position shows the cursor with the ring on
+   the pointer), they hide when the mouse leaves the window, and the position is forgotten then. It no
+   longer reads movementX or movementY. Before, Chromium's own move at load, at the pointer's resting
+   place, turned the cursor on; with no mouse position known that was the page's top-left corner.
+   MY TESTS (Chromium, 1440 x 900), on the preview dpl_v5aT91EqWmD7c4ANBixGAPvvfHuL (/, /colors/ember,
+   /tropos, /#hemisphere-ember) and again on www.earf.world (/, /#mantle-smoke): hidden at load (ring off
+   screen, opacity 0; before it sat at -17, -17 with opacity 1); after the mouse has left: one dispatched
+   move without movement values stays hidden, the same position again stays hidden, a different position
+   shows it with the ring there; a real move shows it; leaving hides it; returning shows it; a touch
+   pointermove does not move it; a click on a gallery thumbnail and on a home link leave it on; no page
+   errors; phones have no cursor. The public home page's HTML differs from before in exactly those ten
+   lines; noindex still sent. Not tested here: Safari and Firefox themselves (only Chromium is installed);
+   the logic no longer depends on anything browser-specific, and the native cursor shows whenever the
+   custom one does not.
+   STATE: every lane's work is delivered and live. Only the owner's choices remain (the Smoke trail, the
+   mail forwarder sign-up, search engines, and the older open items). The stall guard is cancelled.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
