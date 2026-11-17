@@ -821,6 +821,7 @@ def apply(web, head, rest):
         rc_marketing(p, web)
         rc_norender(p)
         rc_captions(p)
+        rc_cursor(p)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
@@ -867,6 +868,19 @@ def rc_captions(p):
             c['hab_cap'] = ''
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     p.css("#cap[hidden], .c-hab figcaption[hidden] { display: none !important }\n")
+
+
+def rc_cursor(p):
+    """The cursor hidden until the mouse truly moves (the page's own synthetic move at load, with no movement, put it in
+    the top-left corner), hidden again when the mouse leaves the window, and the ring set on the pointer when it comes back."""
+    p.sub("  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null;",
+          "  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null, snap = true;")
+    p.sub("    x = e.clientX; y = e.clientY; root.classList.add('cursor');",
+          "    if (snap && !e.movementX && !e.movementY) return;           // not a move: the browser's own at load\n"
+          "    x = e.clientX; y = e.clientY; if (snap) { rx = x; ry = y; snap = false; } root.classList.add('cursor');")
+    p.sub("  root.addEventListener('pointerleave', () => root.classList.remove('cursor'));",
+          "  const away = () => { root.classList.remove('cursor'); snap = true; };\n"
+          "  root.addEventListener('pointerleave', away); document.addEventListener('mouseout', e => { if (!e.relatedTarget) away(); });")
 
 
 # --- the release candidate (the coordinator, 2026-11-09): honest pictures only -------------------------------------
