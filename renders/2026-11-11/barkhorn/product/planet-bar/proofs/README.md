@@ -21,3 +21,9 @@ so noise and the low samples cancel: per bowl, mean and largest difference (8-bi
 
 Ember's bowl goes about 10 levels down in red and 15 in green: deeper and more saturated, with the denser shell's mottle;
 visible at site size. Acid about 5 to 9 levels darker and a little warmer: visible side by side. Dust unchanged.
+
+## lamp-mix-bowls.jpg (2026-11-17): before | after, each changed bowl at 100 %
+
+The four bar frames before (`FRAME-premix.png`) and after the lamp mix was put in by the difference method (MEASURED.md,
+"The lamp mix in four bar frames"). Each crop is the bounding box of one connected change above 8 levels, plus 10 px.
+JPEG at quality 92; the PNGs are the reference.

@@ -344,3 +344,38 @@ one with the current one. A crop render does not reproduce the banded final exac
 grown 2 px, blurred 1.5 px). 430 px change, all inside x 881–934, y 773–797; 46 by more than 8 levels, at most 23;
 nothing outside. No seam at 400 or 800 %. The shot file still names fa0c3a65: the frame is that render with the block
 taken out.
+
+## The lamp mix in four bar frames (2026-11-17, the coordinator, 05:37 and 06:24)
+
+The owner's lamp mix (Hemisphere Ember 1.8, Acid 5, blue 6, violet 1.8; Core green 0.6; Core Smoke and Poison 0.3),
+put into bar-hero, bar-backbar, bar-pendants and bar-backbar-portrait without a full re-render. mantle-bar and
+core-bar-table are unchanged. The present finals are kept beside the new ones as `FRAME-premix.png`.
+
+- **Method (the difference):** each lit shade's area was rendered twice, at the same samples and seed:
+  - once with the loadings as built (`LOAD_BUILT=1`), once with the mix (lamps at 5fa6ef946);
+  - both at 1152 samples, where the Ember bowls' mottle has converged. The mottle is the model's structure, not
+    noise: a plain bowl patch's texture std is 1.95 at 1152 samples and 1.98 at 2304.
+  - Their difference was added to the final under a soft mask grown from it: the change above 3 levels (7 px mean),
+    grown 6 px, blurred 3 px, faded to zero over the area's last 10 px. Overlapping areas share a weighted average.
+- **The areas** (full-frame px; one bowl's reflection in each of backbar and portrait counts as its own area):
+
+  | frame | areas |
+  |---|---|
+  | bar-hero | x 1150–2074, y 764–1086 |
+  | bar-backbar | x 312–928, y 514–942; x 2064–2222, y 816–956 |
+  | bar-pendants | x 202–684, y 794–1066; x 586–1082, y 1134–1456; x 1320–1846, y 716–1298; x 1710–2184, y 698–968 |
+  | bar-backbar-portrait | x 144–490, y 134–416; x 816–1466, y 42–336; x 1288–1430, y 1284–1442; x 1746–1842, y 222–310 |
+
+- **Edge check:**
+  - Difference across each area's 10 px border, levels: p99 3.0 (hero); 1.0 and 3.4 (backbar); 2.0, 2.0, 24 and 2.0
+    (pendants); 2.0, 5.0, 5.0 and 2.0 (portrait).
+  - Pendants C's 24 is its right edge (x 1846, y 739–922), which lies inside area D: the two areas' differences agree
+    there to 1.2 levels on average (p99 6, against a change of 17). The step across x 1846 in the composite averages
+    0.76 levels, against 0.72 one column in.
+  - Mean difference in the 8 px ring outside each mask: at most 0.54 levels.
+  - Nothing changes outside the areas. No seam at 100 %.
+- **Changed px:** 57,685 (hero); 55,402 (backbar); 291,260 (pendants); 65,165 (portrait).
+- **Size:** saved with PNG optimisation, lossless (pixels identical); all four under 5 MB.
+- **Audit (reaudit.py):** hidden 0, equipment 0 on the four frames' shots and on the mix renders' shots.
+- **Before | after at 100 %, bowl by bowl:** `proofs/lamp-mix-bowls.jpg`.
+- The shot files still give the loadings as built: each frame is that render with the mix's difference added.
