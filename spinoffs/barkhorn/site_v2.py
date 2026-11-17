@@ -820,9 +820,53 @@ def apply(web, head, rest):
         rc_home(p, web)
         rc_marketing(p, web)
         rc_norender(p)
+        rc_captions(p)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
+
+
+# The owner (2026-11-17): no caption that states what the picture plainly shows. Removed, not rewritten; a caption keeps
+# only a fact the picture cannot show (a material, a measure, a part's name). '' hides the caption; a view not listed
+# keeps its words. The product lines, the facts, "How it lights", the color taglines and the headings are not captions.
+CAPTIONS = {
+    'speaker': {'habitat': '', 'bar': '', 'studio-light': '', 'studio': '', 'amp': '', 'reel': '', 'turn': '',
+                'spin': 'Drag across it to turn it.',
+                'back': 'The name cut into the back and filled with color; grips in the sides.',
+                'horn-side': "The flare, the driver's pod, four slim posts.",
+                'horn-back': 'Its compression driver, on four black posts.',
+                'inside': "The woofer's motor, the batts in their voile sleeves, a port."},
+    'dome': {'hero': None, 'bar': '', 'off': '', 'cluster': '', 'row': '',
+             'below': 'The opal diffuser inside the shade.', 'table': 'Half a meter over an oak table.',
+             'cap': 'Satin black anodized aluminum.', 'rim': 'The opal diffuser within the rim.',
+             'unlit': 'Shown in Smoke, a color on hold.'},
+    'orb': {'hero': None, 'bar': '', 'row': '', 'day': '', 'unlit': 'Shown in Smoke, a color on hold.'},
+    'turntable': {'studio': '', 'cover': '', 'bar': '', 'open': '', 'detail': '',
+                  'pod': 'The motor in its own pod, clear of the plinth.'},
+}
+
+
+def rc_captions(p):
+    """The captions under the pictures: the places named only; no caption under a color page's place; the galleries'
+    captions per CAPTIONS (None: only "Shown lit in <color>" where another color stands in)."""
+    import json
+    def js(v):
+        return "(c, s) => s ? `Shown lit in ${BY[s].name}.` : ''" if v is None else json.dumps(v)
+    caps = '{' + ', '.join(f"{k}: {{{', '.join(f'{json.dumps(v)}: {js(t)}' for v, t in d.items())}}}" for k, d in CAPTIONS.items()) + '}'
+    p.sub("  document.getElementById('cap').textContent = tell(c, v);",
+          "  { const k = (CAPS[P.id] || {})[v], t = k === undefined ? tell(c, v) : typeof k === 'function' ? k(c, (vw()[v] || {}).shown) : k,\n"
+          "      e = document.getElementById('cap'); e.textContent = t; e.hidden = !t; }")
+    p.sub("const PBY = Object.fromEntries(", f"const CAPS = {caps};   // the captions the owner kept (2026-11-17)\nconst PBY = Object.fromEntries(")
+    # the color page's place: no caption
+    p.sub('<figcaption><span id="c-hab-cap"></span></figcaption>', '<figcaption hidden><span id="c-hab-cap"></span></figcaption>')
+    i = p.rest.index('const D = ') + len('const D = ')
+    j = p.rest.index(', BY = Object', i)
+    D = json.loads(p.rest[i:j])
+    for c in D['clouds']:
+        if 'hab_cap' in c:
+            c['hab_cap'] = ''
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    p.css("#cap[hidden], .c-hab figcaption[hidden] { display: none !important }\n")
 
 
 # --- the release candidate (the coordinator, 2026-11-09): honest pictures only -------------------------------------
@@ -2285,10 +2329,8 @@ FAMILY = [  # (product, route, tint, kind, line)
     ('Hemisphere', '#hemisphere-haze', 'violet', 'Pendant', 'A pendant. Half a globe of light over the table.'),
     ('Core', '#core-poison', 'green', 'Table lamp', 'A cordless table lamp. A glow, not a reading light.'),
 ]
-PLACES = [('red', 'Ember, on a lava field at dusk.'), ('orange', 'Dust, on desert sand at sunset.'), ('amber', 'Acid, on wet rock in the rain.'),
-          ('green', 'Poison, in ivy in a dark forest.'), ('blue', 'Ice, on the snow in the last sun.'),
-          ('violet', 'Haze, in dry grass on hazy hills.'), ('ice', 'Fog, on a hillside at dawn.'), ('black', 'Smoke, where a meteor just came down.')]
-PLACES_SHOWN = [x for x in PLACES if x[0] in HAB_SRC]     # a place shows once its habitat has passed
+PLACES = ['red', 'orange', 'amber', 'green', 'blue', 'violet', 'ice', 'black']   # each color's place, named and nothing more (the owner, 2026-11-17)
+PLACES_SHOWN = [k for k in PLACES if k in HAB_SRC]     # a place shows once its habitat has passed
 ARROW = ('<svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" '
          'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
@@ -2374,7 +2416,7 @@ def rc_marketing(p, web):
               '<div class="mk-wide fam pick">' + boxes + '</div><div class="wrap"><p class="mk-cap"><i class="render">Render</i></p></div></section>')
     # 4. each color a place
     places = ''.join(f'<a class="place" href="#color-{C[k]["name"].lower()}">{img(C[k]["hab"], C[k]["hab_alt"])}'
-                     f'<span class="pl-cap">{cap} <i class="render">Render</i></span></a>' for k, cap in PLACES_SHOWN)
+                     f'<span class="pl-cap">{C[k]["name"]} <i class="render">Render</i></span></a>' for k in PLACES_SHOWN)
     place = ('<section class="band mk" id="places"><div class="wrap mk-head"><h2>Each color is a place.</h2></div>'
              '<div class="mk-wide places">' + places + '</div></section>')
     # the old blocks go: the Tropos words, the lamps' and Mantle's beats
