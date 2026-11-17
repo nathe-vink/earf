@@ -202,6 +202,17 @@ def plume(bpy, name, p, kit):
         ng.inputs['Detail'].default_value = gr[2] if len(gr) > 2 else 3.0; ng.inputs['Distortion'].default_value = 0.4
         L(mp.outputs['Vector'], ng.inputs['Vector'])
         dens = math_('MULTIPLY', dens, math_('MAXIMUM', math_('MULTIPLY_ADD', ng.outputs['Fac'], 2.0 * gr[0], 1.0 - gr[0]), 0.0))
+    if p.get('box_fade'):
+        # Smoke f shower (2026-11-17): a plume seen whole from far away shows its grid's walls where the sim's soot
+        # reaches them; `box_fade` (a share of the box) fades the soot to nothing toward the sides and the top
+        bf = p['box_fade']; sepn = N('ShaderNodeSeparateXYZ'); L(tc.outputs['Generated'], sepn.inputs[0])
+        def ramp(v, a, b):
+            n = N('ShaderNodeMapRange'); n.interpolation_type = 'SMOOTHSTEP'; n.clamp = True
+            n.inputs['From Min'].default_value = a; n.inputs['From Max'].default_value = b; L(v, n.inputs['Value']); return n.outputs['Result']
+        w = math_('MULTIPLY', ramp(sepn.outputs['X'], 0.0, bf), ramp(sepn.outputs['X'], 1.0, 1.0 - bf))
+        w = math_('MULTIPLY', w, math_('MULTIPLY', ramp(sepn.outputs['Y'], 0.0, bf), ramp(sepn.outputs['Y'], 1.0, 1.0 - bf)))
+        w = math_('MULTIPLY', w, ramp(sepn.outputs['Z'], 1.0, 1.0 - bf))
+        dens = math_('MULTIPLY', dens, w)
     L(dens, vol.inputs['Density'])
     # the flame: black-body colour by how hot, as bright as it is strong; the heat a dull red glow in the smoke above it
     tk = math_('MULTIPLY_ADD', fl, p.get('hot', 1700.0) - p.get('cool', 1000.0), p.get('cool', 1000.0))
