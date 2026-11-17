@@ -3128,6 +3128,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    two ports, and the lining showing through the walls."; the tags "Shown in Ember." Untouched: headings
    (also "Each color is a place."), product one-liners, color taglines, spec tables, "How it lights", alt
    text. Views not shown on the site today were changed in the page data by the same rule.
+   17 Nov 05:37 UTC, THE LAMP MIX IN THE BAR FRAMES (speaker lane, r33-speaker-horn 7db4e2e612, sheet
+   renders/2026-11-11/barkhorn/product/planet-bar/proofs/lamp-mix-sheet.jpg; half size, 48 samples, the mix
+   against LOAD_BUILT=1 on the same lamps code 5fa6ef9464, so the noise cancels; CORE_LOAD Smoke and Poison
+   0.3 in shots.py, 5dbace487b). Mean / largest difference over the changed bowls: bar-hero Ember 20.6/132
+   and 19.9/121, Acid 11.5/79 and 11.5/74; bar-backbar Ember 18.4/118 and 14.0/91, Acid 11.3/102, reflections
+   to about 8; bar-pendants Ember 20.5/140 and 22.9/130, Acid 14.8/90 and 14.7/131 (shows most);
+   bar-backbar-portrait Ember 23.7/124, Acid 13.4/78, a reflection 8.6/60: ALL FOUR VISIBLE at site size;
+   mantle-bar (no pendant, two reflections of about 4) and core-bar-table (no Hemisphere): nothing to do; Dust
+   unchanged. The light on the room barely moves (whole-frame means 0.1 to 1.1). APPROVED: region re-renders
+   of the four frames by the lane's difference method (each bowl region twice at the final's settings, as
+   built and with the mix, the difference added under a soft mask; about 70 min against about 6 h), on three
+   conditions: Ember's bowls clean (enough samples, or the mix render itself under the mask), each region's
+   edge checked and no seam at full size, the present finals kept as -premix and the audit run; one report
+   with before | after crops.
+   Stall guard: nothing stalled. Biomes: building the dispersed trail (new options shear, low_fade,
+   puff_detail; proof expected about 06:15 UTC). Lamps: step 2 rendering. Next check about 90 minutes on.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
