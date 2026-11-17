@@ -3257,6 +3257,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    crops at 100 %, before | after: Ember deeper, Acid slightly warmer, no seam; the hero frame whole, before
    | after: nothing else moved. All pass. Site lane told to re-cut every picture that comes from the four
    (desktop hero, phone hero, "At the bar", smaller sizes, share cards) on r47 and r49; one report.
+   17 Nov 10:56 UTC, THE BAR PICTURES WITH THE LAMP MIX ARE LIVE (main d4ae55544e = r49-site-rc d4ae55544e, r47-site-next
+   2e92555842; pushed 10:52 UTC by a plain fast-forward from 0e4218930b; vercel.json unchanged; the public
+   site served them from 10:54 UTC). The site lane's cut: eight pictures and no text: home-ice-wide-1600 and
+   -2400 (the desktop hero, from bar-hero), home-bar-tall-800 and -1200 (the phone hero, from
+   bar-backbar-portrait), bar-pendants and its thumbnail ("At the bar" for Hemisphere and Core, and the
+   lighting page), tropos-bar and its thumbnail ("At the bar" on Tropos, from bar-backbar). No share card
+   comes from the four frames (og-home and the color cards are cut from the Tropos studio fronts).
+   MY CHECK: each new site picture is as close to its new frame as the old one was to the premix frame
+   (mean 1.2 to 2.0 levels at the site's size, equal within 0.02) and closer to the new frame than to the
+   premix one; away from the pendants the new and old site pictures differ by 0.6 to 1.2 levels on average
+   (the encoder); the pendants' areas viewed at 100 %, public | new, in the desktop hero, the phone hero,
+   bar-pendants and tropos-bar: Ember deeper, Acid slightly warmer, nothing else moved, no seam. Preview
+   dpl_GGqYFYJkmH4L2o6d4YEXTXrQpJkx served the eight checked files (md5) and the same home page. LIVE: the
+   eight files on www.earf.world equal the checked ones (md5); the home page's HTML is byte-identical to
+   before; the home top viewed at 1440 x 900 and 390 x 844; noindex still sent. THE LAMP MIX IS NOW
+   COMPLETE ON THE SITE.
+   Noticed during the check, sent to the site lane as one small job: og-home.jpg (the share card) has its
+   row of eight Tropos in the lower half (rows 288 to 539 of 630) under an empty top; to be centered.
+   Also seen: the custom cursor's ring (.cur-ring) sits at the page's top-left corner until the first
+   mouse move (mouse devices only; phones do not have it).
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
