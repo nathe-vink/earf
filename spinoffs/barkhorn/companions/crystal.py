@@ -102,13 +102,15 @@ SOLIDS.setdefault('acrylic-opal-formed', dict(title='Perspex GS 041 3 mm opal, o
 # about $25 to $40 a ball [E], the rate set for about $30)
 SOLIDS.setdefault('acrylic-trucast-formed', dict(title='Cast acrylic sheet 6 mm, tinted through in the speaker\'s TruCast '
                                                  'code, drape-formed over an aluminium mould, polished both faces; CUSTOM POURS (2026-11-11): Dust, '
-                                                 'Acid, Ice at 3x the chart loading; Smoke 0.6x the chart loading (2x the speakers\' own pour; 2026-11-16, matched to Hemisphere off)',
+                                                 'Acid, Ice at 3x the chart loading; Smoke 0.6x the chart loading (2x the speakers\' own pour; 2026-11-16, matched to Hemisphere off); '
+                                                 'Poison 0.6x the chart loading (the mix, the owner 2026-11-17, matched to Hemisphere off)',
                                                  density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('acrylic-opal-core', dict(title='Cast acrylic sheet 3 mm, white opal (Hemisphere\'s diffuser\'s), formed '
                                             'over an aluminium core mould', density=1.19, usd_per_cm3=0.18))
 SOLIDS.setdefault('acrylic-tint-3-formed', dict(title='Cast acrylic sheet 1/8 in, TruCast stock tint in the line\'s code, '
-                                                'drape-formed; CUSTOM POURS (2026-11-11): Dust, Acid, Ice the same dye at 3x the '
-                                                'stock loading; Smoke 1.2x the stock loading (2026-11-16, matched to Core off; was 0.3x)', density=1.19, usd_per_cm3=0.05))
+                                                'drape-formed; CUSTOM POURS (2026-11-11): Dust the same dye at 3x the stock loading; the mix (the owner '
+                                                '2026-11-17, matched to Core off): Acid 5x, Ice 6x, Ember 1.8x, Haze 1.8x the stock loading; '
+                                                'Smoke 1.2x the stock loading (2026-11-16, matched to Core off; was 0.3x)', density=1.19, usd_per_cm3=0.05))
 SOLIDS.setdefault('cast-acrylic-satin', dict(title='Black cast acrylic rod, turned, bead-blasted SATIN close to matte '
                                              '(2026-11-11; OPTION: 6061 turned, satin black anodized)', density=1.19,
                                              usd_per_cm3=0.06))
@@ -249,7 +251,8 @@ def cover_parts(p=N):
             Part('shell', shell, Machined('acrylic-tint-3-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
                  notes=['v3, the outside: 1/8 in (3 mm) stock TruCast in the line\'s code (Ember 2423, Poison 2092, Haze '
                         '2287, Dust 2422, Acid 9097, Ice 2069, Fog 0000, Smoke 2074), ' + note_formed + '; CUSTOM POURS (the owner, '
-                        '2026-11-11): Dust, Acid and Ice the same dye at 3x the stock sheet\'s loading, Smoke at 1.2x '
+                        '2026-11-11): Dust the same dye at 3x the stock sheet\'s loading; the mix (the owner, 2026-11-17, matched to Core '
+                        'switched off): Acid 5x, Ice 6x, Ember 1.8x and Haze 1.8x the stock loading; Smoke at 1.2x '
                         'the stock loading (2026-11-16, was 0.3x, the speakers\' own pour; matched to Core switched off), not stock 2074; the one '
                         'tinted layer, seen unlit, glowing lit (15 to 20 % at 3 mm for 2423 and 2092). Its mould is v2\'s '
                         'shell mould (the outer face, R 100), the sheet 1/8 in instead of 10 mm']),
@@ -652,7 +655,7 @@ def orb_parts(p=O):
                         '(no frost). Two hemispheres drape-formed from 6 mm (1/4 in) cast sheet in the speaker\'s TruCast '
                         'code for the tint (Ember 2423, Dust 2422, Acid 9097, Poison 2092, Ice 2069, Haze 2287, Fog 0000, '
                         'Smoke 2074), the chart figure held at the 6 mm wall; CUSTOM POURS (the owner, 2026-11-11): Dust, Acid and Ice '
-                        'at 3x that loading, Smoke at 0.6x the chart loading (2026-11-16, was the speakers\' own pour, 0.3x; matched to Hemisphere switched off), on the existing female mould [check with the '
+                        'at 3x that loading, Poison at 0.6x it (the mix, the owner 2026-11-17, matched to Hemisphere switched off), Smoke at 0.6x the chart loading (2026-11-16, was the speakers\' own pour, 0.3x; matched to Hemisphere switched off), on the existing female mould [check with the '
                         'former: the 6 mm wall must form on the 9 mm wall\'s mould]; joined at the equator round the core '
                         'with a polymerising acrylic cement (Acrifix 192 kind), the joint turned and polished; the Ø40 '
                         'port cut at its foot']),
@@ -854,8 +857,10 @@ NOTES_ORB = [
     'dosed batch per code, cast to match where stock will not hold it; the chips decide. Haze 2287 may be translucent '
     '(Acme lists it "Violet - Translucent"): Haze is a custom cast for the speaker, and its outer ball would be too.',
     'Colour (the owner, 2026-11-11, on the Core colour test): both lamps\' shells for Dust, Acid and Ice are custom '
-    'pours of the same dye at 3x the chart loading, and Smoke the speakers\' own pour (about 54 % through Core\'s 6 mm), '
-    'not 2074 dark gray; their LEDs 4000 K. Ember 2200 K, Poison and Fog 2700 K, Haze 3000 K, their shells unchanged.',
+    'pours of the same dye at 3x the chart loading, and Smoke a custom pour, not 2074 dark gray; their LEDs 4000 K. Ember '
+    '2200 K, Poison and Fog 2700 K, Haze 3000 K. The mix (the owner, 2026-11-17, "Yes for matching when turned off"): '
+    'Hemisphere\'s shell denser in Acid 5x, Ice 6x, Ember 1.8x and Haze 1.8x the stock loading; Core\'s ball lighter in '
+    'Poison, 0.6x the chart loading; Smoke Hemisphere 1.2x, Core 0.6x (2026-11-16); Dust and Fog as above.',
     'Cordless (the owner, 2026-10-31): three button-top LiFePO4 18650 cells (Power Sonic PSL-FP-IFR18650EC class, 14.4 Wh) '
     'on bare spring contacts in bays milled round the LED, behind a hatch underneath on four captive screws, the user\'s '
     'to replace with standard cells. It charges on its dock or from USB-C underneath at 9 V (USB PD, the 20 W adapter '

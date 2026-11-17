@@ -2,11 +2,11 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| shell | formed | 1 | Cast acrylic sheet 6 mm, tinted through in the speaker's TruCast code, drape-formed over an aluminium mould, polished both faces; CUSTOM POURS (2026-11-11): Dust, Acid, Ice at 3x the chart loading; Smoke 0.6x the chart loading (2x the speakers' own pour; 2026-11-16, matched to Hemisphere off) | 440 cm3, 170 x 170 x 167 | 1,534.01 |
+| shell | formed | 1 | Cast acrylic sheet 6 mm, tinted through in the speaker's TruCast code, drape-formed over an aluminium mould, polished both faces; CUSTOM POURS (2026-11-11): Dust, Acid, Ice at 3x the chart loading; Smoke 0.6x the chart loading (2x the speakers' own pour; 2026-11-16, matched to Hemisphere off); Poison 0.6x the chart loading (the mix, the owner 2026-11-17, matched to Hemisphere off) | 440 cm3, 170 x 170 x 167 | 1,534.01 |
 | core | formed | 1 | Cast acrylic sheet 3 mm, white opal (Hemisphere's diffuser's), formed over an aluminium core mould | 173 cm3, 150 x 150 x 147 | 1,339.27 |
 | grommet | lathe | 1 | Aluminium 6061 | 62 x 62 x 23 | 47.25 |
 | base | lathe | 1 | Black cast acrylic rod, turned, bead-blasted SATIN close to matte (2026-11-11; OPTION: 6061 turned, satin black anodized) | 139 x 139 x 40 | 131.39 |
-| skin | formed | 1 | Cast acrylic sheet 6 mm, tinted through in the speaker's TruCast code, drape-formed over an aluminium mould, polished both faces; CUSTOM POURS (2026-11-11): Dust, Acid, Ice at 3x the chart loading; Smoke 0.6x the chart loading (2x the speakers' own pour; 2026-11-16, matched to Hemisphere off) | 114 cm3, 160 x 160 x 54 | 1,212.55 |
+| skin | formed | 1 | Cast acrylic sheet 6 mm, tinted through in the speaker's TruCast code, drape-formed over an aluminium mould, polished both faces; CUSTOM POURS (2026-11-11): Dust, Acid, Ice at 3x the chart loading; Smoke 0.6x the chart loading (2x the speakers' own pour; 2026-11-16, matched to Hemisphere off); Poison 0.6x the chart loading (the mix, the owner 2026-11-17, matched to Hemisphere off) | 114 cm3, 160 x 160 x 54 | 1,212.55 |
 | liner | formed | 1 | Cast acrylic sheet 3 mm, white opal (Hemisphere's diffuser's), formed over an aluminium core mould | 6 cm3, 147 x 147 x 42 | 46.22 |
 | ring | lathe | 1 | Aluminium 6061 | 108 x 108 x 17 | 49.83 |
 | well | lathe | 1 | PTFE rod, white (virgin) | 42 x 42 x 16 | 48.44 |

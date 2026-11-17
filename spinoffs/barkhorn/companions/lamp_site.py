@@ -79,19 +79,21 @@ TINT_LOAD = {'orange': 3.0, 'amber': 3.0, 'blue': 3.0, 'black': 1.2}
 CORE_TINT_LOAD = {'black': 0.6}
 if os.environ.get('RIG_LEGACY'):
     TINT_LOAD['black'] = 0.3; CORE_TINT_LOAD.pop('black')
-# TINT_LOAD_SET 'tint:L,...' (2026-11-15, the coordinator: a choice sheet of Smoke's gray at 0.5x and 0.8x): one tint's dye
-# loading changed, the rest as signed; unset, nothing changes
-for kv_ in filter(None, os.environ.get('TINT_LOAD_SET', '').split(',')):
-    TINT_LOAD[kv_.split(':')[0]] = float(kv_.split(':')[1]); CORE_TINT_LOAD.pop(kv_.split(':')[0], None)
-# LOAD_MIX=1 (2026-11-16, THE MIX as the coordinator recommends it to the owner; OFF by default until he picks):
-# Hemisphere denser in Ember 1.8, Acid 5, Ice 6, Haze 1.8 (Core keeps its loadings); Core lighter in Poison 0.6
-# (Hemisphere keeps 1); Smoke the approved pair (the default); Dust and Fog as built
+# THE MIX (2026-11-16 B-MIX; the owner said yes 2026-11-17, "Yes for matching when turned off"): the default since then.
+# Hemisphere denser in Ember 1.8 (built 1.0), Acid 5 (3), Ice 6 (3), Haze 1.8 (1.0), loadings as a multiple of the base
+# pour (Core keeps its own: its entries are set first); Core lighter in Poison 0.6 (built 1.0; Hemisphere keeps 1.0);
+# Smoke the approved pair above; Dust and Fog as built. LOAD_BUILT=1 (or RIG_LEGACY) gives the as-built loadings.
+# (LOAD_MIX=1, the switch it had while staged, is now a no-op.)
 HEMI_MIX = {'red': 1.8, 'amber': 5.0, 'blue': 6.0, 'violet': 1.8}
 CORE_MIX = {'green': 0.6}
-if os.environ.get('LOAD_MIX'):
+if not (os.environ.get('LOAD_BUILT') or os.environ.get('RIG_LEGACY')):
     for t_, L_ in HEMI_MIX.items():
         CORE_TINT_LOAD.setdefault(t_, TINT_LOAD.get(t_, 1.0)); TINT_LOAD[t_] = L_
     CORE_TINT_LOAD.update(CORE_MIX)
+# TINT_LOAD_SET 'tint:L,...' (2026-11-15, the coordinator: a choice sheet of Smoke's gray at 0.5x and 0.8x): one tint's dye
+# loading changed, the rest as signed; unset, nothing changes (after the mix, so it wins over it)
+for kv_ in filter(None, os.environ.get('TINT_LOAD_SET', '').split(',')):
+    TINT_LOAD[kv_.split(':')[0]] = float(kv_.split(':')[1]); CORE_TINT_LOAD.pop(kv_.split(':')[0], None)
 def core_load(t_):
     return 0.5 * CORE_TINT_LOAD.get(t_, TINT_LOAD.get(t_, 1.0))
 # the site's colour keys (web.py HABITAT) to the tints

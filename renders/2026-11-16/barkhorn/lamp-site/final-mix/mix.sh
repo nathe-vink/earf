@@ -1,5 +1,7 @@
 #!/bin/bash
 # B-MIX (2026-11-16, the coordinator): THE MIX rendered into STAGING, final/'s names, the corrected method, LOAD_MIX=1
+# INSTALLED 2026-11-17 (the owner said yes): its pictures, audits and masks moved to renders/2026-11-10/barkhorn/lamp-site/final/
+# under the same names (the rows and the cluster excepted, re-rendered there); the mix is now lamp_site.py's default.
 # (Hemisphere Ember 1.8, Acid 5, Ice 6, Haze 1.8; Core Poison 0.6; Smoke the approved pair; Dust and Fog as built).
 # Nothing in final/ or legible/ is written. Each picture uses the recipe that made its final/ version (run.sh, views.sh,
 # views2.sh, hemi-fix.sh, corrected.sh, core-final.sh, core-day2.sh, base-*.sh, legible*.sh). Skips what is done.

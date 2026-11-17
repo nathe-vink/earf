@@ -1,5 +1,33 @@
+PHOTOMETRY, THE MIX (2026-11-17: the owner said yes to the mix, "Yes for matching when turned off"). The source of truth.
+The lamps as built from now on: Hemisphere's shell denser in Ember 1.8, Acid 5, Ice 6, Haze 1.8 (loadings as a multiple
+of the base pour; Ember and Haze were 1.0, Acid and Ice 3); Core's ball lighter in Poison, 0.6x the chart loading (was
+1.0); Smoke the approved pair (Hemisphere 1.2, Core 0.6; 2026-11-16); Dust, Poison's shell, Fog and the other balls as
+before. lamp_site.py's default since 2026-11-17 (LOAD_BUILT=1 gives the old loadings). The corrected method, one scale
+(WLM 3.2/490), the same sensors as below: light out launch/isphere.py; lux on the table 0.5 m below Hemisphere's rim,
+paper #9A9A9A, centre r < 0.05 m, "0.3 m" and "0.6 m" 40 mm squares on the lamp's x axis. The new lines' raw output:
+renders/2026-11-16/barkhorn/lamp-site/final-mix/photometry-mix.raw (and photometry-mix.txt, the staging table).
+
+Tint     | Hemisphere load | Hemisphere lm (below/above, down %)  | lux centre / 0.3 m / 0.6 m | Core load | Core lm (below/above)
+---------|-----------------|--------------------------------------|----------------------------|-----------|----------------------
+Ember    |             1.8 |   307.3 (213.9/ 93.4,  70 % down) |  336 /  215 /  67             |       1.0 |  44.7 (29.5/15.3)
+Dust     |             3.0 |   353.4 (230.7/122.7,  65 % down) |  347 /  220 /  71             |       3.0 |  51.1 (33.3/17.8)
+Acid     |             5.0 |   379.8 (241.7/138.0,  64 % down) |  346 /  220 /  71             |       3.0 |  63.2 (37.6/25.6)
+Poison   |             1.0 |   282.1 (205.4/ 76.7,  73 % down) |  341 /  215 /  68             |       0.6 |  38.1 (26.3/11.8)
+Ice      |             6.0 |   269.8 (200.4/ 69.4,  74 % down) |  345 /  219 /  69             |       3.0 |  38.9 (27.0/11.9)
+Haze     |             1.8 |   258.2 (196.1/ 62.1,  76 % down) |  343 /  216 /  68             |       1.0 |  33.0 (24.0/9.1)
+Fog      |             1.0 |   521.4 (293.1/228.3,  56 % down) |  347 /  220 /  75             |       1.0 |  95.1 (53.3/41.7)
+Smoke    |             1.2 |   260.4 (196.6/ 63.8,  75 % down) |  345 /  218 /  68             |       0.6 |  35.1 (23.9/11.2)
+
+For the site: Hemisphere about 258 to 521 lm out (Ember 307); "about 340 lux" on a table 0.5 m below
+(336 to 347); about two thirds to three quarters of its light down (56 % Fog to 76 % Haze; Ember 70 %).
+Core 33 to 95 lm out (Ember 44.7).
+
+====================================================================================================================
+SUPERSEDED 2026-11-17 (the lamps as built before the mix): kept for the record; do not quote. Ember, Acid, Ice and Haze's
+Hemisphere lines and Poison's Core line below are the old loadings; the rest still hold and are repeated above.
+
 PHOTOMETRY, THE CORRECTED METHOD (2026-11-16; lamp_site.py since 9a6a2913: Filter Glossy off, Hemisphere's opal sheet
-acting once, Core's ball plain glass; renders/2026-11-15/barkhorn/lamp-site/off-match/notes-v3.md). The source of truth.
+acting once, Core's ball plain glass; renders/2026-11-15/barkhorn/lamp-site/off-match/notes-v3.md). Superseded 2026-11-17.
 The lamps as built today: each tint's LED (lamp_site.LED_CCT) and shell (TINT_LOAD), Hemisphere option 3 (24 LEDs, about
 1,000 lm at the LEDs), Core B (200 lm at its LED). One scale, WLM 3.2/490. Light out: launch/isphere.py, the enclosing
 sensor (Hemisphere 64 bounces, 128 spp; Core 256 spp). Lux: the table 0.5 m below Hemisphere's rim, paper #9A9A9A
