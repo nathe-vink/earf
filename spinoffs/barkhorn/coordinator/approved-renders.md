@@ -3080,6 +3080,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    shows the lamps as before the mix. ASKED THE OWNER for his word on this update and on whether later
    checked updates may go live without asking each time. One share link made for the preview (expires 18 Nov
    03:17 UTC), sent to the owner in chat only.
+   17 Nov 04:22 UTC, THE OWNER ON THE COPY: "I don't like the biome shot descriptions. They are too on the nose. We
+   need to remove ai slop copy like 'where a meteor just came down,' 'on a desert at sunset' etc. the content
+   should speak for itself. The copy shouldn't state the obvious." (He did not answer the two questions on
+   updating the public site.) A RULE FOR ALL COPY FROM NOW ON: a line next to a picture never says what the
+   picture plainly shows; remove, do not rewrite. Site lane told, r47 and r49 only: PART 1, the place
+   pictures: home tiles keep the color's name alone, no caption under the place picture on the color pages,
+   no caption on Tropos's "Out" view, the same phrases out of page descriptions and share cards, alt text
+   stays descriptive; PART 2, the same fault elsewhere: every caption that only restates its picture is
+   removed ("Lit, in Ember.", "Mantle in Ember.", "... switched off.", "... its dust cover on.", "Eight ...
+   in a row ..."), a caption that carries a fact the picture cannot show keeps only that fact, and the product
+   one-liners, spec tables, "How it lights", the color taglines and the headings are not touched; one report
+   with a before -> after list so the owner can overrule. The build will carry the lamp mix as well. Nothing
+   to main.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
