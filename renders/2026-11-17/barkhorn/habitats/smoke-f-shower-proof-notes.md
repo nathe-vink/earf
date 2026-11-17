@@ -13,4 +13,4 @@ Built on the approved no-trail build by smoke-f-shower-proof-build.py (exec in o
 | far2-kit (the plume cache, scale 21.0, density 1.02) | px x 235, at [-937, 5500] m | 168 m tall, 173 px | 5.5 km | the haze box, then air-far |
 | air-far | box [-3000, 420, -1, 3000, 6000, 300] m | | | beta 0.00016 / m (visibility ~25 km) |
 
-References: the Chelyabinsk bolide (2013) videos and stills, a fireball breaking into pieces; the re-entry of a spacecraft breaking up (e.g. ATV-1 2008, many glowing pieces each with its own tail, moving together); meteor-shower composites (e.g. Geminids/Perseids, streaks radiating from one point).
+References (from what I know of them; I did not open or view photographs in this round): the Chelyabinsk bolide (2013) videos and stills, a fireball breaking into pieces; the re-entry of a spacecraft breaking up (e.g. ATV-1 2008, many glowing pieces each with its own tail, moving together); meteor-shower composites (e.g. Geminids/Perseids, streaks radiating from one point).
