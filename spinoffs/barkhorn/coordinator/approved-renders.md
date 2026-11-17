@@ -3058,6 +3058,14 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    down; Core lm Ember 44.7, Dust 51.1, Acid 63.2, Poison 38.1, Ice 38.9, Haze 33.0, Fog 95.1, Smoke 35.1.
    Site lane told to re-cut every site picture whose source changed in that commit and to set the figures, on
    r47 and r49 only; rows, cluster and the lit Dust, Poison and Fog pendants follow in a second batch.
+   17 Nov 04:13 UTC, THE SITE IS PUBLIC AND CHECKED. https://www.earf.world/ serves the release candidate (first seen
+   04:11 UTC): title "EARF · A world of sound, in color."; earf.world answers 308 to www.earf.world; production
+   deployment dpl_Hm6SHyYusbqUo7GEFfBcw6CERGEM from main at 93515206ce. Checked at 1280 wide on the public
+   domain: home (hero, the family, eight colors, the eight places), /colors/smoke, Mantle, Hemisphere and Core
+   in Smoke, Tropos in Ember: all load, no broken pictures. The header still says "noindex, nofollow". The
+   contact address is still hello@earf.world, which bounces (no MX record): with the owner. The lamp pictures
+   on the public site are those of the release candidate (before the mix); the mix pictures follow after my
+   check of the next r49 preview.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
