@@ -3324,6 +3324,22 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the no-trail base (several meteors burning up in the background sky, self-luminous, all parallel to the
    path of the one that fell here; two far sites still burning, no speaker; half-size frame and two crops;
    at most 90 minutes of rendering; one report). It replaces nothing until he has seen it.
+   17 Nov 17:28 UTC, THE SMOKE PLACE WITHOUT THE TRAIL IS LIVE (main d4b2a89fd1 = r49-site-rc d4b2a89fd1, r47-site-next
+   6ffd14f519; pushed 17:25 UTC by a plain fast-forward from a2d66f6e11; vercel.json and every page
+   unchanged; the public site served it from 17:27 UTC). The site lane's cut: black-habitat.webp (1200 x
+   1500) and its thumbnail, from r48-biomes 0ffe803ac7 smoke-f-notrail-portrait-finish.jpg (the same blob
+   on r49); the generator's source line; nothing else comes from the Smoke place (the -card files are
+   Tropos studio cuts). MY CHECK: the new site picture is as close to the candidate as the old one was to
+   the old final (mean 1.8 and 1.7 levels at the site's size) and farther from the other (2.9); against
+   the old site picture the change sits in the sky right of the column (mean 10.7 levels there), with the
+   candidate's known fine noise elsewhere (mean 2.3, 99.9th percentile 10, one pixel above 16); viewed
+   whole at 100 %: sky clean, the column's flank soft, no seam; thumbnail old | new viewed. The newest
+   preview (dpl_C8d3DwRLqnK41rBSW4csXzirMoku) and www.earf.world serve the two checked files (md5); on
+   the public site the picture loads on the home tile, on /colors/smoke and in "Out" on Tropos in Smoke;
+   the home page's HTML is byte-identical to before; no page errors; noindex still sent.
+   To settle with the shower decision: the Smoke place's alt text still says a meteor has just come down;
+   with no trail the picture shows the fire, the column and the crater. If the shower is adopted the
+   words fit again; if not, the alt text is to say what is seen.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
