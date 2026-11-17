@@ -3340,6 +3340,30 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    To settle with the shower decision: the Smoke place's alt text still says a meteor has just come down;
    with no trail the picture shows the fire, the column and the crater. If the shower is adopted the
    words fit again; if not, the alt text is to say what is seen.
+   17 Nov 18:21 UTC, THE METEOR SHOWER PROOF IS IN AND DOES NOT LOOK REAL YET (biomes lane, r48-biomes 374e2d578e,
+   reported 18:18 UTC; renders/2026-11-17/barkhorn/habitats/smoke-f-shower-proof.jpg (1200 x 1500, 24
+   samples, no finish), -sky.jpg and -far1.jpg (full-scale crops), -notes.md, -build.py; about 50 minutes
+   of rendering of the 90 allowed; the final and no-trail files untouched). Added on the no-trail build:
+   five meteors parallel to the fallen one's path (azimuth 13.5, elevation 19.8 degrees; radiant off
+   frame at about 2555, -424), 66 to 95 km up and 397 to 777 km away, emissive heads with tapering tails,
+   dimmed and reddened by the air at their elevation; two far sites from the same plume cache at 2.0 km
+   (70 m tall) and 5.5 km (168 m tall); air beyond the haze box out to 6 km (visibility about 25 km);
+   camera clip 1000 km. Lights of the place: the world at 0.7, the main site's fire and embers, the
+   seven meteor heads with tails, the two far fires; no lamps. Audit over the whole frame: hidden 0,
+   equipment 0. The lane did not look at photographs first (it says so).
+   THE LANE'S CORRECTION: the no-trail build's audit of 16 Nov had covered only the re-rendered crop (the
+   render border was still on); re-run over the whole frame: exit 0, nothing hidden, 112500 of 112500.
+   So the no-trail picture now on the site is audited whole.
+   MY VIEW (whole frame and both crops at full size): I agree with the lane. The camera is focused on
+   the speaker, so the meteors' heads are soft discs the size and color of the fire's sparks and read as
+   more sparks; only the longest tail reads as a streak. The far sites are pale ghosts, each with a small
+   orange blob at its foot and a faint straight-edged outline around it; the farther one barely shows.
+   The added air darkens the sky a little, with a faint step at the box's top edge. And the frame itself
+   has little sky: the column fills the middle, the left is drifting smoke, and the clear strip on the
+   right is about a sixth of the width, a sliver at the home tile's size.
+   Sent to the owner with that verdict (owner copy smoke-meteor-shower-proof-17nov.jpg). My advice:
+   leave Smoke as it is. One more round (two or three long bright streaks; far columns 300 to 600 m tall
+   at 5 to 10 km; about 2 h of rendering, then a full render) only on his word. Nothing is rendering.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
