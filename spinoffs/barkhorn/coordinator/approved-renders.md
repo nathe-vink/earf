@@ -3244,6 +3244,19 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Hemisphere in Poison "Lit", "All eight" and "In a group", Core's "All eight": all match the finals (0.6 to
    0.8); figures unchanged. THE LAMP MIX IS NOW COMPLETE ON THE SITE except in the four bar pictures, which
    the speaker lane is re-rendering at the pendants.
+   17 Nov 10:45 UTC, THE FOUR BAR FRAMES CARRY THE LAMP MIX AND ARE CHECKED (speaker lane, r33-speaker-horn
+   a50e8da167, pushed 10:43 UTC; renders/2026-11-11/barkhorn/product/planet-bar/: bar-hero.png, bar-backbar.png,
+   bar-pendants.png, bar-backbar-portrait.png; the earlier finals kept beside them as -premix; mantle-bar and
+   core-bar-table unchanged). Method: each lit shade's area rendered twice, as built and with the mix, both at
+   1152 samples and the same seed; the difference added to the final under a soft mask faded to zero over
+   the area's last 10 px; the bowls not smoothed. The lane's edge check: 99th percentile across each area's
+   border 1.0 to 5.0 levels (one edge at 24 lies inside a second area covering the same bowl, and the two
+   agree to 1.2 on average); mean in the ring just outside each mask at most 0.54; audit hidden 0, equipment
+   0. MY CHECK: changed pixels exactly as reported and confined to the pendants and their reflections (hero
+   57,685, x 1184-2044, y 766-1084; backbar 55,402; pendants 291,260; portrait 65,165); the sixteen bowl
+   crops at 100 %, before | after: Ember deeper, Acid slightly warmer, no seam; the hero frame whole, before
+   | after: nothing else moved. All pass. Site lane told to re-cut every picture that comes from the four
+   (desktop hero, phone hero, "At the bar", smaller sizes, share cards) on r47 and r49; one report.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
