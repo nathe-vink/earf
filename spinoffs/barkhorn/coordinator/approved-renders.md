@@ -3315,6 +3315,15 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    custom one does not.
    STATE: every lane's work is delivered and live. Only the owner's choices remain (the Smoke trail, the
    mail forwarder sign-up, search engines, and the older open items). The stall guard is cancelled.
+   17 Nov 17:14 UTC, THE OWNER ON THE SMOKE TRAIL: "No trail is fine. You could also do a trail of multiple meteors
+   burning up in the atmosphere in the background, and a couple of crashes without speakers burning in the
+   distance, like a meteor shower."
+   So: (1) NO TRAIL IS APPROVED: the candidate (r48-biomes 0ffe803ac7, smoke-f-notrail-portrait-finish.jpg)
+   becomes the Smoke place; site lane told to cut it wherever the Smoke place is used; I check and put it
+   live. (2) THE METEOR SHOWER is his idea, offered, not ordered: ONE small proof from the biomes lane on
+   the no-trail base (several meteors burning up in the background sky, self-luminous, all parallel to the
+   path of the one that fell here; two far sites still burning, no speaker; half-size frame and two crops;
+   at most 90 minutes of rendering; one report). It replaces nothing until he has seen it.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
