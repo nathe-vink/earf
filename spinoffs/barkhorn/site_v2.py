@@ -1009,7 +1009,8 @@ def rc_images(web):
         im = im.copy(); im.thumbnail((1200, 630), Image.LANCZOS)
         can.paste(im, ((1200 - im.width) // 2, (630 - im.height) // 2))
         can.save(os.path.join(web.SITE, rel), 'JPEG', quality=84)
-    og(hero.crop((0, 300, 2400, 1200)), 'img/rc/og-home.jpg')
+    row_top = min(H - tile(frames[k], cw).height for k in RC_KEYS)    # the row alone, so the card centers it (the coordinator 2026-11-17)
+    og(hero.crop((0, row_top, W, H)), 'img/rc/og-home.jpg')
     for k, im in frames.items():
         og(im, f'img/rc/og-{k}.jpg')
     if LAMPS_PIC:                                   # the lamps' card from their honest picture, or none
