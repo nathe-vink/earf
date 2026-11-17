@@ -752,8 +752,43 @@ def trail(bpy, name, p, kit):
     spread = math_('POWER', math_('MULTIPLY', inv, r0), p.get('thin', 1.0))
     dens = math_('MULTIPLY', math_('MULTIPLY', math_('MULTIPLY', core, lumpy), math_('MULTIPLY', fade, near)),
                  math_('MULTIPLY', spread, p.get('density', 1.5)))
+    col = None
+    pos = geo.outputs['Position']
+    # `air` {beta, H, cam, sky} (Smoke f distant train, 2026-11-17): the air between the camera and a train tens of km
+    # away, which the scene's haze box (to 420 m) does not cover. Its transmittance T = exp(-beta d g(z)), g the mean
+    # density of an exponential atmosphere (scale height H) along a ray climbing to height z; the train's density is
+    # scaled by T and its colour moved toward the sky's horizon colour by 1 - T (fainter and nearer the sky far away)
+    if p.get('air'):
+        A_ = p['air']; cam = Vector(A_['cam'])
+        dd = vec('LENGTH', vec('SUBTRACT', pos, cam))
+        zz = math_('MAXIMUM', math_('SUBTRACT', vec('DOT_PRODUCT', pos, (0.0, 0.0, 1.0)), cam.z), 1.0)
+        H_ = A_.get('H', 8000.0)
+        g = math_('MULTIPLY', math_('DIVIDE', H_, zz), math_('SUBTRACT', 1.0, math_('EXPONENT', math_('DIVIDE', math_('MULTIPLY', zz, -1.0), H_))))
+        T_ = math_('EXPONENT', math_('MULTIPLY', math_('MULTIPLY', dd, g), -A_['beta']))
+        dens = math_('MULTIPLY', dens, T_)
+        mix = N('ShaderNodeMix'); mix.data_type = 'RGBA'
+        L(math_('SUBTRACT', 1.0, T_), mix.inputs['Factor'])
+        mix.inputs[6].default_value = (*kit.M.hex_lin(p.get('color', '#D9D5CF'))[:3], 1.0)
+        mix.inputs[7].default_value = (*kit.M.hex_lin(A_.get('sky', '#B8B4BE'))[:3], 1.0)
+        col = mix.outputs[2]
+    # `earth_shadow` {sun_h, x_t, R, pen, part}: after sunset the ground lies in the earth's shadow, whose top at a
+    # point is (x_t - s)^2 / 2R, s the point's distance toward the sun from the camera and x_t the distance to where the
+    # sun's grazing ray touches the ground; soft over the sun's penumbra `pen` m. `part` 'lit' keeps the smoke above
+    # it (that copy alone is lit by the set sun), 'shade' the smoke below; the two copies add up to the whole train
+    if p.get('earth_shadow'):
+        es = p['earth_shadow']; cam = Vector(es.get('cam', [0.0, -6.3, 0.55]))
+        sx, sy = es['sun_h']
+        s_ = vec('DOT_PRODUCT', vec('SUBTRACT', pos, cam), (sx, sy, 0.0))
+        xs = math_('MAXIMUM', math_('SUBTRACT', es['x_t'], s_), 0.0)
+        hs = math_('DIVIDE', math_('MULTIPLY', xs, xs), 2.0 * es.get('R', 6371000.0))
+        zz2 = vec('DOT_PRODUCT', pos, (0.0, 0.0, 1.0))
+        pen = es.get('pen', 550.0)
+        lit = smooth(math_('SUBTRACT', zz2, hs), -pen, pen)
+        dens = math_('MULTIPLY', dens, lit if es.get('part', 'lit') == 'lit' else math_('SUBTRACT', 1.0, lit))
     v = N('ShaderNodeVolumePrincipled')
     v.inputs['Color'].default_value = kit.M.hex_lin(p.get('color', '#D9D5CF'))
+    if col is not None:
+        L(col, v.inputs['Color'])
     v.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.35)
     L(dens, v.inputs['Density'])
     out = N('ShaderNodeOutputMaterial'); L(v.outputs['Volume'], out.inputs['Volume'])
