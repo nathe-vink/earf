@@ -3008,6 +3008,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    built loadings, lit panels with the new Core placement); hemisphere-smoke (the 1.2x hero, no key; final/
    has none since the old one was removed). DEPEND ON THE MIX: every other hemisphere-* file, the cluster,
    core-row, core-row-day, core-poison, hemisphere-row.
+   17 Nov 02:43 UTC, THE OWNER: "What are the questions and references?" Answered with the two open choices and
+   their four reference pictures, sent again in one go: (1) the lamp mix, yes or no: a new sheet cut from the
+   lane's mix sheets, each pendant beside its Core switched off, today and in the mix (Ember, Acid, Poison,
+   Ice, Haze, Smoke); the four pendants lit, today over the mix; Core by day and Core in Poison lit; the light
+   figures; (2) the Smoke trail, thinner or as now: the trail now beside the thinner proof. My recommendations
+   stand: yes to the mix, the thinner trail. Also listed, not blocking: the lossless masters, hello@earf.world,
+   going public, the Hypex plate letter and the lining, the cover's color chips and custom-cast quote.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
