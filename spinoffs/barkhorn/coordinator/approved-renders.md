@@ -3443,6 +3443,27 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    whole frame: hidden 0, equipment 0; lights: the world at 0.7, the main site's emitters, five meteor
    heads with tails, two far fires; no lamps). Site lane told to cut the Smoke place from it and to
    bring its alt text in line with what is seen; I check the preview and put it live.
+   18 Nov 02:52 UTC, THE SMOKE PLACE WITH THE METEOR SHOWER (B) IS LIVE (main 8ee88b2349 = r49-site-rc 8ee88b2349,
+   r47-site-next abe72c0d95; pushed 02:49 UTC by a plain fast-forward from d4b2a89fd1; vercel.json
+   unchanged; the public site served it from 02:51 UTC). The site lane's cut: black-habitat.webp (1200 x
+   1500, WebP 92, the same crop and settings) and its thumbnail, from r48-biomes e3850c91dc
+   smoke-f-shower-B-portrait-finish.jpg (the same blob on r49); the alt text in the 21 pages and the
+   generator: "... a small crater on fire, a black column of smoke, more meteors falling and two fires
+   far off" in place of "... its trail in the sky", which had been wrong since the trail came out; no
+   visible text changed (the place's caption stays empty).
+   MY CHECK: the new site picture is closest to B (mean 1.82 levels at the site's size; A 1.96; no-trail
+   2.05); against the picture that was live the change sits in the right-hand strip (mean 3.6, max 88),
+   the encoder's noise elsewhere (mean 1.45, 99.9th percentile 8, max 16); viewed whole at 100 %: three
+   meteors, two far columns each with an orange point at its foot, the speaker still the subject, no
+   seam; thumbnail live | new viewed. Page diffs: the same change in each of the 21 pages, the alt
+   ending in the picture tag and in the page data, nothing else. The newest preview
+   (dpl_aTRFPDo8sDFNZ92nVeqayQVffUMd) and www.earf.world serve the two checked files (md5); the public
+   home equals the checked preview home; the new ending is on /, /colors/smoke, /tropos/smoke, /tropos,
+   /lighting, /mantle and /contact and the old one on none; the picture loads on the home tile, on
+   /colors/smoke and in "Out" on Tropos in Smoke; no page errors; noindex still sent.
+   B was the owner's pick over my A; its known weakness stays on record: the two far columns are smooth
+   twins and may be read as twisters. Biomes lane asked to mark B in CHECK.md as his pick and the Smoke
+   place on the site. Nothing is rendering; only the owner's older open items remain.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
