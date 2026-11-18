@@ -3371,6 +3371,30 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the foot, no box outline; the air matched to the no-trail sky within 1 level, no step; the whole frame
    at half size WITH the finish and two full-scale crops; at most 2 hours of rendering; one report with a
    verdict. A full render only on his yes to that proof. The no-trail picture stays on the site.
+   18 Nov 00:59 UTC, METEOR SHOWER, SECOND TRY: PROOF 2 READS; TWO THINGS STILL LOOK MADE (biomes lane, r48-biomes
+   33dca83424, reported 00:56 UTC; renders/2026-11-18/barkhorn/habitats/smoke-f-shower-proof2.jpg (1200 x
+   1500, finished as the site picture is), -sky.jpg, -far.jpg, -notes.md, -build.py; about 21 minutes of
+   rendering of the 120 allowed, 35 in all). Method: the region x 1950-2400, rows 0-1720 re-rendered at
+   full size, 48 samples, on the no-trail build, feathered 48 px into the no-trail master (band difference
+   0.66 levels), finished, downsized. Built: three meteors on the right, on lines through the fallen
+   one's radiant, heads low: 690 px (head 30 km up, 271 km away), 440 px, and one in three pieces (400,
+   280, 280 px); two far columns on the right, 450 m tall at 5.5 km and 380 m at 8 km, leaning with the
+   main column's wind, the air between in their own shader (39 km visibility), a small glow at each
+   foot; no air box. Photographs viewed first (Wikimedia Commons): the Chelyabinsk trace, a fireball
+   over Kitt Peak, the ATV Jules Verne re-entry, wildfire smoke from 14 miles. Lights of the place: the
+   world at 0.7, the main site's emitters, five meteor heads with tails, two far glows; no lamps. Audit
+   over the whole frame: hidden 0, equipment 0.
+   MY VIEW (frame and both crops at full size; the frame against the picture on the site): it reads at
+   once as a meteor shower over a burning plain; the streaks cannot be taken for sparks; clear sky within
+   0.5 level of the site picture in my patches; no seam, no step. Not yet real, as the lane says: the
+   meteors are evenly bright pale rods with a white ball at the end, all one color; the far columns are
+   smooth leaning cones, narrow at the foot and wide at the top, that could be read as twisters, and
+   their glows do not show at half size.
+   Sent back within the same 2-hour cap: uneven brightness with flares, a teardrop end, unequal colors;
+   billow, a wide lost foot, a sheared trailing top and a visible point of fire for the columns; proof 3,
+   plus the finished full-size frame as a candidate with its audit, since the method already renders the
+   region at full size. Proof 2 shown to the owner beside the site picture (owner copy
+   smoke-meteor-shower-second-try-18nov.jpg). Nothing goes on the site without his yes.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
