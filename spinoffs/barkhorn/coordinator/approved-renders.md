@@ -3412,6 +3412,31 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Last pass of this try ordered (about 45 minutes left): two finished candidates for the owner to
    choose between: A, the meteors alone; B, the meteors with proof 2's slender columns on the rises and
    an orange, unclipped glow at each foot. Proof 3 itself is not shown to him: the pair replaces it.
+   18 Nov 02:19 UTC, METEOR SHOWER: THE TRY ENDS WITH TWO FINISHED CANDIDATES FOR THE OWNER TO CHOOSE BETWEEN (biomes
+   lane, r48-biomes e3850c91dc, reported 02:17 UTC; 23 minutes of rendering, so about 1 h 40 min of the
+   try's 2 hours in all). Both are the no-trail master with x 1850-2400, rows 0-1720 re-rendered at 48
+   samples, feathered 48 px, finished as the site picture is.
+   A, METEORS ONLY: renders/2026-11-12/barkhorn/habitats/smoke-f-shower-A-portrait.jpg and -finish.jpg;
+   renders/2026-11-18/barkhorn/habitats/smoke-f-shower-A-half.jpg and -A-lowright.jpg. Proof 3's three
+   meteors, nothing else. Lights: the world at 0.7, the main site's emitters, five meteor heads with
+   tails; no lamps.
+   B, METEORS WITH FAR FIRES: the same names with -B-. As A, plus proof 2's slender columns (450 m at
+   5.5 km on a 45 m rise; 380 m at 8 km on a 60 m rise) and a low fire mound at each foot (#FF5A18,
+   peak after the air about 207, 156, 154: orange, unclipped). Lights: as A plus the two far fires.
+   Audits over the whole frame, each: hidden 0, equipment 0. The blocky proof 3 candidate is withdrawn
+   (moved to proof3-fullsize names, CHECK.md row marked).
+   MY CHECK: A and B against the approved no-trail finish at full size: outside the re-rendered region
+   mean 0.04 and 0.10 levels, 99.9th percentile 2 and 3, no pixel above 12: the rest of the picture is
+   the picture on the site. A against B: they differ only in x 2117-2373, y 1186-1633 (the columns and
+   fires). Viewed: both half-size frames whole, the lower right of both at full scale, A's right strip
+   at 100 % from the finished full-size file: no seam; grain as elsewhere.
+   MY VERDICT: A looks real: three teardrop streaks with flares and their own colors, clearly not
+   sparks, the speaker still the subject. B is the best of the far-fire attempts and its orange points
+   read as fire, but the two columns are smooth twins and could be read as twisters: nearly, not yes.
+   The lane says the same. Sent to the owner as one sheet (site now | A | B, with the right side closer;
+   owner copy smoke-meteor-shower-A-B-18nov.jpg) with my pick, A. Nothing goes on the site without his
+   pick; on it, the site lane cuts the Smoke place from that candidate's -finish file and the alt text
+   is brought in line with what is seen. No further rounds without his word.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
