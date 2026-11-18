@@ -12,8 +12,8 @@ On the approved no-trail build; region x 1950-2400, rows 0-1720 at full size re-
 | farA (dark smoke column, leaning -40.0 m, top sheared 60.0 m; a small glow at its foot) | base x 2265, 464 px tall, 45 px wide at the foot, 206 at the top | 450.0 m | 5.5 km | in its shader: beta 1e-4 / m (visibility ~39 km), glow T [0.64, 0.58, 0.49] |
 | farB (dark smoke column, leaning -30.0 m, top sheared 50.0 m; a small glow at its foot) | base x 2360, 269 px tall, 26 px wide at the foot, 120 at the top | 380.0 m | 8.0 km | in its shader: beta 1e-4 / m (visibility ~39 km), glow T [0.53, 0.45, 0.35] |
 
-Photographs viewed (Wikimedia Commons):
-1. File:2013 Chelyabinsk meteor trace.jpg (Alex Alishevskikh, CC BY-SA): a long straight white trail, brightest and narrowest at the head end, warm where the low sun lights it.
-2. File:Fireball over KPNO (iotw2039a).jpg (NOIRLab, CC BY): a clipped head, a streak tapering to both ends, straight.
-3. File:Jules Verne Automated Transfer Vehicle re-enters Earth's atmosphere.jpg (ESA/NASA): many pieces moving together, parallel, each with its own tail, gold to orange behind a white lead.
-4. File:Ominous smoke from wildfires look larger than life from over 14 mile away. (USDA, public domain): smoke from km away has no outline, soft everywhere, its base widest and lost in haze.
+Photographs viewed on Wikimedia Commons (file names; authors and licences as on each file page, not copied here; no photo is in the repo):
+1. File:2013 Chelyabinsk meteor trace.jpg: a long straight white trail, brightest and narrowest at the head end, warm where the low sun lights it.
+2. File:Fireball over KPNO (iotw2039a).jpg: a clipped head, a streak tapering to both ends, straight.
+3. File:Jules Verne Automated Transfer Vehicle re-enters Earth's atmosphere.jpg: many pieces moving together, parallel, each with its own tail, gold to orange behind a white lead.
+4. File:Ominous smoke from wildfires look larger than life from over 14 mile away.: smoke from km away has no outline, soft everywhere, its base widest and lost in haze.
