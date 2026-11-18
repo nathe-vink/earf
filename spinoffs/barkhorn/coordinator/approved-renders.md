@@ -3364,6 +3364,13 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Sent to the owner with that verdict (owner copy smoke-meteor-shower-proof-17nov.jpg). My advice:
    leave Smoke as it is. One more round (two or three long bright streaks; far columns 300 to 600 m tall
    at 5 to 10 km; about 2 h of rendering, then a full render) only on his word. Nothing is rendering.
+   18 Nov 00:27 UTC, THE OWNER ON THE METEOR SHOWER, after the proof and my advice to leave it: "One more try".
+   So ONE more round from the biomes lane on this frame: real photographs looked at first and named; two
+   or three meteors only, long bright streaks (400 to 800 px at full size) in the right-hand sky; far
+   columns 300 to 600 m tall at 5 to 10 km, dark like the main one less the air between, a small glow at
+   the foot, no box outline; the air matched to the no-trail sky within 1 level, no step; the whole frame
+   at half size WITH the finish and two full-scale crops; at most 2 hours of rendering; one report with a
+   verdict. A full render only on his yes to that proof. The no-trail picture stays on the site.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
