@@ -1,6 +1,6 @@
 # Smoke f meteor shower proof 3 (2026-11-18): what changed from proof 2
 
-Region x 1850-2400, rows 0-1720 at full size, 48 samples, on the approved no-trail build, feathered over 48 px into the no-trail master; shot finish then finish.py v1.1. Build: smoke-f-shower-proof3-build.py. The full-size CANDIDATE is renders/2026-11-12/barkhorn/habitats/smoke-f-shower-CANDIDATE-portrait(-finish).jpg; not the final.
+Region x 1850-2400, rows 0-1720 at full size, 48 samples, on the approved no-trail build, feathered over 48 px into the no-trail master; shot finish then finish.py v1.1. Build: smoke-f-shower-proof3-build.py. Its full-size frames are smoke-f-shower-proof3-fullsize(-finish).jpg here (withdrawn as a candidate); not the final.
 
 | item | detail |
 |---|---|
