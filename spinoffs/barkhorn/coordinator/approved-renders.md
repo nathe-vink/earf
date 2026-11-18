@@ -3395,6 +3395,23 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    plus the finished full-size frame as a candidate with its audit, since the method already renders the
    region at full size. Proof 2 shown to the owner beside the site picture (owner copy
    smoke-meteor-shower-second-try-18nov.jpg). Nothing goes on the site without his yes.
+   18 Nov 01:48 UTC, METEOR SHOWER, PROOF 3: THE METEORS ARE RIGHT, THE FAR COLUMNS GOT WORSE (biomes lane, r48-biomes
+   60c222334a, reported 01:44 UTC; renders/2026-11-18/barkhorn/habitats/smoke-f-shower-proof3.jpg, -sky.jpg,
+   -far.jpg, notes, build script; a full-size CANDIDATE with the same columns beside the no-trail files;
+   1 h 15 min of the try's 2 hours of rendering used). Meteors: brightness strongest behind the head and
+   falling off, three uneven flares on the long one, teardrop ends, three colors (white warming along
+   the tail; a warmer dimmer one; a white lead with two gold pieces). Far columns: each now a column, a
+   wide foot of ground smoke and a sheared top layer, on rises of 45 and 60 m so that a fire point at
+   each foot clears the near skyline. Lights: the world at 0.7, the main site's emitters, five meteor
+   heads with tails, two far fire points; no lamps. Audit over the whole frame: hidden 0, equipment 0.
+   Seam 0.72 levels; clear sky within 0.33 of no-trail.
+   MY VIEW (frame and both crops at full size): the meteors now pass: nothing like the sparks, and no
+   longer rods with balls. The far columns read as two pale towers with flat tops; the camera's blur
+   wipes out the billow; and the fire points, clipped and out of focus, read as two cream lamps at the
+   towers' feet. The lane says the same and would not send its candidate to the site.
+   Last pass of this try ordered (about 45 minutes left): two finished candidates for the owner to
+   choose between: A, the meteors alone; B, the meteors with proof 2's slender columns on the rises and
+   an orange, unclipped glow at each foot. Proof 3 itself is not shown to him: the pair replaces it.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
