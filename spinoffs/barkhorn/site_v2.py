@@ -1307,7 +1307,7 @@ def rc_waves(p, web):
     HAB = dict(HAB_SRC)
     # out (the audits, 2026-11-09/10): Dust 26493989 (a hidden panel), then 43c91242 (it hovers: a lit strip under its
     # front edge); Fog b61474c0 (two suns), then aa1ca856 (a hidden fill lamp)
-    HAB_ALT = {'violet': 'Tropos in Haze, in dry grass on rolling hills that fade into violet haze, the sun low from the side', 'black': 'Tropos in Smoke, in open grassland at dusk, a meteor just come down behind it: a small crater on fire, a black column of smoke, its trail in the sky', 'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
+    HAB_ALT = {'violet': 'Tropos in Haze, in dry grass on rolling hills that fade into violet haze, the sun low from the side', 'black': 'Tropos in Smoke, in open grassland at dusk, a meteor just come down behind it: a small crater on fire, a black column of smoke, more meteors falling and two fires far off', 'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
         im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
@@ -1456,7 +1456,7 @@ def rc3(p, web):
     import os
     from PIL import Image
     names = {k: name for k, num, name, *_ in web.CLOUDS}
-    HAB_ALT = {'violet': 'Tropos in Haze, in dry grass on rolling hills that fade into violet haze, the sun low from the side', 'black': 'Tropos in Smoke, in open grassland at dusk, a meteor just come down behind it: a small crater on fire, a black column of smoke, its trail in the sky', 'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
+    HAB_ALT = {'violet': 'Tropos in Haze, in dry grass on rolling hills that fade into violet haze, the sun low from the side', 'black': 'Tropos in Smoke, in open grassland at dusk, a meteor just come down behind it: a small crater on fire, a black column of smoke, more meteors falling and two fires far off', 'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
                'ice': 'Tropos in Fog, in the grass on a hillside, in fog at dawn'}
     HAB_CAP = {'violet': 'In dry grass on rolling hills, fading into violet haze.', 'black': 'In grassland at dusk, where a meteor has just come down.', 'green': 'In ivy and leaf litter, in a dark forest with dappled sun.', 'red': 'On a lava field at dusk, among glowing streams.', 'blue': 'Out on the snow, in the last sun.', 'orange': 'On rippled desert sand at sunset, mesas in the haze behind.', 'amber': 'On wet dark rock in the rain, over a pool.', 'ice': 'In the grass on a hillside, in fog at dawn.'}
     # --- 1. home, the lamps: the picture left, the two lamps' names beside it, one line each, as links
@@ -1972,7 +1972,7 @@ def rc_intro(p, web):
 
 
 # the seated habitats, 4:5, one per tint as each passes (r48-biomes); Haze (violet) and Smoke (black) still to come
-HAB_SRC = {'black': 'renders/2026-11-12/barkhorn/habitats/smoke-f-notrail-portrait-finish.jpg',       # the seated Smoke, no trail (the owner's pick 2026-11-17; r48-biomes 0ffe803a)
+HAB_SRC = {'black': 'renders/2026-11-12/barkhorn/habitats/smoke-f-shower-B-portrait-finish.jpg',     # the seated Smoke, the meteor shower (the owner's pick B 2026-11-18; r48-biomes e3850c91)
            'violet': 'renders/2026-11-12/barkhorn/habitats/haze-b-final-portrait-finish.jpg',          # the seated Haze final, finished (r48-biomes 7895f4d6)
            'blue': 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-finish.jpg',            # the seated Ice final, finished (r48-biomes 8f4c9fd9)
            'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
