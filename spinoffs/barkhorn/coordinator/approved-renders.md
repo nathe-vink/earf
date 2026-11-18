@@ -3437,6 +3437,12 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    owner copy smoke-meteor-shower-A-B-18nov.jpg) with my pick, A. Nothing goes on the site without his
    pick; on it, the site lane cuts the Smoke place from that candidate's -finish file and the alt text
    is brought in line with what is seen. No further rounds without his word.
+   18 Nov 02:40 UTC, THE OWNER PICKS B for the Smoke place: the meteors with the two far fires ("B", in answer to
+   A, B, or keep Smoke as it is; my pick had been A, and he had my reasons). B IS APPROVED: r48-biomes
+   e3850c91dc, renders/2026-11-12/barkhorn/habitats/smoke-f-shower-B-portrait-finish.jpg (audited over the
+   whole frame: hidden 0, equipment 0; lights: the world at 0.7, the main site's emitters, five meteor
+   heads with tails, two far fires; no lamps). Site lane told to cut the Smoke place from it and to
+   bring its alt text in line with what is seen; I check the preview and put it live.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
