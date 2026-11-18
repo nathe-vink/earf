@@ -3464,6 +3464,10 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    B was the owner's pick over my A; its known weakness stays on record: the two far columns are smooth
    twins and may be read as twisters. Biomes lane asked to mark B in CHECK.md as his pick and the Smoke
    place on the site. Nothing is rendering; only the owner's older open items remain.
+   18 Nov 02:56 UTC, the biomes lane's bookkeeping is done: CHECK.md marks B as the owner's pick and the Smoke place
+   on the site, A as the alternative not taken, no-trail and w1 as superseded on the site and kept; file
+   names unchanged. The commit on the branch is r48-biomes 7a4be17ce4 (CHECK.md only); the lane's
+   message named 9b1d5e9b7d, which is not on the branch.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
