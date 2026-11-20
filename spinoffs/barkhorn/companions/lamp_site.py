@@ -220,7 +220,11 @@ def build(frame, samples, scale):
         strands crossing at 45 degrees round the cord's axis (the object's z), about 1.2 mm wide on a 6 mm cord, their
         ridges lifted (bump) and a touch lighter, a cloth sheen on top."""
         m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; b_ = nt.nodes['Principled BSDF']
-        tc = nt.nodes.new('ShaderNodeTexCoord'); sp_ = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sp_.inputs[0])
+        # world position less the object's origin, in metres (the STL import may scale the object, not its mesh)
+        gp_ = nt.nodes.new('ShaderNodeNewGeometry'); oi_ = nt.nodes.new('ShaderNodeObjectInfo')
+        sub_ = nt.nodes.new('ShaderNodeVectorMath'); sub_.operation = 'SUBTRACT'
+        nt.links.new(gp_.outputs['Position'], sub_.inputs[0]); nt.links.new(oi_.outputs['Location'], sub_.inputs[1])
+        sp_ = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(sub_.outputs['Vector'], sp_.inputs[0])
         def mth(op, a_, b_v=None, c_v=None):
             n_ = nt.nodes.new('ShaderNodeMath'); n_.operation = op
             for i_, v_ in enumerate((a_, b_v, c_v)):
@@ -238,8 +242,8 @@ def build(frame, samples, scale):
         cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['From Min'].default_value = -1.0; cr.inputs['From Max'].default_value = 1.0
         cr.inputs['To Min'].default_value = 0.004; cr.inputs['To Max'].default_value = 0.014; nt.links.new(h, cr.inputs['Value'])
         nt.links.new(cr.outputs['Result'], b_.inputs['Base Color'])
-        b_.inputs['Roughness'].default_value = 0.62
-        b_.inputs['Sheen Weight'].default_value = 0.3; b_.inputs['Sheen Roughness'].default_value = 0.5
+        b_.inputs['Roughness'].default_value = 0.75; b_.inputs['Specular IOR Level'].default_value = 0.15
+        b_.inputs['Sheen Weight'].default_value = 0.2; b_.inputs['Sheen Roughness'].default_value = 0.5
         return m
 
     oc_ = (0.93, 0.93, 0.92)                      # the CAD's neutral opal
