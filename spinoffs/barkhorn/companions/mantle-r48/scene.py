@@ -417,7 +417,7 @@ def make_sleeve(path):
     im.save(path)
 
 
-def make_label(path, near=False):
+def make_label(path, near=False, blank=False):
     from PIL import Image, ImageDraw, ImageFont
     S = 1600
     im = Image.new('RGB', (S, S), (168, 160, 146))
@@ -436,6 +436,9 @@ def make_label(path, near=False):
         # C gate 4: the wordmark on the label's near half, so the spindle does not stand in front of it from the camera
         rows = (('TEST PRESSING  ·  NOT FOR SALE', f3, c - 470), ('1. Lithosphere   2. Asthenosphere', f3, c - 330),
                 ('3. Transition Zone   4. Lower Mantle', f3, c - 270), ('STRATA', f1, c + 150), ('SIDE A  ·  33⅓ RPM', f2, c + 320))
+    if blank:
+        # the owner, 2026-11-20 (via the coordinator): no coined lines; the label is the paper and its two fine rings
+        rows = ()
     for txt, f, y in rows:
         w = d.textlength(txt, font=f)
         d.text((c - w / 2, y), txt, font=f, fill=(42, 38, 34))
@@ -1307,10 +1310,10 @@ def build(args):
         pass
 
     # the record (a prop): 0.1505 radius, 1.8 thick, its edge bead
-    label = os.path.join(HERE, 'out-outcrop', 'render', 'label-near.png' if args.label_near else 'label.png')  # shared by both proposals
+    label = os.path.join(HERE, 'out-outcrop', 'render', 'label-blank.png' if args.blank_label else 'label-near.png' if args.label_near else 'label.png')  # shared by both proposals
     if not os.path.exists(label):
         import subprocess
-        subprocess.run(['python3', os.path.abspath(__file__), '--label-near' if args.label_near else '--label', label], check=True)
+        subprocess.run(['python3', os.path.abspath(__file__), '--label-blank' if args.blank_label else '--label-near' if args.label_near else '--label', label], check=True)
     S = [c * mm for c in meta['S']]
     rz = meta['pz1'] * mm
     rec = lathe('record', [(0.0036, 0), (0.1495, 0), (0.1505, 0.0006), (0.1505, 0.0013), (0.1490, 0.0018), (0.050, 0.0016),
@@ -1593,8 +1596,8 @@ def post(path, grain=0.012, vignette=0.12):
 
 
 if __name__ == '__main__' and bpy is None:
-    if sys.argv[1] in ('--label', '--label-near'):
-        make_label(sys.argv[2], near=sys.argv[1] == '--label-near')
+    if sys.argv[1] in ('--label', '--label-near', '--label-blank'):
+        make_label(sys.argv[2], near=sys.argv[1] == '--label-near', blank=sys.argv[1] == '--label-blank')
     elif sys.argv[1] == '--sleeve':
         make_sleeve(sys.argv[2])
     elif sys.argv[1] == '--post':
@@ -1645,6 +1648,7 @@ if __name__ == '__main__':
     ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
     ap.add_argument('--debug-emit', default='')
     ap.add_argument('--crop', type=float, nargs=4, default=None)
+    ap.add_argument('--blank-label', action='store_true')   # the record's label with nothing printed (the owner, 2026-11-20)
     ap.add_argument('--vignette', type=float, default=0.12)   # the post step's corner falloff (0 on the house ground, 2026-11-20)
     a = ap.parse_args(argv)
     NO_EDGE_BEVEL = a.no_edge_bevel
