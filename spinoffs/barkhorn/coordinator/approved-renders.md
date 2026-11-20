@@ -3499,6 +3499,26 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    DONE NOW: (3), (4), (5) ordered from the site lane as one build; a research and critic pass started
    (the best furniture, lighting and audio stores; the site audited against them); (1) and (2) become a
    production plan for the lamps, Mantle and speaker lanes once the research has set the standard set.
+   20 Nov 05:54 UTC, THE OWNER'S THREE QUICK FIXES ARE LIVE (main 90ab8377c8 = r49-site-rc 90ab8377c8, r47-site-next
+   ebc9d460e0; pushed 05:51 UTC by a plain fast-forward from 8ee88b2349; changes: the 21 pages and the
+   generator, no picture; vercel.json unchanged; the public site served it from 05:52 UTC).
+   (3) The eight place tiles link to the Tropos they show (#speaker-<tint>), on every page that carries
+   them; no link to a color page is left on the home page, so the color pages are reachable only by
+   their address until the critic pass has said what to do with them.
+   (4) "Drawn to be made." is removed: the section, its styles and its footer link; the build now fails
+   if #progress is named again.
+   (5) The hero has one dot per product in each crop, on a plain part of its body: wide crop Tropos in
+   Acid 70.0 / 47.0 (the cabinet's upper front corner), Hemisphere in Ember 45.2 / 51.8 (the cap),
+   Core in Ember 31.3 / 86.6 (the base), Mantle in Ember 52.0 / 84.5 (the plinth's front edge); tall
+   crop 56.5 / 34.5, 12.8 / 5.0, 24.0 / 71.5, 45.0 / 72.0. The old dots on the woofer's center are gone.
+   MY CHECK of the first build (b3c80134dd) on its preview at 1440, 1024 and 390: links and removal
+   right; dots clear of the headline and buttons; each leads to its page; but on the phone the
+   Hemisphere label was clipped at the picture's top-left (box x -37 to 137, y 105 to 137 against a
+   picture starting at y 130). Sent back; the fix places every label by rule (below the dot when there
+   is no room above; shifted to stay 8 px inside the sides). Second build checked on its preview
+   (dpl_FErm7ubwkra1Af4nDB5NPubXPZAy) and again on www.earf.world: all four labels whole at 390 (the
+   Hemisphere one now x 8 to 182, y 173 to 205), first tap shows and second follows, hover and click
+   right at 1440 and 1024, no page errors; "Drawn to be made" on no page; noindex still sent.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
