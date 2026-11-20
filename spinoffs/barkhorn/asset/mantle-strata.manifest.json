@@ -1,6 +1,6 @@
 {
  "asset": "mantle-strata.blend",
- "source_commit": "the black-hardware finals (2026-11-11), their frames and model in the same commit",
+ "source_commit": "the house-ground scenes (2026-11-20, v3_day.py --house): the arm parked on its rest 20 mm clear of the record, the label blank, the rear plate black nickel with its legends, the acrylic passing tinted light to shadow rays (--glass-shadows); built from tiny renders of those scenes, the studio stripped",
  "units": "m, z up, the shelf at z 0",
  "build": "no light of any kind; base Smoke 2074 solid; every visible piece of hardware satin black (post-satin-black, #18181A, roughness 0.5; the list in black_hardware), bright only the parts in bright_by_necessity; the deck underside satin; a record on the platter; no lid or hinges: the lift-off cover is in its own collection, off by default",
  "edge": "C: a 1 mm even chamfer on the outer edges of the deck and base (in the CAD), the chamfer polished; the deck's outer edge satin, the base's diamond-polished, as signed (the owner, 2026-11-11)",
@@ -776,7 +776,9 @@
      "object": "rear-plate.ember",
      "type": "MESH",
      "hidden_render": false,
-     "materials": [],
+     "materials": [
+      "rear-plate-black-nickel.ember"
+     ],
      "cover": false
     },
     {
@@ -1231,7 +1233,18 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-feet.ember": {},
+    "cover-feet.ember": {
+     "base_color": [
+      0.92,
+      0.92,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.22,
+     "transmission": 0.75,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
     "cover-solid-1.00x.ember": {
      "volume_color": [
       0.9201,
@@ -1835,6 +1848,31 @@
      "transmission": 0.0,
      "ior": 1.5,
      "metallic": 0.0
+    },
+    "rear-plate-black-nickel.ember": {
+     "base_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.035,
+       0.035,
+       0.038,
+       1.0
+      ],
+      "B": [
+       0.85,
+       0.85,
+       0.83,
+       1.0
+      ]
+     },
+     "roughness": 0.38,
+     "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": {
+      "linked_from": "MIX",
+      "A": 0.85,
+      "B": 0.0
+     }
     },
     "vinyl.ember": {
      "base_color": [
@@ -2728,7 +2766,9 @@
      "object": "rear-plate.dust",
      "type": "MESH",
      "hidden_render": false,
-     "materials": [],
+     "materials": [
+      "rear-plate-black-nickel.dust"
+     ],
      "cover": false
     },
     {
@@ -3183,7 +3223,18 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-feet.dust": {},
+    "cover-feet.dust": {
+     "base_color": [
+      0.92,
+      0.92,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.22,
+     "transmission": 0.75,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
     "cover-solid-2.25x.dust": {
      "volume_color": [
       0.97873,
@@ -3787,6 +3838,31 @@
      "transmission": 0.0,
      "ior": 1.5,
      "metallic": 0.0
+    },
+    "rear-plate-black-nickel.dust": {
+     "base_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.035,
+       0.035,
+       0.038,
+       1.0
+      ],
+      "B": [
+       0.85,
+       0.85,
+       0.83,
+       1.0
+      ]
+     },
+     "roughness": 0.38,
+     "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": {
+      "linked_from": "MIX",
+      "A": 0.85,
+      "B": 0.0
+     }
     },
     "vinyl.dust": {
      "base_color": [
@@ -4680,7 +4756,9 @@
      "object": "rear-plate.acid",
      "type": "MESH",
      "hidden_render": false,
-     "materials": [],
+     "materials": [
+      "rear-plate-black-nickel.acid"
+     ],
      "cover": false
     },
     {
@@ -5135,7 +5213,18 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-feet.acid": {},
+    "cover-feet.acid": {
+     "base_color": [
+      0.92,
+      0.92,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.22,
+     "transmission": 0.75,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
     "cover-solid-2.45x.acid": {
      "volume_color": [
       0.91726,
@@ -5739,6 +5828,31 @@
      "transmission": 0.0,
      "ior": 1.5,
      "metallic": 0.0
+    },
+    "rear-plate-black-nickel.acid": {
+     "base_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.035,
+       0.035,
+       0.038,
+       1.0
+      ],
+      "B": [
+       0.85,
+       0.85,
+       0.83,
+       1.0
+      ]
+     },
+     "roughness": 0.38,
+     "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": {
+      "linked_from": "MIX",
+      "A": 0.85,
+      "B": 0.0
+     }
     },
     "vinyl.acid": {
      "base_color": [
@@ -6632,7 +6746,9 @@
      "object": "rear-plate.poison",
      "type": "MESH",
      "hidden_render": false,
-     "materials": [],
+     "materials": [
+      "rear-plate-black-nickel.poison"
+     ],
      "cover": false
     },
     {
@@ -7087,7 +7203,18 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-feet.poison": {},
+    "cover-feet.poison": {
+     "base_color": [
+      0.92,
+      0.92,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.22,
+     "transmission": 0.75,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
     "cover-solid-1.00x.poison": {
      "volume_color": [
       0.0001,
@@ -7691,6 +7818,31 @@
      "transmission": 0.0,
      "ior": 1.5,
      "metallic": 0.0
+    },
+    "rear-plate-black-nickel.poison": {
+     "base_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.035,
+       0.035,
+       0.038,
+       1.0
+      ],
+      "B": [
+       0.85,
+       0.85,
+       0.83,
+       1.0
+      ]
+     },
+     "roughness": 0.38,
+     "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": {
+      "linked_from": "MIX",
+      "A": 0.85,
+      "B": 0.0
+     }
     },
     "vinyl.poison": {
      "base_color": [
@@ -8584,7 +8736,9 @@
      "object": "rear-plate.ice",
      "type": "MESH",
      "hidden_render": false,
-     "materials": [],
+     "materials": [
+      "rear-plate-black-nickel.ice"
+     ],
      "cover": false
     },
     {
@@ -9039,7 +9193,18 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-feet.ice": {},
+    "cover-feet.ice": {
+     "base_color": [
+      0.92,
+      0.92,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.22,
+     "transmission": 0.75,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
     "cover-solid-3.05x.ice": {
      "volume_color": [
       0.0001,
@@ -9643,6 +9808,31 @@
      "transmission": 0.0,
      "ior": 1.5,
      "metallic": 0.0
+    },
+    "rear-plate-black-nickel.ice": {
+     "base_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.035,
+       0.035,
+       0.038,
+       1.0
+      ],
+      "B": [
+       0.85,
+       0.85,
+       0.83,
+       1.0
+      ]
+     },
+     "roughness": 0.38,
+     "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": {
+      "linked_from": "MIX",
+      "A": 0.85,
+      "B": 0.0
+     }
     },
     "vinyl.ice": {
      "base_color": [
@@ -10536,7 +10726,9 @@
      "object": "rear-plate.haze",
      "type": "MESH",
      "hidden_render": false,
-     "materials": [],
+     "materials": [
+      "rear-plate-black-nickel.haze"
+     ],
      "cover": false
     },
     {
@@ -10991,7 +11183,18 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-feet.haze": {},
+    "cover-feet.haze": {
+     "base_color": [
+      0.92,
+      0.92,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.22,
+     "transmission": 0.75,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
     "cover-solid-1.00x.haze": {
      "volume_color": [
       0.50136,
@@ -11595,6 +11798,31 @@
      "transmission": 0.0,
      "ior": 1.5,
      "metallic": 0.0
+    },
+    "rear-plate-black-nickel.haze": {
+     "base_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.035,
+       0.035,
+       0.038,
+       1.0
+      ],
+      "B": [
+       0.85,
+       0.85,
+       0.83,
+       1.0
+      ]
+     },
+     "roughness": 0.38,
+     "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": {
+      "linked_from": "MIX",
+      "A": 0.85,
+      "B": 0.0
+     }
     },
     "vinyl.haze": {
      "base_color": [
@@ -12488,7 +12716,9 @@
      "object": "rear-plate.fog",
      "type": "MESH",
      "hidden_render": false,
-     "materials": [],
+     "materials": [
+      "rear-plate-black-nickel.fog"
+     ],
      "cover": false
     },
     {
@@ -12943,7 +13173,18 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-feet.fog": {},
+    "cover-feet.fog": {
+     "base_color": [
+      0.92,
+      0.92,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.22,
+     "transmission": 0.75,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
     "cover-solid-1.00x.fog": {
      "volume_color": [
       0.0001,
@@ -13547,6 +13788,31 @@
      "transmission": 0.0,
      "ior": 1.5,
      "metallic": 0.0
+    },
+    "rear-plate-black-nickel.fog": {
+     "base_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.035,
+       0.035,
+       0.038,
+       1.0
+      ],
+      "B": [
+       0.85,
+       0.85,
+       0.83,
+       1.0
+      ]
+     },
+     "roughness": 0.38,
+     "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": {
+      "linked_from": "MIX",
+      "A": 0.85,
+      "B": 0.0
+     }
     },
     "vinyl.fog": {
      "base_color": [
@@ -14440,7 +14706,9 @@
      "object": "rear-plate.smoke",
      "type": "MESH",
      "hidden_render": false,
-     "materials": [],
+     "materials": [
+      "rear-plate-black-nickel.smoke"
+     ],
      "cover": false
     },
     {
@@ -14895,7 +15163,18 @@
      "ior": 1.5,
      "metallic": 0.0
     },
-    "cover-feet.smoke": {},
+    "cover-feet.smoke": {
+     "base_color": [
+      0.92,
+      0.92,
+      0.88,
+      1.0
+     ],
+     "roughness": 0.22,
+     "transmission": 0.75,
+     "ior": 1.5,
+     "metallic": 0.0
+    },
     "cover-solid-4.30x.smoke": {
      "volume_color": [
       0.0001,
@@ -15499,6 +15778,31 @@
      "transmission": 0.0,
      "ior": 1.5,
      "metallic": 0.0
+    },
+    "rear-plate-black-nickel.smoke": {
+     "base_color": {
+      "linked_from": "MIX",
+      "A": [
+       0.035,
+       0.035,
+       0.038,
+       1.0
+      ],
+      "B": [
+       0.85,
+       0.85,
+       0.83,
+       1.0
+      ]
+     },
+     "roughness": 0.38,
+     "transmission": 0.0,
+     "ior": 1.5,
+     "metallic": {
+      "linked_from": "MIX",
+      "A": 0.85,
+      "B": 0.0
+     }
     },
     "vinyl.smoke": {
      "base_color": [
