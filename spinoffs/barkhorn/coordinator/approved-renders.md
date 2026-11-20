@@ -3738,6 +3738,42 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    NOT YET IN IT (sent after it was built): the five MUST items of 12:56. PUBLISHING WAITS for the push that holds
    those and the eight Mantle pictures. A last small list went 13:05 (description tags, structured data, "How it
    lights", "speaker" as the one kind word, button wrap, orphan words, /hemisphere and /core without a tint).
+   20 Nov 13:51 UTC, THE NEW SITE IS PUBLIC. main 90ab8377c8 -> 4bf2f948b89c69fa508fcc9f587026a0fb7e832b (plain
+   fast-forward at 13:43; live 13:45). WHAT WENT BEFORE IT:
+   13:20 r49 ecbb12db58 (Builds 1A+1B+2+3, my notes, the 1B critics' twelve items) checked: the view sets and the
+   links pass, the five MUST items hold. Not published: the home and family tiles still carried the stretched Mantle
+   picture.
+   13:22 the critic pass on 1A stopped after its words and clicks critics returned (gate/1A/result-1.json,
+   result-2.json); its pictures and stores critics were looking at an overtaken build. Four items from the clicks
+   critic went to the site lane 13:24, not holding the publish: the chip state after Back; the hero line and buttons
+   off the first screen in short wide windows (844x390, 932x430, 960x600) and a name touching "See the colors" at
+   961 to 990 px; a header item pressed on its own page adds a Back step; one chosen tint for the visit, shared by
+   the home row and the header.
+   13:22 a release-gate critic pass started on ecbb12db58 (two critics: the product page; the home page and a
+   first-time visitor's read against the stores). It had not returned when I published; its findings come in as
+   follow-up fixes (my word to the owner at 13:06: I hold only for a blocking fault found before the Mantle push was
+   checked).
+   13:30 THE PUSH TO PUBLISH from the site lane: r49 4bf2f948b8 (code r47 1d839b9daa): the five MUST items; the eight
+   Mantle pictures on the Tropos ground as the home and family tiles (800 x 1000), as picture 1 of the Mantle
+   gallery ("In the studio"; the spot-lit one second, "Under a spot"), in the share cards; a Power row on Mantle;
+   the eight leftovers of 13:05 with /hemisphere and /core forwarding to Ember.
+   MY CHECKS ON IT: main is an ancestor; vercel.json keeps main's cleanUrls, headers and git block and adds six
+   redirects (seven in all); on a local copy (gate/tree4): gate/sets.js passes by the real paths (Mantle now four
+   views in all eight tints), gate/links.js flags nothing at 1440 and 390, gate/recheck.js (the copied link gives
+   /tropos/ice, no "Shown in" pill on the bar pictures, the figures 442 mm, 17.4 in, 75 kg (165 lb)),
+   gate/phonebar.js; looked at the home row in Ember, Fog, Smoke and Ice and on a phone, the Mantle page on desktop
+   and phone, and slices of home, Tropos, Hemisphere, Lighting and Mantle top to bottom. ON THE REAL PREVIEW
+   (gate/real.js): /colors/ice, /tropos, /mantle, /hemisphere, /core answer 308 to the right page; /s/colour-ice 308;
+   /s/speaker-ice/out 307 to /s/speaker-ice and lands on Tropos in Ice (the view is not kept: an old address form);
+   an unknown path gives the site's 404; pages carry X-Robots-Tag noindex, nofollow.
+   ON THE PUBLIC SITE after the publish: sets and links pass again; index, /tropos/ice, /mantle/ember and
+   mantle-ember-house.webp are byte for byte the checked build; redirects and the noindex header as on the preview.
+   Two screenshots sent to the owner (the family row, the Tropos page).
+   KNOWN AND NOT IN THIS PUBLISH: the Hemisphere and Core tiles are still on dark grounds (the lamps lane's batch 1a
+   has been rendering since 11:56); /tropos/EMBER and /tropos/red give 404 (capitals and the old file keys); the
+   share cards of the dark lamp pictures keep carried-out edges until the lamps are on the light ground.
+   ARRIVED SINCE, NOT YET CHECKED: site lane r49 6c5fe5760b (13:46, the clicks critic's four); Mantle lane
+   b839428b5b (13:41, the cover on, all eight).
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
