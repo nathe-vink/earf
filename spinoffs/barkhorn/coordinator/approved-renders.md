@@ -3901,6 +3901,32 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    MY MISTAKE IN THE CRITICS' BRIEF: I called the Core's base satin black aluminum; it is the lamp's own pour. What
    the critic says about the base's color is discounted; the black band at its foot was the render fault already
    fixed.
+   20 Nov 15:42 UTC, PUSH C2 IS PUBLIC. main f105c9292e -> b3c79897293841fc3942003907ff87f7ab25f67d (pushed 15:36, live
+   15:39). It is push C's fourteen items with the five faults its critics found fixed (site lane, 15:21).
+   MY CHECKS: gate/whole.js at 1440x900 (all eight Tropos tints and one page of each other product), 1366x768,
+   390x844, 844x390 and 820x1180: every picture drawn in its file's own proportions and wholly inside the stage
+   ("Out" now 480 x 600 at 1440x900 and 315 x 394 on the phone), thumbnails and Specifications at one height on
+   every picture (spread 0; the old 2 px wobble is gone too). Arrows hold at two sizes; sets, links at 1440 and 390,
+   the visit script and the phone bar pass. Names rows read against the frames by measured hue: the room picture
+   "Hemisphere in Ember · Hemisphere in Acid · Hemisphere in Dust · Core in Ember · Core in Dust"; the Tropos bar
+   picture names its three pendant tints and three Core tints (Dust, Acid, Ember each). Looked at: "Out" on desktop
+   and phone, the one-line scrolling names row and the whole thumbnail frame on the phone (first, middle, last),
+   the centered hero at 820x1180, 768x1024 and 600x900. ON THE PUBLIC SITE after the publish: whole.js and jump.js
+   pass, noindex and redirects as before.
+   PUBLISHED WITH ONE KNOWN WRONG FIGURE, to get the cut picture off the live site: the Core's new size line prints
+   "7.1 in (180 mm) tall"; the CAD and the lamps lane's drawing say 187 mm (7.4 in). The same 180 has stood in
+   Specifications for days. ORDERED 15:42 AS PUSH C2b, alone: Core 187 mm / 7.4 in, weight about 1.4 kg (3.1 lb),
+   and "Touch the top of the base" for "Touch the ring" (there is no visible ring). THEN PUSH C3 (thirteen items
+   from the same critic pass; it changes wording and layout, so it gets the scripts and a critic before it goes
+   live): inches first everywhere; spec rows that repeat their label or say what the picture shows; the lamps
+   lane's new facts; dots and rings; small phones; the renders line's left edge; the logo's 1 MB of frames.
+   THE LAMPS LANE'S FACTS (15:18, r32-lamps-final 7fa9e68aa7, lamp-site/FACTS.md; all computed from the CAD, none
+   measured): Hemisphere 126 mm rim to top of cap, about 1.6 kg hanging and a 0.4 kg canopy, about 7 W, phase-cut
+   or 0-10 V dimming (not bench-tested), 3 m of cloth-braided cord, 56 to 76 % of its light coming down by tint;
+   Core 187 mm tall, about 1.4 kg, three LiFePO4 18650 cells (14.4 Wh) behind a hatch, the touch surface under the
+   skin at the base's top edge, IP44 a design target, in the box: lamp, dock, 2 m USB-C cable, 20 W adapter. The
+   black rod behind the Core in the frames was the dock's cable modeled for its first 105 mm only: the Core will be
+   shot off its dock. Its two drawings (delivered 11:34, which I had not picked up) are with the site lane.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
