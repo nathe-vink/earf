@@ -89,7 +89,7 @@ P = dict(
     spindle=(200.0, 168.0),
     platter_d=300.0, platter_t=21.0, lift=6.0,
     platter_lams=(('tint', 3.0), ('clear', 12.7), ('tint', 5.6)),
-    arm_r=222.0, arm_x=395.0, L_eff=236.5, offset=21.55, rest_r=168.0,
+    arm_r=222.0, arm_x=395.0, L_eff=236.5, offset=21.55, rest_r=182.0,                     # PROPOSAL (2026-11-20, the critic): the stylus 182 from the spindle at rest, so the cartridge clears a 12 in record's rim by about 20 (168 had it over the rim); Rega does not publish the rest's angle: confirm on the arm
     puck_d=84.0, puck_t=12.0,
     motor_d=184.7, motor_x=64.0, motor_pocket=76.0,
     rpm_motor=300.0,                                  # PROPOSAL until benched: the US Neo at 60 Hz (STOCK-AND-AUDIT.md 3.1)

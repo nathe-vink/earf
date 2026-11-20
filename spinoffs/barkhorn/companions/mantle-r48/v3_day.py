@@ -272,11 +272,9 @@ def cover(kind=None):
         kind = 'solid-' + kind
     Y = 0.2126 * T[0] + 0.7152 * T[1] + 0.0722 * T[2]
     print(f'v3_day: cover sheet {kind}: one 3 mm wall passes RGB {T[0]:.3f} {T[1]:.3f} {T[2]:.3f} (luminance {Y:.3f}) before its two faces\' Fresnel', flush=True)
-    f = bpy.data.materials.new('cover-feet'); f.use_nodes = True; ft = f.node_tree; ft.nodes.clear()   # clear PU domes
-    fo = ft.nodes.new('ShaderNodeOutputMaterial'); fm = ft.nodes.new('ShaderNodeMixShader'); fm.inputs[0].default_value = 0.12
-    ftr = ft.nodes.new('ShaderNodeBsdfTransparent'); ftr.inputs['Color'].default_value = (0.9, 0.9, 0.86, 1)
-    fgl = ft.nodes.new('ShaderNodeBsdfGlossy'); fgl.inputs['Roughness'].default_value = 0.15
-    ft.links.new(ftr.outputs[0], fm.inputs[1]); ft.links.new(fgl.outputs[0], fm.inputs[2]); ft.links.new(fm.outputs[0], fo.inputs['Surface'])
+    f = bpy.data.materials.new('cover-feet'); f.use_nodes = True; fb = f.node_tree.nodes['Principled BSDF']   # clear PU domes:
+    fb.inputs['Base Color'].default_value = (0.92, 0.92, 0.88, 1); fb.inputs['Transmission Weight'].default_value = 0.75   # (2026-11-20, the critic:
+    fb.inputs['Roughness'].default_value = 0.22; fb.inputs['IOR'].default_value = 1.5                                       # they read as nothing) a slightly milky dome, as a Bumpon is
     for o in obs:
         o.data.materials.clear(); o.data.materials.append(f if o.name == 'cover-feet' else m)
     print(f'v3_day: the cover ON, {kind}: ' + ', '.join(o.name for o in obs), flush=True)
@@ -843,6 +841,10 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, a
         for o in [o for o in bpy.data.objects if o.parent is None and o.type not in ('LIGHT', 'CAMERA') and o.name not in ('sweep', 'focus')]:
             o.matrix_world = R @ o.matrix_world
         print(f'v3_day: the product turned {turn} deg on the set', flush=True)
+    import bmesh as _bm   # the scene's turned arm parts came out of lathe() with most faces inward (the RB330's base rendered
+    for o in [o for o in bpy.data.objects if o.type == 'MESH' and o.name.startswith(('arm-', 'cue-'))]:   # as a white disc from above)
+        bm_ = _bm.new(); bm_.from_mesh(o.data); _bm.ops.recalc_face_normals(bm_, faces=bm_.faces); bm_.to_mesh(o.data); bm_.free()
+        print('v3_day: normals outward on', o.name, flush=True)
     rp = bpy.data.objects.get('rear-plate')
     if rp is not None and not any(sl.material for sl in rp.material_slots):
         # the rear plate came without a material (it rendered as the default white): black nickel satin with its legends
