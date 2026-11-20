@@ -25,7 +25,7 @@ From above: no edge lamps in any tint.
 | Tint | Level | Why |
 |---|---|---|
 | Ember | a third | (b) not met at any level: front edge 9 against the Tropos's 29.5; the top carries the red (median L* 17, C 17; 95th percentile 48) |
-| Fog | none | a tenth and a third read brighter than the floor; none reads as clear acrylic, with the base a dark field through the top |
+| Fog | a twentieth (3 and 2.5 W/m2) | the coordinator, 2026-11-20 18:27: the lowest that brings the front within 6 of the Tropos Fog (60.7) with no face brighter than the floor: front 56.1 (-4.6), brightest face 85.8 against the floor's 95.2. A thirtieth: 52.7 (-8.0). None: 35.7 (smoked glass). A tenth: brighter than the floor |
 | Smoke | a third | the front is near the Tropos Smoke (6.0) at every level; nothing lifts it further. It reads as dark smoked acrylic, its top's highlights to L* 53 |
 | Dust | a tenth | front edge 43.3 against the Tropos's 43.4 |
 | Acid | a third | (b) not met: front 25.9 against 60.8; the top 60.5, C 56 |
@@ -74,3 +74,10 @@ haze: Tropos front L* 15.5 C 68.5 (chroma>40 share 0.56)
    tenth  front L* 8.3 C 3.1 | top L* 15.1 C 33.0 (95% 41.5) | brightest 41.5 vs floor 94.5 ok | front vs Tropos -7.2 off
    third  front L* 7.8 C 5.9 | top L* 18.1 C 46.0 (95% 43.9) | brightest 43.9 vs floor 94.5 ok | front vs Tropos -7.7 off
 ```
+
+## The beams narrowed (2026-11-20, evening)
+
+The left lamp's beam grazed the deck's top and lit the glossy black arm base and the cue post (602 white px at the
+arm's foot in Ember v2). Both lamps now stand at the deck's mid-thickness (z 79 and 80 mm) with beams of 1.5 and 1 deg
+and 10 mm tall, so the beam stays inside the deck's 25.4 mm: 0 white px there in the Ember test at a third. The levels
+above keep their names; the Fog numbers are measured with the narrowed beams (tests-2026-11-20/fixes/).

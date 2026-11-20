@@ -895,6 +895,14 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, a
         sr = (st.matrix_world.translation - rc).xy.length * 1000 if st else -1
         print(f'v3_day: the arm turned {math.degrees(piv.rotation_euler.z - a0):+.1f} deg onto its rest: nearest part {clear() * 1000:.1f} from the record centre, stylus at {sr:.1f}', flush=True)
         turn_done[0] = True
+        tab = bpy.data.objects.get('arm-lift-tab'); head = bpy.data.objects.get('arm-head')
+        if tab is not None and head is not None and tab.parent == piv:
+            # the finger lift (the coordinator, 2026-11-20): on the RB330 it is bent out of the headshell's OUTER side,
+            # away from the record, and part of it; the scene had it on the inner side, 2-3 mm off the plate. Mirror it to
+            # the outer side and slide it in until it meets the headshell's edge
+            tab.location.y = -tab.location.y; e = tab.rotation_euler; tab.rotation_euler = (-e.x, e.y, -e.z)
+            tab.location.y = 0.0155 if tab.location.y > 0 else -0.0155   # 3.5 mm in from the scene's 19: its inner end on the plate's edge
+            print(f'v3_day: the finger lift on the outer side, joined to the headshell (local y {tab.location.y * 1000:.1f} mm)', flush=True)
     rp = bpy.data.objects.get('rear-plate')
     if rp is not None and not any(sl.material for sl in rp.material_slots):
         # the rear plate came without a material (it rendered as the default white): black nickel satin with its legends
