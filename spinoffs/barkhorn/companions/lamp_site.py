@@ -215,6 +215,33 @@ def build(frame, samples, scale):
     # sheen so each eased edge catches a highlight (was a flat dark grey, read as a lump)
     cap = SC.principled('cap', '#161618', 0.38, metallic=1.0, bump=(4000.0, 0.08))
 
+    def braid_mat(nm, r_cord=0.003, strands=8):
+        """A black textile braid (the coordinator, 2026-11-20: the cord read as a ruler-straight matte rod): two sets of
+        strands crossing at 45 degrees round the cord's axis (the object's z), about 1.2 mm wide on a 6 mm cord, their
+        ridges lifted (bump) and a touch lighter, a cloth sheen on top."""
+        m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; b_ = nt.nodes['Principled BSDF']
+        tc = nt.nodes.new('ShaderNodeTexCoord'); sp_ = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sp_.inputs[0])
+        def mth(op, a_, b_v=None, c_v=None):
+            n_ = nt.nodes.new('ShaderNodeMath'); n_.operation = op
+            for i_, v_ in enumerate((a_, b_v, c_v)):
+                if v_ is None: continue
+                if isinstance(v_, (int, float)): n_.inputs[i_].default_value = v_
+                else: nt.links.new(v_, n_.inputs[i_])
+            return n_.outputs[0]
+        th = mth('ARCTAN2', sp_.outputs['Y'], sp_.outputs['X'])
+        zr = mth('DIVIDE', sp_.outputs['Z'], r_cord)
+        c1 = mth('COSINE', mth('MULTIPLY', mth('ADD', th, zr), float(strands)))
+        c2 = mth('COSINE', mth('MULTIPLY', mth('SUBTRACT', th, zr), float(strands)))
+        h = mth('MAXIMUM', c1, c2)
+        bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.7; bp.inputs['Distance'].default_value = 0.0004
+        nt.links.new(h, bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b_.inputs['Normal'])
+        cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['From Min'].default_value = -1.0; cr.inputs['From Max'].default_value = 1.0
+        cr.inputs['To Min'].default_value = 0.004; cr.inputs['To Max'].default_value = 0.014; nt.links.new(h, cr.inputs['Value'])
+        nt.links.new(cr.outputs['Result'], b_.inputs['Base Color'])
+        b_.inputs['Roughness'].default_value = 0.62
+        b_.inputs['Sheen Weight'].default_value = 0.8; b_.inputs['Sheen Roughness'].default_value = 0.35
+        return m
+
     oc_ = (0.93, 0.93, 0.92)                      # the CAD's neutral opal
     def opal(nm):
         m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
@@ -292,7 +319,7 @@ def build(frame, samples, scale):
             part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), c)
             part('out-dome-pendant', 'pins', steel, c)
             part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
-            part('out-dome-pendant', 'cord', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
+            part('out-dome-pendant', 'cord', braid_mat(f'cord-braid-{tint}') if os.environ.get('BRAID', '1') == '1' else SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
             part('out-dome-pendant', 'carrier', an, c)
             part('out-dome-pendant', 'stem', an, c)
             part('out-dome-pendant', 'board', SC.principled('board', '#E6E4DE', 0.5), c)
@@ -332,7 +359,7 @@ def build(frame, samples, scale):
         part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
         if os.environ.get('HEMI_REFL', '1') == '1':   # (diagnostic switch)
             part('out-dome-pendant', 'reflector', refl, c)
-        part('out-dome-pendant', 'cord', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
+        part('out-dome-pendant', 'cord', braid_mat(f'cord-braid-{tint}') if os.environ.get('BRAID', '1') == '1' else SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
         # round 3 (the Mantle lane's flag, the coordinator 18:13): the COB as the CAD builds it, a Vero SE 10's ~11 mm
         # emitting face at the top of the 46 bore (its face 82 above the rim, 22 up from the bore's mouth at 60), the
         # faceted reflector round it, the cut-off from that geometry, not a spread setting. Of the COB's ~575 lm, the
@@ -448,7 +475,7 @@ def build(frame, samples, scale):
                 revolve(f'base-ring-{base}-{tint}', up_, satin_an)
         for nm, m in tuple(p_ for p_ in (('dock', satin_black), ('base', satin_black), ('ring', satin_an), ('seat', SC.principled('si', '#111111', 0.6)),
                       ('dock-cable', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)))) + \
-                     (('grommet', an),) if not (((base in BASE_PROFILES or own) and p_[0] in ('base', 'ring') and not (base == 'A' and p_[0] == 'ring' and not own_all)) or (own_all and p_[0] == 'dock'))):
+                     (('grommet', an),) if not (((base in BASE_PROFILES or own) and p_[0] in ('base', 'ring') and not (base == 'A' and p_[0] == 'ring' and not own_all)) or (own_all and p_[0] == 'dock') or (p_[0] == 'dock-cable' and os.environ.get('CORE_DOCK', '1') == '0'))):
             objs.append(part('out-orb-table', nm, m, (x, y, z0)))   # (the base and dock angled, the owner, 2026-11-10)
         # the light well, white PTFE round the window (2026-11-10)
         part('out-orb-table', 'well', SC.principled('ptfe', '#F7F7F5', 0.7), (x, y, z0))
@@ -785,12 +812,16 @@ def build(frame, samples, scale):
         tint = frame.split('-', 2)[2]
         hs = float(os.environ.get('HOUSE_S', {'dome': '0.196', 'orb': '0.154'}[kind0]))
         hdim = float(os.environ.get('HOUSE_DIM', '1'))
-        hcam, HR, hlights = HG.build(bpy, hs, hdim)
+        # HOUSE_LIFT (m): the pendant hung free, that much higher, its lamps and the camera with it; HOUSE_STUDIO: a factor on
+        # the studio for the LIT frames (the studio taken down, HOUSE_EV the exposure for the lamp); CORE_DOCK 0: off its dock
+        hlift = float(os.environ.get('HOUSE_LIFT', '0'))
+        hst = float(os.environ['HOUSE_STUDIO']) if os.environ.get('HOUSE_STUDIO') else None
+        hcam, HR, hlights = HG.build(bpy, hs, hdim, hlift, hst)
         key = fill = kick = None
         if kind0 == 'dome':
             # hung on its cord (the CAD's 600 drop, the cord running out of the frame's top), the shade's middle where
             # the Tropos' middle stands; HOUSE_RIM overrides the rim's height
-            hemisphere(tint, 0.0, float(os.environ.get('HOUSE_RIM', hs * HR['tropos_centre'][2] - 0.056)))
+            hemisphere(tint, 0.0, float(os.environ.get('HOUSE_RIM', hs * HR['tropos_centre'][2] - 0.056)) + hlift)
         else:
             core(tint, 0.0, 0.0)                      # standing on the sweep
         for k_, v_ in (('HOUSE_CAMPOS', 'position'), ('HOUSE_TARGET', 'target')):
