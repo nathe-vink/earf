@@ -38,3 +38,38 @@ Why: both lamps get their off color from studio light that crosses the tint, sca
 - Core's opal is a closed sphere, so the light it passes comes back out. Hemisphere's liner is open below, so the light it passes leaves.
 
 The dark ground put little light on either opal, so the two matched there.
+
+## Ember: the price of matching in daylight (pours study)
+
+House light, OFF, quarter size, measured as in the table above (pixels with chroma over 40):
+
+| | L* |
+|---|---|
+| Hemisphere 1.8 (the mix) | 31.3 |
+| Hemisphere 1.4 | 37.0 |
+| Hemisphere 1.0 (as built) | 41.5 |
+| Core 0.5 (approved) | 42.9 |
+| Core 0.8 | 33.8 |
+| Core 1.1 | 25.3 |
+| Core 1.5 | 17.2 |
+
+`ember-pours-house-off.png`, left to right: Hemisphere 1.8, Hemisphere 1.0, Core 0.5, Core 0.8.
+
+The approved match rig of 16 Nov uses the one off rig and the rows' lit rig, measured by the mix's own boxes (`../../../2026-11-16/barkhorn/lamp-site/mix/`). In it, today's Core at 0.5 reproduces 72,0,0 off and 227,85,71 lit. Values are sRGB, with L* after them.
+
+| Pair | House, off gap | Dark, off | Dark, lit | Light out |
+|---|---|---|---|---|
+| **Approved**: Hemisphere 1.8, Core 0.5 | +11.6 | H 71,13,12 (13.6), C 72,0,0 (11.8): matched | H 253,145,136 (71.5), C 227,85,71 (55.4) | H 307 lm, C 44.7 lm |
+| **A**: Core to 0.8 | +2.5 | C 52,0,0 (6.6): 7 L* darker than H; 19 levels in red | C 215,61,48 (49.5): deeper, 22 L* under the dome | C 38.2 lm (−15 %) |
+| **B**: Hemisphere back to 1.0 | −1.4 | H 96,14,10 (19.3): 7.5 L* lighter than C; 24 levels in red (the as-built mismatch the mix fixed) | H 255,165,157 (76.4), C as approved | H 334 lm (+9 %) |
+
+`ember-pours-dark-off.png`, left to right: Hemisphere 1.0, Hemisphere 1.8, Core 0.5, Core 0.8 (dark off rig).
+
+`ember-pours-dark-lit.png`, left to right: Hemisphere 1.0, Hemisphere 1.8, Core 0.5, Core 0.8 (the rows' lit rig).
+
+In short, no single pair of pours matches in both lights:
+- **Pair A** matches in daylight. In a dim room the Core reads darker than the dome, and its lit glass goes deeper and gives 15 % less light.
+- **Pair B** (the lamps as built) matches in daylight. In a dim room it leaves the as-built mismatch that the mix fixed.
+- **The approved mix** matches in a dim room only.
+
+The lit colors never matched in any pair: Hemisphere's lit glass is about 16 L* lighter than Core's.
