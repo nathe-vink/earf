@@ -23,7 +23,11 @@ one() { n=$1; f=$2; sp=$3; shift 3
 # R 248 on most of it, Ember's hue (h 39), the two lamps matched (Core L* 44.6 C 89 h 40, pendant 46.2 C 88 h 39) and
 # their walls alike (L* 13-18, h 76-81): Core studio 0.8 at -3.5 EV, Hemisphere studio 3 at -5 EV.
 CORE="HOUSE_S=0.19 CORE_DOCK=0 HOUSE_CUT2=fill,1.0"
-DOME="HOUSE_S=0.2 HOUSE_LIFT=0.25 HOUSE_LIFT_RX=bg-left $DOME_EXTRA"   # DOME_EXTRA: the pendant floor fix the coordinator picks
+# The pendant (the coordinator 20:28, option a): a flag on the key's floor copy (bearings 0-60, 25-60 degrees down,
+# 2 m out at full scale) for the bottom right, and a low sweep lamp at the left (0.35 W/m2, 30 degree spread) for the
+# lower left: quarter-size corners LL 96.5, BR 88.3 against the Tropos's 94.0 and 87.4; the shade's light and shadow
+# untouched (both on the sweep alone), nothing in reflections or through glass
+DOME="HOUSE_S=0.2 HOUSE_LIFT=0.25 HOUSE_LIFT_RX=bg-left HOUSE_KEYFLAG=0,60,25,60,2 HOUSE_WALL_LL=0.35 HOUSE_WALL_LL_SPREAD=30"
 one core-ember-off       house-orb-red  128 LIGHTS_OFF=1 $CORE "HOUSE_FLAGS=horn cutter"
 one core-ember-lit       house-orb-red  512 HOUSE_STUDIO=0.8 HOUSE_EV=-3.5 $CORE "HOUSE_FLAGS=horn cutter"
 [ -n "$CORE_ONLY" ] && exit 0

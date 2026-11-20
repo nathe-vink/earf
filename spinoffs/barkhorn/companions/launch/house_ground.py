@@ -92,8 +92,8 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         # HOUSE_WALL_LL 'IRR' (2026-11-20, the pendant hung free: its lower frame is wall where the Tropos frame has
         # floor, 80 against 94 L*): a soft lamp lighting the sweep alone, low at the left, aimed at the wall behind and
         # below the shade, at IRR W/m2 (its size and place in full-scale metres, times s, lifted with the camera)
-        wsp = {'type': 'area', 'size_m': [2.0 * s, 1.5 * s], 'position': [-2.2 * s, -1.2 * s, -0.6 * s + lift],
-               'target': [-0.8 * s, 2.0 * s, -0.4 * s + lift], 'irradiance': float(os.environ['HOUSE_WALL_LL']),
+        wsp = {'type': 'area', 'size_m': [2.0 * s, 1.5 * s], 'position': [-3.0 * s, -0.8 * s, 1.2 * s + lift],
+               'target': [-2.0 * s, 1.25 * s, 0.0], 'spread_deg': float(os.environ.get('HOUSE_WALL_LL_SPREAD', '180')), 'irradiance': float(os.environ['HOUSE_WALL_LL']),
                'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']}
         wo = Lt.area(bpy, 'house-wall-ll', wsp, pcentre); wo.data.energy *= k_st * float(os.environ.get('HOUSE_BG', '1'))
         Lt.link_receivers(bpy, wo, [sweep]); made.append(wo)
@@ -101,6 +101,8 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
     door_ = None
     if os.environ.get('HOUSE_DOOR'):
         door_ = barn_door(bpy, bpy.data.objects['house-key'], float(os.environ['HOUSE_DOOR']), s)
+    if os.environ.get('HOUSE_KEYFLAG'):
+        door_ = key_flag(bpy, bpy.data.objects['house-key'], [float(v) for v in os.environ['HOUSE_KEYFLAG'].split(',')], s)
     if hf_ != '0' or door_ is not None:
         # (2026-11-20, the critics: the Tropos ground darkens toward the bottom right, 84-87 at the bottom edge; the
         # lamps' stayed at 96) the Tropos set's flags that cast shadows, scaled: the card right of the product, the floor
@@ -183,7 +185,9 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
                     L_.light_linking.receiver_collection = rc_
                     for c2_ in rc_.collection_objects:
                         c2_.light_linking.link_state = 'EXCLUDE'
-                    excl(cp, [o_ for o_ in cut_obs if o_ is not co_])
+                    # (a copy with no blocker collection was not shadowed by its own cutter once others had one:
+                    # it always gets one, the sweep, which blocks nothing it lights, as its placeholder)
+                    excl(cp, [o_ for o_ in cut_obs if o_ is not co_] or [sweep])
                 else:                         # a lamp under two cutters: its copy now meets this one too
                     col_ = cp.light_linking.blocker_collection; col_.objects.unlink(co_)
     if os.environ.get('HOUSE_ROOM', '1') == '1':
@@ -232,6 +236,26 @@ def softbox(bpy, ob, s):
     hm = bpy.data.materials.new('softbox-housing'); hm.use_nodes = True
     hb = hm.node_tree.nodes['Principled BSDF']; hb.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); hb.inputs['Roughness'].default_value = 0.6
     hous.data.materials.append(hm)
+
+
+def key_flag(bpy, ob, rng, s):
+    """A flag on the key (2026-11-20, the coordinator: the pendant's bottom corners darkened as the Tropos's): a black
+    card at R m (full scale, times s) from the key, spanning bearings B0 to B1 (degrees from +y toward +x) and depression
+    D0 to D1 (degrees below level). rng: [B0, B1, D0, D1, R]. Used as a cutter on the key's floor copy alone (the shade's
+    own light and shadow untouched; not in reflections nor through glass)."""
+    from mathutils import Vector
+    b0, b1, d0, d1, r = rng; r *= s; K = ob.location.copy()
+    def pt(b, d):
+        b, d = math.radians(b), math.radians(d)
+        return K + r * Vector((math.sin(b) * math.cos(d), math.cos(b) * math.cos(d), -math.sin(d)))
+    c = [pt(b0, d0), pt(b1, d0), pt(b1, d1), pt(b0, d1)]
+    me = bpy.data.meshes.new('house-key-flag'); me.from_pydata([tuple(v) for v in c], [], [(0, 1, 2, 3)])
+    o = bpy.data.objects.new('house-key-flag', me); bpy.context.scene.collection.objects.link(o)
+    o.visible_camera = os.environ.get('KF_CAM') == '1'; o.visible_shadow = True
+    m = bpy.data.materials.new('house-key-flag'); m.use_nodes = True
+    m.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1)
+    me.materials.append(m)
+    return o
 
 
 def barn_door(bpy, ob, phi, s):
