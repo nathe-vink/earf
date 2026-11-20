@@ -72,7 +72,9 @@ TOP = CONSOLE['h']
 MANTLE = (-0.24, CON_Y - 0.06, TOP + 0.001, -30.0)
 CORE = (0.5, CON_Y - 0.155, TOP)           # at the console's front edge: the sun's band on its top is its front 6 cm
 SOCKETS = (-1.85, 2.1)                          # the two outlets, either side of the pair, in frame
-CHAIR = (-0.15, -1.6, 180.0)                    # its back to the lens, across the frame's foot, below the speakers' feet
+# (the critics, 20 Nov 18:41: the lounge chair's plywood back read as an oak barrel: an upholstered sofa, sofa_02 (scanned,
+# 1.81 x 0.82 m, back 0.71 m high), its back to the lens across the frame's foot)
+CHAIR = (0.0, -0.9, 180.0)
 # a walnut side table (scanned) by the window in frame, in the sun's band: a book and a glass of water on it in every frame;
 # camera C sets the Core on it, switched off (taken off the console for that frame only)
 SIDE = (-2.2, 1.66, 0.0)
@@ -92,11 +94,13 @@ def _rug():
     """A wool rug with pile and a bound edge: a herringbone wool field (photographed: its weave and pile in the texture)
     inside an 80 mm border band much darker, 16 mm thick, its edge rounded over (the field 1 mm proud, so no two faces
     lie in one plane). (Proof 2: the kit's wool has a strong sheen, and seen this low it went white and flat.)"""
-    wool = {'material': 'pbr', 'texture': 'poly_wool_herringbone', 'tex_res': '2k'}
-    return [{'kind': 'kit', 'shape': 'box', 'size': [2.4, 1.7, 0.016], 'position': [0.0, 0.15, 0.0045], 'ease': 0.007,
-             **wool, 'tint': '#3E352C', 'tint_mix': 0.75, 'gain': 0.55},
-            {'kind': 'kit', 'shape': 'box', 'size': [2.24, 1.54, 0.0165], 'position': [0.0, 0.15, 0.0045], 'ease': 0.004,
-             **wool, 'tint': '#9A8A72', 'tint_mix': 0.45, 'gain': 0.85}]
+    # (the critics, 18:41: a flat grey field with a knife-sharp border, no pile: 22 mm thick, the edge rounded 10 mm, the
+    # weave twice its size and in relief, the border a shade of the field, not a line)
+    wool = {'material': 'pbr', 'texture': 'poly_wool_herringbone', 'tex_res': '2k', 'tex_scale': 0.5, 'bump': 2.5}
+    return [{'kind': 'kit', 'shape': 'box', 'size': [2.4, 1.7, 0.022], 'position': [0.0, 0.15, 0.0045], 'ease': 0.01,
+             **wool, 'tint': '#6C604F', 'tint_mix': 0.6, 'gain': 0.7},
+            {'kind': 'kit', 'shape': 'box', 'size': [2.26, 1.56, 0.0228], 'position': [0.0, 0.15, 0.0045], 'ease': 0.006,
+             **wool, 'tint': '#A69680', 'tint_mix': 0.45, 'gain': 0.9}]
 
 
 # (american_walnut_veneer averages #726E69, a grey: walnut_veneer_02, #A98971, deepened a little toward walnut)
@@ -167,10 +171,23 @@ def _window_bars():
     return out
 
 
+SOCKET_Z = 0.28                                  # the plate's foot; its lower receptacle's centre at SOCKET_Z + 0.032
+
+
 def _socket(x):
-    # a white duplex outlet on the back wall above the skirting
-    return {'kind': 'kit', 'shape': 'box', 'size': [0.07, 0.012, 0.115], 'position': [x, BACK - 0.006, 0.28],
-            'material': 'satin', 'color': '#ECEAE4', 'ease': 0.002}
+    """A white duplex receptacle on the back wall above the skirting: the plate, two receptacle faces standing 3 mm proud,
+    each with its two slots and its ground hole (the critics: blank plates read as no outlet)."""
+    out = [{'kind': 'kit', 'shape': 'box', 'size': [0.07, 0.006, 0.115], 'position': [x, BACK - 0.003, SOCKET_Z],
+            'material': 'clay', 'color': '#ECEAE4', 'roughness': 0.35, 'ease': 0.0015}]
+    for zc in (SOCKET_Z + 0.032, SOCKET_Z + 0.083):
+        out.append({'kind': 'kit', 'shape': 'box', 'size': [0.034, 0.004, 0.03], 'position': [x, BACK - 0.008, zc - 0.015],
+                    'material': 'clay', 'color': '#E6E3DC', 'roughness': 0.3, 'ease': 0.002})
+        for dx in (-0.0065, 0.0065):
+            out.append({'kind': 'kit', 'shape': 'box', 'size': [0.0022, 0.001, 0.009], 'position': [x + dx, BACK - 0.0101, zc - 0.001],
+                        'material': 'clay', 'color': '#1A1918', 'roughness': 0.8})
+        out.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.0022, 'height': 0.001, 'position': [x, BACK - 0.0101, zc - 0.009],
+                    'rotate': [90.0, 0, 0], 'material': 'clay', 'color': '#1A1918', 'roughness': 0.8})
+    return out
 
 
 def _cables():
@@ -181,11 +198,14 @@ def _cables():
     by = SPK_Y + TROPOS_D / 2 + 0.03               # just behind each cabinet
     for sx, sock in ((-1, SOCKETS[0]), (1, SOCKETS[1])):
         x = sx * SPK_X
+        # (the critics: the cords stopped short of blank plates) from the plug, pushed into the lower receptacle, down and
+        # along the skirting to the speaker's back; the plug's moulded head on the first 45 mm
+        zr = SOCKET_Z + 0.032
         out.append({'kind': 'cable', 'position': [0, 0], 'd': 0.008, 'color': '#141414',
-                    'points': [[x + sx * 0.1, by, 0.14], [x + sx * 0.16, by + 0.04, 0.004], [x + sx * 0.34, BACK - 0.06, 0.004],
-                               [sock - sx * 0.12, BACK - 0.03, 0.004], [sock, BACK - 0.03, 0.12], [sock, BACK - 0.014, 0.25]],
-                    'plug': [0.05, 0.016]})
-        out.append(_socket(sock))
+                    'points': [[sock, BACK - 0.011, zr], [sock, BACK - 0.05, zr - 0.01], [sock, BACK - 0.04, 0.1], [sock - sx * 0.12, BACK - 0.03, 0.004],
+                               [x + sx * 0.34, BACK - 0.06, 0.004], [x + sx * 0.16, by + 0.04, 0.004], [x + sx * 0.1, by, 0.14]],
+                    'plug': [0.045, 0.018]})
+        out += _socket(sock)
         ex = sx * (CONSOLE['w'] / 2 + 0.03)             # down the console's end, against the wall
         out.append({'kind': 'cable', 'position': [0, 0], 'd': 0.005, 'color': '#1A1A1A',
                     'points': [[MANTLE[0] + sx * 0.05, BACK - 0.04, TOP - 0.01], [ex, BACK - 0.03, TOP - 0.05], [ex, BACK - 0.03, 0.2],
@@ -206,7 +226,7 @@ def _life():
         {'kind': 'books', 'position': [-0.6, CON_Y], 'z': TOP, 'colors': ['#3E4A5C', '#B9A27A', '#7A2E2A', '#D8D2C4'], 'seed': 5},
         {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': sleeves},
         {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_02', 'res': '2k', 'position': [-2.3, 0.45, 0.0], 'rotate': [0, 0, 20.0]},
-        {'kind': 'kit', 'shape': 'asset', 'model': 'mid_century_lounge_chair', 'res': '2k', 'position': [CHAIR[0], CHAIR[1], 0.0],
+        {'kind': 'kit', 'shape': 'asset', 'model': 'sofa_02', 'res': '2k', 'position': [CHAIR[0], CHAIR[1], 0.0],
          'rotate': [0, 0, CHAIR[2]]},
     ]
 
@@ -216,10 +236,25 @@ def _side_table():
     x, y, _ = SIDE; T = SIDE_TOP
     RK = [[0, 0], [0.041, 0], [0.043, 0.006], [0.044, 0.092]]
     return [{'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'res': '2k', 'position': [x, y, 0.0], 'rotate': [0, 0, 0.0]},
-            {'kind': 'kit', 'shape': 'box', 'size': [0.155, 0.235, 0.028], 'position': [x + 0.1, y + 0.07, T + 0.0005],
-             'rotate': [0, 0, 14.0], 'material': 'cotton', 'color': '#4F6253', 'ease': 0.002},
+            *_book(x + 0.1, y + 0.07, T + 0.0005, 14.0),
             LB.lathe(LB.shell(RK, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#F8F8F6', 64),
             LB.lathe(LB.contents(RK, 0.06, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#EEF3F4', 64)]
+
+
+def _book(x, y, z, rz, w=0.155, d=0.235, h=0.028, cloth='#4F6253'):
+    """A clothbound book lying flat: two boards 2.5 mm, the spine along its left edge, and the page block between
+    them, cream, set in 3 mm at the head, the tail and the fore-edge (the critics: a solid box had no pages)."""
+    import math
+    c, s_ = math.cos(math.radians(rz)), math.sin(math.radians(rz))
+    at = lambda u, v: [round(x + u * c - v * s_, 5), round(y + u * s_ + v * c, 5)]
+    cl = {'material': 'cotton', 'color': cloth}
+    t = 0.0025
+    return [{'kind': 'kit', 'shape': 'box', 'size': [w, d, t], 'position': [*at(0, 0), z], 'rotate': [0, 0, rz], 'ease': 0.0008, **cl},
+            {'kind': 'kit', 'shape': 'box', 'size': [w - 0.004, d - 0.006, h - 2 * t - 0.0004], 'position': [*at(-0.001, 0), z + t + 0.0002],
+             'rotate': [0, 0, rz], 'material': 'paper', 'color': '#EFE8D6', 'ease': 0.0005},
+            {'kind': 'kit', 'shape': 'box', 'size': [w, d, t], 'position': [*at(0, 0), z + h - t], 'rotate': [0, 0, rz], 'ease': 0.0008, **cl},
+            {'kind': 'kit', 'shape': 'box', 'size': [0.004, d, h - 0.0002], 'position': [*at(-w / 2 + 0.002, 0), z + 0.0001],
+             'rotate': [0, 0, rz], 'ease': 0.0015, **cl}]
 
 
 def _sleeve_plain():
