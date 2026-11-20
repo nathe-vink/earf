@@ -6,7 +6,7 @@ with the studio at K and the exposure at E. Writes OUT_BASE-K-E.png (raw; the ho
 
     python3.11 launch/lit_balance.py PASSES.exr OUT_BASE K,E [K,E ...]
 """
-import json, os, sys
+import json, os, struct, sys
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.argv = [sys.argv[0]] + (sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:])

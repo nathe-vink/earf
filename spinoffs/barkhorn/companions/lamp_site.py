@@ -243,10 +243,10 @@ def build(frame, samples, scale):
         bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = float(os.environ.get('BRAID_BS', '0.5')); bp.inputs['Distance'].default_value = float(os.environ.get('BRAID_BD', '0.00012'))
         nt.links.new(h, bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b_.inputs['Normal'])
         cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['From Min'].default_value = -1.0; cr.inputs['From Max'].default_value = 1.0
-        cr.inputs['To Min'].default_value = 0.003; cr.inputs['To Max'].default_value = 0.007; nt.links.new(h, cr.inputs['Value'])
+        ab_ = float(os.environ.get('BRAID_ALB', '0.0025')); cr.inputs['To Min'].default_value = 0.6 * ab_; cr.inputs['To Max'].default_value = 1.4 * ab_; nt.links.new(h, cr.inputs['Value'])
         nt.links.new(cr.outputs['Result'], b_.inputs['Base Color'])
-        b_.inputs['Roughness'].default_value = 0.9; b_.inputs['Specular IOR Level'].default_value = 0.06
-        b_.inputs['Sheen Weight'].default_value = float(os.environ.get('BRAID_SHEEN', '0.12')); b_.inputs['Sheen Roughness'].default_value = 0.7
+        b_.inputs['Roughness'].default_value = 0.9; b_.inputs['Specular IOR Level'].default_value = float(os.environ.get('BRAID_SPEC', '0.03'))
+        b_.inputs['Sheen Weight'].default_value = float(os.environ.get('BRAID_SHEEN', '0.03')); b_.inputs['Sheen Roughness'].default_value = 0.7
         return m
 
     oc_ = (0.93, 0.93, 0.92)                      # the CAD's neutral opal
