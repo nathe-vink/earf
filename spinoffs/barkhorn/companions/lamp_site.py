@@ -957,6 +957,17 @@ def build(frame, samples, scale):
         for o_ in bpy.data.objects:
             if o_.name.startswith(p_):
                 o_.hide_render = True
+    # DIAG_UNLIGHT 'lamp=prefix|prefix;...' (diagnostics): the named lamp no longer lights those objects (light linking,
+    # receivers excluded); they still cast its shadow. Unset, nothing changes
+    for spec_ in filter(None, os.environ.get('DIAG_UNLIGHT', '').split(';')):
+        ln_, ps_ = spec_.split('=')
+        lo2_ = bpy.data.objects[ln_]; col_ = bpy.data.collections.new(ln_ + '-unlit')
+        for o_ in bpy.data.objects:
+            if o_.type == 'MESH' and any(o_.name.startswith(q_) for q_ in ps_.split('|')):
+                col_.objects.link(o_)
+        lo2_.light_linking.receiver_collection = col_
+        for o_ in col_.objects:
+            col_.collection_objects[o_.name].light_linking.link_state = 'EXCLUDE'
     if os.environ.get('DIAG_BLACK'):
         blk_ = SC.principled('diag-black', '#000000', 1.0)
         for p_ in os.environ['DIAG_BLACK'].split(','):
