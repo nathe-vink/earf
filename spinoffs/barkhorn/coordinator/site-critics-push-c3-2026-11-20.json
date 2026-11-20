@@ -1,0 +1,283 @@
+{
+ "results": [
+  {
+   "part": "page",
+   "found": {
+    "findings": [
+     {
+      "id": "P-1",
+      "severity": "blocking",
+      "where": "http://127.0.0.1:4176/tropos/<tint> (seen on /tropos/ember and /tropos/fog), 1440x900; the same placement measured at 1366x768, 1024x768 and 844x390. Gallery: #g-count, #g-prev, #g-next on the 2nd picture \"Horn, behind\" (and the 4th, \"Turning\").",
+      "steps": "Open http://127.0.0.1:4176/tropos/ember in a 1440x900 window. Click the 2nd thumbnail (\"Horn, behind\"). Then click the 4th (\"Turning\"). Do the same on http://127.0.0.1:4175/tropos/ember to compare.",
+      "what": "Push C3 now pins the counter and arrows where the right edge of a 4:5 picture would fall (CSS: right: calc(var(--pin) + 10px)). \"Horn, behind\" is a 4:3 picture that fills the whole stage width, so the counter \"2 / 6\" and both arrows (x 592-732, y 733-769) sit on the speaker cabinet, over its EARF-lettered front. On \"Turning\", the counter and both arrows sit on the cabinet next to the \"Drag to turn\" pill. Measured positions at 1366x768: arrows at x 563-643, y 601-637, inside the 624x468 picture. At 1024x768: x 432-512, inside the 624x468 picture. In the build before, the counter and arrows stood in the stage's bottom-right corner (x 744-879), on the floor beside the cabinet.",
+      "expected": "Counter and arrows clear of the product on every picture, as in the build before, while staying in one place across pictures.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/new-1440x900-_tropos_ember-pic2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/new-1440x900-_tropos_ember-pic4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/cmp-1440-tropos-old-new.png (old on the left, new on the right; top row is Horn, behind; bottom row is Turning) ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/montage-1440-wide.png ; logs pc-1440x900.log, pc-1366x768.log, pc-1024x768.log, pc-844x390.log, pc-old-1440x900.log in the same folder",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-2",
+      "severity": "blocking",
+      "where": "http://127.0.0.1:4176/tropos/ember and /tropos/fog at 360x740 (iPhone 13 emulation, 360x740 viewport). First screen, picture 1 \"Front\". The other 4:5 Tropos pictures (The amplifier, Out) share the same layout.",
+      "steps": "Open http://127.0.0.1:4176/tropos/ember at 360x740 and look at the first screen. Compare http://127.0.0.1:4175/tropos/ember at the same size.",
+      "what": "To keep the name above the ask bar (item 5), the picture is now capped at 220x276 (it was 289x361), but the counter and the 44 px arrows did not shrink. The Prev arrow (x 184-228, y 353-397) covers the lower right corner of the cabinet, and the counter pill touches the cabinet's base. In the build before, both stood on the floor below the cabinet. Hemisphere, Core and Mantle at this size stay clear.",
+      "expected": "The arrows and counter clear of the product, as in the build before.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/cmp-360-tropos-old-new.png (old on the left, new on the right) ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/zoom-360-tropos-ember-arrows.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/montage-360-first.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/new-360x740-_tropos_ember-first.png ; logs pc-360x740.log and pc-old-360x740.log in the same folder",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-3",
+      "severity": "blocking",
+      "where": "All eight /core/<tint> pages, Specifications, In the box > Contents (any size).",
+      "steps": "Open http://127.0.0.1:4176/core/fog and read Specifications > In the box.",
+      "what": "\"a 6.5 ft (2 m) braided USB-C cable\": 2 m / 0.3048 = 6.562 ft, which is 6.6 ft at the one decimal the page uses. The page is off by 0.06 ft (about 0.7 in). Strictly this is a conversion off by more than rounding, but it is tiny and the fix is one character. The builder's own list carries the same figure. Every other unit pair on the 32 pages is within rounding (see tested_and_right).",
+      "expected": "\"6.6 ft (2 m)\"",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/units-new.txt (lines marked OFF) ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/new-spec.txt ; script /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/units.py",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-4",
+      "severity": "fix_next",
+      "where": "Specifications on /hemisphere/<tint>: Canopy row at 1440x900, Weight row at 1024x768. Also the \"COLOR TEMPERATURE\" label on Hemisphere and Core at 1440x900 and 1024x768.",
+      "steps": "Open http://127.0.0.1:4176/hemisphere/ice at 1440x900 and scroll to Specifications > Size and hanging. Repeat at 1024x768.",
+      "what": "Two of the new values break a number away from its unit. At 1440x900 the Canopy row ends \"(150 x 50\" with \"mm)\" alone on the next line. At 1024x768 the Weight row breaks \"the canopy about 0.9\" from \"lb (0.4 kg)\". Separately, the label \"COLOR TEMPERATURE\" fills its 150 px column and almost touches its value (\"COLOR TEMPERATURE4000 K\"). That label was already there in the build before. No row overflows, and nothing scrolls sideways at any size tested.",
+      "expected": "Each figure kept on one line with its unit (non-breaking spaces), and a visible gap between every label and its value.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/new-1440x900-_hemisphere_ice-spec.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/new-1024x768-_hemisphere_ice-spec.png ; spec-new.log in the same folder",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-5",
+      "severity": "fix_next",
+      "where": "Color dots on phones: /core/poison at 360x740 (new fault) and /hemisphere/ice at 390x844 (same in both builds).",
+      "steps": "Phone viewport 360x740. Open http://127.0.0.1:4176/core/poison, click the product name, then press Tab until the chosen dot (Poison) has focus.",
+      "what": "The focused dot sits at y 673-717, behind the fixed \"Ask about Core\" bar (y 675-740). The page does not scroll, so only the top edge of the blue focus ring shows above the bar. In the build before, at 360x740 the page scrolled the focused dot into view (y 438-482). At 390x844 both builds hide the focused dot under the bar (new y 800-844, old 791-835; bar at 779).",
+      "expected": "Keyboard focus on a dot is never hidden behind the ask bar (for example a scroll-padding-bottom equal to the bar's height).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/new-360x740-_core_poison-dotfocus-view.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/old-360x740-_core_poison-dotfocus-view.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/dots-phone-montage.png ; dotsafe.log in the same folder",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-6",
+      "severity": "fix_next",
+      "where": "All eight /hemisphere/<tint> pages, Specifications > Light > Color temperature.",
+      "steps": "Open http://127.0.0.1:4176/hemisphere/ice and read Light.",
+      "what": "\"4000 K, straight down\". With \"the light\" cut, the line reads as if the color temperature itself points straight down. The build before said \"4000 K, the light straight down; ...\". The kelvin values per tint are unchanged.",
+      "expected": "A line that makes plain sense, for example \"4000 K\" alone, or keep \"the light straight down\".",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/new-spec.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/old-spec.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-7",
+      "severity": "fix_next",
+      "where": "All eight /core/<tint> pages, Specifications > Power > Runtime.",
+      "steps": "Open http://127.0.0.1:4176/core/fog and read the product sentence, then Specifications > Power.",
+      "what": "The new Runtime row reads \"Cordless: about five hours a charge at full brightness, longer dimmed\". The value starts with a leftover \"Cordless:\" carried over from the old Battery row. The sentence beside the picture already says \"Cordless. About five hours a charge.\", so the fact appears twice on the page.",
+      "expected": "\"About five hours a charge at full brightness, longer dimmed\" (remove \"Cordless:\").",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/new-spec.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-8",
+      "severity": "fix_next",
+      "where": "All eight /mantle/<tint> pages, Specifications > Playing > Speeds and Power.",
+      "steps": "Open http://127.0.0.1:4176/mantle/haze and read Playing.",
+      "what": "Speeds now reads \"33 and 45, by a button on the power supply\", but the Power row three lines below says there are two supplies: \"Rega's Neo PSU drives the motor; the phono stage runs on its own 18 V adapter.\" \"The power supply\" does not say which one has the button. The speeds also have no unit (rpm), as in the build before. The new Plinth and Hardware rows do not contradict any other row. Hardware's gold RCA contacts agree with Outputs, and the four posts agree with the Posts row.",
+      "expected": "Name the supply (for example \"on the motor's power supply\"), or remove the added words.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/new-spec.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-9",
+      "severity": "fix_next",
+      "where": "Specifications: /core/<tint> \"In the box\" > \"Contents\" and \"Cells\"; /hemisphere/<tint> \"Cord\".",
+      "steps": "Read Specifications on http://127.0.0.1:4176/core/fog and http://127.0.0.1:4176/hemisphere/ice.",
+      "what": "Three new labels say twice what their heading or value already says. \"IN THE BOX\" has a single row labeled \"CONTENTS\", which restates the heading; the page's own rule prints a one-row group without a label only when the label equals the heading. \"CELLS\" is followed by \"Three LiFePO4 18650 cells ...\". \"CORD\" is followed by \"10 ft (3 m) of black cloth-braided cord ...\".",
+      "expected": "No label that repeats its heading or its own value, for example drop the \"Contents\" label, \"Three LiFePO4 18650, 14.4 Wh, ...\", \"10 ft (3 m), black, cloth-braided, ...\".",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/new-spec.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/shots/new-1440x900-_core_fog-spec.png",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-10",
+      "severity": "note",
+      "where": "/hemisphere/<tint> Specifications: On the table, Cord, Dimming, Drop, Canopy.",
+      "steps": "Read Specifications on http://127.0.0.1:4176/hemisphere/ice.",
+      "what": "Several new lines read as a buyer might stumble over them, though none is wrong. \"About 340 lux 20 in (0.5 m) below\" runs two figures together (\"340 lux 20 in\"); \"at\" would help. \"cut to the drop at install\" is trade shorthand. \"Phase-cut (leading or trailing edge) or 0-10 V\" uses electrician's terms; it is the standard US spec-sheet form. In \"23.6 in (600 mm) as standard: 30.6 in (776 mm) from the ceiling to the rim\" the colon has to be read as \"that is\"; the arithmetic is right (2.0 + 23.6 + 5.0 = 30.6 in; 50 + 600 + 126 = 776 mm). Canopy is the only row written \"5.9 in across, 2.0 in deep (150 x 50 mm)\" with the millimeters grouped at the end. Also not in the builder's list: Core's group was renamed \"Balls, rating and care\" and its \"Care\" label became \"Cleaning\", while Hemisphere's similar row is still \"Care\".",
+      "expected": "Owner's call.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/new-spec.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/old-spec.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "P-11",
+      "severity": "fix_next",
+      "where": "All eight /mantle/<tint> pages, Specifications > Outputs and Plinth/Posts.",
+      "steps": "Read Specifications on http://127.0.0.1:4176/mantle/haze.",
+      "what": "\"RCA line outputs and an earth post\": \"earth\" is British; the American term is \"ground post\". The rewritten Plinth row still says \"raised 1.6 in (40 mm) on four posts\", and the next row says \"Four solid posts, 1.2 in (30 mm) across\", so the posts are named twice. Both were the same in the build before.",
+      "expected": "\"a ground post\". Name the posts in one row only.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/new-spec.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/page/old-spec.txt",
+      "added_by_this_build": false
+     }
+    ],
+    "tested_and_right": [
+     "Numbers, all 32 pages, new build and build before (specdump.js -> new-spec.txt, old-spec.txt; units.py -> units-new.txt): I recomputed every unit pair from its metric value. All are within the rounding the page uses except P-3. Tropos: 0.8 in/20 mm (0.787), 3.9/100 (3.937), 0.4/10 (0.394), 3.3 ft/1 m (3.281), 16 ft/5 m (16.40), 51 in/1295 (50.98), 22/560 (22.05), 17.4/442 (17.40), 16.5/420 (16.54), 165 lb/75 kg (165.35). Hemisphere: 7.9/200 (7.874), 5.0/126 (4.961), 3.9/100, 3.5 lb/1.6 kg (3.527), 0.9 lb/0.4 kg (0.882), 10 ft/3 m (9.84), 20 in/0.5 m (19.69), 23.6/600 (23.62), 30.6/776 (30.55), 5.9/150 (5.906), 2.0/50 (1.969). Core: 6.3/160 (6.299), 7.4/187 (7.362), 5.9/150, 3.1 lb/1.4 kg (3.086). Mantle: 1/25 (0.984), 1.6/40 (1.575), 1.2/30 (1.181), 0.5/12.7 (0.500), 1.4/35 (1.378), 11.8/300 (11.81), 0.8/21 (0.827), 0.1/3 (0.118), 17.6 x 14.1 x 3.9 in / 448 x 358 x 100 mm (17.64, 14.09, 3.94), 2.4 lb/1.1 kg (2.425), 17.7/450 (17.72), 14.2/360 (14.17), 6.3/161 (6.339), 7.7/196 (7.717), 25.6 lb/11.6 kg (25.57), 28 lb/12.7 kg (28.00).",
+     "Unit order on all 32 pages: inches first, pounds before kilograms, feet first for cables. My regex found no length or weight in metric only and none in the wrong order. The Canopy row's grouped style is noted in P-10.",
+     "The size line under each sentence matches the first figure of its Size row on all four products, in all eight tints (51 in (1295 mm) tall, 7.9 in (200 mm) across, 7.4 in (187 mm) tall, 17.7 in (450 mm) wide).",
+     "Figures are the same across the eight tints of each product, except color words, lumens and kelvin, which differ as in the build before. Hemisphere: 307/353/380/282/270/258/521/260 lm and 2200/4000/4000/2700/4000/3000/2700/4000 K (Ember to Smoke). Core: 45/51/63/38/39/33/95/35 lm, same kelvin pattern.",
+     "Every fact in the build before is still on the new pages. Removed, as listed: \"the shade glows in its own color\" and \"the ball lights in its own color\". New rows match the builder's list word for word: Hemisphere Size, Weight, Power, Dimming, Cord, Drop, Canopy; Core Use, Color temperature, Runtime, Charging, Cells, Contents, Rating moved; Mantle Plinth (Fog: \"Clear cast acrylic ...\"), Speeds, Hardware on all eight. Cross-checks hold: Mantle weight with the cover is 11.6 + 1.1 = 12.7 kg; Hemisphere drop arithmetic holds; three LiFePO4 18650 cells at 4.8 Wh each = 14.4 Wh.",
+     "whole.js (new build) on /tropos/acid, /hemisphere/poison, /core/haze, /mantle/dust: RESULT: every picture whole, nothing moves, at 1440x900, 1366x768, 390x844 and 360x740 (whole-new.log). I looked at the widest and tallest pictures at 1440x900 and 390x844: whole, not stretched.",
+     "jump.js (new build), same four pages: RESULT: arrows hold their place at 1440x900 and 1366x768. Next top constant (733 and 601), every click advanced by one, one tab (jump-new.log).",
+     "Counter and arrows hold one place on every picture of a product at every size tested (1440x900, 1366x768, 1024x768, 844x390, 430x932, 390x844, 360x740). The counter is 52 px wide on every picture (the build before varied 47-49). On phones the Next arrow is on the 4:5 picture (390x844: x 299-343 inside 37-352). It sits below wide pictures, as it must to keep one place.",
+     "Item 6: \"Shown in Ember.\" is a line under the picture (#cap), not on it. It shows on exactly Off, The cap, The rim and Over a table on /hemisphere/ice and /hemisphere/smoke at 1440x900, 390x844 and 360x740, and is hidden on the in-tint pictures. Bar pictures carry the names row as one line scrolling sideways (Tropos, Hemisphere, Core, Mantle). The build before put a \"Shown in Ember.\" tag on the picture; none is on the stage now. The page does not move when stepping onto such a picture: thumbnails top, Specifications top and page height are constant.",
+     "Item 4: the dots break four and four at every size tested (panel 319-398 px wide, never 408, so never one row) on Tropos ember/fog, Hemisphere ice/smoke, Core poison/fog and Mantle haze/smoke. Smoke is never alone (the build before had Ember...Fog | Smoke at 360x740). With focus at 1440x900 the chosen dot shows its black ring plus a blue ring outside it (Ice, Fog, Smoke); a neighbor (Haze) shows the blue ring. Space chooses a dot and the page does not scroll (scrollY unchanged at 1440, 1024, 390 and 360). Enter chooses as well.",
+     "Item 7: link rel=canonical follows the color after Space, Enter and a mouse click (for example /hemisphere/haze, /hemisphere/fog, /hemisphere/ember, /tropos/smoke, /mantle/ember, /core/ice, /core/haze).",
+     "Item 5: the name ends above the fixed ask bar on the first screen. 360x740: h1 617-657, bar from 675 (the build before had the h1 at 702-742, under the bar). 390x844: 735-775 vs 779. 430x932: 779-819 vs 867. No sideways scroll at any of the seven sizes (page width = window).",
+     "Item 11 (1440x900 and 390x844): /tropos/ice?view=out opens on Out (6 / 6) with /tropos/ice in the address bar (the build before opened on Front). /tropos/ice opens on Front. /#speaker-ice/out opens on Out with /tropos/ice in the address bar (the build before kept the hash address). /s/speaker-ice opens on Front with /tropos/ice. /tropos/ice?view=habitat opens on Out. Back leaves the page in one step from each. Copy link copies /tropos/ice on Front, Horn behind, The amplifier, Turning and At the bar, and /tropos/ice?view=out on Out; that address reopens on Out.",
+     "Specifications rows: no label wraps and nothing overflows its box on Hemisphere ice, Core fog, Mantle smoke and Tropos ember at 1440x900, 1366x768, 1024x768, 844x390, 430x932, 390x844 and 360x740 (specshot.js, spec-new.log). On phones the label stands above its value; the bad breaks are in P-4."
+    ],
+    "not_tested": [
+     "Not every tint at every size: two tints per product at 1440x900, 390x844 and 360x740; one tint per product at 1366x768, 1024x768, 430x932 and 844x390. Per-picture screenshots exist only at 1440x900 and the phone sizes; at 1366 and 1024 I have measured positions only.",
+     "Fog and Smoke focus rings at phone sizes, and Space and Enter at 390x844 beyond /hemisphere/ice and at 1024x768 beyond /core/fog: I stopped that script early (see the last line).",
+     "The breadcrumb's focus box (part of item 13), the opening film and lazy icons (item 12), and the home-page side of item 11.",
+     "The /s/speaker-ice/out pattern redirect (not emulated locally) and the share pictures.",
+     "A one-row dot layout: no window I tried gives the panel 408 px.",
+     "Disclosure: my dots script pressed Enter on the \"Ask about\" mailto link three times by mistake, after Tab moved past the last dot (1440x900 on /tropos/smoke and /mantle/smoke; 1024x768 on /core/smoke). This was headless Chromium, which has no mail program; the address stayed on the product page and nothing was sent. I stopped the script and did not rerun those parts."
+    ]
+   }
+  },
+  {
+   "part": "home",
+   "found": {
+    "findings": [
+     {
+      "id": "H-1",
+      "severity": "blocking",
+      "where": "http://127.0.0.1:4176/lighting, the names row under the bar picture (figure.lt-room figcaption.names), at 1440x900, 1366x768, 1280x720 and 1024x768 (desktop, no device emulation)",
+      "steps": "Open /lighting at 1280x720 (or 1440x900, 1366x768, 1024x768) and look at the line of names under the bar picture on the first screen.",
+      "what": "Push C3 made the names row exactly as wide as the picture: the picture and the names both run x36-426 at 1280, x116-686 at 1440 and x16-454 at 1024. The text needs 591 px, so it is now cut off in the middle of a word. At 1280x720 it reads \"Hemisphere in Ember \u00b7 Hemisphere in Acid \u00b7 Hemisphere in Du\". At 1366x768 and 1024x768 it ends \"...Hemisphere in Dust \u00b7 Cor\", and at 1440x900 it ends \"...Core in Ember \u00b7 Core in D\". The two Core names can only be reached by scrolling the row sideways, and a mouse user gets no sign that it scrolls. In the build before at 1280x720, all five names showed whole on one line (names x36-627, so they ran 201 px past the picture's edge). At 1920x970 the new row fits (640 of 640 px).",
+      "expected": "Every name in the row can be read whole at common desktop widths, as in the build before, with the row still one line and lined up with its picture (item 10). For example, a picture at least 591 px wide would fit the row, as the 640 px picture does at 1920.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/lt-1280-old-new.jpg (old above, new below); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/lt/n-lt-1280x720-00first.jpg; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/lt/o-lt-1280x720-00first.jpg; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/n-lt-1440-names.jpg; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/n-lt-1024-1280.jpg; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/n-lt-1366-1920.jpg; measurements in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/lt/new.txt and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/lt/old.txt; script /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/lighting.js. The CSS added in this build is '.lt-room .names { width: 0; min-width: 100% }'.",
+      "added_by_this_build": true
+     },
+     {
+      "id": "H-2",
+      "severity": "fix_next",
+      "where": "http://127.0.0.1:4176/ hero on small phones (iPhone 13 emulation) at 480x800, 375x667 and 360x640: the headline (h1.tagline) compared with the line (.hero-sub) and the buttons (.hero-cta)",
+      "steps": "Open / at 375x667. Compare the left edge of \"A world of sound, in color.\" with the left edges of \"Horn speakers, lamps and a turntable...\" and the \"Meet Tropos\" button.",
+      "what": "The capped picture is centered with side margins. The headline lines up with the picture, but the line and both buttons stay at the 16 px page edge, so the two do not line up. Headline left edge x36 at 480x800 (picture x36-444), x36.7 at 375x667 (picture x36.7-338.3) and x40 at 360x640 (picture x40-320); the line and buttons are at x16 at all three sizes. At 600x900, 768x1024 and 820x1180, the headline, line and buttons all line up with the picture. In the build before, all three were at x16 above a full-width picture.",
+      "expected": "The headline, the line and the buttons share one left edge, as they do at tablet widths.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/new/n-375x667-00first.jpg; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/n-phones-first.jpg (new, six phone sizes); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/o-phones-first.jpg (old); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/new/digest.txt and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/old/digest.txt (hero: lines)",
+      "added_by_this_build": true
+     },
+     {
+      "id": "H-3",
+      "severity": "fix_next",
+      "where": "http://127.0.0.1:4176/ first load at 1440x900 (desktop, cold cache)",
+      "steps": "Load / with a cold cache at 1440x900 and record the network requests.",
+      "what": "img/globe-frames-0.webp (248 KB) is fetched twice, at 51 ms and again at 111 ms. Then frames 1, 2 and 3 load. In total: 20 requests, 2129 KB, of which images are 18 requests, 1815 KB. The build before fetched each of the four frames once: 27 requests, 1944 KB. The opening itself plays as before.",
+      "expected": "Each globe-frames file is fetched once on desktop.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/fl/firstload.txt (sections '### new desk 1440x900 /' and '### old desk 1440x900 /'); script /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/firstload.js",
+      "added_by_this_build": true
+     },
+     {
+      "id": "H-4",
+      "severity": "fix_next",
+      "where": "http://127.0.0.1:4176/ on a phone held sideways, 844x390 (iPhone 13 emulation, touch)",
+      "steps": "Load / with a cold cache at 844x390 with devices['iPhone 13'] and that viewport.",
+      "what": "The opening film still plays (classes 'opening intro' with .flyer and .splash at 0.3-1 s), and all four globe-frames files are fetched (about 1029 KB): 19 requests, 1881 KB. In portrait (390x844), the same phone gets no film and no frames: 14 requests, 787 KB. The build before behaved the same way in landscape.",
+      "expected": "Item 12 says phones get no opening film and no globe frames. That holds in portrait, but not for a phone turned sideways.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/fl/firstload.txt ('### new land 844x390 /'); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/fl/fl-new-land_-t0300.jpg",
+      "added_by_this_build": false
+     },
+     {
+      "id": "H-5",
+      "severity": "fix_next",
+      "where": "http://127.0.0.1:4176/ \"The family.\" color chips (#family label.tint) at 430x932 (iPhone 13 emulation)",
+      "steps": "Open / at 430x932 and scroll to The family.",
+      "what": "Measured, not looked at: the chips break into rows of 3, 4 and 1 (rows at y970, 1022 and 1074), so Smoke stands alone on the third row. At 390x844, 375x667 and 360 wide they break 3+3+2; at 480 and wider they break 4+4. The build before measured the same 3+4+1 at 430x932.",
+      "expected": "No chip alone on a row (for example 4+4, as at 480 and wider).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/new/digest.txt and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/old/digest.txt (line 'family h2 ... chips rows' under == 430x932)",
+      "added_by_this_build": false
+     },
+     {
+      "id": "H-6",
+      "severity": "note",
+      "where": "http://127.0.0.1:4176/ hero at 844x390",
+      "steps": "Open / at 844x390 (iPhone 13 emulation) and look at the hero picture.",
+      "what": "Only three of the four product dots are shown; there is no Hemisphere dot. The Core and Mantle dots sit below the first screen (y476 and y466 of 390), on the products' lower parts. The build before was the same. At every other size I measured (13 sizes), all four dots are present. On the phone sizes and at 1440x900 I looked at them: they sit on the Ember pendant's cap, the Tropos cabinet, the Ember Core's base and the Mantle plinth.",
+      "expected": "Four dots, each on its product, where the picture shows all four products (owner's decision on the dots stands).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/n-844-all.jpg; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/n-844-02-top.jpg; dots: lines in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/new/digest.txt and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/old/digest.txt",
+      "added_by_this_build": false
+     },
+     {
+      "id": "H-7",
+      "severity": "note",
+      "where": "http://127.0.0.1:4176/ \"Write to us.\" Copy address (#copy, #copy-note) at 1440x900, 390x844 and 360x740",
+      "steps": "Scroll to Write to us. Measure the footer's top, press Copy address, and measure again at 0.35 s and at 6 s.",
+      "what": "The note reads \"Address copied.\" and the clipboard holds hello@earf.world. The footer moves down 0.7 px: 3490.8 to 3491.5 at 1440, 2745.9 to 2746.6 at 390 and 2634.8 to 2635.5 at 360x740. The empty note box is 21 px tall (its new min-height) and 21.7 px with text in it. On /contact nothing moves. I did not measure the build before.",
+      "expected": "Nothing moves (item 8); the note box's empty height should equal its filled height.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/copy/new.txt; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/copy/n-copy-1440_-b.jpg",
+      "added_by_this_build": false
+     },
+     {
+      "id": "H-8",
+      "severity": "note",
+      "where": "http://127.0.0.1:4176/contact and / at 1440x900: the Copy address button after a mouse click",
+      "steps": "Click Copy address with the mouse at 1440x900 and look at the button.",
+      "what": "A hard black rectangle stays around \"Copy address\" after a mouse click, at 0.35 s and still at 6 s. The site's gray cursor ring (div.cur.cur-ring) sits over it. I did not compare this with the build before.",
+      "expected": "No keyboard-style focus box after a mouse click.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/sheets/n-contact-bc.jpg; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/copy/n-copy-1440_contact-b.jpg; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/copy/n-copy-1440_contact-c.jpg",
+      "added_by_this_build": false
+     },
+     {
+      "id": "H-9",
+      "severity": "note",
+      "where": "http://127.0.0.1:4176/ hero \"Meet Tropos\" button and hero dots after the visitor has chosen a tint",
+      "steps": "Visit /tropos/ice (or /hemisphere/haze) and press the logo, or return to the home page. Read the hrefs of the hero button and dots.",
+      "what": "\"Meet Tropos\" still leads to #speaker-acid, and the dots to the tints the picture shows (Acid, Ember), while the header Speakers and the family row carry the visit's tint (Ice or Haze). This matches the rule that a link leads to what its picture shows, but pressing Meet Tropos changes the visit's tint to Acid. I did not check the build before.",
+      "expected": "Owner's call; noted only.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/tint/new.txt (A2 and E lines)",
+      "added_by_this_build": false
+     },
+     {
+      "id": "H-10",
+      "severity": "note",
+      "where": "All pages, both builds: <meta name=\"robots\" content=\"noindex, nofollow\"> in the page source",
+      "steps": "View the source of / on 4176 and on 4175.",
+      "what": "Both builds carry noindex, nofollow, so the push changes nothing here. I am noting it only because search engines are still open with the owner.",
+      "expected": "Whatever the owner decides about search engines.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/home-new.html; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/9/home/r2/home-old.html",
+      "added_by_this_build": false
+     }
+    ],
+    "tested_and_right": [
+     "Home: screenshots of every screenful at all 14 sizes (1920x970 to 360x640). I looked at the first screen at every size, and at every screenful at 1920, 1440, 1280, 1024, 844x390, 820x1180, 768x1024, 600x900 and 390x844. No sideways page scroll at any size (scrollWidth equals width) and nothing overlapping.",
+     "Item 9 hero, measured: headline, line and both buttons are on the first screen. Buttons end at 777.6 of 800 at 480x800, 636 of 667 at 375x667, 607.8 of 640 at 360x640, 707.8 of 740 at 360x740 and 747.7 of 844 at 390x844. In the build before, they fell below the first screen at 480x800, 375x667 and 360x640.",
+     "Item 9 hero, looked at: the capped picture is the same 4:5 frame scaled down (408x510, 301.6x377, 280x350), nothing cut. At 844x390 the line is one line and the buttons stand side by side at y189-233, clear of the pendants (nearest pendant top about y265). The build before stacked them.",
+     "Item 8: the renders line's left edge equals the first family tile's left edge at all 14 sizes (x240 at 1920, x16 at every other size). Before, it was offset by 116, 100 or 20 px at 1920, 1440 and 1280.",
+     "Family row at 14 sizes: four equal tiles (4 across at 768 and wider, 2x2 at 600 and narrower), pictures whole (at most 0.03% off their own proportions), names on one line, all eight chips present.",
+     "Place tiles at 14 sizes: pictures whole (at most 0.31% off), captions are the color names alone, and the row scrolls sideways on phones as before.",
+     "Item 11 at 1440x900 (all eight tiles) and 390x844 (Ember, Haze): each tile opens /tropos/<tint> with the Out picture (6/6) shown whole, title \"Tropos in <Tint> \u00b7 EARF\", and canonical following.",
+     "Item 11 Copy link: on Out it gives /tropos/<tint>?view=out, which opens on Out; the other five views (Front, Horn behind, The amplifier, Turning, At the bar) give /tropos/ember. Back returns to the home page at the same scroll in one step, and on the phone the row's sideways position is restored too.",
+     "Copy address on / and /contact at 1440x900, 390x844 and 360x740: the note says \"Address copied.\", the clipboard holds hello@earf.world, and Enter works the same. On /contact nothing moves.",
+     "/contact at 1440x900 and 390x844: \"Write to us.\", the made-to-order line, the address and Copy address. Links: mailto:hello@earf.world (href read, not followed), the logo to home, and Contact in the footer.",
+     "/lighting, item 10, measured at 1920, 1440, 1366, 1280, 1024, 390x844 and 360x740: the eight named dots break four and four in each tile, each name sits under its own dot (centers within 0.1 px), none is cut, targets are at least 45x52, and the buttons stay on one line. The names row's edges equal the picture's edges at every size. The two rows of eight show whole at 3:1 and split four and four on phones.",
+     "/lighting clicks at 1440x900: all 16 dots lead to /hemisphere/<tint> or /core/<tint> with the right title, picture, chosen dot and canonical. See Hemisphere, See Core and the tile pictures lead to the visit's tint, and after an Ice visit the tile pictures also show Ice.",
+     "visit.js on 4176: RESULT: all hold. Fresh visit Ember; Poison chip; Core tile opens /core/poison; the Haze dot gives /core/haze; header Speakers leads to haze; Back shows Haze; reload keeps Haze. Header items on their own pages do not add history. Hero line and buttons fit at 844x390, 932x430, 960x600, 1440x900, 390x844 and 961x700.",
+     "My tint.js on 4176: after the Ice place tile and Back, the home row shows Ice (pictures and links), and reload keeps it. On /hemisphere/haze the header Speakers and Turntable lead to Haze, and the logo returns to a Haze row. Phone (390x844): Fog chip, then Mantle tile (/mantle/fog), then Back keeps Fog. Nothing I found shows one tint while linking to another: the /lighting names row and the hero dots link to the tints they show.",
+     "Old addresses on 4176: /#speaker-ice and /colors/ice go to /tropos/ice; /#hemisphere-fog to /hemisphere/fog; /s/core-smoke to /core/smoke; /tropos, /hemisphere, /core and /mantle to their /ember pages (308); /tropos/ice?view=out to /tropos/ice on Out; ?view=nonsense to /tropos/ice on Front; /lighting?x=1 to /lighting. Each has the right title (\"<Product> in <Tint> \u00b7 EARF\", \"Lighting \u00b7 EARF\"). /tropos/EMBER and /tropos/red give 404 (known). The server answers the same on 4175.",
+     "First load, phone 390x844 home: 14 requests, 787 KB, against 26 requests, 1879 KB before. No globe-frames file and no opening film. The header logo looks right at 0.3 s and 3 s.",
+     "First load, desktop: the opening still plays at 1440x900. /tropos/ember is 24 requests, 853 KB on phone and desktop, against 31 and 906 before.",
+     "What the first screen never shows on the phone home: the four family tiles and the eight place pictures (about 420 KB) are fetched within 120 ms.",
+     "The visible text of the home, lighting, speakers and turntable views, the header and the footer is the same as the build before. The title, meta and canonical tags of /, /lighting and /contact are also unchanged."
+    ],
+    "not_tested": [
+     "links.js was not run (dropped for time); tint.js and visit.js covered which tint each tile and dot links to and shows.",
+     "The /lighting run at 820x1180 was stopped for time, so I have no measurements or screenshots at that size. In the build before I looked at /lighting at 1280x720 only.",
+     "In the build before: Copy address, the tint checks, and /lighting at other sizes were not run.",
+     "I did not look at every screenful beyond the first screen at 480x800, 430x932, 375x667, 360x740 and 360x640; those sizes were checked by measurement only.",
+     "Keyboard focus rings and hover states on the home chips, the place tiles and the lighting dots.",
+     "The first-time visitor read of the home page and /hemisphere/ice on the phone, new beside old, was not done. On my pages, what C3 made worse is H-1 (the /lighting names cut at desktop widths), H-2 (the headline indent on small phones) and H-3 (the doubled desktop globe fetch); everything else I tested is the same or better.",
+     "Place tiles at 390x844 were clicked for Ember and Haze only (all eight at 1440x900)."
+    ]
+   }
+  }
+ ],
+ "dropped": 0
+}
