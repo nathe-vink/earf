@@ -566,10 +566,10 @@ SPEC = {
     'orb': [
         ('Materials', [('Ball', '{Tinted|Clear} cast acrylic, with an opal diffuser centered inside it'), ('Base', 'Its own color, satin')]),
         ('Light', [('Glow', 'A glow, not a reading light: the ball lights in its own color'), ('Output', 'About {lm} lm out of the ball in this color'),
-                   ('Color temperature', 'The LED inside: {K} K'), ('Control', 'Touch the ring: tap to switch, hold to dim')]),
+                   ('Color temperature', 'The LED inside: {K} K'), ('Control', 'Touch the top of the base: tap to switch, hold to dim')]),
         ('Power', [('Battery', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours on its dock, on three standard LiFePO4 cells you can replace yourself'),
                    ('Rating', 'Designed to meet IP44, for terraces and spilled drinks')]),
-        ('Size and weight', [('Size', '160 mm ball, 187 mm tall (6.3 in ball, 7.4 in tall)'), ('Weight', 'About 1.5 kg (3.3 lb)')]),
+        ('Size and weight', [('Size', '160 mm ball, 187 mm tall, base 150 mm across (6.3 in ball, 7.4 in tall, 5.9 in base)'), ('Weight', 'About 1.4 kg (3.1 lb) with its cells')]),
         ('Balls and care', [('Balls', 'In all eight colors, sold separately. Each comes off by hand.'), ('Care', '{care}')]),
     ],
     'turntable': [
@@ -1157,8 +1157,9 @@ def fix_5(p, web):
     # the dead lines out of the page data: the lamps' old lines become their pages' sentences
     D['lamps']['dome']['line'] = 'A pendant in cast acrylic. The shade comes off with a quarter turn.'
     D['lamps']['orb']['line'] = 'A table lamp in cast acrylic. Cordless. About five hours a charge.'
-    # the Core is 187 mm tall (the lamps lane's CAD and drawing, the coordinator 15:17): the old 180 out of the page data too
-    D['lamps']['orb']['facts'] = [[a, b.replace('180 mm tall', '187 mm tall')] for a, b in D['lamps']['orb']['facts']]
+    # the Core's height, weight and touch surface (r32-lamps-final 7fa9e68a FACTS.md; the coordinator 15:42): the old figures out of the page data too
+    fx = {'Size': '160 mm ball, 187 mm tall, base 150 mm across', 'Weight': 'About 1.4 kg with its cells', 'Control': 'Touch the top of the base: tap to switch, hold to dim'}
+    D['lamps']['orb']['facts'] = [[a, fx.get(a, b)] for a, b in D['lamps']['orb']['facts']]
     i, j, _ = _data(p)
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     p.sub('"turntable": ["studio", "cover", "bar"]', '"turntable": ["house", "cover", "studio", "bar"]')     # cover off, then on, then under a spot
