@@ -1,0 +1,23 @@
+AUDIT house-dome-red hidden ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'house-key-flag', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] no-shadow ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] lights [('house-key', 'AREA', 3.394), ('house-fill', 'AREA', 9.528), ('house-kick', 'AREA', 2.339), ('house-horn', 'AREA', 14.073), ('house-bg-left', 'AREA', 10.229), ('house-bg-right', 'AREA', 3.957), ('house-wall_left', 'AREA', 28.516), ('house-bg-high', 'AREA', 6.494), ('house-wall-ll', 'AREA', 1.715), ('house-key-floor', 'AREA', 3.394), ('led-red-0', 'AREA', 0.621), ('led-red-1', 'AREA', 0.621), ('led-red-2', 'AREA', 0.621), ('led-red-3', 'AREA', 0.621), ('led-red-4', 'AREA', 0.621), ('led-red-5', 'AREA', 0.621), ('led-red-6', 'AREA', 0.621), ('led-red-7', 'AREA', 0.621), ('led-red-8', 'AREA', 0.621), ('led-red-9', 'AREA', 0.621), ('led-red-10', 'AREA', 0.621), ('led-red-11', 'AREA', 0.621), ('led-red-12', 'AREA', 0.621), ('led-red-13', 'AREA', 0.621), ('led-red-14', 'AREA', 0.621), ('led-red-15', 'AREA', 0.621), ('led-red-16', 'AREA', 0.621), ('led-red-17', 'AREA', 0.621), ('led-red-18', 'AREA', 0.621), ('led-red-19', 'AREA', 0.621), ('led-red-20', 'AREA', 0.621), ('led-red-21', 'AREA', 0.621), ('led-red-22', 'AREA', 0.621), ('led-red-23', 'AREA', 0.621)]
+HIDDENCAST house-dome-red: 24 hidden, 4 in frame
+   out         0.0 %  area lamp (rectangle) house-key
+   out         0.0 %  hidden mesh house-key-face
+   out         0.0 %  hidden mesh house-key-housing
+   out         0.0 %  area lamp (rectangle) house-fill
+   out         0.0 %  hidden mesh house-fill-face
+   out         0.0 %  hidden mesh house-fill-housing
+   out         0.0 %  area lamp (rectangle) house-kick
+   out         0.0 %  hidden mesh house-kick-face
+   out         0.0 %  hidden mesh house-kick-housing
+   out         0.0 %  area lamp (rectangle) house-horn
+   out         0.0 %  hidden mesh house-horn-face
+   out         0.0 %  hidden mesh house-horn-housing
+   out         0.0 %  area lamp (rectangle) house-bg-left
+   out         0.0 %  area lamp (rectangle) house-bg-right
+   out         0.0 %  area lamp (rectangle) house-bg-high
+   out         0.0 %  area lamp (rectangle) house-wall-ll
+   out         0.0 %  area lamp (rectangle) house-key-floor
+   out         0.0 %  hidden mesh room-right
+   out         0.0 %  hidden mesh room-ceiling
+   out         0.0 %  hidden mesh room-front
+CASTCHECK house-dome-red {'house-key': 0.0, 'house-key-face': 0.0, 'house-key-housing': 0.0, 'house-fill': 0.0, 'house-fill-face': 0.0, 'house-fill-housing': 0.0, 'house-kick': 0.0, 'house-kick-face': 0.0, 'house-kick-housing': 0.0, 'house-horn': 0.0, 'house-horn-face': 0.0, 'house-horn-housing': 0.0, 'house-bg-left': 0.0, 'house-bg-right': 0.0, 'house-wall_left': 5.45, 'house-bg-high': 0.0, 'house-wall-ll': 0.0, 'house-key-flag': 18.71, 'house-key-floor': 0.0, 'room-left': 6.85, 'room-right': 0.0, 'room-back': 44.46, 'room-ceiling': 0.0, 'room-front': 0.0}
