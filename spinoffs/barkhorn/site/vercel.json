@@ -15,6 +15,11 @@
       "source": "/tropos",
       "destination": "/tropos/ember",
       "permanent": true
+    },
+    {
+      "source": "/mantle",
+      "destination": "/mantle/ember",
+      "permanent": true
     }
   ],
   "headers": [
