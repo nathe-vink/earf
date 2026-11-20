@@ -2069,10 +2069,14 @@ HOTSPOT_CSS = """
   display: grid; place-items: center; color: #1C1A18; text-decoration: none; -webkit-tap-highlight-color: transparent }
 .hs-dot { width: 18px; height: 18px; border-radius: 50%; background: #FFF; box-shadow: 0 0 0 5px rgb(255 255 255 / .35), 0 1px 6px rgb(0 0 0 / .35);
   transition: transform .2s ease }
-.hs-label { position: absolute; left: 50%; bottom: calc(100% - 4px); transform: translate(-50%, 4px); white-space: nowrap;
+.hs-label { position: absolute; left: 50%; bottom: calc(100% - 4px); transform: translate(calc(-50% + var(--dx, 0px)), 4px); white-space: nowrap;
   padding: 7px 12px; border-radius: 999px; background: #FFF; color: #1C1A18; font-size: 15px; line-height: 1.2;
   box-shadow: 0 2px 10px rgb(0 0 0 / .2); opacity: 0; pointer-events: none; transition: opacity .18s ease, transform .18s ease }
-.hs-pt:hover .hs-label, .hs-pt:focus-visible .hs-label, .hs-pt.open .hs-label { opacity: 1; transform: translate(-50%, 0) }
+.hs-pt:hover .hs-label, .hs-pt:focus-visible .hs-label, .hs-pt.open .hs-label { opacity: 1; transform: translate(calc(-50% + var(--dx, 0px)), 0) }
+/* placed by HOTSPOT_JS so each label is whole inside its picture: below the dot when there is no room above, and shifted
+   (--dx) to stay 8 px inside the left and right edges */
+.hs-pt.below .hs-label { bottom: auto; top: calc(100% - 4px); transform: translate(calc(-50% + var(--dx, 0px)), -4px) }
+.hs-pt.below:hover .hs-label, .hs-pt.below:focus-visible .hs-label, .hs-pt.below.open .hs-label { transform: translate(calc(-50% + var(--dx, 0px)), 0) }
 .hs-pt:hover .hs-dot, .hs-pt:focus-visible .hs-dot, .hs-pt.open .hs-dot { transform: scale(1.15) }
 .hs-pt:focus-visible { outline: none }
 .hs-pt:focus-visible .hs-dot { box-shadow: 0 0 0 3px #1C1A18, 0 0 0 6px #FFF }
@@ -2082,10 +2086,20 @@ HOTSPOT_CSS = """
 HOTSPOT_JS = """<script>(function () {   // on a touch screen, a point's first tap shows what it is; the second follows it
   const pts = document.querySelectorAll('.hs-pt'); if (!pts.length) return;
   const touch = () => matchMedia('(hover: none)').matches;
+  // each label whole inside its picture, by rule: above the dot if it fits, else below; shifted to keep 8 px from each side
+  const place = a => { const box = a.closest('.hs'), lab = a.querySelector('.hs-label'); if (!box || !lab) return;
+    const b = box.getBoundingClientRect(), d = a.getBoundingClientRect(), w = lab.offsetWidth, h = lab.offsetHeight, m = 8;
+    a.classList.toggle('below', d.top + 4 - h < b.top + m);
+    const cx = d.left + d.width / 2, left = Math.min(Math.max(cx - w / 2, b.left + m), b.right - m - w);
+    a.style.setProperty('--dx', Math.round(left - (cx - w / 2)) + 'px'); };
+  const placeAll = () => pts.forEach(place);
+  placeAll(); addEventListener('resize', placeAll, { passive: true }); addEventListener('load', placeAll);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeAll);
+  pts.forEach(a => { a.addEventListener('pointerenter', () => place(a)); a.addEventListener('focus', () => place(a)); });
   addEventListener('click', e => {     // the window's capture: ahead of the page's router, which yields to a prevented click
     const a = e.target.closest && e.target.closest('.hs-pt');
     if (!a || !touch() || a.classList.contains('open')) return;
-    e.preventDefault(); pts.forEach(b => b.classList.toggle('open', b === a)); }, true);
+    e.preventDefault(); place(a); pts.forEach(b => b.classList.toggle('open', b === a)); }, true);
   document.addEventListener('click', e => { if (!e.target.closest || !e.target.closest('.hs-pt')) pts.forEach(b => b.classList.remove('open')); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') pts.forEach(b => b.classList.remove('open')); });
 })()</script>"""
