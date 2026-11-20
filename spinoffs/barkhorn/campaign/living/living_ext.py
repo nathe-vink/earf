@@ -89,7 +89,8 @@ def no_glass_shadows(bpy, name, p, kit):
 def plain_sleeves(bpy, name, p, kit):
     """Plain card sleeves (the coordinator, 20 Nov 22:03: unprinted kraft and dark matte, no graphic): the bar's leaning
     boards (bar_life.boards: the same card, the same lean and placing keys) with one plain card on every face. Each
-    entry of `boards` takes w, h, t, x, y, z, rot, `card` (hex) and rough."""
+    entry of `boards` takes w, h, t, x, y, z, rot, `card` (hex), rough, `ease` (the edges' round, m) and `grain`
+    (a card's tooth, mm a grain; optional)."""
     path = os.path.join(ROOT, 'spinoffs', 'barkhorn', 'campaign', 'bar_life', 'bar_life.py')
     spec = importlib.util.spec_from_file_location('bar_life_living', path)
     bl = importlib.util.module_from_spec(spec); spec.loader.exec_module(bl)
@@ -97,6 +98,63 @@ def plain_sleeves(bpy, name, p, kit):
     for k, c in enumerate(p['boards']):
         one = dict(c, image=None, ground=c['card'])
         bl._print = lambda bpy_, img, ground, rough: bl._plain(bpy_, ground, rough)      # no print: the card itself
-        objs += bl.boards(bpy, f'{name}-{k}', {'boards': [one]}, kit)
+        made = bl.boards(bpy, f'{name}-{k}', {'boards': [one]}, kit)
+        if c.get('grain'):                                   # card's own tooth: a fine grain in the bump, on every face
+            for ob in made:
+                for m in ob.data.materials:
+                    if m.get('grain'):
+                        continue
+                    m['grain'] = 1
+                    nt = m.node_tree; b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+                    tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+                    nz.inputs['Scale'].default_value = 1000.0 / float(c['grain']); nz.inputs['Detail'].default_value = 6.0
+                    bump = nt.nodes.new('ShaderNodeBump'); bump.inputs['Strength'].default_value = 0.25
+                    bump.inputs['Distance'].default_value = 0.0003
+                    nt.links.new(tc.outputs['Object'], nz.inputs['Vector']); nt.links.new(nz.outputs['Fac'], bump.inputs['Height'])
+                    nt.links.new(bump.outputs['Normal'], b.inputs['Normal'])
+        objs += made
     print('PLAIN SLEEVES:', len(objs))
     return objs
+
+
+def soft_fabric(bpy, name, p, kit):
+    """Upholstery that reads as cloth (the A critics, round 2: the sofa read as smooth rubber or clay, its outline
+    faceted). For every mesh whose name starts with one of `prefixes`: a subdivision surface (`levels`, render and
+    viewport), so the outline curves; on its materials, a sheen (the nap's soft rim light, `sheen` weight and
+    `sheen_rough`, tinted grey by `sheen_tint`) and a fine nap in the bump (a noise grain, `weave_mm` a grain,
+    `weave_depth` its strength), added over the scan's own normal map. Prints what it changed."""
+    pref = tuple(p.get('prefixes', ['sofa_02']))
+    lv = int(p.get('levels', 2))
+    done_m, done_o = set(), []
+    for o in list(bpy.data.objects):
+        if o.type != 'MESH' or not o.name.startswith(pref):
+            continue
+        for poly in o.data.polygons:
+            poly.use_smooth = True
+        md = o.modifiers.new('soft', 'SUBSURF'); md.levels = lv; md.render_levels = lv; md.uv_smooth = 'PRESERVE_BOUNDARIES'
+        done_o.append(o.name)
+        for sl in o.material_slots:
+            m = sl.material
+            if not m or m.name in done_m or not m.use_nodes:
+                continue
+            done_m.add(m.name)
+            nt = m.node_tree
+            b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+            b.inputs['Sheen Weight'].default_value = float(p.get('sheen', 0.6))
+            b.inputs['Sheen Roughness'].default_value = float(p.get('sheen_rough', 0.45))
+            b.inputs['Sheen Tint'].default_value = (*([float(p.get('sheen_tint', 0.45))] * 3), 1.0)
+            tc = nt.nodes.new('ShaderNodeTexCoord')
+            nz = nt.nodes.new('ShaderNodeTexNoise')               # the nap: a fine, even grain with no direction
+            nz.inputs['Scale'].default_value = 1000.0 / float(p.get('weave_mm', 1.2))
+            nz.inputs['Detail'].default_value = 4.0; nz.inputs['Roughness'].default_value = 0.6
+            nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+            mx = nz
+            bump = nt.nodes.new('ShaderNodeBump')
+            bump.inputs['Strength'].default_value = float(p.get('weave_depth', 0.35)); bump.inputs['Distance'].default_value = 0.0005
+            nt.links.new(mx.outputs['Fac'], bump.inputs['Height'])
+            nl = b.inputs['Normal'].links
+            if nl:
+                nt.links.new(nl[0].from_socket, bump.inputs['Normal'])
+            nt.links.new(bump.outputs['Normal'], b.inputs['Normal'])
+    print('SOFT FABRIC:', done_o, sorted(done_m), 'levels', lv)
+    return []

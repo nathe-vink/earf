@@ -228,9 +228,13 @@ def _life():
     # two dark sleeves leaning on the wall behind it, on the console, where its top looks; their faces the darkest covers)
     # (the light-model test: covers 08 and 12 carry bright graphics, busy behind Mantle and only half dark: plain dark
     # card sleeves instead, matte)
-    dark = [{'kind': 'kit', 'shape': 'box', 'size': [0.315, 0.004, 0.315], 'position': [MANTLE[0] + dx, BACK - 0.075, TOP + 0.0005],
-             'rotate': [-8.0, 0, rz], 'material': 'paper', 'color': col, 'ease': 0.001}
-            for dx, rz, col in ((-0.17, -3.0, '#1F1D1B'), (0.14, 2.0, '#26221F'))]
+    # (the A critics, round 2: they read as one flat board, no card edge, no lit top, and swallowed the deck's back edge:
+    # card sleeves, their edges rounded 1.5 mm so the top catches the light, a paper grain; the right one 6 cm further
+    # right, clear of the deck)
+    dark = [{'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'plain_sleeves',
+             'boards': [{'card': col, 'w': 0.315, 'h': 0.315, 't': 0.004, 'ease': 0.0015, 'grain': 0.4, 'rough': 0.8,
+                         'x': MANTLE[0] + dx, 'y': BACK - 0.077, 'z': TOP + 0.0005, 'rot': [-8.0, 0, rz]}
+                        for dx, rz, col in ((-0.17, -3.0, '#1F1D1B'), (0.20, 2.0, '#26221F'))]}]
     return [
         # one quiet print above the console, hung at eye height over it (muted, so the pair keeps the colour)
         {'kind': 'frame', 'position': [0.05, BACK - 0.012], 'z': 1.58, 'size': [0.62, 0.78],
@@ -296,6 +300,9 @@ def base(tint='ember', size=(2400, 1600)):
                 'windows': [WIN_BACK, WIN_LEFT, WIN_FRONT, WIN_RIGHT],
                 'props': [_floor()] + _rug() + _console() + _window_bars() + _cables() + _life() + _side_table() + [_cores(tint),
                           {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_portal', 'windows': ['wall-back']},
+                          # (the A critics, round 2: the sofa read as rubber, its outline faceted: subdivided, a sheen, a nap)
+                          {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'soft_fabric', 'prefixes': ['sofa_02'], 'levels': 2,
+                           'sheen': 0.3, 'sheen_rough': 0.5, 'sheen_tint': 0.45, 'weave_mm': 0.8, 'weave_depth': 0.2},
                           # (the coordinator, 19:45: one light model: caustics on, the acrylics' glass-shadow shortcut off)
                           {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_glass_shadows'}]}
     s.pop('haze', None)
