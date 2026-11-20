@@ -946,6 +946,18 @@ def build(frame, samples, scale):
         Y = sum(0.2126 * px[4 * i] + 0.7152 * px[4 * i + 1] + 0.0722 * px[4 * i + 2] for i in range(n)) / n
         print('FLUX', frame, 'mean Y', round(Y, 5), 'flux W', round(Y * math.pi * 9.0, 4), 'emitted COB W', round(430 * WLM, 3))
         return
+    # DIAG_HIDE 'prefix,...' (2026-11-20, diagnostics only): objects or lamps whose names start with a prefix leave the
+    # render; DIAG_BLACK 'prefix,...': their surfaces become a black absorber. Unset, nothing changes
+    for p_ in filter(None, os.environ.get('DIAG_HIDE', '').split(',')):
+        for o_ in bpy.data.objects:
+            if o_.name.startswith(p_):
+                o_.hide_render = True
+    if os.environ.get('DIAG_BLACK'):
+        blk_ = SC.principled('diag-black', '#000000', 1.0)
+        for p_ in os.environ['DIAG_BLACK'].split(','):
+            for o_ in bpy.data.objects:
+                if o_.name.startswith(p_) and o_.type == 'MESH':
+                    o_.data.materials.clear(); o_.data.materials.append(blk_)
     if os.environ.get('AUDIT'):
         hidden = [o for o in sc.objects if o.type == 'MESH' and not o.visible_camera]
         print('AUDIT', frame, 'hidden', [o.name for o in hidden],
