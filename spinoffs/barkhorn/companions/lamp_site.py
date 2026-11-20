@@ -897,6 +897,11 @@ def build(frame, samples, scale):
     if house:
         vs.white_balance_temperature = HR['render']['white_balance_k']; vs.white_balance_tint = HR['render']['white_balance_tint']
         sc.cycles.sample_clamp_indirect = 0.0        # no clamp on the lamp's light (the clamp scales with exposure here)
+        # Cycles' light tree OFF on the house ground (2026-11-20): with the sweep's light-linked lamps it was biased here.
+        # Core's LED switched on, at any output (20 lm or 200), lifted the paper behind it by 10 levels, and the OFF
+        # frame read 8 levels over the same frame without the tree; with the tree off, ON and OFF match and the paper is
+        # the unbiased figure. HOUSE_LTREE=1 for the tree
+        sc.cycles.use_light_tree = os.environ.get('HOUSE_LTREE', '0') == '1'
         HG.camera(bpy, sc, hcam, W, H, s=hs)
     else:
       SC.camera(cam[0], cam[1], lens=cam[2], fstop=float(os.environ.get('FSTOP', '8.0')),   # FSTOP, FOCUS: a detail's shallow focus
