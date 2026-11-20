@@ -35,12 +35,26 @@ W, D, H = 5.4, 6.0, 2.75                        # a living room, 5.4 x 6.0 m, 2.
 CX, CY = 0.0, -1.0                              # its floor's centre: x -2.7..2.7, y -4..2
 BACK = CY + D / 2                               # the back wall's face, y = 2.0
 LEFT = CX - W / 2                               # the left wall's face, x = -2.7
-WIN_BACK = {'wall': 'back', 'along': -1.95, 'sill': 0.42, 'size': [0.85, 1.95], 'mullions': [1, 3]}   # in frame, at the left
-WIN_LEFT = {'wall': 'left', 'along': 0.35, 'sill': 0.42, 'size': [1.5, 1.95], 'mullions': [2, 3]}     # out of frame: the sun's way in
-WIN_FRONT = {'wall': 'front', 'along': 0.0, 'sill': 0.42, 'size': [2.2, 1.95], 'mullions': [3, 3]}   # behind the lens: the sky from the front
-SKY = {'kind': 'hdri', 'polyhaven': 'garden_nook', 'res': '4k', 'rotation_deg': 101.2, 'strength': 1.0}
-# (assets.py sun garden_nook: azimuth 54.2 - rotation, elevation 25.9: at 101.2 the sun comes from the front left,
-# azimuth -47, through the left window onto the floor at the left speaker's front)
+# the window in frame: a steel casement, its frame and bars dark; its bars are set pieces a few mm behind the frame's
+# faces (the engine's own bars share the frame's faces, and coplanar faces render black in Cycles: proof 1's notches)
+# (test u2: at along -1.95 the garden showed through the left horn and cabinet: further left, clear of the speaker)
+WIN_BACK = {'wall': 'back', 'along': -2.22, 'sill': 0.42, 'size': [0.75, 1.95], 'mullions': [1, 1], 'frame_w': 0.055, 'frame_d': 0.06}
+# the sun's way in, out of frame: a narrow window in the left wall at the back corner (y 1.55..1.95), so the sun crosses
+# the room behind the horns' faces: it grazes the backs of both cabinets' sides (their red light onto the floor and the
+# console's ends) and crosses the console's top to Mantle and the Core (test u1: a wider one lit the left horn alone,
+# horns L* 41 against 10)
+WIN_LEFT = {'wall': 'left', 'along': 2.75, 'sill': 0.3, 'size': [0.4, 2.05], 'mullions': [1, 3]}
+# the right wall, toward the front, out of frame: more sky into the room
+WIN_RIGHT = {'wall': 'right', 'along': 1.6, 'sill': 0.3, 'size': [1.6, 2.15], 'mullions': [2, 2]}
+# behind the lens: a long run of windows, the sky from the front, on both speakers alike
+WIN_FRONT = {'wall': 'front', 'along': 0.0, 'sill': 0.3, 'size': [4.6, 2.15], 'mullions': [5, 2]}
+SKY = {'kind': 'hdri', 'polyhaven': 'garden_nook', 'res': '4k', 'rotation_deg': 144.2, 'strength': 1.0}
+# (assets.py sun garden_nook: azimuth 54.2 - rotation, elevation 25.9. Proof 1 (101.2, azimuth -47, from the front
+# left) put the sun on the left speaker's front and its cone: the coordinator, 20 Nov 11:58, no sun on a front. At 144.2
+# the sun comes from straight left, azimuth -90, parallel to the fronts: through the left window it grazes the left
+# cabinet's side (its red light onto the floor and the console's end), lies in stripes on the floor before the pair,
+# and crosses the console's top to Mantle and the Core.)
+STEEL = '#2C2B29'
 
 # --- the furniture --------------------------------------------------------------------------------------------------
 SPK_X, SPK_GAP, TOE = 1.25, 0.30, 6.0           # the pair 2.5 m apart, 0.3 m off the wall, toed in
@@ -64,13 +78,72 @@ def _floor():
 
 
 def _rug():
-    return {'kind': 'kit', 'shape': 'box', 'size': [2.4, 1.7, 0.009], 'position': [0.0, 0.15, 0.0045],
-            'material': 'pbr', 'texture': 'poly_wool_herringbone', 'tex_res': '2k', 'tint': '#C8B597', 'tint_mix': 0.6, 'gain': 1.1, 'ease': 0.003}
+    """A wool rug with pile and a bound edge: a field of the kit's wool (fibres, twist and clumps) inside an 80 mm border
+    band a shade darker, 16 mm thick, its edge rounded over (the field 1 mm proud, so no two faces lie in one plane)."""
+    return [{'kind': 'kit', 'shape': 'box', 'size': [2.4, 1.7, 0.016], 'position': [0.0, 0.15, 0.0045],
+             'material': 'wool', 'color': '#5E5244', 'ease': 0.007},
+            {'kind': 'kit', 'shape': 'box', 'size': [2.24, 1.54, 0.0165], 'position': [0.0, 0.15, 0.0045],
+             'material': 'wool', 'color': '#8E806A', 'ease': 0.004}]
+
+
+# (american_walnut_veneer averages #726E69, a grey: walnut_veneer_02, #A98971, deepened a little toward walnut)
+WALNUT = {'material': 'pbr', 'texture': 'walnut_veneer_02', 'tex_res': '4k', 'tint': '#3A2214', 'tint_mix': 0.7, 'gain': 0.5}
 
 
 def _console():
-    return {'kind': 'sideboard', 'position': [0.0, CON_Y], 'size': [CONSOLE['w'], CONSOLE['d'], CONSOLE['h']], 'wood': 'veneer',
-            'color': '#6E4A32', 'grain': 0.3, 'turntable': False}
+    """A walnut credenza, 1500 x 450 x 640, as a furniture maker builds one: a case of walnut (top, sides, bottom) round
+    a dark inside; across its front a door, a bank of three drawers and a door, 18 mm fronts with 4 mm reveals between
+    them and to the case; blackened bar pulls; the case on a walnut base rail and four tapered legs, set in from the
+    ends. Grain runs along the top and up the fronts."""
+    w, d, h = CONSOLE['w'], CONSOLE['d'], CONSOLE['h']
+    yf = CON_Y - d / 2                                  # the front's plane
+    z0, t, rv, ft = 0.19, 0.022, 0.004, 0.018           # the case's underside, its boards, the reveals, the fronts
+    out = []
+    box = lambda size, pos, rz=0.0, **m: {'kind': 'kit', 'shape': 'box', 'size': size, 'position': pos, 'rotate': [0, 0, rz], 'ease': 0.0015, **m}
+    # the case: the top (grain along its length), the sides, the bottom; a dark core behind the fronts shows in the reveals
+    out.append(box([d, w, t], [0.0, CON_Y, h - t], 90.0, **WALNUT))
+    for sx in (-1, 1):
+        out.append(box([t, d, h - z0 - t - 0.0005], [sx * (w / 2 - t / 2), CON_Y, z0], **WALNUT))
+    out.append(box([w - 2 * t - 0.001, d, t], [0.0, CON_Y, z0], **WALNUT))
+    out.append(box([w - 2 * t - 0.002, d - ft - 0.004, h - z0 - 2 * t - 0.002], [0.0, CON_Y + (ft + 0.004) / 2, z0 + t + 0.001],
+                   material='clay', color='#1A1411', roughness=0.9))
+    # the fronts in the opening x -0.728..0.728, z z0+t..h-t, 4 mm reveals
+    x0, x1, za, zb = -w / 2 + t + rv, w / 2 - t - rv, z0 + t + rv, h - t - rv
+    door = 0.36
+    fy = yf + ft / 2 + 0.0005
+    pull = dict(material='foil', color='#2E2925', roughness=0.42)
+    for sx in (-1, 1):                                  # the two doors, vertical pulls by their inner edges
+        cx = sx * (x1 - door / 2)
+        out.append(box([door, ft, zb - za], [cx, fy, za], **WALNUT))
+        out.append(box([0.012, 0.014, 0.11], [cx - sx * (door / 2 - 0.035), yf - 0.007, za + (zb - za) * 0.6], **pull))
+    dx0, dx1 = x0 + door + rv, x1 - door - rv
+    dh = (zb - za - 2 * rv) / 3
+    for k in range(3):                                  # the bank of three drawers, a bar pull centred on each
+        dz = za + k * (dh + rv)
+        out.append(box([dx1 - dx0, ft, dh], [0.0, fy, dz], **WALNUT))
+        out.append(box([0.16, 0.014, 0.012], [0.0, yf - 0.007, dz + dh * 0.62], **pull))
+    # the base: a rail under the case and four tapered legs, set in from the ends and the front
+    out.append(box([w - 0.2, d - 0.1, 0.03], [0.0, CON_Y, z0 - 0.03], **WALNUT))
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            out.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.012, 'radius_top': 0.02, 'height': z0 - 0.03,
+                        'position': [sx * (w / 2 - 0.13), CON_Y + sy * (d / 2 - 0.08), 0.0], **WALNUT})
+    return out
+
+
+def _window_bars():
+    """The window in frame's steel bars: one upright, two cross bars, 22 mm, set 6 mm back from the frame's faces."""
+    wb = WIN_BACK
+    xc = CX + wb['along']; ww, wh = wb['size']; fw = wb['frame_w']
+    xa, xb, za, zb = xc - ww / 2 + fw, xc + ww / 2 - fw, wb['sill'] + fw, wb['sill'] + wh - fw
+    y0 = BACK + 0.12 + 0.006; dep = wb['frame_d'] - 0.012
+    bar = lambda size, pos: {'kind': 'kit', 'shape': 'box', 'size': size, 'position': pos, 'material': 'foil', 'color': STEEL,
+                             'roughness': 0.5, 'ease': 0.001}
+    out = [bar([0.022, dep, zb - za + 0.02], [xc, y0 + dep / 2, za - 0.01])]
+    for k in (1, 2):
+        z = za + (zb - za) * k / 3
+        out.append(bar([xb - xa + 0.02, dep, 0.022], [xc, y0 + dep / 2, z - 0.011]))
+    return out
 
 
 def _socket(x):
@@ -111,7 +184,7 @@ def _life():
          'artwork': {'bands': [['#D8D0C2', 0.45], ['#9C9384', 0.3], ['#CBC2B2', 0.25]], 'ground': '#E8E2D7', 'seed': 21}},
         {'kind': 'books', 'position': [-0.6, CON_Y], 'z': TOP, 'colors': ['#3E4A5C', '#B9A27A', '#7A2E2A', '#D8D2C4'], 'seed': 5},
         {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': sleeves},
-        {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_02', 'res': '2k', 'position': [-2.38, 1.45, 0.0], 'rotate': [0, 0, 20.0]},
+        {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_02', 'res': '2k', 'position': [-2.3, 0.45, 0.0], 'rotate': [0, 0, 20.0]},
         {'kind': 'kit', 'shape': 'asset', 'model': 'mid_century_lounge_chair', 'res': '2k', 'position': [CHAIR[0], CHAIR[1], 0.0],
          'rotate': [0, 0, CHAIR[2]]},
     ]
@@ -134,9 +207,9 @@ def base(tint='ember', size=(2400, 1600)):
     shots._approved(s, order=[tint, tint])
     s['products'].append(shots._mantle(MANTLE[0], MANTLE[1], MANTLE[2], MANTLE[3], tint=tint))
     s['set'] = {'kind': 'room', 'size': [W, D, H], 'center': [CX, CY],
-                'wall': {'color': '#E6E0D5'}, 'ceiling': '#EFECE6', 'skirting': {'h': 0.09, 'color': '#E3DED4'},
-                'windows': [WIN_BACK, WIN_LEFT, WIN_FRONT],
-                'props': [_floor(), _rug(), _console()] + _cables() + _life() + [_cores(tint),
+                'wall': {'color': '#E6E0D5'}, 'ceiling': '#EFECE6', 'frame': STEEL, 'skirting': {'h': 0.09, 'color': '#E3DED4'},
+                'windows': [WIN_BACK, WIN_LEFT, WIN_FRONT, WIN_RIGHT],
+                'props': [_floor()] + _rug() + _console() + _window_bars() + _cables() + _life() + [_cores(tint),
                           {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_portal', 'windows': ['wall-back']}]}
     s.pop('haze', None)
     s.pop('sun', None)
@@ -145,7 +218,7 @@ def base(tint='ember', size=(2400, 1600)):
     s['materials'] = {k: v for k, v in s.get('materials', {}).items() if k != 'sweep'}
     s['size'] = list(size)
     s['render'] = {**s['render'], 'samples': 128, 'adaptive': 0.01, 'denoise': True, 'clamp': 0, 'view': 'AgX', 'look': 'AgX - Base Contrast',
-                   'exposure': 2.8, 'white_balance_k': 5600, 'white_balance_tint': 0.0}
+                   'exposure': 5.35, 'white_balance_k': 5600, 'white_balance_tint': 0.0}
     s.pop('finish', None)
     return s
 
