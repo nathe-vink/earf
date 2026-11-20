@@ -322,8 +322,8 @@ TROPOS_SPEC = [
     ("Bass", "To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz"),
     ("Loudness", "Up to about 115 dB at 1 m, each"),
     ("Inputs", "XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up"),
-    ("Size", "1295 high, 560 wide (the horn flush with the cabinet), 428 deep overall, 420 at the cabinet (mm)"),
-    ("Weight", "About 73 kg; about 64 kg with the horn lifted off (modeled)"),
+    ("Size", "1295 high, 560 wide (the horn flush with the cabinet), 442 deep overall, 420 at the cabinet (mm)"),
+    ("Weight", "About 75 kg (165 lb) each"),
     ("Care", "${D.care}"),
 ]
 
@@ -575,7 +575,8 @@ SPEC = {
         ('Playing', [('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'), ('Speeds', '33 and 45, by a button'),
                      ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black, fitted'),
                      ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
-                     ('Outputs', 'RCA line outputs and an earth post; a switch picks the built-in phono stage or bypass')]),
+                     ('Outputs', 'RCA line outputs and an earth post; a switch picks the built-in phono stage or bypass'),
+                     ('Power', 'Two supplies at the wall: Rega&rsquo;s Neo PSU drives the motor; the phono stage runs on its own 18 V adapter.')]),
         ('Size and weight', [('Size', '450 wide, 360 deep, 161 high to the top of the arm; 196 high with the cover on (mm); 17.7 x 14.2 x 6.3 in (7.7 in with the cover)'),
                              ('Weight', 'About 11.6 kg (25.6 lb); about 12.7 kg (28 lb) with the cover')]),
         ('Care', [('Care', '{care}')]),
@@ -926,7 +927,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
 """)
 
 
-def _og_card(src, dst):
+def _og_card(src, dst, paper=False):
     """A 1200 x 630 link card from a product picture: the picture whole at the card's height, its edges carried out to the sides."""
     from PIL import Image, ImageFilter
     im = Image.open(src).convert('RGB')
@@ -934,9 +935,9 @@ def _og_card(src, dst):
     if im.width > 1200:
         x = (im.width - 1200) // 2
         im = im.crop((x, 0, x + 1200, 630))
-    can = Image.new('RGB', (1200, 630))
+    can = Image.new('RGB', (1200, 630), (244, 241, 236))      # the page's paper, as the Tropos cards
     side = (1200 - im.width) // 2
-    if side > 0:
+    if side > 0 and not paper:
         can.paste(im.crop((0, 0, 6, 630)).resize((side + 2, 630), Image.BILINEAR).filter(ImageFilter.GaussianBlur(10)), (0, 0))
         can.paste(im.crop((im.width - 6, 0, im.width, 630)).resize((1200 - side - im.width + 2, 630), Image.BILINEAR).filter(ImageFilter.GaussianBlur(10)), (side + im.width - 2, 0))
     can.paste(im, (side, 0))
@@ -946,14 +947,14 @@ def _og_card(src, dst):
 def finish_3(web):
     """The 24 lamp and Mantle addresses, each with its own title, description and card; /mantle forwards to Mantle in Ember."""
     import html
-    pic = {'hemisphere': 'img/rc/hemisphere-{n}.webp', 'core': 'img/rc/core-{n}.webp', 'mantle': 'img/rc/mantle-{n}.webp'}
+    pic = {'hemisphere': 'img/rc/hemisphere-{n}.webp', 'core': 'img/rc/core-{n}.webp', 'mantle': 'img/rc/mantle-{n}-house.webp'}
     idx = open(os.path.join(web.SITE, 'index.html')).read()
     e = lambda x: html.escape(x, quote=True)
     for r, name in ROUTES3:
         for k in KEYS:
             n = NAMES[k]; h = f'{r}-{n}'
             card = f'img/rc/card-{r}-{n}.jpg'      # not og-mantle-*: that name is held by the deploy check
-            _og_card(os.path.join(web.SITE, pic[r].format(n=n)), os.path.join(web.SITE, card))
+            _og_card(os.path.join(web.SITE, pic[r].format(n=n)), os.path.join(web.SITE, card), paper=(r == 'mantle'))
             alt = f'{name} in {CNAME[k]}'
             sf = os.path.join(web.SITE, 's', h + '.html')
             s = open(sf).read()
@@ -1121,4 +1122,85 @@ def finish_4(web):
     v = json.load(open(vj))
     if not any(x['source'] == '/s/:page/(.+)' for x in v.get('redirects', [])):
         v.setdefault('redirects', []).append({'source': '/s/:page/(.+)', 'destination': '/s/:page', 'permanent': False})
+    json.dump(v, open(vj, 'w'), indent=2)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The coordinator, 20 Nov 12:59 and 13:05: the eight Mantle pictures on the Tropos ground, and the words critic's leftovers
+MANTLE_HOUSE = 'renders/2026-11-20/barkhorn/mantle-r48/mantle-house-{n}.png'     # r48-mantle-design 06228224, passed 12:59
+
+
+def fix_5(p, web):
+    from PIL import Image
+    i, j, D = _data(p)
+    # --- the Mantle alone on the Tropos ground: picture 1 of its gallery ("In the studio"), the spot-lit one second
+    for k in KEYS:
+        n = NAMES[k]
+        im = Image.open(os.path.join(web.ROOT, MANTLE_HOUSE.format(n=n))).convert('RGB')
+        assert im.size == (1600, 2000), ('fix_5: Mantle picture', n, im.size)
+        big = im.resize((1200, 1500), Image.LANCZOS); big.save(os.path.join(web.IMG, 'rc', f'mantle-{n}-house.webp'), 'WEBP', quality=86, method=6)
+        im.resize((336, 420), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'mantle-{n}-house-th.webp'), 'WEBP', quality=82)
+        im.resize((800, 1000), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'tile-mantle-{n}.webp'), 'WEBP', quality=86, method=6)   # the tiles: the whole frame
+        D['tt']['colours'][k]['views']['house'] = {'src': f'img/rc/mantle-{n}-house.webp', 'w': 1200, 'h': 1500, 'th': f'img/rc/mantle-{n}-house-th.webp'}
+    # the dead lines out of the page data: the lamps' old lines become their pages' sentences
+    D['lamps']['dome']['line'] = 'A pendant in cast acrylic. The shade comes off with a quarter turn.'
+    D['lamps']['orb']['line'] = 'A table lamp in cast acrylic. Cordless. About five hours a charge.'
+    i, j, _ = _data(p)
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    p.sub('"turntable": ["studio", "cover", "bar"]', '"turntable": ["house", "studio", "cover", "bar"]')
+    p.sub("const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],",
+          "const TT_VIEWS = [['house', 'In the studio', c => `${D.tt.name} in ${c.name}.`], ['studio', 'Under a spot', c => `${D.tt.name} in ${c.name}, under a spot.`],")
+    p.sub('turntable: {"studio": "",', 'turntable: {"house": "", "studio": "",')
+    # the Mantle tile on the same light card as the Tropos tile (home row and the foot's family row)
+    p.sub('<a class="ftile ft-mantle" href="#mantle-ember" data-p="mantle"><span class="ft-pic" style="background:#74706C">',
+          '<a class="ftile ft-mantle" href="#mantle-ember" data-p="mantle"><span class="ft-pic" style="background:#E9E5DC">')
+    p.rest, n = re.subn(r'("route":"mantle","name":"Mantle","kind":"Turntable","w":\d+,"h":\d+,"ground":")#[0-9A-Fa-f]{6}', r'\g<1>#E9E5DC', p.rest)
+    assert n == 1, ('fix_5: the foot row\'s Mantle ground', n)
+    # --- words: How it lights, by removal alone; the old /tropos view's numbers and figures
+    p.sub("Twenty-four LEDs, all facing away from you, so there&rsquo;s no bright point to look into.",
+          "Twenty-four LEDs face away from you, so there&rsquo;s no bright point to look into.")
+    p.rest, n = re.subn(r'<p class="num">Tropos 0\d</p>', '', p.rest)
+    assert n == 8, ('fix_5: Tropos 0N', n)
+    S_ = r'(?:\s|&nbsp;|\u00a0)'
+    for a, b in ((r'About 73' + S_ + r'kg; about 64' + S_ + r'kg with the horn lifted off \(modeled\)', 'About 75&nbsp;kg (165&nbsp;lb) each'),
+                 (r'428(' + S_ + r')mm overall', r'442\1mm overall')):
+        n = len(re.findall(a, p.head)) + len(re.findall(a, p.rest))
+        assert n, ('fix_5: figure', a)
+        p.head = re.sub(a, b, p.head); p.rest = re.sub(a, b, p.rest)
+    # --- the sentence under the name wraps without a lone word; "See Hemisphere" on one line at every width
+    p.css("""
+/* the coordinator 13:05 */
+.buy .line { text-wrap: pretty }
+.ft-btn { white-space: nowrap }
+@media (max-width: 380px) { .ft-btn { padding: 0 12px; gap: 6px } .ft-btn .arr { display: none } }
+@media (min-width: 761px) and (max-width: 860px) { .ft-btn { padding: 0 12px; font-size: 14px } }
+""")
+
+
+def finish_5(web):
+    """One kind word for Tropos ("horn speaker"); the /s/ pages' structured data says what their description says; the
+    retired /s/color pages carry their Tropos's title, words and card; /lighting made to order; /hemisphere and /core forward."""
+    import glob, html as H
+    for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
+        s = open(f).read(); t = s.replace('horn loudspeaker', 'horn speaker').replace('Horn loudspeaker', 'Horn speaker')
+        if f.endswith('lighting.html'):
+            t = t.replace('in the eight colors. In development."', 'in the eight colors. In development. Made to order."')
+        if t != s:
+            open(f, 'w').write(t)
+    for f in glob.glob(os.path.join(web.SITE, 's', '*.html')):
+        s = open(f).read()
+        m = re.search(r'<meta name="description" content="([^"]*)"', s)
+        if m:
+            desc = json.dumps(H.unescape(m.group(1)))[1:-1]
+            s = re.sub(r'("@type":"Product".*?"description":")(?:[^"\\]|\\.)*(")', lambda x: x.group(1) + desc + x.group(2), s, count=1, flags=re.S)
+            open(f, 'w').write(s)
+    for k in KEYS:
+        n = NAMES[k]; sp = os.path.join(web.SITE, 's', f'speaker-{n}.html'); cp = os.path.join(web.SITE, 's', f'color-{n}.html')
+        if os.path.exists(sp) and os.path.exists(cp):
+            open(cp, 'w').write(open(sp).read())          # it forwards to that Tropos: its title, words and card
+    vj = os.path.join(web.SITE, 'vercel.json')
+    v = json.load(open(vj))
+    for src, dst in (('/hemisphere', '/hemisphere/ember'), ('/core', '/core/ember')):
+        if not any(x['source'] == src for x in v.get('redirects', [])):
+            v.setdefault('redirects', []).append({'source': src, 'destination': dst, 'permanent': True})
     json.dump(v, open(vj, 'w'), indent=2)
