@@ -555,12 +555,12 @@ SPEC = {      # inches first, millimeters in brackets; pounds first; feet first 
     'dome': [
         ('Materials', [('Shade', 'Cast acrylic in three layers: its color on the outside, over a clear shell and an opal diffuser within'),
                        ('Cap', 'Satin black anodized aluminum, with a quarter-turn catch')]),
-        ('Light', [('Output', 'About {lm} lm out of the shade in this color'), ('On the table', 'About 340 lux 20 in (0.5 m) below, in every color'),
-                   ('CRI', '90'), ('Color temperature', '{K} K, straight down')]),
+        ('Light', [('Output', 'About {lm} lm out of the shade in this color'), ('On the table', 'About 340 lux at 20 in (0.5 m) below, in every color'),
+                   ('CRI', '90'), ('Color temperature', '{K} K')]),
         ('Electrical', [('Power', 'About 7 W at 120 V'), ('Dimming', 'Phase-cut (leading or trailing edge) or 0&ndash;10 V')]),
         ('Size and hanging', [('Size', '7.9 in (200 mm) across; 5.0 in (126 mm) from the rim to the top of the cap; the shade 3.9 in (100 mm) deep'),
                               ('Weight', 'About 3.5 lb (1.6 kg) hanging; the canopy about 0.9 lb (0.4 kg)'),
-                              ('Cord', '10 ft (3 m) of black cloth-braided cord, cut to the drop at install'),
+                              ('Cord', '10 ft (3 m), black, cloth-braided, cut to the drop at install'),
                               ('Drop', '23.6 in (600 mm) as standard: 30.6 in (776 mm) from the ceiling to the rim'),
                               ('Canopy', 'Satin black anodized aluminum, 5.9 in across, 2.0 in deep (150 x 50 mm)')]),
         ('Shades and care', [('Shades', 'In all eight colors, sold separately'),
@@ -570,24 +570,24 @@ SPEC = {      # inches first, millimeters in brackets; pounds first; feet first 
         ('Materials', [('Ball', '{Tinted|Clear} cast acrylic, with an opal diffuser centered inside it'), ('Base', 'Its own color, satin')]),
         ('Light', [('Use', 'A glow, not a reading light'), ('Output', 'About {lm} lm out of the ball in this color'),
                    ('Color temperature', '{K} K'), ('Control', 'Touch the top of the base: tap to switch, hold to dim')]),
-        ('Power', [('Runtime', 'Cordless: about five hours a charge at full brightness, longer dimmed'),
+        ('Power', [('Runtime', 'About five hours a charge at full brightness, longer dimmed'),
                    ('Charging', 'Two to three hours on its dock'),
-                   ('Cells', 'Three LiFePO4 18650 cells, 14.4 Wh, replaceable, behind a hatch under the base')]),
+                   ('Cells', 'Three LiFePO4 18650, 14.4 Wh, replaceable, behind a hatch under the base')]),
         ('Size and weight', [('Size', '6.3 in (160 mm) ball, 7.4 in (187 mm) tall, the base 5.9 in (150 mm) across'), ('Weight', 'About 3.1 lb (1.4 kg) with its cells')]),
-        ('In the box', [('Contents', 'The lamp, its dock, a 6.5 ft (2 m) braided USB-C cable and a 20 W USB-C adapter')]),
+        ('In the box', [('Contents', 'The lamp, its dock, a 6.6 ft (2 m) braided USB-C cable and a 20 W USB-C adapter')]),
         ('Balls, rating and care', [('Balls', 'In all eight colors, sold separately. Each comes off by hand.'),
                                     ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'), ('Cleaning', '{care}')]),
     ],
     'turntable': [
-        ('Materials', [('Plinth', '{Cast acrylic in its color|Clear cast acrylic}, about 1 in (25 mm), raised 1.6 in (40 mm) on four posts over the base; its top face polished, the underside and the edges satin with a fine polished bevel'),
+        ('Materials', [('Plinth', '{Cast acrylic in its color|Clear cast acrylic}, about 1 in (25 mm), raised 1.6 in (40 mm) over the base; its top face polished, the underside and the edges satin with a fine polished bevel'),
                        ('Posts', 'Four solid posts, 1.2 in (30 mm) across, satin black'), ('Hardware', 'Satin black throughout; the RCA sockets&rsquo; contacts are gold'),
                        ('Base', 'Smoked cast acrylic, 0.5 in (12.7 mm), set in 1.4 in (35 mm) all around'),
                        ('Platter', 'Cast acrylic, 11.8 in (300 mm) across, 0.8 in (21 mm) thick, in three layers'),
-                       ('Cover', 'Included: a lift-off dust cover in the deck&rsquo;s own {tint|color}: 0.1 in (3 mm) cast acrylic, 17.6 x 14.1 x 3.9 in (448 x 358 x 100 mm), about 2.4 lb (1.1 kg). It rests on four small clear bumpers and lifts straight off; no hinges.')]),
-        ('Playing', [('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'), ('Speeds', '33 and 45, by a button on the power supply'),
+                       ('Cover', 'Included: a lift-off dust cover in the deck&rsquo;s own {tint|color}: 0.1 in (3 mm) cast acrylic, 17.6 x 14.1 x 3.9 in (448 x 358 x 100 mm), about 2.4 lb (1.1 kg). It rests on four small bumpers and lifts straight off; no hinges.')]),
+        ('Playing', [('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'), ('Speeds', '33 and 45 rpm, by a button on the Neo PSU'),
                      ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black, fitted'),
                      ('Phono stage', 'Built in, for moving-magnet cartridges'),
-                     ('Outputs', 'RCA line outputs and an earth post; a switch picks the built-in phono stage or bypass'),
+                     ('Outputs', 'RCA line outputs and a ground post; a switch picks the built-in phono stage or bypass'),
                      ('Power', 'Two supplies at the wall: Rega&rsquo;s Neo PSU drives the motor; the phono stage runs on its own 18 V adapter.')]),
         ('Size and weight', [('Size', '17.7 in (450 mm) wide, 14.2 in (360 mm) deep, 6.3 in (161 mm) high to the top of the arm; 7.7 in (196 mm) with the cover on'),
                              ('Weight', 'About 25.6 lb (11.6 kg); about 28 lb (12.7 kg) with the cover')]),
@@ -692,7 +692,7 @@ def fix_2(p, web):
           "const fillSpec = (t, c) => t.replace(/\\{([^{}|]*)\\|([^{}]*)\\}/g, (x, a, b) => c.k === 'ice' ? b : a).replace('{tint}', c.tint)\n"
           "  .replace('{lm}', (LM[P.id] || {})[c.k]).replace('{K}', KELVIN[c.k]).replace('{care}', CARE);\n"
           "function renderSpec(P, c) {        // Specifications: plain headings, one fact to a row (fix list 2026-11-20, 17)\n"
-          "  document.getElementById('p-spec-body').innerHTML = (SPEC[P.id] || []).map(([h, rows]) => `<h3>${h}</h3>` + (rows.length === 1 && rows[0][0] === h\n"
+          "  document.getElementById('p-spec-body').innerHTML = (SPEC[P.id] || []).map(([h, rows]) => `<h3>${h}</h3>` + (rows.length === 1\n"
           "    ? `<p class=\"spec1\">${fillSpec(rows[0][1], c)}</p>` : '<dl class=\"facts\">' + rows.map(([a, b]) => `<dt>${a}</dt><dd>${fillSpec(b, c)}</dd>`).join('') + '</dl>')).join(''); }\n"
           "function renderAsk(P, c) {         // the ask: a letter, its subject the product in its color (18)\n"
           "  const t = P.title(c), href = `mailto:${MAIL}?subject=${encodeURIComponent(t)}&body=${encodeURIComponent(`${t}. Quantity: \\nCountry: `)}`;\n"
@@ -1386,7 +1386,6 @@ def fix_10(p, web):
 .swatches a[aria-current="true"], .swatches a[aria-current="true"]:focus { outline: 2px solid var(--ink) !important; outline-offset: 0 !important }
 .swatches a:focus-visible { box-shadow: 0 0 0 3px var(--page), 0 0 0 5px #1A5FD0 !important }
 /* 5: a short phone keeps the name above the ask bar */
-@media (max-width: 700px) and (max-height: 760px) { .stage { height: min(var(--cap), calc(100cqw * 0.84)) !important } }
 /* 8: the renders line under the family row from the row's own edge; the Write to us note keeps its room */
 #family .render-note { margin: 12px 0 0 }
 #copy-note { display: block !important; min-height: 1.5em }
@@ -1394,7 +1393,8 @@ def fix_10(p, web):
 .lt-tile .dots-row, .lt-body .dots-row { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 4px 6px !important }
 .lt-tile .dots-row a { flex-direction: column; justify-content: center; gap: 2px !important; min-height: 52px; font-size: 12px; border-radius: 8px }
 .lt-tile .dots-row .coin-dot { width: 28px !important; height: 28px !important }
-.lt-room .names { width: 0; min-width: 100% }
+@media (max-width: 860px) { .lt-room .names { width: 0; min-width: 100% } }
+@media (min-width: 861px) { .lt-room .names { overflow: visible !important; width: auto } .lt-room { min-width: 0 } }
 /* 13: one counter width; the arrows and counter at the picture's own foot; the breadcrumb's focus clear of the slash */
 .gallery .count { min-width: 52px; text-align: center; box-sizing: border-box; font-variant-numeric: tabular-nums }
 .gallery .nav.next { right: calc(var(--pin, 0px) + 10px) !important }
@@ -1407,7 +1407,6 @@ def fix_10(p, web):
 /* 9: the hero's line and both buttons on the first screen of a phone too; in a short wide window the buttons side by side, clear of the pendants */
 @media (max-aspect-ratio: 1/1) and (max-width: 559px) {
   .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100svh - 290px) * 0.8)); margin-left: auto !important; margin-right: auto !important; align-self: center }
-  .hs-hero .hero-title .wrap { max-width: min(100%, calc((100svh - 290px) * 0.8 + 32px)) !important; margin-left: auto !important; margin-right: auto !important }
 }
 @media (min-aspect-ratio: 1/1) and (max-width: 960px) and (max-height: 640px) {
   .hs-hero .hero-more { left: 0 !important; right: 0 !important; margin-inline: auto !important; width: min(92vw, 640px) !important; max-width: none !important }
@@ -1426,3 +1425,47 @@ def finish_10(web):
         t = s.replace('history.replaceState(null, "", location.pathname + "#', 'history.replaceState(null, "", location.pathname + location.search + "#')
         if t != s:
             open(f, 'w').write(t)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Push C4: the critics' faults on C3 (the coordinator, 20 Nov 18:43); the rows are in SPEC above
+def fix_11(p, web):
+    # 1. the arrows and the counter in a strip under the stage, at its right edge, on the names row's line: never on a picture
+    p.sub("  pin();\n  document.getElementById('g-count').textContent", "  document.getElementById('g-count').textContent")
+    # 5. every figure on one line with its unit
+    p.sub("const fillSpec = (t, c) => t.replace(",
+          "const keepUnits = t => t.replace(/(\\d) (in|mm|lb|kg|ft|m|W|V|Wh|K|lm|lux|dB|Hz|kHz|rpm)\\b/g, '$1\\u00a0$2').replace(/\\b(in|mm|lb|kg|ft|m) \\(/g, '$1\\u00a0(')\n"
+          "  .replace(/(\\d) x (\\d)/g, '$1\\u00a0x\\u00a0$2');\n"
+          "const fillSpec = (t, c) => keepUnits(t).replace(")
+    # 15, 16: the first frame sheet fetched once; a phone held sideways is a phone (no opening film)
+    _sub_any(p, "{ const l = document.createElement('link'); l.rel = 'preload'; l.as = 'image'; l.href = 'img/globe-frames-0.webp'; document.head.appendChild(l); }", "")
+    _sub_any(p, "|| matchMedia('(max-width: 700px)').matches", "|| matchMedia('(max-width: 700px), (max-height: 500px)').matches")
+    p.css("""
+/* push C4 (the coordinator, 18:43) */
+/* 1: the strip under the stage: the names row at the left, the counter and the arrows at the right; one place for every picture */
+.gallery .frame { padding-bottom: 44px }
+.gallery .cap { margin-top: -44px !important; height: 44px !important; line-height: 44px !important; padding-right: 160px; position: relative; z-index: 1 }
+.gallery .nav { top: auto !important; bottom: 0 !important; translate: none !important; width: 40px !important; height: 40px !important;
+  background: transparent !important; color: var(--ink) !important; box-shadow: inset 0 0 0 1px var(--rule) !important; z-index: 2 }
+.gallery .nav:hover { box-shadow: inset 0 0 0 1.5px var(--ink) !important }
+.gallery .nav.next { right: 0 !important; left: auto !important }
+.gallery .nav.prev { right: 48px !important; left: auto !important }
+.gallery .count { bottom: 10px !important; right: 96px !important; background: transparent !important; color: var(--muted) !important; z-index: 2 }
+@media (max-width: 700px) {
+  .gallery .nav { width: 44px !important; height: 44px !important } .gallery .nav.prev { right: 52px !important } .gallery .count { right: 100px !important; bottom: 11px !important }
+  .gallery .cap { padding-right: 156px }
+  .pdp { row-gap: 14px !important } #pdp .gallery { gap: 8px !important } #pdp .render-note { margin: 0 !important }
+}
+:root { --cap: max(300px, calc(100svh - 322px)) }
+@media (max-width: 860px) { :root { --cap: calc(100svh - 222px) } }
+/* 5: a visible gap between a label and its value */
+.spec2 .facts { column-gap: 16px } .spec2 .facts dt { overflow-wrap: anywhere; padding-right: 6px }
+/* 6: a focused dot never under the ask bar */
+@media (max-width: 700px) { html { scroll-padding-bottom: 84px } }
+/* 17: the home chips: four to a row, or three, never one alone */
+@media (max-width: 479px) and (min-width: 400px) { #family .tint-pick { display: grid !important; grid-template-columns: repeat(4, max-content); gap: 8px } }
+@media (max-width: 399px) { #family .tint-pick { display: grid !important; grid-template-columns: repeat(3, max-content); gap: 8px } }
+/* 18, 19: the Copy address note one height, empty or filled; its focus box for the keyboard only */
+#copy-note { display: block !important; height: 22px !important; min-height: 0 !important; line-height: 22px !important; overflow: hidden }
+#copy:focus:not(:focus-visible), .btn:focus:not(:focus-visible), .ic-btn:focus:not(:focus-visible) { outline: none !important; box-shadow: none }
+""")
