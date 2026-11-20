@@ -3774,6 +3774,45 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    share cards of the dark lamp pictures keep carried-out edges until the lamps are on the light ground.
    ARRIVED SINCE, NOT YET CHECKED: site lane r49 6c5fe5760b (13:46, the clicks critic's four); Mantle lane
    b839428b5b (13:41, the cover on, all eight).
+   20 Nov 14:30 UTC, AFTER THE PUBLISH: THE RELEASE-GATE CRITICS RETURNED (13:52) AND FOUND THREE FAULTS IN WHAT WAS LIVE.
+   Their whole result: coordinator/site-critics-release-gate-2026-11-20.json (33 entries: 2 blocking, 19 to fix next,
+   12 notes). I had published ten minutes before it came back. MY RULE FROM NOW ON: nothing structural goes live until
+   the critic pass on that same build has returned; a push that only fixes listed findings goes live on my own
+   reproduction of each finding plus the standing scripts. Told to the owner as it is.
+   CONFIRMED BY ME AND FIXED LIVE:
+   (1) The gallery's arrows moved (the stage took each picture's height). On the public site at 1440x900 the top of
+   Next was 733, 713, 733, 733, 568, 733 on Tropos; seven clicks at one spot stayed at 2 / 6 and opened the picture
+   file in new tabs; Hemisphere stuck at 6 / 8, Core at 2 / 2, Mantle at 2 / 4. Test kept: gate/jump.js. FIX: r49
+   419a88305c (one stage height per page), with the clicks critic's four of 13:24 (one tint for the visit, the chip
+   state after Back, a header item on its own page, the hero in short wide windows; test kept: gate/visit.js, all
+   hold). Checked at 1440x900, 1920x970, 1280x720, 1366x768 on one page per product: spread 0, the clicks walk the
+   set and wrap. PUBLISHED 14:16, live 14:18, re-tested on the public site.
+   (2) The pendant's tile had a join in its cord at row 100 of 1000 (rows carried out to make the square picture
+   tall). (3) My order to re-cut the eight place tiles level had cut the approved pictures: Smoke lost its three
+   meteors and two far fires (the owner's pick of 18 Nov) and stood a sixth larger than its neighbors, Ice lost the
+   cabin, Dust most of both mesas. ORDER TAKEN BACK. FIX: r49 f105c9292e: the sixteen lamp tiles are now the real 4:5
+   pictures (hemisphere-<tint>.webp, core-<tint>.webp, nothing added); the place tiles are the whole approved
+   pictures again (<key>-habitat.webp; the place-<key>.webp files are gone). Looked at; sets, links, arrows and visit
+   scripts pass. PUBLISHED 14:26, live 14:29. main = f105c9292ede9a25308325c8dec4d0a273745433.
+   ORDERED FROM THE SITE LANE AS PUSH C (13:56, fourteen items): Hemisphere gallery order (Lit, From below first);
+   keys on the Tropos 360; phone: thumbnails clear of the bar, the name on the first screen, room for the copy note;
+   focus marks on the color dots; "Pictures are renders. Nothing is built yet." under the family row; one size line
+   under the sentence (inches first); lazy loading and sized files; /lighting tiles on the first screen and a names
+   row with every product and tint in the frame; hero on upright tablets; chips four and four; inches wherever a
+   buyer measures, one fact to a row, no label twice; small things. WAITING ON PICTURES: the share cards (lamp cards
+   with carried-out sides; Tropos cards a tall picture on a flat panel), the cutaway's lettering, the 360's cool
+   gray ground and small frames (640 x 576) beside the stills. THE OWNER'S: what stands beside the ask, the hero
+   dots, the mood lines.
+   LAMPS ON THE HOUSE GROUND, FIRST FRAMES (lamps lane c190672ed2, 13:56: Hemisphere and Core, off and on, Ember,
+   1600 x 2000, audits 0 in frame). MY CHECK (gate/ground.py against the Tropos Ember front): the plain ground patches
+   are within 1.9 L* on all four; the lit frames tint the floor near the lamp, as they should. Both OFF frames read
+   as Ember; the pendant OFF is the best lamp picture so far. SENT BACK 14:01, as tests on Ember only: (a) the off
+   colors do not match under this light: dome L* 31.1, chroma 66; ball L* 44.1, chroma 75; Tropos front 28.6 (the
+   owner's rule of 17 Nov: they match when off); the pours are not to change, the light on the ball may; (b) the lit
+   Core's floor is mottled and its ball reads flat; (c) the Core's base reads red on its upper half, off and on:
+   say what it is. SHOWN TO THE OWNER 14:02: the home row in Ember with lamps off and with lamps lit, for his choice;
+   my pick is off (deep color, sits with the speaker and the turntable; the stores show lamps unlit in their grids),
+   the lit frame second on the lamp's page. Fog and Smoke still rendering.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.

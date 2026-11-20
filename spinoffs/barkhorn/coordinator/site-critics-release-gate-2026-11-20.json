@@ -1,0 +1,415 @@
+{
+ "results": [
+  {
+   "part": "page",
+   "found": {
+    "findings": [
+     {
+      "id": "D-1",
+      "severity": "blocking",
+      "where": "http://127.0.0.1:4175/tropos/ice (same picture set on all 8 Tropos pages) and /hemisphere/ice (all 8), desktop windows about 790 px high or more: 1440x900, 1920x970, 1440x790. Gallery: #g-next, #g-prev, #thumbs, #stage.",
+      "steps": "1) Open /tropos/ice at 1440x900. 2) Put the pointer on the middle of the Next arrow (861, 751) and click. 3) Do not move the pointer; click again. Repeat at 1920x970 with the arrow's middle at (1096, 821). On /hemisphere/ice at 1440x900 click Next six times at (861, 751).",
+      "what": "The stage takes each picture's height, so the arrows, the thumbnails and everything under them jump between pictures. At 1440x900 on Tropos the Next arrow's top is at y 733, 713, 733, 733, 568, 733 for pictures 1 to 6; thumbnails top 831, 811, 831, 831, 668, 831; the Specifications heading 1005, 985, 1005, 1005, 842, 1005. After the first click (picture 2, 'Horn, behind', stage 580 high instead of 600) the arrow has moved up 20 px and the pointer is on the picture: the second click opened a new tab with http://127.0.0.1:4175/img/rc/blue-horn-back.webp and the counter stayed at 2 / 6; every further click opened another tab. (At 1440x900 this happens when the pointer is in the arrow's lower 20 px, its middle included.) At 1920x970 the arrow jumps 94 px after the first click (803 to 709) and 238 px at picture 5; the second click lands on blank paper and nothing happens: stuck at 2 / 6. At 1440x790 the visitor is stuck at 5 / 6. On Hemisphere the arrow jumps 85 px at picture 6 ('Over a table') at 1440x900 and 158 px at 1920x970: clicks 6 to 9 hit blank paper, stuck at 6 / 8. No jump at 1536x730, 1280x720, 1366x768 (Core) or on the phone at 390x844, where the stage keeps one height.",
+      "expected": "Next pressed again at the same spot goes to the next picture, on every picture. The arrows, counter and thumbnails keep their place while the visitor steps through the set (one stage height per page, the picture standing inside it), and a click meant for Next never opens the picture file.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/jump.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/jump2.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/jump.js ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra/view-tropos-ice-bar-1440.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/tropos-acid-1440x900-1.jpg",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-2",
+      "severity": "fix_next",
+      "where": "/tropos/<tint>, picture 4 of 6 (the 360), 1440x900. Seen on /tropos/smoke and /tropos/ember.",
+      "steps": "Open /tropos/smoke, click nothing, press the Right key nine times and read the counter each time. Then: click the 360 thumbnail with the mouse and press Right once.",
+      "what": "Counter: 2 / 6, 3 / 6, 4 / 6, then 4 / 6 six more times. On the 360 the Right and Left keys turn the horn and never leave it, so pictures 5 ('At the bar') and 6 ('Out') cannot be reached with the keys. After a mouse click on the 360 thumbnail the same key does the other thing: Right went to 5 / 6 without turning. On /hemisphere/smoke nine presses give 2 to 8, then 1, 2 (it wraps). On the live site the keys do nothing without a click (1 / 5 six times), so the dead end is new.",
+      "expected": "The keys take the visitor through all six pictures, and one key does one thing whatever was clicked last (for example: turn only while the picture itself has focus, or go on after one full turn).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/last.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra/tropos-smoke-after-9-right.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/kb.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-3",
+      "severity": "fix_next",
+      "where": "The 16 lamp share pictures: img/rc/card-hemisphere-<tint>.jpg and img/rc/card-core-<tint>.jpg (og:image of /hemisphere/<tint> and /core/<tint>), 1200 x 630.",
+      "steps": "Open the files at full size. Then lift the dark range (my copies: ground level plus and minus 20 mapped to full contrast). Measured all 16 in a canvas: columns equal to their neighbour, rows flat along x, grain in the top band.",
+      "what": "Only the middle 500 px (about x 350 to 850) is picture. The left and right 330 px are the picture's edge columns carried outward: 320 to 329 of 329 columns are the same as their neighbour, 87 to 99 percent of rows are one flat value, and there is no grain (0.00 to 0.02) beside 0.11 to 0.60 in the middle. At normal brightness the lamp is whole, centered and unstretched and the sides read as plain dark ground with faint level bands; with the dark range lifted the smear and the panel edges at x 350 and 850 are plain (blocks and streaks). The live site has no such files (it sends og-home.jpg for lamp pages), so this is new. The 8 Mantle cards are a real picture edge to edge and clean.",
+      "expected": "Cards cut from a picture that is wide enough, with the same grain edge to edge and no carried-out columns.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/cards.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/cards/stretch-hemisphere-fog.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/cards/stretch-core-fog.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/cards.js ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/tree3/spinoffs/barkhorn/site/img/rc/card-hemisphere-fog.jpg",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-4",
+      "severity": "fix_next",
+      "where": "The 8 Tropos share pictures: img/rc/og-red.jpg, og-orange.jpg, og-amber.jpg, og-green.jpg, og-blue.jpg, og-violet.jpg, og-ice.jpg, og-black.jpg (og:image of /tropos/<tint>), 1200 x 630.",
+      "steps": "Open the files at full size (I looked at red, amber, ice and black) and measure the column steps (all eight).",
+      "what": "The tall front picture is pasted into the middle third of a flat cream card. Its left edge is a hard vertical line at x 348 (a step of 50 levels in the top band: card 240, picture 194) and its right edge a softer one at x 852 (9 to 11 levels). The side panels are perfectly flat (329 of 329 columns identical, no grain). The speaker is whole and not stretched, but the card reads as a picture stuck on a panel, not as a photograph. All eight files are byte for byte the live files.",
+      "expected": "A share picture with one ground edge to edge.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/cards.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/tree3/spinoffs/barkhorn/site/img/rc/og-red.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/tree3/spinoffs/barkhorn/site/img/rc/og-black.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/live-og/og-red.jpg",
+      "added_by_this_build": false
+     },
+     {
+      "id": "D-5",
+      "severity": "fix_next",
+      "where": "/hemisphere/ember at 1440x900, the color dots (#swatches a). The same dots are on every product page.",
+      "steps": "Press Tab 13 times from the top (focus lands on the Ember dot, the chosen one). Compare with the page before any Tab. Press Tab once more (Dust).",
+      "what": "With focus on the chosen dot nothing changes on screen: its focus outline sits at offset 0 under the ring that marks it as chosen. With focus on any other dot the focus ring is the same ring as the chosen mark, so two dots look chosen (Ember and Dust in my picture). Every other stop on the page shows a clear ring. Not compared with the live site.",
+      "expected": "A focus mark that can be told from the chosen mark, and that shows on the chosen dot too.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra/dots-no-focus.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra/dots-focus-on-chosen.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra/dots-focus-on-next.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/kb/stop-16.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/kb.txt",
+      "added_by_this_build": false
+     },
+     {
+      "id": "D-6",
+      "severity": "fix_next",
+      "where": "/hemisphere/ember at 1440x900, keyboard only: the color dots and the picture (#stage).",
+      "steps": "a) Put focus on the Ice dot and press Enter, then press Tab. b) Tab to the picture (stop 9, it shows a ring) and press Enter.",
+      "what": "a) The color changes (address /hemisphere/ice, 'Color: Ice') but focus drops to the page body; the next Tab lands on the first dot (Ember), not on the dot after Ice. b) Enter on the picture opens nothing; only a mouse click opens the full file. All other controls work from the keys: arrows (Enter and Space), thumbnails (Right, End), 'Copy address', 'Copy link', the ask, row links, family tiles.",
+      "expected": "Focus stays on the dot just chosen; the picture, being a stop, opens the full file on Enter (or is not a stop).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/kb.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/kb.js",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-7",
+      "severity": "fix_next",
+      "where": "/hemisphere/smoke (all 8 Hemisphere pages: eight thumbnails) at 390x844, top of the page: #thumbs and the fixed bar (.ask-bar).",
+      "steps": "Open /hemisphere/smoke on a 390x844 phone and do not scroll.",
+      "what": "The eight thumbnails stand in two rows (y 679 to 791). The fixed bar 'Ask about Hemisphere' starts at y 779 and lies over the bottom 12 px of the second row (two thumbnails). On Tropos, Core and Mantle (one row) nothing is covered. While scrolling, the dots pass under the bar for about 120 px of travel before the page's own button comes on screen and the bar steps away; that is the bar doing its job.",
+      "expected": "All thumbnails clear of the bar on the first screen (one row that scrolls sideways, or a smaller size).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/hemi-smoke-390x844-1.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/phone.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-8",
+      "severity": "fix_next",
+      "where": "All product pages at 390x844, first screen. Seen on /tropos/acid, /tropos/fog, /hemisphere/smoke, /hemisphere/dust, /core/poison, /mantle/haze.",
+      "steps": "Open the page on a 390x844 phone; compare with https://www.earf.world/#hemisphere-smoke and /#speaker-acid at the same size.",
+      "what": "The first screen holds the crumb ('Home / Tropos in Acid'), the whole picture, the counter and arrows, the thumbnails, 'Pictures are renders. Nothing is built yet.' and the fixed bar. The big name starts at y 830 (Tropos) or 890 (Hemisphere), under the bar's top edge at 779; the color dots, the sentence and 'Price on request.' are further down. On the live site the name is in sight at the foot of the first screen (y 750 to 790 on Tropos, 776 to 816 on Hemisphere). The picture now starts 21 px lower than on live (y 179 against 158).",
+      "expected": "The name in sight on the first screen of a phone, as on live (less air above the picture would do it).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/tropos-acid-390x844-1.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra/live-hemi-smoke-390x844.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-9",
+      "severity": "fix_next",
+      "where": "/core/poison at 390x844 (any product page on a phone): 'Copy address' and 'Copy link', the status note (#p-share-note).",
+      "steps": "Scroll to 'Copy address' and tap it; watch the 'Specifications' heading.",
+      "what": "The note 'Address copied.' appears under the address and pushes the page down 45 px ('Specifications' from y 637 to 682); about four seconds later the note clears and the page jumps back to 637. The clipboard holds hello@earf.world. On desktop the note stands at the end of the side column and nothing moves.",
+      "expected": "Room kept for the note so nothing moves.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/last.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra/phone-copy-note.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/last.js",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-10",
+      "severity": "fix_next",
+      "where": "Specifications on all four products (read on all 32 pages).",
+      "steps": "Read #p-spec-body row by row.",
+      "what": "Three small misses against the order. 1) Inches and pounds stand only in the Size and Weight rows. Metric alone: Tropos cabinet 20 mm, lining 100 mm, horn 10 mm, link cable 5 m, 'at 1 m', and 420 mm at the cabinet; Hemisphere drop 600 mm, canopy 150 mm, 'half a meter below'; Mantle plinth 25 mm, raised 40 mm, posts 30 mm, base 12.7 mm, set in 35 mm, platter 300 x 21 mm, cover 3 mm, 448 x 358 x 100 mm, and the cover's 1.1 kg has no pounds (2.4 lb). 2) Several rows hold more than one fact: Hemisphere 'Light' (lumens, lux, CRI, the glow, kelvin), Core 'Light' (3) and 'Power' (run time, charge time, dock, cells), Tropos 'Amplifier' (4), Mantle 'Cover' (6) and 'Plinth' (4). 3) A group's heading is followed by a row with the same label: 'LIGHT' then 'LIGHT' on both lamps, 'POWER' then 'POWER' on Core. Also on Mantle the rows 'Phono stage' and 'Outputs' both state the bypass switch.",
+      "expected": "One fact to a row, inches beside millimeters and pounds beside kilograms wherever a buyer would measure (drop, canopy, cover), no label said twice in a row.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/specs-new-all.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/conversions.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/hemi-smoke-1440x900-2.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/mantle-haze-1440x900-3.jpg",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-11",
+      "severity": "fix_next",
+      "where": "All product pages at 844x390 (a phone held sideways). Seen on /tropos/acid, /tropos/fog, /hemisphere/smoke, /hemisphere/dust, /core/poison, /mantle/haze.",
+      "steps": "Open /tropos/acid at 844x390 and do not scroll.",
+      "what": "The first screen is the header, the crumb and the top 211 px of a 300 px picture (the speaker cut at the woofer). The counter and arrows (y 433), the thumbnails (y 531), the name (y 695), the sentence, the price line and the button (y 939) are all below; there is no fixed bar at this width. One scroll shows the rest in good order. The live site at this size is worse: its first screen is an unreadable crop of one gray picture.",
+      "expected": "The whole product and its name on the first screen (picture beside the text, or a lower picture).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/tropos-acid-844x390-1.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/tropos-acid-844x390-2.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/extra/live-tropos-acid-844x390.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots.txt",
+      "added_by_this_build": false
+     },
+     {
+      "id": "D-12",
+      "severity": "note",
+      "where": "Specifications and the sentence under the name, all four products: every fact the new build states that the live site does not.",
+      "steps": "Compared the text of the new pages with the live product pages, live /tropos, live /mantle and live /lighting.",
+      "what": "TROPOS: depth 442 mm overall (live 428); weight about 75 kg each (live about 73 kg, and 'about 64 kg with the horn lifted off (modeled)' is gone); new row Power '100-120 V / 200-240 V, 50/60 Hz, 350 W max'; new row With a pair 'Two power cords and a 5 m link cable between the speakers'; 'Sold in pairs.'; the inch and pound figures (51 x 22 x 17.4 in, 165 lb). MANTLE: new row Platter 'Cast acrylic, 300 x 21 mm, in three layers'; Cartridge 'Ortofon 2M Black, fitted' (live 'A moving-magnet cartridge'); new row Outputs 'RCA line outputs and an earth post; a switch picks the built-in phono stage or bypass'; the cover is now 'Included'; Fog plinth 'Clear cast acrylic' (live 'in its color'); inch and pound figures (17.7 x 14.2 x 6.3 in, 7.7 in with the cover, 25.6 lb, 28 lb). HEMISPHERE: 7.9 in; the sentence 'The shade comes off with a quarter turn.' is live's wording shortened. CORE: 6.3 in ball, 7.1 in tall, 3.3 lb; 'Each comes off by hand.' moved from live /lighting; Fog ball 'Clear cast acrylic' (live 'Tinted'). Each lamp page now gives its own kelvin where live listed all eight. I found no other new fact.",
+      "expected": "For the record; the Tropos and Mantle facts match what the coordinator's notes say came from the lanes.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/specs-new-all.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/live/tropos-page.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/live/mantle-ember.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/live/hemisphere-ember.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/live/core-ember.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-13",
+      "severity": "note",
+      "where": "Specifications wording, lamps and Mantle: lines reworded where the owner's rule is remove, do not rewrite.",
+      "steps": "Same comparison as D-12.",
+      "what": "Reworded, same meaning: Mantle plinth 'it floats 40 mm over the base' is now 'raised 40 mm on four posts over the base'; Hemisphere and Core 'sold singly' is now 'sold separately'; Hemisphere 'a 600 mm drop as standard' is now 'a standard 600 mm drop'; 'The dome glows' is now 'The shade glows'; 'in every color' after the lux figure is dropped; labels 'Fitting' and 'Mains' are now 'Cap' and 'Power'; Core 'a white opal ball centered inside it' is now 'an opal diffuser centered inside it' and the label 'Shades' is now 'Balls'; Mantle Fog cover 'in the deck's own tint' is now 'in the deck's own color'. All read as plain American English. None is a mood line.",
+      "expected": "For the coordinator to confirm these were ordered.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/specs-new-all.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/live/hemisphere-ember.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/live/mantle-fog.txt",
+      "added_by_this_build": true
+     },
+     {
+      "id": "D-14",
+      "severity": "note",
+      "where": "/hemisphere/dust, /hemisphere/acid, /hemisphere/ice, /hemisphere/smoke: the 'How it lights' picture against the 'Light' row. Seen on /hemisphere/smoke at 1440x900.",
+      "steps": "Scroll to 'How it lights' and read the labels drawn into the picture; read the 'Light' row.",
+      "what": "The picture's own label reads 'warm white light, down'; the row on these four pages says the light straight down is '4000 K'. The picture is marked 'Shown in Ember.' (2200 K), and the live site shows the same picture, so nothing here is new.",
+      "expected": "A cutaway without the word 'warm', or without lettering (the coordinator's list already has one).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/hemi-smoke-1440x900-4.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/hemi-smoke-1440x900-2.jpg",
+      "added_by_this_build": false
+     },
+     {
+      "id": "D-15",
+      "severity": "note",
+      "where": "Product pages, small things seen in passing.",
+      "steps": "See each item.",
+      "what": "1) Phone, 390x844: the picture arrows are 36 x 36 px and 6 px apart (the dots are 44). 2) At 1024x768 the eight dots wrap six and two. 3) After a place tile on the home page the address bar keeps /#speaker-ice/out while every other old address is rewritten to its real path; 'Copy link' there gives /tropos/ice, which opens picture 1, not the place picture. 4) Phone: under a bar picture with four names the names row takes two lines and the thumbnails move down 24 px (679 to 703 on /tropos/ice). 5) The 360 frames are 640 x 576 shown at 667 x 600 at 1440x900: soft beside the 1000 x 1250 stills, and on a cool gray ground where the stills stand on warm white. 6) While the side column lets go at the end of Specifications, its button and the foot's button, both 'Ask about Mantle', are on screen together (/mantle/haze at 1440x900, scrolled 1865). 7) Head tags: no og:image:width or height; no structured data on the 32 paths; every path carries robots 'noindex, nofollow'. 8) The focused skip link lies over the globe and the E of the logo.",
+      "expected": "No action needed now.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/ask.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/jump.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/kb/tropos-360.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/shots/mantle-haze-1440x900-4.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/heads.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/page/kb/skip-focused.jpg",
+      "added_by_this_build": true
+     }
+    ],
+    "tested_and_right": [
+     "CONVERSIONS, Tropos (Ember and Fog read; the rows are the same on all 8 tints): 1295 mm = 50.98 in (page 51); 560 mm = 22.05 in (page 22); 442 mm = 17.40 in (page 17.4); 75 kg = 165.35 lb (page 165). All right.",
+     "CONVERSIONS, Hemisphere (Ember and Fog; same on all 8): 200 mm = 7.87 in (page 7.9). Right.",
+     "CONVERSIONS, Core (Ember and Fog; same on all 8): 160 mm = 6.30 in (page 6.3); 180 mm = 7.09 in (page 7.1); 1.5 kg = 3.31 lb (page 3.3). All right.",
+     "CONVERSIONS, Mantle (Ember and Fog; same on all 8): 450 mm = 17.72 in (page 17.7); 360 mm = 14.17 in (page 14.2); 161 mm = 6.34 in (page 6.3); 196 mm = 7.72 in (page 7.7); 11.6 kg = 25.57 lb (page 25.6); 12.7 kg = 28.00 lb (page 28); 11.6 kg plus the 1.1 kg cover = 12.7 kg. All right. Table kept in conversions.txt.",
+     "LAMP FIGURES, all 16 lamp pages: each gives its own color's lumens and kelvin and they equal the live lists. Hemisphere 307, 353, 380, 282, 270, 258, 521, 260 lm and Core 45, 51, 63, 38, 39, 33, 95, 35 lm (Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke); kelvin 2200 Ember, 2700 Poison and Fog, 3000 Haze, 4000 Dust, Acid, Ice and Smoke; 'about 340 lux' and 'CRI 90' on all eight Hemisphere pages.",
+     "AGREEMENT, all 32 pages: no two rows on a page disagree; the sentence under the name agrees with the rows (Sold in pairs / With a pair; Cordless, about five hours / Power row; quarter turn / Cap and Care rows); every row that should be the same on all eight tints is the same; only the tint rows differ (Acrylic, Cabinet 'clear' on Fog, Core ball 'Clear' on Fog, Mantle plinth 'Clear' on Fog, lamp lumens and kelvin). Fog says 'clear' and Smoke 'smoked gray' in the sentence and the rows.",
+     "SPECIFICATIONS FORM, all 32 pages: heading 'Specifications' under the gallery; Tropos 5 groups, Hemisphere 4, Core 5, Mantle 4; 'All figures come from the design; none is measured yet.' under each; 'Pictures are renders. Nothing is built yet.' under each gallery; label line 'Horn speaker / Pendant / Table lamp / Turntable \u00b7 In development'; 'Price on request.' with 'Each pair is made to order.' (Tropos) or 'Made to order.'",
+     "THE ASK at 1440x900 on /tropos/ember, /tropos/fog, /hemisphere/ice, /hemisphere/fog, /core/haze, /core/fog, /mantle/dust, /mantle/fog: one filled button ('Ask about a pair', 'Ask about Hemisphere', 'Ask about Core', 'Ask about Mantle', 44 px high, dark with light text), no target; href decoded: to hello@earf.world, subject '<Product> in <Tint>', body '<Product> in <Tint>. Quantity: ' then a new line 'Country: '; no broken characters; the same button at the foot; the phone bar carries the same href; all three follow a color click at once.",
+     "ADDRESS AND COPY ADDRESS, same eight pages: hello@earf.world stands as text (15 px, selects whole); 'Copy address' puts hello@earf.world on the clipboard; the note reads 'Address copied.' and clears within 4 seconds; the address bar does not change. Also from the keyboard (Enter).",
+     "COPY LINK (a 44 px icon, label and tooltip 'Copy link'): on the plain page, after a color click, on /#hemisphere-ice, /#speaker-poison, /#core-smoke, /#mantle-acid, /#speaker-ice/out, /s/hemisphere-haze, /s/speaker-dust, /colors/acid, /tropos, /mantle and after the home page's Ice place tile it copies /<product>/<tint> of the color now shown, each answering 200; the note reads 'Link copied.' and clears within 4 seconds.",
+     "PHONE BAR at 390x844 on /hemisphere/smoke, /tropos/acid, /core/poison, scrolled in 40 px steps: the bar shows only while none of the page's own ask buttons is on screen and steps away when the top or the foot button is; never both at once; it never lies over the page's own button, the copy buttons or the tile buttons; at the very end of the page the footer's last line ends near y 715 and the bar starts at 779, so nothing is covered. Dots are 44 x 44 px. The menu reads 'Close' while open.",
+     "FIRST SCREEN at 1440x900, 1366x768 and 1024x768 on /tropos/acid, /tropos/fog, /hemisphere/smoke, /hemisphere/dust, /core/poison, /mantle/haze: the product is whole; the name, the sentence, the price line and the button are in sight; the counter and all thumbnails (64 px, one size, one row) are in sight (thumbnails end at y 763 of 768 at 1366x768). Also at 1366x650 and 1280x620 on /hemisphere/dust: the stage shrinks and the thumbnails stay in sight. Better than live, where the thumbnails run past the fold at 1440x900.",
+     "FIRST SCREEN at 390x844, same six pages: the picture is whole, with counter, arrows and thumbnails (52 px, one size) in sight.",
+     "NO SIDEWAYS SCROLL at 1440x900, 1366x768, 1024x768, 390x844, 844x390 on the six pages (document width equals the window's); no text cut off, overlapping or out of its box in the screens I looked at; no script error on any page loaded.",
+     "THE SIDE COLUMN at 1440x900, 1366x768, 1024x768: stays in view (sticky at y 88) through the gallery and Specifications, lets go before the row of eight, and at x 938 to 1324 never lies over the pictures (which end at x 889). On phones it stands under the gallery.",
+     "STAGE AND CONTROLS: the stage is 773 px of the 1208 px page width (64 percent) at 1440; arrows are 36 px light discs with a dark mark, the counter 12 px on a light pill; legible on dark pictures (Hemisphere, Core, the bar) and on light ones (Tropos, Mantle); beside tall pictures they stand on the paper, on wide ones on the picture's corner ground; they did not cover a product in the views I looked at (Tropos 1, 4, 5; Hemisphere 1 and 6; Core 1 and 2; Mantle 1).",
+     "RHYTHM at 1440x900 on /hemisphere/smoke, /tropos/acid, /mantle/haze: gallery, Specifications, row of eight, (How it lights), the foot's button, the three family tiles follow with even gaps of about 110 to 140 px; the chosen tint is marked in the row of eight; the family tiles show the chosen tint.",
+     "COLOR CLICK at 1440x900 (Tropos Acid to Ice on picture 3, Hemisphere Smoke to Fog on picture 3, Core Poison to Haze on picture 2, Mantle Haze to Dust on picture 2, each scrolled to 300): the view and the scroll stay; the address becomes the new tint's path; history length does not grow; Back once leaves to the home page and Forward returns; the title, crumb, 'Color:' line, sentence, tint rows and lumens, the ask, the family tiles, the row's mark and the header links all change with it.",
+     "ARROW KEYS with nothing clicked step the pictures on all four products (and wrap on Hemisphere, Core and Mantle). A click on the picture (cursor zoom-in) opens that file in a new tab: Tropos 1000 x 1250, Core 1200 x 1500, the same file the page shows.",
+     "THE 32 PATHS: all answer 200 with their own title ('<Product> in <Tint> \u00b7 EARF'), description (ending 'In development. Made to order.'), canonical (https://www.earf.world/<product>/<tint>), og:title (same as the title), og:description (same as the description), og:url and og:image (a 1200 x 630 file that exists); all 32 of each differ; twitter:image equals og:image. Table in heads.txt.",
+     "SHARE PICTURES: all 32 measured; by eye at full size I opened 19 (Tropos red, amber, ice, black; Hemisphere Ember, Acid, Ice, Fog, Smoke; Core Ember, Acid, Haze, Fog, Smoke; Mantle Ember, Dust, Ice, Fog, Smoke). In every one the product is whole, centered and not stretched. The 8 Mantle cards are a real picture edge to edge.",
+     "OLD ADDRESSES: /#speaker-haze, /#hemisphere-poison, /#core-dust, /#mantle-smoke, /s/speaker-smoke, /s/hemisphere-acid, /s/core-ice, /s/mantle-poison, /s/color-haze, /s/colour-haze, /colors/fog, /colors/ember, /tropos, /mantle, /#tropos, /#turntable, /#color-ice, /tropos/, /tropos/ember/, /mantle/ember.html all land on the right product and tint with the right title; /#lighting and /#contact land on /lighting and /contact; /tropos/EMBER and /tropos/red answer 404 with 'Nothing here.'",
+     "KEYBOARD on /hemisphere/ember at 1440x900: order is skip link, logo, Speakers, Lighting, Turntable, Contact, crumbs, picture, previous, next, thumbnails (one stop, arrow keys inside), eight dots, the ask, copy link, copy address, eight row links, the foot's ask, three family tiles, footer; no stop in a hidden page; 'Skip to content' shows on the first Tab, and Enter moves focus to the product page's main part without leaving the page; a 2 or 3 px dark ring on every stop except the chosen dot (D-5); row links show a white inner ring on the dark row and a dark ring on the Tropos row.",
+     "THE 360 on /tropos/ember: '360' on its thumbnail; 'Drag to turn' on the picture until it is first turned; a drag turns it; reachable from the keyboard. Names row stands directly under the bar pictures as their only caption, each name a link ('Tropos in Acid \u00b7 Hemisphere in Ember \u00b7 Core in Ember \u00b7 Mantle in Ember' on Tropos; 'Core in Ember' on Core); 'Shown in Ember.' stands on the one-tint pictures."
+    ],
+    "not_tested": [
+     "The pattern redirect /s/<page>/<anything> (skipped as told; the local copy does not run it).",
+     "Opening the letter: I read the mailto href and did not follow it, so I did not see how a mail program shows the subject and the two body lines.",
+     "Any browser but Chromium; a real phone; touch swipes on the gallery, and stepping back from the 360 on a phone.",
+     "13 of the 32 share pictures by eye (Tropos orange, green, blue, violet; Hemisphere Dust, Poison, Haze; Core Dust, Poison, Ice; Mantle Acid, Poison, Haze): measured only. Their measurements match the ones I looked at.",
+     "How the share pictures look in a real link preview (Messages, Slack, X).",
+     "The five sizes on the other 26 product pages: only /tropos/acid, /tropos/fog, /hemisphere/smoke, /hemisphere/dust, /core/poison, /mantle/haze were looked at, and I did not open every slice of every page at every size.",
+     "D-1 on Core and Mantle at tall windows (Core was run only at 1366x768 and on the phone, where nothing moves), and D-1 with the Previous arrow.",
+     "Whether the arrows or counter cover a product on every view of every tint: I looked at eight views.",
+     "A full Tab-through on Tropos, Core and Mantle pages and at phone size: only /hemisphere/ember was walked stop by stop.",
+     "Whether the live site has the faults in D-5 (not compared).",
+     "Screen readers; widths under 390 px; zoomed text; the system pointer and its ring.",
+     "The truth of the engineering figures themselves (watts, hertz, lumens, weights): I checked conversions, agreement between rows, tints and the live site, not the design behind them.",
+     "The home page, /lighting and /contact: the other critic's part."
+    ]
+   }
+  },
+  {
+   "part": "home",
+   "found": {
+    "findings": [
+     {
+      "id": "H-1",
+      "severity": "blocking",
+      "where": "All eight img/rc/tile-hemisphere-<tint>.webp (800 x 1000). Shown on / in \"The family.\" (second tile; 340 x 425 at 1440 x 900), on /lighting (Hemisphere tile, 183 x 229) and as the Hemisphere tile in the family row at the foot of every Tropos, Core and Mantle page (392 px wide at 1440).",
+      "steps": "1) Open http://127.0.0.1:4175/img/rc/tile-hemisphere-ember.webp at 100% and follow the cord from the top edge down to y=100. 2) Or open http://127.0.0.1:4175/ at 1440 x 900, scroll to \"The family.\" and look at the top 42 px of the Hemisphere tile; press any chip, it is the same in every tint. No brightening needed.",
+      "what": "The cord changes at row 100 of 1000, at the same row in all eight files. Above it the cord is 25 to 28 px wide, dark gray (darkest value 5 to 8 on a ground of 30) with soft edges; below it the cord is 16 to 18 px wide, black (0 to 1) and sharp. On the home page at 1440 that is an 11 px soft gray cord for the top 42 px, then a 7 px sharp black one: it reads as a sleeve or a smear on the cord, a visible join where the top was extended. It is plainest on the 392 px tiles at the foot of the product pages and faint on a phone (174 px tile). This is the same kind of fault as the Mantle tile streaks the publish is already held for.",
+      "expected": "One cord of one width and one black from the cap to the top edge; no join. The live site has no such join (it uses square home-hemisphere-<tint>.webp, not extended).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/tilecrop-hemisphere-ember.png (file at 100%, left half normal, right half brightened 3.5 times); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/tile-onpage-1440.png and tile-onpage-1440-cordzoom.png (the tile as the home page shows it at 1440); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/tiles-hemisphere-x3_5.png (all eight); measurements printed by the second script block in my session, cord widths per tint (rows 0-60: 25-28 px; rows 150-300: 16-18 px; change at row 100 or 101).",
+      "added_by_this_build": true
+     },
+     {
+      "id": "H-2",
+      "severity": "fix_next",
+      "where": "/ , \"Each color is a place.\", the Smoke tile (img/rc/place-black.webp), any width. At 1440 x 900 it is the last tile of the second row.",
+      "steps": "Open http://127.0.0.1:4175/ at 1440 x 900, scroll to \"Each color is a place.\" and compare Smoke with Ice, Haze and Fog beside it. Then open https://www.earf.world/ and look at the same tile.",
+      "what": "Two things. (a) Size: in seven tiles the speaker stands at one size and place (top of the horn at 27 to 29% of the tile's height, foot at 83 to 85%, so 55 to 57% tall). In Smoke the horn starts at about 23% and the foot is at about 88%: about 65% tall, roughly one sixth larger than its neighbors, and it looms in the row. (b) Content: the new cut keeps about 60% of the live picture's width and drops everything right of the fire: the three falling meteors and the two far fires, which are the version the owner picked on 18 Nov, are no longer on the home page. The tile's alt text still ends \"more meteors falling and two fires far off\", which the tile no longer shows. A click still opens the Tropos page on the full picture (href #speaker-smoke/out, read, not clicked).",
+      "expected": "The speaker the same size and place as in the other seven (the order's own aim for the re-cut), and a cut that keeps the meteors, or the alt text changed to what the tile shows.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/place-smoke-new-vs-live.png (new left, live right, same height); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/places-grid.png (all eight new tiles under a 10% grid); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/places-new-top-live-bottom.png",
+      "added_by_this_build": true
+     },
+     {
+      "id": "H-3",
+      "severity": "fix_next",
+      "where": "/ , the hero, on upright tablets and small windows: 820 x 1180, 768 x 1024, 600 x 900.",
+      "steps": "Open http://127.0.0.1:4175/ at 820 x 1180 (or 768 x 1024). Do not scroll.",
+      "what": "The first screen is the headline (y 85 to 131) and the tall bar picture (y 147 to 1172 at 820; 147 to 1107 at 768; 147 to 897 at 600 x 900). The line \"Horn speakers, lamps and a turntable in tinted cast acrylic.\" (y 1192 at 820) and both buttons (y 1235 to 1279) are under the fold. A first-time visitor on an upright iPad sees \"A world of sound, in color.\", a dark picture and four unnamed dots: no word of what is sold and no button. The lower third of the picture there is almost black. The live site does exactly the same (measured: same numbers). At 390 x 844 and 360 x 740 everything fits (line at 638, buttons end at 748).",
+      "expected": "The line and the two buttons on the first screen at tablet sizes too, as on phones and desktops (for example a picture height capped to the screen).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/hero-tablet-820.png, hero-tablet-768.png, hero-tablet-600.png; script /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/tab.js (prints new and live side by side)",
+      "added_by_this_build": false
+     },
+     {
+      "id": "H-4",
+      "severity": "fix_next",
+      "where": "/ first load on a phone (390 x 844), cold cache; and the hidden /lighting block inside index.html.",
+      "steps": "Run /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/light.js (weights) or slow.js (request lists), or open the home page at 390 x 844 with the network panel open and compare with https://www.earf.world/.",
+      "what": "Home, phone: new 29 requests, 2108 KB (pictures 1808 KB) against live 23 requests, 1351 KB (pictures 1249 KB). 198 KB of the difference is only the local copy sending the page uncompressed (270 KB against 72 KB), so the real growth is about 560 KB of pictures, about 40% more than live. Where it comes from: seven of the eight place tiles load at once (61 to 83 KB each, 511 KB; they are 800 x 1000 files for a 272 x 340 slot, and the shorter page now brings them within the browser's lazy-load distance), and img/rc/bar-pendants.webp (85 KB), the /lighting room picture, loads on the home page because its tag lost loading=\"lazy\" in this build (the live tag has it); the two /lighting lamp tiles have no lazy either. Home, desktop 1440: new 30 requests, 2300 KB (pictures 2001) against live 28, 1920 KB (pictures 1818): about 180 KB more. The four globe-frames sheets of the opening animation (1.03 MB) are the same on both. Product pages: Tropos in Ember new 33 requests, 923 KB (pictures 593) against live 21, 698 KB (pictures 565): level once the uncompressed page is set aside, 12 more requests. Hemisphere in Ember new 31 requests, 888 KB against live 31, about 1400 KB: lighter, because the real path no longer loads the opening animation.",
+      "expected": "A home page no heavier on a phone than the live one: loading=\"lazy\" back on the three pictures of the hidden /lighting block, and place tiles sized for their slot on phones.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/light-out.txt (lines starting WEIGHT); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/slow-out.txt (the two lines starting \"== requests\")",
+      "added_by_this_build": true
+     },
+     {
+      "id": "L-1",
+      "severity": "fix_next",
+      "where": "/lighting at 1440 x 900, 1366 x 768 and 1024 x 768: the Core tile (second tile, right column).",
+      "steps": "Open http://127.0.0.1:4175/lighting at 1366 x 768. Do not scroll.",
+      "what": "The two tiles are stacked in the right column, so the second one runs off the first screen. At 1366 x 768 the Core tile starts at y 642: its kind and name show (name at 707), the first row of dots is cut by the fold (753 to 797) and the button \"See Core\" is at y 951. At 1440 x 900 three of the four rows of dots show and the button is at y 956. At 1024 x 768 one row of dots shows and the button is at y 921. Build 1B item 15 asked for both tiles \"with kind, name, color dots and button on the first screen\". At 390 x 844 the tiles come first and the Core button ends at y 897, also just under the fold.",
+      "expected": "Both tiles whole on the first screen at 1366 x 768 and 1440 x 900 (for example side by side under or beside a smaller room picture).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/lighting-1366-s1.png, lighting-1440-dot.png, lighting-1024-s1.png; positions in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/light-out.txt",
+      "added_by_this_build": false
+     },
+     {
+      "id": "L-2",
+      "severity": "fix_next",
+      "where": "/lighting, the names row under the room picture (img/rc/bar-pendants.webp), all sizes. The same picture and row are the \"At the bar\" view of the Hemisphere pages.",
+      "steps": "Open http://127.0.0.1:4175/lighting at 1440 x 900 and read the row under the picture against the picture.",
+      "what": "The row reads \"Hemisphere in Ember \u00b7 Core in Ember\". The picture shows five pendants, two of them plainly yellow (Acid; the alt text itself says \"in Acid, Ember and Dust\"), and two Cores, one red and one orange. A visitor who likes the yellow pendant or the orange Core has no name for it and no link to it; the row is the picture's only caption. Both links that are there are right (/hemisphere/ember, /core/ember by href).",
+      "expected": "Each product in the frame with each tint shown, as item 14 of Build 1B says (\"each product in the picture with the tint shown\"): for example \"Hemisphere in Ember \u00b7 Hemisphere in Acid \u00b7 Core in Ember \u00b7 Core in Dust\".",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/lighting-1440-dot.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/light-out.txt (line \"room img ... names row\")",
+      "added_by_this_build": false
+     },
+     {
+      "id": "T-1",
+      "severity": "fix_next",
+      "where": "TRUST, first of five. All three pages. Tropos and Hemisphere pages, beside the picture: \"IN DEVELOPMENT\", \"Price on request.\", \"Made to order.\", one button that opens a letter. Home: \"Write to us.\" near the foot.",
+      "steps": "Open /tropos/ember and /hemisphere/ember at 1440 x 900 and read the first screen as a buyer; then read the same screen at KEF LS50 Wireless II, Klipsch La Scala AL6, Design Within Reach Panthella Portable and Louis Poulsen (saved screens named under evidence).",
+      "what": "The buyer is told what the thing is and that it is not built, and then nothing that lets him weigh it: no price or range, no date, no name of a person or maker, no place to see or hear one, no word on what happens after he writes. The only way forward is a letter to an address. Every store I compared gives at least one firm thing at that spot: KEF a price \"/ Pair\" and a cart; Design Within Reach and Louis Poulsen a price, the designer's name and a delivery time (\"Estimated delivery time: 2 weeks\"); Klipsch Heritage no price, but \"Find a dealer\" with a search box, so there is a room to hear it in; Linn (in the same notes) \"From US$\" and \"Book a demo\". Here there is none of the four. I know price, lead time and maker wait for the owner; this is the largest gap and it is his to close.",
+      "expected": "At least one firm thing beside the ask, the owner's choice of which: a range or a \"from\" figure, a season for the first pairs, who designs and builds it, or what a letter gets back and when.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/sheet-two-tropos-d.png, sheet-two-hemisphere-d.png, stores-speaker.png, stores-lamp.png; notes /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/audit/work/audio/notes.txt and furniture/notes.txt, lighting/notes.txt",
+      "added_by_this_build": false
+     },
+     {
+      "id": "T-2",
+      "severity": "fix_next",
+      "where": "TRUST, second of five. Home, first two screens and every section down to the footer, all sizes. Also the place pictures and the hero.",
+      "steps": "Open http://127.0.0.1:4175/ at 1440 x 900 and read down. Note where a visitor first learns that nothing exists yet.",
+      "what": "Nothing puts these objects in a home or beside a person, and nothing gives a size. The home page's 13 pictures are one dark bar and eight landscapes with lava, rain and a burning crater, and four studio tiles; the product pages add the same bar. In the family row a speaker 51 inches tall and 165 lb, a pendant 7.9 inches across, a table lamp and a turntable stand at the same picture size with no word of size; on the Tropos page the first size a visitor meets is the last group of Specifications, on the second and third screens. KEF opens on a pair on a sideboard beside a turntable in a real room; Klipsch makes the room picture number 1 of 33 and gives the whole second screen to a pair either side of a fireplace with a sofa in front; at Design Within Reach 16 of the Panthella's 17 pictures are in place. Living-room pictures are known to be on the way; what is new here is that the equal tiles actively hide the scale, and that words the site already has would carry it today (\"51 in tall\" can stand in the one sentence under the name, where \"Sold in pairs.\" stands).",
+      "expected": "A size a visitor meets on the first screen of the Tropos page and in the family row's speaker tile, until the room pictures arrive; then a room picture among the first three of each gallery.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/full-1440-half.png, sheet-two-home-d.png, stores-home.png, stores-speaker.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/text-tropos-d.txt",
+      "added_by_this_build": false
+     },
+     {
+      "id": "T-3",
+      "severity": "fix_next",
+      "where": "TRUST, third of five. Home, hero and \"The family.\" (first two screens), all sizes. The footer line at the very end of the page (y about 3490 of 3560 at 1440).",
+      "steps": "Open http://127.0.0.1:4175/ and read the first two screens; then scroll to the footer.",
+      "what": "The home page presents four products with names, kinds and \"See ...\" buttons and says nowhere on the first two screens that they are in development or that the pictures are renders. \"Everything is made to order, so we quote rather than list.\" comes in \"Write to us.\" near the foot, and \"Pictures are renders; nothing is built yet.\" is the small last line of the footer. The product pages are straight about it at once (\"HORN SPEAKER \u00b7 IN DEVELOPMENT\" above the name, \"Pictures are renders. Nothing is built yet.\" under the gallery). A buyer who learns one click in that nothing exists trusts the first page less afterwards. The tiles already carry the kind (\"HORN SPEAKER\"); the product page's own label is \"Horn speaker \u00b7 In development\". The live site is the same.",
+      "expected": "The status where the products are first shown, in words the site already has: the tile label reading as it does on the product page (\"Horn speaker \u00b7 In development\"), or the renders line under the family row as it stands under each gallery.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/text-home-d.txt (every word on the home page, in order); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/sheet-two-home-d.png, full-1440-half.png",
+      "added_by_this_build": false
+     },
+     {
+      "id": "T-4",
+      "severity": "fix_next",
+      "where": "TRUST, fourth of five. /hemisphere/<tint> for the seven tints other than Ember: the gallery, pictures 2, 4, 5, 6 and 7.",
+      "steps": "Open http://127.0.0.1:4175/hemisphere/ice and step through the eight pictures.",
+      "what": "A buyer who has chosen Ice sees his color in two of eight pictures (Lit, From below). Picture 2 (Off), 4 (The cap), 5 (The rim) and 6 (Over a table) are a red lamp with the small line \"Shown in Ember.\", picture 7 is the bar with Ember lamps, picture 8 the group. The second picture he meets is a red lamp switched off. He never sees his color unlit, which is how a tinted acrylic lamp looks most of the day and the thing he is choosing. The stores keep the chosen color in front: Klipsch has 11 pictures for each of 3 finishes, KEF 9 thumbnails per color, Design Within Reach swaps the first two pictures on a color click and leaves only room pictures as they were, and Louis Poulsen shows the same frame lit and unlit as a pair. The off and on pictures are known to be rendering; until they arrive the order of the set is what does the damage, and that is the build's (same order on all eight, item 11).",
+      "expected": "On a tint's page, that tint's own pictures first and together; the Ember-only views after them, or held back on the other seven pages until they exist in each color.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/4/mine/sets.txt (lines \"hemisphere dust\" to \"hemisphere smoke\"); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/stores-lamp.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/audit/work/lighting/notes.txt (lines 220 to 224) and furniture/notes.txt (lines 9 to 11)",
+      "added_by_this_build": false
+     },
+     {
+      "id": "T-5",
+      "severity": "fix_next",
+      "where": "TRUST, fifth of five. /hemisphere/ember and /tropos/ember, \"Specifications\", second screen at 1440 x 900.",
+      "steps": "Open http://127.0.0.1:4175/hemisphere/ember, scroll to \"Specifications\" and look for what an electrician or a buyer hanging it needs; then read the Tropos amplifier and light rows.",
+      "what": "The Hemisphere's size is one figure, \"200 mm (7.9 in) across\": no height, no weight, no watts (Power reads \"120 V, dimmable\"). The Hanging row gives \"600 mm drop\" and a canopy \"150 mm across\" with no inches, and the Light row says \"half a meter\", against the order's inches beside millimeters. Several rows hold three or four facts in a sentence where the order asked one fact to a row: Light carries lumens, lux, CRI and kelvin in one run with a describing sentence between them; the Tropos Amplifier row carries the model, the channels, the watts and the crossover. Design Within Reach lists Height, Diameter, Cord Length and Weight as separate rows; KEF's table is one value to a row (Frequency Response, Maximum SPL, Dimension, Weight). A design-minded buyer reads a table that is thin on the plain numbers and long on sentences as a product that is not yet worked out. The figures I checked convert correctly (1295, 560, 442 mm = 51, 22, 17.4 in; 75 kg = 165 lb; 200 mm = 7.9 in) and Ember's 307 lm matches the lamp record.",
+      "expected": "For the Hemisphere: height, weight and watts added when the lamp lane's facts arrive, inches beside the 600 mm and 150 mm, and lumens, lux, CRI and kelvin each on its own row.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/text-hemisphere-d.txt, text-tropos-d.txt; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/sheet-two-hemisphere-d.png, sheet-two-tropos-d.png, stores-speaker.png",
+      "added_by_this_build": false
+     },
+     {
+      "id": "R-1",
+      "severity": "note",
+      "where": "FIRST-TIME READ, home, beside Design Within Reach and KEF. Desktop 1440 x 900 and phone 390 x 844, first two screens.",
+      "steps": "Compare shots/sheet-two-home-d.png and the first two panels of shots/sheet-two-m.png with shots/stores-home.png.",
+      "what": "Understood on the desktop: the header says the range by kind (Speakers, Lighting, Turntable); the line says what and of what (\"Horn speakers, lamps and a turntable in tinted cast acrylic.\"); the second screen ties each name to its kind in four tiles, and the eight chips recolor the whole row, which neither store has and which makes the point about color better than any sentence. Not understood: which object \"Tropos\" is when the first button says \"Meet Tropos\" (the kind word comes one screen later); what the four white dots are until the pointer is on one; that nothing is built and there is no price (see T-3); how big anything is (see T-2); who EARF is (the header has no About; the stores name a designer or a founder). Against the stores: both open on a room photo with a sale line and one button, then tiles; KEF's second screen is the closest match to ours (pair on white, name, one sentence, color dots, price) and ours lacks only the sentence and the price. Ours is calmer and clearer about what is sold than either sale-led page; it is weaker on real-world anchors. Phone: the headline, the picture, the line and both buttons all fit the first screen; the second shows the chips in three rows, the color line and the first two tiles whole, with Core and Mantle cut by the fold. The Hemisphere dot on the phone sits on a lamp that the top edge of the picture cuts (same as live). I have no saved phone screens for Design Within Reach or KEF.",
+      "expected": "No action from this entry; the actions are T-1 to T-3.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/sheet-two-home-d.png, sheet-two-m.png, stores-home.png, live-home-1440-small.png (the live home, for the before)",
+      "added_by_this_build": false
+     },
+     {
+      "id": "R-2",
+      "severity": "note",
+      "where": "FIRST-TIME READ, /tropos/ember beside KEF LS50 Wireless II and Klipsch La Scala AL6. Desktop 1440 x 900 and phone 390 x 844.",
+      "steps": "Compare shots/sheet-two-tropos-d.png and panels 3 and 4 of shots/sheet-two-m.png with shots/stores-speaker.png.",
+      "what": "Understood on the desktop first screen: what it is and its state (\"HORN SPEAKER \u00b7 IN DEVELOPMENT\"), the name, eight colors with the chosen one named, one plain sentence (\"A powered horn loudspeaker in translucent red cast acrylic. Sold in pairs.\"), that there is no listed price, and one clear button with the address beside it. That block is as orderly as KEF's (name, line, swatches, price per pair, cart) and plainer than Klipsch's. The second screen goes straight to Specifications with the name and button kept beside them, which KEF and Klipsch only reach after six to twelve screens. Not understood: the size (a speaker alone on white reads as a bookshelf box; it is 51 inches tall); what the small red flame mark beside \"Color: Ember\" means; price range, date, maker (T-1). Missing against both stores: a room (Klipsch picture 1, KEF thumbnail 2), a view with a person or furniture, and any reason to believe in the sound beyond part names. Phone: the first screen is the crumb, the picture with its counter and arrows, six thumbnails, \"Pictures are renders. Nothing is built yet.\" and the fixed bar \"Ask about a pair\". The name and kind start at y 805 to 830 of 844, behind that bar, so the first screen asks about a pair before it has said what of, except in the small crumb \"Tropos in Ember\". At Flos and Louis Poulsen the name is on the first phone screen under the picture; I have no saved phone screens for KEF or Klipsch.",
+      "expected": "Worth a look by whoever owns the product page: the kind and name on the first phone screen (for example above the picture).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/sheet-two-tropos-d.png, sheet-two-m.png, stores-speaker.png, zoom-icon-and-961.png (the flame mark); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/audit/work/lighting/phone-3stores.jpg",
+      "added_by_this_build": false
+     },
+     {
+      "id": "R-3",
+      "severity": "note",
+      "where": "FIRST-TIME READ, /hemisphere/ember beside Design Within Reach's Panthella Portable and Louis Poulsen. Desktop 1440 x 900 and phone 390 x 844.",
+      "steps": "Compare shots/sheet-two-hemisphere-d.png and panels 5 and 6 of shots/sheet-two-m.png with shots/stores-lamp.png.",
+      "what": "Understood: a pendant, in eight colors, the shade comes off with a quarter turn, no listed price, how to ask; the second screen gives the light in numbers for this color (307 lm, 340 lux, CRI 90, 2200 K), which neither store states as plainly. Not understood: the size (it is 7.9 inches across, small for a pendant; alone in a black frame it could be any size), what it looks like unlit and in daylight (both stores show that first: Design Within Reach picture 1 unlit on near-white, Louis Poulsen lit then the same frame unlit), whether it is hard-wired or plugs in (only in the rows below), and the price range. The picture is a black slab on a cream page where the stores' lamp stands on the page's own light ground; that is the known lamp-ground item and I add only that on this page it is the first thing seen. The stores also give the designer's name, stars or a delivery time beside the name; here that space holds the status. Phone: same pattern as Tropos; the eight thumbnails wrap to a second row of two, and the name is under the first screen.",
+      "expected": "No action from this entry beyond T-1, T-4 and T-5.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/sheet-two-hemisphere-d.png, sheet-two-m.png, stores-lamp.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/audit/work/lighting/phone-3stores.jpg",
+      "added_by_this_build": false
+     },
+     {
+      "id": "H-5",
+      "severity": "note",
+      "where": "All 16 lamp tiles, img/rc/tile-hemisphere-<tint>.webp and tile-core-<tint>.webp, the extended top and bottom bands.",
+      "steps": "Open any of them and raise the brightness 3.5 times (or view shots/tiles-core-x3_5.png).",
+      "what": "Brightened 3.5 times, the top band and the bottom band of every tile show vertical streaks and the ground shows large soft patches. Measured at normal brightness the streaks are 1.0 to 2.7 levels of 255 from peak to peak (the untouched ground beside the lamp varies 0.4 to 1.8), so on an ordinary screen they do not show; I could not see them in the page at 1440 without brightening. On the Core tiles I found no join, no cut base and no step in the glow on the floor at normal brightness. The Hemisphere cord is the exception and is H-1.",
+      "expected": "Nothing now; the new lamp pictures replace these tiles.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/tiles-core-x3_5.png, tiles-hemisphere-x3_5.png, tiles-core-x1.png, tiles-hemisphere-x1.png, tilecrop-core-ember.png, tilecrop-core-fog.png, tilecrop-hemisphere-fog.png; script /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/tiles.py",
+      "added_by_this_build": true
+     },
+     {
+      "id": "H-6",
+      "severity": "note",
+      "where": "/ , \"Each color is a place.\", the seven tiles other than Smoke (img/rc/place-red, -orange, -amber, -green, -blue, -violet, -ice .webp) against the live site's <key>-habitat.webp.",
+      "steps": "View shots/places-new-top-live-bottom.png (new row above, live row below).",
+      "what": "The seven are level with each other and nothing is cut badly: every horn and foot is whole, with ground under the foot and sky over the horn. Each is the live picture cut tighter (70 to 76% of its width; match 0.95 to 0.99), colors unchanged, so the speaker is larger and the place smaller than on the live site. What the tighter cut dropped: in Ice the cabin with the lit window at the left; in Dust most of both mesas, which now touch the edges; in Fog part of the hillside. The alt texts of these seven still fit what is shown.",
+      "expected": "Nothing, unless the owner misses the cabin.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/places-new-top-live-bottom.png, places-new-8.png, places-grid.png, place-ice-new-vs-live.png; script /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/places.py",
+      "added_by_this_build": true
+     },
+     {
+      "id": "H-7",
+      "severity": "note",
+      "where": "/ , two small things: the hero at 961 px wide; the chip row at 820 px wide.",
+      "steps": "(a) Open / at 961 x 800 and put the pointer on the Tropos dot (right speaker). (b) Open / at 820 x 1180 and scroll to \"The family.\"",
+      "what": "(a) The name \"Tropos in Acid\" touches the lower right corner of the \"See the colors\" button (1 px over; clear by 9 px at 1024). Only while the name is shown. (b) The eight chips break seven and one: \"Smoke\" sits alone on a second line.",
+      "expected": "(a) A few pixels of air. (b) Four and four, or all eight on one line.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/zoom-icon-and-961.png (lower half), hero-961-dot0.png, sheet-family-820.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/hero-log.txt",
+      "added_by_this_build": false
+     },
+     {
+      "id": "L-3",
+      "severity": "note",
+      "where": "/lighting at 1366 x 768 and 1024 x 768, the room picture.",
+      "steps": "Open http://127.0.0.1:4175/lighting at 1366 x 768.",
+      "what": "The picture is held to 438 x 438 so that its names row stays on the first screen, in a column 658 px wide: 244 px of bare page lie between the picture and the tiles (112 px at 1440 x 900, where the picture is 570 px). It looks unfinished beside the full-height tile column, though nothing is broken.",
+      "expected": "The picture and the tiles filling the row, which also answers L-1.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/5/home/shots/lighting-1366-s1.png, lighting-1024-s1.png",
+      "added_by_this_build": false
+     }
+    ],
+    "tested_and_right": [
+     "Home, \"The family.\", 48 rows: 1440 x 900, 1280 x 800, 1024 x 768, 820 x 1180, 600 x 900 and 390 x 844, each in Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke. Four equal tiles every time (340 x 548, 300 x 494, 236 x 411, 185 x 347, 279 x 464, 174 x 333; pictures 4:5), four in a row down to 820, two by two at 600 and 390. Every tile's link and picture file are the pressed tint and the color line changes with them. Log: home-log.txt; sheets: shots/sheet-family-<width>.png.",
+     "The row does not jump: at all six widths the row's top, its height and the page's height are identical before and after each of the eight chip presses. No sideways scroll at any width, no page errors.",
+     "Under the pointer at 1440, 1280 and 1024, in Ember and in Fog, all four tiles: no zoom and no shift (the picture fills its box exactly at rest and under the pointer). At rest every product is whole and clear of the edges: Tropos with ground above and below, Core and Mantle whole, Hemisphere whole with its cord running out of the top. Shots: shots/hover-<width>-<tint>-<n>.png.",
+     "Slow connection, 1.6 Mbit/s with 150 ms delay, cold cache, at 1440 x 900 and 390 x 844: after pressing Ice the four links and the color line change within 50 ms; each picture keeps the old tint until its new file is in (Hemisphere and Core by 400 ms, Tropos and Mantle by 800 ms). Never an empty or half-drawn tile, never a third tint. Haze then Fog pressed 120 ms apart ends in Fog on all four with no Haze picture shown. Log: slow-out.txt.",
+     "Hero at 1920 x 1080, 1440 x 900, 1366 x 768, 1280 x 800, 1024 x 768, 961 x 800, 900 x 800, 801 x 800, 390 x 844 and 360 x 740: headline, line, two buttons and four dots do not overlap at rest and nothing is cut; no dot lies on a button at 801 to 961 (the old fault); each dot's name shows whole inside the picture under the pointer and on a first tap on the phone, and a first tap does not leave the page. Tab order at 1440: skip link, logo, the four header items, Meet Tropos, See the colors, then the four dots (each with a ring and its name shown), then the chips and tiles. Log: hero-log.txt.",
+     "The re-encoded dark lamp pictures, 11 files against the live site's (hemisphere-ember, core-ember, hemisphere-smoke, core-ice, hemisphere-ember-under, -off, -cap, -rim, hemisphere-cluster, hemisphere-row, core-row), at full size, normal and brightened 3 times: the ground now reads as a clean photograph with fine even grain (0.6 to 1.3 levels), no blocks, no bands and no laid-on pattern, where the live files break into flat blocks of 1 to 3 levels when brightened. No color shift (corner means within 0.4 of a level of live). At the size the page shows them the grain is not seen. Files grew from 7-37 KB to 50-136 KB. Crops: shots/grain-*.png.",
+     "/lighting at 1440 x 900, 1366 x 768, 1024 x 768 and 390 x 844: the title \"Lighting\" in sight; the room picture with its names row directly under it; two equal tiles with picture, kind, name, eight dots and a filled button; every dot is a 44 px high target (137, 107 or 106 px wide) with the color's name printed beside it at 14 px at all four sizes; no sideways scroll.",
+     "/lighting, what a dot does: under the pointer it shows that tint in the tile's picture and leaving it puts the chosen tint back, so the picture and the button never disagree at rest (tested Poison, then moving to the button and to the picture). A click at the three desktop sizes and a tap at 390 on Hemisphere's Ice dot opens /hemisphere/ice (\"Hemisphere in Ice \u00b7 EARF\", stage hemisphere-ice.webp); Back returns to /lighting with both tiles and both buttons in Ice; \"See Core\" then opens /core/ice. The tile's picture opens the chosen tint.",
+     "/lighting, the two rows of eight at all four sizes: both rows whole, 16 links, each over its own lamp and each to its own tint by href; \"Core in Haze\" clicked at all four sizes opens /core/haze.",
+     "The pointer: the system pointer is not hidden (cursor is auto on the page and pointer on links) and the outline ring is drawn at the pointer in my captures.",
+     "Page weight was measured for home, Tropos in Ember and Hemisphere in Ember at 1440 x 900 and 390 x 844, new and live; the figures are in H-4. The Hemisphere page is about 500 KB lighter than its live address."
+    ],
+    "not_tested": [
+     "Any browser but Chromium under Playwright at device scale 1 with touch emulated: no real phone, no Safari, no Firefox.",
+     "A real bright screen: the grain and the tile streaks were judged from files brightened 3 to 3.5 times and from the page's own captures, not on a physical display.",
+     "The re-encoded lamp pictures beyond the 11 files listed (the other tints of each view, core-row-day and the thumbnails were not compared with live).",
+     "Clicking through the hero dots and the eight place tiles: I read their hrefs only; the coordinator's links files cover where they land.",
+     "The pattern redirect /s/<page>/<anything> (skipped as told), /contact, the 404 page, share pictures, titles and descriptions, the phone menu and the skip link's target: the other critic's part or already in the coordinator's results.",
+     "Whether globe-frames-0.webp is fetched twice on the real host: it was in one of my two local runs, and the local copy answers with Cache-Control: no-store, so I did not count it.",
+     "The stores' live pages: I used the researchers' saved screens and notes of 20 Nov. There are no saved phone screens for Design Within Reach, KEF or Klipsch, so the phone comparisons rest on Flos, Gantri and Louis Poulsen.",
+     "The Mantle tiles (known bad, being replaced) and the Mantle and Core pages.",
+     "Hover states below 1024 px, widths between those listed, and phones held sideways.",
+     "Keyboard focus rings on the /lighting dots (I only set focus from a script, which does not show what a keyboard user sees)."
+    ]
+   }
+  }
+ ],
+ "dropped": 0
+}
