@@ -20,6 +20,11 @@
       "source": "/mantle",
       "destination": "/mantle/ember",
       "permanent": true
+    },
+    {
+      "source": "/s/:page/(.+)",
+      "destination": "/s/:page",
+      "permanent": false
     }
   ],
   "headers": [
