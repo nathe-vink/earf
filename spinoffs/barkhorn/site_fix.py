@@ -299,9 +299,8 @@ def finish_1a(web):
 # the products in each bar picture, with the tint shown (planet-bar/<frame>.centres.json, r33-speaker-horn): the names
 # row under it, its only caption
 BAR_NAMES = {
-    'tropos-bar.webp': [('speaker', 'amber'), ('hemisphere', 'orange'), ('hemisphere', 'red'), ('hemisphere', 'amber'),
-                        ('core', 'red'), ('core', 'orange'), ('core', 'amber'), ('mantle', 'red')],          # bar-backbar
-    'bar-pendants.webp': [('hemisphere', 'amber'), ('hemisphere', 'red'), ('hemisphere', 'orange'), ('core', 'red'), ('core', 'orange')],
+    'tropos-bar.webp': [('speaker', 'amber'), ('hemisphere', 'red'), ('core', 'red'), ('mantle', 'red')],      # one per kind, the largest whole one (the coordinator 12:27)          # bar-backbar
+    'bar-pendants.webp': [('hemisphere', 'red'), ('core', 'red')],
     'core-bar-table.webp': [('core', 'red')],
     'mantle-bar.webp': [('speaker', 'amber'), ('core', 'red'), ('mantle', 'red')],
 }
@@ -539,11 +538,13 @@ SPEC = {
         ('Drivers and amplifier', [('Woofer', 'FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners'),
                                    ('Horn driver', 'B&amp;C DE1085TN, 2-inch compression driver'),
                                    ('Amplifier', 'Hypex FusionAmp FA123 built in: the woofer on two bridged channels, up to 125 W into its 8 &Omega;; the horn on its own; crossed at 1 kHz in its DSP')]),
-        ('Sound', [('Bass', 'To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
+        ('Sound and connections', [('Bass', 'To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
                    ('Loudness', 'Up to about 115 dB at 1 m, each'),
-                   ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up')]),
-        ('Size and weight', [('Size', '1295 high, 560 wide (the horn flush with the cabinet), 428 deep overall, 420 at the cabinet (mm); 51 x 22 x 16.9 in'),
-                             ('Weight', 'About 73 kg (161 lb) each; about 64 kg (141 lb) with the horn lifted off (modeled)')]),
+                   ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
+                   ('Power', '100&ndash;120 V / 200&ndash;240 V, 50/60 Hz, 350 W max'),
+                   ('With a pair', 'Two power cords and a 5 m link cable between the speakers')]),
+        ('Size and weight', [('Size', '1295 high, 560 wide (the horn flush with the cabinet), 442 deep overall, 420 at the cabinet (mm); 51 x 22 x 17.4 in'),
+                             ('Weight', 'About 75 kg (165 lb) each')]),
         ('Care', [('Care', '{care}')]),
     ],
     'dome': [
@@ -569,10 +570,12 @@ SPEC = {
         ('Materials', [('Plinth', 'Cast acrylic in its color, about 25 mm, its edges satin with a fine polished bevel; raised 40 mm on four posts over the base'),
                        ('Posts', 'Four solid posts, 30 mm across, satin black'), ('Hardware', 'Satin black throughout'),
                        ('Base', 'Smoked cast acrylic, 12.7 mm, set in 35 mm all around'),
-                       ('Cover', 'Lift-off dust cover in the deck&rsquo;s own {tint|color}: 3 mm cast acrylic, 448 x 358 x 100 mm, about 1.1 kg. It rests on four small clear bumpers and lifts straight off; no hinges.')]),
+                       ('Platter', 'Cast acrylic, 300 x 21 mm, in three layers'),
+                       ('Cover', 'Included: a lift-off dust cover in the deck&rsquo;s own {tint|color}: 3 mm cast acrylic, 448 x 358 x 100 mm, about 1.1 kg. It rests on four small clear bumpers and lifts straight off; no hinges.')]),
         ('Playing', [('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'), ('Speeds', '33 and 45, by a button'),
-                     ('Arm', 'Rega RB330'), ('Cartridge', 'A moving-magnet cartridge'),
-                     ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it')]),
+                     ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black, fitted'),
+                     ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
+                     ('Outputs', 'RCA line outputs and an earth post; a switch picks the built-in phono stage or bypass')]),
         ('Size and weight', [('Size', '450 wide, 360 deep, 161 high to the top of the arm; 196 high with the cover on (mm); 17.7 x 14.2 x 6.3 in (7.7 in with the cover)'),
                              ('Weight', 'About 11.6 kg (25.6 lb); about 12.7 kg (28 lb) with the cover')]),
         ('Care', [('Care', '{care}')]),
@@ -611,7 +614,7 @@ def fix_2(p, web):
         if isinstance(v, dict) and v.get('src') and not v.get('bg') and v['src'].endswith(('.webp', '.jpg', '.png')):
             f = os.path.join(web.SITE, v['src'])
             if os.path.exists(f):
-                gr[v['src']] = _sides(f)
+                pass                                     # no sampled sides any more (the coordinator 12:27)
     for prod, groups in SPEC.items():           # every fact the pages hold, once (none added)
         for _, rows in groups:
             for _, v in rows:
@@ -676,8 +679,8 @@ def fix_2(p, web):
           "const fillSpec = (t, c) => t.replace(/\\{([^{}|]*)\\|([^{}]*)\\}/g, (x, a, b) => c.k === 'ice' ? b : a).replace('{tint}', c.tint)\n"
           "  .replace('{lm}', (LM[P.id] || {})[c.k]).replace('{K}', KELVIN[c.k]).replace('{care}', CARE);\n"
           "function renderSpec(P, c) {        // Specifications: plain headings, one fact to a row (fix list 2026-11-20, 17)\n"
-          "  document.getElementById('p-spec-body').innerHTML = (SPEC[P.id] || []).map(([h, rows]) => `<h3>${h}</h3><dl class=\"facts\">`\n"
-          "    + rows.map(([a, b]) => `<dt>${a}</dt><dd>${fillSpec(b, c)}</dd>`).join('') + '</dl>').join(''); }\n"
+          "  document.getElementById('p-spec-body').innerHTML = (SPEC[P.id] || []).map(([h, rows]) => `<h3>${h}</h3>` + (rows.length === 1 && rows[0][0] === h\n"
+          "    ? `<p class=\"spec1\">${fillSpec(rows[0][1], c)}</p>` : '<dl class=\"facts\">' + rows.map(([a, b]) => `<dt>${a}</dt><dd>${fillSpec(b, c)}</dd>`).join('') + '</dl>')).join(''); }\n"
           "function renderAsk(P, c) {         // the ask: a letter, its subject the product in its color (18)\n"
           "  const t = P.title(c), href = `mailto:${MAIL}?subject=${encodeURIComponent(t)}&body=${encodeURIComponent(`${t}. Quantity: \\nCountry: `)}`;\n"
           "  document.querySelectorAll('#pdp .p-ask').forEach(a => { a.textContent = ASK[P.id] || 'Ask'; a.href = href; }); }\n"
@@ -686,6 +689,9 @@ def fix_2(p, web):
           "  document.getElementById('p-others').innerHTML = '<div class=\"ftiles ftiles3\">' + OTHERS.filter(o => o.route !== P.route).map(o =>\n"
           "    `<a class=\"ftile\" href=\"#${o.route}-${nm}\"><span class=\"ft-pic\" style=\"background:${o.ground}\"><img src=\"${o.pics[c.k]}\" width=\"${o.w}\" height=\"${o.h}\" loading=\"lazy\" alt=\"${o.name} in ${c.name}\"></span>`\n"
           "    + `<span class=\"ft-body\"><span class=\"ft-kind\">${o.kind}</span><h3 class=\"ft-name\">${o.name}</h3><span class=\"ft-btn\">See ${o.name} ${ARROW}</span></span></a>`).join('') + '</div>'; }\n"
+          "{ const bar = document.querySelector('#pdp .ask-bar'), seen = new Set();      // the phone's bar steps away while an ask is on screen\n"
+          "  const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)); bar.classList.toggle('off', seen.size > 0); });\n"
+          "  document.querySelectorAll('#p-enquire, #pdp .foot-ask .p-ask').forEach(a => io.observe(a)); }\n"
           "document.getElementById('p-copy').addEventListener('click', () => {\n"
           "  const note = document.getElementById('p-share-note'), say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };\n"
           "  try { navigator.clipboard.writeText(MAIL).then(() => say('Address copied.'), () => say(MAIL)); } catch (e) { say(MAIL); } });\n"
@@ -695,9 +701,9 @@ def fix_2(p, web):
     # the stage in the picture's own shape (the phone's tall cut on a phone), capped in height
     p.sub("  stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent'; if (P.id === 'turntable') stage.style.setProperty('aspect-ratio', '3 / 2', 'important'); else stage.style.removeProperty('aspect-ratio');",
           "  stage.parentElement.parentElement.style.setProperty('--sar', (phone.matches && s.tall && (v === 'habitat' || s.fill) ? s.tall.w / s.tall.h : s.w / s.h).toFixed(4));\n"
-          "  stage.style.background = (P.id === 'speaker' && ground(v)) || grOf(s) || 'transparent';")
+          "  stage.style.background = 'transparent';      // the picture whole on the page's paper, no sampled ground (the coordinator 12:27)")
     p.sub("new ResizeObserver(() => { if (cur) stage.style.background = ground(view); }).observe(stage);",
-          "new ResizeObserver(() => { if (cur) stage.style.background = (P.id === 'speaker' && ground(view)) || grOf(src(BY[cur], view)) || 'transparent'; }).observe(stage);")
+          "new ResizeObserver(() => { if (cur) stage.style.background = 'transparent'; }).observe(stage);")
     p.sub("thumbs.addEventListener('keydown', e => keys(e, true));",
           "thumbs.addEventListener('keydown', e => keys(e, true));\n"
           "// the arrow keys turn the pictures without a first click (16)\n"
@@ -761,6 +767,7 @@ def fix_2(p, web):
 .spec2 h2 { margin: 0 0 8px; font-size: clamp(26px, 2.4vw, 36px); letter-spacing: -0.03em }
 .spec2 h3 { margin: 28px 0 8px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600 }
 .spec2 .facts { grid-template-columns: 160px minmax(0, 1fr); border-top: 1px solid var(--ink) }
+.spec2 .spec1 { margin: 0; padding: 10px 0; border-top: 1px solid var(--ink); font-family: var(--spec-mono); font-size: 15px }
 .spec2 .figs { margin: 20px 0 0; font-size: 14px; color: var(--muted) }
 .foot-ask { padding-block: clamp(40px, 5vw, 64px) 24px }
 .others { padding-bottom: 72px }
@@ -784,7 +791,8 @@ def fix_2(p, web):
   .ask-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
     background: var(--page); border-top: 1px solid var(--rule) }
   .ask-bar .cta-btn { flex: 1; justify-content: center }
-  #pdp { padding-bottom: 72px }
+  body:has(#pdp:not([hidden])) { padding-bottom: 72px }
+  .ask-bar { transition: transform .2s ease } .ask-bar.off { transform: translateY(110%); visibility: hidden }
 }
 @media (orientation: landscape) and (max-height: 520px) { :root { --cap: 80svh } }
 """)
@@ -813,7 +821,14 @@ def fix_3(p, web):
     import site_v2
     from PIL import Image
     i, j, D = _data(p)
-    # --- 20. real paths for the lamps and Mantle: the clean map knows them (the pages are written in finish_3)
+    # --- 20. real paths for the lamps and Mantle: the clean map knows them (the pages are written in finish_3); last
+    # build's pages and cards go first, so the deploy check sees none of their old names
+    import glob, shutil
+    for r, _ in ROUTES3:
+        if os.path.isdir(os.path.join(web.SITE, r)):
+            shutil.rmtree(os.path.join(web.SITE, r))
+        for f in glob.glob(os.path.join(web.IMG, 'rc', f'og-{r}-*.jpg')) + glob.glob(os.path.join(web.IMG, 'rc', f'card-{r}-*.jpg')):
+            os.remove(f)
     a = p.rest.index('(() => { const P = ') + len('(() => { const P = ')
     b = p.rest.index(', R = Object', a)
     P = json.loads(p.rest[a:b])
@@ -937,7 +952,7 @@ def finish_3(web):
     for r, name in ROUTES3:
         for k in KEYS:
             n = NAMES[k]; h = f'{r}-{n}'
-            card = f'img/rc/og-{r}-{n}.jpg'
+            card = f'img/rc/card-{r}-{n}.jpg'      # not og-mantle-*: that name is held by the deploy check
             _og_card(os.path.join(web.SITE, pic[r].format(n=n)), os.path.join(web.SITE, card))
             alt = f'{name} in {CNAME[k]}'
             sf = os.path.join(web.SITE, 's', h + '.html')
