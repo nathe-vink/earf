@@ -835,6 +835,7 @@ def apply(web, head, rest):
         site_fix.fix_8(p, web)
         site_fix.fix_9(p, web)
         site_fix.fix_10(p, web)
+        site_fix.fix_11(p, web)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
