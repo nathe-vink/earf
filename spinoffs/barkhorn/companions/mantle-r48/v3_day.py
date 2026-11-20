@@ -817,7 +817,7 @@ def lighttable(watts, cct):
           f'{int(cct)} K; LED faces seen at {ls} of {lt_} points; the panel face (cover top) seen at {cs} of {ct}', flush=True)
 
 
-def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0):
+def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, aim=None, fstop=11.0, turn=0.0):
     """THE HOUSE GROUND (the coordinator, 2026-11-20): the set the eight Tropos fronts stand in (r33-speaker-horn,
     renders/2026-11-04/barkhorn/rollout/A-polished-tallr7/site-front-off-tall-<tint>.shot.json), scaled to a tabletop
     around the deck: the warm white sweep #F7F0E8 (scene.py --paper), a dark sky at 0.15, the key from camera left at 40
@@ -837,6 +837,37 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0):
     pts = [o.matrix_world @ Vector(c) for o in pl for c in o.bound_box]
     C = Vector((sum(p.x for p in pts) / len(pts), sum(p.y for p in pts) / len(pts), 0.0))
     T = C + Vector((0, 0, 0.08))
+    if turn:   # the product turned on the set about its centre (for the view from behind): the set and its lamps stay
+        from mathutils import Matrix
+        R = Matrix.Translation(C) @ Matrix.Rotation(math.radians(turn), 4, 'Z') @ Matrix.Translation(-C)
+        for o in [o for o in bpy.data.objects if o.parent is None and o.type not in ('LIGHT', 'CAMERA') and o.name not in ('sweep', 'focus')]:
+            o.matrix_world = R @ o.matrix_world
+        print(f'v3_day: the product turned {turn} deg on the set', flush=True)
+    rp = bpy.data.objects.get('rear-plate')
+    if rp is not None and not any(sl.material for sl in rp.material_slots):
+        # the rear plate came without a material (it rendered as the default white): black nickel satin with its legends
+        # and rating engraved and filled white, as signed (strata_rear.py; the texture from rear_legend.py, seen from
+        # behind at the CAD's positions, mapped across the plate's world box)
+        ps = [rp.matrix_world @ Vector(c) for c in rp.bound_box]
+        lo = Vector([min(p[i] for p in ps) for i in range(3)]); hi = Vector([max(p[i] for p in ps) for i in range(3)])
+        m = bpy.data.materials.new('rear-plate-black-nickel'); m.use_nodes = True; nt = m.node_tree; b_ = nt.nodes['Principled BSDF']
+        b_.inputs['Metallic'].default_value = 0.85; b_.inputs['Roughness'].default_value = 0.38
+        geo = nt.nodes.new('ShaderNodeNewGeometry'); sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], sep.inputs[0])
+        def lin(sock, a0, w):
+            n_ = nt.nodes.new('ShaderNodeMapRange'); n_.inputs['From Min'].default_value = a0; n_.inputs['From Max'].default_value = a0 + w
+            nt.links.new(sock, n_.inputs['Value']); return n_.outputs['Result']
+        flip = not ((rp.matrix_world.to_3x3() @ Vector((1, 0, 0))).x < 0) if turn else True   # seen from behind: the texture's left at the viewer's left
+        uu = lin(sep.outputs['X'], hi.x if flip else lo.x, (lo.x - hi.x) if flip else (hi.x - lo.x)); vv = lin(sep.outputs['Z'], lo.z, hi.z - lo.z)
+        cmb = nt.nodes.new('ShaderNodeCombineXYZ'); nt.links.new(uu, cmb.inputs['X']); nt.links.new(vv, cmb.inputs['Y'])
+        tx = nt.nodes.new('ShaderNodeTexImage'); tx.image = bpy.data.images.load(os.path.join(HERE, 'out-strata-v3', 'render', 'rear-legend.png')); tx.extension = 'CLIP'
+        nt.links.new(cmb.outputs['Vector'], tx.inputs['Vector'])
+        mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'
+        mix.inputs['A'].default_value = (0.035, 0.035, 0.038, 1); mix.inputs['B'].default_value = (0.85, 0.85, 0.83, 1)
+        nt.links.new(tx.outputs['Color'], mix.inputs['Factor']); nt.links.new(mix.outputs['Result'], b_.inputs['Base Color'])
+        mt = nt.nodes.new('ShaderNodeMix'); mt.data_type = 'FLOAT'; mt.inputs['A'].default_value = 0.85; mt.inputs['B'].default_value = 0.0   # the fill is paint, not metal
+        nt.links.new(tx.outputs['Color'], mt.inputs['Factor']); nt.links.new(mt.outputs['Result'], b_.inputs['Metallic'])
+        rp.data.materials.clear(); rp.data.materials.append(m)
+        print('v3_day: rear plate black nickel with its legends', flush=True)
     sw = bpy.data.objects.get('sweep')
     if sw is not None:   # the sweep at the set's scale too: its curve comes in to half the distance, so the wall stands in frame
         sw.data.transform(__import__('mathutils').Matrix.Translation(-C)); sw.data.transform(__import__('mathutils').Matrix.Scale(sweep_k, 4))
@@ -872,10 +903,12 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0):
         o.rotation_euler = (tgt - loc).to_track_quat('-Z', 'Y').to_euler()
         print(f'v3_day: house lamp {nm} (added) at {tuple(round(v, 2) for v in loc)} aimed {tuple(round(v, 2) for v in tgt)}, {ld.energy:.1f} W', flush=True)
     co = sc.camera; az, el, d, lens = cam or (30.0, 30.0, 1.75, 70.0)
+    if aim is not None:   # the camera's aim (and focus) relative to the deck's centre on the floor, m: for a close view
+        T = C + Vector(aim)
     a_, e_ = math.radians(az), math.radians(el)
     co.location = T + Vector((d * math.cos(e_) * math.sin(a_), -d * math.cos(e_) * math.cos(a_), d * math.sin(e_)))
     co.rotation_euler = (T - co.location).to_track_quat('-Z', 'Y').to_euler()
-    co.data.lens = lens; co.data.sensor_fit = 'AUTO'; co.data.dof.aperture_fstop = 11.0
+    co.data.lens = lens; co.data.sensor_fit = 'AUTO'; co.data.dof.aperture_fstop = fstop
     f_ = bpy.data.objects.get('focus')
     if f_ is not None: f_.location = T
     vs = sc.view_settings; vs.view_transform = 'Khronos PBR Neutral'; vs.look = 'None'; vs.exposure = -0.1
@@ -939,7 +972,10 @@ def prepare():
             if f'--house-{k_}' in mine: lt_[k_] = float(mine[mine.index(f'--house-{k_}') + 1])
         ex_ = [[mine[j + 1]] + [float(v) for v in mine[j + 2:j + 12]] for j, v in enumerate(mine) if v == '--house-extra']
         house(float(mine[i_ + 1]), cam_, lt_, float(mine[mine.index('--house-sweep') + 1]) if '--house-sweep' in mine else 0.5, ex_,
-              float(mine[mine.index('--house-wb') + 1]) if '--house-wb' in mine else 5600.0)
+              float(mine[mine.index('--house-wb') + 1]) if '--house-wb' in mine else 5600.0,
+              tuple(float(v) for v in mine[mine.index('--house-aim') + 1:mine.index('--house-aim') + 4]) if '--house-aim' in mine else None,
+              float(mine[mine.index('--house-f') + 1]) if '--house-f' in mine else 11.0,
+              float(mine[mine.index('--house-turn') + 1]) if '--house-turn' in mine else 0.0)
     if '--black-posts' in mine:
         black_posts()
     if '--side-fix' in mine:
