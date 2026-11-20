@@ -1,0 +1,248 @@
+{
+ "results": [
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "fog-top-plinth-white",
+      "severity": "blocking",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-fog-top-test.png",
+      "where": "the whole plinth, x 166-1436, y 492-1509; clearest at the back edge, x 300-1250, y 440-600",
+      "what": "The clear plinth is an even, cold white sheet: L* 98.1-99.1, a* -1.3, b* 0 (rgb 248/252/252) everywhere that is not covered. It is brighter than the floor it stands on (floor in front 92.6, at the left 82.7; in linear light the plinth is 1.14/1.20/1.28 times the front floor in R/G/B) and it has lost the floor's warmth (floor b* +3.9 to +5.2). The smoked base is gone: over the base 98.1, over the margin 98.7 (before: 15-29 against 68-76). The black box reads L* 50-74 (before 4-13). The shadow of the record and motor cover on the floor (L* 59-66 just outside the back edge) stops dead at the edge; 20 px inside, the plinth reads 98.8, a step of +33 to +39 L*. 14.0% of the frame is now at 245 or above in all channels (before 0.2%). It reads as white laminate or a lightbox, not as clear acrylic.",
+      "expected": "A clear sheet can only pass on what is under it. Each face reflects 3.9%, so one pass lets 0.92 through; light down and view up gives 0.85, plus about 7% from light bouncing between floor and sheet: about 0.9 of the open floor, so L* 87-91 beside floor at 92.6, with the floor's warm tint, never brighter. The shadow must run on under the back margin (about L* 60-70, softened), and the smoked base must show as a soft dark gray rectangle. The sheet also cannot both pass the light (the floor shadow behind it did get 8 L* lighter) and send all of it back like white paper. The picture proves the true values itself: inside the two streaks (next finding) the margin reads 84-90 and the base 33-48. I do not know the cause; no shadow of the record falls on the white, so it is not key light caught by the satin face.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_backedge_old_new.png (before left, new right); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_new_marked.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_box_old_new.png"
+     },
+     {
+      "id": "fog-top-streaks",
+      "severity": "blocking",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-fog-top-test.png",
+      "where": "streak 1: x 470-1436, y 613-753 (hidden under the record from x 540 to 910); streak 2: x 1160-1436, y 990-1070",
+      "what": "Two straight gray bands run exactly left to right across the white plinth, out to its right edge and past the base's footprint. Streak 1 is 140 px (50 mm) tall and starts at the motor; streak 2 is 80 px (28 mm) tall and sits at the height of the record's center (y 1033). Their top and bottom edges switch within about 10 px over a run of 300 px and more. Inside them: L* 50-74 over the black box, 33-48 over the base, rising 54 to 90 toward the right edge. The sockets are four smeared light blobs at the top of streak 1. Nothing was there before (right margin flat at L* 83).",
+      "expected": "Nothing straight-edged. Bead-blast blurs evenly in all directions, and the key's shadows in this frame are soft over 100-200 px and fall up and to the right (the spindle's shadow on the label points 26 degrees right of straight up), so these are not shadows of the key and not satin blur. Each band starts at a hole through the plinth (motor, bearing) and runs to one edge; inside the bands the deck looks the way it should (previous finding). That pattern points at the plinth's faces or normals around the cut-outs behaving in two different ways under the new shadow setup; that part is my guess.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_new_right.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_new_right_stretch.png (same crop, contrast raised); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_new_marked.png"
+     },
+     {
+      "id": "fog-top-outline-lost",
+      "severity": "fix",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-fog-top-test.png",
+      "where": "all four plinth edges; e.g. front edge x 300-700, y 1480-1530; front left corner x 160-260, y 1440-1520",
+      "what": "The plinth has no outline. Across the front edge L* goes 99 to 92 with no line at all; right and back edges the same; the left edge keeps a 2 px dip to 73. Before, every edge had a dark line (L* 25-62) and a bright one beside it, and the corners showed their radius. The 25 mm slab now reads as a paper cut-out. Same fault as the white plinth, most likely; listed so it gets checked after the repair.",
+      "expected": "From above with this lens the satin side faces show as strips a few px wide, and the 1 mm polished chamfer gives a thin line that is lighter or darker than the top. A photograph of a 25 mm clear slab always shows its edge.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_frontleft_old_new.png (before left, new right); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_headshell_old_new.png"
+     },
+     {
+      "id": "white-at-arm-foot",
+      "severity": "fix",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "arm foot x 1170-1230, y 940-995; foot of the arm-rest post x 1095-1125, y 960-995. Same part in the top view: white ring x 1217-1275, y 670-795 of mantle-house-fog-top-test.png",
+      "what": "The white patch at the arm's foot is still there, the same size and tone as before: 742 px above 200 in all channels, mean rgb 244/245/248 (before 715 px, 243/247/249). It shows a rim, so it is a part with thickness, like a white washer. The foot of the rest post has the same thing: 104 px, rgb 253/241/241 (before 96 px, 249/249/250). In the new frame both also throw a pink-white hot spot onto the pillar and post, and a red glow sits under the front rim of the flange. It is the brightest thing on the red deck and draws the eye. Whatever was made satin black, this was not it.",
+      "expected": "Nothing white on this deck: all hardware is satin black and the plinth is red. In a ring-shaped gap at the arm's foot one would see dark red plinth or a black part. A neutral white part in every color (it is white in the red and the clear deck, before and now) looks like a piece with no material set.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_armfoot_old_new_x3.png (before left, new right); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_new_collar_x8.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_new_armbase_x3.png"
+     },
+     {
+      "id": "finger-lift-detached",
+      "severity": "fix",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-fog-top-test.png",
+      "where": "x 1135-1215, y 1285-1340; in the red frame x 885-960, y 985-1010",
+      "what": "Seen from straight above, the finger lift is a loose black bar beside the headshell. A gap of 6-8 px (2-3 mm) of bare plinth (L* 95-96) runs between its end and the headshell plate over the whole width of the bar, so nothing joins them at any height. Now that the arm is parked off the record the gap sits against a light ground and shows.",
+      "expected": "A finger lift is part of the headshell; from above the two must touch.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_new_fingerlift_x4.png"
+     },
+     {
+      "id": "finger-lift-side",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-fog-top-test.png",
+      "where": "x 1135-1215, y 1285-1340",
+      "what": "The finger lift points toward the record (the inner side of the headshell). It did before as well.",
+      "expected": "On the Rega arms I know the finger lift is on the outer side, away from the record, so the right hand can take it. From memory, not from a drawing: check against the RB330.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_new_fingerlift_x4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_new_marked.png"
+     },
+     {
+      "id": "ember-red-against-speaker",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "lit zone x 260-340, y 980-1020; dark zone x 960-1060, y 1150-1200 and x 1130-1230, y 1060-1120",
+      "what": "Where the plinth is lit (roughly its left third) it is the speaker's red, a little lighter and milkier: rgb 216/49/43, L* 48.2, C* 76.7, hue 35.0 against the speaker's horn at 207/12/8, L* 43.7, C* 86.9, hue 39.2 (difference about 12.6 dE). The rest of the top is maroon-brown, L* 18-21, C* 16-17 (rgb 64/36/31 and 72/42/36), where the speaker's shaded red stays pure (78/0/0, L* 13.3, C* 39.1). New is a shade redder than before in both zones (C* 76.7 against 71.9; 15.7 against 11.7). So: same red, not as deep over most of the top.",
+      "expected": "This is not a renderer fault. At this low camera (about 18 degrees) the view goes through the plinth into the gap and onto the dark smoked base, so little red comes back, and the glossy top adds a thin gray sheen (green and blue near 40 where the speaker has 0-10). A real deck would do the same. If the owner wants the deck to read red all over in this view, that is a choice about the base or the camera height, not about this render.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_new_patches.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/speaker_patches.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_new_marked.png"
+     },
+     {
+      "id": "grain-and-smoothing",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "plinth top right of the platter, x 780-1280, y 1040-1260",
+      "what": "The grain is down by about two thirds, not half: fine-grain spread on the floor 1.05 against 2.95 before, on the plinth top 0.8-0.9 against 1.9-2.2. At normal size the frame is cleaner. On the dark plinth top the smoothing now shows as soft clouds and streaks when the crop is brightened three times; at normal exposure it passes. No banding in the sweep.",
+      "expected": "Fine as it is. I would not take the grain any lower: it is what keeps the dark, smoothed surfaces from looking airbrushed.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_top_right_old_new_gain3.png (before left, new right, brightened 3x); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_top_right_old_new_x2.png"
+     },
+     {
+      "id": "front-face-lens-marks",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "x 450-512, y 1083-1103 and x 770-822, y 1158-1177",
+      "what": "Two small lens-shaped marks sit just under the top edge of the plinth's long front face, each about 22 mm wide. They were there before. At full size they read as dents or smudges in the edge. They may be the bumpers seen through the plinth; I cannot tell.",
+      "expected": "A satin face would blur a bumper behind it to nothing; a crisp lens shape there looks like a flaw. A retoucher would take them out of a photograph.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_new_dent_left_x6.png (brightened 2x); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_new_marked.png"
+     },
+     {
+      "id": "bumper-neutral-gray",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "x 672-705, y 1184-1204, in the gap under the plinth",
+      "what": "The bumper in the gap is a neutral, slightly cool gray dome: rgb 132/131/134, L* 54.8, a* +0.9, b* -1.4. Everything around it in the gap is lit red. Same before.",
+      "expected": "A white or clear bumper under a red plinth, over a red-lit base and a warm floor, would pick up some red or warmth. A dead neutral gray looks pasted in. Small in the frame.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_gap_old_new_x3.png (before left, new right)"
+     },
+     {
+      "id": "record-surface",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "record, x 400-1080, y 800-1000; the same in the top view",
+      "what": "The record is a smooth satin disc with five or six thin scribed rings. In the three-quarter frame its far half goes to a mid gray with no structure. Unchanged from before. The blank label is good: plain warm paper, two thin rings, a soft spindle shadow.",
+      "expected": "Vinyl under a soft key shows a fan of sheen that follows the grooves, with bands of slightly different sheen per track. Its absence is a mild tell at full size, not at page size.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/ember_label_old_new_x3.png (before left, new right); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/photo/fogtop_record_old_new_gain2.png"
+     }
+    ],
+    "q1_red_ready": "Not yet, though it is close. As a photograph the red frame holds and is better than before: the arm is parked with the cartridge clear, the label is blank, the grain is cleaner, the floor now picks up a faint red from the deck as a real floor would, and the ground is unchanged (all seven ground patches within 0.1 L* of before). Two things stop it: the white patch at the arm's foot and at the rest post's foot is still in the frame exactly as before, and the shadow change this pattern carries breaks the clear deck from above, which the red test cannot show. Fix the white parts, repair the clear deck, then test a clear deck in three-quarter view and one tinted deck from above before the set is rendered; neither was tested here.",
+    "q2_clear_from_above_true": "No. Such a deck from above would show the floor through the 35 mm margin at about nine tenths of the open floor's brightness (L* 87-91 beside 92.6) and with its warm tint, the record's shadow running on under the back margin, the smoked base as a soft-edged dark gray rectangle with the box, motor and posts as darker soft shapes, and a thin line all around where the chamfer and satin edge show. The picture shows an even cold white sheet at L* 98.1-99.1, brighter than the floor, with no base, a shadow that stops at the back edge, no outline, and two straight gray streaks; only inside those streaks does it look right (margin 84-90, base 33-48). The picture before was closer to true, apart from being too dark under the margins.",
+    "q3_reads_as_cg": "In the top view: the white, self-lit plinth, the two hard-edged streaks, the missing edge line, and the finger lift floating beside the headshell. In the red frame: the white patch and pink hot spot at the arm's foot and rest post, then, at full size only, the record without groove sheen, the neutral gray bumper in a red-lit gap, the two lens marks on the front face, and the very smooth dark plinth top now that the grain is lower.",
+    "measured": [
+     "Top view scale: plinth 1269 px for 450 mm = 2.82 px/mm; record radius 433.9 px = 2.87 px/mm at record height; record center (727.5, 1033.5)",
+     "Top view, new: plinth L*/a*/b* 98.7/-1.4/-0.1 (left margin), 99.1/-1.2/-0.2 (front margin), 98.8 (back margin), 98.1 (over the base); rgb 248/252/252",
+     "Top view, new: floor L* 82.7-84.0 left of plinth (b* +5.2), 92.6 in front (b* +3.9), 91.2 right, 91.6 below",
+     "Top view, linear-light ratio plinth to floor in front: 1.14 / 1.20 / 1.28 (R/G/B); to floor at left: 1.47 / 1.58 / 1.75",
+     "Top view, before: margin L* 68.5-76.0 (left), 41.1 (back); over the base 15.1-29.0",
+     "Top view, back edge at x 400-420: new 58-59 outside, 97-99 inside (step +39); before 44-47 outside, 25-30 on the edge line, 41-47 inside",
+     "Top view, share of frame at 245 or above in all channels: new 14.0%, before 0.2%; share of the plinth rectangle at L* 97 or above: new 36.1%, before 0.3%",
+     "Top view, streak 1: y 613-753 (140 px, 50 mm), x 470 to 1436; inside L* 50-74 over the box (before 4-13)",
+     "Top view, streak 2: y 990-1070 (80 px, 28 mm), x 1160 to 1436; inside L* 33-48 over the base, 84-90 over the margin (open floor beside it 85-86)",
+     "Top view, right margin (x 1390-1425): before flat L* 83 at y 980-1060; new dips to 85-90 there",
+     "Top view, plinth edges: new front, right and back have no line (99 to 92, 99 to 85, 59 to 98 in one step); left a 2 px dip to 73; before each edge had a dark line at L* 25-62",
+     "Top view, floor shadow behind the plinth: core L* 65.6 new, 57.1 before; same outline in both",
+     "Top view, key direction from the spindle's shadow on the label: 26 degrees right of straight up, about 16 mm long",
+     "Top view, arm parked: finger lift 24 mm clear of the record's rim, headshell plate 35 mm; gap between finger lift and headshell 6-8 px (2-3 mm) at L* 95-96",
+     "Red frame, white at arm foot (x 1170-1230, y 940-995): 742 px above 200 in all channels, mean 244/245/248; before 715 px, 243/247/249",
+     "Red frame, white at rest-post foot (x 1095-1125, y 960-995): 104 px above 180, mean 253/241/241; before 96 px, 249/249/250",
+     "Red frame, lit plinth top (x 260-340, y 980-1020): new rgb 216/49/43, L* 48.2, a* 62.8, b* 44.1, C* 76.7, hue 35.0; before 203/48/43, L* 45.6, C* 71.9",
+     "Red speaker: horn face rgb 207/12/8, L* 43.7, C* 86.9, hue 39.2; front panel 180/1/1, L* 37.1, C* 78.6; shaded side panel 78/0/0, L* 13.3, C* 39.1",
+     "Red frame, dark plinth top: near corner new 64/36/31, L* 17.9, C* 15.7 (before C* 11.7); right of platter 72/42/36, L* 20.9, C* 16.6 (before 14.9)",
+     "Red frame, plinth front face: rgb 40/26/22, L* 11.5, C* 8.4",
+     "Red frame, floor tint: a* rose from -0.6 to as much as +4.7 to +5.0 in front of the base; floor L* changed by -1.6 to +1.8 at the 1st and 99th percentile",
+     "Red frame, ground: seven ground.py patches within 0.1 L* of before (82.1, 92.8, 81.2, 92.9, 95.2, 94.1, 87.3)",
+     "Fine-grain spread (pixel minus 5x5 mean): floor 1.05 new, 2.95 before; red plinth top 0.82-0.91 new, 1.90-2.18 before",
+     "Red frame, bumper in the gap: rgb 132/131/134, L* 54.8, a* +0.9, b* -1.4",
+     "Red frame, platter's white layer: 120 px at 250 or above in all channels, none at 255 (before 99 px)"
+    ]
+   }
+  },
+  {
+   "part": "optics",
+   "found": {
+    "findings": [
+     {
+      "id": "optics-1",
+      "severity": "blocking",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-fog-top-test.png",
+      "where": "Whole plinth, x 167-1433, y 494-1508. Boxes measured: margin left (190,900)-(250,1300), front (190,1440)-(480,1490), right (1350,1120)-(1410,1400), back (500,512)-(900,570); over the base (290,1340)-(420,1395) and (1050,1340)-(1150,1395); over the black box (1060,650)-(1140,740), (1060,765)-(1140,800), (1125,850)-(1165,880).",
+      "what": "The clear plinth is a flat near-white slab: sRGB about 248/252/252, L* 98.3 to 99.0, the same within 2 levels over the floor margin on all four sides and over the smoked base. It is lighter than every patch of floor in the frame (floor L* 84.4 left, 88.7 right, 91.7 front, 93 in the corners; the paper label is L* 65.6). In luminance (sRGB decoded) it is 1.49 (left), 1.22 (front), 1.30 (right) and 2.74 (back, where the floor behind is in the deck's shadow) times the floor beside it. Its cast is cool (b* -0.1 to -1.0); the floor is warm (b* +3.7 to +5.7), so this light has not come off the floor. The smoked base, a dark soft rectangle before (L* 36 to 37), is gone: the step at its edge is 2 levels of red. The black box (L* 8 to 10 before) is L* 55 in its back part and L* 71 to 84 in its front part. No edge or chamfer line is left at the outline, and the record and arm throw no shadow onto or under the slab. Cause not found from the picture: a toy test of the obvious suspect (lamp light joined straight through the top face onto the frosted face, veil_toy.py) gives only 0.06 to 0.15 of a white card.",
+      "expected": "A clear slab with a glossy top and a frosted underside sends up three things: what the floor below returns, cut about 4 percent at the top face and 5 to 10 percent at the frosted face; a few percent of haze scattered back by the frost; and a 4 percent mirror of whatever is overhead. My Monte Carlo of that stack (n 1.49, roughness 0.3 to 0.5, floor albedo 0.7 to 0.9, key 40 to 60 degrees off vertical; slab_mc.py) gives, relative to the open floor: margin 0.87 to 0.99, over the smoked base 0.07 to 0.21, over black 0.07 to 0.16. So a true picture shows the margin slightly darker than the floor beside it (about L* 87 to 91 where the floor is 91.7, darker at the back where the floor under it lies in the record's shadow), the base as a dark soft-edged rectangle near L* 28 to 48, the box as a blurred block near L* 28 to 43, never black and never white. A passive clear slab cannot return more light than the white floor under it; to read L* 98.8 it would have to reflect 1.2 to 1.5 times what the floor reflects. If the view transform has a shoulder the real excess is larger, not smaller. The before frame is nearer the truth at all three places: margin 0.69 to 0.88 of the adjacent floor (too dark by 0.1 to 0.2), base 0.13 to 0.14 (inside my range), box 0.01 to 0.02 (too black by 20 to 30 L*, but still a box).",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/EVID_fogtop_new_vs_before_boxes.png (new left, before right, boxes with L*); full-size crops /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/fogtop_new_q_bl.png and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/fogtop_old_q_bl.png; model /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/slab_mc.py"
+     },
+     {
+      "id": "optics-2",
+      "severity": "blocking",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-fog-top-test.png",
+      "where": "Three horizontal bands right of the record: x 960-1430, y 600-750; x 1160-1430, y 990-1070; x 1100-1430, y 1252-1340.",
+      "what": "Gray smears run from the record's rim to the plinth's right edge. Middle band: sRGB about 80 to 85 at x 1180-1200, 135 at x 1300, 220 at x 1380 (the white around it is 249); it sits at the height of the spindle (y 1034) and is about 70 px (25 mm) thick. Upper band (L* 47 to 59) sits at the height of the motor (y 674) and holds what is left of the black box and its sockets. Lower band is faint (243 to 247 against 249), about 88 px (31 mm) thick. In the before frame the same area is an even gray gradient (sRGB 48 to 110) with no bars. Left of the record there are no bands (left margin stays 248 from y 780 to 1500).",
+      "expected": "Nothing in the design makes a horizontal bar there. The key at about 40 degrees throws a shadow about 1.2 times the caster's height, under 50 mm for anything in the 40 mm gap, not a trail of 100 mm and more. A true picture shows this area as the smoked base, an even dark gray through the frost. The bands say the light that whitens the slab travels sideways, left to right, inside the slab or in the gap under it, and is cut off by things on its way (spindle bearing, motor, perhaps the posts). Probably the same fault as optics-1; listed apart because it shows where the extra light goes and must be gone in the re-test.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/EVID_fogtop_new_streaks_marked.png (contrast raised, lines at spindle and motor height); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/fogtop_new_veil_R240_251.png (red channel 240-251 stretched, whole plinth); before, darks lifted: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/fogtop_old_under_lift.png"
+     },
+     {
+      "id": "optics-3",
+      "severity": "fix",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "Plinth top, right half, x 820-1330, y 960-1230.",
+      "what": "The top face does not read glossy; it reads satin. On the deep red plinth the green channel holds only what the top face reflects (the red body passes no green: G is 1 to 3 where the top mirrors black parts). That reflection is a soft cloud: along x 1050 green rises from 1 at y 1000 to 50 at y 1120 with no edge anywhere. The arm tube's mirror image is a broad dim band and the lift post's reflection is a smear that widens with distance. Same in the before frame, so this is not from today's change.",
+      "expected": "A cast, glossy acrylic face seen about 66 degrees from its normal (camera about 24 degrees above the surface, from the record's ellipse 270 by 676 px) mirrors about 13 percent (Fresnel, n 1.49). It would show crisp, dark mirror images of the arm tube (roughly 150 to 200 px below the tube), counterweight, lift post and platter rim against the reflected wall, with edges as sharp as the parts themselves. The blur seen is about 5 to 10 degrees, which is a satin finish.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/EVID_ember_new_G_only_plinth_right_2x.png (green channel only, 2x); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/ember_G_channel_new_left_old_right.png (new beside before)"
+     },
+     {
+      "id": "optics-4",
+      "severity": "fix",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "Arm pillar foot x 1180-1250, y 945-985; lift post foot x 1095-1130, y 960-1000.",
+      "what": "New in this frame: red-hot flares on the black pillar and on the lift post just above their feet (31 px and 9 px with red at 250 or more and green under 150; none in the before frame). The white disc at the pillar's foot and the white dot at the post's foot are still at 255 (576 px at 240 or more in all channels; 548 before). In the top view the same disc shows as a white ring inside the black arm base.",
+      "expected": "Satin black hardware beside a red slab can pick up a dull red sheen low on its lit side, but not a clipped red patch: its reflectance is a few percent except at grazing angles. A part at 255 next to a floor at 239 is as bright as a perfect white card or a mirror of a lamp. With all hardware satin black nothing there should be white or glowing.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/ember_armfoot_4x_new_left_old_right.png (4x, new left, before right)"
+     },
+     {
+      "id": "optics-5",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "Strip along the plinth's left edge on the top face (the 35 mm margin seen at a shallow angle), about x 150-620, y 780-1060.",
+      "what": "8,177 px in that strip have more red than the open white floor (linear red above 0.863); their mean is sRGB 247/91/90, linear red 0.935. Before: 7,743 px. Taking off the white sheen (the green level, 0.117) leaves 0.82 of red that came through the slab, which is 0.95 of the floor's red. Only 54 px clip at 255.",
+      "expected": "Through that strip the camera sees, via the frost, the open lit floor beyond the deck's left side. The most a red slab can pass is 0.86 (top face at this angle) times about 0.93 (frost) times the acrylic's own red transmission over a 32 mm slant path. With no absorption at all that is 0.80 of the floor's red, plus a few percent of haze; a deep red would give 0.5 to 0.7. So the strip is 10 to 20 percent brighter in red than a loss-free filter allows and reads as lit from inside. I cannot rule out that the view transform bends bright saturated reds, so this stays a note.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/EVID_ember_new_red_above_floor_mask.png (yellow = red above the floor's red); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/ember_leftfront_new_over_old_2x.png"
+     },
+     {
+      "id": "optics-6",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-ember-test.png",
+      "where": "Floor around the deck: left x 0-300, y 1085-1170; front x 780-860, y 1320-1390; right x 1255-1335, y 1140-1180.",
+      "what": "Yes, there is now red on the floor beside the red deck, and none before. Red channel up by 0.02 to 0.10 (linear; open floor 0.86), green and blue unchanged to within 0.005. a* goes from about -0.5 to +1 to +3 at the sides and peaks at +6.8 in front of the base (x 800-840, y 1340-1360). L* rises by 2 at most. The red that comes back is 10 to 26 percent of the light the deck takes away at each place.",
+      "expected": "Right in kind: a red slab passes red only, so its shadow stays almost as dark and turns pink. In amount it looks low. The slab should pass roughly 0.8 of red per pass, and about half of the rays through the plinth then meet the record or the black parts, so I would expect 30 to 45 percent back, a pink about twice as strong. The floor alone cannot settle which tint the shadow rays use; ask the lane for the number and compare it with the red the camera sees through the plinth (which behaves like 0.8 or more per pass).",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/EVID_ember_floor_tint_sat_x6_new_over_before.png (saturation times 6, new above, before below); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/ember_astar_x12_new_over_old.png (a* map)"
+     },
+     {
+      "id": "optics-7",
+      "severity": "note",
+      "file": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b33/mantle-house-fog-top-test.png",
+      "where": "Floor around the plinth: behind x 600-1000, y 400-460; left x 40-130, y 900-1100; right x 1470-1560, y 1100-1300; front strip x 300-400, y 1510-1550.",
+      "what": "The clear deck's shadow is lighter than it was: behind L* 58.0 to 66.0, left 80.3 to 84.4, right 87.2 to 88.7. The 3 to 5 L* contact shadow along the front edge is gone (floor at the edge 234.7/232.5/224.8 against 236.2/234.1/226.5 further out). What remains behind the deck fits the opaque parts (record, pulley cover, black box) under a soft key.",
+      "expected": "About right. A real clear plinth still takes 10 to 13 percent out of the light that passes it (Fresnel at the top face, back-scatter at the frosted face), so its outline would stay just visible as a soft shadow about 4 L* deep. Here the plinth's own shadow is zero. Small, and only worth doing if it is cheap.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/fogtop_shadow_back_new_over_old.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/8/optics/fogtop_shadow_left_new_beside_old.png"
+     }
+    ],
+    "measured": [
+     "Top view scale: plinth 1267 x 1014 px = 2.817 px/mm; plinth x 167-1433, y 494-1508; base footprint x 265-1335, y 593-1409; record center (726,1034), radius 425 px.",
+     "Fog top NEW, floor: front L* 91.7 (sRGB 233/231/224), left 84.4, right 88.7, behind the deck 66.0, frame corners 93; paper label 65.6.",
+     "Fog top NEW, plinth over the floor margin: left L* 98.8 (248/252/252), front 99.0, right 98.4, back 98.8; luminance 1.49, 1.22, 1.30, 2.74 times the adjacent floor.",
+     "Fog top NEW, plinth over the smoked base: L* 98.6 and 98.5 (1.20 times the open floor); over the black box: L* 55.3, 71.0, 84.4 (0.29, 0.80, 1.00 times the open floor).",
+     "Fog top BEFORE, margin: left L* 69.1, front 81.2, right 82.9, back 41.2; 0.69, 0.74, 0.88, 0.46 times the adjacent floor.",
+     "Fog top BEFORE, over the base: L* 37.3 and 36.0 (0.14 and 0.13 times the open floor); over the box: L* 10.4, 8.3, 8.0 (0.01 to 0.02).",
+     "Model (clear slab, glossy top, frosted underside, relative to the open floor): over white floor 0.87 to 0.99; over smoked base 0.07 to 0.21; over black 0.07 to 0.16.",
+     "Fog top shadows, before to new: behind L* 58.0 to 66.0; left 80.3 to 84.4; right 87.2 to 88.7; front contact shadow (3 to 5 L*) gone.",
+     "Fog top NEW streak at spindle height (y 1030): sRGB 80-85 at x 1180-1200, 135 at x 1300, 220 at x 1380, against 249 around it.",
+     "Ember 3/4 floor, new minus before (linear, open floor red 0.86): red +0.02 to +0.10, green and blue within 0.005; a* peak +6.8 at (800-840, 1340-1360); L* change +2 at most; red returned = 10 to 26 percent of the light the deck blocks.",
+     "Ember 3/4 plinth top: left-mid patch (300-420, 1010-1045) linear red 0.27 before, 0.63 new; left-edge strip 8,177 px above the floor's red (7,743 before), mean sRGB 247/91/90.",
+     "Ember 3/4 top-face reflection (green channel, x 1050): 1 at y 1000 rising to 50 at y 1120, no edge; expected mirror share at this angle about 13 percent.",
+     "Ember 3/4 arm foot: red flares 31 px and 9 px new, 0 before; white disc 576 px at 240 or more (548 before).",
+     "Toy test of 'lamp joined straight through the top face onto the frosted face': veil 0.06 to 0.15 of a white card against 0.03 to 0.07 done correctly; not enough to explain the white slab."
+    ],
+    "q1_red_ready": "Not yet as the pattern for the set. The red three-quarter frame itself holds up optically (red now reaches the floor, the brighter plinth fits about 0.8 red transmission per pass, nothing new breaks energy conservation) and needs two small fixes: the top face reads satin and the arm foot has white and red-hot spots. But the same change turned the clear deck from above into a white slab and the cause is not found; a deep red may simply be absorbing the same extra light. Re-test Fog from above, Fog in three-quarter view and one pale tint from above before the batch.",
+    "q2_clear_from_above_true": "No. Such a deck would show a margin slightly darker and cooler than the floor beside it (0.87 to 0.99 of it, about L* 87 to 91 here), a thin edge line at the outline, the smoked base as a dark soft-edged rectangle (L* about 28 to 48, edge blurred over 15 to 40 mm), and the black box as a blurred dark block (L* about 28 to 43). The picture shows a flat white slab at L* 98 to 99, 1.2 to 1.5 times brighter than the floor, with the base gone, the box reduced to gray smears, and three horizontal streaks that match no object. The before frame was nearer the truth at all three places.",
+    "q3_reads_as_cg": "Clear from above: the paper-white slab with no edge line, no shadow of record or arm on or under it, and gray streaks trailing to the right. Red three-quarter: cloud-like reflections on the top face where a cast face would mirror the arm crisply; the glowing strip along the left edge (red as bright as the white floor); the white disc and red-hot flares at the arm's foot; a red glow under the front rim of the arm base (x 1215-1300, y 1005-1030, also there before) where a contact shadow belongs. I am unsure about faint cloudy patches on the plinth top right (x 895-1150, y 1100-1210)."
+   }
+  }
+ ],
+ "dropped": 0
+}
