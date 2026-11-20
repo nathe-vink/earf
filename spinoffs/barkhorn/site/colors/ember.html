@@ -1089,7 +1089,7 @@ html.intro .splash { background: var(--page, #F4F1EC) }
 @media (max-aspect-ratio: 1/1) { .hs-hero .hero-pic { display: flex !important; flex-direction: column }
   .hs-hero .hero-title { order: 1 } .hs-hero .hero-photo { order: 2 } .hs-hero .hero-more { order: 3 } }
 /* between a phone and a wide screen (up to 960 px) the line and the buttons stand under the picture, clear of its dots */
-@media (min-aspect-ratio: 1/1) and (max-width: 960px) {
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (min-height: 641px) {
   .hs-hero .hero-pic { display: flex !important; flex-direction: column } .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 2 }
   .hs-hero .hero-more { position: static !important; left: auto !important; right: auto !important; top: auto !important; text-align: left; padding-top: 20px }
   .hs-hero .hero-more .wrap { margin-inline: auto !important; padding-inline: 16px !important; max-width: 1240px !important }
@@ -1243,6 +1243,12 @@ a.cta-btn, .ft-btn { min-height: 44px }
 .ft-btn { white-space: nowrap }
 @media (max-width: 380px) { .ft-btn { padding: 0 12px; gap: 6px } .ft-btn .arr { display: none } }
 @media (min-width: 761px) and (max-width: 860px) { .ft-btn { padding: 0 12px; font-size: 14px } }
+
+/* the hero in a short wide window (a phone held sideways, 960 x 600): the line and buttons stay over the picture on the first
+   screen, and the Hemisphere dot, which would lie on them, steps aside */
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (max-height: 640px) { .hs-hero .hs-pt[href^="#hemisphere"] { display: none } }
+/* from 961 to 1060 px the name "Tropos in Acid" would touch "See the colors" just above it: it opens a little lower */
+@media (min-width: 961px) and (max-width: 1060px) { .hs-hero .hs-pt.hs-w[href^="#speaker"] .hs-label { translate: 0 14px } }
 </style>
 
 <div class="splash" aria-hidden="true"></div>
@@ -1940,6 +1946,10 @@ menuBtn.addEventListener('click', () => menuOpen(!navEl.classList.contains('open
 navEl.querySelectorAll('ul a').forEach(a => a.addEventListener('click', () => menuOpen(false)));
 addEventListener('hashchange', () => menuOpen(false));
 addEventListener('keydown', e => { if (e.key === 'Escape' && navEl.classList.contains('open')) { menuOpen(false); menuBtn.focus(); } });
+addEventListener('click', e => { const a = e.target.closest && e.target.closest('header a[href^="#"], footer a[href^="#"]');
+  if (!a || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const h = a.getAttribute('href').slice(1), here = last === 'home' ? (h === 'top' || h === '') : last === 'line-lighting' ? h === 'lighting' : last === h;
+  if (!here) return; e.preventDefault(); e.stopPropagation(); if (typeof menuOpen === 'function') menuOpen(false); scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); }, true);
 const navAt = which => document.querySelectorAll('nav a[data-nav]').forEach(a => {
   if (a.dataset.nav === which) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
 // the tint chosen in this visit (a product's page or the family's chips): carried by every link marked data-carry
@@ -2146,18 +2156,22 @@ opening();
   const T = {"red":{"name":"Ember","line":"The last light of the fire.","slug":"ember","pics":{"tropos":"img/rc/red-tall.webp","hemisphere":"img/rc/tile-hemisphere-ember.webp","core":"img/rc/tile-core-ember.webp","mantle":"img/rc/tile-mantle-ember.webp"}},"orange":{"name":"Dust","line":"A long, dry afternoon.","slug":"dust","pics":{"tropos":"img/rc/orange-tall.webp","hemisphere":"img/rc/tile-hemisphere-dust.webp","core":"img/rc/tile-core-dust.webp","mantle":"img/rc/tile-mantle-dust.webp"}},"amber":{"name":"Acid","line":"A yellow with an edge.","slug":"acid","pics":{"tropos":"img/rc/amber-tall.webp","hemisphere":"img/rc/tile-hemisphere-acid.webp","core":"img/rc/tile-core-acid.webp","mantle":"img/rc/tile-mantle-acid.webp"}},"green":{"name":"Poison","line":"Bottle green. Keep out of reach.","slug":"poison","pics":{"tropos":"img/rc/green-tall.webp","hemisphere":"img/rc/tile-hemisphere-poison.webp","core":"img/rc/tile-core-poison.webp","mantle":"img/rc/tile-mantle-poison.webp"}},"blue":{"name":"Ice","line":"Glacier blue, and in no hurry.","slug":"ice","pics":{"tropos":"img/rc/blue-tall.webp","hemisphere":"img/rc/tile-hemisphere-ice.webp","core":"img/rc/tile-core-ice.webp","mantle":"img/rc/tile-mantle-ice.webp"}},"violet":{"name":"Haze","line":"Dusk, kept indoors.","slug":"haze","pics":{"tropos":"img/rc/violet-tall.webp","hemisphere":"img/rc/tile-hemisphere-haze.webp","core":"img/rc/tile-core-haze.webp","mantle":"img/rc/tile-mantle-haze.webp"}},"ice":{"name":"Fog","line":"Water-clear. Almost not there.","slug":"fog","pics":{"tropos":"img/rc/ice-tall.webp","hemisphere":"img/rc/tile-hemisphere-fog.webp","core":"img/rc/tile-core-fog.webp","mantle":"img/rc/tile-mantle-fog.webp"}},"black":{"name":"Smoke","line":"Smoked glass, for after dark.","slug":"smoke","pics":{"tropos":"img/rc/black-tall.webp","hemisphere":"img/rc/tile-hemisphere-smoke.webp","core":"img/rc/tile-core-smoke.webp","mantle":"img/rc/tile-mantle-smoke.webp"}}}, R = {"tropos": "speaker", "hemisphere": "hemisphere", "core": "core", "mantle": "mantle"}, N = {"tropos": "Tropos", "hemisphere": "Hemisphere", "core": "Core", "mantle": "Mantle"}, box = document.getElementById('family'); if (!box) return;
   const line = box.querySelector('.tint-line'), tiles = box.querySelectorAll('.ftile'), warm = {};
   let want = 'red';
-  const show = k => { want = k; const t = T[k];
+  const show = (k, quiet) => { want = k; const t = T[k];
     line.innerHTML = `<b>${t.name}.</b> <span>${t.line}</span>`;
     tiles.forEach(a => { const f = a.dataset.p, im = a.querySelector('img'), s = t.pics[f];
       a.href = `#${R[f]}-${t.slug}`; im.alt = `${N[f]} in ${t.name}`;
       const n = warm[s] || (warm[s] = new Image()); if (!n.src) n.src = s;
       const swap = () => { if (want === k) im.src = s; };
       if (n.complete && n.naturalWidth) swap(); else if (n.decode) n.decode().then(swap, swap); else n.addEventListener('load', swap, { once: true }); });
-    if (typeof setTint === 'function') setTint(k); };
+    if (!quiet && typeof setTint === 'function') setTint(k); };
   box.querySelectorAll('.tint input').forEach(r => {
     r.addEventListener('change', () => r.checked && show(r.value));
     r.closest('label').addEventListener('pointerenter', () => Object.values(T[r.value].pics).forEach(s => { if (!warm[s]) { warm[s] = new Image(); warm[s].src = s; } }), { passive: true });
   });
+  // one tint for the visit: the row starts in it (else Ember), and after Back it follows that tint, not a chip the browser restored
+  const sync = () => { let k = null; try { k = sessionStorage.getItem('earf-tint'); } catch (e) {} const has = !!T[k]; if (!has) k = 'red';
+    box.querySelectorAll('.tint input').forEach(r => { r.checked = r.value === k; }); show(k, !has); };
+  sync(); addEventListener('pageshow', sync); addEventListener('hashchange', () => { if (location.hash === '' || location.hash === '#top' || location.hash === '#family' || location.hash === '#colors') sync(); });
 })()</script>
 <script>(function () {      // /lighting's tiles: each its lamp in the tint chosen, and in the tint of a dot under the pointer or the focus
   const S = {"red": "ember", "orange": "dust", "amber": "acid", "green": "poison", "blue": "ice", "violet": "haze", "ice": "fog", "black": "smoke"}, tiles = document.querySelectorAll('.lt-tile[data-p]');
