@@ -224,15 +224,17 @@ def _life():
                for j, k in enumerate((3, 11, 6, 13))]
     # (the A critics: Mantle's polished top, seen nearly edge-on, mirrored the white wall behind it and read grey, C* 6:
     # two dark sleeves leaning on the wall behind it, on the console, where its top looks; their faces the darkest covers)
-    sleeves += [{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 't': 0.004, 'x': MANTLE[0] + dx, 'y': BACK - 0.075,
-                 'z': TOP + 0.0005, 'rot': [-8.0, 0, rz], 'ground': '#1C1A18', 'rough': 0.7}
-                for k, dx, rz in ((8, -0.17, -3.0), (12, 0.14, 2.0))]
+    # (the light-model test: covers 08 and 12 carry bright graphics, busy behind Mantle and only half dark: plain dark
+    # card sleeves instead, matte)
+    dark = [{'kind': 'kit', 'shape': 'box', 'size': [0.315, 0.004, 0.315], 'position': [MANTLE[0] + dx, BACK - 0.075, TOP + 0.0005],
+             'rotate': [-8.0, 0, rz], 'material': 'paper', 'color': col, 'ease': 0.001}
+            for dx, rz, col in ((-0.17, -3.0, '#1F1D1B'), (0.14, 2.0, '#26221F'))]
     return [
         # one quiet print above the console, hung at eye height over it (muted, so the pair keeps the colour)
         {'kind': 'frame', 'position': [0.05, BACK - 0.012], 'z': 1.58, 'size': [0.62, 0.78],
          'artwork': {'bands': [['#D8D0C2', 0.45], ['#9C9384', 0.3], ['#CBC2B2', 0.25]], 'ground': '#E8E2D7', 'seed': 21}},
         {'kind': 'books', 'position': [-0.6, CON_Y], 'z': TOP, 'colors': ['#3E4A5C', '#B9A27A', '#7A2E2A', '#D8D2C4'], 'seed': 5},
-        {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': sleeves},
+        {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': sleeves}, *dark,
         {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_02', 'res': '2k', 'position': [-2.3, 0.45, 0.0], 'rotate': [0, 0, 20.0]},
         {'kind': 'kit', 'shape': 'asset', 'model': 'sofa_02', 'res': '2k', 'position': [CHAIR[0], CHAIR[1], 0.0],
          'rotate': [0, 0, CHAIR[2]]},
