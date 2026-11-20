@@ -25,6 +25,16 @@
       "source": "/s/:page/(.+)",
       "destination": "/s/:page",
       "permanent": false
+    },
+    {
+      "source": "/hemisphere",
+      "destination": "/hemisphere/ember",
+      "permanent": true
+    },
+    {
+      "source": "/core",
+      "destination": "/core/ember",
+      "permanent": true
     }
   ],
   "headers": [
