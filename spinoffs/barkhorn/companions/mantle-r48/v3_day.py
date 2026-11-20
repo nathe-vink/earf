@@ -1041,6 +1041,23 @@ def prepare():
         lamps_off(mine[mine.index('--lamps-off') + 1])
     if '--cards' in mine:
         cards()
+    if '--base-finish' in mine:
+        # A TEST TO SHOW THE OWNER, not a design change (the coordinator, 2026-11-20): the base's material only, same
+        # geometry and 12.7 mm. 'satin': every face bead-blasted (its tint comes from --base-tint); 'opal': an opal white
+        # cast acrylic, milky (subsurface), satin
+        kind_ = mine[mine.index('--base-finish') + 1]
+        for m_ in [m_ for m_ in bpy.data.materials if m_.name.startswith('base-') and m_.node_tree]:
+            nt_ = m_.node_tree; b_ = [n for n in nt_.nodes if n.type == 'BSDF_PRINCIPLED']
+            for bb in b_:
+                for l_ in list(bb.inputs['Roughness'].links): nt_.links.remove(l_)
+                bb.inputs['Roughness'].default_value = 0.35
+                if kind_ == 'opal':
+                    bb.inputs['Base Color'].default_value = (0.90, 0.90, 0.88, 1); bb.inputs['Transmission Weight'].default_value = 0.0
+                    bb.inputs['Subsurface Weight'].default_value = 1.0; bb.inputs['Subsurface Scale'].default_value = 0.004
+            if kind_ == 'opal':
+                out_ = [n for n in nt_.nodes if n.type == 'OUTPUT_MATERIAL'][0]
+                for l_ in list(out_.inputs['Volume'].links): nt_.links.remove(l_)
+        print(f'v3_day: TEST base finish {kind_}', flush=True)
     if '--satin-refract' in mine:
         satin_inside_refract()
     if '--house' in mine:
