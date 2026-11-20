@@ -1,0 +1,1351 @@
+{
+ "title": "Living room by day: Core on the side table, switched off (ember)",
+ "size": [
+  1600,
+  2000
+ ],
+ "set": {
+  "kind": "room",
+  "size": [
+   5.4,
+   6.0,
+   2.75
+  ],
+  "center": [
+   0.0,
+   -1.0
+  ],
+  "wall": {
+   "color": "#E6E0D5"
+  },
+  "ceiling": "#EFECE6",
+  "frame": "#2C2B29",
+  "skirting": {
+   "h": 0.09,
+   "color": "#E3DED4"
+  },
+  "windows": [
+   {
+    "wall": "back",
+    "along": -2.22,
+    "sill": 0.42,
+    "size": [
+     0.75,
+     1.95
+    ],
+    "mullions": [
+     1,
+     1
+    ],
+    "frame_w": 0.055,
+    "frame_d": 0.06
+   },
+   {
+    "wall": "left",
+    "along": 2.75,
+    "sill": 0.3,
+    "size": [
+     0.4,
+     2.05
+    ],
+    "mullions": [
+     1,
+     1
+    ],
+    "frame_w": 0.055,
+    "frame_d": 0.06
+   },
+   {
+    "wall": "front",
+    "along": 0.0,
+    "sill": 0.3,
+    "size": [
+     4.6,
+     2.15
+    ],
+    "mullions": [
+     5,
+     2
+    ]
+   },
+   {
+    "wall": "right",
+    "along": 1.6,
+    "sill": 0.3,
+    "size": [
+     1.6,
+     2.15
+    ],
+    "mullions": [
+     2,
+     2
+    ]
+   }
+  ],
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     5.380000000000001,
+     5.98,
+     0.003
+    ],
+    "position": [
+     0.0,
+     -1.0,
+     0.0005
+    ],
+    "material": "pbr",
+    "texture": "oak_wood_planks",
+    "tex_res": "2k",
+    "gain": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.4,
+     1.7,
+     0.016
+    ],
+    "position": [
+     0.0,
+     0.15,
+     0.0045
+    ],
+    "ease": 0.007,
+    "material": "pbr",
+    "texture": "poly_wool_herringbone",
+    "tex_res": "2k",
+    "tint": "#3E352C",
+    "tint_mix": 0.75,
+    "gain": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.24,
+     1.54,
+     0.0165
+    ],
+    "position": [
+     0.0,
+     0.15,
+     0.0045
+    ],
+    "ease": 0.004,
+    "material": "pbr",
+    "texture": "poly_wool_herringbone",
+    "tex_res": "2k",
+    "tint": "#9A8A72",
+    "tint_mix": 0.45,
+    "gain": 0.85
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.45,
+     1.5,
+     0.022
+    ],
+    "position": [
+     0.0,
+     1.715,
+     0.618
+    ],
+    "rotate": [
+     0,
+     0,
+     90.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.022,
+     0.45,
+     0.4275
+    ],
+    "position": [
+     -0.739,
+     1.715,
+     0.19
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.022,
+     0.45,
+     0.4275
+    ],
+    "position": [
+     0.739,
+     1.715,
+     0.19
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     1.455,
+     0.45,
+     0.022
+    ],
+    "position": [
+     0.0,
+     1.715,
+     0.19
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     1.454,
+     0.428,
+     0.404
+    ],
+    "position": [
+     0.0,
+     1.726,
+     0.213
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "clay",
+    "color": "#1A1411",
+    "roughness": 0.9
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.36,
+     0.018,
+     0.398
+    ],
+    "position": [
+     -0.544,
+     1.4994999999999998,
+     0.216
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.012,
+     0.014,
+     0.11
+    ],
+    "position": [
+     -0.399,
+     1.483,
+     0.4548
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "foil",
+    "color": "#2E2925",
+    "roughness": 0.42
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.36,
+     0.018,
+     0.398
+    ],
+    "position": [
+     0.544,
+     1.4994999999999998,
+     0.216
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.012,
+     0.014,
+     0.11
+    ],
+    "position": [
+     0.399,
+     1.483,
+     0.4548
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "foil",
+    "color": "#2E2925",
+    "roughness": 0.42
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.72,
+     0.018,
+     0.13
+    ],
+    "position": [
+     0.0,
+     1.4994999999999998,
+     0.216
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.16,
+     0.014,
+     0.012
+    ],
+    "position": [
+     0.0,
+     1.483,
+     0.2966
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "foil",
+    "color": "#2E2925",
+    "roughness": 0.42
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.72,
+     0.018,
+     0.13
+    ],
+    "position": [
+     0.0,
+     1.4994999999999998,
+     0.35
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.16,
+     0.014,
+     0.012
+    ],
+    "position": [
+     0.0,
+     1.483,
+     0.4306
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "foil",
+    "color": "#2E2925",
+    "roughness": 0.42
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.72,
+     0.018,
+     0.13
+    ],
+    "position": [
+     0.0,
+     1.4994999999999998,
+     0.484
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.16,
+     0.014,
+     0.012
+    ],
+    "position": [
+     0.0,
+     1.483,
+     0.5646
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "foil",
+    "color": "#2E2925",
+    "roughness": 0.42
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     1.3,
+     0.35,
+     0.03
+    ],
+    "position": [
+     0.0,
+     1.715,
+     0.16
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "ease": 0.0015,
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "radius_top": 0.02,
+    "height": 0.16,
+    "position": [
+     -0.62,
+     1.57,
+     0.0
+    ],
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "radius_top": 0.02,
+    "height": 0.16,
+    "position": [
+     -0.62,
+     1.86,
+     0.0
+    ],
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "radius_top": 0.02,
+    "height": 0.16,
+    "position": [
+     0.62,
+     1.57,
+     0.0
+    ],
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.012,
+    "radius_top": 0.02,
+    "height": 0.16,
+    "position": [
+     0.62,
+     1.86,
+     0.0
+    ],
+    "material": "pbr",
+    "texture": "walnut_veneer_02",
+    "tex_res": "4k",
+    "tint": "#3A2214",
+    "tint_mix": 0.7,
+    "gain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.022,
+     0.048,
+     1.8599999999999999
+    ],
+    "position": [
+     -2.22,
+     2.15,
+     0.46499999999999997
+    ],
+    "material": "foil",
+    "color": "#2C2B29",
+    "roughness": 0.5,
+    "ease": 0.001
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6599999999999999,
+     0.048,
+     0.022
+    ],
+    "position": [
+     -2.22,
+     2.15,
+     1.0773333333333335
+    ],
+    "material": "foil",
+    "color": "#2C2B29",
+    "roughness": 0.5,
+    "ease": 0.001
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6599999999999999,
+     0.048,
+     0.022
+    ],
+    "position": [
+     -2.22,
+     2.15,
+     1.6906666666666668
+    ],
+    "material": "foil",
+    "color": "#2C2B29",
+    "roughness": 0.5,
+    "ease": 0.001
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.048,
+     0.31000000000000005,
+     0.022
+    ],
+    "position": [
+     -2.85,
+     1.75,
+     0.9906666666666665
+    ],
+    "material": "foil",
+    "color": "#2C2B29",
+    "roughness": 0.5,
+    "ease": 0.001
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.048,
+     0.31000000000000005,
+     0.022
+    ],
+    "position": [
+     -2.85,
+     1.75,
+     1.637333333333333
+    ],
+    "material": "foil",
+    "color": "#2C2B29",
+    "roughness": 0.5,
+    "ease": 0.001
+   },
+   {
+    "kind": "cable",
+    "position": [
+     0,
+     0
+    ],
+    "d": 0.008,
+    "color": "#141414",
+    "points": [
+     [
+      -1.35,
+      1.73,
+      0.14
+     ],
+     [
+      -1.41,
+      1.77,
+      0.004
+     ],
+     [
+      -1.59,
+      1.94,
+      0.004
+     ],
+     [
+      -1.73,
+      1.97,
+      0.004
+     ],
+     [
+      -1.85,
+      1.97,
+      0.12
+     ],
+     [
+      -1.85,
+      1.986,
+      0.25
+     ]
+    ],
+    "plug": [
+     0.05,
+     0.016
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.07,
+     0.012,
+     0.115
+    ],
+    "position": [
+     -1.85,
+     1.994,
+     0.28
+    ],
+    "material": "satin",
+    "color": "#ECEAE4",
+    "ease": 0.002
+   },
+   {
+    "kind": "cable",
+    "position": [
+     0,
+     0
+    ],
+    "d": 0.005,
+    "color": "#1A1A1A",
+    "points": [
+     [
+      -0.29,
+      1.96,
+      0.63
+     ],
+     [
+      -0.78,
+      1.97,
+      0.59
+     ],
+     [
+      -0.78,
+      1.97,
+      0.2
+     ],
+     [
+      -0.8200000000000001,
+      1.94,
+      0.003
+     ],
+     [
+      -1.09,
+      1.75,
+      0.003
+     ],
+     [
+      -1.15,
+      1.73,
+      0.14
+     ]
+    ]
+   },
+   {
+    "kind": "cable",
+    "position": [
+     0,
+     0
+    ],
+    "d": 0.008,
+    "color": "#141414",
+    "points": [
+     [
+      1.35,
+      1.73,
+      0.14
+     ],
+     [
+      1.41,
+      1.77,
+      0.004
+     ],
+     [
+      1.59,
+      1.94,
+      0.004
+     ],
+     [
+      1.98,
+      1.97,
+      0.004
+     ],
+     [
+      2.1,
+      1.97,
+      0.12
+     ],
+     [
+      2.1,
+      1.986,
+      0.25
+     ]
+    ],
+    "plug": [
+     0.05,
+     0.016
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.07,
+     0.012,
+     0.115
+    ],
+    "position": [
+     2.1,
+     1.994,
+     0.28
+    ],
+    "material": "satin",
+    "color": "#ECEAE4",
+    "ease": 0.002
+   },
+   {
+    "kind": "cable",
+    "position": [
+     0,
+     0
+    ],
+    "d": 0.005,
+    "color": "#1A1A1A",
+    "points": [
+     [
+      -0.19,
+      1.96,
+      0.63
+     ],
+     [
+      0.78,
+      1.97,
+      0.59
+     ],
+     [
+      0.78,
+      1.97,
+      0.2
+     ],
+     [
+      0.8200000000000001,
+      1.94,
+      0.003
+     ],
+     [
+      1.09,
+      1.75,
+      0.003
+     ],
+     [
+      1.15,
+      1.73,
+      0.14
+     ]
+    ]
+   },
+   {
+    "kind": "frame",
+    "position": [
+     0.05,
+     1.988
+    ],
+    "z": 1.58,
+    "size": [
+     0.62,
+     0.78
+    ],
+    "artwork": {
+     "bands": [
+      [
+       "#D8D0C2",
+       0.45
+      ],
+      [
+       "#9C9384",
+       0.3
+      ],
+      [
+       "#CBC2B2",
+       0.25
+      ]
+     ],
+     "ground": "#E8E2D7",
+     "seed": 21
+    }
+   },
+   {
+    "kind": "books",
+    "position": [
+     -0.6,
+     1.715
+    ],
+    "z": 0.64,
+    "colors": [
+     "#3E4A5C",
+     "#B9A27A",
+     "#7A2E2A",
+     "#D8D2C4"
+    ],
+    "seed": 5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/bar_life/bar_life.py",
+    "fn": "boards",
+    "boards": [
+     {
+      "image": "tex/cover-03.png",
+      "w": 0.315,
+      "h": 0.315,
+      "t": 0.004,
+      "x": 0.81,
+      "y": 1.615,
+      "z": 0.0,
+      "rot": [
+       -12.0,
+       0,
+       90.0
+      ],
+      "ground": "#E9E3D6",
+      "rough": 0.7
+     },
+     {
+      "image": "tex/cover-11.png",
+      "w": 0.315,
+      "h": 0.315,
+      "t": 0.004,
+      "x": 0.8220000000000001,
+      "y": 1.635,
+      "z": 0.0,
+      "rot": [
+       -9.0,
+       0,
+       94.0
+      ],
+      "ground": "#E9E3D6",
+      "rough": 0.7
+     },
+     {
+      "image": "tex/cover-06.png",
+      "w": 0.315,
+      "h": 0.315,
+      "t": 0.004,
+      "x": 0.8340000000000001,
+      "y": 1.655,
+      "z": 0.0,
+      "rot": [
+       -6.0,
+       0,
+       98.0
+      ],
+      "ground": "#E9E3D6",
+      "rough": 0.7
+     },
+     {
+      "image": "tex/cover-13.png",
+      "w": 0.315,
+      "h": 0.315,
+      "t": 0.004,
+      "x": 0.8460000000000001,
+      "y": 1.675,
+      "z": 0.0,
+      "rot": [
+       -3.0,
+       0,
+       102.0
+      ],
+      "ground": "#E9E3D6",
+      "rough": 0.7
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "potted_plant_02",
+    "res": "2k",
+    "position": [
+     -2.3,
+     0.45,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     20.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "2k",
+    "position": [
+     -0.15,
+     -1.6,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     180.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "side_table_01",
+    "res": "2k",
+    "position": [
+     -2.2,
+     1.66,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.155,
+     0.235,
+     0.028
+    ],
+    "position": [
+     -2.1,
+     1.73,
+     0.5511999999999999
+    ],
+    "rotate": [
+     0,
+     0,
+     14.0
+    ],
+    "material": "cotton",
+    "color": "#4F6253",
+    "ease": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.041,
+      0
+     ],
+     [
+      0.043,
+      0.006
+     ],
+     [
+      0.044,
+      0.092
+     ],
+     [
+      0.040499999999999994,
+      0.092
+     ],
+     [
+      0.0,
+      0.016
+     ]
+    ],
+    "position": [
+     -2.0700000000000003,
+     1.5599999999999998,
+     0.5511999999999999
+    ],
+    "material": "glass",
+    "color": "#F8F8F6",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "profile": [
+     [
+      0.0,
+      0.0166
+     ],
+     [
+      0.03902325581395348,
+      0.0166
+     ],
+     [
+      0.03952790697674418,
+      0.06
+     ],
+     [
+      0.0,
+      0.06
+     ]
+    ],
+    "position": [
+     -2.0700000000000003,
+     1.5599999999999998,
+     0.5511999999999999
+    ],
+    "material": "glass",
+    "color": "#EEF3F4",
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
+    "fn": "cores_off",
+    "core_load": {
+     "orange": 1.5,
+     "amber": 1.5,
+     "blue": 1.5,
+     "black": 0.3,
+     "green": 0.3
+    },
+    "core_cable": false,
+    "cores": [
+     {
+      "tint": "red",
+      "x": -2.31,
+      "y": 1.67,
+      "floor_z": 0.5507,
+      "rot": 0.0
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
+    "fn": "no_portal",
+    "windows": [
+     "wall-back",
+     "wall-left"
+    ]
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   -1.45,
+   0.6,
+   0.98
+  ],
+  "target": [
+   -2.2600000000000002,
+   1.67,
+   0.6507
+  ],
+  "lens_mm": 60.0,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   -2.31,
+   1.67,
+   0.6306999999999999
+  ]
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "garden_nook",
+  "res": "4k",
+  "rotation_deg": 144.2,
+  "strength": 1.0
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.005,
+  "denoise": true,
+  "clamp": 0,
+  "bounces": 32,
+  "view": "AgX",
+  "exposure": 5.35,
+  "white_balance_k": 5600,
+  "white_balance_tint": 0.0,
+  "glossy_bounces": 16,
+  "transmission_bounces": 32,
+  "look": "AgX - Base Contrast"
+ },
+ "materials": {
+  "builtin-led": {
+   "glow": 0.0
+  },
+  "builtin-led-brace": {
+   "glow": 0.0
+  },
+  "horn-satin": {
+   "roughness": 0.05
+  }
+ },
+ "lights": {},
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -1.25,
+      1.486,
+      0.0
+     ],
+     "rotate_z": 6.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    },
+    {
+     "position": [
+      1.25,
+      1.486,
+      0.0
+     ],
+     "rotate_z": -6.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "cloth-disc",
+      "post-*",
+      "post-sleeves",
+      "post-sockets",
+      "woofer-ring"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-variants.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -1.25,
+      1.486,
+      0.0
+     ],
+     "rotate_z": 6.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    },
+    {
+     "position": [
+      1.25,
+      1.486,
+      0.0
+     ],
+     "rotate_z": -6.0,
+     "flavour": "cloud-red",
+     "hide": [
+      "horn-topo*",
+      "base-out*",
+      "horn-strata"
+     ],
+     "options": []
+    }
+   ]
+  },
+  {
+   "asset_blend": "studio/assets/cache/mantle/b64c6bd3/mantle-strata.blend",
+   "manifest": "studio/assets/cache/mantle/b64c6bd3/mantle-strata.manifest.json",
+   "tint": "ember",
+   "collection": "Mantle Strata Ember",
+   "forbid": [
+    "brass"
+   ],
+   "asset_sha": "b64c6bd37b8ff5eb8007d2d04ee7c0859962dd3b",
+   "instances": [
+    {
+     "position": [
+      -0.24,
+      1.655,
+      0.641
+     ],
+     "rotate_z": -30.0
+    }
+   ]
+  }
+ ]
+}
