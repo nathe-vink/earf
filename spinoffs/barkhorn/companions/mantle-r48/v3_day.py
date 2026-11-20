@@ -704,6 +704,29 @@ def satin_underside():
     print(f'v3_day: the plinth underside satin ({n} faces)', flush=True)
 
 
+def satin_inside_refract():
+    """With --glass-shadows the lamps reach the inside of the deck straight through its top (a transparent shadow ray, at
+    angles a refracted ray could never have: past acrylic's 42 deg), and the rough satin face reflected that light back
+    up as if by total internal reflection: the clear deck read brighter than the white floor under it (the coordinator,
+    2026-11-20). From inside, the satin faces (slot 1: the underside and the outer edge) now refract only, rough as
+    before, with a 4 % gloss for the light a frosted face returns by itself; from outside they are as they were."""
+    m = bpy.data.materials.get('plinth-1')
+    if m is None: return
+    nt = m.node_tree; out = [n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL'][0]
+    orig = out.inputs['Surface'].links[0].from_socket
+    geo = nt.nodes.new('ShaderNodeNewGeometry'); lp = nt.nodes.new('ShaderNodeLightPath')
+    rf = nt.nodes.new('ShaderNodeBsdfRefraction'); rf.inputs['IOR'].default_value = 1.49; rf.inputs['Roughness'].default_value = 0.35
+    gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.35
+    m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs[0].default_value = 0.04
+    nt.links.new(rf.outputs[0], m1.inputs[1]); nt.links.new(gl.outputs[0], m1.inputs[2])
+    m2 = nt.nodes.new('ShaderNodeMixShader'); nt.links.new(geo.outputs['Backfacing'], m2.inputs[0])
+    nt.links.new(orig, m2.inputs[1]); nt.links.new(m1.outputs[0], m2.inputs[2])
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent'); m3 = nt.nodes.new('ShaderNodeMixShader')
+    nt.links.new(lp.outputs['Is Shadow Ray'], m3.inputs[0]); nt.links.new(m2.outputs[0], m3.inputs[1]); nt.links.new(tr.outputs[0], m3.inputs[2])
+    nt.links.new(m3.outputs[0], out.inputs['Surface'])
+    print('v3_day: the satin faces refract only from inside', flush=True)
+
+
 def lighttable(watts, cct):
     """PROPOSAL (the coordinator, 2026-11-10 16:50), the LIGHT-TABLE BASE: the base keeps its signed outline and smoke; its
     top carries a pocket 15 mm in from its edges, 10 mm deep, islands left round the posts (r 22), the bearing (r 30) and
@@ -993,6 +1016,8 @@ def prepare():
         lamps_off(mine[mine.index('--lamps-off') + 1])
     if '--cards' in mine:
         cards()
+    if '--satin-refract' in mine:
+        satin_inside_refract()
     if '--house' in mine:
         i_ = mine.index('--house'); cam_ = None; lt_ = {}
         if '--house-cam' in mine:
