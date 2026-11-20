@@ -823,6 +823,8 @@ def apply(web, head, rest):
         rc_captions(p)
         rc_cursor(p)
         rc_no_progress(p)
+        import site_fix                 # the fix list of 2026-11-20
+        site_fix.fix_1a(p, web)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
@@ -2662,6 +2664,8 @@ def rc_finish(web):
         assert not re.search(r'(?i)ember to smoke', u), ('rc_finish: Ember to Smoke', f)
         if u != t:
             open(f, 'w').write(u)
+    import site_fix                     # the fix list of 2026-11-20: previews in one voice, the color pages forwarded
+    site_fix.finish_1a(web)
 
 
 BANNED_RC = r'seven colors|Ember to Fog|Smoke as current|still to come|on hold|polished black' if EIGHT else r'eight colors|to Smoke|Smoke as current'
