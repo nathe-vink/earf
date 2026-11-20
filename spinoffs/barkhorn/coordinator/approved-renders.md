@@ -3519,6 +3519,96 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    (dpl_FErm7ubwkra1Af4nDB5NPubXPZAy) and again on www.earf.world: all four labels whole at 390 (the
    Hemisphere one now x 8 to 182, y 173 to 205), first tap shows and second follows, hover and click
    right at 1440 and 1024, no page errors; "Drawn to be made" on no page; noindex still sent.
+   20 Nov 11:14 UTC, THE RESEARCH AND CRITIC PASS IS BACK (workflow wf_4088609c-734, 10 agents, 5.5 h): three researchers
+   opened 39 stores (furniture: Design Within Reach, Herman Miller, Knoll, Vitra, HAY, Hem, USM, Fritz Hansen, Muuto,
+   Carl Hansen; lighting: Louis Poulsen, Flos, &Tradition, Santa & Cole, Gantri, Tala, Bocci, Roll & Hill, Artemide and
+   others; audio: KEF, Klipsch, Avantgarde, Bang & Olufsen, Linn, OJAS, U-Turn, Rega and others), four critics went
+   through earf.world (copy 51, links 23, pictures 26, merchandising 29 findings), two skeptics re-checked every one:
+   114 confirmed, 15 confirmed in part, 15 more found by the skeptics; one editor wrote the plan. THE WHOLE RESULT IS
+   KEPT: `spinoffs/barkhorn/coordinator/site-audit-2026-11-20.json` (research, merch standards, findings, missed, plan).
+   MY SPOT-CHECKS (all held): on the stores' own screenshots, DWR's ceiling listing (cut-outs on one light gray, lamps
+   off, cords to the top), DWR Panthella (the lamp alone first, then rooms), Louis Poulsen Panthella Portable (lit and
+   unlit from one camera, then rooms), KEF Blade (dots at the cabinet's top edge inside a page, each opening a card),
+   Klipsch Klipschorn (the pair with a console and turntable between); on the live site, /hemisphere/ember 404,
+   /colors/ember 200, the home description ending "not yet for sale", /s/hemisphere-ember previewing with og-home.jpg,
+   the hidden "Copy address" rule, no MX and no TXT record for earf.world.
+   WHAT THE BEST STORES DO (the answer given to the owner): (1) one ground for every product in a row: light with lamps
+   off (DWR, Fritz Hansen, Louis Poulsen) or mid-tone with lamps lit (Santa & Cole, Gantri, Tala); (2) the product page
+   opens on the product alone, then rooms, and one set of rooms serves every color (DWR, Knoll, Herman Miller, KEF,
+   Louis Poulsen, Muuto); (3) a lamp off and on from one camera (Louis Poulsen, &Tradition, Hem, Gantri); (4) a bright
+   home with furniture for size: the pair with a console or fireplace between (Klipsch, Avantgarde, KEF, U-Turn), a
+   small lamp beside books (DWR, HAY, Carl Hansen); (5) room pictures name their products by caption or corner button
+   (HAY, &Tradition, Flos, DWR); none of 35 home pages has dots on its first picture; Vitra and KEF use dots inside
+   pages at the object's edge; (6) selling by inquiry: a starting price, the wait and the reply time beside the ask
+   (Apparatus, Lindsey Adelman, Allied Maker); (7) sizes in inches with a dimension drawing (Flos, Roll & Hill, Santa &
+   Cole, OJAS).
+   THE HOUSE GROUND, measured by me on the eight Tropos fronts (studio-refresh, 1000 x 1250, the same in every tint):
+   top left L* 81.6, top right 92.9, middle left 87.5, middle right 94.5, lower left 96.9, bottom right (shadow) 86.9;
+   a* about 0, b* 3.5 to 5.3. Recipe: r33-speaker-horn renders/2026-11-04/barkhorn/rollout/A-polished-tallr7/
+   site-front-off-tall-<tint>.shot.json (sweep #F7F0E8, key from camera left 40 degrees up, Khronos PBR Neutral).
+   ORDERS SENT (11:10 to 11:12 UTC):
+   - LAMPS LANE: Hemisphere and Core alone and whole on the house ground, OFF and ON from one camera (ON = the studio
+     dimmed by one declared factor, exposure raised by the same), 4:5, 1600 x 2000; proof in Ember, Fog, Smoke (12
+     frames), the other five tints after my word; dimension drawings (SVG); the missing facts (shade height, weight,
+     watts, dimmer, cord length and longest drop, lux at the 600 mm drop, "two thirds comes back down"; Core dock,
+     charger, cell, touch ring, IP44 tested or target).
+   - MANTLE LANE: the Mantle alone on the house ground (three-quarter from above, cover off, a record on), proof in
+     Ember, Fog, Smoke, then the other five, then the studio set (cover on, from above, low front, arm close, back if
+     in the CAD); drawing; facts (power supply, platter, outputs, cover included, cartridge); the asset for the room.
+   - SPEAKER LANE: a living room by day (photographs first: Klipsch, Avantgarde, KEF, U-Turn, DWR, HAY): camera A wide
+     from the listening seat (Tropos pair 2.5 m apart, the Mantle on a console between, a Core off on a side table,
+     cables in frame), B close on the Mantle, C the Core beside a book and a glass; one small proof of A in Ember
+     first, the owner sees the first good one; then Ember finals, then seven tints by the difference method; Tropos
+     drawing; facts (power, volume, what comes with a pair); a check of the Smoke horn (L* 70 over a cabinet at L* 1).
+   - SITE LANE: one order in four builds. 1A home, names, lines (one family section with the chips over four equal
+     tiles starting in Ember; every tile, button and header link opens the product in the tint shown; header by kind;
+     tint carried between products; color pages forwarded to /tropos/<tint>; Tropos pages titled "Tropos" in the
+     pattern of the other three; restating captions and lines removed; previews say "In development. Made to order."
+     as the pages do; render line under each gallery; the opening only on / with no fragment). 1B the sets (one list
+     of views per product in one order on all eight tints, shared pictures with "Shown in Ember."; rows of eight at
+     full width, each product a link; the 360 marked; a names row under every bar picture inside the pages; /tropos
+     and /mantle folded into the product pages; /lighting rebuilt as the listing). 2 the product page (gallery keeps
+     the view on a color click, arrows, larger stage; Specifications under the gallery with inches and pounds; the ask
+     as one filled button that opens a letter with the product and tint; the family row at the foot). 3 addresses,
+     phone, files (real paths and share pictures for the 24 lamp and Mantle pages; 44 px dots; system pointer back;
+     dark lamp files re-encoded; place tiles re-cut). 4 as pictures arrive.
+   WHERE I LEFT THE PLAN: place tiles keep the color name alone (the owner's rule of 17 Nov; the editor wanted "Tropos
+   in Ember"); the hero keeps its dots and the color line keeps its mood sentence until the owner answers; vercel.json
+   may gain redirect entries only (headers, cleanUrls and git byte for byte: my publish check now reads the diff
+   instead of requiring none); "about two thirds of its light comes back down" stays until the lamps lane answers
+   (its own photometry gave 66 to 75 %); second-batch pictures (pendant over a table at home, Core at dusk and on a
+   terrace, Tropos back and corner, acrylic blocks, the whole-speaker turn, Poison's horn re-lit) wait for the first.
+   PUT TO THE OWNER (11:1x UTC, with a four-panel sheet of the stores): mail sign-up (still no MX; the only way to
+   buy); what to print beside the ask (reply time, a starting price or "Price on request", the wait); hero dots or one
+   line of names (the research says names); the eight mood lines under the color names (the critics say remove).
+   Lamps off or lit in the product row: he chooses from pictures when the proofs land.
+   THE STANDING CHECKLIST (run by me on every build before main moves, and by a critic pass after every batch of
+   pictures and before any structural build):
+    1. In every grid or row where two products stand side by side: one ground, one light direction, one tile size?
+    2. With one tint chosen, do all four products read as that one color side by side?
+    3. Is every product whole and clear of the edges in its tile and first picture at 1440, 1024 and 390 px, at rest
+       and under the pointer?
+    4. Counted on the page itself: does every tint of each product show the same views in the same order?
+    5. Does every product page open on the product alone on the house ground, under a title that is the product's
+       name, with one sentence that says what the product is?
+    6. Does every product have a picture in a home in light that lets the room be read, with something of known size
+       in frame, and each lamp its off and on pair from one camera?
+    7. Clicked on a desktop and on a phone: does every picture, tile, marker and button open the product and tint it
+       shows?
+    8. Does every room picture name the products in it as links, and is every marker off the drivers, the lit
+       shades, the record and other controls?
+    9. Is there no line beside a picture that says what the picture shows, and no new coined or mood line?
+   10. Does one visible button on every product page, on the first phone screen or fixed to its foot, open a letter
+       that names the product and tint, and does a test letter from an outside account arrive?
+   11. Does every product and tint have an address that loads directly, without the opening, and previews with its
+       own name and a picture of that product?
+   12. Do the page, the line beside the ask and the link preview say the same thing about whether it can be ordered,
+       and does each picture's limit (render, "Shown in Ember.") stand beside the picture?
+   13. Does a color click keep the view the visitor is on, and does one Back leave the product?
+   14. Are sizes and weights given in inches and pounds as well as metric, and do the figures agree with each other,
+       with the labels inside the pictures and with the clear tint (Fog)?
+   15. Was each changed page set beside the same kind of page at two reference stores (a lamp: DWR and Louis Poulsen;
+       the speaker: KEF and Klipsch), with each difference fixed or kept on purpose?
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
