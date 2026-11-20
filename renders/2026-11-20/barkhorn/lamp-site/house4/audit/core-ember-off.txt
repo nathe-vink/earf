@@ -1,0 +1,24 @@
+AUDIT house-orb-red hidden ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] no-shadow ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] lights [('house-key', 'AREA', 1.021), ('house-fill', 'AREA', 2.866), ('house-kick', 'AREA', 0.704), ('house-horn', 'AREA', 4.234), ('house-bg-left', 'AREA', 3.077), ('house-bg-right', 'AREA', 1.19), ('house-wall_left', 'AREA', 8.579), ('house-bg-high', 'AREA', 1.954), ('house-horn-floor', 'AREA', 4.234), ('house-fill-floor', 'AREA', 2.866), ('led-red', 'AREA', 0.0)]
+HIDDENCAST house-orb-red: 23 hidden, 2 in frame
+   out         0.0 %  area lamp (rectangle) house-key
+   out         0.0 %  hidden mesh house-key-face
+   out         0.0 %  hidden mesh house-key-housing
+   out         0.0 %  area lamp (rectangle) house-fill
+   out         0.0 %  hidden mesh house-fill-face
+   out         0.0 %  hidden mesh house-fill-housing
+   out         0.0 %  area lamp (rectangle) house-kick
+   out         0.0 %  hidden mesh house-kick-face
+   out         0.0 %  hidden mesh house-kick-housing
+   out         0.0 %  area lamp (rectangle) house-horn
+   out         0.0 %  hidden mesh house-horn-face
+   out         0.0 %  hidden mesh house-horn-housing
+   out         0.0 %  area lamp (rectangle) house-bg-left
+   out         0.0 %  area lamp (rectangle) house-bg-right
+   out         0.0 %  area lamp (rectangle) house-wall_left
+   out         0.0 %  area lamp (rectangle) house-bg-high
+   out         0.0 %  area lamp (rectangle) house-horn-floor
+   out         0.0 %  area lamp (rectangle) house-fill-floor
+   out         0.0 %  hidden mesh room-right
+   out         0.0 %  hidden mesh room-ceiling
+   out         0.0 %  hidden mesh room-front
+CASTCHECK house-orb-red {'house-key': 0.0, 'house-key-face': 0.0, 'house-key-housing': 0.0, 'house-fill': 0.0, 'house-fill-face': 0.0, 'house-fill-housing': 0.0, 'house-kick': 0.0, 'house-kick-face': 0.0, 'house-kick-housing': 0.0, 'house-horn': 0.0, 'house-horn-face': 0.0, 'house-horn-housing': 0.0, 'house-bg-left': 0.0, 'house-bg-right': 0.0, 'house-wall_left': 0.0, 'house-bg-high': 0.0, 'house-horn-floor': 0.0, 'house-fill-floor': 0.0, 'room-left': 4.66, 'room-right': 0.0, 'room-back': 33.22, 'room-ceiling': 0.0, 'room-front': 0.0}
