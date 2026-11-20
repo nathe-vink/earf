@@ -1,0 +1,273 @@
+{
+ "results": [
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "fog-right-side-face-glows-white",
+      "severity": "blocking",
+      "frame": "Fog",
+      "where": "right (short) side face of the plinth: its top edge runs from (1070,1230) to (1415,945), the face is the 25-40 px band below that line; box x 1070-1415, y 940-1270. Hard stripes at x 1235-1265 and x 1310-1345; stepped notch at x 1310-1345, y 1025-1050",
+      "what": "Along its whole length the plinth's right side face is a near-white glowing bar. The 90th-percentile L* along the face is 98-99, except two stripes at 80-86. That is brighter than the open floor beside it (L* 93.1 right of the deck, 92.9 below it). In x 1180-1420, y 1040-1200 there are 1371 px at 250+ in all channels and 5568 px above L* 95. The live Fog has 0 and 12 there, and v2 has 0 and 3; the same face read L* 50-76 in the live frame and 47-68 in v2. Inside the glow, two gray stripes have hard vertical edges: along y 1120, L* goes 48 to 97 within 5 px. At 480x600 this face is the brightest thing in the frame and reads as white blocks pasted on the edge, or as an edge-lit light bar. The lane's 'brightest 85.8 against 95.2' does not include this face.",
+      "expected": "The house edge-lamp rule (a) says no face of the deck may read brighter than the open floor beside it. That rule is why the README picked 'none' for Fog; this frame uses a twentieth. A satin, bead-blasted edge would at most glow softly and evenly, never in hard-edged blocks. My guess is that the stripes are the shadows of the bearing hole and the motor or arm bore, carried through the slab with no blur by the left lamp. That would be the same mechanism as this afternoon's top-view streaks.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/F3_vs_FL_rightend_x1.5.png (new left, live right); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/F3_rightend_ticks_x2.png (with frame coordinates); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/F3_frontright_x3.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/E3_rightend_and_F2_rightend_x2.png (v2 Fog had no glow); visitor size: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/F3_480view_deck_x2nearest.png"
+     },
+     {
+      "id": "ember-deck-not-the-tropos-red",
+      "severity": "fix",
+      "frame": "Ember",
+      "where": "whole deck, x 140-1430, y 760-1360; front face x 600-800, y 1135-1150",
+      "what": "Beside the Tropos Ember the deck reads as oxblood or brown-black with red only at the edges. Only 6.6% of the deck's pixels have chroma above 40 (Tropos 44%); median chroma is 4.4 (Tropos 34.9). The front face is L* 7.3 C* 4.5, against the Tropos cabinet's lower front at L* 32.9 C* 62.4. The red is in the left top margin (L* 52 C* 71, hue 33) and in the gap. It is slightly less red than the live frame: front face C* 4.5 against 14.0, and 13.3% of deck pixels above chroma 20 against 17.1%. The platter's white middle band in the live frame is now dark. In the 300 px home row it reads as the same studio but a darker, browner material than the Tropos.",
+      "expected": "The owner's rules call for deep colour and for the product to read as its tint. The README already states that (b) cannot be met for Ember at any edge level; this is not new. It is the open question for the dark tints (Poison, Haze, Smoke) made the same way.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/homerow_300_E3_F3_TE_TF_EL_FL.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/visitor_480_new_live_tropos.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/E3_vs_EL_leftend_1x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/platter_rim_E3_F3_top_EL_FL_bottom_x2.png"
+     },
+     {
+      "id": "top-still-reads-satin",
+      "severity": "fix",
+      "frame": "both",
+      "where": "plinth top right of the platter, x 800-1420, y 950-1250 (clearest in Ember's green channel)",
+      "what": "In the picture this is unchanged from this afternoon. In Ember's green channel, which holds only what the top reflects, the top shows no mirror image of the arm tube, rest post, pillar or platter rim. The sheen rises from G 0 to 45 between y 1030 and y 1110 at x 1050 with no edge anywhere. The new and live frames are nearly identical (live 2 to 40 over the same run). The Fog top reads milky, which fits the frosted underside, but it shows no crisp reflections either.",
+      "expected": "The lane says the 0.004 top mirrors a dark sky. That explains why black parts vanish dark-on-dark. It does not explain a soft-edged sheen: whatever lights that sheen would show the platter's or arm's silhouette as sharply as the parts themselves. A polished cast top in a studio photograph usually carries at least one crisp reflection.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/E3_over_EL_Gchannel_x3gain_topright.png (green channel x3, new above, live below)"
+     },
+     {
+      "id": "fog-white-crescent-at-arm-base",
+      "severity": "fix",
+      "frame": "Fog",
+      "where": "plinth top in front of the arm-base flange, x 1140-1330, y 985-1025",
+      "what": "A white glowing crescent sits round the front of the arm-base flange: 932 px above L* 85 and 357 px at 240+ in all channels, max L* 98.8. The live frame has 223 and 0. It is brighter than the open floor (93-95). In Ember the same place carries a red crescent (max L* 44.6, not clipped) and a red ring at the rest post's foot.",
+      "expected": "The lane says it is edge light leaving through the bore, which is possible. In Fog it still breaks rule (a), being brighter than the floor beside the deck. In Ember it reads at page size like a small red lamp under the arm base.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/F3_armfoot_x3.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/E3_armfoot_x3.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/E3_rightend_and_F2_rightend_x2.png"
+     },
+     {
+      "id": "post-seats-crisp-through-front-face",
+      "severity": "note",
+      "frame": "both",
+      "where": "Ember x 450-512, y 1083-1103 and x 765-830, y 1158-1177; Fog the same two plus two further back, about (650,1135) and (817,1107)",
+      "what": "The two lens-shaped marks under the Ember front face's top edge are unchanged. In Fog the same seats show as four crisp dark-gray discs with bright rims. At 480 px they read as four round pads inside the slab, which is plausible for posts in a clear deck.",
+      "expected": "The lane's explanation (glossy bonded seats seen through the slab) works only if the front face is optically clear. With satin edges, as designed, they would blur to soft shadows. Worth checking against the material setting; it is not a visitor-size problem.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/lensmarks_E3gain2_top_F3_bottom_x5.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/F3_plinth_left_x1.4.png"
+     },
+     {
+      "id": "ground-shadow-contact-grain-match",
+      "severity": "note",
+      "frame": "both",
+      "where": "ten ground patches in normalised frame coordinates (top-left 0.03-0.13 x 0.03-0.11 and so on; see measured); contact profiles at x 500-1300 below the base",
+      "what": "The ground is unchanged from the live frames (within 0.1 L* at all ten patches) and matches the Tropos within 1.7 L* at six of ten. Four differ from the Tropos because of the higher camera, the same as in the live frames: the left band at upper mid is 10.5 L* darker (75.1 against 85.6), low centre is 4.4-5.8 darker, low right 6 darker, and upper right 3 lighter. a* is -0.5 to -0.8 against the Tropos's -0.7 to +0.5, and b* is 3.2-6.0 against 3.7-5.2. The shadow falls front-right in both. The contact shadow under the base matches the Tropos's: Ember at x 700 reads 48.7/56.5/64.0/69.1/73.0/83.7 at 3/6/10/20/40/80 px, Tropos 52.4/55.6/60.5/69.3/80.6/90.2. Grain (high-pass std at 1000x1250) is 0.79 everywhere, against the Tropos's 0.77-0.93 (1.23 in its dark corner) and the live frames' 1.6-1.7. Light now comes through the deck into its shadow: Ember floor a* +4.9 to +5.6 in front of the base (live -0.3); Fog front shadow lighter by 10-13 L* (87.7/77.2/63.3 against 76.0/63.9/53.1).",
+      "expected": "This is as it should be. At 300 px the frames read as the same studio as the Tropos. The grain is the same amount everywhere regardless of brightness, which looks synthetic only at full size.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/ground_Lstar_posterized_TE_E3_TF_F3.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/E3_base_contact_1x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/F3_over_FL_shadow_front.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/homerow_300_E3_F3_TE_TF_EL_FL.png"
+     },
+     {
+      "id": "arm-tube-in-front-of-rest",
+      "severity": "note",
+      "frame": "both",
+      "where": "rest post and arm tube, x 1105-1145, y 900-935",
+      "what": "From this camera the arm tube crosses in front of the rest post's shaft, and the post's top cap shows above the tube's upper edge. Nothing on the rest is seen holding the tube.",
+      "expected": "If that cap is the top of the rest, a tube lying on it would cover it from this higher camera. Either the cap is the back of a cradle, or the tube sits in front of the rest rather than on it. I cannot tell from one view; check the parked position in the scene.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/armrest_F3_E3gain2_x4.png"
+     },
+     {
+      "id": "fog-dark-block-in-platter-band",
+      "severity": "note",
+      "frame": "Fog",
+      "where": "x 850-875, y 1020-1047",
+      "what": "A dark gray rectangle with hard vertical edges interrupts the platter's white band. It was in the live frame too. It is barely visible at 480 px.",
+      "expected": "Probably a part seen through the clear platter (the belt or the cartridge). A retoucher would check it; it is minor.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/platter_rim_E3_F3_top_EL_FL_bottom_x2.png"
+     },
+     {
+      "id": "ember-neutral-bumper",
+      "severity": "note",
+      "frame": "Ember",
+      "where": "x 673-703, y 1187-1203, in the gap",
+      "what": "The bumper is still a neutral white-gray highlight among red-lit surfaces; the patch reads L* 19.9, a* +2.7 against live 30.0 and +0.8. It is unchanged in kind.",
+      "expected": "A milky bumper in a red-lit gap would pick up some red. It is small and shows at full size only.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/E3_over_EL_gap_bumper_x3.png"
+     }
+    ],
+    "afternoon_findings": [
+     "white-at-arm-foot and the rest post's foot: FIXED in both. Pixels at 200+ in all channels at the pillar foot (x 1170-1260, y 930-1000): Ember 0 (live 717), Fog 0 at the foot (90 px at y 930-936 are the plinth behind, not the foot; live 835). Rest post foot at 240+: Ember 0, Fog 1 (live 82 and 87). Evidence: E3_armfoot_x3.png, F3_armfoot_x3.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/",
+     "optics-4 red-hot flares at the pillar and post: FIXED (0 px with R at 250+ and G under 150). A soft red glow remains under the flange's front rim (max L* 44.6) and at the post's foot (max L* 47.8); the lane says this is bore light.",
+     "finger-lift-detached (2-3 mm gap, seen from above): NOT CHECKABLE, because no top view was supplied. From this camera the lift meets the headshell and points toward the camera, which is the outer side, as the RB330 has it. Evidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/F3_headshell_ctx_x3.png",
+     "finger-lift-side: likely FIXED (outer side, seen from this camera only).",
+     "optics-3 top reads satin: NOT FIXED in the picture. Ember's green channel is nearly identical to live, with no crisp mirror images and a sheen that rises over 70 px with no edge. The lane's dark-sky explanation covers dark-on-dark parts, not the soft-edged sheen. Evidence: E3_over_EL_Gchannel_x3gain_topright.png",
+     "front-face lens marks: UNCHANGED (Ember x 450-512, y 1083-1103 and x 765-830, y 1158-1177). In Fog they show as four crisp discs. The lane's explanation holds only if the front face is optically clear, not satin. Evidence: lensmarks_E3gain2_top_F3_bottom_x5.png",
+     "fog-top-plinth-white, fog-top-streaks, fog-top-outline-lost (from above): NOT CHECKABLE, because no top view was supplied. The same left-to-right light inside the slab, with hard shadows of holes, now shows on the Fog's right side face in three-quarter view (glow at L* 99 with hard stripes). That suggests the mechanism behind the streaks is still there, and the top view needs re-rendering and re-checking before the set.",
+     "optics-5 glowing left strip (Ember): about the same as this afternoon's test. 8447 px have linear red above the open floor's red, against 13289 live and 8177 in the afternoon's test frame; the mean is rgb 248/104/106.",
+     "optics-6 floor tint (Ember): PRESENT. a* +4.9 to +5.6 on the floor in the shadow in front of the base, against -0.3 live, with L* up 1-2.",
+     "grain-and-smoothing: FINE. Grain is 0.79 at 1000x1250, against the Tropos's 0.83-0.93; live was 1.6-1.7. Brightened 3x, the dark Ember top shows only soft clouds, as this afternoon. Evidence: E3_over_EL_topfront_gain3.png",
+     "bumper-neutral-gray: UNCHANGED (neutral white-gray highlight in the red gap).",
+     "record-surface: UNCHANGED (satin disc with thin rings). Label: blank in both new frames, with two thin rings and the spindle's shadow; the live frames' STRATA lettering is gone. Evidence: label_E3_F3_EL_x3.png",
+     "ember-red-against-speaker: UNCHANGED. The deck is darker and browner than the Tropos red, and its front face is slightly less red than the live frame (C* 4.5 against 14.0)."
+    ],
+    "q1_replace_live": "Ember: yes. It is better than the live frame and worse nowhere that a visitor sees. The arm is parked off the record, the label is blank, the white parts at the arm and post feet are gone, the grain is halved and now matches the Tropos, and the shadow in front of the deck now carries red. The ground is identical to the live frame. Its red is no deeper than live: the front face is slightly less red and the platter's white band is gone. Fog: not as it stands. It fixes the same faults (arm, lettering, white feet, grain), and the clear deck now lets light into its shadow (10-13 L* lighter in front). But it adds a new fault visible at page size: the right side face glows white at L* 99, brighter than the floor at 93, with hard-edged gray stripes. It is the brightest thing in the frame and reads as an edge-lit bar or pasted white blocks. It also breaks the house rule (a), which is why the README chose 'none' for Fog; this frame uses a twentieth. Re-render Fog with the edge lamp at none, or with whatever stops the light reaching the far edge, then check that face against the floor. If the lettering on the live label has to go today, v3 Fog is the lesser fault, but it is not a pass.",
+    "q2_other_six": "Not yet the same way. The ground, camera, shadow, contact and grain are ready to reuse unchanged. Two things carry over badly. First, the edge-lamp light travels through the slab and comes out at the far (right) side face, with hard shadows of the holes. At a twentieth in a clear deck that face already reaches L* 99 against a floor of 93. Dust (a tenth) and Acid and Ice (a third) pass much more light than Ember and will likely glow on that face as well, so in every tint measure the right side face (x 1070-1415, y 940-1270) against the floor beside it, not only the top and front medians. Second, the dark tints (Poison, Haze, Smoke) will probably read like Ember: dark brown-black fronts with colour only at the edges. Ember carries 6.6% strongly coloured deck pixels against the Tropos's 44%. The top's soft-sheen look and the seat discs seen through the front face will repeat in all six.",
+    "q3_reads_wrong": "At visitor size: in Fog, the white glowing right side face with gray stripes and a stepped notch (blocking), and secondarily the white crescent in front of the arm base. In Ember, the deck reads oxblood or brown-black rather than the Tropos red, with the red only at the left margin and in the gap, and the red crescent under the arm base reads like a small red lamp. At full size only: in both, a top without crisp reflections; the post seats seen sharply through what should be satin edges (four discs in Fog, two lens marks in Ember); the neutral bumper in Ember's red gap; the arm tube crossing in front of the rest post with the post's cap above it (unsure); a dark block in Fog's platter band; grain that is the same amount at every brightness. The ground, the shadow, the contact with the floor and the blank label all read as a photograph and as the same studio as the Tropos.",
+    "measured": [
+     "Ground L* (a*, b*), normalised patches, Tropos Ember / Fog v3 / Ember v3 / live: top-left 82.6 / 83.6 / 83.0 / 83.1; top-centre 95.0 / 95.3 / 95.2 / 95.2; top-right 92.9 / 93.4 / 93.1 / 93.1; mid-left 87.2 / 86.6 / 85.9 / 85.9; mid-right 94.2 / 94.3 / 94.2 / 94.3; low-left 96.3 / 94.7 / 94.7 / 94.8; low-centre 91.2 (Tropos Fog 92.6) / 86.8 / 86.8 / 86.9; low-right 94.1 / 88.2 / 88.2 / 88.2; upper-mid-left 85.6 / 76.3 / 75.1 / 75.2; upper-mid-right 91.9 / 94.9 / 94.9 / 94.9. a* -0.5 to -0.8 in the Mantle frames against -0.7 to +0.5 in the Tropos; b* 3.2-6.0 against 3.7-5.2. New minus live: 0.0 to 0.1 L* everywhere in Ember, up to 1.1 in Fog.",
+     "Contact profile, floor L* at +3/6/10/20/40/80/160 px below the product: Ember v3 x 700: 48.7/56.5/64.0/69.1/73.0/83.7/89.1. Fog v3 x 700: 48.8/56.4/65.4/74.8/86.6/87.8/88.9. Tropos Ember (scaled to 1600x2000) x 800: 52.4/55.6/60.5/69.3/80.6/90.2/92.4.",
+     "Shadow in front of the base, L* new/live: Fog 87.7/76.0, 77.2/63.9, 63.3/53.1; Ember 77.1/75.7, 65.0/63.7, 55.3/53.0. Ember floor a* +4.9, +5.6, +3.2 (live -0.3, -0.3, -0.5).",
+     "Grain, high-pass std (minus Gaussian blur r3) on flat ground at 1000x1250: Ember v3 and Fog v3 0.76-0.79; Tropos Ember and Fog 0.77-0.93 (1.23 in the dark upper left); live 1.59-1.72.",
+     "Fog v3 right side face, 90th-percentile L* along it from x 1087 to 1397: 99 99 99 99 99 86 99 98 80 99. Live: 57 60 65 67 66 62 50 59 76 74. v2: 47-68. Ember v3: 31-39. Floor beside it L* 93.1 and 92.9.",
+     "Fog zone x 1180-1420, y 1040-1200: px at 250+ in all channels 1371 (live 0, v2 0); px above L* 95: 5568 (live 12, v2 3). Whole frame at 250+: Fog v3 2837, live 2208.",
+     "Fog deck polygon, px brighter than L* 94: v3 13964 (at the right side face, x 1000-1400, y 940-1260); live 25877 (at the left top margin, x 100-400, y 860-1100).",
+     "Fog arm-base front rim (x 1140-1330, y 985-1025): 932 px above L* 85, 357 px at 240+, max L* 98.8 (live 223, 0, 95.0). Ember same zone max L* 44.6, none at 240+.",
+     "Arm pillar foot (x 1170-1260, y 930-1000) px at 200+: Ember 0 (live 717), Fog 90, all at y 930-936 and not the foot (live 835). Rest post foot (x 1095-1145, y 960-1000) px at 240+: Ember 0, Fog 1 (live 82 and 87).",
+     "Ember deck (x 140-1430, y 760-1360, L* below 75): share with chroma above 40 is 6.6% (live 5.9%, v2 8.1%, Tropos Ember 44.0%); above 20 is 13.3% (live 17.1%, Tropos 65.3%); median L* 15.7, median C* 4.4 (Tropos 19.9 and 34.9).",
+     "Ember faces, L* C* hue, v3 / live: left top margin 52.4 71.1 33 / 58.2 69.2 32; top front-right 19.8 11.8 / 19.2 12.5; front face mid 7.3 4.5 / 11.2 14.0; base top left (gap) 23.6 22.2 / 26.0 28.3. Tropos Ember cabinet lower front 32.9 62.4 36; horn 43.6 87.0 39.",
+     "Ember green channel along x 1050, y 1000 to 1230 in steps of 10: v3 0 0 0 1 3 6 12 22 31 38 44 45 48 49 47 45 41 40 40 39 39 39 32 20; live 2 11 5 10 10 14 17 24 32 36 40 39 41 40 39 41 39 41 42 44 42 44 35 21.",
+     "Ember left strip (x 150-620, y 780-1060), px with linear red above the open floor's red: v3 8447 (mean rgb 248/104/106), live 13289.",
+     "Ember bumper (x 675-702, y 1186-1200): L* 19.9, a* +2.7, b* +1.6 (live 30.0, +0.8, +0.3). Fog cartridge body L* 18.4, neutral.",
+     "Evidence folder: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-photo/ (visitor_480_new_live_tropos.png and homerow_300_E3_F3_TE_TF_EL_FL.png are the page-size views)."
+    ]
+   }
+  },
+  {
+   "part": "optics",
+   "found": {
+    "findings": [
+     {
+      "id": "ember-body-not-red",
+      "severity": "blocking",
+      "frame": "Ember",
+      "where": "top over the base x 600-1300, y 1040-1160; front face band from (158,1005) to (1060,1260); right face band from (1060,1260) to (1415,940)",
+      "what": "Only the top's left quarter (x 160-400, y 830-1010) and the crescent under the arm base carry red. Everywhere else the deck is brown, black or gray. Top right of the platter: rgb 49/32/27, L* 14.4, C 8.8. Top in front of the platter: rgb 19/2/2, L* 2.2. Front face: rgb 28/26/22, L* 9.3, a* 0.1, C 3.2. Right face: rgb 95/88/83, L* 37.3, a* 2.2, C 4.6. The lit strip in the same frame is 221/80/76 (L* 55, C 64) and the Tropos Ember body is L* 29.5, C 61. At 480 x 600 and in the 300 px row beside the Tropos Ember, the deck reads as a dark wine-brown slab with one red corner. The top is a little browner than the live frame (C 8.8 against 13.6 right of the platter; L* 2.2 against 8.8 in front of the platter). The faces are the same as the live.",
+      "expected": "A red cast slab can only send red out of its body, so any face that glows at all glows red. Satin edges, as designed, would show a soft red glow from light carried through the slab. Neutral black and gray faces (a* about 0) mean only surface reflection reaches the camera. On a deep-red top, the parts mirrored by the polished top should sit against deep red, not under an even brown veil.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/page_size_new_live_tropos.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/home_row_300.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/E_rightface_x2.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/E_frontface_left_x2.png"
+     },
+     {
+      "id": "fog-right-face-lightbox",
+      "severity": "blocking",
+      "frame": "Fog",
+      "where": "right side face: x 1075-1240, y 1100-1250; x 1260-1340, y 1020-1110; corner x 1385-1415, y 945-1000",
+      "what": "The right side face of the clear plinth is a row of hard-edged white blocks at 255. 10,005 px are above L* 95.2, the lane's floor value, and 2,460 px are at 250 or more in all three channels. The floor never reaches 250 anywhere in either frame: the Ember frame has 0 such pixels. Block means: L* 93.4 (p95 99.7) and L* 78.1 (p95 99.4). The blocks switch from 252 to about 190 and from 184 to 51 within 3 px (rows 1120-1140), and one white tab stands out at x 1310-1340, y 1025-1050. The live frame was L* 50.9-74.1 in the same place, so this is new. At page size it reads as a lit white light box. This contradicts the lane's 'brightest 85.8 against 95.2'.",
+      "expected": "Nothing on the deck brighter than the floor. A satin edge lit by a lamp at a twentieth would glow softly and evenly, below the floor's L* 88-95, with no hard-edged rectangles.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/F_rightface_x2.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/F_brighter_than_floor_map.png (magenta = brighter than the brightest floor)"
+     },
+     {
+      "id": "edges-render-polished",
+      "severity": "blocking",
+      "frame": "both",
+      "where": "front face band (158,1005)-(1060,1260); right face band (1060,1260)-(1415,940); left corner x 150-200, y 990-1060",
+      "what": "The plinth's side faces behave like clear polished glass, not satin. (1) Through the front face, two post seats show as crisp lens shapes: x 450-512, y 1083-1103 and x 770-830, y 1155-1180. In Fog they look like shiny coins with glints at both ends. A third seat, seen through the top and the satin underside (x 800-900, y 1085-1125), is properly blurred, so the underside is satin but the front is see-through. (2) Fog's right face shows hard-edged images that switch within 3 px. (3) Fog's left corner shows the background through it. (4) Ember's faces are neutral black and gray with no red glow. The lane's own reason for the marks ('glossy circles seen through the front') works only if the front is clear.",
+      "expected": "The design gives satin edges with a 1 mm polished chamfer. Through a satin face nothing behind it is seen sharply: the face glows softly in the slab's own color, red on Ember. This misstates the product and causes findings 1 and 2. Every tint made from this scene will carry it.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/seats_and_bumper_x4_E(gain2)_top_F_bottom.png (tiles 1-2 seats through the front face, tile 3 seat through the top); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/F_frontface_left_x2.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/F_rightface_x2.png"
+     },
+     {
+      "id": "top-still-satin",
+      "severity": "fix",
+      "frame": "Ember",
+      "where": "plinth top right of the platter, x 820-1400, y 960-1250",
+      "what": "On the red top, the green channel holds only the top's reflection. It shows a smooth veil of G 50-58 with no sharp mirror image of the lift post, the arm pillar, the arm tube, the headshell or the platter rim. Dark-to-veil edges ramp over 30-40 px; at row 1040, G goes 3, 15, 39, 51 across x 1050-1080. The veil is not dark: at about 13% Fresnel it mirrors an environment about a quarter of white. So 'a dark sky, so little contrast' does not explain the missing images. Same as the afternoon (optics-3).",
+      "expected": "At roughness 0.004 and about 66 degrees from the normal, the top would mirror the black parts crisply as dark shapes against that veil, with edges as sharp as the parts. The blur seen is that of a satin face, or of a denoiser smearing reflections. The even veil is also part of why the top reads brown.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/E_green_x4gain_topright.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/E_green_x3gain_topleft.png"
+     },
+     {
+      "id": "fog-arm-base-white-ring",
+      "severity": "fix",
+      "frame": "Fog",
+      "where": "x 1140-1310, y 995-1025 (front rim of the arm base flange)",
+      "what": "The bore glow shows in Fog as a bright white-silver crescent and ring around the arm base flange. p95 is L* 97.8; 381 px are above L* 95.2 (brighter than the floor) and 203 px are at 200 or more in all channels near the pillar foot. At page size it reads as a white washer or metal ring under the arm base, much like the white part flagged this afternoon. In Ember the same light is a red crescent, mean rgb 138/14/13, max R 206, unclipped. That is believable in kind.",
+      "expected": "Light leaving through the bore wall seen through the top is plausible, but it should stay below the floor and fade softly. It should not read as a separate bright part. With satin edges and a dimmer lamp it would be weaker.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/headshell_armbase_bumper_x2_E_top_F_bottom.png (middle tiles); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/F_rightface_x2.png"
+     },
+     {
+      "id": "ember-left-strip-hot",
+      "severity": "note",
+      "frame": "Ember",
+      "where": "top face along the left and back-left edges, x 160-520, y 780-1010",
+      "what": "7,195 px on the plinth still have more red than the white floor (linear R above 0.892), mean rgb 249/111/113. The live frame had 12,349. The strip mean is 221/80/76 (live 237/96/94). Luminance never exceeds the floor (0 px). Reduced since this afternoon, still lit from inside rather than filtered.",
+      "expected": "Seen through the slab to the floor, red cannot exceed about 0.6-0.8 of the floor's red. Anything above that is edge-lamp light. That is acceptable near a lamp, but it is the brightest red in the frame and the only place the deck reads as Ember.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/E_brighter_than_floor_map.png (cyan = red above floor red)"
+     },
+     {
+      "id": "ember-floor-halo",
+      "severity": "note",
+      "frame": "Ember",
+      "where": "floor hugging the base outline, about 30-60 px wide; left of the base x 230-300, y 1100-1125; in front x 600-800, y 1330-1360",
+      "what": "New: a pink halo on the floor following the base outline. a* is +2.4 left of the base (live -0.2) and +3.3 in front (live -0.4), against -0.7 on the open floor. The shadowed floor under the right overhang (x 1100-1200, y 1180-1210) is L* 28.6, a* 4.4 (live 2.8): almost no red reaches the shadow. Fog has no halo, as it should not.",
+      "expected": "Right in kind: light from the red underside margin falls on the floor beside the base. Light the slab passes into the shadow under the overhang should also turn it clearly pink. It barely does.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/floor_astar_map_E_LE_F.png (a* -2..+12 mapped black..white; top new Ember, middle live Ember, bottom new Fog)"
+     },
+     {
+      "id": "fog-top-reads-frosted",
+      "severity": "note",
+      "frame": "Fog",
+      "where": "top over the base x 950-1100, y 1080-1150; left margin x 200-330, y 960-1000",
+      "what": "The top reads as clear acrylic over a frosted underside, not white plastic or smoked glass. Over the base: L* 51.2, neutral (live 40.2). Left margin: L* 85.0, b* 2.6, below the floor beside it (94.8). The live was 95.5, above the floor. That part is better than the live. The white plastic look is limited to the right face (finding 2) and the arm base ring.",
+      "expected": "As seen.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/F_left_1to1.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/page_size_new_live_tropos.png"
+     },
+     {
+      "id": "bumpers-not-milky",
+      "severity": "note",
+      "frame": "both",
+      "where": "feet under the base x 480-520, y 1205-1225 and x 800-850, y 1285-1305; dome in the gap x 672-705, y 1184-1204",
+      "what": "I found no milky part in either frame. The feet under the smoked base are black (L* 9.8 Ember, 11.7 Fog). The dome in the gap is dark (L* 14.9 Ember, 23.5 Fog). I do not know for certain which parts are meant as the bumpers.",
+      "expected": "Small milky bumpers would read as soft, light, translucent dots picking up the deck's color.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b37/critic-optics/feet_and_gap_x3_gain1.8_E_top_F_bottom.png"
+     }
+    ],
+    "afternoon_findings": [
+     "fog-top-plinth-white (photo) / optics-1: NOT CHECKABLE, no top view among these frames. In the three-quarter Fog the top is not white (over the base L* 51.2, margin 85.0, below the floor), but the right face is now clipped white (finding fog-right-face-lightbox).",
+     "fog-top-streaks / optics-2: NOT CHECKABLE (no top view). No straight streaks on the three-quarter top. The right face does carry hard-edged blocks.",
+     "fog-top-outline-lost: NOT CHECKABLE from above. In three-quarter view the edges show.",
+     "white-at-arm-foot: FIXED in Ember: 0 px at 200 or more in all channels at the pillar foot (live 717) and the rest-post foot (live 95); max at the pillar foot 155/95/90. In Fog no white part remains, but the bore glow makes a bright white ring at the flange (203 px at 200 or more, p95 L* 97.8), which reads much the same at page size.",
+     "optics-4 (red-hot flares at the feet): FIXED in Ember (no clipped red; crescent max R 206). The red crescent under the flange remains as described (mean 138/14/13).",
+     "finger-lift-detached: looks joined to the headshell in the three-quarter view of both frames; the 2-3 mm gap can only be confirmed from above (not supplied). Not my lens.",
+     "finger-lift-side: in both frames the lift appears on the side away from the record; not fully checkable at this angle.",
+     "optics-3 / top reads satin: NOT FIXED. In the green channel there are no crisp reflections; ramps run 30-40 px; the veil is G 50-58, not dark (finding top-still-satin).",
+     "front-face-lens-marks: NOT FIXED, still crisp at x 450-512, y 1083-1103 and x 770-830, y 1155-1180, and in Fog they now look like shiny coins. The lane's explanation needs a clear front face, which contradicts the satin edges (finding edges-render-polished).",
+     "ember-red-against-speaker: NOT FIXED and slightly worse. Top right of the platter C 8.8 (test frame 15.7, live 13.6) against the speaker's 61. Front face C 3.2, right face C 4.6.",
+     "optics-5 (left strip redder than a filter allows): REDUCED, not gone. 7,195 px with red above the floor's red (live 12,349); strip mean 221/80/76 (live 237/96/94); luminance above the floor 0 px.",
+     "optics-6 (red on the floor): PRESENT. A pink halo hugs the base (a* +2.4 to +3.3 against -0.7). The shadow under the right overhang stays almost neutral (a* 4.4).",
+     "optics-7 (clear deck's own shadow): only partly checkable. In Fog the floor just in front of the base is L* 87.6 against 89.1 further out, a faint shadow.",
+     "bumper-neutral-gray: CHANGED. The dome in the gap is now dark (L* 14.9 Ember, 23.5 Fog), not a light neutral gray; nothing milky is visible.",
+     "grain-and-smoothing and record-surface: NOT CHECKED (outside this lens)."
+    ],
+    "q1_replace_live": "Ember: yes. Optically it is no worse than the live frame, and it fixes the live frame's faults: the arm is parked off the record, the label is blank and the white part at the arm's foot is gone (0 px against 717). It keeps the live frame's main weakness: a wine-brown body with black and gray edges. Fog: not yet. It fixes the arm and the label, but its right side face is now a hard-edged white light box at 255 (2,460 clipped px, 10,005 px above L* 95.2), brighter than the floor, where the live frame was mid-gray. It also has a white ring under the arm base. Bring the right face below the floor first. That is a small change if the lamp is turned down or the edges are made satin.",
+    "q2_other_six": "No, not with this scene as it stands. Three things carry over to every tint. First, the edges render as clear polished glass, not satin, so each tint's faces show only reflections and inner images instead of glowing in their own color. Second, an edge lamp can push a face to clipped white: in the pale tints (Ice at a third or a tenth, Dust, Acid) expect Fog's light-box face and a bright ring at the arm base. Third, the deep tints show only brown and black over the smoked base: Poison and Smoke would read nearly black, as Ember already reads brown. Haze, with no lamp, would show faces of pure reflection. Make the edges satin, keep every face below the floor, then test one pale tint (Ice) and one deep tint (Poison or Smoke) in this view before making the set.",
+    "q3_reads_wrong": "Ember: the deck does not read as the same red as the Tropos Ember. It reads as a dark brown, oxblood or wood-like slab with one red corner and black or gray edges. A red light sits under the arm base like an LED. At full size, the polished top does not mirror the arm. Fog: the right side glows like a white light box; a white ring sits under the arm base; two shiny coin-like marks sit under the front edge. At full size the front edge looks like clear glass, where the product has satin edges.",
+    "measured": [
+     "Floor (both new frames, same as live): left-front L* 94.8-94.9, right 94.7-95.3, front center 88.6; b* 3.4-4.1. No pixel in the Ember frame reaches 250 in all channels; the Fog frame has 2,837, all on the deck.",
+     "Ember top right of the platter (950-1100, 1080-1150): rgb 49/32/27, L* 14.4, a* 6.6, b* 5.6, C 8.8 (live 53/28/24, C 13.6).",
+     "Ember top in front of the platter (600-800, 1060-1100): rgb 19/2/2, L* 2.2 (live L* 8.8).",
+     "Ember top left strip (200-330, 960-1000): rgb 221/80/76, L* 55.3, C 64.2 (live 237/96/94, L* 60.8).",
+     "Ember front face (600-700, 1135-1160): rgb 28/26/22, L* 9.3, a* 0.1, C 3.2 (live same).",
+     "Ember right face (1200-1260, 1150-1175): rgb 95/88/83, L* 37.3, a* 2.2, C 4.6 (live 36.4, C 3.5).",
+     "Ember arm base crescent (1215-1285, 1007-1016): rgb 138/14/13, L* 28.7, C 58.9; max R 206.",
+     "Ember smoked base top seen in the gap (350-450, 1120-1140): rgb 82/10/8, C 37.",
+     "Ember plinth px with linear red above the floor's red (0.892): 7,195 (live 12,349); px with luminance above the floor: 0.",
+     "Ember floor a*: left of the base +2.4 (live -0.2); in front of the base +3.3 (live -0.4); open floor -0.7; shadow under the right overhang L* 28.6, a* 4.4.",
+     "Ember top reflection (green channel): veil G 50-58; dark-to-veil ramp 30-40 px (row 1040: 3, 15, 39, 51 over x 1050-1080).",
+     "Fog top over the base: L* 51.2, neutral (live 40.2); left margin L* 85.0, b* 2.6 (live 95.5); front face L* 46.7.",
+     "Fog right face: blocks L* 78.1 (p95 99.4) and 93.4 (p95 99.7); corner 88.2 (p95 99.4); live 50.9-74.1. Of 22,044 px on the face, 10,005 have L* above 95.2 and 2,460 are at 250 or more in all channels; edges switch 252 to 190 and 184 to 51 within 3 px.",
+     "Fog arm base crescent (1140-1310, 995-1025): p95 L* 97.8; 381 px above L* 95.2; 203 px at 200 or more near the pillar foot.",
+     "Arm foot white parts: Ember 0 px at 200 or more (live 717 at the pillar, 95 at the rest post); Fog 203 (glow), live 1,008.",
+     "Seats: two crisp lens marks seen through the front face at x 450-512, y 1083-1103 and x 770-830, y 1155-1180; the seat seen through the top at x 800-900, y 1085-1125 is blurred.",
+     "Feet under the base: L* 9.8 (Ember), 11.7 (Fog); gap dome L* 14.9 (Ember), 23.5 (Fog)."
+    ]
+   }
+  }
+ ],
+ "dropped": 0
+}

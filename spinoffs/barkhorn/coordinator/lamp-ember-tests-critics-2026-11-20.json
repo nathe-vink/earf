@@ -1,0 +1,262 @@
+{
+ "results": [
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "H-beam",
+      "severity": "blocking",
+      "frame": "hemisphere-ember-off and hemisphere-ember-lit",
+      "where": "OFF: a beam from the top edge at about x 520-680, y 0, fanning down and left to about (0, 520). LIT: a hot spot at x 560-650, y 0-30 with the same beam below it",
+      "what": "There is a spotlight beam on the wall in both pendant frames. In the OFF frame a hard-edged diagonal beam runs from a source just above the frame: L* 86.5 in the beam against 81.6 beside it, and 94.4 at the top edge (peak 97.6). In the LIT frame it is still the brightest thing on the wall: peak L* 36.0 at x 604, y 4, against a wall of 11.5-21.6. It shows clearly at 480x600 and in the 300 px home row, where it reads as a stray studio light. Neither the Tropos nor the Mantle frame has it: both have a smooth, darker top-left corner. Because it comes from the camera and lights, it would repeat in all 16 pendant frames (8 tints, off and lit). It is new since the b29 pictures and comes from the higher hang.",
+      "expected": "A smooth top-left falloff like the Tropos (L* 81 in the corner) with no visible beam or source. In the lit frame, nothing on the wall brighter than the general falloff.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/h-off-topleft-900.png ; .../critic-photo/h-lit-topleft-900.png ; .../critic-photo/hemisphere-ember-off-480.png ; .../critic-photo/hemisphere-ember-lit-480.png ; .../critic-photo/row-home-300.png ; .../critic-photo/measurements.txt (all under /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/)"
+     },
+     {
+      "id": "ground-bottom-corners",
+      "severity": "fix",
+      "frame": "hemisphere-ember-off, core-ember-off",
+      "where": "Bottom-right, x 1300-1580, y 1800-2000 (both frames). Hemisphere bottom-left, x 20-300, y 1700-2000",
+      "what": "Both house frames get darker toward the bottom-right corner; the lamp frames do not. Right column at y 1950: Tropos 84.9, Mantle 86.3, Hemisphere 95.7, Core 96.6. At y 1850: 93.0 / 87.4 / 95.9 / 96.5. The house patch at bottom-right (88.4 here; 86.9 in the coordinator's own test) is missed by 7-10 L*, outside that test's 3 L* limit. The Hemisphere's lower-left is 84.5-86.7 where the Tropos is 94.5-96.7; the lane already disclosed this one. So the pendant's lower corners are the reverse of the Tropos: dark on the left, bright on the right. In the 300 px row the lamp tiles have slightly whiter bottoms than the Tropos and Mantle. Hue matches everywhere: a* -0.7 to 0.5, b* 2.8 to 5.4. All other patches are within 1.5 L*.",
+      "expected": "Bottom-right patch within 3 L* of the Tropos (about 86-89), with the same darkening toward the camera.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/bottom-strips-tropos-mantle-hemi-core.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/row-home-300.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/measurements.txt"
+     },
+     {
+      "id": "lit-rooms-differ",
+      "severity": "note",
+      "frame": "hemisphere-ember-lit vs core-ember-lit",
+      "where": "Wall patches x 100-500 and 1300-1500, y 300-500 in both frames",
+      "what": "The two lit frames do not read as the same room. The Hemisphere's wall is warm brown: L* 11.5-21.6, a* 2-4, b* 4-6. The Core's wall is a neutral mid grey: L* 30.7-36.5, a* about 1, b* about 3.5. The different dimming levels are deliberate, but seen side by side (for example a lit home-row mock) they look like two rooms. On separate product pages this does not matter.",
+      "expected": "If the lit pictures are ever shown together, the same wall hue and a closer wall level",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/lamps-ember-four.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/measurements.txt"
+     },
+     {
+      "id": "blotches-facets-1024",
+      "severity": "note",
+      "frame": "core-ember-lit (and hemisphere-ember-lit glow)",
+      "where": "Glow x 560-1100, y 1100-1400; base bands y 1560-1760, x 520-1120",
+      "what": "Denoiser blotches: a faint mottle at 100%. Band-pass amplitude is 0.37 L* sd at 100% and 0.39 at 480 px. That is the same as the old b29 lit frame (0.30) and below the real shading on the smooth OFF ball (0.46), so it does not show at 480 or 300. The Hemisphere glow measures 0.24. Facet lines: a period of about 13.6 px and 0.39-0.58 L* peak-to-peak in bands at L* 6-13; I could just see them at 100%. At 480 px they measure 0.32 peak-to-peak and are invisible. A 1024-sample pass (2.5 h) would not change anything a visitor sees. It is worth it only if the site offers a full-size zoom. Raise the segment count only if the scene is re-rendered anyway.",
+      "expected": "Invisible at 480x600 and 300 px (they are)",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/c-lit-face-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/c-lit-base-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/core-ember-lit-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/measurements.txt"
+     },
+     {
+      "id": "core-lit-window",
+      "severity": "note",
+      "frame": "core-ember-lit",
+      "where": "About x 660-940, y 820-1040",
+      "what": "A dimmed softbox shows over the glowing diffuser as a trapezoidal 'window', framed by thin housing lines at 100%. At 480 it is a faint lighter square on the glow. It reads as a real reflection on the glossy shell, not as an artifact.",
+      "expected": "Acceptable as is",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/c-lit-face-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/core-ember-lit-480.png"
+     },
+     {
+      "id": "hemi-lit-no-wall-spill",
+      "severity": "note",
+      "frame": "hemisphere-ember-lit",
+      "where": "Wall beside the shade, x 150-300 and 1350-1500, y 1150-1300",
+      "what": "The wall gets no redder near the glowing shade. a* is 2.0 to the left and 3.2 to the right, the same as the far wall (2.3 and 3.9). The only lamp light on the ground is the orange glow along the bottom edge (L* 30.0, a* 9.4, b* 17.1). That orange is consistent with 2200 K light leaving the open bottom. The missing red halo could just mean the wall is far away.",
+      "expected": "A faint red rise on the wall near the shade if the wall is within about a metre",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/h-lit-bottom-half.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/measurements.txt"
+     },
+     {
+      "id": "gland-cord",
+      "severity": "note",
+      "frame": "hemisphere-ember-off (and lit)",
+      "where": "Cord entry x 790-830, y 735-745; cord x 795-830, y 0-735",
+      "what": "The cord goes straight into the flat top face of the cap. At 100% there is no gland nut, bushing or hole edge, only a 1-2 px lip. The cap's steps read as satin black rings with soft edge highlights, which looks good. The cord's braid is a crisp, perfectly regular diamond knurl with specular dots: up close it looks more like knurled plastic than cloth, but at 480 it reads as a fine black textured cord. In the lit frame the cord and cap are pure black (the lane disclosed this). None of it is visible at visitor size.",
+      "expected": "A visible gland where the cord enters the cap, if the design has one above the cap",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/h-off-gland-3x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/h-off-cord-3x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/h-off-cap-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/h-lit-gland-3x.png"
+     },
+     {
+      "id": "core-contact-base",
+      "severity": "note",
+      "frame": "core-ember-off, core-ember-lit",
+      "where": "Base and floor, x 380-1240, y 1560-1880",
+      "what": "The Core does not float. A thin dark contact line runs under the whole bottom edge, with a soft shadow to the right on the same side as the Tropos's shadow; the 0.2 mm lift cannot be seen. In the lit frame the floor round the base takes a pink pool (L* 40-56, a* 8-14), which looks right. One look to check: on the OFF base the left and right flanks and the bottom band go nearly black, while the centre is bright red. At 480 it reads as a dark-edged frosted cone. Against the white sweep I would expect the grazing flanks of a pour over a white liner to stay lighter. The b29 base was the same.",
+      "expected": "Contact as is. Flanks perhaps less black",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/c-off-base-contact-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/c-lit-base-contact-100.png"
+     },
+     {
+      "id": "off-gap-measured",
+      "severity": "note",
+      "frame": "hemisphere-ember-off vs core-ember-off",
+      "where": "Hemisphere shade lower band x 450-1200, y 1330-1400; Core ball middle band x 560-1060, y 1130-1250",
+      "what": "The known daylight gap, measured and not reported as a fault: the Core ball's body is L* 42.4, C 75.1, h 36.5; the pendant's shade is L* 28.2, C 64.3, h 38.9. The Core is 14.2 L* lighter and 10.8 more chroma; the hue is within 2.4 degrees. The Core base centre is L* 26.0.",
+      "expected": "Owner's decision",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/measurements.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/row-home-300.png"
+     }
+    ],
+    "q1_pattern_ready": "The Core's pattern is close to ready. The Hemisphere's is not. Both pendant frames show a spotlight beam on the wall at the top left (OFF: beam L* 86.5 against 81.6 beside it, source 97.6 at the top edge; LIT: the brightest point on the wall, L* 36 against 11.5-21.6). It comes from the camera and lights, so it would be copied into all 16 pendant frames. The bottom-right ground of both lamps is 7-10 L* brighter than the Tropos and Mantle, outside the house's 3 L* test, and is worth bringing down before the seven tints are rendered.",
+    "q2_site_ready": "The Core OFF and Core LIT can go to the site at 480x600 and 300 px. The blotches and facet lines are invisible at those sizes: 0.37-0.39 L* band-pass and 0.32 L* peak-to-peak at 480. The 1024-sample pass is not worth 2.5 h unless the site shows the full 1600 px. The Hemisphere OFF and LIT should wait until the beam is gone. Otherwise they read as studio photographs.",
+    "q3_reads_wrong": "Only the pendant's stray light. In the OFF frame it is a beam fanning down from a source just above the top edge. In the LIT frame it is a bright spot at the top that pulls the eye away from the glow. Neither the Tropos nor the Mantle has anything like it. The rest reads as one studio: the grounds match the Tropos within 1.5 L* except at the bottom corners, and the hue matches (a* about 0, b* 3-5). The softbox reflections read as real softboxes, and the Core sits on the floor with its shadow on the Tropos's side. Against the b29 pictures: the Core is better (the cable stub is gone, the ground matches, and the lit frame now reads as a dimmed studio with a pink pool). The Hemisphere is mixed. Its lit frame is much better (the glow reads in a dark room), the floor and red shadow blob are gone, which suits a pendant, but the beam is new and the lower-left is now wall at 84-87 L*.",
+    "measured": [
+     "OFF grounds L* (Tropos / Mantle / Hemisphere / Core): top-left 81.0/81.5/81.6/82.8; top-right 92.9/92.7/93.2/93.7; mid-left 87.6/86.2/86.9/89.1; mid-right 94.5/94.1/93.7/93.5; low-left 96.7/95.2/86.7/96.8; bottom-left 94.5/94.0/84.5/96.7; bottom-right 88.4/87.2/95.8/96.6; a* -0.7 to 0.5, b* 2.8 to 5.4 in all four",
+     "Bottom-right corner column, x 1300-1580, at y 1950: Tropos 84.9, Mantle 86.3, Hemisphere 95.7, Core 96.6",
+     "Hemisphere beam, OFF: top-edge source 94.4 (peak 97.6), beam 86.5, wall beside it 81.6. LIT: source peak 36.0 at (604, 4), beam 14.2, wall 11.5-21.6",
+     "Tint body OFF: Hemisphere shade L* 28.2, C 64.3, h 38.9; Core ball L* 42.4, C 75.1, h 36.5 (Core +14.2 L*, +10.8 C)",
+     "Lit walls: Hemisphere L* 11.5-21.6, a* 2-4, b* 4-6, bottom glow L* 30.0, a* 9.4, b* 17.1; Core wall L* 30.7-36.5, a* about 1, b* about 3.5, floor pool L* 40-56, a* 8-14",
+     "Lit glow: Hemisphere diffuser L* 69.0, C 48.7; Core diffuser L* 62.5, C 64.2",
+     "Blotches (band-pass, L* sd): Core lit 0.37 at 100%, 0.39 at 480; b29 Core on 0.30; smooth OFF ball 0.46; Hemisphere lit glow 0.24",
+     "Facet lines on the Core lit base: period about 13.6 px, 0.39-0.58 L* peak-to-peak at 100% in bands at L* 6-13; 0.32 at 480 px",
+     "Measurement log: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-photo/measurements.txt"
+    ]
+   }
+  },
+  {
+   "part": "product",
+   "found": {
+    "findings": [
+     {
+      "id": "P1-lit-glow-clipped-pink",
+      "severity": "blocking",
+      "frame": "hemisphere-ember-lit and core-ember-lit",
+      "where": "Hemisphere glow x380-1260, y1090-1470; Core glow x470-1180, y700-1420",
+      "what": "Both lit glows are clipped in red, so they read coral to salmon-pink rather than Ember red. The red channel is at 248 or above on 80.6 % of the Hemisphere's glow pixels and 83.6 % of the Core's, and G equals B (within 2) on 100 % and 99.5 % of them. All the shading is therefore a pink-to-red hue ramp, not a change in brightness. Hemisphere glow: top RGB 251,143,143 (L* 71.0, C* 44.5, h 23.9); low RGB 249,72,72 (h 31.1). Core glow: RGB 251,98,97 (L* 61.8, C* 66.3, h 28.4). For comparison, the off bodies are h 39.2 (Hemisphere) and h 34.3 (Core), and the Tropos Ember is h 36.4. Down the Hemisphere's center column R stays at 251 from y1100 to y1440 while G=B falls from 145 to 13. At 480x600 the pendant's upper glow reads as salmon pink. Used as the pattern, the same clip would wash every other tint's lit color toward a pale version of its hue.",
+      "expected": "A lit Ember glow that stays in Ember's hue (about h 34-39) and is shaded by brightness, with R below clipping over most of the glow. At 2200 K behind a deep red, any overexposure should drift toward orange, not toward a pink G=B.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/swatches-off-vs-lit.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/visitor-hlit-480.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/lit-pair-800.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/hlit-shade-full.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/lit.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/hl.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/last.py"
+     },
+     {
+      "id": "P2-lit-lamps-do-not-match",
+      "severity": "fix",
+      "frame": "hemisphere-ember-lit vs core-ember-lit",
+      "where": "Hemisphere x600-1000, y1150-1300; Core x650-1000, y1000-1250",
+      "what": "The two lamps do not match when lit. The Hemisphere's glow center is paler and pinker (L* 69.4, C* 47.8, h 24.4) than the Core's (L* 61.8, C* 66.3, h 28.4), a CIE76 delta E of about 20. Only the Hemisphere's lower glow band (L* 60.4, C* 69.8, h 28.8) matches the Core. Side by side, the pendant reads salmon and the Core reads coral.",
+      "expected": "Lit glows of the same tint that read as one color, as the off pair is meant to.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/lit-pair-800.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/swatches-off-vs-lit.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/lit.py"
+     },
+     {
+      "id": "P3-core-base-reads-black",
+      "severity": "fix",
+      "frame": "core-ember-lit (also core-ember-off)",
+      "where": "base x430-1210, y1560-1785",
+      "what": "The Core's base reads black or near-black instead of as the lamp's own red pour over a white liner. Lit, the lower band center is L* 8.8 (RGB 59,2,1) and the flanks are L* 1.9-2.6 (RGB 22-28,2,1), while the floor just beside the base is L* 32-35. Lit-to-off, the flank-to-floor ratio is about the same (0.03-0.04 lit against 0.02-0.03 off), so the flanks just dim with the studio and get almost nothing from the 45 lm ball 50-100 mm above them. Off, the lower corners are L* 12-18 (RGB 61,18,15 and 78,29,25), dark gray-maroon. At 480 px the lit base reads as a black-maroon pedestal under a red rim, and the off base reads red with black corners.",
+      "expected": "A base that reads as Ember red over white: lit by the ball's own light when on, and without black corners when off.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/clit-base-crop.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/coff-base-crop.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/sheet-4-at-480.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/base.py"
+     },
+     {
+      "id": "P4-core-off-collar-glows",
+      "severity": "fix",
+      "frame": "core-ember-off",
+      "where": "x560-1100, y1470-1550 (top band of the base, under the ball)",
+      "what": "In the off picture a bright coral band runs across the top of the base: center RGB 248,98,99, L* 61.1, h 27.1. That is the same color as the lit glow (Core lit 251,98,97). It looks like light focused by the ball into the base. At 800 and 480 px it reads as the collar glowing faintly, as if the lamp were on, and it sets up the pink-to-black gradient down the base. With an opal centered in the ball, this much focused light is doubtful.",
+      "expected": "An off base whose top shows the tint and the studio's soft highlight, not a band in the lit glow's color.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/coff-base-crop.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/swatches-off-vs-lit.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/off-pair-800.png"
+     },
+     {
+      "id": "P5-hemisphere-lit-dark-band-under-cap",
+      "severity": "fix",
+      "frame": "hemisphere-ember-lit",
+      "where": "x400-1240, y990-1100",
+      "what": "The pendant's glow stops at a crisp elliptical edge (about y1095 at the center, higher at the sides). Above it, under the cap, sits a dark red band about 100 px (about 20 mm) tall: L* 1.8-22.5, RGB 22-115,1,0. The step down the center column is sharp, from L* 22.5 at y1080 to L* 68.6 at y1100. Visible at 480 px. A buyer reads it as the diffuser, or the light, ending short of the top of the shade.",
+      "expected": "Check against the design's opal height and LED housing. If the opal runs up to the cap, the glow should continue to it with a soft falloff, not a hard cut.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/hlit-shade-full.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/visitor-hlit-480.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/hl.py"
+     },
+     {
+      "id": "P6-cord-reads-knurled-gray",
+      "severity": "fix",
+      "frame": "hemisphere-ember-off",
+      "where": "cord x808-836, y0-737",
+      "what": "The cord is a regular raised-pyramid pattern with sharp specular points. At 2x it looks like knurled metal or molded plastic, not soft cloth braid. Its tone is mid-gray (median L* 19.6, p90 L* 40.1) against the cap's L* 0.6, so in the 480 and 800 views it reads as a gray textured rod rather than a black cord. No gland nut or strain-relief grip is shown, which matches the design.",
+      "expected": "A black cloth-braided cord: a softer, finer textile weave with low sheen, reading black beside the cap.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/hoff-gland-2x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/hoff-top-full.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/sw.py"
+     },
+     {
+      "id": "P7-core-height",
+      "severity": "note",
+      "frame": "core-ember-off",
+      "where": "ball x409-1233 at y1090; base x434-1208 at y1640; base front edge y1782",
+      "what": "The Core may stand about 5 % taller than stated. Ball 824 px = 160 mm (5.15 px/mm) and base 774 px = 150.3 mm both match. From the base's bottom ellipse (center y1641, front y1783, camera about 21.5 degrees down), the ball's center sits about 116 mm above the floor against the CAD's 107 mm, which gives about 196 mm overall against 187 mm. The neck between ball and collar is at about 50 mm against the CAD's 44 mm. The same method gives the Hemisphere 129 mm against 126 mm (+2 %), so part of this is method error.",
+      "expected": "187 mm overall, ball center 107 mm above the floor (CAD).",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/last.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/sil.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b29/core-dimensions.png"
+     },
+     {
+      "id": "P8-off-color-gap-measured",
+      "severity": "note",
+      "frame": "hemisphere-ember-off vs core-ember-off",
+      "where": "Hemisphere plain body x600-1050, y1310-1370; Core ball x600-1050, y1100-1350",
+      "what": "Known gap, measured and not counted as a fault. Measured the same way on each, with a plain-body patch below the reflections: Hemisphere L* 29.2, a* 52.1, b* 42.4 (C* 67.2, h 39.2); Core L* 42.5, a* 58.0, b* 39.9 (C* 70.4, h 34.5). The Core is 13.3 L* lighter, delta E76 about 14.7, and 4.7 degrees redder in hue. Whole-body masks (C* over 30, red hue) give medians of L* 28.6 against 41.3, a gap of 12.7. The b29 set gave 31.3 against 43.4, a gap of 12.1, so the gap has not closed. The Tropos Ember body median is L* 30.4, h 36.4: the Hemisphere sits on the Tropos and the Core about 12 L* above it.",
+      "expected": "Owner's decision (deepen the Core or not).",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/color.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/off-pair-800.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/swatches-off-vs-lit.png"
+     },
+     {
+      "id": "P9-glow-brightness-plausibility",
+      "severity": "note",
+      "frame": "both lit",
+      "where": "glows as in P1; Hemisphere floor x650-950, y1800-1990",
+      "what": "Because both glows clip, the pendant (307 lm, frame at -3 EV) and the Core (45 lm, frame at -1 EV) come out at the same in-frame brightness, so nothing in the pictures shows the difference in output. Allowing for the exposures and emitting areas, about equal luminance in frame is roughly what to expect, so the clip, not the light level, is the problem. Under the pendant the floor gets a warm wash (bottom center L* 27.4, h 61, against the wall's L* 12-20). That fits 2200 K light leaving the open bottom through the opal alone. The rim's lit edge is a saturated L* 48.7, C* 94 with an orange line beneath. Both read plausibly.",
+      "expected": "No change beyond P1.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/hl.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/lit-pair-800.png"
+     },
+     {
+      "id": "P10-hemisphere-reads-as-designed",
+      "severity": "note",
+      "frame": "hemisphere-ember-off",
+      "where": "x330-1312, y737-1502",
+      "what": "The pendant reads as itself off. Shade 983 px across (4.915 px/mm; rim ellipse center y1374, camera about 15 degrees down). Rim to top of cap measures about 129 mm against 126 mm. Cap tiers are 38.7 and 82.8 mm wide against the CAD's 40.7 and 80.7, the lower steps are 89, 108 and 120 mm, and the cap is satin black (L* 0.6). The layers show as a dark outer band at the silhouette (about 13 mm seen edge-on) in both frames. No invented lettering on either lamp.",
+      "expected": "As designed.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/hoff-body-full.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/cad-hemi-cap.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/py/sil.py"
+     },
+     {
+      "id": "P11-hemisphere-glow-streaks",
+      "severity": "note",
+      "frame": "hemisphere-ember-lit",
+      "where": "x450-1000, y1100-1250",
+      "what": "At 100 % the pendant's glow shows faint curved streaks and blotches, like the Core's known denoiser blotches. They are not visible at 480 px.",
+      "expected": "Clean glow at full size (the same fix as the Core's 1024-sample pass).",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/hlit-shade-full.png"
+     },
+     {
+      "id": "P12-lit-top-spot",
+      "severity": "note",
+      "frame": "hemisphere-ember-lit (also off as a wedge)",
+      "where": "x560-760, y0-40",
+      "what": "At the top edge, left of the cord, there is a bright spot (L* 28.8 against the wall's L* 12-20). At 480 px it reads as a light source just out of frame. In the off frame it is a soft diagonal wedge.",
+      "expected": "Ground without a hot spot at the frame edge (a photo-lens question).",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/hlit-top-full.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b35/critic-product/hoff-top-full.png"
+     }
+    ],
+    "q1_pattern_ready": "No. Most of the off pattern is fine: the Hemisphere off reads as itself, matches the CAD and matches the Tropos Ember, and the Core off reads as a red ball on its own base. The lit pattern is not. Both glows are clipped in red (R at 248 or above on 81-84 % of glow pixels, G equal to B on almost all of them), so the lit color is a pale pink-to-red ramp and not the tint. Copied to seven more tints, it would wash each tint's lit color the same way. Fix the lit exposure or view transform so the glow is shaded by brightness within the tint's hue, and settle the Core's base (off collar band, black flanks) before copying.",
+    "q2_site_ready": "Picture 1 (off): the Hemisphere is ready. The Core is usable, but its base has a glowing coral collar band and black lower corners, and it reads about 13 L* lighter than the pendant (the known gap, owner's call). Picture 2 (lit): neither is ready. The pendant's glow reads salmon-pink with a dark band under the cap, the Core's glow reads coral, the two do not match each other (delta E about 20), and the lit Core's base reads black-maroon.",
+    "q3_reads_wrong": "A buyer would see a lamp that glows pink or salmon rather than deep Ember red, the pendant's light stopping short of the cap with a dark band at the top, and the Core sitting on what looks like a black base when lit (and a red base with black corners when off). In the off Core picture the collar looks faintly lit, as if the lamp were on. The Core also looks lighter red than the pendant (known), and the pendant's cord looks gray and knurled rather than black cloth.",
+    "measured": [
+     "Off color gap, plain-body patches: Hemisphere [600,1310,1050,1370] L* 29.2, a* 52.1, b* 42.4, C* 67.2, h 39.2; Core ball [600,1100,1050,1350] L* 42.5, a* 58.0, b* 39.9, C* 70.4, h 34.5. Delta L* 13.3, delta E76 about 14.7",
+     "Off color gap, whole-body masks (C* over 30, red hue): Hemisphere median L* 28.6 against Core 41.3 (delta 12.7). b29 set: 31.3 against 43.4 (delta 12.1)",
+     "Tropos Ember body median L* 30.4, C* 61.4, h 36.4. Mantle Ember body median L* 38.8, C* 46.7, h 32.2",
+     "Lit glow, Hemisphere: top RGB 251,143,143 (L* 71.0, C* 44.5, h 23.9); low RGB 249,72,72 (L* 57.3, C* 77.6, h 31.1); center patch L* 69.4, C* 47.8, h 24.4",
+     "Lit glow, Core: center RGB 251,98,97 (L* 61.8, C* 66.3, h 28.4)",
+     "Glow clipping: R at 248 or above on 80.6 % (Hemisphere) and 83.6 % (Core) of glow pixels; G equal to B within 2 on 100 % and 99.5 %",
+     "Hemisphere lit center column: R = 251 from y1100 to y1440; G=B 145 to 13; dark band under the cap L* 1.8-22.5 (y1000-1080), then a hard step to L* 68.6 at y1100",
+     "Previous b29 on frames: glow L* 85.0, C* 19.3 (Hemisphere) and L* 81.2, C* 25.6 (Core). b35 is deeper but still clipped",
+     "Core base off: top band center RGB 248,98,99 (L* 61.1, h 27.1); mid L* 49.8; low center L* 32.8; low flanks L* 18.2 / 12.3",
+     "Core base lit: upper center L* 23.7; mid L* 15.3; low center L* 8.8; low flanks L* 2.6 / 1.9; floor beside the base L* 32-35",
+     "Hemisphere geometry: shade 983 px (4.915 px/mm); rim ellipse center y1374, b 128 px (camera about 15 degrees down); top of cap y737; rim to top of cap about 129 mm against 126; cap tiers 38.7 / 82.8 / 89 / 108 / 120 mm against CAD 40.7 / 80.7 / 89 / 97-114 / 117",
+     "Core geometry: ball 824 px = 160 mm (5.15 px/mm); base 774 px = 150.3 mm; base ellipse center y1641, front y1783 (about 21.5 degrees down); ball center about 116 mm above the floor against 107 (CAD); overall about 196 mm against 187 (method error about +2 %)",
+     "Hemisphere lit ground: walls L* 12-20.5; floor bottom center L* 27.4, a* 7.9, b* 14.4 (h 61); top-edge spot L* 28.8",
+     "Cord (off): median L* 19.6, p10 7.3, p90 40.1; cap tier L* 0.6"
+    ]
+   }
+  }
+ ],
+ "dropped": 0
+}
