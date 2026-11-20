@@ -3813,6 +3813,29 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    say what it is. SHOWN TO THE OWNER 14:02: the home row in Ember with lamps off and with lamps lit, for his choice;
    my pick is off (deep color, sits with the speaker and the turntable; the stores show lamps unlit in their grids),
    the lit frame second on the lamp's page. Fog and Smoke still rendering.
+   20 Nov 14:42 UTC, PUSH C IS HELD FOR ITS OWN CRITIC PASS. Site lane r49 7556153e38 (14:26): the fourteen items (the
+   Hemisphere order with a tint's own two pictures first; keys through the Tropos 360; phone: one thumbnail row, a
+   1.1 stage, the name on the first screen, room for the copy note; a focus ring of its own on the dots; the renders
+   line under the family row; one size line under the sentence: "51 in (1295 mm) tall", "7.9 in (200 mm) across",
+   "7.1 in (180 mm) tall", "17.7 in (450 mm) wide"; lazy loading and a 600 x 750 file for the place tiles; /lighting
+   in one row with the names row "Hemisphere in Ember · Hemisphere in Acid · Core in Ember · Core in Dust"; the hero
+   capped on upright tablets; chips and dots four and four; inches beside every measure, lumens, lux, CRI and kelvin
+   on their own rows; phone arrows 44 px; a sideways phone layout). MY CHECKS on a local copy (gate/tree3): sets,
+   links at 1440 and 390, arrows at two sizes, the visit script and the phone bar pass; looked at home, Tropos,
+   Hemisphere and Lighting on desktop, phone and tablet. NOT PUBLISHED: it changes structure, so two critics are on
+   it first (workflow wf_bc6b1889-8de, folders gate/6/page and gate/6/home). The site lane holds further changes on
+   r47 and prepares: the lamp tile and off/on pair as one switch per product, the two drawings, the Mantle cover set.
+   MANTLE, STEP 3a PASSED: the cover on, all eight, on the house ground (r48-mantle-design b839428b5b,
+   renders/2026-11-20/barkhorn/mantle-r48/mantle-house-<tint>-cover.png, 1600 x 2000): corners within 1.0 L* of the
+   Tropos front, audits 0, each cover reads as its sheet. To the site lane as picture 2 of the Mantle gallery (the
+   same camera, cover off then on), "Under a spot" third. The lane goes on: from above, the low front, the arm, the
+   back.
+   ORDERED FROM THE SPEAKER LANE (14:44, after the Ember living-room finals): a proof of the horn 360 on the house
+   ground, Ember, four frames of the 24 at 1200 x 1080, with minutes per frame, the corners against the front, and
+   steadiness from frame to frame; the run of 192 frames only after I have looked. Reason: the owner's list names
+   "studio images including the horn 360", and today's turn is 640 x 576 on a cooler gray ground.
+   NOTED FOR THE LAMPS LANE, when its batch is released: a wide frame per lamp and tint for the share cards (the tall
+   frames cannot fill 1200 x 630 without added columns: the Core with its base is taller than the band).
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
