@@ -304,7 +304,7 @@ def finish_1a(web):
 # row under it, its only caption
 BAR_NAMES = {
     'tropos-bar.webp': [('speaker', 'amber'), ('hemisphere', 'red'), ('core', 'red'), ('mantle', 'red')],      # one per kind, the largest whole one (the coordinator 12:27)          # bar-backbar
-    'bar-pendants.webp': [('hemisphere', 'red'), ('core', 'red')],
+    'bar-pendants.webp': [('hemisphere', 'red'), ('hemisphere', 'amber'), ('core', 'red'), ('core', 'orange')],     # every product and tint in the frame (13:56)
     'core-bar-table.webp': [('core', 'red')],
     'mantle-bar.webp': [('speaker', 'amber'), ('core', 'red'), ('mantle', 'red')],
 }
@@ -312,7 +312,7 @@ PNAME = {'speaker': 'Tropos', 'hemisphere': 'Hemisphere', 'core': 'Core', 'mantl
 CNAME = dict(zip(KEYS, ['Ember', 'Dust', 'Acid', 'Poison', 'Ice', 'Haze', 'Fog', 'Smoke']))
 # one list of views per product, the same order in every tint, the product alone first
 VORDER = {'speaker': ['off', 'horn-back', 'amp', 'turn', 'bar', 'habitat'],
-          'dome': ['hero', 'off', 'below', 'cap', 'rim', 'table', 'bar', 'cluster'],
+          'dome': ['hero', 'below', 'off', 'cap', 'rim', 'table', 'bar', 'cluster'],     # its own two first (the coordinator 13:56)
           'orb': ['hero', 'bar'], 'turntable': ['studio', 'cover', 'bar']}
 # Tropos's particulars and its page's facts as one list, one wording (the fuller where they differed)
 TROPOS_SPEC = [
@@ -546,7 +546,7 @@ SPEC = {
                    ('Loudness', 'Up to about 115 dB at 1 m, each'),
                    ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
                    ('Power', '100&ndash;120 V / 200&ndash;240 V, 50/60 Hz, 350 W max'),
-                   ('With a pair', 'Two power cords and a 5 m link cable between the speakers')]),
+                   ('With a pair', 'Two power cords and a 5 m (16 ft) link cable between the speakers')]),
         ('Size and weight', [('Size', '1295 high, 560 wide (the horn flush with the cabinet), 442 deep overall, 420 at the cabinet (mm); 51 x 22 x 17.4 in'),
                              ('Weight', 'About 75 kg (165 lb) each')]),
         ('Care', [('Care', '{care}')]),
@@ -554,18 +554,19 @@ SPEC = {
     'dome': [
         ('Materials', [('Shade', 'Cast acrylic in three layers: its color on the outside, over a clear shell and an opal diffuser within'),
                        ('Cap', 'Satin black anodized aluminum, with a quarter-turn catch')]),
-        ('Light', [('Light', 'About {lm} lm out of the shade in this color, and about 340 lux on a table half a meter below; CRI 90. The shade glows in its own color, and the light straight down is the lamp&rsquo;s own white: {K} K'),
+        ('Light', [('Output', 'About {lm} lm out of the shade in this color'), ('On the table', 'About 340 lux half a meter below, in every color'),
+                   ('CRI', '90'), ('Color temperature', '{K} K, the light straight down; the shade glows in its own color'),
                    ('Power', '120 V, dimmable')]),
         ('Size and hanging', [('Size', '200 mm (7.9 in) across'),
-                              ('Hanging', 'A cloth-braided cord, a standard 600 mm drop, cut to length; a canopy of satin black anodized aluminum, 150 mm across')]),
+                              ('Hanging', 'A cloth-braided cord, a standard 600 mm (23.6 in) drop, cut to length; a canopy of satin black anodized aluminum, 150 mm (5.9 in) across')]),
         ('Shades and care', [('Shades', 'In all eight colors, sold separately'),
                              ('Care', 'A quarter turn takes the shade off to wash: water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic.')]),
     ],
     'orb': [
         ('Materials', [('Ball', '{Tinted|Clear} cast acrylic, with an opal diffuser centered inside it'), ('Base', 'Its own color, satin')]),
-        ('Light', [('Light', 'A glow, not a reading light: the ball lights in its own color. About {lm} lm out of the ball in this color. The LED inside: {K} K'),
-                   ('Control', 'Touch the ring: tap to switch, hold to dim')]),
-        ('Power', [('Power', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours on its dock, on three standard LiFePO4 cells you can replace yourself'),
+        ('Light', [('Glow', 'A glow, not a reading light: the ball lights in its own color'), ('Output', 'About {lm} lm out of the ball in this color'),
+                   ('Color temperature', 'The LED inside: {K} K'), ('Control', 'Touch the ring: tap to switch, hold to dim')]),
+        ('Power', [('Battery', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours on its dock, on three standard LiFePO4 cells you can replace yourself'),
                    ('Rating', 'Designed to meet IP44, for terraces and spilled drinks')]),
         ('Size and weight', [('Size', '160 mm ball, 180 mm tall (6.3 in ball, 7.1 in tall)'), ('Weight', 'About 1.5 kg (3.3 lb)')]),
         ('Balls and care', [('Balls', 'In all eight colors, sold separately. Each comes off by hand.'), ('Care', '{care}')]),
@@ -575,10 +576,10 @@ SPEC = {
                        ('Posts', 'Four solid posts, 30 mm across, satin black'), ('Hardware', 'Satin black throughout'),
                        ('Base', 'Smoked cast acrylic, 12.7 mm, set in 35 mm all around'),
                        ('Platter', 'Cast acrylic, 300 x 21 mm, in three layers'),
-                       ('Cover', 'Included: a lift-off dust cover in the deck&rsquo;s own {tint|color}: 3 mm cast acrylic, 448 x 358 x 100 mm, about 1.1 kg. It rests on four small clear bumpers and lifts straight off; no hinges.')]),
+                       ('Cover', 'Included: a lift-off dust cover in the deck&rsquo;s own {tint|color}: 3 mm cast acrylic, 448 x 358 x 100 mm (17.6 x 14.1 x 3.9 in), about 1.1 kg (2.4 lb). It rests on four small clear bumpers and lifts straight off; no hinges.')]),
         ('Playing', [('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'), ('Speeds', '33 and 45, by a button'),
                      ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black, fitted'),
-                     ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
+                     ('Phono stage', 'Built in, for moving-magnet cartridges'),
                      ('Outputs', 'RCA line outputs and an earth post; a switch picks the built-in phono stage or bypass'),
                      ('Power', 'Two supplies at the wall: Rega&rsquo;s Neo PSU drives the motor; the phono stage runs on its own 18 V adapter.')]),
         ('Size and weight', [('Size', '450 wide, 360 deep, 161 high to the top of the arm; 196 high with the cover on (mm); 17.7 x 14.2 x 6.3 in (7.7 in with the cover)'),
@@ -1225,4 +1226,79 @@ def fix_6(p, web):
 @media (min-aspect-ratio: 1/1) and (max-width: 960px) and (max-height: 640px) { .hs-hero .hs-pt[href^="#hemisphere"] { display: none } }
 /* from 961 to 1060 px the name "Tropos in Acid" would touch "See the colors" just above it: it opens a little lower */
 @media (min-width: 961px) and (max-width: 1060px) { .hs-hero .hs-pt.hs-w[href^="#speaker"] .hs-label { translate: 0 14px } }
+""")
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The last critic pass, push C (the coordinator, 20 Nov 13:56)
+SIZEL = {'speaker': '51 in (1295 mm) tall', 'dome': '7.9 in (200 mm) across', 'orb': '7.1 in (180 mm) tall', 'turntable': '17.7 in (450 mm) wide'}
+
+
+def fix_7(p, web):
+    from PIL import Image
+    # C2: Left and Right always step through the pictures; the horn turns by keys only while the picture itself has focus
+    p.sub("  if (!focus && view === 'turn' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {",
+          "  if (!focus && view === 'turn' && document.activeElement === stage && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {")
+    # C6: Enter on the picture does what a click does; a dot chosen with the keys keeps the focus
+    p.sub("stage.addEventListener('keydown', e => keys(e, false));",
+          "stage.addEventListener('keydown', e => keys(e, false));\n"
+          "stage.addEventListener('keydown', e => { if (e.key !== 'Enter' || view === 'turn' || view === 'spin') return; const s = src(BY[cur], view); if (s && s.src) { e.preventDefault(); window.open(s.src, '_blank', 'noopener'); } });")
+    p.sub("  WANT = view; history.replaceState(null, '', location.pathname + h); dispatchEvent(new HashChangeEvent('hashchange')); }, true);",
+          "  WANT = view; history.replaceState(null, '', location.pathname + h); dispatchEvent(new HashChangeEvent('hashchange'));\n"
+          "  const f = document.querySelector(`#swatches a[href=\"${h}\"]`); if (f) f.focus({ preventScroll: true }); }, true);")
+    # C8: one size line under the sentence, inches first
+    p.sub('<p class="line" id="p-line"></p>', '<p class="line" id="p-line"></p>\n        <p class="sizel" id="p-size"></p>')
+    p.sub("function renderSpec(P, c) {", f"const SIZEL = {json.dumps(SIZEL)};\nfunction renderSpec(P, c) {{ document.getElementById('p-size').textContent = SIZEL[P.id] || '';")
+    # C7: the home's family row says what the gallery says
+    p.rest, n = re.subn(r'(<section class="band mk" id="family">.*?<div class="mk-wide ftiles">.*?</a></div>)(</section>)',
+                        r'\1<div class="wrap"><p class="render-note">Pictures are renders. Nothing is built yet.</p></div>\2', p.rest, count=1, flags=re.S)
+    assert n == 1, 'fix_7: the family note'
+    # C9: lazy where it was lost; the place tiles at the slot's size
+    p.sub('<figure class="lt-room"><img src="img/rc/bar-pendants.webp"', '<figure class="lt-room"><img loading="lazy" src="img/rc/bar-pendants.webp"')
+    p.rest, n = re.subn(r'(<a class="lt-pic"[^>]*><img )', r'\1loading="lazy" ', p.rest)
+    assert n == 2, ('fix_7: lt-pic lazy', n)
+    for k in KEYS:
+        big = os.path.join(web.IMG, 'rc', f'{k}-habitat.webp')
+        im = Image.open(big); assert im.size == (1200, 1500), ('fix_7: habitat', k, im.size)
+        im.convert('RGB').resize((600, 750), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'{k}-habitat-600.webp'), 'WEBP', quality=86, method=6)
+        p.rest, n = re.subn(r'(<a class="place" href="#speaker-%s/out"><img src="img/rc/%s-habitat\.webp" width="1200" height="1500")' % (NAMES[k], k),
+                            r'\1 srcset="img/rc/%s-habitat-600.webp 600w, img/rc/%s-habitat.webp 1200w" sizes="(max-width: 700px) 76vw, 25vw"' % (k, k), p.rest)
+        assert n == 1, ('fix_7: place srcset', k, n)
+    p.css("""
+/* the last critic pass, push C (the coordinator, 13:56) */
+.sizel { margin: -8px 0 0; font-size: 15px; color: var(--muted) }
+.sizel:empty { display: none }
+.share-note { min-height: 1.5em; margin: 0 } .share-note:empty { display: block !important }
+/* C6: focus is its own ring, outside the chosen one, and shows on the chosen dot too */
+.swatches a:focus { outline: none } .swatches a:focus-visible { box-shadow: 0 0 0 4px var(--page), 0 0 0 6px #1A5FD0 }
+.swatches a[aria-current="true"]:focus-visible { box-shadow: 0 0 0 4px var(--page), 0 0 0 6px #1A5FD0 }
+/* C14: the dots four and four where one line does not fit beside the picture */
+@media (min-width: 861px) and (max-width: 1260px) { .swatches { display: grid !important; grid-template-columns: repeat(4, 44px); gap: 4px 8px !important } }
+/* C12: the chips four and four where one line does not fit */
+@media (min-width: 480px) and (max-width: 1000px) { #family .tint-pick { display: grid !important; grid-template-columns: repeat(4, max-content); justify-content: start } }
+/* C11: on an upright tablet the hero's picture is capped so its line and buttons show */
+@media (max-aspect-ratio: 1/1) and (min-width: 560px) { .hs-hero .hero-photo { width: min(100%, calc((100svh - 330px) * 0.8)); margin-inline: auto } }
+/* C10: /lighting, the room and two compact tiles filling the row, both whole on the first screen */
+@media (min-width: 861px) {
+  .lt-grid { grid-template-columns: auto minmax(0, 1fr) !important; gap: 24px }
+  .lt-tile { grid-template-columns: minmax(0, 18%) minmax(0, 1fr); padding: 16px 18px; gap: 18px }
+  .lt-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px; align-items: center }
+  .lt-body .ft-kind { grid-column: 1 / -1; margin: 0 } .lt-body h2 { margin: 0 } .lt-body .cta-btn { grid-column: 2; grid-row: 2 }
+  .lt-body .dots-row { grid-column: 1 / -1; margin: 8px 0 0 !important; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)) }
+}
+@media (max-width: 700px) {
+  /* C3: one row of thumbnails that scrolls sideways */
+  .thumbs { flex-wrap: nowrap !important; overflow-x: auto !important; scrollbar-width: none }
+  /* C4: less air above the picture, so the name is on the first screen */
+  .pdp { padding-top: 0 !important } #pdp .crumbs { margin: 0 } .cap { min-height: 3.2em }
+  .stage { height: min(var(--cap), calc(100cqw * 1.1)) !important }
+  /* C14: the arrows 44 px */
+  .gallery .nav { width: 44px !important; height: 44px !important } .gallery .nav.prev { right: 62px !important } .gallery .count { right: 114px !important; bottom: 19px !important }
+}
+/* C14: a phone held sideways, the picture beside the words */
+@media (orientation: landscape) and (max-height: 520px) and (max-width: 960px) {
+  .pdp { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important; gap: 20px !important }
+  .pcol > .spec2 { grid-column: 1 / -1 }
+  .buy { position: static !important }
+}
 """)
