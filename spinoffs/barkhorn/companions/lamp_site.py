@@ -1042,6 +1042,9 @@ def build(frame, samples, scale):
         # path guiding (Cycles' OpenPGL, CPU): the light that reaches the paper through the shade's clear layers is a
         # caustic of 24 small LEDs; guiding samples it better (no clamp, no denoiser: an unbiased estimator still)
         sc.cycles.use_guiding = os.environ.get('GUIDING', '1') == '1'; sc.cycles.use_surface_guiding = True
+    if kind0 == 'orb' and os.environ.get('GUIDE_ORB') == '1':
+        # (2026-11-20, a test) path guiding for Core too: its light reaches the floor through the ball, a refracted path
+        sc.cycles.use_guiding = True; sc.cycles.use_surface_guiding = True
     sc.render.filepath = os.environ.get('LAMP_OUT') or os.path.join(OUT, frame + '.png')
     lg = os.environ.get('LIGHTGROUPS')           # a path: the LEDs in their own light group, the rest in 'studio'
     if lg:
