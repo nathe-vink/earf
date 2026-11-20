@@ -5,6 +5,11 @@
       "source": "/s/colour-:name",
       "destination": "/s/color-:name",
       "permanent": true
+    },
+    {
+      "source": "/colors/:name",
+      "destination": "/tropos/:name",
+      "permanent": true
     }
   ],
   "headers": [
