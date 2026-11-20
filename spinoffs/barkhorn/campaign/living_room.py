@@ -63,8 +63,10 @@ SPK_Y = round(BACK - SPK_GAP - TROPOS_D / 2, 4)
 CONSOLE = {'w': 1.5, 'd': 0.45, 'h': 0.64}
 CON_Y = round(BACK - 0.06 - CONSOLE['d'] / 2, 4)
 TOP = CONSOLE['h']
-MANTLE = (-0.24, CON_Y - 0.02, TOP + 0.001, 0.0)
-CORE = (0.5, CON_Y - 0.04, TOP)
+# (proof 2: the sun crosses the console's top in a band at its front; Mantle and the Core moved into it, Mantle turned
+# 30 degrees toward the window so its Ember plinth's lit face shows to the lens)
+MANTLE = (-0.24, CON_Y - 0.06, TOP + 0.001, -30.0)
+CORE = (0.5, CON_Y - 0.155, TOP)           # at the console's front edge: the sun's band on its top is its front 6 cm
 SOCKETS = (-1.85, 2.1)                          # the two outlets, either side of the pair, in frame
 CHAIR = (-0.15, -1.6, 180.0)                    # its back to the lens, across the frame's foot, below the speakers' feet
 CAM_A = {'position': [0.1, -3.05, 1.5], 'target': [0.0, 1.6, 1.0], 'lens_mm': 32.0, 'level': True, 'fstop': 8.0,
@@ -78,12 +80,14 @@ def _floor():
 
 
 def _rug():
-    """A wool rug with pile and a bound edge: a field of the kit's wool (fibres, twist and clumps) inside an 80 mm border
-    band a shade darker, 16 mm thick, its edge rounded over (the field 1 mm proud, so no two faces lie in one plane)."""
-    return [{'kind': 'kit', 'shape': 'box', 'size': [2.4, 1.7, 0.016], 'position': [0.0, 0.15, 0.0045],
-             'material': 'wool', 'color': '#5E5244', 'ease': 0.007},
-            {'kind': 'kit', 'shape': 'box', 'size': [2.24, 1.54, 0.0165], 'position': [0.0, 0.15, 0.0045],
-             'material': 'wool', 'color': '#8E806A', 'ease': 0.004}]
+    """A wool rug with pile and a bound edge: a herringbone wool field (photographed: its weave and pile in the texture)
+    inside an 80 mm border band much darker, 16 mm thick, its edge rounded over (the field 1 mm proud, so no two faces
+    lie in one plane). (Proof 2: the kit's wool has a strong sheen, and seen this low it went white and flat.)"""
+    wool = {'material': 'pbr', 'texture': 'poly_wool_herringbone', 'tex_res': '2k'}
+    return [{'kind': 'kit', 'shape': 'box', 'size': [2.4, 1.7, 0.016], 'position': [0.0, 0.15, 0.0045], 'ease': 0.007,
+             **wool, 'tint': '#3E352C', 'tint_mix': 0.75, 'gain': 0.55},
+            {'kind': 'kit', 'shape': 'box', 'size': [2.24, 1.54, 0.0165], 'position': [0.0, 0.15, 0.0045], 'ease': 0.004,
+             **wool, 'tint': '#9A8A72', 'tint_mix': 0.45, 'gain': 0.85}]
 
 
 # (american_walnut_veneer averages #726E69, a grey: walnut_veneer_02, #A98971, deepened a little toward walnut)
