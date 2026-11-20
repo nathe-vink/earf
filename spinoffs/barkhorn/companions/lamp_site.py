@@ -301,8 +301,8 @@ def build(frame, samples, scale):
                     f_.normal_flip()
             me = bpy.data.meshes.new(f'opal-edge-{tint}'); bm.to_mesh(me); bm.free(); me.materials.append(clr)
             eo = bpy.data.objects.new(f'opal-edge-{tint}', me); bpy.context.scene.collection.objects.link(eo); eo.location = c
-            if os.environ.get('LIP_CLOSE', '0') == '1':
-                # (2026-11-20, a test) the tint shell's own lip, r 97 to 100 at the rim plane, polished: the shell is a solid
+            if os.environ.get('LIP_CLOSE', '1') == '1':
+                # (2026-11-20, the default since: the white line along the rim was the open lip) the tint shell's own lip, r 97 to 100 at the rim plane, polished: the shell is a solid
                 # (the CAD's), its two spheres were open there
                 bm = bmesh.new(); n_ = 256
                 ra = [bm.verts.new((0.097 * math.cos(2 * math.pi * k / n_), 0.097 * math.sin(2 * math.pi * k / n_), 0.0)) for k in range(n_)]
@@ -331,7 +331,10 @@ def build(frame, samples, scale):
             part('out-dome-pendant', 'white-disc', white, c)
             part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), c)
             part('out-dome-pendant', 'pins', steel, c)
-            part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
+            if os.environ.get('GASKETS', '0') == '1':
+                # (2026-11-20) off by default: two 1 mm silicone rings sandwiched under the clamp ring and the collar's
+                # flange, unseen in the lamp; their faceted STL pierced the smooth shell and drew two rows of dots
+                part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
             part('out-dome-pendant', 'cord', braid_mat(f'cord-braid-{tint}') if os.environ.get('BRAID', '1') == '1' else SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
             part('out-dome-pendant', 'carrier', an, c)
             part('out-dome-pendant', 'stem', an, c)
