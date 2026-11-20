@@ -1302,3 +1302,90 @@ def fix_7(p, web):
   .buy { position: static !important }
 }
 """)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Prepared on r47 while push C is under the critics (the coordinator, 20 Nov 14:33)
+DIMS = {'speaker': ('tropos', 'Tropos, front and side, with its height, width and depth in inches and millimeters'),
+        'turntable': ('mantle', 'Mantle from above and from the front, with its cover off and on, with its sizes in inches and millimeters')}
+
+
+def fix_8(p, web):
+    """The dimension drawings with Specifications: a picture the visitor can enlarge (the drawing's own SVG opens on a click)."""
+    from PIL import Image
+    import shutil
+    dims = {}
+    for pid, (f, alt) in DIMS.items():
+        src = os.path.join(web.ROOT, 'spinoffs', 'barkhorn', 'dims-site', f'{f}-dims')
+        im = Image.open(src + '.png').convert('L')
+        im.save(os.path.join(web.IMG, 'rc', f'dims-{f}.webp'), 'WEBP', lossless=True, method=6)
+        shutil.copy(src + '.svg', os.path.join(web.IMG, 'rc', f'dims-{f}.svg'))
+        dims[pid] = {'src': f'img/rc/dims-{f}.webp', 'svg': f'img/rc/dims-{f}.svg', 'w': im.width, 'h': im.height, 'alt': alt}
+    p.sub('<h2 id="p-spec-h">Specifications</h2>',
+          '<h2 id="p-spec-h">Specifications</h2><figure class="dims" id="p-dims" hidden><a target="_blank" rel="noopener"><img loading="lazy" alt=""></a></figure>')
+    p.sub("function renderSpec(P, c) {",
+          f"const DIMS = {json.dumps(dims)};\n"
+          "function renderDims(P) { const f = document.getElementById('p-dims'), d = DIMS[P.id]; f.hidden = !d; if (!d) return;\n"
+          "  const a = f.querySelector('a'), i = f.querySelector('img'); a.href = d.svg; a.setAttribute('aria-label', d.alt + ' (opens the drawing)');\n"
+          "  if (i.getAttribute('src') !== d.src) { i.src = d.src; i.width = d.w; i.height = d.h; i.alt = d.alt; } }\n"
+          "function renderSpec(P, c) { renderDims(P);")
+    p.css("""
+.dims { margin: 4px 0 24px } .dims a { display: inline-block; max-width: 100%; cursor: zoom-in }
+.dims img { display: block; width: auto; max-width: 100%; height: auto; max-height: min(78svh, 720px); background: #fff; border-radius: 4px }
+""")
+
+
+# the lamps on the light ground: one switch, the owner's (off: the tiles and picture 1 show the lamp off; on: lit)
+LAMP_LEAD = 'off'
+LAMP_HOUSE = 'renders/2026-11-20/barkhorn/lamp-site/house/{f}-{n}-{state}.png'     # r32-lamps-final, from 2026-11-20
+HOUSE_LABEL = {'off': 'Off', 'on': 'Lit'}
+
+
+def fix_9(p, web):
+    """Per lamp: when all eight tints have their off and lit pictures on the light ground, the tile (home row, the foot's
+    family row, /lighting) is the LAMP_LEAD one and the gallery opens on the pair, LAMP_LEAD first. A lamp with any tint
+    missing keeps today's files everywhere: a row never mixes grounds within one product."""
+    from PIL import Image
+    i, j, D = _data(p)
+    ready = []
+    for pid, f in (('dome', 'hemisphere'), ('orb', 'core')):
+        paths = {(k, st): os.path.join(web.ROOT, LAMP_HOUSE.format(f=f, n=NAMES[k], state=st)) for k in KEYS for st in ('off', 'on')}
+        if not all(os.path.exists(x) for x in paths.values()):
+            continue
+        ready.append(pid)
+        other = 'on' if LAMP_LEAD == 'off' else 'off'
+        for k in KEYS:
+            n = NAMES[k]; views = D['lamps'][pid]['colours'][k]['views']
+            for st in ('off', 'on'):
+                im = Image.open(paths[(k, st)]).convert('RGB')
+                assert abs(im.width / im.height - 0.8) < 1e-3, ('fix_9: not 4:5', f, n, st, im.size)
+                im.resize((1200, 1500), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'{f}-{n}-house-{st}.webp'), 'WEBP', quality=86, method=6)
+                im.resize((336, 420), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'{f}-{n}-house-{st}-th.webp'), 'WEBP', quality=82)
+                views[f'house-{st}'] = {'src': f'img/rc/{f}-{n}-house-{st}.webp', 'w': 1200, 'h': 1500, 'th': f'img/rc/{f}-{n}-house-{st}-th.webp'}
+                if st == LAMP_LEAD:
+                    im.resize((800, 1000), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'tile-{f}-{n}.webp'), 'WEBP', quality=86, method=6)
+        name = D['lamps'][pid]['name']
+        # the pair first in the gallery, the lead one first; their labels; the dark-room pictures say where they are
+        a = p.rest.index(f'const LAMP_VIEWS = {{'); b = p.rest.index(f'{pid}: [', a) + len(f'{pid}: [')
+        p.rest = (p.rest[:b] + f"['house-{LAMP_LEAD}', '{HOUSE_LABEL[LAMP_LEAD]}', c => `{name} in ${{c.name}}, {'switched off' if LAMP_LEAD == 'off' else 'lit'}.`], "
+                  f"['house-{other}', '{HOUSE_LABEL[other]}', c => `{name} in ${{c.name}}, {'lit' if other == 'on' else 'switched off'}.`], " + p.rest[b:])
+        for old, new in (("['hero', 'Lit',", "['hero', 'In the dark',"), ("['off', 'Off',", "['off', 'Off, in the dark',")):
+            c_ = p.rest.find(old, b, p.rest.index('],', b) if False else len(p.rest))
+            e_ = p.rest.find(']],', b)          # the end of this lamp's list
+            if 0 <= c_ < e_:
+                p.rest = p.rest[:c_] + new + p.rest[c_ + len(old):]
+        vo = re.search(r'"%s": \[([^\]]*)\]' % pid, p.rest[p.rest.index('const VORDER = '):])
+        at = p.rest.index('const VORDER = ') + vo.start(1)
+        p.rest = p.rest[:at] + f'"house-{LAMP_LEAD}", "house-{other}", ' + p.rest[at:]
+        cap_at = p.rest.index('const CAPS = '); k_at = p.rest.index(f'{pid}: {{', cap_at) + len(f'{pid}: {{')
+        p.rest = p.rest[:k_at] + '"house-off": "", "house-on": "", ' + p.rest[k_at:]
+        # the tiles stand on the Tropos tile's light card
+        fam = re.search(r'(<a class="ftile ft-%s"[^>]*><span class="ft-pic" style="background:)#[0-9A-Fa-f]{6}' % f, p.rest)
+        assert fam, ('fix_9: family tile', f)
+        p.rest = p.rest[:fam.start()] + fam.group(1) + '#E9E5DC' + p.rest[fam.end():]
+        p.rest, n_ = re.subn(r'("route":"%s","name":"%s","kind":"[^"]+","w":\d+,"h":\d+,"ground":")#[0-9A-Fa-f]{6}' % (f, name), r'\g<1>#E9E5DC', p.rest)
+        assert n_ == 1, ('fix_9: the foot row', f, n_)
+    if ready:
+        i, j, _ = _data(p)
+        p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    print('fix_9: lamps on the light ground:', ready or 'none yet (a tint missing)')
