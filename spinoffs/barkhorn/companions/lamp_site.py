@@ -233,13 +233,13 @@ def build(frame, samples, scale):
         c1 = mth('COSINE', mth('MULTIPLY', mth('ADD', th, zr), float(strands)))
         c2 = mth('COSINE', mth('MULTIPLY', mth('SUBTRACT', th, zr), float(strands)))
         h = mth('MAXIMUM', c1, c2)
-        bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.7; bp.inputs['Distance'].default_value = 0.0004
+        bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 1.0; bp.inputs['Distance'].default_value = 0.0005
         nt.links.new(h, bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b_.inputs['Normal'])
         cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['From Min'].default_value = -1.0; cr.inputs['From Max'].default_value = 1.0
         cr.inputs['To Min'].default_value = 0.004; cr.inputs['To Max'].default_value = 0.014; nt.links.new(h, cr.inputs['Value'])
         nt.links.new(cr.outputs['Result'], b_.inputs['Base Color'])
         b_.inputs['Roughness'].default_value = 0.62
-        b_.inputs['Sheen Weight'].default_value = 0.8; b_.inputs['Sheen Roughness'].default_value = 0.35
+        b_.inputs['Sheen Weight'].default_value = 0.3; b_.inputs['Sheen Roughness'].default_value = 0.5
         return m
 
     oc_ = (0.93, 0.93, 0.92)                      # the CAD's neutral opal
