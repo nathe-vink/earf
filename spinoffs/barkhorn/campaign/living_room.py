@@ -219,9 +219,11 @@ def _life():
     """Books on the console's left end, a stack of records leaning at its right side on the floor, a plant in the
     window's corner, the chair."""
     # (at 1.8 m the console's end is 7 cm from the speaker: the records lean against its front, at the right door)
-    sleeves = [{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 't': 0.004, 'x': 0.58 - 0.015 * j,
-                'y': CON_Y - CONSOLE['d'] / 2 - 0.075 + 0.012 * j, 'z': 0.0, 'rot': [12.0 - 2.5 * j, 0, 3.0 * j - 2.0], 'ground': '#E9E3D6', 'rough': 0.7}
-               for j, k in enumerate((3, 11, 6, 13))]
+    # (the coordinator, 22:03: the invented covers (03, 11, 06, 13) put a second strong colour beside the pair: plain
+    # card sleeves, unprinted kraft and dark matte, in the same stack)
+    sleeves = [{'card': col, 'w': 0.315, 'h': 0.315, 't': 0.004, 'x': 0.58 - 0.015 * j,
+                'y': CON_Y - CONSOLE['d'] / 2 - 0.075 + 0.012 * j, 'z': 0.0, 'rot': [12.0 - 2.5 * j, 0, 3.0 * j - 2.0], 'rough': 0.8}
+               for j, col in enumerate(('#CDBB9C', '#26221F', '#BFA987', '#1F1D1B'))]
     # (the A critics: Mantle's polished top, seen nearly edge-on, mirrored the white wall behind it and read grey, C* 6:
     # two dark sleeves leaning on the wall behind it, on the console, where its top looks; their faces the darkest covers)
     # (the light-model test: covers 08 and 12 carry bright graphics, busy behind Mantle and only half dark: plain dark
@@ -234,7 +236,7 @@ def _life():
         {'kind': 'frame', 'position': [0.05, BACK - 0.012], 'z': 1.58, 'size': [0.62, 0.78],
          'artwork': {'bands': [['#D8D0C2', 0.45], ['#9C9384', 0.3], ['#CBC2B2', 0.25]], 'ground': '#E8E2D7', 'seed': 21}},
         {'kind': 'books', 'position': [-0.6, CON_Y], 'z': TOP, 'colors': ['#3E4A5C', '#B9A27A', '#7A2E2A', '#D8D2C4'], 'seed': 5},
-        {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'boards', 'boards': sleeves}, *dark,
+        {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'plain_sleeves', 'boards': sleeves}, *dark,
         {'kind': 'kit', 'shape': 'asset', 'model': 'potted_plant_02', 'res': '2k', 'position': [-2.3, 0.45, 0.0], 'rotate': [0, 0, 20.0]},
         {'kind': 'kit', 'shape': 'asset', 'model': 'sofa_02', 'res': '2k', 'position': [CHAIR[0], CHAIR[1], 0.0],
          'rotate': [0, 0, CHAIR[2]]},

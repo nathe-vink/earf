@@ -84,3 +84,19 @@ def no_glass_shadows(bpy, name, p, kit):
                 cut.append(m.name)
     print('NO GLASS SHADOWS:', len(cut), 'materials:', sorted(set(cut))[:40])
     return []
+
+
+def plain_sleeves(bpy, name, p, kit):
+    """Plain card sleeves (the coordinator, 20 Nov 22:03: unprinted kraft and dark matte, no graphic): the bar's leaning
+    boards (bar_life.boards: the same card, the same lean and placing keys) with one plain card on every face. Each
+    entry of `boards` takes w, h, t, x, y, z, rot, `card` (hex) and rough."""
+    path = os.path.join(ROOT, 'spinoffs', 'barkhorn', 'campaign', 'bar_life', 'bar_life.py')
+    spec = importlib.util.spec_from_file_location('bar_life_living', path)
+    bl = importlib.util.module_from_spec(spec); spec.loader.exec_module(bl)
+    objs = []
+    for k, c in enumerate(p['boards']):
+        one = dict(c, image=None, ground=c['card'])
+        bl._print = lambda bpy_, img, ground, rough: bl._plain(bpy_, ground, rough)      # no print: the card itself
+        objs += bl.boards(bpy, f'{name}-{k}', {'boards': [one]}, kit)
+    print('PLAIN SLEEVES:', len(objs))
+    return objs
