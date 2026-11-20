@@ -104,18 +104,22 @@ def fix_1a(p, web):
   const T = %s, R = %s, N = %s, box = document.getElementById('family'); if (!box) return;
   const line = box.querySelector('.tint-line'), tiles = box.querySelectorAll('.ftile'), warm = {};
   let want = 'red';
-  const show = k => { want = k; const t = T[k];
+  const show = (k, quiet) => { want = k; const t = T[k];
     line.innerHTML = `<b>${t.name}.</b> <span>${t.line}</span>`;
     tiles.forEach(a => { const f = a.dataset.p, im = a.querySelector('img'), s = t.pics[f];
       a.href = `#${R[f]}-${t.slug}`; im.alt = `${N[f]} in ${t.name}`;
       const n = warm[s] || (warm[s] = new Image()); if (!n.src) n.src = s;
       const swap = () => { if (want === k) im.src = s; };
       if (n.complete && n.naturalWidth) swap(); else if (n.decode) n.decode().then(swap, swap); else n.addEventListener('load', swap, { once: true }); });
-    if (typeof setTint === 'function') setTint(k); };
+    if (!quiet && typeof setTint === 'function') setTint(k); };
   box.querySelectorAll('.tint input').forEach(r => {
     r.addEventListener('change', () => r.checked && show(r.value));
     r.closest('label').addEventListener('pointerenter', () => Object.values(T[r.value].pics).forEach(s => { if (!warm[s]) { warm[s] = new Image(); warm[s].src = s; } }), { passive: true });
   });
+  // one tint for the visit: the row starts in it (else Ember), and after Back it follows that tint, not a chip the browser restored
+  const sync = () => { let k = null; try { k = sessionStorage.getItem('earf-tint'); } catch (e) {} const has = !!T[k]; if (!has) k = 'red';
+    box.querySelectorAll('.tint input').forEach(r => { r.checked = r.value === k; }); show(k, !has); };
+  sync(); addEventListener('pageshow', sync); addEventListener('hashchange', () => { if (location.hash === '' || location.hash === '#top' || location.hash === '#family' || location.hash === '#colors') sync(); });
 })()</script>""" % (json.dumps(data, separators=(',', ':')), json.dumps(routes), json.dumps(names))
     at = p.rest.index('</body>') if '</body>' in p.rest else len(p.rest)
     p.rest = p.rest[:at] + js + '\n' + p.rest[at:]
@@ -149,7 +153,7 @@ def fix_1a(p, web):
 @media (max-aspect-ratio: 1/1) { .hs-hero .hero-pic { display: flex !important; flex-direction: column }
   .hs-hero .hero-title { order: 1 } .hs-hero .hero-photo { order: 2 } .hs-hero .hero-more { order: 3 } }
 /* between a phone and a wide screen (up to 960 px) the line and the buttons stand under the picture, clear of its dots */
-@media (min-aspect-ratio: 1/1) and (max-width: 960px) {
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (min-height: 641px) {
   .hs-hero .hero-pic { display: flex !important; flex-direction: column } .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 2 }
   .hs-hero .hero-more { position: static !important; left: auto !important; right: auto !important; top: auto !important; text-align: left; padding-top: 20px }
   .hs-hero .hero-more .wrap { margin-inline: auto !important; padding-inline: 16px !important; max-width: 1240px !important }
@@ -1204,3 +1208,22 @@ def finish_5(web):
         if not any(x['source'] == src for x in v.get('redirects', [])):
             v.setdefault('redirects', []).append({'source': src, 'destination': dst, 'permanent': True})
     json.dump(v, open(vj, 'w'), indent=2)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The clicks critic on 1A (the coordinator, 20 Nov 13:24)
+def fix_6(p, web):
+    # --- 3. a header item pressed on its own page adds no step to Back and goes to the top
+    p.sub("const navAt = which =>",
+          "addEventListener('click', e => { const a = e.target.closest && e.target.closest('header a[href^=\"#\"], footer a[href^=\"#\"]');\n"
+          "  if (!a || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;\n"
+          "  const h = a.getAttribute('href').slice(1), here = last === 'home' ? (h === 'top' || h === '') : last === 'line-lighting' ? h === 'lighting' : last === h;\n"
+          "  if (!here) return; e.preventDefault(); e.stopPropagation(); if (typeof menuOpen === 'function') menuOpen(false); scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); }, true);\n"
+          "const navAt = which =>")
+    p.css("""
+/* the hero in a short wide window (a phone held sideways, 960 x 600): the line and buttons stay over the picture on the first
+   screen, and the Hemisphere dot, which would lie on them, steps aside */
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (max-height: 640px) { .hs-hero .hs-pt[href^="#hemisphere"] { display: none } }
+/* from 961 to 1060 px the name "Tropos in Acid" would touch "See the colors" just above it: it opens a little lower */
+@media (min-width: 961px) and (max-width: 1060px) { .hs-hero .hs-pt.hs-w[href^="#speaker"] .hs-label { translate: 0 14px } }
+""")
