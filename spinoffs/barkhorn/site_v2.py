@@ -822,6 +822,7 @@ def apply(web, head, rest):
         rc_norender(p)
         rc_captions(p)
         rc_cursor(p)
+        rc_no_progress(p)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
@@ -884,6 +885,22 @@ def rc_cursor(p):
     p.sub("  root.addEventListener('pointerleave', () => root.classList.remove('cursor'));",
           "  const away = () => { root.classList.remove('cursor'); snap = true; snapAt = null; };\n"
           "  root.addEventListener('pointerleave', away); document.addEventListener('mouseout', e => { if (!e.relatedTarget) away(); });")
+
+
+def rc_no_progress(p):
+    """No "Drawn to be made" (the owner, 2026-11-20: unnecessary): the section, its link in the footer, its styles."""
+    p.section('progress')
+    p.sub('<a href="#progress">Drawn to be made</a>', '')
+    for where in ('head', 'rest'):
+        t = getattr(p, where)
+        for a, b in (('#progress, ', ''), (' #progress.mk { padding-bottom: clamp(56px, 7vw, 96px) }', ''), (', #progress h2', ''),
+                     ('#progress .promise { max-width: 980px } ', '')):
+            t = t.replace(a, b)
+        setattr(p, where, t)
+    p.styles = [x.replace(' #progress.mk { padding-bottom: clamp(56px, 7vw, 96px) }', '').replace(', #progress h2', '')
+                 .replace('#progress .promise { max-width: 980px } ', '').replace('#progress, ', '') for x in p.styles]
+    left = [x for x in (p.head, p.rest, ''.join(p.styles)) if 'progress"' in x or '#progress' in x]
+    assert not left, 'rc_no_progress: still named'
 
 
 # --- the release candidate (the coordinator, 2026-11-09): honest pictures only -------------------------------------
@@ -1991,8 +2008,13 @@ HERO_ALT = 'Two Tropos in Acid at a bar, Hemispheres over the counter, Cores and
 HERO_ALT_TALL = 'The EARF bar with a Tropos in Acid in its bay, Mantle and a Core in Ember on the bar, record shelves behind'
 HERO_WIDE = (16 / 9, 0.5, 0.5)     # the desktop: the whole 16:9 picture
 HERO_TALL = (4 / 5, 0.5, 0.5)      # the phone: the whole 4:5 picture
-HERO_POINTS = [(73.5, 57.7, 'Tropos in Acid', '#speaker-acid')]  # x, y in percent of the wide picture: the right speaker's woofer
-HERO_POINTS_TALL = [(66.2, 47.9, 'Tropos in Acid', '#speaker-acid')]   # the portrait's own point: the near Tropos's woofer
+# x, y in percent of each picture; one dot per product, on a plain part of its body, never on a driver, a lit bowl or ball,
+# or the record (the owner, 2026-11-20): Tropos the cabinet's upper front corner, Hemisphere its cap, Core its base,
+# Mantle the plinth's front edge
+HERO_POINTS = [(70.0, 47.0, 'Tropos in Acid', '#speaker-acid'), (45.2, 51.8, 'Hemisphere in Ember', '#hemisphere-ember'),
+               (31.3, 86.6, 'Core in Ember', '#core-ember'), (52.0, 84.5, 'Mantle in Ember', '#mantle-ember')]
+HERO_POINTS_TALL = [(56.5, 34.5, 'Tropos in Acid', '#speaker-acid'), (12.8, 5.0, 'Hemisphere in Ember', '#hemisphere-ember'),
+                    (24.0, 71.5, 'Core in Ember', '#core-ember'), (45.0, 72.0, 'Mantle in Ember', '#mantle-ember')]
 
 
 def cover_point(x, y, size, crop):
@@ -2433,7 +2455,7 @@ def rc_marketing(p, web):
               f'<p class="tint-line" aria-live="polite"><b>{C["blue"]["name"]}.</b> <span>{C["blue"]["line"]}</span></p></div>'
               '<div class="mk-wide fam pick">' + boxes + '</div><div class="wrap"><p class="mk-cap"><i class="render">Render</i></p></div></section>')
     # 4. each color a place
-    places = ''.join(f'<a class="place" href="#color-{C[k]["name"].lower()}">{img(C[k]["hab"], C[k]["hab_alt"])}'
+    places = ''.join(f'<a class="place" href="#speaker-{C[k]["name"].lower()}">{img(C[k]["hab"], C[k]["hab_alt"])}'
                      f'<span class="pl-cap">{C[k]["name"]} <i class="render">Render</i></span></a>' for k in PLACES_SHOWN)
     place = ('<section class="band mk" id="places"><div class="wrap mk-head"><h2>Each color is a place.</h2></div>'
              '<div class="mk-wide places">' + places + '</div></section>')
