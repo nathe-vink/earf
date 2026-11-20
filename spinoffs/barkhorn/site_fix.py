@@ -532,7 +532,7 @@ MAIL = 'hello@earf.world'
 # Specifications: four or five plain headings, one fact to a row. {a|b}: a, or b on Fog. {lm} {K}: this color's own.
 SPEC = {
     'speaker': [
-        ('Materials', [('Acrylic', '{tint}'), ('Cabinet', 'Cast acrylic, 20 mm, {tinted through|clear}; lined in white'),
+        ('Materials', [('Acrylic', '{tint}'), ('Cabinet', 'Cast acrylic, 20 mm, {tinted through|clear}'),
                        ('Lining', 'Polyester batts in white voile, 100 mm at the top and the bottom'),
                        ('Horn', 'Thermoformed cast acrylic, 10 mm, in the cabinet&rsquo;s color; polished inside and out, on four black posts')]),
         ('Drivers and amplifier', [('Woofer', 'FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners'),
@@ -564,10 +564,10 @@ SPEC = {
         ('Power', [('Power', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours on its dock, on three standard LiFePO4 cells you can replace yourself'),
                    ('Rating', 'Designed to meet IP44, for terraces and spilled drinks')]),
         ('Size and weight', [('Size', '160 mm ball, 180 mm tall (6.3 in ball, 7.1 in tall)'), ('Weight', 'About 1.5 kg (3.3 lb)')]),
-        ('Balls and care', [('Balls', 'In all eight colors, sold separately'), ('Care', '{care}')]),
+        ('Balls and care', [('Balls', 'In all eight colors, sold separately. Each comes off by hand.'), ('Care', '{care}')]),
     ],
     'turntable': [
-        ('Materials', [('Plinth', 'Cast acrylic in its color, about 25 mm, its edges satin with a fine polished bevel; raised 40 mm on four posts over the base'),
+        ('Materials', [('Plinth', '{Cast acrylic in its color|Clear cast acrylic}, about 25 mm, its edges satin with a fine polished bevel; raised 40 mm on four posts over the base'),
                        ('Posts', 'Four solid posts, 30 mm across, satin black'), ('Hardware', 'Satin black throughout'),
                        ('Base', 'Smoked cast acrylic, 12.7 mm, set in 35 mm all around'),
                        ('Platter', 'Cast acrylic, 300 x 21 mm, in three layers'),
@@ -983,4 +983,142 @@ def finish_3(web):
     v = json.load(open(vj))
     if not any(x['source'] == '/mantle' for x in v.get('redirects', [])):
         v.setdefault('redirects', []).append({'source': '/mantle', 'destination': '/mantle/ember', 'permanent': True})
+    json.dump(v, open(vj, 'w'), indent=2)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# The critics' list on Build 1B (the coordinator, 20 Nov 12:56)
+def _split_row(src, w, h, alt, cuts, href, label, current=''):
+    """A row of eight as two halves of four: side by side on a desktop (the picture whole), stacked on a phone."""
+    out = []
+    for half in (0, 1):
+        links = ''
+        for n in range(half * 4, half * 4 + 4):
+            left = max(0.0, (cuts[n] - 50 * half) * 2); right = min(100.0, (cuts[n + 1] - 50 * half) * 2)
+            links += f'<a href="{href[n]}" style="left:{left:.2f}%;width:{right - left:.2f}%" aria-label="{label[n]}"{current[n] if current else ""}></a>'
+        img = (f'<img src="{src}" width="{w}" height="{h}" loading="lazy" alt="{alt}">' if half == 0 else
+               f'<img src="{src}" width="{w}" height="{h}" loading="lazy" alt="" aria-hidden="true">')
+        out.append(f'<div class="half h{half}">{img}{links}</div>')
+    return '<figure class="row8 split">' + ''.join(out) + '</figure>'
+
+
+def fix_4(p, web):
+    from PIL import Image
+    i, j, D = _data(p)
+    C = {c['k']: c for c in D['clouds']}
+    # --- 1. Copy link: the product and tint only; the address drops "/out" once the visitor leaves that view
+    p.sub("// \"Copy link\": the product's own page",
+          "function productPath() { return (P.route === 'speaker' ? '/tropos/' : `/${P.route}/`) + BY[cur].name.toLowerCase(); }\n"
+          "// \"Copy link\": the product's own page")
+    p.sub("const url = location.href, note", "const url = location.origin + productPath(), note")
+    p.sub("  const c = BY[cur], list = shown(c), i = list.indexOf(v); view = v;\n",
+          "  const c = BY[cur], list = shown(c), i = list.indexOf(v); view = v;\n"
+          "  { const o = /^#[a-z]+-[a-z]+\\/([a-z-]+)$/.exec(location.hash); if (o && v !== (VIEWKEY[o[1]] || o[1])) history.replaceState(null, '', productPath()); }\n")
+    # --- 2. a view with a names row carries no "Shown in" pill; the pill's line ends with its period
+    p.sub("  if (s.shown) stage.appendChild(el('span', { class: 'tag' }, `Shown in ${BY[s.shown].name}`));",
+          "  if (s.shown && !NAMEROWS[(s.src || '').split('/').pop()]) stage.appendChild(el('span', { class: 'tag' }, `Shown in ${BY[s.shown].name}.`));")
+    # --- 3. the two moved paragraphs go: their page says it already
+    a = p.rest.index('const PARA = '); b = p.rest.index('\n', a)
+    p.rest = p.rest[:a] + 'const PARA = {};' + p.rest[b:]
+    # --- 5. Core at the bar: one picture, one alt, on all eight
+    p.sub("['bar', 'At the bar', c => c.k === 'red' ? 'Core in Ember on a bar table, a wall of records behind.' : 'Two Cores on a bar counter in Ember and Dust, five Hemispheres over them.'],",
+          "['bar', 'At the bar', () => 'Core in Ember on a bar table, a wall of records behind.'],")
+    # --- 6. the names row directly under its picture, its height kept
+    p.sub('        <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>\n        <p class="cap" id="cap" aria-live="polite"></p>',
+          '        <p class="cap" id="cap" aria-live="polite"></p>\n        <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>')
+    # --- 9. the rows of eight as two rows of four on a phone (the product pages' and /lighting's)
+    a = p.rest.index('function renderRows(P, c) {'); b = p.rest.index('\n}\n', a) + 3
+    p.rest = p.rest[:a] + (
+        "function renderRows(P, c) {        // the row of eight under the gallery: each product in it a link to its own tint; two rows of four on a phone\n"
+        "  const box = document.getElementById('p-rows'), R = ROWS[P.id], nm = o => o.name.toLowerCase(), cur = o => o.k === c.k ? ' aria-current=\"true\"' : '';\n"
+        "  box.hidden = !R; if (!R) { box.replaceChildren(); return; }\n"
+        "  box.innerHTML = R === 'fronts'\n"
+        "    ? '<div class=\"fronts\">' + D.clouds.map(o => `<a href=\"#speaker-${nm(o)}\"${cur(o)}><img src=\"img/rc/${o.k}-tall.webp\" width=\"1000\" height=\"1250\" loading=\"lazy\" alt=\"Tropos in ${o.name}\"></a>`).join('') + '</div>'\n"
+        "    : R.map(r => '<figure class=\"row8 split\">' + [0, 1].map(hf => `<div class=\"half h${hf}\"><img src=\"${r.src}\" width=\"${r.w}\" height=\"${r.h}\" loading=\"lazy\" ` + (hf ? 'alt=\"\" aria-hidden=\"true\">' : `alt=\"${r.alt}\">`)\n"
+        "        + D.clouds.slice(hf * 4, hf * 4 + 4).map((o, n) => { const k = hf * 4 + n, L = Math.max(0, (r.cuts[k] - 50 * hf) * 2), Rr = Math.min(100, (r.cuts[k + 1] - 50 * hf) * 2);\n"
+        "          return `<a href=\"#${P.route}-${nm(o)}\" style=\"left:${L.toFixed(2)}%;width:${(Rr - L).toFixed(2)}%\" aria-label=\"${P.name(c)} in ${o.name}\"${cur(o)}></a>`; }).join('') + '</div>').join('') + '</figure>').join('');\n"
+        "}\n"
+        "// 11. a tint chosen in a row: its page from the top, so the gallery and the facts change in sight\n"
+        "document.getElementById('p-rows').addEventListener('click', e => { if (e.target.closest('a')) setTimeout(() => scrollTo(0, 0), 0); });\n") + p.rest[b:]
+    def lt_rows():
+        out = ''
+        for r, name, f, alt in (('hemisphere', 'Hemisphere', 'hemisphere-row.webp', 'Eight Hemispheres, one in each color'),
+                                ('core', 'Core', 'core-row.webp', 'Eight Core lamps, lit, one in each color')):
+            path = os.path.join(web.SITE, 'img', 'rc', f); w, h = Image.open(path).size
+            out += _split_row(f'img/rc/{f}', w, h, alt, _row_cuts(path), [f'#{r}-{NAMES[k]}' for k in KEYS], [f'{name} in {CNAME[k]}' for k in KEYS])
+        return out
+    p.rest, n = re.subn(r'<div class="lt-rows">.*?</div>\n', lambda m: '<div class="lt-rows">' + lt_rows() + '</div>\n', p.rest, count=1, flags=re.S)
+    assert n == 1, 'fix_4: /lighting rows'
+    # --- 8. /lighting: each tile its lamp's picture, changing with the dots; the room sized so its names row is in sight
+    def tile(m):
+        kind, name = m.group(2), m.group(3); f = name.lower(); r = f
+        src = f'img/rc/tile-{f}-ember.webp'; w, h = Image.open(os.path.join(web.SITE, src)).size
+        return (f'<article class="lt-tile" data-p="{f}" data-name="{name}"><a class="lt-pic" href="#{r}-ember" data-carry="{r}" tabindex="-1" aria-hidden="true">'
+                f'<img src="{src}" width="{w}" height="{h}" alt=""></a><div class="lt-body">{m.group(1)}</div></article>')
+    p.rest, n = re.subn(r'<article class="lt-tile">(<p class="ft-kind">([\w ]+)</p><h2>(\w+)</h2>.*?)</article>', tile, p.rest, flags=re.S)
+    assert n == 2, ('fix_4: /lighting tiles', n)
+    js = """<script>(function () {      // /lighting's tiles: each its lamp in the tint chosen, and in the tint of a dot under the pointer or the focus
+  const S = %s, tiles = document.querySelectorAll('.lt-tile[data-p]');
+  const show = (t, slug) => { const im = t.querySelector('.lt-pic img'), s = `img/rc/tile-${t.dataset.p}-${slug}.webp`; if (!im.getAttribute('src').endsWith(s)) im.src = s; };
+  const chosen = () => { let k = null; try { k = sessionStorage.getItem('earf-tint'); } catch (e) {} return S[k] || 'ember'; };
+  const sync = () => tiles.forEach(t => show(t, chosen()));
+  tiles.forEach(t => { t.querySelectorAll('.dots-row a').forEach(a => { const slug = a.getAttribute('href').split('-').pop();
+    a.addEventListener('pointerenter', () => show(t, slug)); a.addEventListener('focus', () => show(t, slug)); });
+    t.querySelector('.dots-row').addEventListener('pointerleave', () => show(t, chosen())); });
+  addEventListener('hashchange', () => setTimeout(sync, 0)); sync();
+})()</script>""" % json.dumps(NAMES)
+    at = p.rest.index('</body>') if '</body>' in p.rest else len(p.rest)
+    p.rest = p.rest[:at] + js + '\n' + p.rest[at:]
+    # --- 12. /#mantle (and #hemisphere, #core) open the product in the tint chosen; the not-found view names the header's kinds
+    p.sub("  if (LINE_OF[h] === 'speakers' || LINE_OF[h] === 'turntable') {",
+          "  { const b = /^(hemisphere|core|mantle)$/.exec(h); if (b) { h = `${b[1]}-${BY[TINT].name.toLowerCase()}`; history.replaceState(null, '', '#' + h); } }\n"
+          "  if (LINE_OF[h] === 'speakers' || LINE_OF[h] === 'turntable') {")
+    p.sub('<a href="#speaker-ember" data-carry="speaker">Tropos</a><a href="#lighting">Lighting</a><a href="#mantle-ember" data-carry="mantle">Mantle</a>',
+          '<a href="#speaker-ember" data-carry="speaker">Speakers</a><a href="#lighting">Lighting</a><a href="#mantle-ember" data-carry="mantle">Turntable</a>')
+    p.css("""
+/* the critics' list on 1B (the coordinator, 20 Nov 12:56) */
+:root { --cap: max(300px, calc(100svh - 300px)) }
+.cap { margin: 8px 0 0; min-height: 1.6em; font-size: 14px; line-height: 1.6; color: var(--muted) }
+.cap a { white-space: nowrap }
+@media (max-width: 700px) { .cap { min-height: 4.8em }
+  .stage { height: min(var(--cap), calc(100cqw * 1.25)) !important }     /* one height for every view: nothing below moves */ }
+/* the arrows at the picture's foot, beside the counter, off the product */
+.gallery .nav { top: auto !important; bottom: 10px; translate: none !important; width: 36px !important; height: 36px !important }
+.gallery .nav.next { right: 10px !important; left: auto !important }
+.gallery .nav.prev { right: 52px !important; left: auto !important }
+.gallery .count { right: 96px !important; bottom: 15px !important }
+.stage .hint { text-transform: none !important; letter-spacing: 0 !important; font: 500 14px/1.2 var(--sans) !important }
+.thumb.turn::after { font: 600 11px/1.3 var(--sans) !important }
+/* rows of eight in two halves: whole on a desktop, two rows of four on a phone */
+.row8.split { display: grid; grid-template-columns: 1fr 1fr; gap: 0 }
+.row8.split .half { position: relative; overflow: hidden }
+.row8.split .half img { width: 200%; max-width: none; height: auto; display: block; border-radius: 0 }
+.row8.split .h1 img { margin-left: -100% }
+@media (max-width: 700px) { .row8.split { grid-template-columns: minmax(0, 1fr); gap: 8px } }
+/* /lighting: the tiles with their lamps; the room whole and its names row on the first screen */
+.lt-tile { display: grid; grid-template-columns: minmax(0, 38%) minmax(0, 1fr); gap: 18px; align-items: start }
+.lt-pic { display: block; border-radius: 4px; overflow: hidden } .lt-pic img { display: block; width: 100%; height: auto }
+.lt-room img { width: auto !important; max-width: 100%; max-height: max(260px, calc(100svh - 330px)) !important; object-fit: contain !important }
+@media (max-width: 860px) {
+  .lt-tiles { order: -1 } .lt-grid { display: flex; flex-direction: column }
+  .lt-tile { grid-template-columns: minmax(0, 30%) minmax(0, 1fr); gap: 12px; padding: 14px }
+  .lt-tile h2 { margin: 2px 0 6px } .lt-tile .dots-row { margin-bottom: 8px }
+  .lt-tile .dots-row { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+}
+""")
+
+
+def finish_4(web):
+    """The 404 page: the header's names for its links, each in the tint chosen in this visit; an /s/ address with more after the
+    product lands on the product."""
+    f = os.path.join(web.SITE, '404.html'); s = open(f).read()
+    for a, b in (('<a href="/tropos">Tropos</a>', '<a href="/tropos">Speakers</a>'), ('<a href="/mantle">Mantle</a>', '<a href="/mantle">Turntable</a>')):
+        assert s.count(a) == 1, ('finish_4: 404', a); s = s.replace(a, b)
+    s = s.replace('</body>', '<script>try { const n = %s[sessionStorage.getItem("earf-tint")]; if (n) { document.querySelector(\'a[href="/tropos"]\').href = "/tropos/" + n;'
+                  ' document.querySelector(\'a[href="/mantle"]\').href = "/mantle/" + n; } } catch (e) {}</script></body>' % json.dumps(NAMES), 1)
+    open(f, 'w').write(s)
+    vj = os.path.join(web.SITE, 'vercel.json')
+    v = json.load(open(vj))
+    if not any(x['source'] == '/s/:page/(.+)' for x in v.get('redirects', [])):
+        v.setdefault('redirects', []).append({'source': '/s/:page/(.+)', 'destination': '/s/:page', 'permanent': False})
     json.dump(v, open(vj, 'w'), indent=2)
