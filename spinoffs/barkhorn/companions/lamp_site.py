@@ -215,10 +215,13 @@ def build(frame, samples, scale):
     # sheen so each eased edge catches a highlight (was a flat dark grey, read as a lump)
     cap = SC.principled('cap', '#161618', 0.38, metallic=1.0, bump=(4000.0, 0.08))
 
-    def braid_mat(nm, r_cord=0.003, strands=8):
+    def braid_mat(nm, r_cord=0.003, strands=None):
         """A black textile braid (the coordinator, 2026-11-20: the cord read as a ruler-straight matte rod): two sets of
         strands crossing at 45 degrees round the cord's axis (the object's z), about 1.2 mm wide on a 6 mm cord, their
         ridges lifted (bump) and a touch lighter, a cloth sheen on top."""
+        # (2026-11-20 19:56, the critics: grey knurled plastic at 2x, a regular pyramid pattern with sharp specular points)
+        # a finer, softer weave: 16 strands (about 0.6 mm), a shallow bump, the cloth darker, rougher and a low sheen
+        strands = strands or int(os.environ.get('BRAID_N', '16'))
         m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; b_ = nt.nodes['Principled BSDF']
         # world position less the object's origin, in metres (the STL import may scale the object, not its mesh)
         gp_ = nt.nodes.new('ShaderNodeNewGeometry'); oi_ = nt.nodes.new('ShaderNodeObjectInfo')
@@ -237,13 +240,13 @@ def build(frame, samples, scale):
         c1 = mth('COSINE', mth('MULTIPLY', mth('ADD', th, zr), float(strands)))
         c2 = mth('COSINE', mth('MULTIPLY', mth('SUBTRACT', th, zr), float(strands)))
         h = mth('MAXIMUM', c1, c2)
-        bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 1.0; bp.inputs['Distance'].default_value = 0.0005
+        bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = float(os.environ.get('BRAID_BS', '0.5')); bp.inputs['Distance'].default_value = float(os.environ.get('BRAID_BD', '0.00012'))
         nt.links.new(h, bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b_.inputs['Normal'])
         cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['From Min'].default_value = -1.0; cr.inputs['From Max'].default_value = 1.0
-        cr.inputs['To Min'].default_value = 0.004; cr.inputs['To Max'].default_value = 0.014; nt.links.new(h, cr.inputs['Value'])
+        cr.inputs['To Min'].default_value = 0.003; cr.inputs['To Max'].default_value = 0.007; nt.links.new(h, cr.inputs['Value'])
         nt.links.new(cr.outputs['Result'], b_.inputs['Base Color'])
-        b_.inputs['Roughness'].default_value = 0.75; b_.inputs['Specular IOR Level'].default_value = 0.15
-        b_.inputs['Sheen Weight'].default_value = 0.2; b_.inputs['Sheen Roughness'].default_value = 0.5
+        b_.inputs['Roughness'].default_value = 0.9; b_.inputs['Specular IOR Level'].default_value = 0.06
+        b_.inputs['Sheen Weight'].default_value = float(os.environ.get('BRAID_SHEEN', '0.12')); b_.inputs['Sheen Roughness'].default_value = 0.7
         return m
 
     oc_ = (0.93, 0.93, 0.92)                      # the CAD's neutral opal

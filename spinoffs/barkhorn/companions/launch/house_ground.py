@@ -55,6 +55,13 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
     centre = Vector(_mul(R['tropos_centre'], s))
     pcentre = centre + Vector((0, 0, lift))
     made = []
+    # HOUSE_LIFT_RX (2026-11-20, the critics: a hot beam on the wall from a lamp just above the frame with the higher
+    # hang): the lamps that light the sweep alone go up with the camera too, so the ground in frame is lit as in the
+    # Tropos frame (and no sweep lamp sits just above the top edge)
+    # (a list: only the lamps named, e.g. 'bg-left')
+    rx_ = os.environ.get('HOUSE_LIFT_RX', '0')
+    lift_rx = rx_ == '1'
+    cen_rx = centre + Vector((0, 0, lift)) if lift_rx else centre
     solid = os.environ.get('HOUSE_SOLID', '1') == '1'
     for name, sp in R['lights'].items():
         if not (sp.get('irradiance', 0) > 0 or sp.get('power_w', 0) > 0):
@@ -65,12 +72,12 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         for k in ('position', 'target'):
             if k in sp:
                 sp[k] = _mul(sp[k], s)
-                if not sp.get('receivers'):
+                if not sp.get('receivers') or lift_rx or name in rx_.split(','):
                     sp[k][2] += lift
         sp['size_m'] = _mul(sp['size_m'], s)
         if 'power_w' in sp:
             sp['power_w'] *= s * s
-        ob = Lt.area(bpy, 'house-' + name, sp, centre if sp.get('receivers') else pcentre)
+        ob = Lt.area(bpy, 'house-' + name, sp, cen_rx if sp.get('receivers') else pcentre)
         ob.data.energy *= k_st
         if solid and not sp.get('receivers') and ob.data.specular_factor > 0:
             softbox(bpy, ob, s)
@@ -81,6 +88,104 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         if sp.get('receivers'):
             Lt.link_receivers(bpy, ob, [sweep])
         made.append(ob)
+    if os.environ.get('HOUSE_WALL_LL'):
+        # HOUSE_WALL_LL 'IRR' (2026-11-20, the pendant hung free: its lower frame is wall where the Tropos frame has
+        # floor, 80 against 94 L*): a soft lamp lighting the sweep alone, low at the left, aimed at the wall behind and
+        # below the shade, at IRR W/m2 (its size and place in full-scale metres, times s, lifted with the camera)
+        wsp = {'type': 'area', 'size_m': [2.0 * s, 1.5 * s], 'position': [-2.2 * s, -1.2 * s, -0.6 * s + lift],
+               'target': [-0.8 * s, 2.0 * s, -0.4 * s + lift], 'irradiance': float(os.environ['HOUSE_WALL_LL']),
+               'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']}
+        wo = Lt.area(bpy, 'house-wall-ll', wsp, pcentre); wo.data.energy *= k_st * float(os.environ.get('HOUSE_BG', '1'))
+        Lt.link_receivers(bpy, wo, [sweep]); made.append(wo)
+    hf_ = os.environ.get('HOUSE_FLAGS', '0')     # '1' all of them, or names ('horn cutter')
+    door_ = None
+    if os.environ.get('HOUSE_DOOR'):
+        door_ = barn_door(bpy, bpy.data.objects['house-key'], float(os.environ['HOUSE_DOOR']), s)
+    if hf_ != '0' or door_ is not None:
+        # (2026-11-20, the critics: the Tropos ground darkens toward the bottom right, 84-87 at the bottom edge; the
+        # lamps' stayed at 96) the Tropos set's flags that cast shadows, scaled: the card right of the product, the floor
+        # card behind right, and the horn's cutter (whose shadow is that falloff). The back-edge card is the speaker's
+        # own; the reflect-only cards cast nothing and are left out. Those over the floor stay on it; the others go up
+        # with the product's lamps.
+        fl = []
+        for f in R['set']['flags']:
+            if f.get('reflect_only') or f.get('name') == 'back-edge card':
+                continue
+            if hf_ != '1' and f.get('name') not in hf_.split(','):
+                continue
+            f = json.loads(json.dumps(f)); f['center_m'] = _mul(f['center_m'], s); f['size_m'] = _mul(f['size_m'], s)
+            if f['center_m'][2] > 0.05 * s:
+                f['center_m'][2] += lift
+            fl.append(f)
+            if f.get('name') == 'horn cutter' and os.environ.get('HOUSE_CUT2'):
+                # HOUSE_CUT2 'LAMP,DX' (2026-11-20): a second cutter the same size, DX m (full scale) to the right, that
+                # shades LAMP alone: the floor's front right off the fill, as the speaker's bulk shades it, its left kept
+                l2_, dx_ = os.environ['HOUSE_CUT2'].split(',')
+                f2 = json.loads(json.dumps(f)); f2['center_m'][0] += float(dx_) * s; f2['name'] = 'cutter2-' + l2_
+                fl.append(f2)
+        bo = []
+        if os.environ.get('HOUSE_BOUNCE', '0') == '1':
+            # the Tropos set's white bounce card right of the product, scaled (it lifts the floor at the left)
+            for f in R['set'].get('bounces', []):
+                f = json.loads(json.dumps(f)); f['center_m'] = _mul(f['center_m'], s); f['size_m'] = _mul(f['size_m'], s)
+                f['center_m'][2] += lift; bo.append(f)
+        if fl or bo:
+            St.cards(bpy, {'flags': fl, 'bounces': bo})
+        # Which lamps each cutter shades: the horn's cutter the lamps in HOUSE_CUT_SCOPE (default the horn alone, the
+        # speaker lane's scope_flag), the second cutter its own lamp. HOUSE_CUT_FLOOR (default 1): a cutter shades the
+        # FLOOR only, as the speaker's bulk did in the Tropos frame, never the product: each shaded lamp is split in two,
+        # itself lighting everything but the sweep, and a copy of it lighting the sweep alone through its cutter (the
+        # speaker lane's split_set_shadow, light linking); the cutters are then not seen in reflections either
+        cuts = {}
+        for i, f in enumerate(fl):
+            if f.get('name') == 'horn cutter':
+                cuts[f'flag{i}'] = os.environ.get('HOUSE_CUT_SCOPE', 'horn').split(',')
+            elif f.get('name', '').startswith('cutter2-'):
+                cuts[f'flag{i}'] = [f['name'][len('cutter2-'):]]
+        if door_ is not None:
+            cuts[door_.name] = ['key']
+        lamps_ = [o for o in bpy.context.scene.objects if o.type == 'LIGHT' and o.name.startswith('house-')]
+        floor_ = os.environ.get('HOUSE_CUT_FLOOR', '1') == '1'
+        def excl(L_, obs):
+            if not obs:                       # (an empty blocker collection would let nothing cast a shadow)
+                return
+            col_ = L_.light_linking.blocker_collection
+            if col_ is None:
+                col_ = bpy.data.collections.new(L_.name + '-blockers'); L_.light_linking.blocker_collection = col_
+            for o_ in obs:
+                if o_.name not in col_.objects:
+                    col_.objects.link(o_)
+            for o_, co_ in zip(col_.objects, col_.collection_objects):
+                if o_ in obs:
+                    co_.light_linking.link_state = 'EXCLUDE'
+        cut_obs = [bpy.data.objects[n] for n in cuts]
+        for L_ in lamps_:                     # no lamp is cut by a cutter unless named below
+            excl(L_, cut_obs)
+        for n, names in cuts.items():
+            co_ = bpy.data.objects[n]
+            if floor_:                        # shadow only: not in reflections, nor through glass, nor soaking bounce
+                co_.visible_glossy = co_.visible_transmission = co_.visible_diffuse = co_.visible_volume_scatter = False
+            for nm in names:
+                L_ = bpy.data.objects.get('house-' + nm)
+                if L_ is None:
+                    continue
+                if not floor_:
+                    col_ = L_.light_linking.blocker_collection
+                    col_.objects.unlink(co_)
+                    continue
+                cp = bpy.data.objects.get(L_.name + '-floor')
+                if cp is None:
+                    cp = L_.copy(); cp.data = L_.data.copy(); cp.name = L_.name + '-floor'
+                    bpy.context.scene.collection.objects.link(cp)
+                    cp.light_linking.blocker_collection = None
+                    Lt.link_receivers(bpy, cp, [sweep])
+                    rc_ = bpy.data.collections.new(L_.name + '-not-sweep'); rc_.objects.link(sweep)
+                    L_.light_linking.receiver_collection = rc_
+                    for c2_ in rc_.collection_objects:
+                        c2_.light_linking.link_state = 'EXCLUDE'
+                    excl(cp, [o_ for o_ in cut_obs if o_ is not co_])
+                else:                         # a lamp under two cutters: its copy now meets this one too
+                    col_ = cp.light_linking.blocker_collection; col_.objects.unlink(co_)
     if os.environ.get('HOUSE_ROOM', '1') == '1':
         room(bpy, s)
     cam = json.loads(json.dumps(R['camera']))
@@ -127,6 +232,31 @@ def softbox(bpy, ob, s):
     hm = bpy.data.materials.new('softbox-housing'); hm.use_nodes = True
     hb = hm.node_tree.nodes['Principled BSDF']; hb.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); hb.inputs['Roughness'].default_value = 0.6
     hous.data.materials.append(hm)
+
+
+def barn_door(bpy, ob, phi, s):
+    """A barn door on the key's right side (2026-11-20, the critics: the Tropos ground darkens toward the bottom right,
+    84-87, where the lamps' stayed at 96; the key alone lights that corner, its light reaching the floor in front and to
+    the right of the product, which the speaker's bulk takes from the Tropos frame). A black card, hinged at the
+    softbox's right edge and swung to the plan bearing `phi` (degrees from +y toward +x): the key's rays bound right of
+    that are cut, softly (the softbox is wide), and those to the product and its shadow, at about 40 degrees, pass.
+    Unseen by the camera and in reflections; it casts shadow only."""
+    from mathutils import Vector
+    L = ob.data; K = ob.location.copy()               # (matrix_world is not updated until the depsgraph is)
+    ax = ob.rotation_euler.to_matrix() @ Vector((0, 0, -1)); a = Vector((ax.x, ax.y, 0)).normalized()
+    r = Vector((a.y, -a.x, 0))                                       # the softbox's right, level
+    hng = K + r * (L.size / 2 * 1.05)
+    u = Vector((math.sin(math.radians(phi)), math.cos(math.radians(phi)), 0))
+    ld = 0.5 * s / 0.2; top = K.z + L.size_y; bot = K.z - 3.0 * ld
+    c = [hng + Vector((0, 0, bot - K.z)), hng + u * ld + Vector((0, 0, bot - K.z)), hng + u * ld + Vector((0, 0, top - K.z)), hng + Vector((0, 0, top - K.z))]
+    me = bpy.data.meshes.new('house-key-door'); me.from_pydata([tuple(v) for v in c], [], [(0, 1, 2, 3)])
+    o = bpy.data.objects.new('house-key-door', me); bpy.context.scene.collection.objects.link(o)
+    o.visible_camera = o.visible_glossy = o.visible_diffuse = o.visible_transmission = o.visible_volume_scatter = False
+    o.visible_shadow = True
+    m = bpy.data.materials.new('house-key-door'); m.use_nodes = True
+    m.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1)
+    me.materials.append(m)
+    return o
 
 
 def room(bpy, s):
