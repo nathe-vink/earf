@@ -899,17 +899,7 @@ def fix_3(p, web):
         v['w'], v['h'] = im.size
     i, j, _ = _data(p)                                 # the page has moved since D was read
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
-    # the eight place tiles re-cut: the speaker at one place and one size in each
-    for k, (cx, sh, cy) in PLACE_BOX.items():
-        im = Image.open(os.path.join(web.ROOT, site_v2.HAB_SRC[k])).convert('RGB')
-        W, H = im.size
-        ch = sh / PLACE_SPEAKER * H; cw = ch * 4 / 5
-        left = min(max(cx * W - cw / 2, 0), W - cw); top = min(max(cy * H - PLACE_CY * ch, 0), H - ch)
-        tile = im.crop((round(left), round(top), round(left + cw), round(top + ch))).resize((800, 1000), Image.LANCZOS)
-        tile.save(os.path.join(web.IMG, 'rc', f'place-{k}.webp'), 'WEBP', quality=site_v2.HAB_Q.get(k, 84), method=6)
-        p.rest, n = re.subn(r'(<a class="place" href="#speaker-%s/out"><img src=")img/rc/%s-habitat\.webp" width="\d+" height="\d+"' % (NAMES[k], k),
-                            r'\g<1>img/rc/place-%s.webp" width="800" height="1000"' % k, p.rest)
-        assert n == 1, ('fix_3: place tile', k, n)
+    # the eight place tiles stay the whole approved pictures (the coordinator took the re-cut back, 13:56)
 
     p.css("""
 /* fix list 2026-11-20, build 3: phone and input */
@@ -1147,6 +1137,14 @@ def fix_5(p, web):
         im.resize((336, 420), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'mantle-{n}-house-th.webp'), 'WEBP', quality=82)
         im.resize((800, 1000), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'tile-mantle-{n}.webp'), 'WEBP', quality=86, method=6)   # the tiles: the whole frame
         D['tt']['colours'][k]['views']['house'] = {'src': f'img/rc/mantle-{n}-house.webp', 'w': 1200, 'h': 1500, 'th': f'img/rc/mantle-{n}-house-th.webp'}
+    # the lamp tiles from the real 4:5 pictures (the coordinator 13:56, B1): the masters at 800 x 1000, grain as the gallery, nothing added
+    import site_v2
+    for f, src in (('hemisphere', 'hemisphere-{n}-direct'), ('core', 'core-{n}')):
+        for k in KEYS:
+            n = NAMES[k]
+            im = Image.open(os.path.join(web.ROOT, site_v2.LAMP_FINAL.format(f=src.format(n=n)))).convert('RGB')
+            assert abs(im.width / im.height - 0.8) < 1e-3, ('fix_5: lamp tile not 4:5', f, n, im.size)
+            _grain_save(im.resize((800, 1000), Image.LANCZOS), os.path.join(web.IMG, 'rc', f'tile-{f}-{n}.webp'))
     # the dead lines out of the page data: the lamps' old lines become their pages' sentences
     D['lamps']['dome']['line'] = 'A pendant in cast acrylic. The shade comes off with a quarter turn.'
     D['lamps']['orb']['line'] = 'A table lamp in cast acrylic. Cordless. About five hours a charge.'
