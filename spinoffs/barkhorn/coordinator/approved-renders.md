@@ -3609,6 +3609,43 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
        with the labels inside the pictures and with the clear tint (Fog)?
    15. Was each changed page set beside the same kind of page at two reference stores (a lamp: DWR and Louis Poulsen;
        the speaker: KEF and Klipsch), with each difference fixed or kept on purpose?
+   20 Nov 11:50 UTC, FIRST RETURNS ON THE 20 NOV ORDERS.
+   SITE BUILD 1A (site lane 11:39, r49 a44e64dd54, code r47 473268a4b7, new spinoffs/barkhorn/site_fix.py run last in
+   the build): 53 pages changed, 24 new tile files (tile-<hemisphere|core|mantle>-<tint>.webp, 800 x 1000), vercel.json
+   gains ONE redirect (/colors/:name -> /tropos/:name, permanent) and nothing else. MY CHECK SO FAR, on a local copy
+   that answers like the host (scratchpad gate/: serve.js, a sparse worktree; md5-identical to live for main): routes
+   and both redirects right; gate/links.js at 1440 and 390: every tile, dot and button opens the product and tint it
+   shows (the baseline's one fault, the Tropos tile opening #speakers, is gone; place tiles open #speaker-<tint>/out);
+   the family row is four equal tiles under the chips, starting in Ember; Tropos pages are titled "Tropos" with the
+   label "Horn speaker · In development" and one sentence; header reads Speakers, Lighting, Turntable, Contact.
+   SENT BACK 11:50: the eight tile-mantle files were set into 4:5 by holding the edge rows, which leaves vertical
+   streaks in the top 190 and bottom 230 rows (plain at 3 times brightness, faint on the page): blur the bands along
+   x, run the gradient on, add grain, feather the join; pass test = no vertical line and no findable join at 3 times.
+   The lamp tiles' extensions are in near-black and do not show. A CRITIC PASS ON 1A IS RUNNING (workflow
+   wf_dea2ed37-3ae: clicks and routes, words, pictures and layout, against the stores; a skeptic on each). Main stays
+   at 90ab8377c8 until it is back. The row still shows white, black, black, gray until the new renders land.
+   LIVING ROOM, PROOF 1 (speaker lane 11:47, r33-speaker-horn dd9584e048, renders/2026-11-20/barkhorn/living/
+   living-a-proof-ember.png, 1500 x 1000, 48 samples; one emitter, the sky and its sun through three windows; audit
+   hidden 0, equipment 0; built from the Klipschorn AK7 hero, the KEF Blade Two room and DWR's Panthella 160).
+   MY CHECK: right in kind (daylight, the pair with a 640 mm console between, the Mantle and an unlit Core on it, the
+   chair back at the foot, plant, sleeves, mains leads to sockets) and the red light the sun throws through the left
+   cabinet onto the floor is the best thing in it. NOT YET FOR THE OWNER: the pair reads as two speakers (left
+   cabinet L* 44.6 in sun, right 17.0 in shade; the sunlit left cone L* 60.8 reads silver); the lit wall is L* 60; the
+   console is a pale flat box; Mantle and Core read as a black deck and a dark ball; window notches; a flat rug.
+   SECOND PROOF ORDERED 11:58 with those seven fixed; no third round on taste.
+   TROPOS FACTS FROM THE SPEAKER LANE (6df744437d): the dimension drawing renders/2026-11-20/barkhorn/dims/
+   tropos-dims.svg and .png (front and side, mm and inches; its header line names "Base A" and "horn A", to be
+   dropped on the site). OVERALL DEPTH IS 441.5 mm (17.4 in), not 428: the three acrylic rings around the woofer
+   stand 14 mm proud; cabinet 420; cabinet top 892. DECIDED: the site prints 442 mm (17.4 in). WEIGHT not settled:
+   72.6 kg was the base model of 9 Nov; the approved look adds about 2 to 3 kg: the site prints "about 75 kg
+   (165 lb) each" until the model is rerun (asked). POWER: "100-120 V / 200-240 V, 50/60 Hz, 350 W max" (the plate's
+   line). WITH A PAIR: two 2 m power cords, one 5 m coax link with RCA plugs. VOLUME: Hypex's IR remote, one per
+   pair; whether US boxes carry it is undecided (coin cell, Reese's Law): not printed yet. SMOKE HORN: explained and
+   closed: the 10 mm horn passes 39 % so white ground behind it reads L* 69; the cabinet shows the near-black
+   lining and cone through 20 mm, hence L* 1. THE GROUND, the speaker lane's six notes (nine sweep-linked lamps
+   stay; re-aim the eight product lamps; scale the contact shadow's reach; Khronos PBR Neutral with the finish
+   block white point 236, contrast 0.2, grain 1.5; rerun the flag audit for a new camera; z = 0 is the base on the
+   paper): relayed to the lamps and Mantle lanes 11:58.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
