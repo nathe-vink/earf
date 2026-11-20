@@ -523,3 +523,268 @@ def fix_1b(p, web):
 .lt-rows { display: grid; gap: 16px; margin-top: clamp(32px, 4vw, 56px) }
 @media (max-width: 860px) { .lt-grid { grid-template-columns: minmax(0, 1fr) } .lt-room img { max-height: none } }
 """)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Build 2: the product page (items 16 to 19)
+KELVIN = {'red': 2200, 'green': 2700, 'ice': 2700, 'violet': 3000, 'orange': 4000, 'amber': 4000, 'blue': 4000, 'black': 4000}
+ASK = {'speaker': 'Ask about a pair', 'dome': 'Ask about Hemisphere', 'orb': 'Ask about Core', 'turntable': 'Ask about Mantle'}
+MAIL = 'hello@earf.world'
+# Specifications: four or five plain headings, one fact to a row. {a|b}: a, or b on Fog. {lm} {K}: this color's own.
+SPEC = {
+    'speaker': [
+        ('Materials', [('Acrylic', '{tint}'), ('Cabinet', 'Cast acrylic, 20 mm, {tinted through|clear}; lined in white'),
+                       ('Lining', 'Polyester batts in white voile, 100 mm at the top and the bottom'),
+                       ('Horn', 'Thermoformed cast acrylic, 10 mm, in the cabinet&rsquo;s color; polished inside and out, on four black posts')]),
+        ('Drivers and amplifier', [('Woofer', 'FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners'),
+                                   ('Horn driver', 'B&amp;C DE1085TN, 2-inch compression driver'),
+                                   ('Amplifier', 'Hypex FusionAmp FA123 built in: the woofer on two bridged channels, up to 125 W into its 8 &Omega;; the horn on its own; crossed at 1 kHz in its DSP')]),
+        ('Sound', [('Bass', 'To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
+                   ('Loudness', 'Up to about 115 dB at 1 m, each'),
+                   ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up')]),
+        ('Size and weight', [('Size', '1295 high, 560 wide (the horn flush with the cabinet), 428 deep overall, 420 at the cabinet (mm); 51 x 22 x 16.9 in'),
+                             ('Weight', 'About 73 kg (161 lb) each; about 64 kg (141 lb) with the horn lifted off (modeled)')]),
+        ('Care', [('Care', '{care}')]),
+    ],
+    'dome': [
+        ('Materials', [('Shade', 'Cast acrylic in three layers: its color on the outside, over a clear shell and an opal diffuser within'),
+                       ('Cap', 'Satin black anodized aluminum, with a quarter-turn catch')]),
+        ('Light', [('Light', 'About {lm} lm out of the shade in this color, and about 340 lux on a table half a meter below; CRI 90. The shade glows in its own color, and the light straight down is the lamp&rsquo;s own white: {K} K'),
+                   ('Power', '120 V, dimmable')]),
+        ('Size and hanging', [('Size', '200 mm (7.9 in) across'),
+                              ('Hanging', 'A cloth-braided cord, a standard 600 mm drop, cut to length; a canopy of satin black anodized aluminum, 150 mm across')]),
+        ('Shades and care', [('Shades', 'In all eight colors, sold separately'),
+                             ('Care', 'A quarter turn takes the shade off to wash: water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic.')]),
+    ],
+    'orb': [
+        ('Materials', [('Ball', '{Tinted|Clear} cast acrylic, with an opal diffuser centered inside it'), ('Base', 'Its own color, satin')]),
+        ('Light', [('Light', 'A glow, not a reading light: the ball lights in its own color. About {lm} lm out of the ball in this color. The LED inside: {K} K'),
+                   ('Control', 'Touch the ring: tap to switch, hold to dim')]),
+        ('Power', [('Power', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours on its dock, on three standard LiFePO4 cells you can replace yourself'),
+                   ('Rating', 'Designed to meet IP44, for terraces and spilled drinks')]),
+        ('Size and weight', [('Size', '160 mm ball, 180 mm tall (6.3 in ball, 7.1 in tall)'), ('Weight', 'About 1.5 kg (3.3 lb)')]),
+        ('Balls and care', [('Balls', 'In all eight colors, sold separately'), ('Care', '{care}')]),
+    ],
+    'turntable': [
+        ('Materials', [('Plinth', 'Cast acrylic in its color, about 25 mm, its edges satin with a fine polished bevel; raised 40 mm on four posts over the base'),
+                       ('Posts', 'Four solid posts, 30 mm across, satin black'), ('Hardware', 'Satin black throughout'),
+                       ('Base', 'Smoked cast acrylic, 12.7 mm, set in 35 mm all around'),
+                       ('Cover', 'Lift-off dust cover in the deck&rsquo;s own {tint|color}: 3 mm cast acrylic, 448 x 358 x 100 mm, about 1.1 kg. It rests on four small clear bumpers and lifts straight off; no hinges.')]),
+        ('Playing', [('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'), ('Speeds', '33 and 45, by a button'),
+                     ('Arm', 'Rega RB330'), ('Cartridge', 'A moving-magnet cartridge'),
+                     ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it')]),
+        ('Size and weight', [('Size', '450 wide, 360 deep, 161 high to the top of the arm; 196 high with the cover on (mm); 17.7 x 14.2 x 6.3 in (7.7 in with the cover)'),
+                             ('Weight', 'About 11.6 kg (25.6 lb); about 12.7 kg (28 lb) with the cover')]),
+        ('Care', [('Care', '{care}')]),
+    ],
+}
+PARA2 = {'turntable': 'Its {tinted|clear} plinth is raised 40&nbsp;mm on four black posts over a smoked base. The motor is fixed under the plinth, and the phono stage is built in.',
+         'orb': 'About five hours a charge at full brightness, longer dimmed. Set it back on its dock and it charges in two to three hours. When the cells tire, you change the cells, not the lamp.'}
+LINK_IC = ('<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8.5 11.5a3.5 3.5 0 0 0 5 0l2.5-2.5a3.5 3.5 0 0 0-5-5l-1 1M11.5 8.5a3.5 3.5 0 0 0-5 0L4 11a3.5 3.5 0 0 0 5 5l1-1" '
+           'fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>')
+
+
+_SIDES = {}
+
+
+def _sides(path):
+    """The picture's left and right edge colors (medians of a 6 px strip), for the stage's sides."""
+    if path not in _SIDES:
+        from PIL import Image
+        import numpy as np
+        a = np.asarray(Image.open(path).convert('RGB')).astype(int)
+        hx = lambda v: '#%02x%02x%02x' % tuple(int(x) for x in v)
+        h = a.shape[0]
+        col = lambda strip: ''.join(hx(np.median(strip[int(h * n / 10):int(h * (n + 1) / 10)].reshape(-1, 3), 0))[1:] for n in range(10))
+        _SIDES[path] = col(a[:, :4]) + col(a[:, -4:])
+    return _SIDES[path]
+
+
+def fix_2(p, web):
+    i, j, D = _data(p)
+    # every picture without a ground of its own gets its sides' colors: the stage is wider than a tall picture
+    views = [v for c in D['clouds'] for v in c['views'].values()]
+    views += [v for L in D['lamps'].values() for t in L['colours'].values() for v in (t.get('views') or {}).values()]
+    views += [v for t in D['tt']['colours'].values() for v in (t.get('views') or {}).values()]
+    gr = {}
+    for v in views:
+        if isinstance(v, dict) and v.get('src') and not v.get('bg') and v['src'].endswith(('.webp', '.jpg', '.png')):
+            f = os.path.join(web.SITE, v['src'])
+            if os.path.exists(f):
+                gr[v['src']] = _sides(f)
+    for prod, groups in SPEC.items():           # every fact the pages hold, once (none added)
+        for _, rows in groups:
+            for _, v in rows:
+                assert '{care}' in v or v, prod
+    care = D['care']
+    # --- 17. beside the pictures: kind and status, name, color dots with the chosen name, the one sentence, the ask
+    m = re.search(r'<aside class="buy" aria-label="This product">.*?</aside>', p.rest, re.S)
+    assert m, 'fix_2: the aside'
+    ask = f'<a class="cta-btn cta-solid p-ask" href="mailto:{MAIL}">Ask</a>'
+    aside = ('<aside class="buy" aria-label="This product">\n'
+             '        <p class="num"><span id="p-num"></span></p>\n'
+             '        <h1 class="named"><span id="p-name"></span><span class="pic" id="p-icon"></span></h1>\n'
+             '        <ul class="swatches" id="swatches" aria-label="Color"></ul>\n'
+             '        <p class="pick">Color: <b id="p-pick"></b><span class="pick-ic" id="p-pick-ic"></span></p>\n'
+             '        <p class="line" id="p-line"></p>\n'
+             '        <p class="para" id="p-para" hidden></p>\n'
+             '        <p class="price">Price on request. <span id="p-unit"></span></p>\n'
+             f'        <div class="acts">{ask.replace("p-ask", "p-ask", 1).replace("<a ", "<a id=\"p-enquire\" ", 1)}'
+             f'<button type="button" class="ic-btn" id="p-share" aria-label="Copy link" title="Copy link">{LINK_IC}</button></div>\n'
+             f'        <p class="addr2"><span>{MAIL}</span> <button type="button" class="btn sm" id="p-copy">Copy address</button></p>\n'
+             '        <p class="share-note" id="p-share-note" aria-live="polite"></p>\n'
+             '      </aside>')
+    p.rest = p.rest[:m.start()] + aside + p.rest[m.end():]
+    # the facts under the gallery as "Specifications", with the figures' caveat
+    p.sub('      <section class="gallery" aria-label="Pictures">', '      <div class="pcol">\n      <section class="gallery" aria-label="Pictures">')
+    p.sub('        <p class="render-note">Pictures are renders. Nothing is built yet.</p>\n      </section>',
+          '        <p class="render-note">Pictures are renders. Nothing is built yet.</p>\n      </section>\n'
+          '      <section class="spec2" id="p-spec" aria-labelledby="p-spec-h"><h2 id="p-spec-h">Specifications</h2><div id="p-spec-body"></div>'
+          '<p class="figs">All figures come from the design; none is measured yet.</p></section>\n      </div>')
+    # --- 18/19. at the foot: the ask again, the other three products in this tint; on a phone the ask in a bar
+    p.sub('    <p class="more-line" id="p-more"></p>',
+          f'    <div class="foot-ask">{ask}</div>\n'
+          '    <section class="others" id="p-others" aria-label="The family"></section>\n'
+          f'    <div class="ask-bar">{ask}</div>')
+    p.sub("  document.getElementById('p-enquire').textContent = P.ask;\n", "")
+    p.sub("  document.getElementById('facts').innerHTML = P.facts(c).map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('');\n",
+          "  renderSpec(P, c); renderAsk(P, c);\n")
+    p.sub("  document.getElementById('p-more').innerHTML = (MORE[P.id] || '').replace(/#(speaker|hemisphere|core|mantle)-[a-z]+/g, (x, r) => `#${r}-${c.name.toLowerCase()}`);\n",
+          "  renderOthers(P, c);\n")
+    p.sub("{ const e = document.getElementById('p-para'), t = PARA[P.id] || ''; e.innerHTML = t; e.hidden = !t; }",
+          "{ const e = document.getElementById('p-para'), t = fillSpec(PARA[P.id] || '', c); e.innerHTML = t; e.hidden = !t; }")
+    pi = p.rest.index('const PARA = '); pj = p.rest.index('\n', pi)
+    p.rest = p.rest[:pi] + f'const PARA = {json.dumps(PARA2)};' + p.rest[pj:]
+    # the other three, from the family's tiles
+    from PIL import Image
+    pic = lambda f, k: f'img/rc/{k}-tall.webp' if f == 'tropos' else f'img/rc/tile-{f}-{NAMES[k]}.webp'
+    src0 = {'tropos': 'img/rc/red-tall.webp', 'mantle': 'img/rc/mantle-ember.webp', 'hemisphere': 'img/rc/home-hemisphere-ember.webp', 'core': 'img/rc/home-core-ember.webp'}
+    others = []
+    for f, name, route, kind in TILES:
+        for k in KEYS:
+            assert os.path.exists(os.path.join(web.SITE, pic(f, k))), ('fix_2: no tile', pic(f, k))
+        w, h = Image.open(os.path.join(web.SITE, pic(f, 'red'))).size
+        others.append({'route': route, 'name': name, 'kind': kind, 'w': w, 'h': h, 'ground': _ground(os.path.join(web.SITE, src0[f])),
+                       'pics': {k: pic(f, k) for k in KEYS}})
+    lm = {pid: D['lamps'][pid].get('lm') for pid in D['lamps']}
+    p.sub("// \"Copy link\": the product's own page",
+          f"const SPEC = {json.dumps(SPEC, separators=(',', ':'))}, LM = {json.dumps(lm)}, KELVIN = {json.dumps(KELVIN)}, CARE = {json.dumps(care)};\n"
+          f"const GR = {json.dumps(gr, separators=(',', ':'))};\n"
+          "const grOf = s => { const h = s && GR[s.src]; if (!h) return ''; const c = h.match(/.{6}/g).map(x => '#' + x), st = cs => cs.map((x, i) => `${x} ${5 + 10 * i}%`).join(', ');\n"
+          "  return `linear-gradient(${st(c.slice(0, 10))}) left / 51% 100% no-repeat, linear-gradient(${st(c.slice(10))}) right / 51% 100% no-repeat`; };\n"
+          f"const ASK = {json.dumps(ASK)}, MAIL = '{MAIL}', OTHERS = {json.dumps(others, separators=(',', ':'))}, ARROW = {json.dumps(ARROW)};\n"
+          "const fillSpec = (t, c) => t.replace(/\\{([^{}|]*)\\|([^{}]*)\\}/g, (x, a, b) => c.k === 'ice' ? b : a).replace('{tint}', c.tint)\n"
+          "  .replace('{lm}', (LM[P.id] || {})[c.k]).replace('{K}', KELVIN[c.k]).replace('{care}', CARE);\n"
+          "function renderSpec(P, c) {        // Specifications: plain headings, one fact to a row (fix list 2026-11-20, 17)\n"
+          "  document.getElementById('p-spec-body').innerHTML = (SPEC[P.id] || []).map(([h, rows]) => `<h3>${h}</h3><dl class=\"facts\">`\n"
+          "    + rows.map(([a, b]) => `<dt>${a}</dt><dd>${fillSpec(b, c)}</dd>`).join('') + '</dl>').join(''); }\n"
+          "function renderAsk(P, c) {         // the ask: a letter, its subject the product in its color (18)\n"
+          "  const t = P.title(c), href = `mailto:${MAIL}?subject=${encodeURIComponent(t)}&body=${encodeURIComponent(`${t}. Quantity: \\nCountry: `)}`;\n"
+          "  document.querySelectorAll('#pdp .p-ask').forEach(a => { a.textContent = ASK[P.id] || 'Ask'; a.href = href; }); }\n"
+          "function renderOthers(P, c) {      // the other three in the tint now chosen, each a link to it (19)\n"
+          "  const nm = c.name.toLowerCase();\n"
+          "  document.getElementById('p-others').innerHTML = '<div class=\"ftiles ftiles3\">' + OTHERS.filter(o => o.route !== P.route).map(o =>\n"
+          "    `<a class=\"ftile\" href=\"#${o.route}-${nm}\"><span class=\"ft-pic\" style=\"background:${o.ground}\"><img src=\"${o.pics[c.k]}\" width=\"${o.w}\" height=\"${o.h}\" loading=\"lazy\" alt=\"${o.name} in ${c.name}\"></span>`\n"
+          "    + `<span class=\"ft-body\"><span class=\"ft-kind\">${o.kind}</span><h3 class=\"ft-name\">${o.name}</h3><span class=\"ft-btn\">See ${o.name} ${ARROW}</span></span></a>`).join('') + '</div>'; }\n"
+          "document.getElementById('p-copy').addEventListener('click', () => {\n"
+          "  const note = document.getElementById('p-share-note'), say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };\n"
+          "  try { navigator.clipboard.writeText(MAIL).then(() => say('Address copied.'), () => say(MAIL)); } catch (e) { say(MAIL); } });\n"
+          "// \"Copy link\": the product's own page")
+
+    # --- 16. the gallery
+    # the stage in the picture's own shape (the phone's tall cut on a phone), capped in height
+    p.sub("  stage.style.background = P.id === 'speaker' ? ground(v) : 'transparent'; if (P.id === 'turntable') stage.style.setProperty('aspect-ratio', '3 / 2', 'important'); else stage.style.removeProperty('aspect-ratio');",
+          "  stage.parentElement.parentElement.style.setProperty('--sar', (phone.matches && s.tall && (v === 'habitat' || s.fill) ? s.tall.w / s.tall.h : s.w / s.h).toFixed(4));\n"
+          "  stage.style.background = (P.id === 'speaker' && ground(v)) || grOf(s) || 'transparent';")
+    p.sub("new ResizeObserver(() => { if (cur) stage.style.background = ground(view); }).observe(stage);",
+          "new ResizeObserver(() => { if (cur) stage.style.background = (P.id === 'speaker' && ground(view)) || grOf(src(BY[cur], view)) || 'transparent'; }).observe(stage);")
+    p.sub("thumbs.addEventListener('keydown', e => keys(e, true));",
+          "thumbs.addEventListener('keydown', e => keys(e, true));\n"
+          "// the arrow keys turn the pictures without a first click (16)\n"
+          "addEventListener('keydown', e => { if (pdp.hidden || e.defaultPrevented || e.altKey || e.metaKey || e.ctrlKey || e.shiftKey) return;\n"
+          "  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;\n"
+          "  if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable], #thumbs, #stage')) return;\n"
+          "  keys(e, false); });\n"
+          "// a color click keeps the view and adds no step to Back: the address is replaced, not added to\n"
+          "addEventListener('click', e => { const a = e.target.closest && e.target.closest('#swatches a');\n"
+          "  if (!a || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;\n"
+          "  e.preventDefault(); e.stopPropagation(); const h = a.getAttribute('href'); if (h === location.hash) return;\n"
+          "  WANT = view; history.replaceState(null, '', location.pathname + h); dispatchEvent(new HashChangeEvent('hashchange')); }, true);\n"
+          "// a click on the picture opens its full file (a drag or a swipe does not)\n"
+          "let downAt = null;\n"
+          "stage.addEventListener('pointerdown', e => { downAt = [e.clientX, e.clientY]; });\n"
+          "stage.addEventListener('click', e => { if (view === 'turn' || view === 'spin' || !downAt || Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 8) return;\n"
+          "  const s = src(BY[cur], view); if (s && s.src) window.open(s.src, '_blank', 'noopener'); });")
+
+    # the same words everywhere the page still holds them (the old /mantle view, the data behind the facts)
+    for a, b in (('it floats 40 mm over the base', 'raised 40 mm on four posts over the base'),
+                 ('Its tinted plinth floats 40&nbsp;mm over a smoked base on four black posts', 'Its tinted plinth is raised 40&nbsp;mm on four black posts over a smoked base'),
+                 ('"Mains"', '"Power"'), ('"Fitting"', '"Cap"'), ('sold singly', 'sold separately'), ('a 600 mm drop as standard', 'a standard 600 mm drop')):
+        assert a in p.rest, ('fix_2: words', a)
+        p.rest = p.rest.replace(a, b)
+    m = re.search(r"const MORE = \{.*?\n\};\n", p.rest, re.S)
+    assert m, 'fix_2: MORE'
+    p.rest = p.rest[:m.start()] + p.rest[m.end():]
+
+    # --- 18. /contact: a page of its own, no opening
+    p.sub("    page = 'home'; showMain('home'); document.title = h === 'contact' ? 'Contact · EARF' : TITLE0; heroIn();",
+          "    const oc = h === 'contact'; page = oc ? 'contact' : 'home'; showMain('home'); home.classList.toggle('only-contact', oc);\n"
+          "    document.title = oc ? 'Contact · EARF' : TITLE0; if (!oc) heroIn();")
+    p.sub("    if (target && h !== 'top') target.scrollIntoView();", "    if (oc) scrollTo(0, 0); else if (target && h !== 'top') target.scrollIntoView();")
+
+    p.css("""
+/* fix list 2026-11-20, build 2: the product page */
+:root { --cap: max(300px, calc(100svh - 270px)) }
+.pdp { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr) !important; gap: clamp(28px, 3.4vw, 56px) !important }
+.pcol { display: grid; gap: clamp(40px, 5vw, 72px); min-width: 0; align-content: start }
+/* the stage spans the column; its height the picture's at that width, capped so the thumbnails stay on the first screen;
+   a picture narrower than that sits in it whole, on its own ground carried to the sides */
+.gallery { container-type: inline-size }
+.stage { aspect-ratio: auto !important; width: 100%; height: min(var(--cap), calc(100cqw / var(--sar, 0.8))) }
+.stage .fit, .stage .fill img { cursor: zoom-in }
+.stage .fill { width: 100%; height: 100% } .stage .fill img { object-fit: contain !important }
+.stage .spin, .stage .spinner { cursor: grab }
+.thumbs { display: flex !important; flex-wrap: wrap; gap: 8px; overflow: visible !important; margin: 0 !important; padding: 0 !important }
+.thumb { width: 64px !important; height: 64px !important; flex: none; aspect-ratio: 1 }
+.cap { min-height: 1.6em }
+.buy { gap: 16px }
+.buy .pick { margin: -4px 0 0 }
+.buy .price { margin: 0 }
+.acts { align-items: center }
+.ic-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--rule); background: transparent; color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0 }
+.ic-btn svg { width: 20px; height: 20px }
+.ic-btn:hover { border-color: var(--ink) }
+.addr2 { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 15px; color: var(--muted) }
+.addr2 span { user-select: all; color: var(--ink) }
+.btn.sm { min-height: 36px; padding: 0 14px; font-size: 14px }
+.share-note:empty { display: none }
+.spec2 h2 { margin: 0 0 8px; font-size: clamp(26px, 2.4vw, 36px); letter-spacing: -0.03em }
+.spec2 h3 { margin: 28px 0 8px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600 }
+.spec2 .facts { grid-template-columns: 160px minmax(0, 1fr); border-top: 1px solid var(--ink) }
+.spec2 .figs { margin: 20px 0 0; font-size: 14px; color: var(--muted) }
+.foot-ask { padding-block: clamp(40px, 5vw, 64px) 24px }
+.others { padding-bottom: 72px }
+.ftiles3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px }
+.ask-bar { display: none }
+#copy { display: inline-flex } #copy-note { display: block }
+#home.only-contact > :not(#contact) { display: none !important }
+#home.only-contact #contact { min-height: calc(100svh - var(--header, 64px) - 160px); padding-top: clamp(48px, 8vw, 120px) }
+@media (max-width: 860px) {
+  .pdp { grid-template-columns: minmax(0, 1fr) !important }
+  .pcol { display: contents } .pcol > .spec2 { order: 3 }
+  :root { --cap: calc(100svh - 200px) }
+  .spec2 .facts { grid-template-columns: minmax(0, 1fr) }
+}
+@media (max-width: 700px) {
+  .ftiles3 { grid-template-columns: minmax(0, 1fr) }
+  .ftiles3 > .ftile { display: flex !important; flex-direction: row !important; gap: 14px; align-items: center }
+  .thumb { width: 52px !important; height: 52px !important }
+  .ftiles3 .ft-pic { width: 40%; flex: none }
+  .ftiles3 .ft-body { padding: 0 }
+  .ask-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: var(--page); border-top: 1px solid var(--rule) }
+  .ask-bar .cta-btn { flex: 1; justify-content: center }
+  #pdp { padding-bottom: 72px }
+}
+@media (orientation: landscape) and (max-height: 520px) { :root { --cap: 80svh } }
+""")
