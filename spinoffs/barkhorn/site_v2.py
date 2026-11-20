@@ -826,6 +826,7 @@ def apply(web, head, rest):
         import site_fix                 # the fix list of 2026-11-20
         site_fix.fix_1a(p, web)
         site_fix.fix_1b(p, web)
+        site_fix.fix_2(p, web)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
