@@ -1,0 +1,13 @@
+{
+ "emitters": [
+  {"name": "the sky and its sun (Poly Haven garden_nook, CC0, 4k, turned 144.2 deg)", "kind": "world",
+   "sun": {"azimuth_deg": -90.0, "elevation_deg": 25.9, "peak_over_median": 16420, "note": "from straight left, parallel to the speakers' fronts"},
+   "reaches the room through": ["window in the back wall, left (in frame)", "narrow window in the left wall at the back corner (out of frame: the sun's way in)",
+                                "a run of windows in the wall behind the lens (out of frame)", "window in the right wall, toward the front (out of frame)"]}
+ ],
+ "lamps": [],
+ "off": [{"name": "Core Ember on the console", "note": "switched off: its LED lamp removed, no glowing face"}],
+ "portals": "the three out-of-frame windows only (they steer the sky's light, add none); none in the window in frame",
+ "hidden_in_frame_px": 0,
+ "equipment_in_frame_px": 0
+}

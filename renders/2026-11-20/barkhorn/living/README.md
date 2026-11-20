@@ -52,3 +52,44 @@ with a low shelf of books and a rug, backs the same choices.)
 - **No lamp, card or fill.** The emitter list is `living-a-proof-ember.emitters.json`.
 - **Audit:** hidden 0, equipment 0, both from the mask pass and from `reaudit.py`. The window in frame has no portal,
   removed by the set piece `no_portal`: a portal is a lamp object, though it adds no light.
+
+## Proof 2 (`living-a-proof2-ember.png`, the coordinator's seven points, 20 Nov 11:58)
+
+Same size and speed (1500 x 1000, 48 samples). Proof 1 is kept beside it. L* is measured by `living/lstar.py` (CIELAB,
+D65), on the same boxes for both speakers.
+
+1. **One colour twice.**
+
+   | | proof 1 | proof 2 |
+   |---|---|---|
+   | cabinet, left / right | 44.6 / 17.0 | 39.9 / 40.7 |
+   | horn, left / right | 49.8 / 28.2 | 40.4 / 30.2 |
+
+   - The sun now comes from straight left (azimuth -90), parallel to the fronts.
+   - A run of windows behind the lens gives both fronts the same sky.
+   - The window in frame moved 0.3 m left: the garden had shown through the left horn and cabinet.
+2. **No sun on a cone.** The cones read 25 and 30, both black.
+   - The sun enters by a narrow window at the left wall's back corner.
+   - It grazes the backs of the cabinets' sides, and their red light falls on the floor and the console's end.
+   - It lies in stripes on the floor before the pair, and crosses the console's top.
+3. **By day.** The lit wall reads 73 to 77, and 0.5 % of pixels are clipped (the sun's patches). Exposure is 5.35,
+   and there is a fourth window, on the right wall, out of frame.
+4. **The console.** A walnut credenza, 1500 x 450 x 640, built as a maker would:
+   - a case with the top's grain along it;
+   - a door, three drawers and a door, 4 mm reveals onto a dark inside;
+   - blackened bar pulls;
+   - a base rail and four tapered legs.
+
+   Its wood is Poly Haven `walnut_veneer_02`. `american_walnut_veneer` averages #726E69, a grey: proof 1's pale box.
+5. **Mantle and the Core in daylight.**
+   - Mantle is turned 30 degrees toward the window, in the sun's band on the console: its Ember plinth's lit face shows.
+   - The Core is at the console's front edge, in the band. Switched off, its Ember ball reads as dark red glass, as in
+     the lamps lane's own unlit day proof (`renders/2026-11-01/barkhorn/tint-proof/core-ember-unlit.png` on
+     r32-lamps-final). The pale core inside shows only when it is on.
+6. **The window.** A steel casement: a dark frame, its bars set 6 mm behind the frame's faces. The engine's own bars
+   share the frame's faces, and coplanar faces render black in Cycles: proof 1's notches.
+7. **The rug.** Herringbone wool (Poly Haven, photographed) in a field, inside an 80 mm border band much darker,
+   16 mm thick, its edge rounded.
+
+Emitters: the sky and its sun, through four windows (`living-a-proof2-ember.emitters.json`). Audit: hidden 0,
+equipment 0, from the masks and from `reaudit.py`.
