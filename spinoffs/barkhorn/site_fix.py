@@ -788,3 +788,184 @@ def fix_2(p, web):
 }
 @media (orientation: landscape) and (max-height: 520px) { :root { --cap: 80svh } }
 """)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Build 3: addresses, phone, files (items 20 to 22)
+ROUTES3 = [('hemisphere', 'Hemisphere'), ('core', 'Core'), ('mantle', 'Mantle')]
+# each place's speaker, measured on its master (fractions of width and height): center x, height, center y
+PLACE_BOX = {'red': (.50, .42, .58), 'orange': (.46, .35, .505), 'amber': (.51, .41, .495), 'green': (.46, .43, .545),
+             'blue': (.635, .42, .55), 'violet': (.625, .41, .575), 'ice': (.505, .42, .66), 'black': (.505, .34, .53)}
+PLACE_SPEAKER = 0.56      # the speaker's height in every tile, as a share of the tile's
+PLACE_CY = 0.56           # and its center's height
+
+
+def _grain_save(im, path, q=90, sigma=2.0, seed=7):
+    """Fine monochrome grain before encoding, so a near-black ground holds its gradient instead of a few flat blocks."""
+    import numpy as np
+    from PIL import Image
+    a = np.asarray(im.convert('RGB')).astype(np.float32)
+    n = np.random.default_rng(seed).normal(0, sigma, a.shape[:2])[..., None]
+    Image.fromarray(np.clip(a + n, 0, 255).round().astype(np.uint8)).save(path, 'WEBP', quality=q, method=6)
+
+
+def fix_3(p, web):
+    import site_v2
+    from PIL import Image
+    i, j, D = _data(p)
+    # --- 20. real paths for the lamps and Mantle: the clean map knows them (the pages are written in finish_3)
+    a = p.rest.index('(() => { const P = ') + len('(() => { const P = ')
+    b = p.rest.index(', R = Object', a)
+    P = json.loads(p.rest[a:b])
+    for r, _ in ROUTES3:
+        for k in KEYS:
+            P[f'{r}-{NAMES[k]}'] = f'/{r}/{NAMES[k]}'
+    p.rest = p.rest[:a] + json.dumps(P) + p.rest[b:]
+    # "Copy link" copies the address in the bar
+    p.sub("const url = location.hash ? `${location.origin}/s/${location.hash.slice(1)}` : location.href, note",
+          "const url = location.href, note")
+    # an unknown fragment: the not-found view
+    p.sub('<main id="pdp" hidden>',
+          '<main id="nf" hidden tabindex="-1"><div class="wrap nf"><h1>Nothing here.</h1><nav class="nf-links" aria-label="Pages">'
+          '<a href="#speaker-ember" data-carry="speaker">Tropos</a><a href="#lighting">Lighting</a><a href="#mantle-ember" data-carry="mantle">Mantle</a>'
+          '<a href="#contact">Contact</a></nav></div></main>\n\n<main id="pdp" hidden>')
+    p.sub("MAINS = { home, line: lineMain, color: colourMain, pdp };", "MAINS = { home, line: lineMain, color: colourMain, pdp, nf: document.getElementById('nf') };")
+    p.sub("    const oc = h === 'contact'; page = oc",
+          "    if (h && h !== 'top' && h !== 'contact' && !document.getElementById(h)) {      // an address the site does not have\n"
+          "      page = 'nf'; showMain('nf'); home.classList.remove('only-contact'); document.title = 'Nothing here · EARF'; scrollTo(0, 0); navAt(null); last = page; return; }\n"
+          "    const oc = h === 'contact'; page = oc")
+    # pages that skip the opening keep the header's still globe (the 339 kB sheet is not fetched)
+    p.sub("const own = !G.layers && !document.documentElement.classList.contains('intro');",
+          "const own = false;      // no opening: the still globe, not the 339 kB sheet (fix list 2026-11-20, 20)")
+
+    # --- 21. phone and input
+    p.sub("const menuOpen = o => { navEl.classList.toggle('open', o); menuBtn.setAttribute('aria-expanded', String(o)); };",
+          "const menuOpen = o => { navEl.classList.toggle('open', o); menuBtn.setAttribute('aria-expanded', String(o)); menuBtn.textContent = o ? 'Close' : 'Menu'; };\n"
+          "document.addEventListener('pointerdown', e => { if (navEl.classList.contains('open') && !navEl.contains(e.target)) menuOpen(false); });\n"
+          "addEventListener('scroll', () => { if (navEl.classList.contains('open')) menuOpen(false); }, { passive: true });\n"
+          "// the skip link: to whichever page is showing, without touching the address\n"
+          "addEventListener('click', e => { const a = e.target.closest && e.target.closest('a.skip'); if (!a) return; e.preventDefault(); e.stopPropagation();\n"
+          "  const m = [...document.querySelectorAll('main')].find(x => !x.hidden); if (m) { m.setAttribute('tabindex', '-1'); m.focus(); } }, true);")
+    _sub_any(p, '<header class="top">', '<a class="skip" href="#top">Skip to content</a>\n<header class="top">')
+    _sub_any(p, 'html.cursor, html.cursor * { cursor: none !important }', '')
+    # /lighting: the dots with their names
+    p.rest, n = re.subn(r'(<li><a href="#(?:hemisphere|core)-[a-z]+" aria-label="(\w+)" title="\2"><span class="coin-dot" style="[^"]*"></span>)(</a></li>)',
+                        r'\1<span class="dn">\2</span>\3', p.rest)
+    assert n == 16, ('fix_3: /lighting dots', n)
+
+    # --- 22. files from the masters
+    LF = os.path.join(web.ROOT, site_v2.LAMP_FINAL)
+    lamp = [(f'hemisphere-{n}-direct', f'hemisphere-{n}', 1200) for n in NAMES.values()]
+    lamp += [(f'hemisphere-{n}-under', f'hemisphere-{n}-under', 1200) for n in NAMES.values()]
+    lamp += [(f'core-{n}', f'core-{n}', 1200) for n in NAMES.values()]
+    lamp += [(f'hemisphere-ember-{d}', f'hemisphere-ember-{d}', 1200) for d in ('off', 'cap', 'rim')]
+    lamp += [('hemisphere-cluster', 'hemisphere-cluster', 1600), ('hemisphere-row', 'hemisphere-row', 2000), ('core-row', 'core-row', 2000)]
+    for src, dst, w in lamp:
+        im = Image.open(LF.format(f=src)).convert('RGB')
+        im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+        out = os.path.join(web.IMG, 'rc', dst + '.webp')
+        assert os.path.exists(out), ('fix_3: no lamp file', out)
+        assert Image.open(out).size == im.size, ('fix_3: size', dst, Image.open(out).size, im.size)
+        _grain_save(im, out)
+    # Horn, behind: the master's whole frame, 1200 x 900
+    for c in D['clouds']:
+        v = c['views'].get('horn-back')
+        if not v:
+            continue
+        name = NAMES[c['k']]
+        im = Image.open(os.path.join(web.ROOT, site_v2.HORN_BACK_SRC.format(name=name))).convert('RGB')
+        assert im.width >= 1040, ('fix_3: horn-back master', im.size)
+        im.save(os.path.join(web.IMG, 'rc', f'{c["k"]}-horn-back.webp'), 'WEBP', quality=86, method=6)
+        v['w'], v['h'] = im.size
+    i, j, _ = _data(p)                                 # the page has moved since D was read
+    p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
+    # the eight place tiles re-cut: the speaker at one place and one size in each
+    for k, (cx, sh, cy) in PLACE_BOX.items():
+        im = Image.open(os.path.join(web.ROOT, site_v2.HAB_SRC[k])).convert('RGB')
+        W, H = im.size
+        ch = sh / PLACE_SPEAKER * H; cw = ch * 4 / 5
+        left = min(max(cx * W - cw / 2, 0), W - cw); top = min(max(cy * H - PLACE_CY * ch, 0), H - ch)
+        tile = im.crop((round(left), round(top), round(left + cw), round(top + ch))).resize((800, 1000), Image.LANCZOS)
+        tile.save(os.path.join(web.IMG, 'rc', f'place-{k}.webp'), 'WEBP', quality=site_v2.HAB_Q.get(k, 84), method=6)
+        p.rest, n = re.subn(r'(<a class="place" href="#speaker-%s/out"><img src=")img/rc/%s-habitat\.webp" width="\d+" height="\d+"' % (NAMES[k], k),
+                            r'\g<1>img/rc/place-%s.webp" width="800" height="1000"' % k, p.rest)
+        assert n == 1, ('fix_3: place tile', k, n)
+
+    p.css("""
+/* fix list 2026-11-20, build 3: phone and input */
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: var(--page); text-decoration: none }
+.skip:focus { top: 12px }
+.swatches { gap: 0 4px !important } .swatches a { width: 44px !important; height: 44px !important; padding: 3px; box-sizing: border-box }
+.swatches a[aria-current="true"] { outline-offset: 0 !important }
+@media (max-width: 700px) { .swatches { gap: 0 !important } }
+.lt-tile .dots-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 2px 8px }
+.lt-tile .dots-row a { width: auto; height: auto; min-height: 44px; display: flex; align-items: center; gap: 8px; border-radius: 22px; color: var(--ink); text-decoration: none; font-size: 14px }
+.lt-tile .dots-row .coin-dot { width: 30px; height: 30px; flex: none }
+.crumbs a { display: inline-flex; align-items: center; min-height: 44px }
+a.cta-btn, .ft-btn { min-height: 44px }
+.names a { display: inline-block; padding-block: 10px }
+.cur-dot { display: none !important }
+.cur-ring.on { background: none !important }
+#nf .nf { padding-block: 18vh 24vh } #nf h1 { margin: 0 0 24px; font-size: clamp(40px, 6vw, 72px); letter-spacing: -0.03em }
+.nf-links { display: flex; flex-wrap: wrap; gap: 8px 24px } .nf-links a { color: var(--ink); min-height: 44px; display: inline-flex; align-items: center }
+""")
+
+
+def _og_card(src, dst):
+    """A 1200 x 630 link card from a product picture: the picture whole at the card's height, its edges carried out to the sides."""
+    from PIL import Image, ImageFilter
+    im = Image.open(src).convert('RGB')
+    im = im.resize((round(im.width * 630 / im.height), 630), Image.LANCZOS)
+    if im.width > 1200:
+        x = (im.width - 1200) // 2
+        im = im.crop((x, 0, x + 1200, 630))
+    can = Image.new('RGB', (1200, 630))
+    side = (1200 - im.width) // 2
+    if side > 0:
+        can.paste(im.crop((0, 0, 6, 630)).resize((side + 2, 630), Image.BILINEAR).filter(ImageFilter.GaussianBlur(10)), (0, 0))
+        can.paste(im.crop((im.width - 6, 0, im.width, 630)).resize((1200 - side - im.width + 2, 630), Image.BILINEAR).filter(ImageFilter.GaussianBlur(10)), (side + im.width - 2, 0))
+    can.paste(im, (side, 0))
+    can.save(dst, 'JPEG', quality=86)
+
+
+def finish_3(web):
+    """The 24 lamp and Mantle addresses, each with its own title, description and card; /mantle forwards to Mantle in Ember."""
+    import html
+    pic = {'hemisphere': 'img/rc/hemisphere-{n}.webp', 'core': 'img/rc/core-{n}.webp', 'mantle': 'img/rc/mantle-{n}.webp'}
+    idx = open(os.path.join(web.SITE, 'index.html')).read()
+    e = lambda x: html.escape(x, quote=True)
+    for r, name in ROUTES3:
+        for k in KEYS:
+            n = NAMES[k]; h = f'{r}-{n}'
+            card = f'img/rc/og-{r}-{n}.jpg'
+            _og_card(os.path.join(web.SITE, pic[r].format(n=n)), os.path.join(web.SITE, card))
+            alt = f'{name} in {CNAME[k]}'
+            sf = os.path.join(web.SITE, 's', h + '.html')
+            s = open(sf).read()
+            s = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(")', r'\g<1>' + web.URL + '/' + card + r'\2', s)
+            s = re.sub(r'(<meta property="og:image:alt" content=")[^"]*(")', r'\g<1>' + alt + r'\2', s)
+            s = re.sub(r'("image":")[^"]*(")', r'\g<1>' + web.URL + '/' + card + r'\2', s)
+            open(sf, 'w').write(s)
+            title = html.unescape(re.search(r'<title>(.*?)</title>', s).group(1))
+            desc = html.unescape(re.search(r'<meta name="description" content="([^"]*)"', s).group(1))
+            url = f'{web.URL}/{r}/{n}'
+            page = idx.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n'
+                               f'<script>if (!location.hash) history.replaceState(null, "", location.pathname + "#{h}")</script>', 1)
+            page = re.sub(r'<title>.*?</title>', f'<title>{e(title)}</title>', page, count=1)
+            page = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{e(desc)}">', page, count=1)
+            page = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{e(title)}">', page, count=1)
+            page = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{e(desc)}">', page, count=1)
+            page = re.sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{url}">\n<link rel="canonical" href="{url}">', page, count=1)
+            page = re.sub(r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{web.URL}/{card}">\n'
+                          f'<meta property="og:image:alt" content="{e(alt)}">', page, count=1)
+            page = page.replace('<meta name="twitter:card" content="summary_large_image">', '<meta name="twitter:card" content="summary_large_image">\n'
+                                f'<meta name="twitter:title" content="{e(title)}">\n<meta name="twitter:description" content="{e(desc)}">\n'
+                                f'<meta name="twitter:image" content="{web.URL}/{card}">', 1)
+            assert 'noindex' in page and f'#{h}' in page
+            os.makedirs(os.path.join(web.SITE, r), exist_ok=True)
+            open(os.path.join(web.SITE, r, n + '.html'), 'w').write(page)
+    vj = os.path.join(web.SITE, 'vercel.json')
+    v = json.load(open(vj))
+    if not any(x['source'] == '/mantle' for x in v.get('redirects', [])):
+        v.setdefault('redirects', []).append({'source': '/mantle', 'destination': '/mantle/ember', 'permanent': True})
+    json.dump(v, open(vj, 'w'), indent=2)
