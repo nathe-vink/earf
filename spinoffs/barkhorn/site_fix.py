@@ -1124,6 +1124,7 @@ def finish_4(web):
 # ---------------------------------------------------------------------------------------------------------------------
 # The coordinator, 20 Nov 12:59 and 13:05: the eight Mantle pictures on the Tropos ground, and the words critic's leftovers
 MANTLE_HOUSE = 'renders/2026-11-20/barkhorn/mantle-r48/mantle-house-{n}.png'     # r48-mantle-design 06228224, passed 12:59
+MANTLE_HOUSE_COVER = 'renders/2026-11-20/barkhorn/mantle-r48/mantle-house-{n}-cover.png'     # r48-mantle-design b839428b, passed 14:36
 
 
 def fix_5(p, web):
@@ -1138,6 +1139,12 @@ def fix_5(p, web):
         im.resize((336, 420), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'mantle-{n}-house-th.webp'), 'WEBP', quality=82)
         im.resize((800, 1000), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'tile-mantle-{n}.webp'), 'WEBP', quality=86, method=6)   # the tiles: the whole frame
         D['tt']['colours'][k]['views']['house'] = {'src': f'img/rc/mantle-{n}-house.webp', 'w': 1200, 'h': 1500, 'th': f'img/rc/mantle-{n}-house-th.webp'}
+        # its cover on, same camera (r48-mantle-design b839428b, passed 14:36): replaces the gray-ground "With its cover"
+        cv = Image.open(os.path.join(web.ROOT, MANTLE_HOUSE_COVER.format(n=n))).convert('RGB')
+        assert cv.size == (1600, 2000), ('fix_5: Mantle cover picture', n, cv.size)
+        cv.resize((1200, 1500), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'mantle-{n}-house-cover.webp'), 'WEBP', quality=86, method=6)
+        cv.resize((336, 420), Image.LANCZOS).save(os.path.join(web.IMG, 'rc', f'mantle-{n}-house-cover-th.webp'), 'WEBP', quality=82)
+        D['tt']['colours'][k]['views']['cover'] = {'src': f'img/rc/mantle-{n}-house-cover.webp', 'w': 1200, 'h': 1500, 'th': f'img/rc/mantle-{n}-house-cover-th.webp'}
     # the lamp tiles from the real 4:5 pictures (the coordinator 13:56, B1): the masters at 800 x 1000, grain as the gallery, nothing added
     import site_v2
     for f, src in (('hemisphere', 'hemisphere-{n}-direct'), ('core', 'core-{n}')):
@@ -1151,7 +1158,7 @@ def fix_5(p, web):
     D['lamps']['orb']['line'] = 'A table lamp in cast acrylic. Cordless. About five hours a charge.'
     i, j, _ = _data(p)
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
-    p.sub('"turntable": ["studio", "cover", "bar"]', '"turntable": ["house", "studio", "cover", "bar"]')
+    p.sub('"turntable": ["studio", "cover", "bar"]', '"turntable": ["house", "cover", "studio", "bar"]')     # cover off, then on, then under a spot
     p.sub("const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],",
           "const TT_VIEWS = [['house', 'In the studio', c => `${D.tt.name} in ${c.name}.`], ['studio', 'Under a spot', c => `${D.tt.name} in ${c.name}, under a spot.`],")
     p.sub('turntable: {"studio": "",', 'turntable: {"house": "", "studio": "",')
