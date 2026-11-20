@@ -291,7 +291,9 @@ def base(tint='ember', size=(2400, 1600)):
                 'wall': {'color': '#E6E0D5'}, 'ceiling': '#EFECE6', 'frame': STEEL, 'skirting': {'h': 0.09, 'color': '#E3DED4'},
                 'windows': [WIN_BACK, WIN_LEFT, WIN_FRONT, WIN_RIGHT],
                 'props': [_floor()] + _rug() + _console() + _window_bars() + _cables() + _life() + _side_table() + [_cores(tint),
-                          {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_portal', 'windows': ['wall-back']}]}
+                          {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_portal', 'windows': ['wall-back']},
+                          # (the coordinator, 19:45: one light model: caustics on, the acrylics' glass-shadow shortcut off)
+                          {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_glass_shadows'}]}
     s.pop('haze', None)
     s.pop('sun', None)
     s['sky'] = dict(SKY)

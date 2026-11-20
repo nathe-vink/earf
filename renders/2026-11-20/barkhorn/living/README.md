@@ -122,3 +122,21 @@ equipment 0, from the masks and from `reaudit.py`.
     (the engine's own bars share the frame's faces and render black where they meet).
   - A and B were rendered with that window's own engine bars, 30 mm; C's are 22 mm, in the same places. Their sun
     shadows in A and B differ only by that width.
+
+## Sources of the room's scanned and photographed pieces
+
+All from Poly Haven (polyhaven.com), CC0: public domain, free for commercial use, no attribution required. They are
+credited here all the same. They are fetched and cached by `studio/engine/assets.py` and are not kept in git.
+
+| piece | Poly Haven id | by |
+|---|---|---|
+| the sofa (its back across the foot of A) | `sofa_02` | Kirill Sannikov |
+| the side table | `side_table_01` | James Ray Cock |
+| the plant | `potted_plant_02` | Rico Cilliers |
+| the lounge chair (proofs 1 and 2 and the first finals only) | `mid_century_lounge_chair` | Kuutti Siitonen |
+| the sky and garden through the windows | `garden_nook` (HDRI) | Dimitrios Savva, Jarod Guest |
+| the oak floor | `oak_wood_planks` | Dimitrios Savva |
+| the credenza's walnut | `walnut_veneer_02` | Jenelle van Heerden |
+| the rug | `poly_wool_herringbone` | colormass, Rico Cilliers |
+
+The record covers are this repository's own (`spinoffs/barkhorn/campaign/bar_life/tex`, invented covers).
