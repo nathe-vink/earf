@@ -3945,6 +3945,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    the room?". B (the Mantle close) HELD: it carries the arm parked on the record's edge; it is re-rendered when the
    Mantle lane re-exports the corrected asset. In B the plinth throws red light on the wood: so the living-room
    scene lets light through the acrylic while the studio fronts do not.
+   20 Nov 15:55 UTC, PUSH C2b IS PUBLIC: THE CORE'S FIGURES ARE RIGHT ON THE LIVE SITE. main b3c7989729 ->
+   87b93bff000764313db7773a990131d5a0adfbaa (pushed 15:53, live 15:55). Diffed word by word against C2: only the
+   Core's facts changed (187 mm for 180, base 150 mm across, about 1.4 kg (3.1 lb) with its cells for 1.5 kg,
+   "Touch the top of the base" for "Touch the ring", 7.4 in for 7.1 in, the size line). Read on the public site:
+   /core/ember gives "160 mm ball, 187 mm tall, base 150 mm across (6.3 in ball, 7.4 in tall, 5.9 in base)"; no
+   "180 mm" or "7.1 in" left on /core/smoke.
+   MANTLE TEST FRAMES (lane 410420bbc2, 15:47): the red three-quarter test and the clear deck from above, with the
+   lane's answers to my ten points: the arm now turns onto its rest 20 mm clear of the record; shadow rays pass the
+   acrylic with its tint (the scene had its glass-shadows option off); the plinth's top is glossy and its underside
+   bead-blasted satin BY DESIGN (signed 10 Nov), so the page is wrong, not the model; bumpers now show; the "crack"
+   is the polished chamfer seen through the corner (true); the collar and the grain are fixed; the speed button is
+   on the power supply; the sockets are black with gold contacts. MY LOOK: the red frame is better in every way I
+   can see. THE CLEAR DECK FROM ABOVE IS NOT TRUE YET: plinth over the floor margin L* 98.8, over the smoked base
+   98.4, over the black box 54.1, open floor 92.9 (old: 76.2, 23.6, 8.4, 92.7): a passive deck brighter than the
+   floor, and the base has vanished. Sent back 15:51 with the numbers and three questions (does a hidden lamp shine
+   up through it; the base's transmission; a diffuse term on the underside); three small frames from above (Fog,
+   Smoke, Ember) asked. A two-critic look at both test frames is running (workflow wf_978bb742-1a8). The sets wait.
+   Three page corrections from the lane's answers go into push C3 (plinth finish, speed button, sockets).
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
