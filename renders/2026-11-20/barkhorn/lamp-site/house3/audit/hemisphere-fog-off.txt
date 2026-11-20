@@ -1,0 +1,20 @@
+AUDIT house-dome-ice hidden ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] no-shadow ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] lights [('house-key', 'AREA', 1.131), ('house-fill', 'AREA', 3.176), ('house-kick', 'AREA', 0.78), ('house-horn', 'AREA', 4.691), ('house-bg-left', 'AREA', 3.41), ('house-bg-right', 'AREA', 1.319), ('house-wall_left', 'AREA', 9.505), ('house-bg-high', 'AREA', 2.165), ('led-ice-0', 'AREA', 0.0), ('led-ice-1', 'AREA', 0.0), ('led-ice-2', 'AREA', 0.0), ('led-ice-3', 'AREA', 0.0), ('led-ice-4', 'AREA', 0.0), ('led-ice-5', 'AREA', 0.0), ('led-ice-6', 'AREA', 0.0), ('led-ice-7', 'AREA', 0.0), ('led-ice-8', 'AREA', 0.0), ('led-ice-9', 'AREA', 0.0), ('led-ice-10', 'AREA', 0.0), ('led-ice-11', 'AREA', 0.0), ('led-ice-12', 'AREA', 0.0), ('led-ice-13', 'AREA', 0.0), ('led-ice-14', 'AREA', 0.0), ('led-ice-15', 'AREA', 0.0), ('led-ice-16', 'AREA', 0.0), ('led-ice-17', 'AREA', 0.0), ('led-ice-18', 'AREA', 0.0), ('led-ice-19', 'AREA', 0.0), ('led-ice-20', 'AREA', 0.0), ('led-ice-21', 'AREA', 0.0), ('led-ice-22', 'AREA', 0.0), ('led-ice-23', 'AREA', 0.0)]
+HIDDENCAST house-dome-ice: 21 hidden, 4 in frame
+   out         0.0 %  area lamp (rectangle) house-key
+   out         0.0 %  hidden mesh house-key-face
+   out         0.0 %  hidden mesh house-key-housing
+   out         0.0 %  area lamp (rectangle) house-fill
+   out         0.0 %  hidden mesh house-fill-face
+   out         0.0 %  hidden mesh house-fill-housing
+   out         0.0 %  area lamp (rectangle) house-kick
+   out         0.0 %  hidden mesh house-kick-face
+   out         0.0 %  hidden mesh house-kick-housing
+   out         0.0 %  area lamp (rectangle) house-horn
+   out         0.0 %  hidden mesh house-horn-face
+   out         0.0 %  hidden mesh house-horn-housing
+   out         0.0 %  area lamp (rectangle) house-bg-right
+   out         0.0 %  area lamp (rectangle) house-bg-high
+   out         0.0 %  hidden mesh room-right
+   out         0.0 %  hidden mesh room-ceiling
+   out         0.0 %  hidden mesh room-front
+CASTCHECK house-dome-ice {'house-key': 0.0, 'house-key-face': 0.0, 'house-key-housing': 0.0, 'house-fill': 0.0, 'house-fill-face': 0.0, 'house-fill-housing': 0.0, 'house-kick': 0.0, 'house-kick-face': 0.0, 'house-kick-housing': 0.0, 'house-horn': 0.0, 'house-horn-face': 0.0, 'house-horn-housing': 0.0, 'house-bg-left': 1.79, 'house-bg-right': 0.0, 'house-wall_left': 5.45, 'house-bg-high': 0.0, 'room-left': 6.86, 'room-right': 0.0, 'room-back': 44.45, 'room-ceiling': 0.0, 'room-front': 0.0}
