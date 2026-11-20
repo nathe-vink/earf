@@ -889,7 +889,7 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, a
         piv.rotation_euler.z = best if best is not None else a0
         from mathutils import Matrix
         Rz = Matrix.Translation(piv.matrix_world.translation) @ Matrix.Rotation(piv.rotation_euler.z - a0, 4, 'Z') @ Matrix.Translation(-piv.matrix_world.translation)
-        for o in [o for o in bpy.data.objects if o.parent is None and o.name.startswith(('arm-yoke', 'arm-axle', 'cue-bar'))]:
+        for o in [o for o in bpy.data.objects if o.parent is None and o.name.startswith(('arm-yoke', 'arm-axle', 'cue-'))]:
             o.matrix_world = Rz @ o.matrix_world      # the bearing block and the cue's bar turn with the tube
         st = bpy.data.objects.get('cart-diamond'); bpy.context.view_layer.update()
         sr = (st.matrix_world.translation - rc).xy.length * 1000 if st else -1
@@ -903,6 +903,23 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, a
             tab.location.y = -tab.location.y; e = tab.rotation_euler; tab.rotation_euler = (-e.x, e.y, -e.z)
             tab.location.y = 0.0155 if tab.location.y > 0 else -0.0155   # 3.5 mm in from the scene's 19: its inner end on the plate's edge
             print(f'v3_day: the finger lift on the outer side, joined to the headshell (local y {tab.location.y * 1000:.1f} mm)', flush=True)
+    pl = bpy.data.objects.get('plinth-L1-stack')
+    if pl is not None:
+        # the deck's faces to the signed finish (the critics, 2026-11-20): the model gave the TOP the satin slot (1) and the
+        # long outer edges the glassy one (0), so the top read satin and the edges see-through. Signed: the top polished,
+        # the underside and the outer edge satin, a 1 mm polished chamfer (that slot is left as it is)
+        M_ = pl.matrix_world; R_ = M_.to_3x3(); zs_ = [(M_ @ v.co).z for v in pl.data.vertices]; zt, zb = max(zs_), min(zs_)
+        xs_ = [(M_ @ v.co).x for v in pl.data.vertices]; ys_ = [(M_ @ v.co).y for v in pl.data.vertices]
+        X0_, X1_, Y0_, Y1_ = min(xs_), max(xs_), min(ys_), max(ys_)
+        sl = {s_.material.name: i for i, s_ in enumerate(pl.material_slots) if s_.material}
+        nt_ = nb_ = ne_ = 0
+        for p_ in pl.data.polygons:
+            n_ = (R_ @ p_.normal).normalized(); c_ = M_ @ p_.center
+            if pl.material_slots[p_.material_index].material.name == 'plinth-chamfer-polished': continue
+            if n_.z > 0.9 and abs(c_.z - zt) < 0.0005: p_.material_index = sl['plinth-0']; nt_ += 1
+            elif n_.z < -0.9 and abs(c_.z - zb) < 0.0005: p_.material_index = sl['plinth-1']; nb_ += 1
+            elif abs(n_.z) < 0.1 and min(c_.x - X0_, X1_ - c_.x, c_.y - Y0_, Y1_ - c_.y) < 0.0015: p_.material_index = sl['plinth-1']; ne_ += 1
+        print(f'v3_day: the deck to the signed finish: top polished ({nt_} faces), underside satin ({nb_}), outer edge satin ({ne_})', flush=True)
     rp = bpy.data.objects.get('rear-plate')
     if rp is not None and not any(sl.material for sl in rp.material_slots):
         # the rear plate came without a material (it rendered as the default white): black nickel satin with its legends
