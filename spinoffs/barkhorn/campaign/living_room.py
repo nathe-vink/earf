@@ -25,6 +25,7 @@ import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import shots                                    # noqa: E402
+import listening_bar as LB                      # noqa: E402  (its turned glass)
 
 EXT = 'spinoffs/barkhorn/campaign/living/living_ext.py'
 LIFE = 'spinoffs/barkhorn/campaign/bar_life/bar_life.py'
@@ -46,7 +47,10 @@ WIN_BACK = {'wall': 'back', 'along': -2.22, 'sill': 0.42, 'size': [0.75, 1.95], 
 WIN_LEFT = {'wall': 'left', 'along': 2.75, 'sill': 0.3, 'size': [0.4, 2.05], 'mullions': [1, 3]}
 # the right wall, toward the front, out of frame: more sky into the room
 WIN_RIGHT = {'wall': 'right', 'along': 1.6, 'sill': 0.3, 'size': [1.6, 2.15], 'mullions': [2, 2]}
-# behind the lens: a long run of windows, the sky from the front, on both speakers alike
+# behind the lens: a long run of windows, the sky from the front, on both speakers alike. (The coordinator, 12:30: the
+# fronts paler than the studio's, chroma 44 against 80. Tested: at 2.0 m and 1.2 m the fronts mirror plain wall, and the
+# cabinets went darker and no deeper, chroma 42/37 and 36/33. The studio's depth is its 'through' lamp aimed through the
+# cabinet; the honest twin here is the sun through the cabinets. Proof 2's run kept.)
 WIN_FRONT = {'wall': 'front', 'along': 0.0, 'sill': 0.3, 'size': [4.6, 2.15], 'mullions': [5, 2]}
 SKY = {'kind': 'hdri', 'polyhaven': 'garden_nook', 'res': '4k', 'rotation_deg': 144.2, 'strength': 1.0}
 # (assets.py sun garden_nook: azimuth 54.2 - rotation, elevation 25.9. Proof 1 (101.2, azimuth -47, from the front
@@ -69,6 +73,11 @@ MANTLE = (-0.24, CON_Y - 0.06, TOP + 0.001, -30.0)
 CORE = (0.5, CON_Y - 0.155, TOP)           # at the console's front edge: the sun's band on its top is its front 6 cm
 SOCKETS = (-1.85, 2.1)                          # the two outlets, either side of the pair, in frame
 CHAIR = (-0.15, -1.6, 180.0)                    # its back to the lens, across the frame's foot, below the speakers' feet
+# a walnut side table (scanned) by the window in frame, in the sun's band: a book and a glass of water on it in every frame;
+# camera C sets the Core on it, switched off (taken off the console for that frame only)
+SIDE = (-2.2, 1.66, 0.0)
+SIDE_TOP = 0.5507
+CORE_C = (-2.31, 1.67, SIDE_TOP)
 CAM_A = {'position': [0.1, -3.05, 1.5], 'target': [0.0, 1.6, 1.0], 'lens_mm': 32.0, 'level': True, 'fstop': 8.0,
          'focus': [0.0, 1.3, 0.9]}
 
@@ -194,6 +203,23 @@ def _life():
     ]
 
 
+def _side_table():
+    """The side table, a book (cloth boards) and a rocks glass of water on it."""
+    x, y, _ = SIDE; T = SIDE_TOP
+    RK = [[0, 0], [0.041, 0], [0.043, 0.006], [0.044, 0.092]]
+    return [{'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'res': '2k', 'position': [x, y, 0.0], 'rotate': [0, 0, 0.0]},
+            {'kind': 'kit', 'shape': 'box', 'size': [0.155, 0.235, 0.028], 'position': [x + 0.1, y + 0.07, T + 0.0005],
+             'rotate': [0, 0, 14.0], 'material': 'cotton', 'color': '#4F6253', 'ease': 0.002},
+            LB.lathe(LB.shell(RK, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#F8F8F6', 64),
+            LB.lathe(LB.contents(RK, 0.06, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#EEF3F4', 64)]
+
+
+def _sleeve_plain():
+    """Camera B: a plain sleeve (unprinted kraft card) leaning against the wall on the console, right of Mantle."""
+    return {'kind': 'kit', 'shape': 'box', 'size': [0.315, 0.004, 0.315], 'position': [MANTLE[0] + 0.42, CON_Y + 0.165, TOP + 0.0005],
+            'rotate': [-10.0, 0, 0], 'material': 'paper', 'color': '#CDBB9C', 'ease': 0.001}
+
+
 def _cores(tint):
     return {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'cores_off', 'core_load': shots.CORE_LOAD, 'core_cable': False,
             'cores': [{'tint': shots.KEY[tint], 'x': CORE[0], 'y': CORE[1], 'floor_z': CORE[2], 'rot': 0.0}]}
@@ -213,7 +239,7 @@ def base(tint='ember', size=(2400, 1600)):
     s['set'] = {'kind': 'room', 'size': [W, D, H], 'center': [CX, CY],
                 'wall': {'color': '#E6E0D5'}, 'ceiling': '#EFECE6', 'frame': STEEL, 'skirting': {'h': 0.09, 'color': '#E3DED4'},
                 'windows': [WIN_BACK, WIN_LEFT, WIN_FRONT, WIN_RIGHT],
-                'props': [_floor()] + _rug() + _console() + _window_bars() + _cables() + _life() + [_cores(tint),
+                'props': [_floor()] + _rug() + _console() + _window_bars() + _cables() + _life() + _side_table() + [_cores(tint),
                           {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_portal', 'windows': ['wall-back']}]}
     s.pop('haze', None)
     s.pop('sun', None)
@@ -236,13 +262,44 @@ def living_a(tint='ember', size=(2400, 1600)):
     return s
 
 
+def living_b(tint='ember', size=(1600, 2000)):
+    """Camera B, close on the console: Mantle whole and in focus, a record on, a plain sleeve leaning beside it; its
+    plinth in the sun's band from the window's edge. 4:5."""
+    s = base(tint, size)
+    s['title'] = f'Living room by day: Mantle on the console ({tint})'
+    s['set']['props'].append(_sleeve_plain())
+    tgt = [MANTLE[0] + 0.06, MANTLE[1], TOP + 0.09]
+    s['camera'] = {'position': [0.35, 0.45, 1.02], 'target': tgt, 'lens_mm': 55.0, 'level': True, 'fstop': 5.6, 'focus': tgt}
+    return s
+
+
+def living_c(tint='ember', size=(1600, 2000)):
+    """Camera C: the Core switched off on the side table by the window, beside a book and a glass, the sun from the
+    left and the window behind it, so it reads as glass. 4:5."""
+    s = base(tint, size)
+    s['title'] = f'Living room by day: Core on the side table, switched off ({tint})'
+    for pr in s['set']['props']:
+        if pr.get('fn') == 'cores_off':
+            pr['cores'] = [{**pr['cores'][0], 'x': CORE_C[0], 'y': CORE_C[1], 'floor_z': CORE_C[2]}]
+    tgt = [CORE_C[0] + 0.05, CORE_C[1], SIDE_TOP + 0.1]
+    s['camera'] = {'position': [-1.45, 0.6, 0.98], 'target': tgt, 'lens_mm': 60.0, 'level': True, 'fstop': 4.0, 'focus': [CORE_C[0], CORE_C[1], SIDE_TOP + 0.08]}
+    return s
+
+
+def _small(f, size):
+    def g(tint='ember'):
+        s = f(tint, size); s['render'].update(samples=48, adaptive=0.02); return s
+    return g
+
+
 def proof_a(tint='ember'):
     s = living_a(tint, (1500, 1000))
     s['render'].update(samples=48, adaptive=0.02)
     return s
 
 
-SHOTS = {'living-a-proof': proof_a, 'living-a': living_a}
+SHOTS = {'living-a-proof': proof_a, 'living-a': living_a, 'living-b': living_b, 'living-c': living_c,
+         'living-b-test': _small(living_b, (800, 1000)), 'living-c-test': _small(living_c, (800, 1000))}
 
 if __name__ == '__main__':
     od = sys.argv[1]
