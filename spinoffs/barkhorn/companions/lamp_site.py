@@ -301,6 +301,19 @@ def build(frame, samples, scale):
                     f_.normal_flip()
             me = bpy.data.meshes.new(f'opal-edge-{tint}'); bm.to_mesh(me); bm.free(); me.materials.append(clr)
             eo = bpy.data.objects.new(f'opal-edge-{tint}', me); bpy.context.scene.collection.objects.link(eo); eo.location = c
+            if os.environ.get('LIP_CLOSE', '0') == '1':
+                # (2026-11-20, a test) the tint shell's own lip, r 97 to 100 at the rim plane, polished: the shell is a solid
+                # (the CAD's), its two spheres were open there
+                bm = bmesh.new(); n_ = 256
+                ra = [bm.verts.new((0.097 * math.cos(2 * math.pi * k / n_), 0.097 * math.sin(2 * math.pi * k / n_), 0.0)) for k in range(n_)]
+                rb = [bm.verts.new((0.100 * math.cos(2 * math.pi * k / n_), 0.100 * math.sin(2 * math.pi * k / n_), 0.0)) for k in range(n_)]
+                for k in range(n_):
+                    bm.faces.new((ra[k], rb[k], rb[(k + 1) % n_], ra[(k + 1) % n_]))
+                for f_ in bm.faces:
+                    if f_.normal.z > 0:
+                        f_.normal_flip()
+                me = bpy.data.meshes.new(f'tint-edge-{tint}'); bm.to_mesh(me); bm.free(); me.materials.append(acrylic(f'tint-edge-{tint}', 0.0, tname, lt_))
+                te = bpy.data.objects.new(f'tint-edge-{tint}', me); bpy.context.scene.collection.objects.link(te); te.location = c
             part('out-dome-pendant', 'rim', acrylic(f'rim-{tint}', 0.0, tname, 0.5), c)   # (polished, chamfered: the bar)
             for nm in ('clamp', 'crown', 'gland', 'hub'):
                 part('out-dome-pendant', nm, cap, c)
