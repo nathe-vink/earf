@@ -93,3 +93,32 @@ D65), on the same boxes for both speakers.
 
 Emitters: the sky and its sun, through four windows (`living-a-proof2-ember.emitters.json`). Audit: hidden 0,
 equipment 0, from the masks and from `reaudit.py`.
+
+## The Ember finals (2026-11-20)
+
+| frame | size | samples | minutes | audit |
+|---|---|---|---|---|
+| `living-a-ember.png` | 2400 x 1600 | 256; the two cabinets 1024 | 28 + 31 (two bands); 26 + 24 (the boxes) | hidden 0, equipment 0 |
+| `living-b-ember.png` (held: Mantle's arm and label, the Mantle lane) | 1600 x 2000 | 256 | 39 | hidden 0, equipment 0 |
+| `living-c-ember.png` | 1600 x 2000 | 256 | 26 | hidden 0, equipment 0 |
+
+- **A, the bands:** two bands (`--crop`, rows 0 to 52 % and 48 to 100 %), joined by `living/bands.py` over 64 rows. The
+  bands differ there by 0.60/255 on average.
+- **A, the cabinets:** at full size the insides were soft (the coordinator, 15:45), so each cabinet's box
+  (x 420 to 799 and 1650 to 2029, y 640 to 1319) was rendered again at 1024 samples, from the same shot file. Each box
+  was joined in by `living/region.py` over a 16 px feather:
+  - over the feather the two renders differ by 1.69 and 2.00/255 on average (p99 10 and 11);
+  - the boxes sit at offset (0, 0), found by edge correlation;
+  - nothing else in the frame changed;
+  - the 256-sample frame is kept as `living-a-ember-256.png`.
+- **Depth of colour:** the coordinator's measure of A (pixels over chroma 40) reads the cabinets at chroma 51.9 and
+  54.7, and the studio's front at 59.7.
+  - Narrowing the run of windows behind the lens (2.0 m, then 1.2 m) made the fronts darker and no deeper (chroma
+    42/37, then 36/33), so proof 2's run was kept.
+  - The studio's depth comes from its `through` lamp. The honest twin here is the sun through the cabinets.
+- **C:** the Core switched off, on the side table by the window, off its dock (no dock, no cable), beside a book and a
+  glass.
+  - The narrow left window is in this frame. It has no portal, and its bars are set pieces set back from the frame
+    (the engine's own bars share the frame's faces and render black where they meet).
+  - A and B were rendered with that window's own engine bars, 30 mm; C's are 22 mm, in the same places. Their sun
+    shadows in A and B differ only by that width.
