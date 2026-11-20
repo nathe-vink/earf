@@ -3927,6 +3927,24 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    skin at the base's top edge, IP44 a design target, in the box: lamp, dock, 2 m USB-C cable, 20 W adapter. The
    black rod behind the Core in the frames was the dock's cable modeled for its first 105 mm only: the Core will be
    shot off its dock. Its two drawings (delivered 11:34, which I had not picked up) are with the site lane.
+   20 Nov 15:45 UTC, THE LAMPS' OFF COLORS: THE STUDY IS IN AND WITH THE OWNER. Lamps lane 55d1713d40,
+   renders/2026-11-20/barkhorn/lamp-site/off-study/ (README.md with the table, off-table-sheet.png, three
+   ember-pours pictures). In the house light, off, Core minus Hemisphere in L* (whole body): Ember +10.0, Dust +2.2,
+   Acid +14.1, Poison +14.3, Ice +12.8, Haze +7.9, Fog +4.5, Smoke +16.7; hue holds within 6 degrees. Ember pours:
+   the approved pair (Hemisphere 1.8, Core 0.5) is +11.6 in daylight and matched in the dark; Core at 0.8 is +2.5 in
+   daylight, 7 L* darker than the dome in the dark, lit deeper (215,61,48 against 227,85,71) and 38.2 lm against
+   43.9; the Hemisphere back at 1.0 matches in daylight and brings back the dark mismatch the mix fixed. No pair
+   matches in both lights; the lit colors never matched in any pair (the lit dome about 16 L* lighter). PUT TO THE
+   OWNER 15:46 with the sheet and the Ember picture: keep the approved mix, or deepen the Core's pours to match in
+   daylight (every picture with a Core re-rendered, the bar set and both heroes too). My recommendation: the deeper
+   Core. Until he answers the approved pours stand everywhere and no other tint is rendered on the house ground.
+   LIVING ROOM, EMBER FINALS (speaker lane e1347d0f71, 15:10): A (2400 x 1600) looked at whole and at full size:
+   the room stands; fronts chroma 51.9 and 54.7 by my measure (proof 44; studio front 59.7), walls L* 70 to 75; at
+   full size the cabinets' insides are soft (ghost rings round the woofers): the two cabinet boxes are to be
+   re-rendered at four times the samples and joined. SHOWN TO THE OWNER 15:44 as the final wide frame with "is this
+   the room?". B (the Mantle close) HELD: it carries the arm parked on the record's edge; it is re-rendered when the
+   Mantle lane re-exports the corrected asset. In B the plinth throws red light on the wood: so the living-room
+   scene lets light through the acrylic while the studio fronts do not.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
