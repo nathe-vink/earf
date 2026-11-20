@@ -815,6 +815,9 @@ def lighttable(watts, cct):
           f'{int(cct)} K; LED faces seen at {ls} of {lt_} points; the panel face (cover top) seen at {cs} of {ct}', flush=True)
 
 
+turn_done = [False]
+
+
 def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, aim=None, fstop=11.0, turn=0.0):
     """THE HOUSE GROUND (the coordinator, 2026-11-20): the set the eight Tropos fronts stand in (r33-speaker-horn,
     renders/2026-11-04/barkhorn/rollout/A-polished-tallr7/site-front-off-tall-<tint>.shot.json), scaled to a tabletop
@@ -845,6 +848,30 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, a
     for o in [o for o in bpy.data.objects if o.type == 'MESH' and o.name.startswith(('arm-', 'cue-'))]:   # as a white disc from above)
         bm_ = _bm.new(); bm_.from_mesh(o.data); _bm.ops.recalc_face_normals(bm_, faces=bm_.faces); bm_.to_mesh(o.data); bm_.free()
         print('v3_day: normals outward on', o.name, flush=True)
+    piv = bpy.data.objects.get('arm-pivot'); rec = bpy.data.objects.get('record')
+    if piv is not None and rec is not None and not turn_done[0]:
+        # the arm on its rest (the critic, 2026-11-20): the scene's RB330 parked with its finger lift over the record (to
+        # r 130) and the cartridge on the rim. Turn it on its pivot, the least turn that puts the cartridge, headshell
+        # and finger lift 20 mm clear of the 12 in record's rim (r 150.5 + 20)
+        rc = rec.matrix_world.translation; ws = [o for o in bpy.data.objects if o.name.startswith(('cart-', 'arm-head', 'arm-lift'))]
+        def clear():
+            bpy.context.view_layer.update()
+            return min((o.matrix_world @ Vector(c) - rc).xy.length for o in ws for c in o.bound_box)
+        a0 = piv.rotation_euler.z; best = None
+        for k in range(0, 90):
+            for sg in (1, -1):
+                piv.rotation_euler.z = a0 + sg * math.radians(k * 0.5)
+                if clear() >= 0.1705: best = piv.rotation_euler.z; break
+            if best is not None: break
+        piv.rotation_euler.z = best if best is not None else a0
+        from mathutils import Matrix
+        Rz = Matrix.Translation(piv.matrix_world.translation) @ Matrix.Rotation(piv.rotation_euler.z - a0, 4, 'Z') @ Matrix.Translation(-piv.matrix_world.translation)
+        for o in [o for o in bpy.data.objects if o.parent is None and o.name.startswith(('arm-yoke', 'arm-axle', 'cue-bar'))]:
+            o.matrix_world = Rz @ o.matrix_world      # the bearing block and the cue's bar turn with the tube
+        st = bpy.data.objects.get('cart-diamond'); bpy.context.view_layer.update()
+        sr = (st.matrix_world.translation - rc).xy.length * 1000 if st else -1
+        print(f'v3_day: the arm turned {math.degrees(piv.rotation_euler.z - a0):+.1f} deg onto its rest: nearest part {clear() * 1000:.1f} from the record centre, stylus at {sr:.1f}', flush=True)
+        turn_done[0] = True
     rp = bpy.data.objects.get('rear-plate')
     if rp is not None and not any(sl.material for sl in rp.material_slots):
         # the rear plate came without a material (it rendered as the default white): black nickel satin with its legends
