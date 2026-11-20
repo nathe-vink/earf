@@ -3646,6 +3646,50 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    stay; re-aim the eight product lamps; scale the contact shadow's reach; Khronos PBR Neutral with the finish
    block white point 236, contrast 0.2, grain 1.5; rerun the flag audit for a new camera; z = 0 is the base on the
    paper): relayed to the lamps and Mantle lanes about 11:49 (the messages themselves are headed 11:58 and 11:50 by my estimate; the clock in this record is the right one).
+   20 Nov 12:30 UTC, SECOND ROUND OF RETURNS.
+   SITE BUILD 1B (11:53, r49 5157092c81): the sets. MY CHECK on the local copy: gate/sets.js PASSES question 4 for
+   all four products (Tropos 6 views, Hemisphere 8, Core 2, Mantle 3, the same in the same order on all eight tints;
+   Ember-only files carry "Shown in Ember"); each lamp in a row of eight links to its own tint, the open one marked;
+   the Tropos row from the eight fronts; /tropos forwards to /tropos/ember (a second redirect in vercel.json,
+   nothing else in that file); /lighting rebuilt with both lamps' names, dots and buttons on the first screen.
+   SENT BACK 12:01: two foot links opening Ember from any tint ("More on the speaker: the particulars." -> #spec;
+   "Pair it with Tropos." -> #speakers), and the Tropos figures (442 mm, 17.4 in, about 75 kg / 165 lb, the power
+   and with-a-pair rows).
+   SITE BUILD 2 (12:19, r49 b9132b4c8a): the product page. MY CHECK: sets pass; both wrong-color lines are gone;
+   the stage is 773 px wide at 1440 with arrows and the counter, thumbnails wrapped in view; the buy column holds
+   label, name, dots, color, the one sentence, "Price on request.", a filled "Ask about ..." button that opens a
+   letter with the product and tint, the address with "Copy address"; Specifications under the gallery in groups
+   with inches and pounds; the ask again at the foot and as a fixed bar on phones; the other three products as
+   tiles in the chosen tint. SENT BACK 12:27: (1) the stage's filled sides beside 4:5 pictures (a gradient sampled
+   from the picture's edges; on the Tropos fronts the joins show at x 250 and 754, steps up to 5 L*): take the fill
+   out, plain paper; (2) the size and weight rows still carry 428 mm / 16.9 in / 73 kg; (3) the phone's fixed ask
+   bar shows together with the page's own button and lies on the footer at the end of the page; (4) "Care" under
+   "Care"; (5) names rows cut to one name per kind of product. Main is still 90ab8377c8.
+   CRITIC PASSES: 1A (wf_dea2ed37-3ae) and a smaller one on 1B (wf_dc100ef5-8cd, two critics, no skeptic stage) are
+   running; this machine runs two critics at a time, so they are slow. I stop the 1A pass once its four critics
+   have returned and reproduce the blocking findings myself on the newest build.
+   MANTLE ON THE HOUSE GROUND, STEP 1 PASSES (Mantle lane 12:22, r48-mantle-design 2d5726300b,
+   renders/2026-11-20/barkhorn/mantle-r48/mantle-house-<ember|fog|smoke>.png, 1600 x 2000; the Tropos set at half
+   size, the shot file's lamps re-aimed, five more real lamps out of frame of which two narrow ones at deck height
+   put light into the plinth's edges; camera 30 degrees right, 22 up, 70 mm, f/11; audit 0 in frame; no emitters).
+   MY TEST at 1000 x 1250 with my patches: top left 82.1, top right 92.8, middle left 86.2 to 86.6, middle right
+   94.0, lower left 95.2, bottom right 86.9: worst 1.7 L* from the Tropos fronts, hue the same; beside the Tropos
+   front the two read as one ground; deck whole and in focus; Ember red (top darker at the front right), Fog clear,
+   Smoke black. RELEASED 12:30: step 2 (the other five tints), then step 3 (cover on, from above, low front, arm
+   close, back if in the CAD). Drawing: spinoffs/barkhorn/companions/mantle-r48/drawings/mantle-dimensions.svg
+   (header off on the site). FACTS: platter 300 x 21 mm cast acrylic in three layers; RCA line outputs and an earth
+   post, a switch for the built-in phono stage (Pro-Ject Phono Box S2) or bypass; cover included; Ortofon 2M Black
+   fitted; POWER UNSETTLED (parts list and README disagree on the phono stage's feed): nothing new printed yet.
+   Asset for rooms: spinoffs/barkhorn/asset/mantle-strata.blend at b64c6bd37b.
+   LIVING ROOM, PROOF 2 PASSES AND IS SHOWN TO THE OWNER 12:31 (speaker lane 12:21, r33-speaker-horn 40f6f0320,
+   renders/2026-11-20/barkhorn/living/living-a-proof2-ember.png): the sun from straight left through a narrow
+   back-corner window, grazing the cabinets' sides; a run of windows behind the lens and one on the right wall;
+   cabinets L* 37.1 and 37.0 in my boxes (were 44.6 and 17.0), cones 24 and 29, wall 74; a walnut credenza with
+   doors, drawers, bar pulls and tapered legs; a steel casement; the Mantle turned to the window, its plinth lit at
+   the edges; the Core as dark red glass; sky and sun only, audit 0/0. MY WORD GIVEN 12:30 FOR THE EMBER FINALS
+   (A 2400 x 1600, B and C 1600 x 2000) with three notes: depth of color (cabinet chroma 44 in the proof against 80
+   in the studio at the same L*), crisp insides (the denoiser smears the woofer rings at 48 samples), B and C as
+   ordered (Core off by day). The other seven tints wait for the owner's yes.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
