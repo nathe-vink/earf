@@ -1085,8 +1085,9 @@ def fix_4(p, web):
 :root { --cap: max(300px, calc(100svh - 300px)) }
 .cap { margin: 8px 0 0; min-height: 1.6em; font-size: 14px; line-height: 1.6; color: var(--muted) }
 .cap a { white-space: nowrap }
-@media (max-width: 700px) { .cap { min-height: 4.8em }
-  .stage { height: min(var(--cap), calc(100cqw * 1.25)) !important }     /* one height for every view: nothing below moves */ }
+@media (max-width: 700px) { .cap { min-height: 4.8em } }
+/* one stage height per page at every size, the tall 4:5 picture's: each picture whole inside it; the arrows, counter and thumbnails never move */
+.stage { height: min(var(--cap), calc(100cqw * 1.25)) !important }
 /* the arrows at the picture's foot, beside the counter, off the product */
 .gallery .nav { top: auto !important; bottom: 10px; translate: none !important; width: 36px !important; height: 36px !important }
 .gallery .nav.next { right: 10px !important; left: auto !important }
