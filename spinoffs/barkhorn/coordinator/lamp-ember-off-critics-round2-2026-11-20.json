@@ -1,0 +1,161 @@
+{
+ "results": [
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "C-base-flanks",
+      "severity": "fix",
+      "frame": "core",
+      "where": "Lower flanks of the base: x 466-560 and 1100-1213, y 1600-1784 (lower left and lower right of the base)",
+      "what": "Not fixed, and darker than in the failed version. The lower flanks of the base go near-black maroon. The low-left flank is L* 14.1 (RGB 63,24,20) and the low-right is L* 8.3 (RGB 47,13,10); before they were 18.0 and 11.2. Of the base's pixels, 13.3 % are now C* under 30 and L* under 25 (10.0 % before), and 14.8 % are under L* 15 (5.6 % before). The whole base got darker: mid centre 46.4 to 38.2, low centre 28.0 to 21.8. The floor round it got darker at the same time (in front 95.0 to 86.0, right 93.0 to 86.1), so the new floor flags most likely removed the floor bounce that used to light the flanks. At 480x600 the base reads as red with black, smoky ends. In the 300 px row they are dark ends that still pass as shading. Everything round the base reads right: the ball, the thin contact line and the shadow to the right. The contact is now close to the Tropos's: the floor 20 px below the product edge is L* 77.4 against the Tropos's 73.0 (90.9 before).",
+      "expected": "Flanks that keep the base's own red (a red pour over a white liner), as the base's centre does, with no near-black ends.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/c-base-100-old-top-new-bottom.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/core-ember-off-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/row-300-hemi-core-tiles.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/contact-front-old-new-tropos-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/c-contact-right-100-old-left-new-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/new-minus-old-dL-pm6-hemi-core.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/measurements.txt"
+     },
+     {
+      "id": "H-left-edge-house-test",
+      "severity": "note",
+      "frame": "pendant",
+      "where": "Left edge, x 0-160: top-left y 0-160 and mid-left y 940-1120",
+      "what": "The pendant fails the house 3 L* test at two patches. By the lane's own numbers: TL 83.6 against the Tropos's 80.0 (+3.6) and ML 83.6 against 87.2 (-3.6). By my patches: TL 84.7 against 81.0 (+3.7) and ML 84.0 against 87.6 (-3.6); against the house figures 81.6 and 87.5 that is +2.0 to +3.1 and -3.5. The pendant's left edge stays flat at L* 83-86 from the top down to y 1600. The Tropos's left edge runs from 80 to 88 and turns to bright floor at about y 1260. I could not see this as a different ground in the 300 px row or at 480: same paper, same falloff direction, no beam.",
+      "expected": "Within 3 L* of the Tropos at TL and ML, if the house test is to pass as written: a slightly darker top-left corner and a slightly lighter mid-left.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/hemi_new-topleft-900.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/hemi_new-topleft-900-stretch75-98.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/tropos-topleft-900-stretch75-98.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/row-v2-tropos-hemi-600.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/row-stretch78-99-tropos-hemi-core-mantle.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/measurements.txt"
+     },
+     {
+      "id": "H-floor-line-low",
+      "severity": "note",
+      "frame": "pendant",
+      "where": "Lower left and bottom: wall band x 0-480, y 1280-1600; bottom band y 1800-2000",
+      "what": "The raised camera puts the pendant's floor line about 360 px lower than in the other three frames. On the left edge it is at about y 1620; the Tropos's is at about 1260, the Core's at 1280 and the Mantle's at 1200. So the old lower-left fault has moved up rather than gone. The band x 0-480, y 1280-1600 is L* 85-88 where the Tropos has bright floor at 93-97 (cells -9.7 to -11.9). Below the line, the new low sweep lamp makes the pendant's bottom the whitest of the four, and it does not darken toward the camera on the left. The bottom band by thirds is 96.3 / 94.2 / 88.1, against the Tropos's 94.2 / 89.9 / 88.6 and the Mantle's 92.2 / 86.1 / 86.3. At the bottom-left edge (y 1990) it is 96.5 against 91.3. In the row it reads as the same studio shot from higher, with a whiter strip along the bottom. For scale, the passed Mantle differs from the Tropos by more than 3 L* in 30 of 73 ground cells; the pendant does in 15.",
+      "expected": "Acceptable as a camera-height difference. If the tiles must match more closely, the pendant's bottom-left could fall off toward the camera like the Tropos's (about 90-92 at the bottom edge).",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/lowerleft-tropos-hemiold-heminew-corenew.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/lowerleft-stretch80-99-tropos-hemiold-heminew-corenew.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/row-v2-bottom40pct.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/row-300-old-top-new-bottom.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/hemisphere-ember-off-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/measurements.txt"
+     },
+     {
+      "id": "H-cord-plain-rod",
+      "severity": "note",
+      "frame": "pendant",
+      "where": "Cord x 808-836, y 0-743; entry into the cap at y 743",
+      "what": "Fixed as asked: the knurl is gone, and the cord reads black beside the cap at every size (median L* 2.4, p90 3.4; was 19.8 and 40.5). At 100 % and 200 % it is a smooth, matte black rod. No braid shows (texture along the cord sd 0.09 L*, was 3.70) and there is no sheen line (cross profile 4.9 to 1.7 L*). Its tone sits between the cap's sides (0.4-0.9) and the cap's lit step tops (11-25). It enters the top tier with a 1-2 px lip, with no gland nut and no grip, as designed. Not visible as a fault at 480 or 300.",
+      "expected": "As is for the tile and picture 1. A faint braid or soft sheen only if the site offers a full-size zoom.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/h-cord-4x-old-left-new-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/h-gland-3x-old-left-new-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/h-new-cap-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/h-new-cap-200.png"
+     }
+    ],
+    "first_findings": [
+     "Pendant spotlight beam at the top left: FIXED. The old hot spot at the top edge (560-640, 0-20) is now L* 95.9 (max 97.2), against the Tropos's 95.4 (96.4) and the old 94.4 (97.6). The old beam zone is 93.7 (was 86.5). The top row now rises smoothly from 81 to 96, like the Tropos's 78 to 95.5. The largest local deviation anywhere on the pendant's ground is 1.08 L*, at the floor line. Nothing new shows in the shade's reflections: the softbox windows are the same as before to within 1 L*.",
+     "Bottom corners 7-10 L* brighter than the Tropos's: FIXED in both frames. The bottom-right patch is 88.0 (pendant) and 89.6 (Core), against the Tropos's 88.3 and the Mantle's 87.1. The right column at y 1950 is 86.4 / 87.4, against 85.0 / 86.3 (it was 95.7 / 96.6). Both floors now darken toward the bottom right like the Tropos's.",
+     "Pendant's lower left a wall at 84-87 L*: FIXED IN THE PATCHES, MOVED UP IN THE FRAME. Low-left is now 95.6 and bottom-left 96.5 (Tropos 96.7 / 94.5; old 86.7 / 84.5). The grey wall now ends at a floor line at about y 1620, so the band x 0-480, y 1280-1600 is still 85-88 where the Tropos's floor is 93-97. That reads as a higher camera (note H-floor-line-low).",
+     "Cord reading as grey knurled plastic: FIXED. Median L* is 2.4 (was 19.8) and the texture along the cord is sd 0.09 L* (was 3.70). It reads as black cloth-coloured cord at every size. At full size it is a plain matte rod with no braid visible (note H-cord-plain-rod). The gland is unchanged: the cord goes into the top tier with a 1-2 px lip and no grip, as designed.",
+     "Core base with black corners: NOT FIXED, and darker. The flanks are L* 14.1 and 8.3 (were 18.0 and 11.2). The share of the base that is grey-black went from 10.0 % to 13.3 %. It is visible at 480 as smoky black ends (finding C-base-flanks).",
+     "Core's possible 5 % height excess (closed as method): nothing changed. The new silhouette matches the old to 1-4 px: ball x 416-1228 at y 1090, base x 434-1213 at y 1640, bottom at y 1784."
+    ],
+    "q1_ready": "Both can become the tiles. The pendant OFF is also ready as the Hemisphere's first picture. The beam is gone, the bottom-right ground matches (88.0 against 88.3), the cord reads black, and nothing reads as CG at 480 or 300. It still misses the house 3 L* test at TL (+3.6) and ML (-3.6) by the lane's own numbers, and its floor line sits lower because the camera is higher. I could not see either as a different ground in the row. The Core OFF has its ground, bottom-right and contact matched to the Tropos now. Its base's near-black flanks were not fixed and are darker (L* 14.1 and 8.3, were 18.0 and 11.2). They show at 480 as smoky black ends. They are the one thing I would fix before it becomes the Core page's first picture.",
+    "q2_pattern": "The lane's changes work and can be copied to the other tints. There is no stray light: the largest local ground deviation is 1.08 L* on the pendant, against 4.25 at the Tropos's own shadow. The floors darken toward the bottom right like the Tropos's (88.0 and 89.6 against 88.3). The Core's contact is now close to the Tropos's (77.4 against 73.0 just below the edge; it was 90.9). Hue and grain match: ground a* 0.0-0.4 and b* 4.6-4.9 against the Tropos's -0.1 and 4.5; ground grain 0.14-0.19 L* sd at tile size against 0.16-0.18. Two things will carry into every tint. One is the Core base's near-black flanks: the new floor flags made them darker by removing floor bounce, and since that comes from the set rather than the tint, I expect it on every base (I have only seen Ember). The other is the pendant's small TL/ML misses of the 3 L* test. The flags also darkened the lower half of the Core's ball by 5-8 L*, so the known off gap is now smaller than the 13 L* on record (numbers under measured).",
+    "q3_reads_wrong": "At 300 px nothing reads as CG, and the four tiles read as one studio. They share the same paper (a* 0.0-0.4, b* 4.6-4.9 against the Tropos's -0.1 and 4.5), a dark top-left, a darker bottom-right, shadows on the right and the same ground grain. Both lamps show the same three softbox windows, which read as real softboxes on glossy acrylic. What a viewer could notice: the pendant tile shows more wall, with its floor line lower and the whitest bottom of the four (96.3 against the Tropos's 94.2 in the bottom-left third). That reads as a higher camera, not a different room. At 480 the Core's base has near-black, smoky ends. At full size the pendant's cord is a featureless black rod. Against the failed versions, the pendant is clearly better: the beam is gone, the ground matches and the cord is black. The Core is better on the floor and contact but slightly worse on the base flanks.",
+    "measured": [
+     "Ground patches (the b35 critic's, 1600x2000; Tropos x1.6, Mantle x2), Tropos / Mantle / Hemisphere / Core (old Hemisphere / old Core): TL 81.0/81.4/84.7/82.4 (81.6/82.8); TR 92.9/92.7/93.5/93.4; ML 87.6/86.7/84.0/88.6 (86.9/89.1); MR 94.5/94.0/92.9/93.2; low-left 96.7/95.2/95.6/95.4 (86.7/96.8); bottom-left 94.5/94.0/96.5/93.1 (84.5/96.7); bottom-right 88.3/87.1/88.0/89.6 (95.8/96.6)",
+     "Lane's own corners, pendant minus Tropos: TL +3.6, TR +0.6, ML -3.6, MR -1.6, LL +2.5, BR +0.6 (two patches outside 3 L*); Core: +1.4, +0.5, +1.1, -1.3, -1.4, +1.8 (all inside)",
+     "Right column x 1300-1580 at y 1950: Tropos 85.0, Mantle 86.3, Hemisphere 86.4, Core 87.4 (old 95.7 and 96.6); at y 1850: 93.0 / 87.5 / 89.4 / 92.3",
+     "Bottom band y 1800-2000 by thirds: Tropos 94.2/89.9/88.6; Mantle 92.2/86.1/86.3; Hemisphere 96.3/94.2/88.1; Core 92.3/86.4/88.8",
+     "Floor line on the left edge (x 40-160): Tropos about y 1260, Mantle 1200, Core 1280, Hemisphere 1620; Hemisphere band x 0-480, y 1280-1600 at L* 85-88 against the Tropos's 93-97",
+     "160-px ground cells more than 3 L* from the Tropos (of 73): Hemisphere 15 (old 21; worst -11.9), Core 7 (old 4; worst -6.4 by its own shadow), passed Mantle 30 (worst -11.5)",
+     "Ground hue: a* 0.03 / 0.41 and b* 4.85 / 4.61 (Hemisphere / Core), against Tropos -0.06 / 4.48 and Mantle -0.54 / 4.41",
+     "Old beam zone: top edge (560-640, 0-20) 95.9, max 97.2 (old 94.4 / 97.6; Tropos 95.4 / 96.4); beam zone (300-400, 100-200) 93.7 (old 86.5); largest local ground deviation 1.08 L* (Core 2.85 and Tropos 4.25, both at their shadows)",
+     "Cord x 812-833: median L* 2.4, p90 3.4, max 5.6, RGB 6.5/9.2/10.3, texture along the cord sd 0.09 (old median 19.8, p90 40.5, sd 3.70); cap sides L* 0.4-0.9, step tops 11-25",
+     "Core base, old to new: top band 65.4 to 61.4; mid centre 46.4 to 38.2; low centre 28.0 to 21.8; flanks 18.0 to 14.1 (RGB 63,24,20) and 11.2 to 8.3 (RGB 47,13,10); share with C* under 30 and L* under 25: 10.0 % to 13.3 % (13.5 % at 480)",
+     "Floor round the Core base, old to new: in front 95.0 to 86.0, right 93.0 to 86.1, left 95.1 to 91.8. Floor 20/60/120 px below the product edge: Core 77.4/84.7/88.8 (old 90.9/94.6/95.9), Tropos 73.0/89.7/92.7, Mantle 70.1/78.6/87.9",
+     "Core ball, old to new: upper half within 0.8 L*; lower half (y 1180-1400) 5.4-7.7 L* darker, where the floor shows through the ball",
+     "Known off gap (measured, not reported): Hemisphere shade band (450-1200, 1330-1400) L* 28.2, C 64.3, h 39.0, unchanged; Core ball band (560-1060, 1130-1250) L* 37.5, C 76.4, h 39.0 (was 42.4). Gap 9.3 (was 14.2); plain-body patches 29.2 against 36.8 (7.6); whole-body medians 28.6 against 37.3 (8.7, was 12.7)",
+     "Fine grain (sd of L* minus a 1 px blur) at the 600x750 tile scale: grounds Hemisphere 0.14-0.19, Core 0.14-0.17, Tropos 0.16-0.18, Mantle 0.24; bodies Hemisphere 0.22, Core 0.21-0.24, Tropos red side panel 0.56",
+     "Row check: the tiles in row-ember-v2 are exact Lanczos scalings of the four frames (mean absolute difference 0.00)",
+     "Measurement log and scripts: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/measurements.txt and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-photo/scripts/"
+    ]
+   }
+  },
+  {
+   "part": "product",
+   "found": {
+    "findings": [
+     {
+      "id": "core-base-black-corners",
+      "severity": "blocking",
+      "frame": "core",
+      "where": "Base, x 430-1215, y 1470-1785. Worst at the lower flanks (x 455-500 and x 1150-1195, y 1640-1680) and along the bottom band (y 1745-1765).",
+      "what": "Not fixed, and worse than the failed b35 version. The base's lower flanks and bottom band go near-black and almost gray. Left flank low: RGB 63,36,32 (L* 17.6, C* 14.5; was 22.4). Right flank low: RGB 44,18,16 (L* 9.1, C* 14.8; was 13.1). Bottom band center: RGB 92,6,3 (L* 17.6; was 22.4). 27.4 % of the base's pixels are below L* 20 (was 14.8 %) and 12.3 % are below L* 15 (was 4.7 %). The floor right beside it is L* 82-92. The left flank faces the key (the shadow falls to the right) and still goes gray-black. At 480 x 600 and in the 300 px row, the base reads as a smoked, dark-edged cone under a coral collar. It does not read as the ball's own red poured over white. The lane's change (768 segments) did not address this. The new flags darkened the floor, and the whole base darkened with it: upper center 53.3 to 44.6 L*, mid 44.0 to 35.9.",
+      "expected": "A base that reads as the tint over a white liner: an even red, shaded only by the light. Its flanks should stay red (C* well above 15) and be no darker than the front's lower band. No gray-black corners.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/c-base-old-top-new-bottom-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/c-base-new-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/core-480-base-2x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/core-ember-off-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/row-300.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/diff-core-new-minus-old.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/measurements.txt"
+     },
+     {
+      "id": "pendant-left-wall",
+      "severity": "note",
+      "frame": "pendant",
+      "where": "Left edge of the pendant frame, x 40-160, y 0-1500",
+      "what": "The beam is gone, but the left wall is now flat at about 84 L* from the top down to y 1500. The Tropos instead runs from 80 at the top to 87.6 at mid-height. Top-left is 84.7 against the Tropos's 81.0 (+3.7); mid-left is 84.0 against 87.6 (-3.6). The lane's own figures agree: 83.6 against 80.0, and 83.6 against 87.2. Both points miss the 3 L* test by about 0.6. In the stretched view the pendant's left edge is a darker strip from the top to the floor line, where the Tropos has only a dark top corner. I cannot see it at 300 px. The photo critic owns grounds; this is here for the record.",
+      "expected": "Top-left and mid-left within 3 L* of the Tropos (about 81 and 87.6).",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/stretch-L75-100-tropos-mantle-Hold-Hnew-Cnew.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/h-topleft-900-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/measurements.txt"
+     },
+     {
+      "id": "cord-cloth-not-legible",
+      "severity": "note",
+      "frame": "pendant",
+      "where": "Cord, x 808-836, y 0-737",
+      "what": "The cord is now black: inner median L* 2.4 (p90 3.4) beside the cap's 0.6. It was 19.8 (p90 40.5). The braid has almost vanished with it: high-pass sd along the cord is 0.10 L*, against 3.95 before. At 100 % it reads as a smooth black cable rather than braided cloth. At 480 and 300 px it is a clean black cord. Nothing reads wrong.",
+      "expected": "As is for the tiles. A faint, soft weave sheen would make the cloth legible if the full-size picture is meant to say cloth.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/h-cord-4x-old-left-new-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/h-gland-3x-old-top-new-bottom.png"
+     },
+     {
+      "id": "collar-tick",
+      "severity": "note",
+      "frame": "pendant",
+      "where": "x 821-824, y 997-1011, just below the cap's lower edge, on the cord's axis",
+      "what": "A small dark-red vertical tick, 3 x 14 px. It sits on the black collar, seen through the shade, directly under the cord. It looks like a mesh seam or a stray wire end. It is about 1 px at 480 and cannot be seen there.",
+      "expected": "A clean collar at full size",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/h-cap-details-4x-lifted.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/h-cap-2x.png"
+     },
+     {
+      "id": "rim-segment-steps",
+      "severity": "note",
+      "frame": "pendant",
+      "where": "Rim, inner dark band, x 500-504 and x 676-688, y 1465-1496",
+      "what": "Along the rim's 8-10 px inner band, the tone jumps from L* 7-8 to 10-14 at x 500-504 and drops back near x 676-688. At 4x these read as polygon segment boundaries. They are invisible at normal viewing and below. This is the same kind of fault the Core's base was raised to 768 segments for.",
+      "expected": "A smooth rim band, if the full-size picture is ever offered as a zoom",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/h-rim-left-4x-L5-35.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/h-rim-underside-3x.png"
+     }
+    ],
+    "first_findings": [
+     "Spotlight beam at the top left of the pendant frame: FIXED. There is no wedge or source at 100 % or at 480. The top edge now runs from 80.4 to 95.9 L* between x 0 and x 560, like the Tropos (76.8 to 95.3). What is left: the left wall is flat at about 84 (top-left +3.7, mid-left -3.6 against the Tropos); see pendant-left-wall.",
+     "Bottom corners 7-10 L* brighter than the Tropos's: FIXED. Bottom-right is 88.0 (pendant) and 89.6 (Core) against the Tropos's 88.3. The right column at y 1950 is 86.4 and 87.4 against 85.0. Both floors now darken toward the bottom right.",
+     "Pendant's lower left a wall at 84-87 L*: FIXED. Low-left is 95.6 and bottom-left 96.5, against the Tropos's 96.7 and 94.5.",
+     "Cord reading as gray knurled plastic: FIXED. Median L* is 2.4 (was 19.8) and the braid's texture sd is 0.10 L* (was 3.95). It reads as a black cord at every size; the cloth weave can no longer be seen (note).",
+     "Core's base with black corners: NOT FIXED, and WORSE. Right flank low is L* 9.1 (was 13.1) and left flank low 17.6 (was 22.4). 27.4 % of the base's pixels are below L* 20 (was 14.8 %). See core-base-black-corners.",
+     "Core's possible 5 % height excess: nothing changed. The silhouettes match b35 within 1-4 px (ball 815 px, base 782 px, object rows 670-1785), so the earlier finding that it is the method still stands.",
+     "Coral band on the top of the base: left as is, per the brief. It is now RGB 247,80,82, L* 58.4 (was 250,96,98, L* 61.6)."
+    ],
+    "q1_ready": "The Hemisphere is ready. The Core is not ready yet. The pendant reads as itself, as designed, in Ember. The shade is deep red (L* 28.6, h 37.7, beside the Tropos's 30.4 and 36.4) and reads as solid tinted acrylic with layered edges at the rim and silhouette. The satin black stepped cap matches the CAD tiers: 39.8, 80, 104 and 116.5 mm against about 40, 80, 100 and 116. The cord is black, the beam is gone, and the bottom corners are within 1 L* of the Tropos. There is no lettering, and only full-size notes remain. The Core's ball, proportions and ground are ready. Its base still has gray-black lower corners and a dark bottom band, now darker than in the failed version. At 480 and in the row, the base reads as a smoked cone, not as red poured over white. Fix the base and the Core is ready. Measured, not a fault: the off gap is now 7.6-8.7 L*, not about 13. The pendant did not change. The Core's lower ball darkened from 42.6 to 35.3 L* because the darker floor now shows through it. The owner's decision on deepening the Core should use the new figure.",
+    "q2_pattern": "The pendant's pattern can be used: the camera, lights, flags, low sweep lamp and black cord all carry over to the other seven tints. The Core's cannot be used until the base is fixed. The black corners come from the set and the base's material, not from Ember, so they would repeat in every tint. On a pale base (Ice, Fog, Haze, Dust), gray-black corners would likely stand out even more. The flags alone moved the Core's off tone by 4-7 L* in the lower ball and 8-9 L* on the base. Each tint's off color should therefore be checked against its pendant after rendering, not against the b35 numbers.",
+    "q3_reads_wrong": "In the tiles and first pictures, the Core's base. Its lower corners and bottom edge look black or smoked, so the base reads as a dark frosted cone rather than the same red as the ball. The Core also reads lighter red than the pendant beside it (the known gap, now about 8 L*). Nothing about the pendant reads wrong at 480 or 300 px. At full size, a close look shows the cord as a smooth black cable rather than cloth. The tiny tick under the cap and the segment steps on the rim need a zoom to see.",
+    "measured": [
+     "Off body color, same method on both lamps (mask C* > 30, red hue, median): Hemisphere L* 28.6, C* 57.1, h 37.7; Core L* 37.3, C* 64.6, h 35.6. Gap 8.7 L*, dE76 11.8. In b35 the medians were 28.6 and 41.3, a gap of 12.7.",
+     "Plain-body patches, as in the first pass: Hemisphere [600,1310,1050,1370] L* 29.2, C* 66.7, h 39.2; Core [600,1100,1050,1350] L* 36.8, C* 73.0, h 38.3. Gap 7.6 L* (b35: 13.3). Only the Core moved. Its ball's upper band went from 44.1 to 43.3, the middle from 41.6 to 38.2 and the lower band from 42.6 to 35.3.",
+     "Tropos Ember body median: L* 30.4, C* 61.4, h 36.4.",
+     "Ground patches, L* (Tropos / Hemisphere new / Core new): top-left 81.0/84.7/82.4, top-right 92.9/93.5/93.4, mid-left 87.6/84.0/88.6, mid-right 94.5/92.9/93.2, low-left 96.7/95.6/95.4, bottom-left 94.5/96.5/93.1, bottom-right 88.3/88.0/89.6. In the lamp frames a* runs -0.2 to 2.8 and b* 3.7 to 5.5.",
+     "Core base, new against b35: coral top band L* 58.4/61.6; upper center 44.6/53.3; mid 35.9/44.0; low center 22.5/28.9; bottom band 17.6/22.4; left flank low 17.6/22.4 (C* 14.5); right flank low 9.1/13.1 (C* 14.8). Base pixels below L* 20: 27.4 %/14.8 %; below L* 15: 12.3 %/4.7 %. Floor beside the base: 82-92/91-95.",
+     "Cord: inner median L* 2.4, p10 1.7, p90 3.4 (b35: 19.8, 7.4, 40.5). Braid high-pass sd 0.10 L* (b35: 3.95). Cap's top tier L* 0.6.",
+     "Geometry is unchanged from b35 (silhouettes within 1-4 px). Pendant: shade 970 px; cap tiers 193/388/505/565 px, which is 39.8/80/104/116.5 mm at 4.85 px/mm (CAD about 40/80/100/116). Core: ball 815 px, neck 541 px, base 782 px, object rows 670-1785.",
+     "The row mock row-ember-v2.png is built from the b42 frames (mean absolute difference 0.00).",
+     "Log: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b42/critic-product/measurements.txt"
+    ]
+   }
+  }
+ ],
+ "dropped": 0
+}
