@@ -3719,6 +3719,25 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    reached me yet. LAMPS LANE: batch 1a (12 frames) still rendering since 11:56; ON factors declared in its script:
    Hemisphere 0.35 (the studio up 2.9 times, the exposure down 1.5 EV), Core 2. MANTLE LANE settled its power line
    (289d958888: the phono stage runs on its own 18 V adapter). SPEAKER LANE is rendering the Ember finals.
+   20 Nov 13:06 UTC, THE EIGHT MANTLES ON THE HOUSE GROUND PASS (Mantle lane 13:00, r48-mantle-design 06228224a6,
+   renders/2026-11-20/barkhorn/mantle-r48/mantle-house-<tint>.png, all eight, 1600 x 2000, audit 0 in frame). MY
+   TEST on all eight: worst 1.7 L* from the Tropos fronts; each deck reads as its tint (plinth top and lit left edge
+   measured: Ember 33/68 red, Dust 40/83 orange, Acid 43/87 yellow, Poison 35/78 green, Ice 38/78 blue, Haze 33/69
+   violet, Fog 46/94 neutral, Smoke 35/76 neutral). SITE LANE TOLD 12:59: they replace the eight tile-mantle files
+   (home row, family rows), become picture 1 of the Mantle gallery with the spot-lit picture second, and the share
+   cards are re-cut. Shown to the owner as a sheet. The Mantle lane is on step 3 (cover on, from above, low front,
+   arm close, the back: the sockets, switch and inlet are in the CAD). Its power line for the site: "Two supplies at
+   the wall: Rega's Neo PSU drives the motor; the phono stage runs on its own 18 V adapter."
+   SITE BUILD 3 CHECKED (site lane 12:55, r49 e75f1a3bab = Build 3 with my notes of 12:01, 12:27, 12:30): 24 real
+   paths (/hemisphere|core|mantle/<tint>) with their own titles, descriptions and share cards
+   (card-<product>-<tint>.jpg); /mantle forwards to /mantle/ember (a third redirect; vercel.json differs from main by
+   redirects only); 44 px dots, names beside the dots on /lighting; the menu closes; a skip link; the system pointer
+   back with an outline ring; lamp files re-encoded with grain (50 to 85 kB); "Horn, behind" at 1200 x 900; place
+   tiles re-cut level. MY CHECK: gate/sets.js passes by the new paths; gate/links.js flags nothing at 1440 and 390;
+   the stage is plain paper; Tropos figures corrected; phone bar clear of the footer; names rows one per kind.
+   NOT YET IN IT (sent after it was built): the five MUST items of 12:56. PUBLISHING WAITS for the push that holds
+   those and the eight Mantle pictures. A last small list went 13:05 (description tags, structured data, "How it
+   lights", "speaker" as the one kind word, button wrap, orphan words, /hemisphere and /core without a tint).
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
