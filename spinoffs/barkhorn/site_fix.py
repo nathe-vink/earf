@@ -303,8 +303,9 @@ def finish_1a(web):
 # the products in each bar picture, with the tint shown (planet-bar/<frame>.centres.json, r33-speaker-horn): the names
 # row under it, its only caption
 BAR_NAMES = {
-    'tropos-bar.webp': [('speaker', 'amber'), ('hemisphere', 'red'), ('core', 'red'), ('mantle', 'red')],      # one per kind, the largest whole one (the coordinator 12:27)          # bar-backbar
-    'bar-pendants.webp': [('hemisphere', 'red'), ('hemisphere', 'amber'), ('core', 'red'), ('core', 'orange')],     # every product and tint in the frame (13:56)
+    'tropos-bar.webp': [('speaker', 'amber'), ('hemisphere', 'red'), ('hemisphere', 'amber'), ('hemisphere', 'orange'),
+                        ('core', 'red'), ('core', 'amber'), ('core', 'orange'), ('mantle', 'red')],      # every product and tint in the frame (bar-backbar.centres.json; hues measured 15:10)          # bar-backbar
+    'bar-pendants.webp': [('hemisphere', 'red'), ('hemisphere', 'amber'), ('hemisphere', 'orange'), ('core', 'red'), ('core', 'orange')],     # every product and tint in the frame (bar-pendants.centres.json; the coordinator 15:06)
     'core-bar-table.webp': [('core', 'red')],
     'mantle-bar.webp': [('speaker', 'amber'), ('core', 'red'), ('mantle', 'red')],
 }
@@ -1300,5 +1301,26 @@ def fix_7(p, web):
   .pdp { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important; gap: 20px !important }
   .pcol > .spec2 { grid-column: 1 / -1 }
   .buy { position: static !important }
+}
+/* push C2 (the coordinator, 15:06) */
+/* C2-1: a full-bleed picture (Tropos "Out") stands whole in the stage like every other: its own proportions, inside the box */
+.stage .fill { display: contents !important }
+.stage .fill img { width: min(100cqw, calc(100cqh * var(--sar, 0.8))) !important; height: auto !important; aspect-ratio: var(--sar, 0.8);
+  object-fit: contain !important; max-width: 100%; max-height: 100% }
+/* C2-2: the names row is one line, scrolling sideways inside its own box; its height is kept under every picture */
+.cap { height: 1.6em !important; min-height: 0 !important; line-height: 1.6 !important; white-space: nowrap; overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: none; overscroll-behavior-x: contain }
+.cap::-webkit-scrollbar { display: none }
+.cap[hidden] { display: block !important; visibility: hidden }
+.lt-room .names { white-space: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; line-height: 1.6 }
+.lt-room .names::-webkit-scrollbar { display: none }
+.names a, .cap a { padding-block: 0 !important; display: inline !important }
+/* C2-3: the chosen thumbnail's whole frame inside the sideways row */
+@media (max-width: 700px) { .thumbs { padding: 5px !important; margin: -5px -5px 0 !important; scroll-padding-inline: 5px } }
+/* C2-4: on an upright tablet the capped hero picture is centered, and the headline and its line align with it */
+@media (max-aspect-ratio: 1/1) and (min-width: 560px) {
+  .hs-hero .hero-pic > .hero-photo { margin-left: auto !important; margin-right: auto !important; align-self: center }
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, calc((100svh - 330px) * 0.8)); max-width: none !important;
+    margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; box-sizing: border-box }
 }
 """)
