@@ -16,7 +16,7 @@ current CAD and parts list win, and that is noted below.
 | Dimmer type | Phase-cut, forward (TRIAC) or reverse (ELV), at 120 V, or 0-10 V; 1 to 100 %. The driver in the canopy, ERP Power ESS010W-0180-42. Not yet bench-tested with the ring board. |
 | Cord supplied | 3 m (about 10 ft) of black textile-braided cord, cut to the drop at install. |
 | Longest drop | Not decided. The 3 m cord is the upper bound, less what the canopy and cap take up; with the steel suspension cable option (2 m as listed), 2 m. |
-| Lux on a table | To come: being measured at the standard 600 mm drop under a 2.44 m ceiling (the table 0.914 m below the rim). The photometry of the mix gives about 340 lux on a table 0.5 m below the rim (336 to 347 across the tints). |
+| Lux on a table | About 110 lux at the centre of a table 0.914 m (36 in) below the rim: the standard 600 mm drop under a 2.44 m (8 ft) ceiling. About 90 lux 0.3 m off the centre and 55 lux 0.6 m off it. The same in every tint within a few lux (centre 106 Ember to 112 Dust and Acid). Computed, not measured: rendered with the light that reaches the table directly, no ceiling or walls, so a real room reads a little higher. It agrees with the photometry of the mix (about 340 lux at 0.5 m) by the inverse square law. Per tint, centre / 0.3 m / 0.6 m: Ember 106/90/55, Dust 112/94/57, Acid 112/94/57, Poison 108/91/56, Ice 111/93/57, Haze 109/92/56, Fog 110/93/58, Smoke 111/94/56. |
 | "About two thirds of its light comes back down" | It does not hold in every tint. The share going down is 56 % (Fog) to 76 % (Haze): Ember 70, Dust 65, Acid 64, Poison 73, Ice 74, Haze 76, Fog 56, Smoke 75. Suggested line: "Most of its light comes back down: about two thirds to three quarters, a little over half in Fog." |
 
 ## Core
