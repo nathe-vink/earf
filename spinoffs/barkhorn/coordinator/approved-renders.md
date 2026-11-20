@@ -3618,7 +3618,7 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    shows (the baseline's one fault, the Tropos tile opening #speakers, is gone; place tiles open #speaker-<tint>/out);
    the family row is four equal tiles under the chips, starting in Ember; Tropos pages are titled "Tropos" with the
    label "Horn speaker · In development" and one sentence; header reads Speakers, Lighting, Turntable, Contact.
-   SENT BACK 11:50: the eight tile-mantle files were set into 4:5 by holding the edge rows, which leaves vertical
+   SENT BACK about 11:46: the eight tile-mantle files were set into 4:5 by holding the edge rows, which leaves vertical
    streaks in the top 190 and bottom 230 rows (plain at 3 times brightness, faint on the page): blur the bands along
    x, run the gradient on, add grain, feather the join; pass test = no vertical line and no findable join at 3 times.
    The lamp tiles' extensions are in near-black and do not show. A CRITIC PASS ON 1A IS RUNNING (workflow
@@ -3632,7 +3632,7 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    cabinet onto the floor is the best thing in it. NOT YET FOR THE OWNER: the pair reads as two speakers (left
    cabinet L* 44.6 in sun, right 17.0 in shade; the sunlit left cone L* 60.8 reads silver); the lit wall is L* 60; the
    console is a pale flat box; Mantle and Core read as a black deck and a dark ball; window notches; a flat rug.
-   SECOND PROOF ORDERED 11:58 with those seven fixed; no third round on taste.
+   SECOND PROOF ORDERED about 11:49 with those seven fixed; no third round on taste.
    TROPOS FACTS FROM THE SPEAKER LANE (6df744437d): the dimension drawing renders/2026-11-20/barkhorn/dims/
    tropos-dims.svg and .png (front and side, mm and inches; its header line names "Base A" and "horn A", to be
    dropped on the site). OVERALL DEPTH IS 441.5 mm (17.4 in), not 428: the three acrylic rings around the woofer
@@ -3645,7 +3645,7 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    lining and cone through 20 mm, hence L* 1. THE GROUND, the speaker lane's six notes (nine sweep-linked lamps
    stay; re-aim the eight product lamps; scale the contact shadow's reach; Khronos PBR Neutral with the finish
    block white point 236, contrast 0.2, grain 1.5; rerun the flag audit for a new camera; z = 0 is the base on the
-   paper): relayed to the lamps and Mantle lanes 11:58.
+   paper): relayed to the lamps and Mantle lanes about 11:49 (the messages themselves are headed 11:58 and 11:50 by my estimate; the clock in this record is the right one).
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
