@@ -64,7 +64,9 @@ STEEL = '#2C2B29'
 SPK_X, SPK_GAP, TOE = 1.25, 0.30, 6.0           # the pair 2.5 m apart, 0.3 m off the wall, toed in
 TROPOS_D = 0.428
 SPK_Y = round(BACK - SPK_GAP - TROPOS_D / 2, 4)
-CONSOLE = {'w': 1.5, 'd': 0.45, 'h': 0.64}
+# (the critics, 18:41: the cabinets' inner sides read white: at that angle each mirrors the back wall in the gap beside
+# the console; at 1.8 m the console's walnut end stands where they look)
+CONSOLE = {'w': 1.8, 'd': 0.45, 'h': 0.64}
 CON_Y = round(BACK - 0.06 - CONSOLE['d'] / 2, 4)
 TOP = CONSOLE['h']
 # (proof 2: the sun crosses the console's top in a band at its front; Mantle and the Core moved into it, Mantle turned
@@ -77,9 +79,9 @@ SOCKETS = (-1.85, 2.1)                          # the two outlets, either side o
 CHAIR = (0.0, -0.9, 180.0)
 # a walnut side table (scanned) by the window in frame, in the sun's band: a book and a glass of water on it in every frame;
 # camera C sets the Core on it, switched off (taken off the console for that frame only)
-SIDE = (-2.2, 1.66, 0.0)
+SIDE = (-2.2, 1.5, 0.0)              # (forward, so the Core can stand out of the sun's band)
 SIDE_TOP = 0.5507
-CORE_C = (-2.31, 1.67, SIDE_TOP)
+CORE_C = (-2.31, 1.40, SIDE_TOP)          # (in front of the sun's band, y 1.55 on: in full sun its opal went salmon, L* 75 C* 35)
 CAM_A = {'position': [0.1, -3.05, 1.5], 'target': [0.0, 1.6, 1.0], 'lens_mm': 32.0, 'level': True, 'fstop': 8.0,
          'focus': [0.0, 1.3, 0.9]}
 
@@ -216,9 +218,15 @@ def _cables():
 def _life():
     """Books on the console's left end, a stack of records leaning at its right side on the floor, a plant in the
     window's corner, the chair."""
-    sleeves = [{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 't': 0.004, 'x': CONSOLE['w'] / 2 + 0.06 + 0.012 * j,
-                'y': CON_Y - 0.1 + 0.02 * j, 'z': 0.0, 'rot': [-12.0 + 3 * j, 0, 90.0 + 4 * j], 'ground': '#E9E3D6', 'rough': 0.7}
+    # (at 1.8 m the console's end is 7 cm from the speaker: the records lean against its front, at the right door)
+    sleeves = [{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 't': 0.004, 'x': 0.58 - 0.015 * j,
+                'y': CON_Y - CONSOLE['d'] / 2 - 0.075 + 0.012 * j, 'z': 0.0, 'rot': [12.0 - 2.5 * j, 0, 3.0 * j - 2.0], 'ground': '#E9E3D6', 'rough': 0.7}
                for j, k in enumerate((3, 11, 6, 13))]
+    # (the A critics: Mantle's polished top, seen nearly edge-on, mirrored the white wall behind it and read grey, C* 6:
+    # two dark sleeves leaning on the wall behind it, on the console, where its top looks; their faces the darkest covers)
+    sleeves += [{'image': f'tex/cover-{k:02d}.png', 'w': 0.315, 'h': 0.315, 't': 0.004, 'x': MANTLE[0] + dx, 'y': BACK - 0.075,
+                 'z': TOP + 0.0005, 'rot': [-8.0, 0, rz], 'ground': '#1C1A18', 'rough': 0.7}
+                for k, dx, rz in ((8, -0.17, -3.0), (12, 0.14, 2.0))]
     return [
         # one quiet print above the console, hung at eye height over it (muted, so the pair keeps the colour)
         {'kind': 'frame', 'position': [0.05, BACK - 0.012], 'z': 1.58, 'size': [0.62, 0.78],
@@ -290,7 +298,11 @@ def base(tint='ember', size=(2400, 1600)):
     s['lights'] = {}
     s['materials'] = {k: v for k, v in s.get('materials', {}).items() if k != 'sweep'}
     s['size'] = list(size)
-    s['render'] = {**s['render'], 'samples': 128, 'adaptive': 0.01, 'denoise': True, 'clamp': 0, 'view': 'AgX', 'look': 'AgX - Base Contrast',
+    # (the critics, 18:41: the Core read as a dark mirror ball, its opal core unseen. Daylight reaches the opal only by
+    # refracting through the tinted shell, a caustic path; off by the engine's default, on in every lamps-lane frame.
+    # On: the opal shows, and the cabinets' fronts deepen, C* 38.7 to 50.0 in a region test)
+    s['render'] = {**s['render'], 'caustics_refractive': True, 'caustics_reflective': True,
+                   'samples': 128, 'adaptive': 0.01, 'denoise': True, 'clamp': 0, 'view': 'AgX', 'look': 'AgX - Base Contrast',
                    'exposure': 5.35, 'white_balance_k': 5600, 'white_balance_tint': 0.0}
     s.pop('finish', None)
     return s
