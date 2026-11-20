@@ -913,11 +913,16 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, a
         X0_, X1_, Y0_, Y1_ = min(xs_), max(xs_), min(ys_), max(ys_)
         sl = {s_.material.name: i for i, s_ in enumerate(pl.material_slots) if s_.material}
         nt_ = nb_ = ne_ = 0
+        liner_i = None
+        if '--white-liner' in mine:   # TEST (the coordinator, 2026-11-20): an opaque white liner under the deck, as the Tropos's batting
+            lm = bpy.data.materials.new('deck-liner-white-TEST'); lm.use_nodes = True; lb = lm.node_tree.nodes['Principled BSDF']
+            lb.inputs['Base Color'].default_value = (0.85, 0.85, 0.84, 1); lb.inputs['Roughness'].default_value = 0.8
+            pl.data.materials.append(lm); liner_i = len(pl.material_slots) - 1
         for p_ in pl.data.polygons:
             n_ = (R_ @ p_.normal).normalized(); c_ = M_ @ p_.center
             if pl.material_slots[p_.material_index].material.name == 'plinth-chamfer-polished': continue
-            if n_.z > 0.9 and abs(c_.z - zt) < 0.0005: p_.material_index = sl['plinth-0']; nt_ += 1
-            elif n_.z < -0.9 and abs(c_.z - zb) < 0.0005: p_.material_index = sl['plinth-1']; nb_ += 1
+            if n_.z > 0.9 and abs(c_.z - zt) < 0.0005: p_.material_index = sl['plinth-1' if '--top-satin' in mine else 'plinth-0']; nt_ += 1
+            elif n_.z < -0.9 and abs(c_.z - zb) < 0.0005: p_.material_index = liner_i if '--white-liner' in mine else sl['plinth-1']; nb_ += 1
             elif abs(n_.z) < 0.1 and min(c_.x - X0_, X1_ - c_.x, c_.y - Y0_, Y1_ - c_.y) < 0.0015: p_.material_index = sl['plinth-1']; ne_ += 1
         print(f'v3_day: the deck to the signed finish: top polished ({nt_} faces), underside satin ({nb_}), outer edge satin ({ne_})', flush=True)
     rp = bpy.data.objects.get('rear-plate')
