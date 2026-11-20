@@ -1598,7 +1598,8 @@ if __name__ == '__main__' and bpy is None:
     elif sys.argv[1] == '--sleeve':
         make_sleeve(sys.argv[2])
     elif sys.argv[1] == '--post':
-        post(sys.argv[2], grain=float(sys.argv[3]) if len(sys.argv) > 3 else 0.012)
+        post(sys.argv[2], grain=float(sys.argv[3]) if len(sys.argv) > 3 else 0.012,
+             vignette=float(sys.argv[4]) if len(sys.argv) > 4 else 0.12)
     sys.exit(0)
 
 if __name__ == '__main__':
@@ -1644,6 +1645,7 @@ if __name__ == '__main__':
     ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
     ap.add_argument('--debug-emit', default='')
     ap.add_argument('--crop', type=float, nargs=4, default=None)
+    ap.add_argument('--vignette', type=float, default=0.12)   # the post step's corner falloff (0 on the house ground, 2026-11-20)
     a = ap.parse_args(argv)
     NO_EDGE_BEVEL = a.no_edge_bevel
     RING_WHITE = a.ring_white; RING_ALBEDO = a.ring_albedo; RING_GLOSS = a.ring_gloss; RING_CLEAR = a.ring_clear; NO_TOP_BEVEL = a.no_top_bevel
@@ -1664,5 +1666,5 @@ if __name__ == '__main__':
     bpy.context.scene.render.filepath = a.out
     bpy.ops.render.render(write_still=True)
     import subprocess
-    subprocess.run(['python3', os.path.abspath(__file__), '--post', a.out, str(a.grain)], check=True)
+    subprocess.run(['python3', os.path.abspath(__file__), '--post', a.out, str(a.grain), str(a.vignette)], check=True)
     print('wrote', a.out)

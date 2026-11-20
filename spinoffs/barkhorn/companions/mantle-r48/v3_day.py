@@ -817,6 +817,72 @@ def lighttable(watts, cct):
           f'{int(cct)} K; LED faces seen at {ls} of {lt_} points; the panel face (cover top) seen at {cs} of {ct}', flush=True)
 
 
+def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0):
+    """THE HOUSE GROUND (the coordinator, 2026-11-20): the set the eight Tropos fronts stand in (r33-speaker-horn,
+    renders/2026-11-04/barkhorn/rollout/A-polished-tallr7/site-front-off-tall-<tint>.shot.json), scaled to a tabletop
+    around the deck: the warm white sweep #F7F0E8 (scene.py --paper), a dark sky at 0.15, the key from camera left at 40
+    deg up, the fill near the camera, the kick from the right, the big front light; Khronos PBR Neutral, exposure -0.1,
+    5600 K. Every lamp is real and out of frame; scene.py's own lamps, flags and cards go. The lamps' irradiance at the
+    deck follows the shot file (P = E pi d^2 for an area lamp on its axis), times `gain`."""
+    import math
+    from mathutils import Vector
+    sc = bpy.context.scene; s_ = 0.5                  # the set at half the speaker's: the deck is about half its size
+    for o in [o for o in bpy.data.objects if o.type == 'LIGHT' or o.name.startswith(('flag-', 'card-'))]:
+        bpy.data.objects.remove(o, do_unlink=True)
+    srgb = lambda h: tuple(((int(h[i:i + 2], 16) / 255 + 0.055) / 1.055) ** 2.4 if int(h[i:i + 2], 16) / 255 > 0.04045 else int(h[i:i + 2], 16) / 255 / 12.92 for i in (1, 3, 5))
+    bg = sc.world.node_tree.nodes['Background']
+    for l in list(bg.inputs['Color'].links): sc.world.node_tree.links.remove(l)
+    bg.inputs['Color'].default_value = (*srgb('#2B2A28'), 1); bg.inputs['Strength'].default_value = 0.15
+    pl = [o for o in bpy.data.objects if o.name.startswith('plinth-L1')]
+    pts = [o.matrix_world @ Vector(c) for o in pl for c in o.bound_box]
+    C = Vector((sum(p.x for p in pts) / len(pts), sum(p.y for p in pts) / len(pts), 0.0))
+    T = C + Vector((0, 0, 0.08))
+    sw = bpy.data.objects.get('sweep')
+    if sw is not None:   # the sweep at the set's scale too: its curve comes in to half the distance, so the wall stands in frame
+        sw.data.transform(__import__('mathutils').Matrix.Translation(-C)); sw.data.transform(__import__('mathutils').Matrix.Scale(sweep_k, 4))
+        sw.data.transform(__import__('mathutils').Matrix.Translation(C))
+    # the shot file's lamps: orbit (azimuth from the front, + toward +x; elevation; distance) round the product's
+    # centre, size, irradiance, color, spread, and each one's own target (the key aims past the product, up and left)
+    L = dict(key=(-40, 40, 2.2, (1.4, 1.8), 2.9, '#FFF5E8', 50, (-0.55, 0.0, 0.9)),
+             fill=(15, 40, 4.0, (2.0, 2.0), 1.6, '#FFF2E6', None, (0.0, 0.0, 0.6)),
+             kick=(75, 40, 1.8, (1.2, 1.8), 2.5, '#FFF8F0', None, (0.28, 0.0, 0.6)),
+             front=(None, None, None, (2.5, 1.6), 5.2, '#FFF8F0', None, (0.05, 0.0, 1.12)))
+    O = C + Vector((0, 0, 0.55 * s_))                 # the speaker's centre, at the set's scale
+    for k_, v_ in (lights or {}).items(): L[k_] = L[k_][:4] + (v_,) + L[k_][5:]   # an irradiance override
+    for nm, (az, el, d, size, E, col, spread, tg) in L.items():
+        if E <= 0: continue
+        tgt = C + Vector(tg) * s_
+        if az is None:                                # the front lamp stands at a position in the shot file
+            loc = C + Vector((0.9, -2.3, 2.2)) * s_
+        else:
+            a_, e_ = math.radians(az), math.radians(el); dd = d * s_
+            loc = O + Vector((dd * math.cos(e_) * math.sin(a_), -dd * math.cos(e_) * math.cos(a_), dd * math.sin(e_)))
+        d = (tgt - loc).length
+        ld = bpy.data.lights.new('house-' + nm, 'AREA'); ld.shape = 'RECTANGLE'; ld.size, ld.size_y = size[0] * s_, size[1] * s_
+        ld.energy = E * math.pi * d * d * gain; ld.color = srgb(col)
+        if spread: ld.spread = math.radians(spread)
+        o = bpy.data.objects.new('house-' + nm, ld); sc.collection.objects.link(o); o.location = loc
+        o.rotation_euler = (tgt - loc).to_track_quat('-Z', 'Y').to_euler()
+        print(f'v3_day: house lamp {nm} at {tuple(round(v, 2) for v in loc)} aimed {tuple(round(v, 2) for v in tgt)}, {d:.2f} m, {ld.energy:.1f} W', flush=True)
+    for ex in (extra or []):   # an added real lamp out of frame: name, position and target relative to the deck's centre on the floor (m), size (m), irradiance at its target, spread
+        nm, px, py, pz, tx, ty, tz, w, h, E, spr = ex; loc = C + Vector((px, py, pz)); tgt = C + Vector((tx, ty, tz)); d = (tgt - loc).length
+        ld = bpy.data.lights.new('house-' + nm, 'AREA'); ld.shape = 'RECTANGLE'; ld.size, ld.size_y = w, h
+        ld.energy = E * math.pi * d * d * gain; ld.color = srgb('#FFF8F0'); ld.spread = math.radians(spr)
+        o = bpy.data.objects.new('house-' + nm, ld); sc.collection.objects.link(o); o.location = loc
+        o.rotation_euler = (tgt - loc).to_track_quat('-Z', 'Y').to_euler()
+        print(f'v3_day: house lamp {nm} (added) at {tuple(round(v, 2) for v in loc)} aimed {tuple(round(v, 2) for v in tgt)}, {ld.energy:.1f} W', flush=True)
+    co = sc.camera; az, el, d, lens = cam or (30.0, 30.0, 1.75, 70.0)
+    a_, e_ = math.radians(az), math.radians(el)
+    co.location = T + Vector((d * math.cos(e_) * math.sin(a_), -d * math.cos(e_) * math.cos(a_), d * math.sin(e_)))
+    co.rotation_euler = (T - co.location).to_track_quat('-Z', 'Y').to_euler()
+    co.data.lens = lens; co.data.sensor_fit = 'AUTO'; co.data.dof.aperture_fstop = 11.0
+    f_ = bpy.data.objects.get('focus')
+    if f_ is not None: f_.location = T
+    vs = sc.view_settings; vs.view_transform = 'Khronos PBR Neutral'; vs.look = 'None'; vs.exposure = -0.1
+    vs.use_white_balance = True; vs.white_balance_temperature = wb; vs.white_balance_tint = 3.0
+    print(f'v3_day: THE HOUSE GROUND, gain {gain}, camera az {az} el {el} at {d} m, {lens} mm', flush=True)
+
+
 def prepare():
     if '--satin-underside' in mine: satin_underside()
     if '--black-hub' in mine: black_hub()
@@ -865,6 +931,15 @@ def prepare():
         lamps_off(mine[mine.index('--lamps-off') + 1])
     if '--cards' in mine:
         cards()
+    if '--house' in mine:
+        i_ = mine.index('--house'); cam_ = None; lt_ = {}
+        if '--house-cam' in mine:
+            j_ = mine.index('--house-cam'); cam_ = tuple(float(v) for v in mine[j_ + 1:j_ + 5])
+        for k_ in ('key', 'fill', 'kick', 'front'):
+            if f'--house-{k_}' in mine: lt_[k_] = float(mine[mine.index(f'--house-{k_}') + 1])
+        ex_ = [[mine[j + 1]] + [float(v) for v in mine[j + 2:j + 12]] for j, v in enumerate(mine) if v == '--house-extra']
+        house(float(mine[i_ + 1]), cam_, lt_, float(mine[mine.index('--house-sweep') + 1]) if '--house-sweep' in mine else 0.5, ex_,
+              float(mine[mine.index('--house-wb') + 1]) if '--house-wb' in mine else 5600.0)
     if '--black-posts' in mine:
         black_posts()
     if '--side-fix' in mine:
