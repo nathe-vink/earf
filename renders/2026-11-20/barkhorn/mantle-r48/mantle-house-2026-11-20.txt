@@ -1,0 +1,38 @@
+THE MANTLE ON THE HOUSE GROUND, STEP 1 (the coordinator, 2026-11-20): Ember, Fog, Smoke; 1600 x 2000.
+
+HOW. v3_day.py --house: the Tropos fronts' set (r33-speaker-horn, renders/2026-11-04/barkhorn/rollout/
+A-polished-tallr7/site-front-off-tall-<tint>.shot.json) scaled to half round the deck: warm white sweep #F7F0E8 with
+its curve brought in to half the distance, a dark sky (#2B2A28 at 0.15), Khronos PBR Neutral, exposure -0.1. The
+shot file's key (from camera left, 40 deg up, aimed past the product up and left), fill, kick and front lamp, each
+re-aimed at the deck at the set's scale, plus five real lamps out of frame to bring the ground to the Tropos
+patches: a wash on the left of the wall, a lamp on the near-left floor, one on the right floor, and two narrow lamps
+at the deck's height from the left (1.0 m) and straight behind (1.5 m) that put light into the deck's edges, so the
+plinth carries its tint. No flags, no cards, nothing hidden in frame. The camera 30 deg right of the front, 22 deg
+up, 70 mm, f/11, the deck about 80 % of the width. No vignette, the scene's own grain; no Tropos finish block.
+The exact options: --house 0.66 --house-cam 30 22 1.75 70 --house-key 1.8 --house-front 1.2 --house-kick 6.5 --house-fill 0.2 --house-extra wall -0.6 -0.6 0.9 -0.7 0.7 0.35 0.8 0.5 0.36 40 --house-extra floor -0.5 -1.2 0.5 -0.25 -0.75 0.0 0.6 0.6 1.7 30 --house-extra right 0.9 -0.3 0.5 0.6 0.1 0.0 0.5 0.5 1.0 30 --house-wb 5750  --house-extra edgeL -1.0 0.0 0.082 0 0 0.082 0.6 0.015 60 3 --house-extra edgeB 0.26 1.48 0.082 0 0 0.082 0.6 0.015 50 3
+
+THE GROUND against the finished Tropos fronts (L*, 100 px patches on the frame at 1000 x 1250; Tropos ember, fog,
+smoke measured the same way: TL 80.0, TR 92.8, ML 87.2, MR 94.5, LL (H-250) 97.0, BR 87.4):
+mantle-house-ember.png TL 80.0(-0.0) b3.6 | TR 92.5(-0.3) b5.7 | ML 86.0(-1.2) b5.2 | MR 94.1(-0.4) b5.0 | LL 95.4(-1.6) b3.2 | BR 87.2(-0.2) b3.9 | worst 1.6
+mantle-house-fog.png TL 80.0(-0.0) b3.6 | TR 92.5(-0.3) b5.7 | ML 86.3(-0.9) b5.2 | MR 94.1(-0.4) b5.0 | LL 95.4(-1.6) b3.2 | BR 87.2(-0.2) b3.9 | worst 1.6
+mantle-house-smoke.png TL 80.0(-0.0) b3.6 | TR 92.5(-0.3) b5.7 | ML 86.0(-1.2) b5.2 | MR 94.1(-0.4) b5.0 | LL 95.4(-1.6) b3.2 | BR 87.2(-0.2) b3.9 | worst 1.6
+b* 3.2 to 5.7 (Tropos 3.5 to 5.3). The key from camera left: the shadow falls to the right, under and behind.
+
+AUDITS: each 0 emitting materials, 0 lamps in frame, no mesh hidden from the camera.
+
+FACTS FOR THE SITE (from the parts list and the README):
+- Power: two supplies at the wall: Rega's Neo PSU MK2 drives the motor (33/45 by a button, fine speed trim), and the
+  phono stage's own 18 V DC adapter plugs into a 2.1 mm jack on the back. (One parts-list line says the phono stage is
+  fed from the rear box's regulator; the README and the rear plate say its own adapter. To settle.)
+- Platter: 300 x 21 mm cast acrylic, three layers cemented (tinted 3 / clear 12.7 / tinted 5.6), 1.74 kg, no mat.
+- Outputs: a pair of gold RCA line outputs and an earth post; a switch on the back picks the built-in phono stage
+  (Pro-Ject Phono Box S2) or bypass (phono level, for an outside stage).
+- Cover: included (in the parts list and the budget): the lift-off cover in the tint's sheet.
+- Cartridge: Ortofon 2M Black, fitted (in the parts list).
+
+FOR THE SPEAKER LANE: spinoffs/barkhorn/asset/mantle-strata.blend (commit b64c6bd37b8ff5eb8007d2d04ee7c0859962dd3b),
+one collection per tint "Mantle Strata <Tint>", the cover in "Mantle Strata <Tint> Cover", off by default; units m,
+z up, the shelf at z 0. In a room by day the plinth reads black from above because the deck's top mirrors the room
+and the base under it is Smoke: what makes it carry its tint here is light into its edges (a low lamp or window
+raking the deck's sides at the deck's height); a brighter surface reflected in its top helps too. No material setting
+does it without that light.
