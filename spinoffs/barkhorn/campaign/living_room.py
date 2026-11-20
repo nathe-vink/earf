@@ -44,7 +44,7 @@ WIN_BACK = {'wall': 'back', 'along': -2.22, 'sill': 0.42, 'size': [0.75, 1.95], 
 # the room behind the horns' faces: it grazes the backs of both cabinets' sides (their red light onto the floor and the
 # console's ends) and crosses the console's top to Mantle and the Core (test u1: a wider one lit the left horn alone,
 # horns L* 41 against 10)
-WIN_LEFT = {'wall': 'left', 'along': 2.75, 'sill': 0.3, 'size': [0.4, 2.05], 'mullions': [1, 3]}
+WIN_LEFT = {'wall': 'left', 'along': 2.75, 'sill': 0.3, 'size': [0.4, 2.05], 'mullions': [1, 1], 'frame_w': 0.055, 'frame_d': 0.06}   # (C: its bars our own too)
 # the right wall, toward the front, out of frame: more sky into the room
 WIN_RIGHT = {'wall': 'right', 'along': 1.6, 'sill': 0.3, 'size': [1.6, 2.15], 'mullions': [2, 2]}
 # behind the lens: a long run of windows, the sky from the front, on both speakers alike. (The coordinator, 12:30: the
@@ -86,6 +86,85 @@ def _floor():
     # real oak planks over the room's own floor, a hair above it (Cycles: coplanar faces render black)
     return {'kind': 'kit', 'shape': 'box', 'size': [W - 0.02, D - 0.02, 0.003], 'position': [CX, CY, 0.0005],
             'material': 'pbr', 'texture': 'oak_wood_planks', 'tex_res': '2k', 'gain': 1.0}
+
+
+def _rug():
+    """A wool rug with pile and a bound edge: a herringbone wool field (photographed: its weave and pile in the texture)
+    inside an 80 mm border band much darker, 16 mm thick, its edge rounded over (the field 1 mm proud, so no two faces
+    lie in one plane). (Proof 2: the kit's wool has a strong sheen, and seen this low it went white and flat.)"""
+    wool = {'material': 'pbr', 'texture': 'poly_wool_herringbone', 'tex_res': '2k'}
+    return [{'kind': 'kit', 'shape': 'box', 'size': [2.4, 1.7, 0.016], 'position': [0.0, 0.15, 0.0045], 'ease': 0.007,
+             **wool, 'tint': '#3E352C', 'tint_mix': 0.75, 'gain': 0.55},
+            {'kind': 'kit', 'shape': 'box', 'size': [2.24, 1.54, 0.0165], 'position': [0.0, 0.15, 0.0045], 'ease': 0.004,
+             **wool, 'tint': '#9A8A72', 'tint_mix': 0.45, 'gain': 0.85}]
+
+
+# (american_walnut_veneer averages #726E69, a grey: walnut_veneer_02, #A98971, deepened a little toward walnut)
+WALNUT = {'material': 'pbr', 'texture': 'walnut_veneer_02', 'tex_res': '4k', 'tint': '#3A2214', 'tint_mix': 0.7, 'gain': 0.5}
+
+
+def _console():
+    """A walnut credenza, 1500 x 450 x 640, as a furniture maker builds one: a case of walnut (top, sides, bottom) round
+    a dark inside; across its front a door, a bank of three drawers and a door, 18 mm fronts with 4 mm reveals between
+    them and to the case; blackened bar pulls; the case on a walnut base rail and four tapered legs, set in from the
+    ends. Grain runs along the top and up the fronts."""
+    w, d, h = CONSOLE['w'], CONSOLE['d'], CONSOLE['h']
+    yf = CON_Y - d / 2                                  # the front's plane
+    z0, t, rv, ft = 0.19, 0.022, 0.004, 0.018           # the case's underside, its boards, the reveals, the fronts
+    out = []
+    box = lambda size, pos, rz=0.0, **m: {'kind': 'kit', 'shape': 'box', 'size': size, 'position': pos, 'rotate': [0, 0, rz], 'ease': 0.0015, **m}
+    # the case: the top (grain along its length), the sides, the bottom; a dark core behind the fronts shows in the reveals
+    out.append(box([d, w, t], [0.0, CON_Y, h - t], 90.0, **WALNUT))
+    for sx in (-1, 1):
+        out.append(box([t, d, h - z0 - t - 0.0005], [sx * (w / 2 - t / 2), CON_Y, z0], **WALNUT))
+    out.append(box([w - 2 * t - 0.001, d, t], [0.0, CON_Y, z0], **WALNUT))
+    out.append(box([w - 2 * t - 0.002, d - ft - 0.004, h - z0 - 2 * t - 0.002], [0.0, CON_Y + (ft + 0.004) / 2, z0 + t + 0.001],
+                   material='clay', color='#1A1411', roughness=0.9))
+    # the fronts in the opening x -0.728..0.728, z z0+t..h-t, 4 mm reveals
+    x0, x1, za, zb = -w / 2 + t + rv, w / 2 - t - rv, z0 + t + rv, h - t - rv
+    door = 0.36
+    fy = yf + ft / 2 + 0.0005
+    pull = dict(material='foil', color='#2E2925', roughness=0.42)
+    for sx in (-1, 1):                                  # the two doors, vertical pulls by their inner edges
+        cx = sx * (x1 - door / 2)
+        out.append(box([door, ft, zb - za], [cx, fy, za], **WALNUT))
+        out.append(box([0.012, 0.014, 0.11], [cx - sx * (door / 2 - 0.035), yf - 0.007, za + (zb - za) * 0.6], **pull))
+    dx0, dx1 = x0 + door + rv, x1 - door - rv
+    dh = (zb - za - 2 * rv) / 3
+    for k in range(3):                                  # the bank of three drawers, a bar pull centred on each
+        dz = za + k * (dh + rv)
+        out.append(box([dx1 - dx0, ft, dh], [0.0, fy, dz], **WALNUT))
+        out.append(box([0.16, 0.014, 0.012], [0.0, yf - 0.007, dz + dh * 0.62], **pull))
+    # the base: a rail under the case and four tapered legs, set in from the ends and the front
+    out.append(box([w - 0.2, d - 0.1, 0.03], [0.0, CON_Y, z0 - 0.03], **WALNUT))
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            out.append({'kind': 'kit', 'shape': 'cylinder', 'radius': 0.012, 'radius_top': 0.02, 'height': z0 - 0.03,
+                        'position': [sx * (w / 2 - 0.13), CON_Y + sy * (d / 2 - 0.08), 0.0], **WALNUT})
+    return out
+
+
+def _window_bars():
+    """The steel bars of the two windows camera A or C sees, set 6 mm back from their frames' faces (the engine's own
+    bars share the frame's faces, and coplanar faces render black in Cycles: proof 1's notches): the back window one
+    upright and two cross bars; the left window's narrow light two cross bars. 22 mm bars."""
+    out = []
+    bar = lambda size, pos: {'kind': 'kit', 'shape': 'box', 'size': size, 'position': pos, 'material': 'foil', 'color': STEEL,
+                             'roughness': 0.5, 'ease': 0.001}
+    wb = WIN_BACK                                       # in the back wall (y = BACK), outside toward +y
+    xc = CX + wb['along']; ww, wh = wb['size']; fw = wb['frame_w']
+    xa, xb, za, zb = xc - ww / 2 + fw, xc + ww / 2 - fw, wb['sill'] + fw, wb['sill'] + wh - fw
+    y0 = BACK + 0.12 + 0.006; dep = wb['frame_d'] - 0.012
+    out.append(bar([0.022, dep, zb - za + 0.02], [xc, y0 + dep / 2, za - 0.01]))
+    for k in (1, 2):
+        out.append(bar([xb - xa + 0.02, dep, 0.022], [xc, y0 + dep / 2, za + (zb - za) * k / 3 - 0.011]))
+    wl = WIN_LEFT                                       # in the left wall (x = LEFT), outside toward -x; along runs to +y
+    yc = CY + wl['along']; ww, wh = wl['size']; fw = wl['frame_w']
+    ya, yb, za, zb = yc - ww / 2 + fw, yc + ww / 2 - fw, wl['sill'] + fw, wl['sill'] + wh - fw
+    x0 = LEFT - 0.12 - 0.006; dep = wl['frame_d'] - 0.012
+    for k in (1, 2):
+        out.append(bar([dep, yb - ya + 0.02, 0.022], [x0 - dep / 2, yc, za + (zb - za) * k / 3 - 0.011]))
+    return out
 
 
 def _rug():
@@ -285,6 +364,9 @@ def living_c(tint='ember', size=(1600, 2000)):
     for pr in s['set']['props']:
         if pr.get('fn') == 'cores_off':
             pr['cores'] = [{**pr['cores'][0], 'x': CORE_C[0], 'y': CORE_C[1], 'floor_z': CORE_C[2]}]
+    for pr in s['set']['props']:                        # (final C: the left window is in this frame: no portal in it either)
+        if pr.get('fn') == 'no_portal':
+            pr['windows'] = ['wall-back', 'wall-left']
     tgt = [CORE_C[0] + 0.05, CORE_C[1], SIDE_TOP + 0.1]
     s['camera'] = {'position': [-1.45, 0.6, 0.98], 'target': tgt, 'lens_mm': 60.0, 'level': True, 'fstop': 4.0, 'focus': [CORE_C[0], CORE_C[1], SIDE_TOP + 0.08]}
     return s
