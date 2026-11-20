@@ -1,0 +1,11 @@
+AUDIT house-dome-red hidden [] no-shadow [] lights [('house-key', 'AREA', 3.233), ('house-fill', 'AREA', 9.074), ('house-kick', 'AREA', 2.227), ('house-horn', 'AREA', 13.403), ('house-bg-left', 'AREA', 9.742), ('house-bg-right', 'AREA', 3.768), ('house-wall_left', 'AREA', 27.158), ('house-bg-high', 'AREA', 6.185), ('led-red-0', 'AREA', 0.621), ('led-red-1', 'AREA', 0.621), ('led-red-2', 'AREA', 0.621), ('led-red-3', 'AREA', 0.621), ('led-red-4', 'AREA', 0.621), ('led-red-5', 'AREA', 0.621), ('led-red-6', 'AREA', 0.621), ('led-red-7', 'AREA', 0.621), ('led-red-8', 'AREA', 0.621), ('led-red-9', 'AREA', 0.621), ('led-red-10', 'AREA', 0.621), ('led-red-11', 'AREA', 0.621), ('led-red-12', 'AREA', 0.621), ('led-red-13', 'AREA', 0.621), ('led-red-14', 'AREA', 0.621), ('led-red-15', 'AREA', 0.621), ('led-red-16', 'AREA', 0.621), ('led-red-17', 'AREA', 0.621), ('led-red-18', 'AREA', 0.621), ('led-red-19', 'AREA', 0.621), ('led-red-20', 'AREA', 0.621), ('led-red-21', 'AREA', 0.621), ('led-red-22', 'AREA', 0.621), ('led-red-23', 'AREA', 0.621)]
+HIDDENCAST house-dome-red: 8 hidden, 0 in frame
+   out         0.0 %  area lamp (rectangle) house-key
+   out         0.0 %  area lamp (rectangle) house-fill
+   out         0.0 %  area lamp (rectangle) house-kick
+   out         0.0 %  area lamp (rectangle) house-horn
+   out         0.0 %  area lamp (rectangle) house-bg-left
+   out         0.0 %  area lamp (rectangle) house-bg-right
+   out         0.0 %  area lamp (rectangle) house-wall_left
+   out         0.0 %  area lamp (rectangle) house-bg-high
+CASTCHECK house-dome-red {'house-key': 0.0, 'house-fill': 0.0, 'house-kick': 0.0, 'house-horn': 0.0, 'house-bg-left': 0.0, 'house-bg-right': 0.0, 'house-wall_left': 0.0, 'house-bg-high': 0.0}

@@ -1,0 +1,11 @@
+AUDIT house-orb-red hidden [] no-shadow [] lights [('house-key', 'AREA', 0.511), ('house-fill', 'AREA', 1.433), ('house-kick', 'AREA', 0.352), ('house-horn', 'AREA', 2.117), ('house-bg-left', 'AREA', 1.539), ('house-bg-right', 'AREA', 0.595), ('house-wall_left', 'AREA', 4.289), ('house-bg-high', 'AREA', 0.977), ('led-red', 'AREA', 2.978)]
+HIDDENCAST house-orb-red: 8 hidden, 0 in frame
+   out         0.0 %  area lamp (rectangle) house-key
+   out         0.0 %  area lamp (rectangle) house-fill
+   out         0.0 %  area lamp (rectangle) house-kick
+   out         0.0 %  area lamp (rectangle) house-horn
+   out         0.0 %  area lamp (rectangle) house-bg-left
+   out         0.0 %  area lamp (rectangle) house-bg-right
+   out         0.0 %  area lamp (rectangle) house-wall_left
+   out         0.0 %  area lamp (rectangle) house-bg-high
+CASTCHECK house-orb-red {'house-key': 0.0, 'house-fill': 0.0, 'house-kick': 0.0, 'house-horn': 0.0, 'house-bg-left': 0.0, 'house-bg-right': 0.0, 'house-wall_left': 0.0, 'house-bg-high': 0.0}
