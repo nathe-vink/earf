@@ -61,7 +61,7 @@ SKY = {'kind': 'hdri', 'polyhaven': 'garden_nook', 'res': '4k', 'rotation_deg': 
 STEEL = '#2C2B29'
 
 # --- the furniture --------------------------------------------------------------------------------------------------
-SPK_X, SPK_GAP, TOE = 1.25, 0.30, 6.0           # the pair 2.5 m apart, 0.3 m off the wall, toed in
+SPK_X, SPK_GAP, TOE = 1.25, 0.30, 15.5          # the pair 2.5 m apart, 0.3 m off the wall, aimed at the seat 4.5 m back (atan 1.25/4.5); (the critics: at 6 degrees the inner sides, seen 14 degrees off edge-on, mirrored the room white; past 14.5 they turn away from the lens)
 TROPOS_D = 0.428
 SPK_Y = round(BACK - SPK_GAP - TROPOS_D / 2, 4)
 # (the critics, 18:41: the cabinets' inner sides read white: at that angle each mirrors the back wall in the gap beside
