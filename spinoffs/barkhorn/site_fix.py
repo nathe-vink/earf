@@ -535,56 +535,62 @@ KELVIN = {'red': 2200, 'green': 2700, 'ice': 2700, 'violet': 3000, 'orange': 400
 ASK = {'speaker': 'Ask about a pair', 'dome': 'Ask about Hemisphere', 'orb': 'Ask about Core', 'turntable': 'Ask about Mantle'}
 MAIL = 'hello@earf.world'
 # Specifications: four or five plain headings, one fact to a row. {a|b}: a, or b on Fog. {lm} {K}: this color's own.
-SPEC = {
+SPEC = {      # inches first, millimeters in brackets; pounds first; feet first for a cable (the coordinator 15:42, C3 1-3)
     'speaker': [
-        ('Materials', [('Acrylic', '{tint}'), ('Cabinet', 'Cast acrylic, 20 mm, {tinted through|clear}'),
-                       ('Lining', 'Polyester batts in white voile, 100 mm at the top and the bottom'),
-                       ('Horn', 'Thermoformed cast acrylic, 10 mm, in the cabinet&rsquo;s color; polished inside and out, on four black posts')]),
+        ('Materials', [('Acrylic', '{tint}'), ('Cabinet', 'Cast acrylic, 0.8 in (20 mm), {tinted through|clear}'),
+                       ('Lining', 'Polyester batts in white voile, 3.9 in (100 mm) at the top and the bottom'),
+                       ('Horn', 'Thermoformed cast acrylic, 0.4 in (10 mm), in the cabinet&rsquo;s color; polished inside and out, on four black posts')]),
         ('Drivers and amplifier', [('Woofer', 'FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners'),
                                    ('Horn driver', 'B&amp;C DE1085TN, 2-inch compression driver'),
                                    ('Amplifier', 'Hypex FusionAmp FA123 built in: the woofer on two bridged channels, up to 125 W into its 8 &Omega;; the horn on its own; crossed at 1 kHz in its DSP')]),
         ('Sound and connections', [('Bass', 'To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
-                   ('Loudness', 'Up to about 115 dB at 1 m, each'),
+                   ('Loudness', 'Up to about 115 dB at 3.3 ft (1 m), each'),
                    ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
                    ('Power', '100&ndash;120 V / 200&ndash;240 V, 50/60 Hz, 350 W max'),
-                   ('With a pair', 'Two power cords and a 5 m (16 ft) link cable between the speakers')]),
-        ('Size and weight', [('Size', '1295 high, 560 wide (the horn flush with the cabinet), 442 deep overall, 420 at the cabinet (mm); 51 x 22 x 17.4 in'),
-                             ('Weight', 'About 75 kg (165 lb) each')]),
+                   ('With a pair', 'Two power cords and a 16 ft (5 m) link cable between the speakers')]),
+        ('Size and weight', [('Size', '51 in (1295 mm) tall, 22 in (560 mm) wide, the horn flush with the cabinet; 17.4 in (442 mm) deep overall, 16.5 in (420 mm) at the cabinet'),
+                             ('Weight', 'About 165 lb (75 kg) each')]),
         ('Care', [('Care', '{care}')]),
     ],
     'dome': [
         ('Materials', [('Shade', 'Cast acrylic in three layers: its color on the outside, over a clear shell and an opal diffuser within'),
                        ('Cap', 'Satin black anodized aluminum, with a quarter-turn catch')]),
-        ('Light', [('Output', 'About {lm} lm out of the shade in this color'), ('On the table', 'About 340 lux half a meter below, in every color'),
-                   ('CRI', '90'), ('Color temperature', '{K} K, the light straight down; the shade glows in its own color'),
-                   ('Power', '120 V, dimmable')]),
-        ('Size and hanging', [('Size', '200 mm (7.9 in) across; 126 mm (5.0 in) from the rim to the top of its cap, the shade 100 mm (3.9 in) deep'),
-                              ('Hanging', 'A cloth-braided cord, a standard 600 mm (23.6 in) drop, cut to length: 776 mm (30.6 in) from the ceiling to the rim; a canopy of satin black anodized aluminum, 150 mm across and 50 mm deep (5.9 x 2.0 in)')]),
+        ('Light', [('Output', 'About {lm} lm out of the shade in this color'), ('On the table', 'About 340 lux 20 in (0.5 m) below, in every color'),
+                   ('CRI', '90'), ('Color temperature', '{K} K, straight down')]),
+        ('Electrical', [('Power', 'About 7 W at 120 V'), ('Dimming', 'Phase-cut (leading or trailing edge) or 0&ndash;10 V')]),
+        ('Size and hanging', [('Size', '7.9 in (200 mm) across; 5.0 in (126 mm) from the rim to the top of the cap; the shade 3.9 in (100 mm) deep'),
+                              ('Weight', 'About 3.5 lb (1.6 kg) hanging; the canopy about 0.9 lb (0.4 kg)'),
+                              ('Cord', '10 ft (3 m) of black cloth-braided cord, cut to the drop at install'),
+                              ('Drop', '23.6 in (600 mm) as standard: 30.6 in (776 mm) from the ceiling to the rim'),
+                              ('Canopy', 'Satin black anodized aluminum, 5.9 in across, 2.0 in deep (150 x 50 mm)')]),
         ('Shades and care', [('Shades', 'In all eight colors, sold separately'),
                              ('Care', 'A quarter turn takes the shade off to wash: water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic.')]),
     ],
     'orb': [
         ('Materials', [('Ball', '{Tinted|Clear} cast acrylic, with an opal diffuser centered inside it'), ('Base', 'Its own color, satin')]),
-        ('Light', [('Glow', 'A glow, not a reading light: the ball lights in its own color'), ('Output', 'About {lm} lm out of the ball in this color'),
-                   ('Color temperature', 'The LED inside: {K} K'), ('Control', 'Touch the top of the base: tap to switch, hold to dim')]),
-        ('Power', [('Battery', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours on its dock, on three standard LiFePO4 cells you can replace yourself'),
-                   ('Rating', 'Designed to meet IP44, for terraces and spilled drinks')]),
-        ('Size and weight', [('Size', '160 mm ball, 187 mm tall, base 150 mm across (6.3 in ball, 7.4 in tall, 5.9 in base)'), ('Weight', 'About 1.4 kg (3.1 lb) with its cells')]),
-        ('Balls and care', [('Balls', 'In all eight colors, sold separately. Each comes off by hand.'), ('Care', '{care}')]),
+        ('Light', [('Use', 'A glow, not a reading light'), ('Output', 'About {lm} lm out of the ball in this color'),
+                   ('Color temperature', '{K} K'), ('Control', 'Touch the top of the base: tap to switch, hold to dim')]),
+        ('Power', [('Runtime', 'Cordless: about five hours a charge at full brightness, longer dimmed'),
+                   ('Charging', 'Two to three hours on its dock'),
+                   ('Cells', 'Three LiFePO4 18650 cells, 14.4 Wh, replaceable, behind a hatch under the base')]),
+        ('Size and weight', [('Size', '6.3 in (160 mm) ball, 7.4 in (187 mm) tall, the base 5.9 in (150 mm) across'), ('Weight', 'About 3.1 lb (1.4 kg) with its cells')]),
+        ('In the box', [('Contents', 'The lamp, its dock, a 6.5 ft (2 m) braided USB-C cable and a 20 W USB-C adapter')]),
+        ('Balls, rating and care', [('Balls', 'In all eight colors, sold separately. Each comes off by hand.'),
+                                    ('Rating', 'Designed to meet IP44, for terraces and spilled drinks'), ('Cleaning', '{care}')]),
     ],
     'turntable': [
-        ('Materials', [('Plinth', '{Cast acrylic in its color|Clear cast acrylic}, about 25 mm, its edges satin with a fine polished bevel; raised 40 mm on four posts over the base'),
-                       ('Posts', 'Four solid posts, 30 mm across, satin black'), ('Hardware', 'Satin black throughout'),
-                       ('Base', 'Smoked cast acrylic, 12.7 mm, set in 35 mm all around'),
-                       ('Platter', 'Cast acrylic, 300 x 21 mm, in three layers'),
-                       ('Cover', 'Included: a lift-off dust cover in the deck&rsquo;s own {tint|color}: 3 mm cast acrylic, 448 x 358 x 100 mm (17.6 x 14.1 x 3.9 in), about 1.1 kg (2.4 lb). It rests on four small clear bumpers and lifts straight off; no hinges.')]),
+        ('Materials', [('Plinth', '{Cast acrylic in its color|Clear cast acrylic}, about 1 in (25 mm), its edges satin with a fine polished bevel; raised 1.6 in (40 mm) on four posts over the base'),
+                       ('Posts', 'Four solid posts, 1.2 in (30 mm) across, satin black'), ('Hardware', 'Satin black throughout'),
+                       ('Base', 'Smoked cast acrylic, 0.5 in (12.7 mm), set in 1.4 in (35 mm) all around'),
+                       ('Platter', 'Cast acrylic, 11.8 in (300 mm) across, 0.8 in (21 mm) thick, in three layers'),
+                       ('Cover', 'Included: a lift-off dust cover in the deck&rsquo;s own {tint|color}: 0.1 in (3 mm) cast acrylic, 17.6 x 14.1 x 3.9 in (448 x 358 x 100 mm), about 2.4 lb (1.1 kg). It rests on four small clear bumpers and lifts straight off; no hinges.')]),
         ('Playing', [('Drive', 'Belt, from Rega&rsquo;s 24 V motor, fixed beneath the plinth'), ('Speeds', '33 and 45, by a button'),
                      ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black, fitted'),
                      ('Phono stage', 'Built in, for moving-magnet cartridges'),
                      ('Outputs', 'RCA line outputs and an earth post; a switch picks the built-in phono stage or bypass'),
                      ('Power', 'Two supplies at the wall: Rega&rsquo;s Neo PSU drives the motor; the phono stage runs on its own 18 V adapter.')]),
-        ('Size and weight', [('Size', '450 wide, 360 deep, 161 high to the top of the arm; 196 high with the cover on (mm); 17.7 x 14.2 x 6.3 in (7.7 in with the cover)'),
-                             ('Weight', 'About 11.6 kg (25.6 lb); about 12.7 kg (28 lb) with the cover')]),
+        ('Size and weight', [('Size', '17.7 in (450 mm) wide, 14.2 in (360 mm) deep, 6.3 in (161 mm) high to the top of the arm; 7.7 in (196 mm) with the cover on'),
+                             ('Weight', 'About 25.6 lb (11.6 kg); about 28 lb (12.7 kg) with the cover')]),
         ('Care', [('Care', '{care}')]),
     ],
 }
@@ -1423,3 +1429,96 @@ def fix_9(p, web):
         i, j, _ = _data(p)
         p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     print('fix_9: lamps on the light ground:', ready or 'none yet (a tint missing)')
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Push C3: the critics' smaller items on push C (the coordinator, 20 Nov 15:42); items 1-3 are in SPEC above
+def fix_10(p, web):
+    # 6. "Shown in Ember." beside the picture, in the line under it, never across its edge
+    p.sub("  if (s.shown && !NAMEROWS[(s.src || '').split('/').pop()]) stage.appendChild(el('span', { class: 'tag' }, `Shown in ${BY[s.shown].name}.`));\n", "")
+    p.sub("    const nr = NAMEROWS[(s.src || '').split('/').pop()]; if (nr) { e.innerHTML = nr; e.hidden = false; } }",
+          "    const nr = NAMEROWS[(s.src || '').split('/').pop()]; if (nr) { e.innerHTML = nr; e.hidden = false; }\n"
+          "    else if (s.shown && !e.textContent) { e.textContent = `Shown in ${BY[s.shown].name}.`; e.hidden = false; } }")
+    # 13. the arrows and the counter at the picture's own foot (an upright picture is narrower than the stage)
+    p.sub("  document.getElementById('g-count').textContent",
+          "  pin();\n  document.getElementById('g-count').textContent")
+    p.sub("function go(d, focus) {",
+          "function pin() { const st = stage.getBoundingClientRect(), pw = Math.min(st.width, st.height * 0.8);   // the 4:5 picture's foot: one place for every picture\n"
+          "  stage.parentElement.style.setProperty('--pin', Math.max(0, (st.width - pw) / 2).toFixed(1) + 'px'); }\n"
+          "new ResizeObserver(() => { if (cur) pin(); }).observe(stage);\n"
+          "function go(d, focus) {")
+    # 7. the canonical address follows the color
+    p.sub("setTint(k); renderRows(P, c);",
+          "setTint(k); renderRows(P, c);\n"
+          "  { let l = document.querySelector('link[rel=\"canonical\"]'); if (!l) { l = document.createElement('link'); l.rel = 'canonical'; document.head.appendChild(l); }\n"
+          "    l.href = 'https://www.earf.world' + productPath(); }")
+    # 4. Space chooses a dot as Enter does, without scrolling the page
+    p.sub("thumbs.addEventListener('keydown', e => keys(e, true));",
+          "thumbs.addEventListener('keydown', e => keys(e, true));\n"
+          "document.addEventListener('keydown', e => { if (e.key !== ' ' && e.key !== 'Spacebar') return; const a = e.target.closest && e.target.closest('#swatches a'); if (!a) return; e.preventDefault(); a.click(); });")
+    # 11. a place tile leaves a clean address (/tropos/<tint>) with its view kept; Copy link from there opens the same picture
+    p.sub("  { const v = /^([a-z]+-[a-z]+)\\/([a-z-]+)$/.exec(h); if (v) { h = v[1]; WANT = VIEWKEY[v[2]] || v[2]; } }",
+          "  { const v = /^([a-z]+-[a-z]+)\\/([a-z-]+)$/.exec(h); if (v) { h = v[1]; WANT = VIEWKEY[v[2]] || v[2];\n"
+          "      const r = /^(speaker|hemisphere|core|mantle)-([a-z]+)$/.exec(h); if (r) history.replaceState(null, '', (r[1] === 'speaker' ? '/tropos/' : `/${r[1]}/`) + r[2]); } }\n"
+          "  { const q = new URLSearchParams(location.search).get('view'); if (q && !WANT) { WANT = VIEWKEY[q] || q; } }")
+    p.sub("const url = location.origin + productPath(), note", "const url = location.origin + productPath() + (view === 'habitat' ? '?view=out' : ''), note")
+    # 8. the home's Write to us: room kept for its note, which says what beside the ask says
+    p.sub("const done = () => { note.textContent = 'Copied.'; };", "const done = () => { note.textContent = 'Address copied.'; };")
+    p.sub('<div class="wrap"><p class="render-note">Pictures are renders. Nothing is built yet.</p></div>',
+          '<div class="mk-wide"><p class="render-note">Pictures are renders. Nothing is built yet.</p></div>')
+    # 12. a phone's first load: no opening film (its four frame sheets are about 1 MB); the hidden block's icons lazy
+    _sub_any(p, "if (location.pathname.replace(/index\\.html$/, '') !== '/' || location.hash || seen",
+             "if (location.pathname.replace(/index\\.html$/, '') !== '/' || location.hash || seen || matchMedia('(max-width: 700px)').matches")
+    p.rest, n = re.subn(r'<img class="ic only-light " (?![^>]*loading=)', '<img class="ic only-light " loading="lazy" ', p.rest)
+    assert n >= 1, ('fix_10: icons', n)
+    p.css("""
+/* push C3 (the coordinator, 15:42) */
+/* 4: the dots one row where it fits, else four and four; focus outside the chosen ring, both shown, apart from the neighbors */
+.buy { container-type: inline-size }
+.swatches { display: flex !important; flex-wrap: wrap; gap: 8px !important }
+@container (max-width: 407px) { .swatches { display: grid !important; grid-template-columns: repeat(4, 44px); gap: 6px 10px !important } }
+.swatches a:focus:not(:focus-visible) { outline: none }
+.swatches a:focus { outline: none }
+.swatches a[aria-current="true"], .swatches a[aria-current="true"]:focus { outline: 2px solid var(--ink) !important; outline-offset: 0 !important }
+.swatches a:focus-visible { box-shadow: 0 0 0 3px var(--page), 0 0 0 5px #1A5FD0 !important }
+/* 5: a short phone keeps the name above the ask bar */
+@media (max-width: 700px) and (max-height: 760px) { .stage { height: min(var(--cap), calc(100cqw * 0.84)) !important } }
+/* 8: the renders line under the family row from the row's own edge; the Write to us note keeps its room */
+#family .render-note { margin: 12px 0 0 }
+#copy-note { display: block !important; min-height: 1.5em }
+/* 10: /lighting, the eight named dots four and four at every width, each name under its dot; the names row no wider than its picture */
+.lt-tile .dots-row, .lt-body .dots-row { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 4px 6px !important }
+.lt-tile .dots-row a { flex-direction: column; justify-content: center; gap: 2px !important; min-height: 52px; font-size: 12px; border-radius: 8px }
+.lt-tile .dots-row .coin-dot { width: 28px !important; height: 28px !important }
+.lt-room .names { width: 0; min-width: 100% }
+/* 13: one counter width; the arrows and counter at the picture's own foot; the breadcrumb's focus clear of the slash */
+.gallery .count { min-width: 52px; text-align: center; box-sizing: border-box; font-variant-numeric: tabular-nums }
+.gallery .nav.next { right: calc(var(--pin, 0px) + 10px) !important }
+.gallery .nav.prev { right: calc(var(--pin, 0px) + 54px) !important }
+.gallery .count { right: calc(var(--pin, 0px) + 98px) !important }
+@media (max-width: 700px) {
+  .gallery .nav.prev { right: calc(var(--pin, 0px) + 62px) !important } .gallery .count { right: calc(var(--pin, 0px) + 114px) !important }
+}
+.crumbs a { margin-inline: 3px } .crumbs a:first-child { margin-left: 0 } .crumbs a:focus-visible { outline-offset: 1px }
+/* 9: the hero's line and both buttons on the first screen of a phone too; in a short wide window the buttons side by side, clear of the pendants */
+@media (max-aspect-ratio: 1/1) and (max-width: 559px) {
+  .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100svh - 290px) * 0.8)); margin-left: auto !important; margin-right: auto !important; align-self: center }
+  .hs-hero .hero-title .wrap { max-width: min(100%, calc((100svh - 290px) * 0.8 + 32px)) !important; margin-left: auto !important; margin-right: auto !important }
+}
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (max-height: 640px) {
+  .hs-hero .hero-more { left: 0 !important; right: 0 !important; margin-inline: auto !important; width: min(92vw, 640px) !important; max-width: none !important }
+  .hs-hero .hero-more .wrap { width: auto !important; max-width: none !important; text-align: center }
+  .hs-hero .hero-sub { max-width: none !important; margin-bottom: 10px !important }
+  .hs-hero .hero-cta { flex-wrap: nowrap !important; justify-content: center; gap: 10px }
+}
+""")
+
+
+def finish_10(web):
+    """The static pages keep a ?view on their way to their own fragment (a place tile's copied link opens its picture)."""
+    import glob
+    for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
+        s = open(f).read()
+        t = s.replace('history.replaceState(null, "", location.pathname + "#', 'history.replaceState(null, "", location.pathname + location.search + "#')
+        if t != s:
+            open(f, 'w').write(t)
