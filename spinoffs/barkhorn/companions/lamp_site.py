@@ -124,6 +124,9 @@ def build(frame, samples, scale):
         return blackbody(CCT_PER_TINT.get(tint, 2700) if pertint else CCT)
     bb = blackbody(CCT)
     kind0 = 'dome' if frame.startswith(('lamps-domes', 'trio-', 'cluster', 'cutaway', 'inuse')) else 'orb' if frame.startswith(('lamps-orbs', 'baseopts')) else frame.split('-')[0]
+    house = frame.startswith('house-')            # house-dome-<k>, house-orb-<k>: the house ground (launch/house_ground.py)
+    if house:
+        kind0 = frame.split('-')[1]
     # the studio's brightness and the exposure move together, so the paper holds its tone while the lamp, at its real
     # output, comes out of clipping: a brighter studio, one scale
     # round 3 (the gate, wf_5760aeac-7cd): Hemisphere's studio x1 with the camera at -2 EV (the lamp up 1 EV against the
@@ -763,7 +766,35 @@ def build(frame, samples, scale):
 
     # --- the frames ---------------------------------------------------------------------------------------------
     kind, _, tint = frame.partition('-')
-    if frame.startswith('lamps-domes'):
+    if house:
+        # THE HOUSE GROUND (2026-11-20, the coordinator: Hemisphere and Core first on the light ground the Tropos fronts
+        # stand on, switched off, then lit from the same camera). The rig's own sweep, world and lamps go; the Tropos
+        # set, sky and lamps come in at the scale HOUSE_S (launch/house_ground.py). HOUSE_DIM: the ON frames' one
+        # declared factor (the studio and sky / DIM, the exposure + log2 DIM). 1600 x 2000, 4:5
+        for o in list(bpy.data.objects):
+            if o.name in ('sweep', 'key', 'fill', 'kicker'):
+                bpy.data.objects.remove(o, do_unlink=True)
+        sys.path.insert(0, os.path.join(HERE, 'launch'))
+        import house_ground as HG
+        W, H = 1600, 2000
+        tint = frame.split('-', 2)[2]
+        hs = float(os.environ.get('HOUSE_S', {'dome': '0.196', 'orb': '0.154'}[kind0]))
+        hdim = float(os.environ.get('HOUSE_DIM', '1'))
+        hcam, HR, hlights = HG.build(bpy, hs, hdim)
+        key = fill = kick = None
+        if kind0 == 'dome':
+            # hung on its cord (the CAD's 600 drop, the cord running out of the frame's top), the shade's middle where
+            # the Tropos' middle stands; HOUSE_RIM overrides the rim's height
+            hemisphere(tint, 0.0, float(os.environ.get('HOUSE_RIM', hs * HR['tropos_centre'][2] - 0.056)))
+        else:
+            core(tint, 0.0, 0.0)                      # standing on the sweep
+        for k_, v_ in (('HOUSE_CAMPOS', 'position'), ('HOUSE_TARGET', 'target')):
+            if os.environ.get(k_):
+                hcam[v_] = list(eval(os.environ[k_]))
+        if os.environ.get('HOUSE_LENS'):
+            hcam['lens_mm'] = float(os.environ['HOUSE_LENS'])
+        cam = None
+    elif frame.startswith('lamps-domes'):
         # round 2 (the gate: the pools merged into one bar that read as LED strip; small domes under a bare third of
         # cable): framed above the floor, the domes larger, the cables cropped; '-7' leaves Smoke out, re-spaced
         W, H = 2400, 800
@@ -829,7 +860,8 @@ def build(frame, samples, scale):
         cam = ((0.0, -4.4, 0.10 + 4.4 * math.tan(math.radians(22))), (0.0, 0.0, 0.10), 85.0)
     elif kind == 'dome':
         W, H = 1600, 2000
-        hemisphere(tint, 0.0, 0.50)                    # the rim 500 above the paper: the dome and its pool in one frame
+        # DOME_RIM (2026-11-20, the coordinator: the lux on a table at the standard drop): the rim's height over the paper
+        hemisphere(tint, 0.0, float(os.environ.get('DOME_RIM', '0.50')))   # the rim 500 above the paper: the dome and its pool in one frame
         # round 3 (the gate: the dome 40-50 % of the card, the pool's front edge inside): higher and closer, looking
         # down past the dome to the pool's near half-maximum (r 0.38 at the rim's 0.50; launch/HIDDENCAST.md's pool note)
         cam = tuple(eval(os.environ['DOMECAM'])) if os.environ.get('DOMECAM') else ((0.06, -0.90, 1.20), (0.0, -0.15, 0.385), 58.0)
@@ -842,6 +874,11 @@ def build(frame, samples, scale):
         raise SystemExit('unknown frame ' + frame)
     SC.render_settings(W, H, samples, scale, exposure=float(os.environ.get('EV', EVD)), look=os.environ.get('LOOK', 'AgX - Punchy'))   # round 2: AgX Punchy (the gate)
     sc = bpy.context.scene
+    if house:
+        # the Tropos' view: Khronos PBR Neutral, their exposure (raised by log2 DIM in the ON frames), their white point
+        hr_ = HR['render']
+        sc.view_settings.view_transform = hr_['view']; sc.view_settings.look = 'None'
+        sc.view_settings.exposure = hr_['exposure'] + math.log2(hdim) + float(os.environ.get('HOUSE_EV', '0'))
     if os.environ.get('BORDER'):   # 'x0,x1,y0,y1' fractions (y from the bottom): only that part of the frame, cropped
         bx0, bx1, by0, by1 = (float(v) for v in os.environ['BORDER'].split(','))
         sc.render.use_border = sc.render.use_crop_to_border = True
@@ -857,7 +894,12 @@ def build(frame, samples, scale):
     sc.cycles.max_bounces = 64; sc.cycles.diffuse_bounces = sc.cycles.glossy_bounces = sc.cycles.transmission_bounces = 32
     vs = sc.view_settings; vs.use_white_balance = True; vs.white_balance_temperature = float(os.environ.get('WB', '3000'))
     vs.white_balance_tint = 0.0
-    SC.camera(cam[0], cam[1], lens=cam[2], fstop=float(os.environ.get('FSTOP', '8.0')),   # FSTOP, FOCUS: a detail's shallow focus
+    if house:
+        vs.white_balance_temperature = HR['render']['white_balance_k']; vs.white_balance_tint = HR['render']['white_balance_tint']
+        sc.cycles.sample_clamp_indirect = 0.0        # no clamp on the lamp's light (the clamp scales with exposure here)
+        HG.camera(bpy, sc, hcam, W, H, s=hs)
+    else:
+      SC.camera(cam[0], cam[1], lens=cam[2], fstop=float(os.environ.get('FSTOP', '8.0')),   # FSTOP, FOCUS: a detail's shallow focus
               focus=tuple(eval(os.environ['FOCUS'])) if os.environ.get('FOCUS') else None)
     if frame == 'cutaway':
         # the labels' anchors (mm in the lamp's frame, its rim's centre at z 0.50), projected to pixels for the leader lines
