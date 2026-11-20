@@ -558,8 +558,8 @@ SPEC = {
         ('Light', [('Output', 'About {lm} lm out of the shade in this color'), ('On the table', 'About 340 lux half a meter below, in every color'),
                    ('CRI', '90'), ('Color temperature', '{K} K, the light straight down; the shade glows in its own color'),
                    ('Power', '120 V, dimmable')]),
-        ('Size and hanging', [('Size', '200 mm (7.9 in) across'),
-                              ('Hanging', 'A cloth-braided cord, a standard 600 mm (23.6 in) drop, cut to length; a canopy of satin black anodized aluminum, 150 mm (5.9 in) across')]),
+        ('Size and hanging', [('Size', '200 mm (7.9 in) across; 126 mm (5.0 in) from the rim to the top of its cap, the shade 100 mm (3.9 in) deep'),
+                              ('Hanging', 'A cloth-braided cord, a standard 600 mm (23.6 in) drop, cut to length: 776 mm (30.6 in) from the ceiling to the rim; a canopy of satin black anodized aluminum, 150 mm across and 50 mm deep (5.9 x 2.0 in)')]),
         ('Shades and care', [('Shades', 'In all eight colors, sold separately'),
                              ('Care', 'A quarter turn takes the shade off to wash: water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic.')]),
     ],
@@ -569,7 +569,7 @@ SPEC = {
                    ('Color temperature', 'The LED inside: {K} K'), ('Control', 'Touch the ring: tap to switch, hold to dim')]),
         ('Power', [('Battery', 'Cordless: about five hours a charge at full brightness, longer dimmed; it charges in two to three hours on its dock, on three standard LiFePO4 cells you can replace yourself'),
                    ('Rating', 'Designed to meet IP44, for terraces and spilled drinks')]),
-        ('Size and weight', [('Size', '160 mm ball, 180 mm tall (6.3 in ball, 7.1 in tall)'), ('Weight', 'About 1.5 kg (3.3 lb)')]),
+        ('Size and weight', [('Size', '160 mm ball, 187 mm tall (6.3 in ball, 7.4 in tall)'), ('Weight', 'About 1.5 kg (3.3 lb)')]),
         ('Balls and care', [('Balls', 'In all eight colors, sold separately. Each comes off by hand.'), ('Care', '{care}')]),
     ],
     'turntable': [
@@ -1157,6 +1157,8 @@ def fix_5(p, web):
     # the dead lines out of the page data: the lamps' old lines become their pages' sentences
     D['lamps']['dome']['line'] = 'A pendant in cast acrylic. The shade comes off with a quarter turn.'
     D['lamps']['orb']['line'] = 'A table lamp in cast acrylic. Cordless. About five hours a charge.'
+    # the Core is 187 mm tall (the lamps lane's CAD and drawing, the coordinator 15:17): the old 180 out of the page data too
+    D['lamps']['orb']['facts'] = [[a, b.replace('180 mm tall', '187 mm tall')] for a, b in D['lamps']['orb']['facts']]
     i, j, _ = _data(p)
     p.rest = p.rest[:i] + json.dumps(D, separators=(',', ':')) + p.rest[j:]
     p.sub('"turntable": ["studio", "cover", "bar"]', '"turntable": ["house", "cover", "studio", "bar"]')     # cover off, then on, then under a spot
@@ -1239,7 +1241,7 @@ def fix_6(p, web):
 
 # ---------------------------------------------------------------------------------------------------------------------
 # The last critic pass, push C (the coordinator, 20 Nov 13:56)
-SIZEL = {'speaker': '51 in (1295 mm) tall', 'dome': '7.9 in (200 mm) across', 'orb': '7.1 in (180 mm) tall', 'turntable': '17.7 in (450 mm) wide'}
+SIZEL = {'speaker': '51 in (1295 mm) tall', 'dome': '7.9 in (200 mm) across', 'orb': '7.4 in (187 mm) tall', 'turntable': '17.7 in (450 mm) wide'}
 
 
 def fix_7(p, web):
