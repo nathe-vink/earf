@@ -247,6 +247,9 @@ def _life():
     ]
 
 
+WATER = 0.06                                    # the water's height in the 92 mm glass (the A critics, round 2: it read empty)
+
+
 def _side_table():
     """The side table, a book (cloth boards) and a rocks glass of water on it."""
     x, y, _ = SIDE; T = SIDE_TOP
@@ -254,7 +257,7 @@ def _side_table():
     return [{'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'res': '2k', 'position': [x, y, 0.0], 'rotate': [0, 0, 0.0]},
             *_book(x + 0.1, y + 0.07, T + 0.0005, 14.0),
             LB.lathe(LB.shell(RK, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#F8F8F6', 64),
-            LB.lathe(LB.contents(RK, 0.06, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#EEF3F4', 64)]
+            LB.lathe(LB.contents(RK, WATER, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#EEF3F4', 64)]
 
 
 def _book(x, y, z, rz, w=0.155, d=0.235, h=0.028, cloth='#4F6253'):
