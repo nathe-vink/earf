@@ -123,6 +123,41 @@ equipment 0, from the masks and from `reaudit.py`.
   - A and B were rendered with that window's own engine bars, 30 mm; C's are 22 mm, in the same places. Their sun
     shadows in A and B differ only by that width.
 
+## The Ember finals again: one light model (2026-11-20, evening)
+
+C (`living-c-ember.png`) and A (`living-a-ember.png`) were rendered again. The first finals are kept as
+`living-c-ember-v1.png` and `living-a-ember-v1.png`.
+
+- **One light model:** refractive and reflective caustics on. The acrylics' glass-shadow shortcut (a shadow ray switched
+  to a transparent surface) is cut in all 22 materials that carry it, by the set piece `no_glass_shadows`. With both on,
+  the light through the acrylic was counted twice (about +7 L*).
+- **Toe-in 15.5 degrees,** aimed at the seat: at 6 degrees the cabinets' inner sides mirrored the window white.
+- **The credenza is 1.8 m,** and the sofa's back crosses the foot of A in place of the lounge chair.
+- **Mantle** is the Mantle lane's asset at 66ccac7890 (its polished deck), with plain dark sleeves leaning behind it.
+- **C:** the Core is out of the sun, the window behind it. Switched off, its ball reads L* 39.3, C* 60.5, hue 39
+  (median); 92 % of it is over chroma 40. The book shows its cream page block.
+- **A:** two bands joined by `living/bands.py` over 64 rows (mean difference 0.67/255); 256 samples; 33 + 32 minutes.
+  The masks were made afterwards with `--masks-only` from the same shot file.
+
+Measured on A by `living/lstar.py` (CIELAB, D65), boxes in pixels of the 2400 x 1600 frame:
+
+| | L* | C* |
+|---|---|---|
+| cabinet above the woofer, left / right (y 880 to 930) | 32.1 / 29.8 | 64.2 / 62.9 |
+| cabinet below the woofer, left / right (y 1180 to 1220) | 32.1 / 28.6 | 46.7 / 44.1 |
+| horn, left / right (its outer edge) | 49.4 / 35.0 | 72.1 / 69.2 |
+| the Core, off | 35.5 | 48.0 |
+| Mantle's deck top, left / right of the platter | 36.2 / 54.3 | 15.3 / 7.6 |
+| Mantle's deck front edge | 26.3 | 6.0 |
+| the wall behind | 75.3 | 9.6 |
+
+- **The deck does not read as Ember.** Polished, it mirrors what stands behind and above it: the dark sleeves and the
+  pale wall. Red shows only at its far left; the rest reads near black or grey (chroma 6 to 15, against the cabinets'
+  44 to 64).
+- **Emitters:** the sky and its sun only, through the windows. No lamp, card or fill. The Core's lamp is removed
+  (`cores_off`), and the window in frame has no portal (`no_portal`).
+- **Audit:** hidden 0, equipment 0 on A and C, from the masks and from `reaudit.py`.
+
 ## Sources of the room's scanned and photographed pieces
 
 All from Poly Haven (polyhaven.com), CC0: public domain, free for commercial use, no attribution required. They are
