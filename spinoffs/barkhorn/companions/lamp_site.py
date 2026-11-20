@@ -439,7 +439,8 @@ def build(frame, samples, scale):
         def revolve(nm, prof, mat, flip=False, off=0.0):
             # a turned surface: the (r, z) profile in mm (material on its left as it is walked) spun about the axis,
             # its normals outward (flip: inward), the profile moved in by `off` mm
-            bm = bmesh.new(); n_ = 192
+            # REV_SEG (2026-11-20, the coordinator: the facet lines on the base in the lit Core): 768 segments, render only
+            bm = bmesh.new(); n_ = int(os.environ.get('REV_SEG', '768'))
             pr = [(max(r_ - off, 0.1), z_) for r_, z_ in prof]
             rings = [[bm.verts.new((r_ * MM * math.cos(2 * math.pi * k / n_), r_ * MM * math.sin(2 * math.pi * k / n_), z_ * MM))
                       for k in range(n_)] for r_, z_ in pr]
