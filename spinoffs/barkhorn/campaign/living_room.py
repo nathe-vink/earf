@@ -268,8 +268,12 @@ def living_b(tint='ember', size=(1600, 2000)):
     s = base(tint, size)
     s['title'] = f'Living room by day: Mantle on the console ({tint})'
     s['set']['props'].append(_sleeve_plain())
-    tgt = [MANTLE[0] + 0.06, MANTLE[1], TOP + 0.09]
-    s['camera'] = {'position': [0.35, 0.45, 1.02], 'target': tgt, 'lens_mm': 55.0, 'level': True, 'fstop': 5.6, 'focus': tgt}
+    for pr in s['set']['props']:                        # (test 2: the Core half cut by the right edge: 15 cm right, out of frame)
+        if pr.get('fn') == 'cores_off':
+            pr['cores'] = [{**pr['cores'][0], 'x': CORE[0] + 0.15}]
+    # (test: Mantle's origin is not its middle; at x +0.06 it ran 130 px past the right edge: aimed 0.19 m right, wider)
+    tgt = [MANTLE[0] + 0.25, MANTLE[1], TOP + 0.09]
+    s['camera'] = {'position': [0.5, 0.3, 1.02], 'target': tgt, 'lens_mm': 48.0, 'level': True, 'fstop': 5.6, 'focus': tgt}
     return s
 
 
@@ -286,6 +290,15 @@ def living_c(tint='ember', size=(1600, 2000)):
     return s
 
 
+FINAL = dict(samples=256, adaptive=0.005)     # (the coordinator, 12:30: crisp insides; a crop at 128 and 384 both crisp)
+
+
+def _final(f):
+    def g(tint='ember'):
+        s = f(tint); s['render'].update(FINAL); return s
+    return g
+
+
 def _small(f, size):
     def g(tint='ember'):
         s = f(tint, size); s['render'].update(samples=48, adaptive=0.02); return s
@@ -298,7 +311,7 @@ def proof_a(tint='ember'):
     return s
 
 
-SHOTS = {'living-a-proof': proof_a, 'living-a': living_a, 'living-b': living_b, 'living-c': living_c,
+SHOTS = {'living-a-proof': proof_a, 'living-a': _final(living_a), 'living-b': _final(living_b), 'living-c': _final(living_c),
          'living-b-test': _small(living_b, (800, 1000)), 'living-c-test': _small(living_c, (800, 1000))}
 
 if __name__ == '__main__':
