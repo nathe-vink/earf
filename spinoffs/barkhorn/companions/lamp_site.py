@@ -435,7 +435,7 @@ def build(frame, samples, scale):
                 ld_ = float(os.environ.get('CORE_LOAD', core_load(tint)))
                 # BASE_LIFT mm (2026-11-20, a test): the skin's foot that far off the floor, so its bottom face is not
                 # coplanar with the sweep (Cycles kills a ray between two coplanar faces: the foot read black)
-                lift_ = float(os.environ.get('BASE_LIFT', '0'))
+                lift_ = float(os.environ.get('BASE_LIFT', '0.2'))   # 0.2 the default since 2026-11-20 (the coordinator accepted it)
                 if lift_:
                     lo_ = [(r_, max(z_, lo_[0][1] + lift_)) for r_, z_ in lo_]
                 sk = acrylic(f'base-skin-{tint}', 0.55, tname, ld_)        # satin outside: a fine bead-blast, as rough glass
@@ -968,6 +968,35 @@ def build(frame, samples, scale):
         lo2_.light_linking.receiver_collection = col_
         for co_ in col_.collection_objects:
             co_.light_linking.link_state = 'EXCLUDE'
+    # PRODUCT_MASK path (2026-11-20, the off-colour study): instead of the frame, a mask of the product (white) on the set
+    # (black), one sample, same camera; for measuring a whole body (Fog, Smoke) where chroma cannot find it
+    if os.environ.get('PRODUCT_MASK'):
+        wm_ = bpy.data.materials.new('mask-white'); wm_.use_nodes = True; nt_ = wm_.node_tree; nt_.nodes.clear()
+        em_ = nt_.nodes.new('ShaderNodeEmission'); em_.inputs['Strength'].default_value = 1.0
+        nt_.links.new(em_.outputs[0], nt_.nodes.new('ShaderNodeOutputMaterial').inputs['Surface'])
+        # MASK_ONLY 'prefix,...': only those objects white; the rest of the product black (it still hides what is behind it)
+        blk_m_ = bpy.data.materials.new('mask-black'); blk_m_.use_nodes = True; nb_ = blk_m_.node_tree; nb_.nodes.clear()
+        nb_.links.new(nb_.nodes.new('ShaderNodeHoldout').outputs[0], nb_.nodes.new('ShaderNodeOutputMaterial').inputs['Surface'])
+        for o_ in bpy.data.objects:
+            if o_.type == 'MESH':
+                if o_.name.startswith('sweep') or o_.data.name.startswith('sweep'):
+                    o_.hide_render = True
+                else:
+                    only_ = [q_ for q_ in os.environ.get('MASK_ONLY', '').split(',') if q_]
+                    keep_ = not only_ or any(o_.name.startswith(q_) for q_ in only_)
+                    print('MASKOBJ', o_.name, keep_)
+                    o_.data.materials.clear(); o_.data.materials.append(wm_ if keep_ else blk_m_)
+            elif o_.type == 'LIGHT':
+                o_.hide_render = True
+        if sc.world:
+            for n_ in sc.world.node_tree.nodes:
+                if n_.type == 'BACKGROUND':
+                    n_.inputs['Strength'].default_value = 0.0
+        sc.cycles.samples = 1; sc.cycles.use_denoising = False; sc.cycles.max_bounces = 0
+        sc.view_settings.view_transform = 'Standard'; sc.view_settings.look = 'None'; sc.view_settings.exposure = 0.0
+        sc.render.filter_size = 0.01
+        sc.render.filepath = os.environ['PRODUCT_MASK']; bpy.ops.render.render(write_still=True)
+        return
     if os.environ.get('DIAG_BLACK'):
         blk_ = SC.principled('diag-black', '#000000', 1.0)
         for p_ in os.environ['DIAG_BLACK'].split(','):
