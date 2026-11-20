@@ -3690,6 +3690,35 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    (A 2400 x 1600, B and C 1600 x 2000) with three notes: depth of color (cabinet chroma 44 in the proof against 80
    in the studio at the same L*), crisp insides (the denoiser smears the woofer rings at 48 samples), B and C as
    ordered (Core off by day). The other seven tints wait for the owner's yes.
+   20 Nov 12:57 UTC, THE CRITICS ON BUILD 1B ARE BACK (workflow wf_dc100ef5-8cd, two critics, 50 minutes; result in the
+   scratchpad at gate/1B/result.json): 30 findings, 5 marked blocking. I RE-TESTED EACH ON BUILD 2 (b9132b4c8a) with
+   gate/recheck.js. STILL TRUE AND SENT TO THE SITE LANE 12:56 AS "MUST BEFORE ANYTHING GOES LIVE":
+   (1) after a place tile the page is at /#speaker-<tint>/out and "Copy link" copies /s/speaker-<tint>/out, which
+   answers 404 (confirmed by me: HTTP 404); (2) the pill "Shown in Ember" on Hemisphere's bar picture in five tints
+   is untrue (the picture shows Acid, Ember and Dust) and on Core, Mantle and Tropos it only repeats the names row:
+   no pill on a view that has a names row; (3) the two paragraphs I had ordered moved (Core's "About five hours a
+   charge ...", Mantle's "Its tinted plinth is raised ...") repeat their page's line, facts and picture: removed by
+   the owner's rule; (4) a fact was lost: live /lighting's "Every shade comes off by hand." is on no page: back
+   into the Core's Balls row; (5) seven Core pages carry the other bar picture's alt text.
+   ALREADY RIGHT IN BUILD 2: Fog rows say clear; the Mantle Fog paragraph said clear; the "Shown in" pill is in
+   sight at 1366 x 768; the particulars line and the "Pair it with" line are gone.
+   SENT AS NEXT: the names row directly under its picture, never breaking inside a name; "; lined in white" out
+   of the Cabinet row; /lighting tiles get their lamp's picture and the names row in sight; lamp rows of eight as
+   two rows of four on a phone; arrows off the Mantle; a row click goes to the top of that tint's page; small
+   things (capitals in "Drag to turn", one form of "Shown in Ember.", the 404 page's links, /#mantle).
+   THE FIRST OF THE FOUR 1A CRITICS (words) IS BACK TOO (1 blocking, 13 next, 6 notes; gate/1A/result-first.json).
+   Most of it is overtaken by Builds 1B and 2. Still to verify on the newest build and send: description tags of
+   /lighting and /mantle without "Made to order."; the structured-data descriptions of 24 share pages keeping the
+   old lines (mood line, "Tropos 01", the removed Core and Hemisphere lines); "How it lights" rewritten, not cut
+   ("Twenty-four LEDs, all facing away from you ..." has no verb; by removal alone: "Twenty-four LEDs face away
+   from you, so there's no bright point to look into."); "(modeled)" beside the one caveat; "See Hemisphere"
+   breaking onto two lines at 320 to 360 and 761 to 800 px; an orphan last word under the name on about a quarter
+   of the pages; two kind words for the Tropos ("horn speaker" and "horn loudspeaker"); the turning picture
+   labeled "Ember's horn" on all eight tints; old /s/color-<tint> tags.
+   SITE BUILD 3 is on r49 (e75f1a3bab, 12:51, "with the coordinator's notes on Build 2"); its report has not
+   reached me yet. LAMPS LANE: batch 1a (12 frames) still rendering since 11:56; ON factors declared in its script:
+   Hemisphere 0.35 (the studio up 2.9 times, the exposure down 1.5 EV), Core 2. MANTLE LANE settled its power line
+   (289d958888: the phono stage runs on its own 18 V adapter). SPEAKER LANE is rendering the Ember finals.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
