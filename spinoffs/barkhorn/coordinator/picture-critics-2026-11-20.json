@@ -1,0 +1,319 @@
+{
+ "results": [
+  {
+   "part": "mantle",
+   "found": {
+    "findings": [
+     {
+      "id": "M-1",
+      "severity": "blocking",
+      "files": "mantle-house-fog-top.png",
+      "where": "whole plinth 164,492 to 1435,1509; clearest along the front margin 500,1430 to 1000,1490, the left margin 185,900 to 245,1100 and the base seen through it 290,630 to 1310,1390",
+      "what": "From above the clear plinth reads as a sheet of gray frosted glass, not as clear acrylic. The floor seen through it just inside the front edge measures L* 60.7; the open floor just outside that edge is 89.9 (left edge: 69.5 inside, 79.0 outside). The base under it is only a soft dark cloud, its edge spread over 15 to 20 px. Behind the deck lies a solid shadow of L* 57.0, to the decimal the same as behind the Smoke deck (57.0) and the Ember deck (57.0).",
+      "expected": "Clear 25 mm cast acrylic with polished faces passes about nine tenths of the light. From above the floor under the 35 mm overhang is nearly as bright as the floor beside it, the plinth is drawn mainly by its satin edge and bevel, the base shows with a firm edge, and the shadow behind is the base's, platter's and arm's, lighter than a black deck's. That is how Fog reads in the Tropos front (front-fog.png: clear, things inside sharp).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-top-BL.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-top-BR.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-top-shadow.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/colors-geometry.txt"
+     },
+     {
+      "id": "M-2",
+      "severity": "fix",
+      "files": "all eight mantle-house-<tint>-top.png and all eight mantle-house-<tint>-cover.png",
+      "where": "top view: shadow behind the deck 300,300 to 1270,492 and all floor outside 164,492 to 1435,1509; cover view: shadow right of the deck 1440,960 to 1560,1060",
+      "what": "Shadow and floor do not change with the tint. Top view: shadow L* 57.0 to 57.1, a* +0.2 in all eight; Ember against Fog outside the plinth differs by 0.10 dE on average (grain level); the difference map between two tints is a hard-edged rectangle, exactly the plinth. Cover view: the shadow right of the deck is 90.2 to 90.4 under the clear Fog cover, the gray Smoke cover and the red Ember cover alike (94.1 with the cover off), so a clear cover darkens the floor as much as a smoked one.",
+      "expected": "Light that passes a red plinth or cover lands red on the floor; a clear cover casts next to no shadow and a smoked one a gray shadow; the shadow of a clear deck is lighter than a black deck's. For the record: the Tropos fronts are the same (bottom-right 89.8, 90.0, 89.8 in Ember, Fog, Smoke), so this is the house treatment and does not stick out beside them, but it is not what a photograph would show. It tells most from above, where the shadow is a main shape in the frame.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-diffs.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-top-shadow.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/ground-patches-by-tint.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/colors-geometry.txt"
+     },
+     {
+      "id": "M-3",
+      "severity": "fix",
+      "files": "all eight mantle-house-<tint>-top.png",
+      "where": "base seen through the plinth 290,630 to 1310,1390 (its corner near 1305,1387); phono box 985,590 to 1290,830",
+      "what": "Everything below the plinth is blurred as through a frosted face: the base's edge spreads over 15 to 20 px (5 to 7 mm), the phono box is a dark cloud, and I could not find the four posts at all. Parts that sit on or in the plinth (black disc at back left, arm base) are crisp.",
+      "expected": "The facts give satin for the edges only. With polished faces the base, the four 30 mm posts, the motor and the phono box would show with firm edges from above in every tint but the darkest. If the underside is meant to be satin, the facts should say so; as rendered the picture shows another material than 'cast acrylic, edges satin'.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-top-BR.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/ember-top-BR.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-top-BL.png"
+     },
+     {
+      "id": "M-4",
+      "severity": "fix",
+      "files": "all eight mantle-house-<tint>-top.png; same pose in the -cover.png pictures and in the cover-off pictures already on the site",
+      "where": "top view 1030,1230 to 1165,1355; three-quarter view 840,955 to 940,1010",
+      "what": "The arm is on its rest, yet the headshell lies edge to edge with the record. In plan the headshell plate's edge follows the record's rim within about 5 px (under 2 mm; rim = circle of radius 434 px about the spindle at 727,1033), the black body under it reaches about 10 mm over the rim and the finger lift about 20 mm. In the three-quarter picture the cartridge hangs directly against the platter's side.",
+      "expected": "A parked RB330 leaves the cartridge clear of a 12 in record by a couple of centimeters, so a record can be put on and lifted off; or the arm is shown on purpose over the lead-in groove. As posed a record could not come off without touching the cartridge.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-top-headshell.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-off-headshell.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/ember-top-BR.png"
+     },
+     {
+      "id": "M-5",
+      "severity": "fix",
+      "files": "mantle-house-fog-cover.png",
+      "where": "cover's top front edge 140,785 to 430,850; cover's right corner 1410,730 to 1428,935; plinth top edge at the right 1300,935 to 1420,1010",
+      "what": "The clear cover's top front edge and its right corner are drawn as a row of light and dark dashes and smudges instead of one edge; a row of dark dashes also runs along the plinth's top edge at the right. Visible at full size, a slightly dotted line at site size.",
+      "expected": "A polished 3 mm edge is one continuous line of light that changes in long runs as it passes different backgrounds, as the same cover shows where its edge crosses the arm (1080,880 to 1380,980).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-topedge-4x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-right-4x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-topedge2-4x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-cover-arm.png"
+     },
+     {
+      "id": "M-6",
+      "severity": "fix",
+      "files": "mantle-house-fog-cover.png (strongest); the same line shows faintly in the other seven -cover.png (seen in Ember as a lighter line); it is also in the cover-off Fog picture already on the site",
+      "where": "line 160,1026 to 218,1054; speck at 185,1016",
+      "what": "Inside the plinth's white satin front edge at the left corner: a thin dark line about 60 px long with a small hook at its lower end, and a dark speck of 1 to 2 px above it. It reads as a hairline crack or a scratch in the block.",
+      "expected": "A satin edge shows nothing sharp from inside the block. If the line is a true edge of the model seen by reflection it would be soft; the speck should not be there.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-speck-8x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-off-speck-8x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-left-4x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/ember-cover-left-4x.png"
+     },
+     {
+      "id": "M-7",
+      "severity": "fix",
+      "files": "mantle-house-ice-top.png and mantle-house-dust-top.png, against the three-quarter pictures of the same tints (b28 mantle-house-ice.png, mantle-house-dust.png and the -cover.png)",
+      "where": "top view plinth margins 185,900 to 245,1100 and 500,1430 to 1000,1490; three-quarter view front face 590,1122 to 610,1148 and the lit left part of the top 230,968 to 300,992",
+      "what": "The plinth changes color between the two views. Ice from above is a pale sky blue (L* 55, C* 27, hue 251; front margin C* 17, hue 246); in three-quarter it is royal blue toward violet (front face L* 18, C* 73, hue 304; lit top hue 273). Dust from above is orange-tan (hue 68 to 69, C* 32 to 53); in three-quarter it is red-orange (front face hue 37, C* 72; lit top hue 49). The other tints hold their hue within about 10 degrees (Ember 39 above / 31, Acid 102 / 104, Poison 140 / 140, Haze 314 / 306).",
+      "expected": "A visitor who flips from picture 1 to the from-above picture sees one color. Tint may deepen with the path through it, but a swing of 50 degrees in Ice and 20 to 30 in Dust reads as two products; from above Ice is also the palest of the set (C* 17 to 27), against the owner's 'deep color'.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-top-TR.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-cover-near.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/colors-geometry.txt"
+     },
+     {
+      "id": "M-8",
+      "severity": "fix",
+      "files": "mantle-house-dust-cover.png, mantle-house-ice-cover.png",
+      "where": "cover faces 180,840 to 260,960 and 1300,800 to 1400,900 against the plinth's faces 590,1122 to 610,1148 and 1230,1110 to 1260,1130",
+      "what": "In these two the stronger cover does not read as the deck's color. Dust: an apricot-tan box (hue 72 to 73, C* 24 to 34) with bright red edge lines on a red-orange slab (hue 32 to 37, C* 48 to 73). Ice: a pale sky-blue box (hue 239 to 245, C* 13 to 20) on a royal-blue slab (hue 296 to 304, C* 43 to 74). The other two stronger covers are in family: Acid cover hue 103 to 104 against plinth 80 to 104; Smoke a neutral gray sheet (L* 51 to 67) on a black deck. Own-sheet covers stay near the deck (Ember 23 against 31 to 39, Poison 145 against 140, Haze 320 against 298 to 314).",
+      "expected": "The stronger sheet reads as the deck's own color in a thin sheet, within some 20 degrees of hue as in the other six.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-cover-near.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-cover-left.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-cover-arm.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/colors-geometry.txt"
+     },
+     {
+      "id": "M-9",
+      "severity": "fix",
+      "files": "all eight mantle-house-<tint>-cover.png (looked at 4x in Ember and Fog, at 1x in the other six)",
+      "where": "the three visible bottom corners of the cover: 140,985 to 200,1015; 1050,1205 to 1095,1235; 1395,925 to 1430,950",
+      "what": "No bumper can be seen at any visible corner, not even under the clear Fog cover. The cover's bottom edge meets the plinth's top edge with a hairline at most: about 2 px at the left and near corners, about 5 px at the right corner. The cover does rest on the plinth; it neither floats nor cuts in.",
+      "expected": "Four small clear bumpers under the cover's corners and the even gap of their height all around (a 2 mm gap is about 4 px at this scale). If they are in the model they do not show.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-left-4x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-near-4x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-right-4x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/ember-cover-near-4x.png"
+     },
+     {
+      "id": "M-10",
+      "severity": "note",
+      "files": "all sixteen",
+      "where": "whole frame; measured on flat ground at 700,80 to 860,240 and 700,1750 to 860,1910",
+      "what": "Grain is about twice the Tropos fronts': fine-detail spread of L* 0.60 against 0.30 to 0.39, both at 1000 x 1250. The grain is one fixed plate laid over every picture (correlation 0.995 to 0.998 between Ember cover, Fog cover, Ember from above and the cover-off picture), so nothing flickers from tint to tint. The cover-off pictures already on the site carry the same grain.",
+      "expected": "The same grain strength as the Tropos fronts if the two are to sit on one page.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/colors-geometry.txt"
+     },
+     {
+      "id": "M-11",
+      "severity": "note",
+      "files": "all sixteen (ground test)",
+      "where": "the coordinator's seven patches",
+      "what": "Ground corners are the same in all eight tints of each view to 0.1 L*. Against front-ember.png: cover view top-left +0.4, top-right -0.4, low-left -2.0, bottom-left -1.0, bottom-right -2.7. From above top-right +1.9, bottom-left -0.4, bottom-right -1.4, low-left -3.8 (beyond the 3 L* line; not on the known list), top-left +11.1 (known). The test's verdict lines read 'outside 3 L*' for every Mantle picture only because the mid-left and mid-right patches fall on the deck and its shadow, not on ground.",
+      "expected": "No change needed except a look at the low-left of the from-above floor (93.2 against 97.1).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/ground-cover.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/ground-top.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/ground-patches-by-tint.txt"
+     },
+     {
+      "id": "M-12",
+      "severity": "note",
+      "files": "all eight mantle-house-<tint>-top.png",
+      "where": "1010,540 to 1230,625",
+      "what": "My reading of the known bright marks: three pairs, each an upper and a lower blob, in a row at the back edge of the dark phono box, 20 to 45 mm in from the plinth's back edge and astride the base's back edge. They are white in Fog and Smoke and take the tint elsewhere, so the things themselves are neutral and bright. They look like the two RCA sockets and the earth post in bright metal, each with its mirror image in the glossy base, blurred by the plinth. I cannot prove it from the pictures.",
+      "expected": "If so, they are true parts; they would read as sockets if the plinth showed them sharply (see M-3) or would not glow if the hardware is satin black as the facts say.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-top-TR.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/ember-top-TR.png"
+     },
+     {
+      "id": "M-13",
+      "severity": "note",
+      "files": "all eight mantle-house-<tint>-top.png; cover-off pictures for comparison",
+      "where": "top view 220,545 to 472,797; cover-off view 590,775 to 680,805",
+      "what": "The round black part at back left is a flat black disc 253 px (90 mm) across, flush with the plinth's top and with a thin lit rim, carrying a raised cap 38 mm across (the pulley's cover) from which two thin lines, the belt, run to the platter's rim. It is in the cover-off picture too: the cap stands behind the platter there and the disc shows as dark slivers beside it. The two views agree. The facts say the motor is fixed beneath the plinth; the disc reads as a motor plate let into the top or a bore through the plinth, I cannot tell which.",
+      "expected": "No change if the plinth has that opening; the facts could name it.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/ember-top-TL.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-top-TL.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-off-pulley.png"
+     },
+     {
+      "id": "M-14",
+      "severity": "note",
+      "files": "all sixteen",
+      "where": "top view 1215,690 to 1300,775; cover view 1180,945 to 1240,985",
+      "what": "The collar at the foot of the arm is a flat bright white: a white ring from above, a white crescent in three-quarter. It is the one piece of hardware that is not satin black, and from above it reads as a white plastic washer more than as polished metal.",
+      "expected": "Satin black like the rest, or metal with a graded highlight.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-top-TR.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/ember-cover-arm.png"
+     },
+     {
+      "id": "M-15",
+      "severity": "note",
+      "files": "all eight mantle-house-<tint>-cover.png; also in the cover-off pictures",
+      "where": "about 455,1085 and 795,1165 (each some 60 x 20 px), just under the plinth's top front edge",
+      "what": "Two dark lens-shaped marks with a small highlight, about a third and two thirds along the front. In Fog they look like round black tops seen through the block, most likely two of the posts; in the dark tints they look like dents in the edge.",
+      "expected": "Nothing to change if they are the posts; worth knowing because they read as dents in Ember, Poison, Haze and Smoke.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/fog-cover-lensmark-6x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/mantle/c/S-cover-base.png"
+     }
+    ],
+    "examined_and_right": [
+     "From above, camera: plinth outline is x 164 to 1434.5, y 492 to 1508.5 = 1271 x 1017 px, ratio 1.250 (450:360); edges straight within 1 px; center 799.3,1000.2 in a 1600 x 2000 frame. Square and centered, the same in Ember, Ice and Smoke.",
+     "From above, record and platter: record is 866 to 868 px across (about 302 mm once its height above the plinth is allowed for), the platter hidden under it as a 300 mm platter should be; grooves and sheen read as vinyl.",
+     "Cover, seating and size (Ember and Fog at 4x, the rest at 1x): bottom corners meet the plinth's corners within 1 to 2 px at the left, near and right corners, so the footprint is nearly flush as 448 x 358 on 450 x 360; height reads as about 99 mm at the left corner; edge lines 3 to 5 px, right for a 3 mm sheet.",
+     "Cover, look through it: arm, counterweight and record are veiled to gray by the sheet's reflection of the white set, the counterweight sits inside the box, the far vertical corner and faint mirror images of platter and pulley show in the far walls. Reads as a real acrylic box in all eight.",
+     "Set consistency: in both views nothing outside the product moves between tints; ground corners agree to 0.1 L*; framing identical.",
+     "Ground against the Tropos front, cover view: all true ground patches within 3 L* (largest -2.7 at bottom-right), a* about -0.6, b* 3.1 to 5.7.",
+     "Smoke, both views: cover is a neutral gray clear sheet over a black deck with a light wedge where the floor shows through the plinth; from above the plinth is a translucent gray (L* 40 to 43 over the floor, 18 over the base). Reads as dark translucent acrylic, not black plastic, and agrees with the gray horn of the Tropos Smoke front.",
+     "Fog cover (the cover itself): reads as clear acrylic, light edges, no gray cast (faces a* -0.5, b* +4.7, the ground's own tone).",
+     "Ember, Acid, Poison, Haze covers: cover and deck read as one family.",
+     "No seams, no stray bright pixels: the isolated-pixel scan of all sixteen hits only thin edge lines; column and row gradients show no step.",
+     "Edges of plinth and base under the deck are straight (checked against the cover-off Ember picture at 3x)."
+    ],
+    "not_judged": [
+     "I did not go over every one of the sixteen frames whole at full size in the time. Ember and Fog were cut and read in detail in both views; the other six tints were read through same-crop sheets at 1x (cover: left corner, near corner, arm, base, top face; from above: back left, back right, front right, shadow) and through the measurements.",
+     "The speed button: I could not find one in either view.",
+     "The four posts from above: not found; the front two would lie under the record and headshell.",
+     "The cover's back corner and any bumper there: hidden in this view. The cover's footprint from above: the from-above pictures show the deck without its cover.",
+     "Whether the plinth's underside is meant to be satin (M-3) and whether the black disc is a bore or a plate (M-13): the facts do not say.",
+     "Colors against a physical chip or the lamps: judged only against each other and by eye against the three Tropos fronts (Ember, Fog, Smoke).",
+     "The record label's words (known, not reported).",
+     "Low front, arm close-up and back pictures: not in this batch."
+    ]
+   }
+  },
+  {
+   "part": "lamps",
+   "found": {
+    "findings": [
+     {
+      "id": "L-1",
+      "severity": "blocking",
+      "files": "hemisphere-ember-on.png, core-ember-on.png",
+      "where": "hemisphere-ember-on.png: whole floor (0,1450)-(1600,2000), darker spot (650,1560)-(1000,1700). core-ember-on.png: floor (0,1450)-(1600,2000)",
+      "what": "With the lamp on, the floor turns peach and gets DARKER than the same pixel in the OFF picture, though the studio light on the ground is the same in both (top-left patch L* 83.0 off, 83.2 on; same framing). Pendant: (800,1900) 247,243,237 -> 251,211,190 = L* 96.0 -> 87.3; (100,1900) 248,246,240 -> 251,228,216; (200,1700) L* 96.6 -> 88.3. The place right under the lamp (800,1640), where its light is strongest, is the darkest part of the pool, L* 82.3: that spot is the lamp's own shadow from the studio lights (L* 42 in OFF) filled in by the lamp. That answers the darker orange spot. Coordinator's ground test against front-ember: pendant low-left -7.1 L*, a* +7.9, b* +12.4, bot-left -3.1; Core low-left -4.0, a* +5.7 (limit 3 L*, a* 0, b* 3.5-5.3). Cause as the pixels show it: red stays pinned at 251 over the whole floor while green and blue fall (243->211, 237->190), so the output curve holds the hue and scales all three channels by the top one; added warm light then comes out as a darker, more saturated color. The balance itself is possible in a studio (lights dimmed, long exposure); the way the over-range light is drawn is not what a camera does.",
+      "expected": "Light only adds. In a photograph exposed for this ground, the floor under a lit lamp stays white or clips whiter (at most a faint warm lift), and the spot under a lamp hanging a few centimeters up is the brightest place in the frame, not the darkest. On a ground held at L* 93-97 the pool cannot truthfully show: a lit picture that shows it needs the studio lights taken down two or three stops, which is a darker ground. Until then use the OFF pictures on the house ground, and keep every ground within 3 L* of the Tropos front.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/floor-off-above-on-below.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-on-floor.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-on-floor-stretch.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     },
+     {
+      "id": "L-2",
+      "severity": "blocking",
+      "files": "hemisphere-ember-on.png (and numbers added to (b) for core-ember-on.png)",
+      "where": "hemisphere-ember-on.png: lit shade (430,1090)-(1200,1470). core-ember-on.png: lit ball (470,720)-(1170,1380)",
+      "what": "The lit shade is pale pink, not Ember. Lit dome 251,192,192 (L* 82.8, chroma 23), its upper part 251,206,206 (chroma 17); lit ball 251,195,195 (L* 83.6, chroma 21). On the site today, on the dark ground, the lit dome is 253,150,141 (L* 72.6, chroma 44, toward coral) and the lit ball 222,76,64 (L* 53, chroma 68). In the new pictures green equals blue exactly: pure red plus white, the mark of an over-range value washed toward white, not of light. It reads as rose beside the deep red Tropos (front 135,6,9) and as another color than the same lamp OFF (153,0,0). The audit shows the pendant's lamp already cut to 0.35 and it still sits on the ceiling (red = 251 across the whole lit area): above a ground this bright there is no room left for a glow.",
+      "expected": "A lit Ember shade stays red to red-orange, chroma 45 or more, lighter at the hot zone and deeper at the edges, as in today's site pictures.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-on-dome.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-on-ball.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/lit-swatches-newdome-sitedome-newball-siteball.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/site-dark-sheet.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     },
+     {
+      "id": "L-3",
+      "severity": "blocking",
+      "files": "core-ember-off.png, core-ember-on.png",
+      "where": "(1095,1370)-(1165,1412) in both files, right of where the ball meets the base",
+      "what": "A short black rod with a rounded end, about 30 px long and 7 px thick, leans out at 45 degrees from behind the lamp. It has its own soft shadow on the floor beside it, about (1135,1395)-(1165,1412), so it is a solid thing standing on or near the floor behind the lamp. The audit files list nothing hidden. I could not tell what it is. On a cordless lamp it reads as the end of a cord or a stray prop, and at site size it is a black tick on the white ground.",
+      "expected": "Nothing behind a cordless lamp. If it is a real part (a switch, a charging lead), it belongs in the design facts and must be shown so it can be read; otherwise take it out of the scene before the other colors are rendered.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-stub-8x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-thing.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-seat.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-on-seat.png"
+     },
+     {
+      "id": "L-4",
+      "severity": "blocking",
+      "files": "core-ember-off.png, core-ember-on.png",
+      "where": "whole lamp (417,681)-(1219,1783)",
+      "what": "By the picture the Core is about 200 mm tall, not 180. The ball is 804 px wide = 160 mm (5.03 px/mm). The foot is an ellipse 776 x 281 px (154 mm across; camera about 21 degrees down) centered at y 1642. The ball's center (y 1083) is 560 px above the foot's center, which is 119 mm above the floor, so the top of the ball is at 199 mm (give or take 5 for my reading of the camera angle). The parts agree with that: base about 60 mm tall, ball sunk about 20 mm into its seat. Height to ball is 1.25 in the picture; the facts give 180/160 = 1.125. The site's dark picture gives about 190 by the same method, measured more roughly.",
+      "expected": "With a 160 mm ball and 180 mm overall, the ball's center is 100 mm above the floor: the ball would sit about 20 mm (100 px) lower than shown. Either the model or the stated height is wrong. Settle it against the CAD before sixteen Core pictures and the size line go out.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-base-floor.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-ball.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/site-core-gamma.png"
+     },
+     {
+      "id": "L-5",
+      "severity": "fix",
+      "files": "hemisphere-ember-off.png, core-ember-off.png (the same shapes show faintly in both ON pictures)",
+      "where": "Dome: stacked pair (712,1147)-(912,1310), right panel (940,1035)-(1105,1320), left shape (545,1105)-(700,1280). Ball: pair (700,880)-(900,1010), right panel (850,800)-(1040,1050), left shape (590,885)-(720,1000)",
+      "what": "The bright shapes are mirror images of the set's own area lamps (the audit lists eight, hidden from the camera but not from reflections), so they are the lights that light the ground. Three things mark them as computer lamps. (1) Two of them overlap and the overlap is brighter than either: inner panel alone L* 60.6, larger panel alone 71.2, overlap 77.4, so each is seen through the other. (2) Each is one flat value from edge to edge (spread 1.3-2 levels) with razor edges: no falloff, no frame, no stand. (3) Around them there is nothing: surfaces that face the room read black (see L-9, L-10). They are the brightest marks on both lamps, the same four on each, and they will repeat on every lamp picture. This is the first fix I would make to the pattern.",
+      "expected": "Softboxes are opaque: the nearer one hides the farther, the overlap is never brighter. A reflected softbox is brightest in the middle and falls off to a dark rim. Use solid fixtures with falloff (one large soft source and a strip would do for objects this small), and give the set walls and a ceiling to reflect.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-refl.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-dome-top.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-ball.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     },
+     {
+      "id": "L-6",
+      "severity": "fix",
+      "files": "hemisphere-ember-off.png, hemisphere-ember-on.png",
+      "where": "floor patch (525,1500)-(1385,1745), darkest at (813,1608); rim center (817,1340)",
+      "what": "The red patch is the lamp's shadow (L* falls from 96.6 to 42) tinted red-brown (a* +16 to +19) by studio light that comes through the shade: a shadow and passed-through light together, which is right. Its place is the trouble. Its core is centered near (931,1595): only 114 px = 24 mm right of the lamp's axis and straight under the rim. That puts the rim roughly 55-85 mm above the floor, a third of the lamp's own width. A key 40 degrees up from camera left would throw the shadow about 1.2 times that height sideways (70-100 mm, 330-480 px). This shadow says the strongest light is nearly overhead, about 70 degrees up, unlike the Tropos front where the shadow runs off to the right.",
+      "expected": "A pendant hangs free. In a product picture it is shot well clear of any surface, so the shadow is out of frame or faint and displaced to the right as the key demands. A lamp hovering a hand's width over the floor reads as a floating bowl, and it is also why the lit picture floods the floor.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-floor.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/floor-off-above-on-below.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     },
+     {
+      "id": "L-7",
+      "severity": "fix",
+      "files": "hemisphere-ember-off.png",
+      "where": "(500,1433)-(1260,1506), under the front and right of the rim",
+      "what": "A band 4-5 px tall (about 1 mm) at L* 97 (250,247,238), as bright as open floor, runs between the red rim and the shadow (L* 57-72 right below it at x 817-1150). It is on the lamp, not the floor: the ON picture has it too (L* 93-96). The camera looks about 20 degrees down on the rim, so an edge that shows under the near rim must hang about 1 mm lower than the tinted shell: the opal diffuser's lip. The site's from-below picture shows a light line there too. So yes, it is the diffuser's edge catching the studio light. As drawn it is one even paper white all the way round, also on the side away from the key, with no thickness. At site size it reads as the halo of a cut-out.",
+      "expected": "If the diffuser really stands 1 mm proud, show it as an edge: opal, slightly gray, lighter toward the key and darker to the right. If the three layers end flush, no line shows from this angle. Check the CAD.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-rim-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-rim-left.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/site-rim.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     },
+     {
+      "id": "L-8",
+      "severity": "fix",
+      "files": "hemisphere-ember-off.png, hemisphere-ember-on.png",
+      "where": "cord (806,0)-(838,735); entry into the cap (770,728)-(870,745)",
+      "what": "The cord is 28-29 px wide against a 957 px shade: 6.0 mm, a believable size. But it is ruler straight, the same width from top to bottom, smooth and matte. No braid shows even at 12 times (a 6 mm braid has strands about 1 mm = 5 px wide). It enters the cap through a plain flat ring, with no cord grip. It reads as a rigid painted rod, not a cloth cord.",
+      "expected": "Cloth braid: a diagonal weave that shows at this size, a soft sheen on the key side, and a cord grip or collar where it enters the cap.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-cord-braid.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-cord-entry.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-cord-top.png"
+     },
+     {
+      "id": "L-9",
+      "severity": "fix",
+      "files": "hemisphere-ember-off.png, hemisphere-ember-on.png",
+      "where": "cap (540,738)-(1105,960)",
+      "what": "The cap's upright faces are L* 0.2-1.0 on the left and in the middle (rgb 1,1,0 to 3,2,2) and 9-18 only at the right; the top faces are L* 55. The key is at camera left and the cord shows it (L* 23 on its left, 12 on its right), but the cap is blackest on the key side. No step carries a sheen: a flat black cut-out with gray lids.",
+      "expected": "Satin black anodized aluminum in a white studio is charcoal, about L* 10-30, with a broad soft highlight down the key side of each step.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-cap.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     },
+     {
+      "id": "L-10",
+      "severity": "note",
+      "files": "core-ember-off.png, core-ember-on.png (cause for (c), already sent back)",
+      "where": "base (449,1440)-(1196,1783)",
+      "what": "The middle of the base at (820,1600) is 214,40,38; the ball's lower half at (820,1180) is 211,42,39. The base returns the ball at full strength. Its sides are neutral near-black (L* 10-20), and its foot at (820,1740) is L* 19.5 although the L* 97 floor is right beside it. That is the pattern of a blurred mirror: red where it faces the ball, black where it faces the empty space above and around the set. The pendant's cap behaves the same way (L-9). So the cause is a base material that reflects nearly everything, in a set with no room around it.",
+      "expected": "Black anodized aluminum returns a few percent: at most a faint red sheen under the ball, as on the site's dark picture where the base is 15,1,2.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-base-floor.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-seat.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/site-core-gamma.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     },
+     {
+      "id": "L-11",
+      "severity": "fix",
+      "files": "core-ember-off.png (also the cause of (a))",
+      "where": "ball (470,720)-(1170,1380); dark crescent (435,860)-(470,1130); line across the ball at about y 1125-1140",
+      "what": "Inside the shell the ball is one flat red: red 197-234, green and blue 0-7 (chroma 90), the same on the key side (216,2,2 at (520,1000)) as in the middle (210,1,2 at (820,1100)). There is no light side and no shade side. The lighter lower half (211,42,39) is the white floor mirrored in the gloss, and the line is the floor's far edge: right in principle, but it is the only modeling there is, and it is upside down for a key from above. The dark crescent at the left (43,0,0) is the shell's edge looking into black. The shell does show as a rim about 50 px wide, so shell over opal can be read, but the first read is a solid painted ball. This is also why the ball is lighter than the dome: the Core's opal fills its shell and throws the studio light straight back through the tint (L* 44-47), while the dome's shell stands in front of a dark hollow (L* 27-31).",
+      "expected": "An opal ball behind a red shell, lit from upper left: lighter at upper left and falling off to lower right, with visible depth between shell and opal.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-ball.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/c-off-left-edge.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     },
+     {
+      "id": "L-12",
+      "severity": "note",
+      "files": "hemisphere-ember-off.png, hemisphere-ember-on.png",
+      "where": "(600,1030)-(1060,1080), inside the dome just under the cap",
+      "what": "Two rows of fine dark dots, each 2-3 px, follow the curve. The design facts name nothing there, and the site's cutaway puts the LED ring at the bottom. At site size they are specks in a neat row. I could not tell what they are.",
+      "expected": "Say what they are (vents, fixings) or take them out.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-on-dots.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/h-off-dome-top.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/site-cutaway.png"
+     },
+     {
+      "id": "L-13",
+      "severity": "note",
+      "files": "row-off-ember.jpg, row-on-ember.jpg",
+      "where": "whole rows; lamp tiles at x 512-992 and 1008-1488 of the 2000 x 632 mock-ups",
+      "what": "The OFF row holds together as one family. Upper and middle ground are within 1.6 L* of the Tropos front; the dome (153,0,0, L* 31) sits with the cabinet front (L* 27.6) and the ball (L* 44-47) with the horn (L* 42.8). What still sets the lamps apart in it: no shadow at lower right (bot-right patch 96.5-96.6 against 89.8, +6.8 L*, outside the test; the Core's shadow is only 3-7 L* deep where the Tropos's and the Mantle's reach L* 75-77), the red Core base, and the bright rectangles. The ON row breaks into two pairs. What breaks it: peach floors under both lamps (a* +6 to +11 against -0.6), pink shades (chroma 21-23 against 62-87 on the Tropos), and the blotches under the Core.",
+      "expected": "Use the OFF row on the home page. Keep lit pictures for a frame where the studio is taken down.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b29/row-off-ember.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b29/row-on-ember.jpg ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/7/lamps/measurements.log"
+     }
+    ],
+    "examined_and_right": [
+     "No picture of the four is right as a whole: both ON pictures carry blocking faults, core-ember-off.png carries two (L-3, L-4), hemisphere-ember-off.png carries fixes only. The lines below are the parts I checked at full size and found right.",
+     "hemisphere-ember-off.png and core-ember-off.png, upper and middle ground against front-ember: top-left +1.4, top-right +0.2, mid-left +0.8/+0.9, mid-right -1.1 L*, a* 0 to +0.5, b* 4.4-5.4; left darker than right like the reference.",
+     "OFF and ON of each lamp share one framing (outlines agree within 1-5 px) and the upper ground of ON is within 0.2 L* of OFF.",
+     "Cord thickness: 6.0 mm against the 200 mm shade (28-29 px against 957 px).",
+     "Stepped cap: four steps, about 40, 81, 105 and 118 mm across, with small slots on the third step where a quarter-turn catch would be; same stack as the site's cap picture.",
+     "Core seat: the ball sits about 20 mm down in a dished seat; no gap and no part passing through another at full size.",
+     "Core shadow: there is one, faint, on the right, the side the key demands (L* 89.8 at (1300,1560) against 96.6 at (300,1560)), plus a thin contact line under the foot.",
+     "Pendant shadow color: the red-brown tint is right for studio light passing through the shade.",
+     "The edge inside the lit dome near its top, (520,1060)-(1115,1100): it is the top of the lit diffuser, curved like the cap's rim, and today's lit picture on the site has it too. True to the model.",
+     "Ember unlit reds are in family with the Tropos: dome 153,0,0 beside cabinet front 135,6,9; ball 210-222,1-7,2-7 beside horn 204,7,4; the same pure red (green and blue near 0) covers 6.4%, 3.8% and 6.8% of the frames.",
+     "Grain and ground texture: top-left ground of hemisphere-ember-off.png and the floor of hemisphere-ember-on.png, contrast-stretched: smooth, no banding, no blotches; grain 0.65-1.05 levels against 0.82-0.94 on the Tropos front.",
+     "Audit files for all four: 8 lights hidden from the camera, 0 in frame, nothing on the hidden list."
+    ],
+    "not_judged": [
+     "Only Ember was given. Fog, Smoke and the other five tints were not seen, so color from tint to tint is not judged.",
+     "What the black rod behind the Core is (L-3) and what the two rows of dots in the dome are (L-12): seen, not identified.",
+     "Whether the diffuser's lip stands 1 mm proud in the CAD (L-7) and which of the two Core heights is right (L-4): I measured the pictures only; I did not open the model.",
+     "The Core height carries my reading of the camera angle from the foot's ellipse (about 21 degrees); I took the ball as 160 mm. Error about plus or minus 5 mm.",
+     "The pendant's height above the floor (55-85 mm) is an estimate from the shadow's place; the lights' true positions are not known to me.",
+     "The true brightness of a 307 lm or 45 lm lamp against the studio lights in absolute terms: the output curve cannot be undone from the PNG, so I judged only what the pixels do (L-1, L-2).",
+     "Fireflies and single bright pixels were not searched for by script in all four files; I saw none in the crops I looked at. The grounds of core-ember-off.png and the floor of core-ember-on.png were measured, and the latter's blotches are already with the renderer.",
+     "The cap in hemisphere-ember-on.png and the Mantle picture were looked at whole, not in crops.",
+     "The row mock-ups are small JPEGs made by the coordinator; I judged the family read, not their pixels."
+    ]
+   }
+  }
+ ],
+ "dropped": 0
+}

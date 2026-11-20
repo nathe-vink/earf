@@ -3873,6 +3873,34 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    A PICTURE CRITIC PASS IS RUNNING (workflow wf_d7a18de8-073) on the Mantle cover and from-above sets and the four
    Ember lamp frames. (My brief to it calls the Core's base "satin black": wrong, see above; I discount what it
    says about that.)
+   20 Nov 15:13 UTC, THE PICTURE CRITICS RETURNED (15:10): THE NEW MANTLE SETS AND THE LAMP FRAMES GO BACK BEFORE ANY MORE TINTS.
+   Their whole result: coordinator/picture-critics-2026-11-20.json (28 entries). What I act on:
+   MANTLE (sent 15:11): the arm is parked with the cartridge on the record's edge (headshell within 2 mm of the rim
+   from above; in the live house pictures too); light does not pass the acrylic (the shadow behind the deck is
+   L* 57.0 in Fog, Smoke and Ember alike; a clear cover darkens the floor as much as a smoked one), which breaks the
+   Fog picture from above (the floor through the clear plinth 60.7 against 89.9 beside it: gray frosted glass);
+   everything under the plinth is blurred from above though the page says only the edges are satin; no bumper shows
+   under the cover; the Fog cover's edges draw as dashes; a dark hairline and a speck inside the plinth's front left
+   edge; the arm's collar flat white; grain twice the Tropos fronts'; no speed button to be found; bright sockets
+   against "hardware satin black throughout". The cover set (passed by me at 14:36) and the from-above set are ON
+   HOLD; I had passed them on the ground numbers and a look at four crops, and missed the arm and the shadows.
+   LAMPS (sent 15:13): THE LIT FRAMES ON THE BRIGHT GROUND ARE WITHDRAWN: with the lamp on the floor draws darker
+   than off (L* 96.0 to 87.3 at one pixel) while red stays pinned at 251, and the lit shade washes to pink (chroma
+   23 against 44 on the dark set): the view transform, not light. A lit lamp cannot be shown truly on a ground held
+   at L* 93 to 97. DECIDED: the house-ground picture of each lamp is the OFF frame (tile and picture 1); its lit
+   partner is the same camera with the studio taken down two and a half to three stops. The owner's choice of off or
+   lit in the row is withdrawn and he is told. Also sent: a black rod behind the cordless Core; the Core measures
+   about 200 mm tall in the picture against 180 on the page (CAD asked); the studio lamps show in reflection as flat
+   rectangles that shine through each other; faces turned from the lights are pure black (the cap's steps); the
+   pendant hangs 55 to 85 mm over the floor with its shadow straight under it; the cord shows no braid; the unlit
+   ball has no light side. Fog and Smoke finals stopped: the pattern is fixed on Ember first.
+   THE TROPOS FRONTS SHARE THE SHADOW FAULT: bottom-right patch 89.8, 90.0, 89.8 in Ember, Fog, Smoke: the clear
+   cabinet throws the black cabinet's shadow. Asked of the speaker lane (15:12): what the recipe does, and one test
+   of the Fog and Ember fronts with light passing through the acrylic. The fronts are the owner's approved pictures
+   of 9 Nov: I show him old beside new and HE decides whether the house set changes. Told to him at 15:14.
+   MY MISTAKE IN THE CRITICS' BRIEF: I called the Core's base satin black aluminum; it is the lamp's own pour. What
+   the critic says about the base's color is discounted; the black band at its foot was the render fault already
+   fixed.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
