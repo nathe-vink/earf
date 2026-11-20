@@ -3830,12 +3830,49 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    Tropos front, audits 0, each cover reads as its sheet. To the site lane as picture 2 of the Mantle gallery (the
    same camera, cover off then on), "Under a spot" third. The lane goes on: from above, the low front, the arm, the
    back.
-   ORDERED FROM THE SPEAKER LANE (14:44, after the Ember living-room finals): a proof of the horn 360 on the house
+   ORDERED FROM THE SPEAKER LANE (sent 14:41; the message is stamped 14:44; after the Ember living-room finals): a proof of the horn 360 on the house
    ground, Ember, four frames of the 24 at 1200 x 1080, with minutes per frame, the corners against the front, and
    steadiness from frame to frame; the run of 192 frames only after I have looked. Reason: the owner's list names
    "studio images including the horn 360", and today's turn is 640 x 576 on a cooler gray ground.
    NOTED FOR THE LAMPS LANE, when its batch is released: a wide frame per lamp and tint for the share cards (the tall
    frames cannot fill 1200 x 630 without added columns: the Core with its base is taller than the band).
+   20 Nov 15:08 UTC, THE CRITICS ON PUSH C RETURNED (15:04): PUSH C IS NOT PUBLISHED. Their whole result:
+   coordinator/site-critics-push-c-2026-11-20.json (31 entries). Five faults block it; each reproduced by me:
+   (1) Tropos "Out" (picture 6, the place picture every home tile opens) is cut by the stage. THIS ONE IS LIVE: at
+   1440x900 the 1200 x 1500 file is drawn 773 x 966 in a 773 x 600 stage, 38 % gone, the cabinet cut through the
+   woofer (48 % at 1366x768). In push C it is also cut on phones (12 %). I had checked that the tile opens the right
+   product, tint and view, and never looked at the picture it lands on; the first critic pass missed it too.
+   (2) Phones: the four-name row under Hemisphere's "At the bar" takes two lines, so the thumbnails and everything
+   below jump 25 px on that picture (Tropos picture 5 too). (3) Phones: the chosen thumbnail's frame is clipped by
+   the new sideways row. (4) Upright tablets: the capped hero picture sits flush left with a bare band on its right
+   (140 px at 820 wide). (5) The room picture's names row is one name short: measured by me in the frame, the top
+   center pendant is Dust (hue 17), left and right Acid (51), the two lower ones Ember (5); Cores Ember (8) and
+   Dust (20). The Tropos bar row also names one of each kind only.
+   ORDERED 15:06 AS PUSH C2 (push C + these five, nothing else); the twenty smaller items wait for push C3 after C2
+   is live. A NEW STANDING TEST, gate/whole.js: for every picture of a page it reads the file's size, the box it is
+   drawn in and how much of it is in sight inside the stage, and the top of the thumbnails and of Specifications
+   from picture to picture. It reports the live fault (62 % in sight) and both phone faults. It joins the standing
+   scripts and question 4 of the checklist: every picture whole, nothing below the stage moves.
+   THE LAMPS LANE'S ANSWERS (14:56) to my three notes: (1) the off gap is the pours, not the picture: both lamps get
+   their off color from studio light that crosses the tint, scatters off the opal and crosses back; the Hemisphere's
+   3 mm at 1.8 absorbs 1.8 times what the Core's 6 mm at 0.5 does, and the Core's opal is a closed ball. On the dark
+   ground little light reached either opal, so they matched; in a bright room they are about 12 L* apart (Ember).
+   A flag over the ball would bring the picture to 5.7; I REFUSED IT: the picture would show a match the lamps do not
+   have. TOLD TO THE OWNER as a design fact. Asked of the lane: the off gap for all eight tints in the house light
+   (quarter size) and, for Ember, the Core pour that matches the dome in daylight with its price when lit. No
+   approved pour changes in any final. (2) the lit Core: house level 0.5 holds the corners and gives the ball more
+   red; the floor speckles are stray light through the ball, in test (path guiding, 1024 samples, no clamp).
+   (3) the Core's base is the lamp's own pour, a 6 mm satin skin over a white liner (the site says "Its own color,
+   satin"): red is true; the black band at its foot was a render fault (two faces on one plane), fixed by a 0.2 mm
+   lift, now the default.
+   MANTLE, STEP 3b, FROM ABOVE, ALL EIGHT (b5937e4066): ground accepted (three corners within 1.9 L*; the top-left
+   is 11 lighter because from above there is floor where the Tropos front has its wall; the lane did not bend the
+   light). The record's label carried a made-up title, four track names and "TEST PRESSING": ORDERED BLANK (paper and
+   two rings) in every frame from now on; the eight from-above frames are re-rendering. The soft bright marks under
+   the plinth at the back right are the rear sockets seen through it: true to the design, they stay.
+   A PICTURE CRITIC PASS IS RUNNING (workflow wf_d7a18de8-073) on the Mantle cover and from-above sets and the four
+   Ember lamp frames. (My brief to it calls the Core's base "satin black": wrong, see above; I discount what it
+   says about that.)
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
