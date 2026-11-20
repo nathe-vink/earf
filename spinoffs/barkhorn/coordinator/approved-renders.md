@@ -3468,6 +3468,37 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
    on the site, A as the alternative not taken, no-trail and w1 as superseded on the site and kept; file
    names unchanged. The commit on the branch is r48-biomes 7a4be17ce4 (CHECK.md only); the lane's
    message named 9b1d5e9b7d, which is not on the branch.
+   20 Nov 05:27 UTC, THE OWNER LOOKED OVER THE PUBLIC SITE AND FOUND SIX THINGS (20 Nov), in his words:
+   1. "the hemisphere and core shots on the home page have darker backgrounds than the other product
+      shots, which makes them stick out in an inconsistent way."
+   2. "most of the products are missing images. The speakers should have a biome image, a listening
+      space image, and studio images including the horn 360. Core and mantle should have living space
+      images as well as studio images. Reference sites like design within reach for examples."
+   3. "the biome images at the bottom of the home page link to pages that aren't product pages."
+   4. "the drawn to be made section seems unnecessary and reads as ai slop."
+   5. "the dots on images that lead to the product page was only ever done on the speaker in the hero,
+      and the dot is placed right on the driver center which is odd."
+   6. "I would expect the team of agentic experts or the critics to catch things like this and
+      proactively address them. We should be able to recognize effective patterns for marketing and
+      selling furniture, lights, and speakers online and draw from that. What are the best high-end or
+      creative brands doing?"
+   WHAT THE LIVE SITE SHOWS (main 8ee88b2349): (1) in "The family." and "Eight colors" Tropos stands on
+   bright warm white, Mantle on gray with a spotlight pool and dark corners, Hemisphere and Core lit on
+   near-black in dark cards: three grounds for four products. (2) per color: Tropos has the studio
+   front, the horn's back, the amplifier plate, its place and the horn's turn, and a room picture only
+   in Acid; Hemisphere has six or so; Core has four (lit, two rows, the bar), no single shot by day and
+   no living space; Mantle has three (studio, bar, cover). (3) the place tiles link to #color-<tint>.
+   (4) the section is #progress on the home page. (5) the hero has one dot per crop, on the woofer's
+   center, both to Tropos in Acid.
+   WHY THEY SLIPPED: since his token instruction of 10 Nov each picture has been checked on its own by
+   the coordinator; nobody has judged the site as a whole against how good stores sell these things.
+   His sixth point lifts that for this purpose.
+   STANDING RULE FROM NOW: a site-level critic pass, measured against the reference stores, before any
+   structural build goes live and after any batch of pictures; its findings acted on without waiting
+   to be asked.
+   DONE NOW: (3), (4), (5) ordered from the site lane as one build; a research and critic pass started
+   (the best furniture, lighting and audio stores; the site audited against them); (1) and (2) become a
+   production plan for the lamps, Mantle and speaker lanes once the research has set the standard set.
    The site: pushes as things land; the owner is awake.
 2. LOCK THE STUDIO PICTURES OF EACH LOCKED PRODUCT. Tropos: the seven fronts (9 Nov), then the backs, close-ups and wides. Lamps:
    in Core B. Mantle: the day frame is in.
