@@ -27,7 +27,7 @@ From above: no edge lamps in any tint.
 | Ember | a third | (b) not met at any level: front edge 9 against the Tropos's 29.5; the top carries the red (median L* 17, C 17; 95th percentile 48) |
 | Fog | a twentieth (3 and 2.5 W/m2) | the coordinator, 2026-11-20 18:27: the lowest that brings the front within 6 of the Tropos Fog (60.7) with no face brighter than the floor: front 56.1 (-4.6), brightest face 85.8 against the floor's 95.2. A thirtieth: 52.7 (-8.0). None: 35.7 (smoked glass). A tenth: brighter than the floor |
 | Smoke | a third | the front is near the Tropos Smoke (6.0) at every level; nothing lifts it further. It reads as dark smoked acrylic, its top's highlights to L* 53 |
-| Dust | a tenth | front edge 43.3 against the Tropos's 43.4 |
+| Dust | a third | with the narrowed beams a tenth fell to front 34.8 (fails (b)); a third: front 46.1 against the Tropos's 43.4, brightest 67.1 against the floor's 94.5 (the coordinator, 2026-11-20 19:48) |
 | Acid | a third | (b) not met: front 25.9 against 60.8; the top 60.5, C 56 |
 | Poison | a third | (b) not met: front 9 against 39.1; the top 16.8, C 11 |
 | Ice | a third | (b) not met: front 21.9 against 44.9; the top 38.3, C 88 |
@@ -81,3 +81,20 @@ The left lamp's beam grazed the deck's top and lit the glossy black arm base and
 arm's foot in Ember v2). Both lamps now stand at the deck's mid-thickness (z 79 and 80 mm) with beams of 1.5 and 1 deg
 and 10 mm tall, so the beam stays inside the deck's 25.4 mm: 0 white px there in the Ember test at a third. The levels
 above keep their names; the Fog numbers are measured with the narrowed beams (tests-2026-11-20/fixes/).
+
+## The eight at full size, narrowed beams (2026-11-20, 19:45 to 19:53)
+
+| Tint | Level | Front L* | Top L* (95 %) | Brightest / floor | Corners against the Tropos |
+|---|---|---|---|---|---|
+| Ember | a third | 9.0 | 14.0 (44.1) | 44.1 / 94.5 | within 0.3 |
+| Fog | a twentieth | 55.4 | 52.3 (85.8) | 85.8 / 95.2 | within 0.5 |
+| Smoke | a third | 8.8 | 11.5 (50.8) | 50.8 / 94.7 | within 0.3 |
+| Dust | a third | 46.1 | 50.4 (67.1) | 67.1 / 94.5 | within 0.3 |
+| Acid | a third | 23.1 | 46.2 (87.0) | 87.0 / 94.7 | within 0.4 |
+| Poison | a third | 8.9 | 13.9 (50.0) | 50.0 / 94.7 | within 0.3 |
+| Ice | a third | 17.2 | 27.8 (61.5) | 61.5 / 94.8 | within 0.3 |
+| Haze | none | 10.3 | 11.8 (39.0) | 39.0 / 94.8 | within 0.4 |
+
+The narrowed beams lowered the tops of Smoke, Acid and Ice by 5 to 14 against the old-beam tests; the coordinator kept
+them as rendered (2026-11-20 19:48): Acid and Ice read as yellow and blue at a third, and the rule takes the closest
+level where (b) cannot be met.
