@@ -3,10 +3,11 @@ redrawing: the workshop header lines are dropped, every "X mm (Y in)" label is s
 reordering its own glyphs (the same characters, so the same width and center), the blank margin is cropped, and a 2x
 picture is rendered for the page. The SVG stays the file a visitor opens to enlarge.
 
-  python3 site_dims.py <tropos-dims.svg> <mantle-dimensions.svg>
-writes dims-site/tropos-dims.svg, .png and dims-site/mantle-dims.svg, .png next to this file.
+  python3 site_dims.py <tropos-dims.svg> <mantle-dimensions.svg> [<hemisphere-dimensions.svg> <core-dimensions.svg>]
+writes dims-site/<name>-dims.svg and .png next to this file.
 Sources: r33-speaker-horn renders/2026-11-20/barkhorn/dims/tropos-dims.svg; r48-mantle-design
-spinoffs/barkhorn/companions/mantle-r48/drawings/mantle-dimensions.svg.
+spinoffs/barkhorn/companions/mantle-r48/drawings/mantle-dimensions.svg; r32-lamps-final
+renders/2026-11-20/barkhorn/lamp-site/drawings/hemisphere-dimensions.svg and core-dimensions.svg (plain text: rewritten).
 """
 import os
 import re
@@ -14,7 +15,10 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'dims-site')
-HEADERS = {'tropos': ('TROPOS', 'Overall dimensions'), 'mantle': ('Mantle (Strata Float v3)', 'Dimensions from the CAD', 'Deck ', 'Height ', 'Millimeters rounded')}
+HEADERS = {'tropos': ('TROPOS', 'Overall dimensions'), 'mantle': ('Mantle (Strata Float v3)', 'Dimensions from the CAD', 'Deck ', 'Height ', 'Millimeters rounded'),
+           'hemisphere': ('Hemisphere, from the side', 'Shade 200 across', 'From the CAD'),
+           'core': ('Core, from the front', 'The dock sits inside', 'From the CAD')}
+PLAIN = re.compile(r'^(.*?)(\d+) mm \((\d+(?:\.\d+)?) in\)(.*)$')
 LABEL = re.compile(r'^(.*?)(\d+(?:\.\d+)?) mm \((\d+(?:\.\d+)?) in\)$')
 
 
@@ -55,6 +59,25 @@ def site_svg(src, name):
     return s
 
 
+def site_svg_plain(src, name):
+    """The lamps' drawings, plain <text>: the title and its notes dropped, each label inches first to 0.1 in."""
+    s = open(src).read()
+    def each(m):
+        attrs, text = m.group(1), m.group(2)
+        if any(text.startswith(h) for h in HEADERS[name]):
+            return ''
+        t = PLAIN.match(text)
+        if t:
+            pre, mm, inch, post = t.groups()
+            text = f'{pre}{float(inch):.1f} in ({mm} mm){post}'
+        elif text.startswith('dock 136 across'):
+            text = text.replace('dock 136 across', 'dock 5.4 in (136 mm) across')
+        return f'<text{attrs}>{text}</text>'
+    s, n = re.subn(r'<text([^>]*)>([^<]*)</text>', each, s)
+    assert n and 'From the CAD' not in s and ' mm (' not in s.replace('in (', ''), name
+    return s
+
+
 def render(svg_path, png_path, width=2400):
     """Render with Chromium; crop the viewBox to the drawn pixels (matplotlib's white page out) and render again at full width."""
     import subprocess
@@ -81,14 +104,16 @@ const { chromium } = require('playwright'); const fs = require('fs');
     shoot(); os.remove(run)
 
 
-def main(tropos, mantle):
+def main(tropos, mantle, hemisphere=None, core=None):
     os.makedirs(OUT, exist_ok=True)
-    for name, src in (('tropos', tropos), ('mantle', mantle)):
+    for name, src in (('tropos', tropos), ('mantle', mantle), ('hemisphere', hemisphere), ('core', core)):
+        if not src:
+            continue
         svg = os.path.join(OUT, f'{name}-dims.svg')
-        open(svg, 'w').write(site_svg(src, name))
+        open(svg, 'w').write(site_svg(src, name) if name in ('tropos', 'mantle') else site_svg_plain(src, name))
         render(svg, os.path.join(OUT, f'{name}-dims.png'))
         print(name, os.path.getsize(svg), os.path.getsize(os.path.join(OUT, f'{name}-dims.png')))
 
 
 if __name__ == '__main__':
-    main(*sys.argv[1:3])
+    main(*sys.argv[1:5])

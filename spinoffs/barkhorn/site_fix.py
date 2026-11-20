@@ -1336,7 +1336,9 @@ def fix_7(p, web):
 # ---------------------------------------------------------------------------------------------------------------------
 # Prepared on r47 while push C is under the critics (the coordinator, 20 Nov 14:33)
 DIMS = {'speaker': ('tropos', 'Tropos, front and side, with its height, width and depth in inches and millimeters'),
-        'turntable': ('mantle', 'Mantle from above and from the front, with its cover off and on, with its sizes in inches and millimeters')}
+        'turntable': ('mantle', 'Mantle from above and from the front, with its cover off and on, with its sizes in inches and millimeters'),
+        'dome': ('hemisphere', 'Hemisphere from the side, hung from its canopy, with its sizes and its drop in inches and millimeters'),
+        'orb': ('core', 'Core from the front, with its ball, its base and its height in inches and millimeters')}
 
 
 def fix_8(p, web):
