@@ -1,0 +1,242 @@
+{
+ "results": [
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "A-sofa-reads-rubber",
+      "severity": "fix",
+      "frame": "A",
+      "where": "Foreground sofa, x 194-2095, y 1348-1600. Left arm outline x 198-402, y 1355-1570. Right arm x 1790-2095, y 1350-1600.",
+      "what": "The wood grain is gone, but the new sofa does not read as upholstery. At 5x the back rail shows soft, cloud-like blotches and no weave, nap or fuzz at its edge. The arms look like smooth, crumpled rubber tubes, each with a dark crease folded into it. The outline is faceted. Tracing the left arm's outer edge, it runs in straight lines between kinks: exactly 2 px of x per 5 rows from y 1505 to 1565, 4 px per 5 rows from y 1460 to 1475, and 6 to 9 px per 5 rows above that. The sofa is the nearest object and fills the bottom sixth of the frame. At 1300 px it reads as a soft dark sofa, but more like smooth leather or clay than fabric. At full size the facets and blotches read as CG.",
+      "expected": "Upholstery with a visible weave or nap and a soft fabric edge, and an outline with no straight runs. Failing that, a lower crop that keeps only the back rail.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sofa-Larm-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sofa-Rarm-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sofa-back-x5.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-web-sofa-Larm-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-old-top-new-bottom-lowerband-web.png"
+     },
+     {
+      "id": "A-green-sleeve-graphic",
+      "severity": "fix",
+      "frame": "A",
+      "where": "Record sleeves leaning against the foot of the credenza, x 1375-1556, y 1130-1290",
+      "what": "The front sleeve carries a flat, saturated green stepped shape on white. The sleeve behind it has a column of alternating orange and blue squares along its edge. There is no lettering, but it reads as an invented placeholder graphic. The green is as flat as the painted wall (std 0.93 levels; the wall is 0.79), with no paper texture, sheen or falloff over its 140 px height. It is the only saturated non-red color in the frame: every pixel with C* over 40 and a green hue lies inside this stack. It is also the complement of Ember, so at 1300 px it is the first thing after the two speakers that pulls the eye, about 100 px from the right Tropos. The stack has no contact line at the floor either: the oak just below the white sleeve reads L* 65-69, brighter than the oak beside it at L* 49-53.",
+      "expected": "Sleeves that do not compete with the tint: muted or dark, or turned to show plain backs or spines. They should show card texture and a thin contact shadow where they stand on the oak.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sleeve-green-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sleeve-spine-x6.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-web-sleeve-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sleeves-floor-x5.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-center-1x.png"
+     },
+     {
+      "id": "A-mantle-pillar-chrome",
+      "severity": "fix",
+      "frame": "A",
+      "where": "Mantle tonearm pillar and arm rest, x 1296-1316, y 893-914",
+      "what": "The arm pillar and the arm rest read as bright polished metal: L* 67-74 across the pillar, with a clipped line at L* 100. The studio Mantle's pillar is satin black (L* 1-5 in ember.png). The arm tube and counterweight are black. The first version looked the same. At 1300 px this is a small bright tick to the right of the record. At full size it reads as chrome, not the satin black Rega arm. This is separate from the known question about the deck. The product lens should decide whether it misstates the product.",
+      "expected": "A satin black pillar and rest, as in ember.png, with at most a narrow line of sheen.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-mantle-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A1-mantle-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-mantle-sleeves-core-x2.png"
+     },
+     {
+      "id": "A-dark-sleeves-board",
+      "severity": "note",
+      "frame": "A",
+      "where": "Dark card sleeves behind the Mantle, x 963-1228, y 800-938",
+      "what": "The two blank sleeves are perfectly flat (high-pass std 0.38-0.39, the same as the painted wall). They show no card edge and no lit top edge, so at 1300 px they read as one dark board, not two sleeves. Their tone (L* 26-28) equals the left half of the deck top (L* 28.6), so the deck's back edge disappears into them. Past their right edge (x 1228) the polished deck mirrors the wall instead (L* 59-66), so the deck reads dark on the left and gray on the right. This adds to the known deck question rather than being a separate fault.",
+      "expected": "If the sleeves stay: card texture, a lit top edge, and their right edge kept clear of the deck so the deck reads as one tone.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-mantle-sleeves-core-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sleeves-rightedge-x5.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sleeves-leftedge-x5.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-web-credenza-x2.png"
+     },
+     {
+      "id": "A-rug-plain-at-web",
+      "severity": "note",
+      "frame": "A",
+      "where": "Rug, x about 520-1960, y about 1335-1500",
+      "what": "Fixed at full size. A fine weave now shows (high-pass std 2.06; the wall is 0.38 and the oak 1.95), and the rug darkens from L* 59.5 at the window end to 51.6 at the far end. At 1300 px it still reads as an even gray mat with a knife-sharp border and no pile, wear or ripple. Its thickness cannot be judged from this camera: the near edge is behind the sofa, and both side faces turn away from the lens.",
+      "expected": "Acceptable as a flat-weave rug. A little more variation in tone would help at web size.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-rug-surface-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-rug-Ledge-x8.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-rug-Rcorner-x8.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-web-bottom-1x.png"
+     },
+     {
+      "id": "A-ports-right-cabinet",
+      "severity": "note",
+      "frame": "A",
+      "where": "Right cabinet ports, x 1670-1800 and 1850-1980, y 1205-1300. Inside bottom strip of the right front, y 1285-1294.",
+      "what": "The left cabinet's ports now read as round tubes. Inside each ring of the right cabinet there is still a pale, folded blob that looks like red jelly. At 1300 px all four ports read as bright red domes, not openings: interior median L* 27-39, C* 33-56, 90th percentile L* 60-72. In the studio, the right port is dark inside (L* 7.6). A pale pink strip also runs along the inside bottom of the right front (L* 51-54, C* 25).",
+      "expected": "Ports that read as tubes with a darker inside, as in front-ember.png.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-Rports-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-Lports-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A1-Rports-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/ref-ports-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-web-Rtropos-x3.png"
+     },
+     {
+      "id": "C-glass-empty",
+      "severity": "note",
+      "frame": "C",
+      "where": "Glass, x about 1040-1270, y about 1240-1570",
+      "what": "Unchanged from the first version. There is no water line, meniscus or surface ellipse. The thick base refracts into a cone, so the glass reads as an empty crystal tumbler, both in C and on the side table in A. It is correctly out of focus.",
+      "expected": "If water is meant, a visible water level a little below the rim.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/C-glass-book-1x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/C-glass-contact-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-sidetable-glass-book-x5.png"
+     },
+     {
+      "id": "C-book-sun-strip",
+      "severity": "note",
+      "frame": "C",
+      "where": "Book cover, x 1250-1600, y 1210-1270",
+      "what": "A straight strip of sun crosses the top of the cover at median L* 99, C* 0.9. The gray-green cover in shade is L* 68. At 700 px the book reads white along its top and gray-green below. The light is plausible; this is only worth knowing.",
+      "expected": "Fine as is. Hold the cover's color under the sun if the book should read as one color.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/C-book-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/C-web700.png"
+     }
+    ],
+    "first_findings": [
+     "The Core reads as a dark brown mirror ball (C and A, blocking): FIXED. In C the ball's median is L* 39.6, C* 59.2, hue 39, with 92% of it red (before: L* 19-22, C* 17; studio: L* 41.9, C* 68.6, hue 35). In A the ball's median is L* 33.0, C* 51.9, hue 39, with 91% above C* 40 (before: L* 17.1, C* 14.2, 3% red). Both bases read red: L* 39, C* 51 in C; L* 33.5, C* 48 in A. Evidence: C-core-1x.png, C-ball-x2p5.png, A-core-x5.png, C-old-left-new-right-web700.png.",
+     "The cabinet sides read white (A, blocking): FIXED. With the toe-in, the inner sides are out of view. The visible outer sides are 8-10 px strips at L* 14-45, C* 1-8, and read as the dark panel edge seen in the studio. The tops read light gray (L* 52-70, C* 9-11) because they mirror the wall at a grazing angle; at 1300 px they are a thin line under each horn. Evidence: A-Lcab-leftedge-x6.png, A-Rcab-rightedge-x6.png, A-web-Ltropos-x3.png, A-web-Rtropos-x3.png.",
+     "The sofa back has wood grain (A, blocking): FIXED. The grain is gone, and the sofa is a neutral gray (C* 1-2). The new sofa has a fault of its own, reported as A-sofa-reads-rubber. Evidence: A-old-top-new-bottom-lowerband-web.png.",
+     "The fronts are pinker than the horns (A, fix): FIXED. Outside the woofer the fronts measure C* 47-53, hue 34.5-35, with 8-11% of pixels pink (C* under 40, hue under 28, L* over 38), against 34-39% before. Below the woofer: C* 42-48, hue 32-33, 7-13% pink (42-49% before). The top band is C* 68-69, hue 40.5; the horns are C* 71-72, hue 38-41. At 1300 px the front and horn read as one red.",
+     "The ports look like crumpled foil (A, fix): PARTLY FIXED. The left cabinet's ports read as tubes. The right cabinet's still show a pale folded blob in each ring, and at 1300 px all four read as bright red domes (see A-ports-right-cabinet).",
+     "The cords stop under blank wall plates (A, fix): FIXED. The plates are duplex receptacles with right-angle plugs in the lower outlets. The cords leave the plugs and run down to the floor behind the cabinets (plates at x 415-443, y 1043-1080 and x 2086-2114, y 1048-1085). Evidence: A-Lreceptacle-x4.png, A-Rreceptacle-x4.png.",
+     "The rug is flat (A, fix): FIXED at full size. Weave high-pass std is 2.06 (the first critic measured 0.89), and the rug falls off from L* 59.5 to 51.6. It still reads plain at 1300 px (note A-rug-plain-at-web). Its thickness cannot be checked from this camera.",
+     "The book has no pages (C and A, fix): FIXED. In C the page block shows on the front and right edges, between the boards (pages L* 72-78; cover L* 68 in shade). The book on the side table in A shows the same. Evidence: C-book-x2.png, A-sidetable-glass-book-x5.png.",
+     "The glass reads empty (C, note): NOT CHANGED (see C-glass-empty).",
+     "The join feather runs through the right cabinet (A, note): NOT CHECKABLE. No 256-sample frame came with v2. A scan of the wall for steps in noise found only real edges (the window frame and the credenza top), and I saw no seam at full size.",
+     "The woofer cones are gray (product pass, note): NOT CHANGED. The cones measure L* 26-28 and the dust caps L* 29-36, the right one slightly blue; the studio measures L* 10-17. They read dark gray at 1300 px. This belongs to the product lens."
+    ],
+    "q1_A_ready": "Close, but not final yet. From the photo lens, nothing blocks at 1300 px. The room, light, exposure, oak floor, walls, window, walnut credenza, wall print, receptacles and both Tropos now read as a photograph, and every first-pass fault I can check is fixed or better. Three things should be fixed before the owner sees it as final. The foreground sofa reads as smooth rubber or clay with a faceted outline, not as upholstery. The green-and-white sleeve at the foot of the credenza is an invented flat graphic and the strongest non-product color in the frame. The Mantle's arm pillar reads as chrome where the product's is satin black; the product lens should rate that one.",
+    "q2_C_ready": "Yes, from the photo lens. The Core now reads as Ember red acrylic: the ball's median is L* 39.6, C* 59, hue 39, with 92% of it red (studio: L* 41.9, C* 68.6, hue 35). Its reflections of the window and the room are believable. The book has its page block. Depth of field is consistent: the near table corner and the glass are soft, the ball is sharp, and the garden is soft. The verticals are straight. Clipping dropped from 7.5% to 4.3%, almost all of it in the window exterior. There are notes only: the glass still reads empty, and a sun strip makes the top of the book read white.",
+    "q3_reads_wrong": "In A at 1300 px, after the two speakers, the eye goes first to the flat, bright green-and-white sleeve at the foot of the credenza. Its green is the complement of Ember. Next comes the foreground sofa, whose arms look like smooth, crumpled rubber. Then the plain gray rug, and the blank dark board behind the turntable, which swallows the back edge of the deck. In C nothing reads wrong at 700 px. A careful viewer may see that the glass is empty.",
+    "measured": [
+     "Tropos fronts in A, outside the woofer: left L* 34.7, C* 52.9, hue 35.0, 8% pink; right L* 32.4, C* 47.4, hue 34.5, 11% pink. First version: L* 37-38, C* 39-42, hue 28-29, 34-39% pink. Top band C* 68.0 / 69.2, hue 40.5. Below the woofer: L* 36.0 / 30.9, C* 47.5 / 41.6, hue 33 / 32. Horns: L* 49.1 / 34.9, C* 71.6 / 70.9, hue 38.3 / 41.3.",
+     "Tropos in A, other parts: outer side faces 8-10 px wide, L* 14-45, C* 1-8. Tops L* 52-70, C* 9-11. Cones L* 26-28; dust caps L* 29-36. Port interiors median L* 27-39, C* 33-56, 90th percentile L* 60-72. Floor under each cabinet reads L* 46-50 within 10 px and 55-60 by 20 px, a soft contact shadow.",
+     "Core: in C, ball median L* 39.6, C* 59.2, hue 39.2, 92% red, none darker than L* 20; base L* 39, C* 51. In A, ball L* 33.0, C* 51.9, hue 39, 91% above C* 40; base L* 33.5, C* 48. Studio Core off: ball L* 41.9, C* 68.6, hue 35.3; base L* 48-51, C* 66.",
+     "Clipping (any channel at 255): A 1.25% (1.27% before); C 4.34% (7.45% before). Nearly all of it is in the window exterior and the sunlit sill and table near the window.",
+     "Verticals: in C the window frames sit at x 773-790 (y 100-700) and x 1197-1254 (y 100-1000). In A the window frame sits at x 146-167 from y 250 to 900. The camera is level in both frames.",
+     "Rug in A: high-pass std 2.06 (wall 0.38, oak 1.95). L* runs from 59.5 at the window end to about 51.6.",
+     "Green sleeve: L* 58.4, C* 57.4, hue 144, std 0.93 levels. All 9,479 pixels in the frame with C* over 40 and hue 90-200 sit inside x 1394-1534, y 1167-1284. Floor just below the white sleeve: L* 65-69. Floor beside it: L* 49-53.",
+     "Dark sleeves behind the Mantle: L* 26.4-28.1, C* 6, high-pass std 0.38-0.39 (the wall is 0.38). Deck top: left half L* 28.6, part past the sleeves L* 59-66. Deck front edge L* 20-29, C* 4-6 (the known deck question).",
+     "Mantle arm pillar, x 1298-1314, y 899-912: L* 67-74, with a line at 100. Studio pillar: L* 1-5.",
+     "Sofa: neutral gray, C* 1-2, L* 32-48. The left arm's outline runs in straight lines between kinks: 2 px per 5 rows from y 1505 to 1565, 4 px per 5 rows from y 1460 to 1475.",
+     "Wall print: no lettering. Its shadow on the wall lightens from L* 76.5 to 80.4 over 35 px below the frame and from 70.3 to 75.7 over 40 px to its right. Books and the record label: no lettering. The sleeves carry graphic shapes only.",
+     "Noise and smoothing: wall high-pass std 0.38, with no blotches under an 8x contrast stretch. Pixels more than 60 levels above their 7x7 mean fall only on real edges, so there are no fireflies. The red glow on the wall beside the horns is smooth. The Tropos insides are crisp at 3x, apart from soft refraction in the woofer ring.",
+     "Scale in A: the Core ball is 70-72 px wide, about 0.45 px/mm. On that scale the credenza is about 1.9 m and each dark sleeve about 307 mm, which is LP size.",
+     "Helper and crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/tools/lab.py. Visitor-size frames: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/A-web1300.png and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-photo/C-web700.png"
+    ]
+   }
+  },
+  {
+   "part": "product",
+   "found": {
+    "findings": [
+     {
+      "id": "A-tropos-tops-grey",
+      "severity": "fix",
+      "frame": "A",
+      "where": "Top of each Tropos cabinet, the band between the horn's lower lip and the black front top edge. Left cabinet x 470-750, y 845-866. Right cabinet x 1650-1932, y 850-877.",
+      "what": "Both cabinet tops still read beige or gray, not red. Left: L* 71.4, C* 11.2, hue 52. Right: L* 52.8, C* 12.8. The wall beside them is L* 85.7, C* 5.8. These are the same values as v1 (65.6 / 13.3 and 49.4 / 14.6), so this part of the first pass's 'white sides and tops' finding is not fixed. The sides are fixed only because the toe-in now hides them. At 1300 px the band is 8 to 11 px tall under each horn and reads as a pale gray glass plate between a red horn and a red front. It is a plausible grazing reflection of the wall, but it is the only part of either cabinet that does not read as Ember.",
+      "expected": "The top should read as red acrylic under the reflection: some red showing (C* above about 25) and darker than the front, like the dark-red top edge in front-ember.png (L* 3-10, C* 13-33).",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-L-top-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-R-top-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-1300-tropos-pair-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/measurements.txt"
+     },
+     {
+      "id": "A-mantle-arm-pillar-chrome",
+      "severity": "fix",
+      "frame": "A",
+      "where": "Mantle tonearm: the pillar (bearing post) at x 1309-1314, y 897-913 and the arm-rest post at x 1291-1296, y 899-915",
+      "what": "The arm's pillar reads polished white or chrome (L* 83-96, C* under 1, rgb 242,244,243 at its brightest), and the rest post reads light gray (L* 62). The arm tube and counterweight are dark (counterweight L* 23). In the studio Mantle (b39/ember.png), the pillar and rest are satin black (L* 6.3 and 8.2). At full size, the arm reads as a black tube on a chrome pillar, which misstates the satin black Rega arm. At 1300 px it is only a 3 x 9 px bright tick at the end of the arm. v1 had the same pillar, and the first critics did not report it.",
+      "expected": "Pillar, base and rest in satin black, as in b39/ember.png.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-mantle-arm-x8.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A1-mantle-arm-x8.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/M-arm-x3.png"
+     },
+     {
+      "id": "A-left-horn-lighter-than-box",
+      "severity": "note",
+      "frame": "A",
+      "where": "Left Tropos horn x 480-740, y 690-800, against the left front's top band x 495-728, y 884-920",
+      "what": "The front and horn now share a hue (front 40.6 degrees, horn 38.5), but the left horn is much lighter: L* 49.8, C* 72, rgb 213,66,45 (coral), against the box at L* 31.9, C* 68.5, rgb 153,13,0. That is 18 L* apart. The studio is 5 apart (horn 42.9, front 37.7), and the right speaker is 4 apart (36.8 vs 32.4). At 1300 px the left speaker shows a lighter coral horn on a deep red box. It is plausible for a thin sheet lit by the window, and it reads as one family of red.",
+      "expected": "Horn and front within about 5-8 L*, as in front-ember.png and the right speaker.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-1300-tropos-pair-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-L-horn-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/tropos-measure-1.txt"
+     },
+     {
+      "id": "A-front-reflection-patches",
+      "severity": "note",
+      "frame": "A",
+      "where": "Left front's outer strip x 470-530, y 930-1160. Right front's outer strip x 1900-1935, y 920-1060. Each woofer surround at 8-9 o'clock. A pale line 4-6 px tall along the bottom of each front (left about y 1280-1287, right about y 1294-1300).",
+      "what": "Outside the woofer and ports, 10% (left) and 12% (right) of each front reads pink or mauve (C* under 40, hue under 28, L* over 38). The studio has 0% and v1 had 44%. The patches are soft room reflections (about rgb 166,108,116 and 184,134,143), plus a pinkish-white line at the foot of each front that the studio front does not have. At 1300 px they read as reflections on gloss, not as a pink cabinet.",
+      "expected": "No action needed unless the owner wants the fronts as clean as the studio's.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-L-pinkpale-mask.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-R-pinkpale-mask.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-L-lowerleft-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-L-bottom-x4.png"
+     },
+     {
+      "id": "C-core-paler-than-studio",
+      "severity": "note",
+      "frame": "C",
+      "where": "Core ball, disc at (722, 1120), r 175. Base x 570-880, y 1300-1400. Crown x 705-735, y 925-960.",
+      "what": "The Core reads as Ember, but a shade lighter and more orange than the studio. Ball: L* 39.3, C* 60.1, hue 39.3, rgb 168,51,33. Studio b35: L* 42.1, C* 70.8, hue 35.9, rgb 193,34,29. Base: L* 34.1, C* 50.3 against the studio's 40.5 / 62.4. The room's reflection covers most of the ball, and the opal does not show as a separate body. At 700 px it reads as a glossy tomato red rather than the studio's crimson. A dark V at the crown (the reflected window frame) reads at 700 px a little like a stem dimple.",
+      "expected": "Fine as is. If touched, aim for the studio's C* about 70 and hue about 36.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/C-core-v1-v2-studio.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/C-700-core-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/C-ball-top-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/core-ball-measure.txt"
+     },
+     {
+      "id": "A-horn-throat-white-eye",
+      "severity": "note",
+      "frame": "A",
+      "where": "Center of each horn throat: left disc x 602-628, y 737-763; right disc x 1777-1802, y 740-765",
+      "what": "Seen head-on, each throat shows a cream disc with concentric rings and a gray center. Left: L* 60.7, C* 12, rgb 148,148,126. Right: L* 45, C* 6. At 1300 px it reads as a white eye in the middle of each horn. The studio picture sees the throat from the side, where it is dark (L* 2-12) with a metal ring, so the references cannot settle what a head-on view should show. It is unchanged from v1.",
+      "expected": "Check against the CAD that the phase plug or driver face is this pale. If it is metal or black, it should read darker.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-L-throat-x5.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/TF-throat-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-1300-tropos-pair-x2.png"
+     },
+     {
+      "id": "A-toe-in-aims-at-camera",
+      "severity": "note",
+      "frame": "A",
+      "where": "Both Tropos",
+      "what": "Both fronts face the lens almost exactly square. Each cabinet shows only a 9-10 px dark edge on both sides (the 20 mm panel edge at about 0.5 px/mm) and no side face. The woofers measure 198 x 191 and 201 x 196 px. The bottom edges drop toward the outer end by 20-25 px, as a toe-in should. With the cabinets about 1.17 m either side of the lens axis, 15.5 degrees crosses the axes about 4.2 m out, which is at the camera. By my rough horizon estimate (y about 610-660), the sofa back is about 1.5 m in front of the camera, so a seated listener would be about 14 degrees off each axis. That is plausible as mild toe-in, and a reader sees speakers turned toward the viewer. It matters only if the copy says they aim at the seat.",
+      "expected": "Nothing to change in the picture. Avoid 'aimed at the seat' in the copy.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-L-leftedge-top-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-L-rightedge-top-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-R-leftedge-top-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-R-rightedge-top-x4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/measurements.txt"
+     },
+     {
+      "id": "A-right-woofer-grey-blue",
+      "severity": "note",
+      "frame": "A",
+      "where": "Right woofer cone, ring r 32-70 around (1788, 1060)",
+      "what": "The right cone is a little lighter and bluer than the left cone and the studio cone: L* 27.0, b* -3.0, with the dust cap at L* 32.1, b* -4.7. The left cone is L* 22.2 and the studio cone L* 22.2. This is the v1 note, now smaller. At 1300 px both cones read as dark gray woofers.",
+      "expected": "Same as the left cone.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/A-R-mid-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/measurements.txt"
+     }
+    ],
+    "first_findings": [
+     "Core a dark brown mirror ball (C and A): FIXED. C ball L* 39.3, C* 60.1, h 39, 90% red (v1 21.9 / 16.7, 8% red; studio b35 42.1 / 70.8, 96%). A ball 32.6 / 52.0, 92% red (v1 17.9 / 14.4, 4%). Bases: C 34.1 / 50.3 (v1 29.9 / 22.3), A 32.1 / 49.9 (v1 19.8 / 15.6). Evidence C-core-v1-v2-studio.png, A-core-x5.png vs A1-core-x5.png.",
+     "Tropos cabinet sides white: sides FIXED, because the toe-in hides them (only the 9-10 px panel edge shows at each side of each cabinet). Tops NOT FIXED: L* 71.4 / 52.8, C* 11 / 13 (v1 65.6 / 49.4, C* 13 / 15). See A-tropos-tops-grey.",
+     "Sofa back with wood grain: FIXED. Dark gray-green upholstery with soft folds and no grain (A-sofa-rug-1x.png). Outside my lens; looked only.",
+     "Fronts pinker than the horns: FIXED. Whole front hue 35.3 / 34.9 against horns 38.5 / 41.6. Pink share 10 / 12% (v1 44 / 44%). Top band C* 68.5 / 69.9 (v1 52 / 55, studio 81). Below the woofer L* 32, C* 48-50 (v1 left 49 / 33, pink 70%). Left over: the left horn is lighter than its box (note), and soft reflection patches remain (note).",
+     "Ports like crumpled foil: FIXED. They read as round tubes with a lit inner wall and the cabinet's inside seen through them. They are brighter inside than the studio's darker tubes, but not crumpled (A-ports-v1-v2-studio-x3.png).",
+     "Cords stopping under blank wall plates: FIXED. Each plate is a duplex receptacle with a plug in the lower outlet, and the cord runs down to the floor and behind the cabinet (A-L-cord-x3.png, A-R-cord-x2.png).",
+     "Flat rug: FIXED as far as I looked. Weave is visible, with high-pass std 2.09 on a 200 x 80 patch at x 1100-1300, y 1360-1440 (v1 0.89), and the border shows an edge (A-sofa-rug-1x.png). Outside my lens.",
+     "Book without pages: FIXED. A cream page block shows on the front and right edges, and the boards overhang (C-book-1x.png).",
+     "First product critic's other items. Mantle plinth gray: known and with the owner, not rechecked. Pale wedges: now soft reflection patches (note). Gray cones: the left matches the studio (L* 22.2), the right is still 27 and bluish (note). Plinth 550 mm wide: NOT A FAULT. The deck is seen corner-on at about 30 degrees (long face 179 px, short face 76 px, record 134 px), which solves to about 450 x 340 mm, the same as the studio b39 (about 458 x 338 mm). The red light that spilled onto the credenza by the Core in v1 is gone (a* 10.1 against v1's 14.4, p95 23.4)."
+    ],
+    "q1_A_ready": "Yes, A can go to the owner, with two fixes before it is final and with the Mantle deck still his decision. Every product fault from the first pass is fixed. The Tropos read as one Ember red: fronts L* 32, C* 51-54, hue 35, which matches the studio front at 30.6 / 50.6 / 37. Horns have the same hue (38.5 / 41.6). The ports read as tubes, and the cords are plugged into receptacles. The toe-in hides the sides, and the Core reads red (C* 52, 92% red). Proportions are right: Tropos 2.24 vs 2.31 by drawing, Core ball and base 70 / 69 px, and the Mantle about 450 mm wide, turned about 30 degrees. Fix before final: (1) the cabinet tops still read beige-gray (L* 71 / 53, C* 11 / 13), an 8-11 px band under each horn at 1300 px; (2) the Mantle's arm pillar and rest read chrome (L* 83-96) instead of satin black. Nothing in my lens is blocking.",
+    "q2_C_ready": "Yes. The Core in C is the studio lamp in Ember and is off: ball L* 39.3, C* 60.1, hue 39, 90% red, against the studio's 42.1 / 70.8 / 36 / 96%. The base is frosted red (34.1 / 50.3). Size and proportions match the studio (ball to base 1.03, height to ball 1.34, studio 1.06 / 1.31), with no dock and no cable. Notes only: it is a shade paler and more orange than the studio, and a dark V at the crown reads a little like a stem dimple at 700 px.",
+    "q3_reads_wrong": "A at 1300 px: little on the products. The two Tropos read as red acrylic horn speakers. Looking closely, a buyer would see a pale gray band where each cabinet top is, a white 'eye' in each horn throat, and a left horn that is a lighter coral than its box. The Mantle reads as a light gray record (L* 66) and black arm on a near-black deck, in front of a dark square of sleeves. That deck is the known question; the chrome pillar is too small to notice at this size. C at 700 px: nothing wrong on the Core. It reads as a glossy red ball on a frosted red base, a little lighter and more tomato red than the studio picture.",
+    "measured": [
+     "Core C ball: L* 39.3, C* 60.1, h 39.3, rgb 168,51,33, red 90%, dark 0%. Quarters (L* / C*): UL 41.7/55.9, UR 40.2/58.0, LL 35.1/64.8, LR 33.6/66.0. Studio b35: 42.1 / 70.8 / 35.9, red 96%. v1: 21.9 / 16.7, red 8%, dark 45%. Matches the lane's 39 / 60 / 92%.",
+     "Core C base: L* 34.1, C* 50.3, h 36.7, red 73% (shaded right third 31.3 / 37.4). Studio b35 base: 40.5 / 62.4, red 85%.",
+     "Core A: ball 32.6 / 52.0, h 39, red 92%; base 32.1 / 49.9, red 72%. v1: 17.9 / 14.4 (4% red) and 19.8 / 15.6.",
+     "Core sizes: C ball 350 px, base about 340 px, ratio 1.03, height-to-ball 1.34 (studio 1.06 / 1.31). A ball 70 px, base about 69 px.",
+     "Tropos top band, L / R: L* 31.9 / 32.4, C* 68.5 / 69.9, h 40.6 / 40.7. Studio 37.7 / 80.8 / 39.8. v1 32.5 / 51.9 and 35.2 / 54.8.",
+     "Tropos whole front (woofer and ports masked), L / R: L* 31.9 / 32.4, C* 54.1 / 51.1, h 35.3 / 34.9, pink 10 / 12%. Studio: 30.6 / 50.6 / 36.9, pink 0%. v1: C* 36.6 / 35.6, h 23.7 / 21.9, pink 44%.",
+     "Tropos below woofer: L* 31.9 / 32.7, C* 50.3 / 48.1, h 33.5 / 33.8. Studio 30.8 / 59.0 / 36.0.",
+     "Tropos horns: L* 49.8 / 36.8, C* 72.0 / 72.4, h 38.5 / 41.6. Studio 42.9 / 87.1 / 39.6.",
+     "Tropos cabinet tops: L* 71.4 / 52.8, C* 11.2 / 12.8. v1 65.6 / 49.4. Wall L* 85.7.",
+     "Tropos edges: 9-10 px dark band on both sides of each cabinet (x 469-477, 743-751, 1647-1655, 1924-1933), no side face. Woofer runs 198 x 191 and 201 x 196 px. Bottom edges: left 1309 to 1289, right 1295 to 1320 (outer end lower).",
+     "Tropos cones: L* 22.2 / 27.0, dust caps 26.6 / 32.1. Studio 22.2 / 26.3.",
+     "Tropos proportions: 633 x 282-284 px = 2.24 (spec 2.31). Woofer about 376 mm across at about 0.505 px/mm. Four black posts present: two front with red bosses, two under the throat seen through the horn.",
+     "Mantle: pillar L* 83-96, rest post L* 62; studio pillar 6.3, rest 8.2. Record L* 66.2, label L* 91.8, blank. Deck top-left L* 32.8, C* 11.9 (v1 81.6 / 6.8, now reflecting the sleeves); top-right 73.9 / 6.2. Sleeves L* 25-28, C* 5-6. Arm parked as in b39: headshell about 16% of the record's diameter in from its right edge, studio 14%.",
+     "No lettering on the products, the amp plate (two dots), the Mantle label, or the floor LP sleeves (shapes only).",
+     "Files: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b41/critic-product/measurements.txt and the tools/ folder beside it (lab.py, tropos.py, coremeasure.py)."
+    ]
+   }
+  }
+ ],
+ "dropped": 0
+}
