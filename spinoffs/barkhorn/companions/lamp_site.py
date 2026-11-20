@@ -433,6 +433,11 @@ def build(frame, samples, scale):
                 up_ = [(up_[0][0] + 3.0, up_[0][1])] + up_[1:]
             if own:
                 ld_ = float(os.environ.get('CORE_LOAD', core_load(tint)))
+                # BASE_LIFT mm (2026-11-20, a test): the skin's foot that far off the floor, so its bottom face is not
+                # coplanar with the sweep (Cycles kills a ray between two coplanar faces: the foot read black)
+                lift_ = float(os.environ.get('BASE_LIFT', '0'))
+                if lift_:
+                    lo_ = [(r_, max(z_, lo_[0][1] + lift_)) for r_, z_ in lo_]
                 sk = acrylic(f'base-skin-{tint}', 0.55, tname, ld_)        # satin outside: a fine bead-blast, as rough glass
                 revolve(f'base-skin-{base}-{tint}', lo_, sk)
                 revolve(f'base-skin-in-{base}-{tint}', lo_, acrylic(f'base-skin-in-{tint}', 0.0, tname, ld_), flip=True, off=6.0)
