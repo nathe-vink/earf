@@ -966,8 +966,8 @@ def build(frame, samples, scale):
             if o_.type == 'MESH' and any(o_.name.startswith(q_) for q_ in ps_.split('|')):
                 col_.objects.link(o_)
         lo2_.light_linking.receiver_collection = col_
-        for o_ in col_.objects:
-            col_.collection_objects[o_.name].light_linking.link_state = 'EXCLUDE'
+        for co_ in col_.collection_objects:
+            co_.light_linking.link_state = 'EXCLUDE'
     if os.environ.get('DIAG_BLACK'):
         blk_ = SC.principled('diag-black', '#000000', 1.0)
         for p_ in os.environ['DIAG_BLACK'].split(','):
