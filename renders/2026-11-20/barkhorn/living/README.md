@@ -115,7 +115,9 @@ equipment 0, from the masks and from `reaudit.py`.
   54.7, and the studio's front at 59.7.
   - Narrowing the run of windows behind the lens (2.0 m, then 1.2 m) made the fronts darker and no deeper (chroma
     42/37, then 36/33), so proof 2's run was kept.
-  - The studio's depth comes from its `through` lamp. The honest twin here is the sun through the cabinets.
+  - Correction (21 Nov): an earlier line here said the studio's depth comes from its `through` lamp. That lamp is at 0 in
+    all eight tallr7 shots. The lamps on there are the key, fill, kick, horn, `wall_left` and the three background
+    lamps. The room's light through the cabinets is the sun.
 - **C:** the Core switched off, on the side table by the window, off its dock (no dock, no cable), beside a book and a
   glass.
   - The narrow left window is in this frame. It has no portal, and its bars are set pieces set back from the frame
