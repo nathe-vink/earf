@@ -1031,6 +1031,9 @@ def build(frame, samples, scale):
         # at 0.01 the bright glow stopped early and the denoiser drew every faint edge in the shell as a crackled seam
         sc.cycles.use_adaptive_sampling = True; sc.cycles.adaptive_threshold = float(os.environ['ADAPTIVE_THRESHOLD'])
         print('ADAPTIVE', sc.cycles.adaptive_threshold)
+    if os.environ.get('TEST_HIDE'):   # (2026-11-21, tests: the glow grain) objects whose names are listed, hidden from the render
+        for o_ in [o for o in sc.objects if o.name in os.environ['TEST_HIDE'].split(',')]:
+            o_.hide_render = True; print('HIDE', o_.name)
     if os.environ.get('SEED'):   # (2026-11-21, tests) Cycles' sampling seed (0 unless set): two seeds tell noise from structure
         sc.cycles.seed = int(os.environ['SEED']); print('SEED', sc.cycles.seed)
     if os.environ.get('DENOISE_PASSES'):   # (2026-11-21, tests) OIDN's guides: RGB, RGB_ALBEDO, RGB_ALBEDO_NORMAL (Blender's)
