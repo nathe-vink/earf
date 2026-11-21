@@ -18,3 +18,18 @@ A faint long curve stays in `nogloss`. It is unidentified; possibly the room's w
 - `unseen-noroom-all`: all five walls hidden. The big curve goes; a short line remains along the glow's bottom and right edge.
 - `unseen-notrans`: HOUSE_ROOM_TRANS=0. The curve stays, so it is a reflection, not something seen through the glass.
 - `unseen-at-*`: 512 spp at adaptive thresholds 0.01, 0.003 and 0.002. They are the same in time (438-443 s), texture (red high-pass std 6.5) and crackle. Adaptive sampling is not the cause.
+
+## Denoiser guides (08:50-09:12, softboxes unseen, 512 spp)
+
+`denoise-highpass.png` shows the red high-pass of four crops, laid out as:
+
+| | left | right |
+|---|---|---|
+| top | Blender's guides (albedo and normal) | colour alone (RGB) |
+| bottom | colour and albedo | prefilter NONE |
+
+- Colour alone: the curve is gone. Red high-pass std 6.27, against 6.5 with Blender's guides. 438 s, the same time.
+- Colour and albedo: the curve stays, so the albedo guide carries it.
+- Prefilter NONE: the curve stays.
+
+The mottle barely changes in any of them. The 2048-spp crop with no denoiser is the reference for its true level.
