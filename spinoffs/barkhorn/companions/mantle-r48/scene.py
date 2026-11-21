@@ -1133,7 +1133,9 @@ def build(args):
                 out.append((z0_, z1_, k) + tuple(b_[3:]))
             return out
         return bands
-    bands_deck, bands_cover, bands_platter = remap(bands_deck), remap(bands_cover), remap(bands_platter)
+    bands_deck, bands_cover = remap(bands_deck), remap(bands_cover)
+    if not getattr(args, 'platter_clear', False):   # --platter-clear (2026-11-20): the platter's middle lamina stays clear, as designed
+        bands_platter = remap(bands_platter)
 
     M = {}
     rw = meta['P'].get('tint_ring')
@@ -1648,7 +1650,8 @@ if __name__ == '__main__':
     ap.add_argument('--strip-color', type=float, nargs=3, default=(1.0, 0.62, 0.30))
     ap.add_argument('--debug-emit', default='')
     ap.add_argument('--crop', type=float, nargs=4, default=None)
-    ap.add_argument('--blank-label', action='store_true')   # the record's label with nothing printed (the owner, 2026-11-20)
+    ap.add_argument('--blank-label', action='store_true')
+    ap.add_argument('--platter-clear', action='store_true')   # the platter's clear lamina clear under --tint-mode custom   # the record's label with nothing printed (the owner, 2026-11-20)
     ap.add_argument('--vignette', type=float, default=0.12)   # the post step's corner falloff (0 on the house ground, 2026-11-20)
     a = ap.parse_args(argv)
     NO_EDGE_BEVEL = a.no_edge_bevel

@@ -993,6 +993,21 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, a
     co.data.lens = lens; co.data.sensor_fit = 'AUTO'; co.data.dof.aperture_fstop = fstop
     f_ = bpy.data.objects.get('focus')
     if f_ is not None: f_.location = T
+    if '--physical' in mine:
+        # ONE PHYSICAL LIGHT MODEL (the coordinator, 2026-11-21, after the acrylic-light audit): refractive and reflective
+        # caustics on, every lamp a caustic light (MNEE through the flat acrylic), no clamp, no glossy filter, deep bounces;
+        # the shadow-ray shortcut stays off (no --glass-shadows); the record a hair off the platter
+        c_ = sc.cycles; c_.caustics_refractive = True; c_.caustics_reflective = True; c_.blur_glossy = 0.0
+        c_.sample_clamp_indirect = 0.0; c_.sample_clamp_direct = 0.0
+        c_.glossy_bounces = max(c_.glossy_bounces, 32); c_.transmission_bounces = max(c_.transmission_bounces, 32)
+        c_.max_bounces = max(c_.max_bounces, 32); c_.volume_bounces = max(c_.volume_bounces, 4)
+        for o in bpy.data.objects:
+            if o.type == 'LIGHT': o.data.cycles.is_caustics_light = True
+        for o in bpy.data.objects:   # every non-acrylic surface receives the shadow caustics
+            if o.type == 'MESH' and not o.cycles.is_caustics_caster: o.cycles.is_caustics_receiver = True
+        rec_ = bpy.data.objects.get('record')
+        if rec_ is not None: rec_.location.z += 0.00005
+        print('v3_day: PHYSICAL: caustics on, MNEE lamps, clamp 0, filter glossy 0, bounces 32+, the record +0.05 mm', flush=True)
     vs = sc.view_settings; vs.view_transform = 'Khronos PBR Neutral'; vs.look = 'None'; vs.exposure = -0.1
     vs.use_white_balance = True; vs.white_balance_temperature = wb; vs.white_balance_tint = 3.0
     print(f'v3_day: THE HOUSE GROUND, gain {gain}, camera az {az} el {el} at {d} m, {lens} mm', flush=True)
@@ -1059,6 +1074,7 @@ def prepare():
                 if kind_ == 'opal':
                     bb.inputs['Base Color'].default_value = (0.90, 0.90, 0.88, 1); bb.inputs['Transmission Weight'].default_value = 0.0
                     bb.inputs['Subsurface Weight'].default_value = 1.0; bb.inputs['Subsurface Scale'].default_value = 0.004
+                    bb.inputs['Subsurface Radius'].default_value = (1.0, 1.0, 1.0)   # neutral, not skin's red-long radii
             if kind_ == 'opal':
                 out_ = [n for n in nt_.nodes if n.type == 'OUTPUT_MATERIAL'][0]
                 for l_ in list(out_.inputs['Volume'].links): nt_.links.remove(l_)
