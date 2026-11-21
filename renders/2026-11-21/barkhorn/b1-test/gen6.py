@@ -15,6 +15,7 @@
       t3  steep: a 14 cm head on the track at (8.25, 4.95, 3.35), 0.6 m in front of the bay, 14 deg, at the same aim.
       t4, t5  no front head; the softbox a real one (a mesh diffuser in a body); track-bay1 times IRR (gen6.py t4 3).
       t6, t7  a diffuser flush under the ceiling over the bay, and a frontal softbox at strength IRR (gen6.py t6 10).
+      t8, t9  t7's lights (frontal softbox at IRR) with the niches in a mid warm-grey felt (an option: a set change).
     python3 gen6.py VARIANT [IRR]  ->  fixed6-VARIANT.json"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -48,7 +49,7 @@ elif v.startswith('t3'):
 s['title'] = f'B1 fixed-6 {v}: Planet EARF bar, the record wall from a seat at the bar (a test, not a final)'
 s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
                           'fn': 'shadow_ray_report'})                       # (prints what the cut left; changes nothing)
-if v.startswith('t6') or v.startswith('t7'):
+if v[:2] in ('t6', 't7', 't8', 't9'):
     # t6/t7: two real softboxes (living_ext.softbox: a glowing diffuser in a black body, every ray on, casting shadows)
     #   ceiling-panel: a 1.4 x 0.9 m diffuser flush under the ceiling over the bay's front (z 3.36-3.40), facing
     #     down, strength 6. The live horn card spanned z 3.04-3.58, more than half of it above the ceiling.
@@ -63,5 +64,13 @@ if v.startswith('t6') or v.startswith('t7'):
                               'position': [8.05, 4.9, 3.37], 'target': [8.05, 4.95, 0.0], 'strength': 6.0, 'color': '#FFE2C0'})
     s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [1.2, 0.9], 'depth': 0.1,
                               'position': [8.6, 4.3, 3.0], 'target': [8.25, 5.6, 1.55], 'strength': irr, 'color': '#FFE2C0'})
+if v.startswith('t8') or v.startswith('t9'):
+    # t8/t9 (the coordinator, 14:38: a set change, an option for the owner): t7's lights (t9 with the frontal softbox
+    # at `irr`), and the speakers' niches in a mid warm-grey felt (#8C8379, albedo about 0.23) in place of the
+    # near-black #1A1918 (planet_bar.py:135), so the clear horn is seen against a lit ground by transmission. The swap is
+    # the bar's own restyle of 'kit-felt', which dresses both bays.
+    for p_ in s['set']['props']:
+        if p_.get('fn') == 'restyle':
+            p_['swap']['kit-felt'] = {'kind': 'plain', 'color': '#8C8379', 'rough': 0.95}
 json.dump(s, open(os.path.join(HERE, f'fixed6-{v}.json'), 'w'), indent=1)
 print(v, s['title'], sorted(L))
