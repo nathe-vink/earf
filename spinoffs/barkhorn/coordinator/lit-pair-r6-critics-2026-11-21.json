@@ -1,0 +1,335 @@
+{
+  "summary": "Two critics judge the round-6 lit Ember pair (pendant LIT and Core LIT-c: softboxes unseen, colour-only denoise, the Core key off) for the lamp pages' second pictures; a skeptic checks each",
+  "agentCount": 4,
+  "logs": [
+    "lit pair r6 critics: 2 of 2 returned"
+  ],
+  "result": {
+    "results": [
+      {
+        "part": "photo",
+        "found": {
+          "findings": [
+            {
+              "id": "B1",
+              "severity": "blocking",
+              "frame": "core-lit",
+              "where": "Core base body, the cone below the red band under the ball (full res x 520-1110, y 1530-1740)",
+              "what": "At 480 x 600 the base body reads as black or dark brown, not Ember. Body mean sRGB (22.2, 0.3, 0.2), L* 1.5, C* 7.1, the same at 480. None of its pixels reach R 40 at 480 (round 5: 98 %, body (47.7, 1.0, 0.8), L* 5.9, C* 24.9; OFF frame (153, 35, 33), L* 34). In the pair it is within 1.5 L* of the pendant's black cap, which is (0, 0.1, 0.2) at 480. Only the band under the ball shows that the base is red. This is not a realism fault: as a photograph it holds together (see base_question). The fault is what it tells a viewer about the product: the base reads as a different, black material, not the same pour as the ball.",
+              "expected": "A base that is plainly not glowing but still reads as dark Ember, about round 5's level: R 40-55, L* 5-6, C* about 25, with G and B under about 3 so the satin gets no grey sheen. The floor (left and front about L* 15) and the polished ball should stay as they are. The LIT-d light on the lamp and base only would do this if it lands there.",
+              "sure": "likely",
+              "evidence": "Measured in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-photo/ (h.py helpers). Crops: core6-base-100.png beside core5-base-100.png and coreoff-base-100.png. at480-x2-core5-core6-pend6.png is the 480 frames at 2x: r5's base is visibly maroon, r6's is near-black with a faint maroon cast, and the pendant cap is pure black. pair480-core6-pend6.png shows the pair as the page shows it."
+            },
+            {
+              "id": "N1",
+              "severity": "note",
+              "frame": "core-lit",
+              "where": "Core floor right of the base (x 1200-1600, y 1500-1700), and the lower backdrop on the right",
+              "what": "The right floor gets a neutral studio light as well as the lamp. Right floor about (64-71, 45-52, 41-49), median L* 22.4. Left floor (x 0-400) about (50-59, 33-35, 27-30), L* 15.4; front L* 15.7. The lamp's red excess (R-G) is similar on both sides (17-27), but G is about 15 levels higher on the right. The base's right edge picks up G/B 2-7 against 0-1 on the left. At 480 it reads as a soft fill from the right, which a real low-key studio shot can have. Round 5's bright neutral floor on the left (L* 37.2) is gone, and the left and front floor now read as lit by the lamp: red pool, and a dark contact shadow in front of the foot, (29-38, 11-18, 10-15) at y 1750.",
+              "expected": "Acceptable as a photograph. If the brief is strictly 'the lamp lights its own floor', this light should come off the right floor too.",
+              "sure": "certain",
+              "evidence": "RGB grid of y 1300-2000 in 50 x 100 blocks (floor.py, plus an inline grid). Crops: core6-floor-half.png and core6-darks-stretch90-640.png, where the dark stretch shows the lighter right floor."
+            },
+            {
+              "id": "N2",
+              "severity": "note",
+              "frame": "pair",
+              "where": "Both glows and shells",
+              "what": "The round-5 outlines are gone, at 100 % and in the red-channel high-pass. A sigma-12 high-pass shows no rectangle or arch outlines in either glow; they are plain in r5. The sigma-3 high-pass p99.9 fell from 10.0 to 6.4 (Core) and from 9.8 to 4.95 (pendant). At 100 % both glows are clean, even and Ember: Core L* 40.3, C* 84.3, h 40.0; pendant 39.1, 83.1, 39.5; G and B 1-5. What remains is geometry a real photo would also show: (a) a soft horizontal step in the Core glow, about 6 R levels over 16 px at y 1128-1144 near centre, where the shell reflects the room's horizon; (b) a thin straight line at y about 1395, the base lip seen through the shell. The Core glow is brighter at the top (p90 45.8, p10 31.3 L*), which fits an up-firing LED. It darkens slightly at the limb (R 169 at the edge, 195 fifty px in), so it reads as a sphere, not a flat disc. With the softboxes gone the shells still pick up the grey room at their rims (Core left limb R 42 falling to 18 inward), so they read as polished glass.",
+              "expected": "No change needed.",
+              "sure": "certain",
+              "evidence": "core6-glow-hp12-x12.png against core5-glow-hp12-x12.png; pend6-glow-hp12-x12.png against pend5-glow-hp12-x12.png; whole-lamp high-passes core6-R-hp6-x10.png and pend6-R-hp6-x10.png; 100 % crops core6-glow-lower-100.png, core6-ball-topleft-100.png, core6-ball-right-100.png, pend6-shell-left-100.png."
+            },
+            {
+              "id": "N3",
+              "severity": "note",
+              "frame": "core-lit",
+              "where": "Core seat ring under the ball (x 778-888, y 1470-1498)",
+              "what": "The clipping is small and reads as a natural hot glint. 510 px have R >= 250, 30 of them at 255, in a 110 x 28 px band; their mean is (251.7, 59.7, 58.8), a bright red lifting toward pink, with texture left and no flat plateau. A real camera clips the hottest point of a red source the same way.",
+              "expected": "No change needed.",
+              "sure": "certain",
+              "evidence": "core6-seat-wide-x2.png (and core5-seat-wide-x2.png for comparison); core6-seatring-100.png."
+            },
+            {
+              "id": "N4",
+              "severity": "note",
+              "frame": "pair",
+              "where": "Darks: walls, floor, base, shells",
+              "what": "Noise and banding are clean. Pixel noise is even, sd 0.48-0.52 L*, on every wall and floor patch in both frames, so the two frames match, and it dithers the gradients: no banding seen. The strict isolated-pixel search finds 0 fireflies in either frame. Denoiser mottling (6-30 px scale) on the Core floor and base has sd 0.14-0.17 L* and peak-to-peak about 1 L*. Walls and the pendant frame are at 0.06-0.08. It shows only in a strong stretch (blotches on the base in core6-base-Rstretch10-45.png and on the floor in core6-darks-stretch90-640.png), not at 100 %.",
+              "expected": "No change needed.",
+              "sure": "certain",
+              "evidence": "floor.py output (pixel noise, grain and blotch bands per region), the firefly search, and the stretched crops named above."
+            },
+            {
+              "id": "N5",
+              "severity": "note",
+              "frame": "pair",
+              "where": "The pair at 480 x 600",
+              "what": "The pair is matched. Glow median by mask A at 480: Core 40.2, pendant 39.1; full res 40.3 and 39.1; hue 40.0 and 39.5; C* 84.3 and 83.1. The walls carry the same hot spot at top centre-left (L* 32) and match corner for corner (TL 14-15, TR 23). Grain matches. The visible differences belong to the products: the pendant glow has a stronger top-to-bottom gradient (p10 24.1 against 31.3), and only the Core shows a floor. The one difference that reads at 480 is B1: the Core's near-black base next to the pendant's black cap.",
+              "expected": "No change needed beyond B1.",
+              "sure": "certain",
+              "evidence": "pair480-core6-pend6.png; pair480-coreoff-core6-pend6-pendoff.png; coarse L*/C* grids of both frames."
+            },
+            {
+              "id": "N6",
+              "severity": "note",
+              "frame": "pendant-lit",
+              "where": "Pendant cap and cord",
+              "what": "The cap and cord are crushed to code 0: 62-87 % of cap pixels are (0, 0, 0) with a maximum of 2-3, and 70 % of cord pixels are zero. The stepped cap still reads, by its silhouette against the grey wall and by step edges 1-3 levels apart (visible in a x21 stretch). Real low-key photos often crush blacks like this; at 100 % it is a pure black cut-out.",
+              "expected": "Acceptable. Lifting it a level or two would only matter at full size.",
+              "sure": "certain",
+              "evidence": "pend6-cap-100.png; pend6-cap-stretch12.png (also shows the known tick under the cap)."
+            },
+            {
+              "id": "N7",
+              "severity": "note",
+              "frame": "pair",
+              "where": "Backdrop in both frames",
+              "what": "The room reads as a dim grey studio with a background light left on, not a dark room. The backdrop's hot spot (L* 32, Y about 6.3 %) is about half the glows' median luminance (L* 40, Y about 11 %). The lamps' red never reaches the wall: C* stays 3-4 even right beside the Core ball, while the floor under the Core is red-lit (C* 10-16). That holds together with a far sweep, and it matches the OFF frames' studio. In the pendant frame only a mild warm lift at the bottom centre ((58-66, 48-54, 41-46) against (44-50, 38-40, 32-33) at the bottom-left edge) hints at light from below.",
+              "expected": "No change needed. A darker backdrop would read more 'lamp in the dark', but this is a legitimate studio choice and is matched across the pair.",
+              "sure": "certain",
+              "evidence": "Coarse L*/C* grids; core6-darks-stretch90-640.png and pend6-darks-stretch90-640.png."
+            },
+            {
+              "id": "N8",
+              "severity": "note",
+              "frame": "pair",
+              "where": "Glow edges",
+              "what": "The glow edges are crisp, with no halation. The Core opal edge goes from R 36 to 169 within 2-4 px; the pendant opal edge from 25 to 147 within 2-4 px. The dark glass beside them gets no lift. A real lens usually adds a faint veiling glow around a bright red emitter. It cannot be seen at 480.",
+              "expected": "Optional: a very faint bloom of a few levels within about 10 px would only matter at full size.",
+              "sure": "certain",
+              "evidence": "Red-channel row and column profiles across the Core's left, right and top limbs and the pendant's left side."
+            }
+          ],
+          "base_question": "The dark base reads right as a photograph of a lamp that is on in a dark studio. It does not read as smoke or frost. The body is a clean, very dark red with no grey veil: mean (22.2, 0.3, 0.2), G and B under 1. The cone still reads: the flanks fall to 0.82-0.86 of the centre (round 5: 0.82 and 0.78). The ball lights its top band (R up to 224). The base casts a dark contact shadow on a red-lit floor. The numbers also agree with each other: in linear light the flank is about 0.2 of the red on the floor beside it, as it should be for faces turned away from the ball.\n\nBut at 480 x 600 the body's colour is gone. It is L* 1.5, C* 7, and none of it reaches R 40 (round 5: 98 %). In the pair it sits within 1.5 L* of the pendant's black cap. Only the band under the ball says the base is red. Someone looking at the lit picture alone, and the owner, who looks closely at the base, will read it as a black or dark-brown base under a red ball. That misstates the 'same pour' base, which is why I rate it blocking with 'likely'.\n\nMy call: take the LIT-d alternative if, measured the same way, it meets all of these:\n- The base body comes back to about round 5's level: R 40-55, L* 5-6, C* about 25.\n- G and B stay under about 3. A grey satin sheen is what would read as smoke-frosted.\n- The floor medians are unchanged, left and front about L* 15.\n- The polished ball gets no new highlight.\n\nIf LIT-d cannot do all of that, r6's dark base is not wrong as a photograph: it is the true look of this lamp in the dark. The choice should then go to the owner with both frames side by side.",
+          "q1_pendant_ready": "Yes. Pendant r6 reads as a real photograph of a lit pendant at 480 and at 100 %. The glow is clean, with no outlines in the high-pass (sigma-3 p99.9 4.95, round 5 9.8), even grain and Ember red (L* 39.1, C* 83.1, h 39.5). It matches the Core. Nothing clips. The cap is black and stepped, and the dark band under the cap holds. Only notes remain: cap and cord crushed to code 0, no halation, and a backdrop bright for a 'dark' room, matched in both frames.",
+          "q2_core_ready": "Not yet, for one reason only: the base (B1). Everything else is ready:\n- The glow is clean, with the round-5 outlines gone.\n- It is matched to the pendant: 40.2 against 39.1 at 480.\n- The left and front floor now read as lit by the lamp.\n- The seat-ring clip is small and natural.\n- No fireflies, no banding.\n- The softbox reflections are gone while the shells still read as polished glass.\nThe right floor still carries a neutral fill (L* 22.4 against 15.4 on the left), which is acceptable. If LIT-d lifts the base as described, without a grey sheen and without lighting the floor, take it. If not, the owner decides between that and r6's truthful dark base.",
+          "measured": [
+            "Glow medians, mask A (L*>18, C*>45, h 25-50): Core r6 L* 40.3 (p10 31.3, p90 45.8), C* 84.3, h 40.0; pendant r6 39.1 (24.1/47.7), 83.1, 39.5; at 480: 40.2 vs 39.1. Mask B (R>100, L*>25): 40.3 vs 40.8.",
+            "Red-channel high-pass of the glows, sigma 3, std / p99.9: Core r6 1.72 / 6.42 (r5 1.84 / 9.97); pendant r6 1.32 / 4.95 (r5 1.81 / 9.79). In the sigma-12 high-pass the r5 outlines are visible and r6 shows none.",
+            "Core base body (x 520-1110, y 1530-1740) mean sRGB: r6 (22.2, 0.3, 0.2), L* 1.5, C* 7.1; r5 (47.7, 1.0, 0.8), L* 5.9, C* 24.9; OFF (153.3, 34.7, 32.5), L* 34.0, C* 58.1. Share of base pixels with R>40 at 480: r6 0.00, r5 0.98.",
+            "Core base R, left flank / centre / right flank (y 1560-1660): r6 19.8 / 24.2 / 20.9; r5 40.8 / 49.5 / 38.5. Row profile down the centre: band under the ball up to 224, then 49, 38, 30, 26, 24, 22, 20, 18 to the foot.",
+            "Pendant at 480: cap (0, 0.1, 0.2). At full res 62-87 % of cap pixels are (0, 0, 0), max 2-3; 70 % of cord pixels are zero.",
+            "Core floor: left (x 0-400, y 1450-1700) about (50-59, 33-35, 27-30), median L* 15.4; right (x 1200-1600, y 1500-1700) about (64-71, 45-52, 41-49), L* 22.4; front (y 1800-2000) L* 15.7; contact shadow in front of the foot (y 1750) (29-38, 11-18, 10-15); floor beside the base (56, 32, 26).",
+            "Seat ring: 510 px with R>=250, 30 at 255; bounding box y 1470-1498, x 778-888; mean (251.7, 59.7, 58.8). Pendant: no pixel with R>=250 (glow R max 238).",
+            "Darks: pixel-noise sd 0.48-0.52 L* on every wall and floor patch in both frames; mottling (6-30 px) sd 0.14-0.17 L*, peak-to-peak about 1.0-1.1, on the Core floor, against 0.06-0.08 elsewhere; 0 isolated hot pixels in either frame.",
+            "Walls: both frames' hot spot L* 32 at top centre-left; corners TL 14-15, TR 23; C* 3-4 everywhere, including beside the Core ball.",
+            "Glow edges: Core left limb R 36 to 111 to 169 over about 4 px, with no lift in the shell beside it; pendant left side R 25 to 65 to 118 to 147 over about 6 px."
+          ]
+        },
+        "verified": {
+          "verdicts": [
+            {
+              "id": "B1",
+              "verdict": "confirmed",
+              "severity": "note",
+              "measurement": "I measured with my own code (verify-photo/v.py) on the same box, x 520-1110, y 1530-1740. Core r6 body at full size: mean sRGB (22.2, 0.29, 0.24), median L* 1.54, C* 7.05. At 480 (Lanczos): (22.2, 0.17, 0.10), L* 1.54, C* 7.06. At 480, 7 of 11,151 px reach R 40, all on the box's bottom two rows (lip and floor), so 'none' holds for the body. r5: (47.7, 1.00, 0.77), L* 5.88, C* 24.9; 98.9 % at R >= 40 (99.1 % at 480). OFF: (153.3, 34.7, 32.5), L* 34.2. Pendant cap at 480: L* 0.08 (lower step) to 0.84 (centre), C* about 0.1. So the base sits 0.7-1.5 L* above the cap, but about dE 7 from it, because the base has C* 7 and the cap none. NOT REPRODUCED: 'dark brown'. The hue is pure red (h_ab 19.6, G and B mean under 0.3, p99 2), and WebP q80 and JPEG q85 at 480 and 960 keep it at about (22, 0.4, 0.4), h 19.4. AGAINST 'a different material': at 480 the ball's own tint ring beside the opal measures (31-37, 5-7, 3-4), L* 3.6-4.5, C* 11-15, the same hue. PHYSICS: in linear red the body is 0.12-0.19 (flank strips) and 0.15-0.29 (centre) of the floor beside it. Crops: verify-photo/at480-x3-core5-core6-pendcap.png, ring-and-base-left-480-core6-core5-x3.png, page480-coreoff-core6.png, core6-base-full.png.",
+              "reasoning": "The observation is real. At 480 the base body is near-black and its colour is barely legible. What says it is red is the lit shoulder and a faint maroon cast, which shows beside the neutral pendant cap. Two parts of the finding do not hold. First, it is not brown: the hue is pure red, and still is after WebP or JPEG. Second, it does not read as a different material. The ball's own tint ring goes almost as dark (2-3 L* lighter, same hue), and in the 3x crop of the 480 frame the ball's shell and the base look like one dark pour with the opal glowing inside. The darkness is physically right, which the critic also says. The lamp page shows the OFF picture first, where the base is plainly red (153, 35, 33), so the page does not misstate the product. The critic's own fallback ('if LIT-d fails, r6 is not wrong; the owner chooses') is not a must-fix, so 'blocking' contradicts the critic's own call. I rate it a note: an owner's choice between r6 and LIT-d, shown side by side. LIT-d is better only if it passes the critic's four tests. I keep it rather than refute it because the owner looks closely at the base and may ask why it is black."
+            }
+          ],
+          "base_check": "I agree with the critic's photographic verdict and with the fallback, but not with 'blocking'.\n\nFULL SIZE (verify-photo/core6-base-full.png and foot-left-core6-core5-x3.png): the base is a clean, very dark oxblood.\n- No grey veil: G and B mean 0.29 and 0.24, p99 2.\n- No banding: R runs 14-35 with a smooth histogram. Denoiser mottling of +-1-2 R levels shows only under a 4x stretch (core6-base-Rstretch8-40.png).\n- The foot edge is crisp, and the contact shadow on the red-lit floor is soft.\n- The shoulder band reaches R 255 (p99 250 on the seat ring), not 'up to 224' as the critic says.\n- The cone reads by its outline, its lit shoulder and its contact shadow. At y 1640 the left flank falls to 0.82 of the centre (sRGB), but the right only to 0.93 (r5: 0.86 and 0.77). So the right side is flatter than the critic's '0.82-0.86'.\n- Linear flank-to-floor is 0.12-0.19, close to the critic's 'about 0.2' and right for faces turned away from the ball.\n\nAT 480 (s480-core5-core6-pend6.png, page480-coreoff-core6.png, at480-x3-core5-core6-pendcap.png):\n- 'Near-black with a faint maroon cast': yes. Body L* 1.5, C* 7.\n- 'Dark brown': no. The hue is pure red, also after WebP q80 or JPEG q85.\n- 'A black material different from the ball': no. The ball's own tint ring measures (31-37, 5-7, 3-4), L* 3.6-4.5, so the shell and the base go dark together and read as one pour (ring-and-base-left-480-core6-core5-x3.png).\n- Beside the pendant's black cap the base is 0.7-1.5 L* lighter but about dE 7 away, because it is warm where the cap is neutral.\n- On the page, the OFF picture comes first and shows the base plainly red.\n\nSo r6's dark base reads right for a lamp that is on in a dark studio and does not misstate the product. It is acceptable as it stands. Take LIT-d only if, measured the same way, it passes all four of the critic's tests:\n- body R 40-55, L* 5-6, C* about 25;\n- G and B under about 3;\n- floor medians unchanged, left and front about L* 15;\n- no new highlight on the polished ball.\n\nOtherwise show the owner both frames side by side. Since he looks closely at the base, he should see both in any case."
+        }
+      },
+      {
+        "part": "product",
+        "found": {
+          "findings": [
+            {
+              "id": "core-base-reads-black",
+              "severity": "fix",
+              "frame": "core-lit",
+              "where": "Core LIT-c, the base flank below the red shoulder band: x 470-1180, y 1530-1770 (full frame); the base silhouette at 480 x 600",
+              "what": "The base flank is a flat near-black. Median RGB is 21-23,0,0 (L* p5/p50/p95 1.0/1.5/2.3). Centre 1.9 against edges 1.5, foot band 1.2. No satin, shading or foot band can be seen at 100 % or at 480 x 600. In the 1:1 480 crop, r5's base (49,1,1, L* 6.1) reads dark red, while LIT-c's reads black with a red glow on its shoulder. It is the same tone as the pendant's black collar band seen through the tint (26,1,0, L* 2.2), so across the pair the Core's red base and the Hemisphere's black parts look alike. It is physically consistent: base-to-floor luminance is 0.09 lit against 0.11 off, and lifted 3 stops it is a clean red satin cone with round shading and no smoke. After the OFF picture, a buyer can read it as the same base in shadow. Seen alone, or by an owner looking at the base, it is a black base.",
+              "expected": "If the lit picture is to show the base, the flank should be around r5's level (L* 5-7, about RGB 45-50,0-3,0-3): dark red, not grey. The light should be one a real studio could have: spill and a key shadow on the floor at the foot, no neutral sheen on the satin, no softbox reflection back on the ball or the polished lip. Otherwise LIT-c's base is the true look in the dark, and the OFF picture has to carry the colour.",
+              "sure": "likely",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/body-480-off-r5-r6-pend.png (1:1 at 480 scale: OFF, r5, LIT-c, pendant); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-off-lit-480pair.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-base-cl6.png vs core-base-co.png and core-base-cl5.png (same folder, 100 %); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-base-vs-pend-collar-100.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-base-lift3stops-r6-r5.png (+3 stops: the data is a clean red cone). Numbers: flank centre RGB 23,0,0 L* 1.6 C* 7.8 h 19; r5 49,1,1 L* 6.1 C* 25.5; OFF 160,47,47 L* 37.3."
+            },
+            {
+              "id": "core-floor-red-blotches",
+              "severity": "note",
+              "frame": "core-lit",
+              "where": "Core LIT-c floor, left (x 0-420, y 1560-2000) and front (x 450-1200, y 1800-2000)",
+              "what": "The floor carries faint red colour blotches 4-40 px across. Band-passed a* std is 0.64-0.67 (p1/p99 about -1.5/+1.7) on the floor, against 0.11 on the Core's wall and 0.08 on the pendant's backdrop (r5 floor-left 0.49). L* in the same band is clean (std 0.23-0.28). They show faintly at 100 % and clearly at +3 stops, and cannot be seen at 480 x 600.",
+              "expected": "An evenly coloured dark floor like the wall (a* band std about 0.1).",
+              "sure": "likely",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-floor-left-100.png (100 %); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-base-lift3stops-r6-r5.png (left panel floor, +3 stops)"
+            },
+            {
+              "id": "core-floor-right-studio-light",
+              "severity": "note",
+              "frame": "core-lit",
+              "where": "Core LIT-c floor right of the base (x 1210-1580, y 1560-2000) against left and front",
+              "what": "The floor is lit evenly by the room, not in a pool that falls off from the lamp. Front: 12.8 at the foot, 15.5-15.8 at 60-120 px out, 14.3 at the frame bottom. Left: 12.6 at the foot, 15 from 130 px out. The right floor is brighter and less red (20.2 at the foot to 23.7, C* 7-10) than the left (C* 11-14), in step with the brighter right wall (TR 23.2 against TL 15.3). A light on the right still reaches the floor. For a buyer it reads as room fill and does no harm.",
+              "expected": "Nothing for the product. If the claim is that the lamp lights its own floor, it holds on the left and front but not on the right.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-lower-half.png; floor falloff rows measured from the foot outward (see measured)"
+            },
+            {
+              "id": "pend-band-apparent-height",
+              "severity": "note",
+              "frame": "pendant-lit",
+              "where": "Hemisphere LIT r6, centre line x=700, from the cap's lowest edge (y about 990) to the top of the glow (y 1097)",
+              "what": "The dark band under the cap measures about 107 px, about 22 mm at 4.76 px/mm (shade 951 px = 200 mm), against the 13 mm stated. In the OFF frame the collar itself shows as only about 40 px (y 990-1030, L* 5-7). In LIT, the next 60 px (y 1032-1092) are shell with nothing lit behind it: L* rises from 1.7 to 10.6, then a hard edge into the glow at 42.6. The change is likely refraction and viewing angle, but I cannot confirm that from the picture. At 480 x 600 it reads as the design's dark band.",
+              "expected": "A band matching the CAD's 13 mm once refraction is allowed for. Worth one check against the CAD view if the owner asks about the band.",
+              "sure": "unsure",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/pend-collar-off-vs-lit-2x.png (OFF top, LIT bottom, 2x); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/pend-cap-100.png"
+            },
+            {
+              "id": "pend-cap-crushed",
+              "severity": "note",
+              "frame": "pendant-lit",
+              "where": "Hemisphere LIT r6, the stepped cap (x 540-1110, y 740-985)",
+              "what": "The cap is crushed to pure black: 67 % of cap pixels are exactly 0,0,0 and 89 % have no channel above 2 (OFF frame: 4 % and 47 %). The four tiers read only by their outline against the backdrop and faint lights on the step edges. It still reads plainly as a black stepped cap on a black cord at 480 x 600, and the data is there when lifted 4 stops.",
+              "expected": "Acceptable as it is. A hint of tread on the steps would show the cap as matt metal rather than a cut-out.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/pend-cap-100.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/pend-cap-lift4stops.png"
+            },
+            {
+              "id": "pair-no-gloss-cue",
+              "severity": "note",
+              "frame": "pair",
+              "where": "Both lit shells: the Core ball and the Hemisphere shade",
+              "what": "With the softboxes flagged off, neither polished shell carries any highlight. Gloss shows only as a faint grey reflection of the backdrop at the outer rims (Core ring 31-37,2,1, L* 3-4; pendant shell sides 13,1,0, L* 1.0). At 480 x 600 the Core reads as a glowing disc in a dark glass ring, and the pendant as a glowing dome in a dark rim. Both still read as glass, and the OFF pictures carry the polish.",
+              "expected": "Fine as a pair. Noted so that nobody adds a highlight to one lamp and not the other.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-ball-cl6.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/core-rim-topleft-2x-cl6.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/critic-product/pend-shade-full.png"
+            }
+          ],
+          "base_question": "The dark base reads right for a lamp that is on in a dark studio, and coming after the OFF picture it does not misstate the product. It is dark red, not grey or smoky: flank RGB about 21-23,0,0 with G and B at 0 and no sheen. The shoulder catches the ball's red light in a band that fades into the flank. The base also matches the dark maroon of the ball's own shell ring (31-37,2,1), so the lamp body reads as one pour gone dark. It is physically consistent too: base-to-floor luminance is 0.09 lit against 0.11 off, so it darkened with the room. Lifted 3 stops, it is a clean red satin cone with no smoke anywhere, so the owner's 'smoke-frosted' worry does not apply. But it does not show the base. At 480 x 600 it reads black (R 21 of 255; r5's 49,1,1 read dark red), the same tone as the pendant's black collar band (26,1,0). At full size it is a flat silhouette: L* 1.0-2.3 across the whole flank, with no satin, no shading and no foot band. A buyer who sees only this picture, or an owner who looks closely at the base, will see a black base rather than a red one in shadow.",
+          "q1_pendant_ready": "Ready. At 480 x 600 and at 100 % the pendant reads as itself, switched on. It shows the black stepped cap on its black cord, the dark collar band under the cap, and the opal glowing through the tint with dome shading (L* 48.7 at the top to 25.5 at the bottom; 40.9 at the centre to 29-33 at the sides). Beyond the opal you see the darker shell edge, and at the rim the layered, polished lip, with a thin warm line where it reflects the floor. The r5 crackle is gone (glow detail std 1.58 against 2.26, and no outlines in a 12x stretch). No studio reflections remain, the glow matches the Core's, and the frame lines up with the OFF picture to 1 px. Only notes are left: the cap is crushed to 0 on 67 % of its pixels (the steps read by outline), and the band under the cap measures about 22 mm on the picture against the 13 mm stated.",
+          "q2_core_ready": "LIT-c can be used as it stands, and nothing in it is false. The ball, opal, 10 mm rim ring (52 px at 5.14 px/mm) and polished seat lip all read right. The r5 crackle is gone (detail std 2.22 against 2.66, no outlines) and so is the bright left floor (15.4, was 38.8). The frame lines up with the OFF picture to 1 px. Its one cost is that the base reads black instead of red, at 480 x 600 and at full size. Given how closely the owner looks at the base, compare LIT-c and LIT-d side by side at 480 x 600. Use LIT-d only if its base reads dark red (around r5's L* 6, RGB about 49,1,1) and it passes three checks. (a) The floor at the foot gets the key's spill and a shadow of the base; a lit base on an unlit floor means light-linking, which looks pasted on and breaks the owner's first rule. (b) The satin flank shows no grey sheen, with G and B staying near 0; a neutral sheen over red is the smoke-frosted look he asked about. (c) No softbox reflection comes back on the ball or the polished lip. If LIT-d fails any of the three, keep LIT-c.",
+          "measured": [
+            "Core LIT-c base flank (x 470-1180, y 1530-1770): L* p5/p50/p95 1.0/1.5/2.3; R p5/p50/p95 15/21/27, G and B 0-1. Centre (x 760-860, y 1580-1680) RGB 23,0,0, L* 1.6, C* 7.8, h 19; left edge 20,1,0 L* 1.4; right edge 21,1,0 L* 1.6; foot band 18,0,0 L* 1.2",
+            "Same spots in r5: centre 49,1,1 L* 6.1 C* 25.5; left 4.7; right 4.0. In OFF: centre 160,47,47 L* 37.3 C* 54.0",
+            "Base-to-floor luminance: LIT-c 0.09 (base L* 1.6, floor in front of the foot L* 15.3, RGB 57,31,27); OFF 0.11 (37.3 against about 96)",
+            "Core shoulder band centre (x 780-840, y 1490-1510): median 235,14,12, L* 49.5, C* 89; p95 251,51,50 (the hottest pixels go pink); centre-line profile y 1495: 55.1, y 1510: 7.2, y 1540: 2.4",
+            "Dark acrylic tones: Core shell ring left 31,2,1 (L* 3.2), top 37,2,1 (L* 4.0); pendant collar band lower part 26,1,0 (L* 2.2), upper part 1,0,0; pendant shell sides beyond the opal 13,1,0 (L* 1.0); pendant cap 0,0,0 (67.3 % of cap pixels exactly 0, 88.9 % no channel above 2; OFF 4.4 % / 47.4 %)",
+            "Core glow: top 221,11,6 L* 46.5; centre 202,6,0 L* 42.3; bottom 156,4,1 L* 32.2; along row 1090 flat at 41-42, 35-37 at the edges",
+            "Pendant glow: top 231,12,13 L* 48.7; bottom 128,0,0 L* 25.5; along row 1300, 40.9 at the centre and 29-33 at the edges",
+            "Glow detail (R minus a 12 px blur): Core r6 std 2.22 (p1/p99 -5/+5) against r5 2.66 (-7/+6); pendant r6 1.58 (-3/+4) against r5 2.26 (-6/+6). In a 12x stretch, r5 shows the softbox outlines and r6 shows grain only",
+            "Geometry: Core ball 822 px (x 411-1233 at y 1090) = 160 mm, 5.14 px/mm; glow disc about 720 px = 140 mm; ring 52 px at the left (about 10 mm), about 43 px at the top; base foot 773 px = 150 mm. Pendant shade 951 px (x 345-1296 at y 1250) = 200 mm, 4.76 px/mm",
+            "OFF against LIT silhouette edges: Core y 900 454-1189 / 454-1188, y 1090 410-1232 / 411-1233; pendant y 900 569-1074 / 569-1074, y 1250 345-1297 / 345-1296",
+            "Pendant band at x=700: OFF collar L* 5-7 over y 990-1030, then shell 17-19; LIT 0.1-0.9 over y 990-1030, 1.7 to 10.6 over y 1032-1092, glow 42.6 from y 1098 (about 107 px, about 22 mm on the picture)",
+            "Core floor (L*): front at the foot 12.8, 15.5-15.8 at 60-120 px out, 14.3 at the frame bottom; left at the foot 12.6, about 15 beyond 130 px; right 20.2 at the foot to 23.7; C* left 11-14, right 7-10. r5 left floor 38-41",
+            "Core floor a* band-pass (4-40 px) std: left 0.64, front 0.67, right 0.46; Core wall 0.11; pendant backdrop 0.08; r5 floor-left 0.49",
+            "Pendant backdrop beside the shade C* 3.2-4.7, h 73-79 (no red cast); bottom rows y 1850-1990 warmer (h 64-66, C* 5.5-8.5)"
+          ]
+        },
+        "verified": {
+          "verdicts": [
+            {
+              "id": "core-base-reads-black",
+              "verdict": "confirmed",
+              "severity": "fix",
+              "measurement": "Core LIT-c (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/core-ember-lit-c.png), base flank measured with a silhouette mask (G<10, R<90) inside x 470-1180, y 1530-1770, eroded 6 px, 156k px: median RGB 21,0,0, L* p5/p50/p95 1.00/1.54/2.32, C* 6.9, h 19. This matches the critic's 1.0/1.5/2.3. Centre box (x 760-880, y 1600-1680): LIT-c 22,0,0, L* 1.65, C* 7.3. r5 49,1,1, L* 6.12, C* 25.5. OFF 161,47,47, L* 37.45. All three match the critic's numbers. Down the flank (x 720-880): L* 2.36 at y 1545 just under the shoulder, 1.44 at mid height, 0.92 at the foot. There is no foot band: r5 rises from 6.12 to 6.83 at y 1710-1755, OFF from 36 to 41. Across the flank, centre luminance divided by left and right edge luminance: upper flank (y 1560-1620) LIT-c 1.33/1.21, r5 1.42/1.69, OFF 1.34/1.73. Lower flank (y 1620-1700) LIT-c 1.15/1.00, r5 1.21/1.42, OFF 1.45/1.74. Over x 460-1200 the column L* runs only 1.34-1.76. At 480 x 600 the flank median is 21.5,0,0, L* 1.54 (r5 48,1,1, L* 5.9). Pendant: the collar band grades from R 7 to 58 over y 1000-1085 (median 30,1,0, L* 2.6), while the cap is 0,0,0 (L* 0.00). Base-to-floor luminance: LIT-c 0.085 left, 0.088 front, 0.051 right; OFF 0.100, 0.131, 0.117. In the red channel alone: LIT-c 0.14-0.18 against OFF 0.36-0.45. Ball's shell ring: 31,2,1 (L* 3.3) on the left, 33-37,0-2,0-2 on the right. Crops (all full paths): /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/v480-crops-co-cl5-cl6-pl6cap.png (1:1 at 480: OFF, r5, LIT-c, pendant cap), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/v480-cl6.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/base100-cl6.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/base100-cl5.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/base100-co.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/core-base-vs-pend-cap-100.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/base-lift-cl6+3-cl5+1.2.png.",
+              "reasoning": "I could not refute this finding. The place is right, every number reproduces, and it is not one of the known and accepted items. What I saw: at 480 x 600, alone and in the 1:1 strip, LIT-c's base is near-black. A faint maroon shows only against the brown floor or next to r5. The only clear red on the base is the lit band on the shoulder. r5's base at the same size plainly reads dark red. At 100 % the flank is a flat dark maroon silhouette. It fades from top to bottom under the shoulder band, but there is no satin, no left-right shading I can see (differences are about 0.3-0.5 L* at L* 1.5), and no foot band. Physics does not refute it, and the finding does not claim a physics error. Its fault is that the base is not shown. Two parts of the finding are overstated, and neither weakens the main point. (a) 'Lifted 3 stops ... with round shading': lifted, the cone is clean red with no grey, but its left-right shading is weak. The lower flank is flat (centre-to-edge 1.15 and 1.00, against r5's 1.21 and 1.42), so the cone reads by its outline and the shoulder band, not by shading. (b) 'The Hemisphere's black parts look alike': true for the collar band seen through the tint (R 7-58 gradient, median 30,1,0). It is not true for the cap and cord, which are 0,0,0 and look plainly blacker than the Core base side by side at 100 %. Severity: I would keep 'fix', not 'blocking'. At 480 it reads as a dark base on a lamp that is on in a dark room. It does not look CG, and on the page it comes right after the OFF picture, so it does not misstate the product there. The real fault shows when someone looks closely at the base, which the owner does: a flat silhouette where a red satin base should be."
+            }
+          ],
+          "base_check": "I agree with the critic on the substance: the base is physically consistent, dark red rather than grey or smoky, and it does not show the base. What I saw at 480 x 600 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/v480-cl6.png and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/v480-crops-co-cl5-cl6-pl6cap.png): a near-black cone with a strong red-lit band under the ball. Its outline stands out clearly against the floor, which is lit by the lamp (L* about 15, RGB about 55-58,31-34,27-29). The maroon in the flank is just visible against that floor and is obvious only next to r5, whose base reads dark red. What I saw at 100 % (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/base100-cl6.png): a flat dark maroon (median 21,0,0, L* 1.5), G and B at 0, no sheen, no grey veil and no smoke. The red band at the shoulder fades into the flank over roughly 40-60 px. Below that the flank has no shading I can see and no foot band. Where the critic's answer holds: flank 21-23,0,0, G and B at 0; shell ring 31-37,2,1 (the base is about 1.7 L* darker than the ring); r5 49,1,1 and OFF 161,47,47 also match; luminance ratio 0.085 and 0.088 lit (left and front floor) against 0.10-0.13 off. Lifted 3 stops the cone is clean red. Three corrections. (1) The base did not simply darken 'with the room'. In the red channel its ratio to the floor fell from 0.36-0.45 (OFF) to 0.14-0.18 (LIT-c), and against the brighter right floor the luminance ratio is 0.051. That is still plausible geometry: the flank is near-vertical and sees the ball's overhang only at a grazing angle, while the floor faces the ball. But the 0.09 against 0.11 figure does not prove it on its own. (2) The lane's 'flank-to-centre ratios as good as before' does not reproduce. Centre-to-edge luminance is 1.33/1.21 on the upper flank and 1.15/1.00 on the lower flank, against r5's 1.42/1.69 and 1.21/1.42, so the shape reads by its outline and the shoulder band, not by shading. (3) The pendant's cap and cord are 0,0,0, plainly blacker than the Core base side by side (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/verify-product/core-base-vs-pend-cap-100.png). Only the collar band seen through the tint matches its tone. My answer to the open question: the dark base reads right as a lamp that is on in a dark studio, and after the OFF picture it does not misstate the product. Seen on its own, though, it reads as a black base under a red ball. It also offers nothing to an owner who studies the base, and it gives up the deep colour of the base. It is not smoke-frosted. If LIT-d meets the critic's 'expected' conditions (spill and a key shadow on the floor at the foot, no neutral sheen on the satin, no softbox in the ball or the polished lip), it is the better second picture. If it does not, LIT-c is the honest look and the OFF picture has to carry the base colour."
+        }
+      }
+    ]
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Judge"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "judge:photo",
+      "phaseIndex": 1,
+      "phaseTitle": "Judge",
+      "agentId": "acef4b7415a984574",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795262419993,
+      "queuedAt": 1795262419914,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "The dark base reads right as a photograph of a lamp that is…",
+      "promptPreview": "You are one of two critics judging the two LIT pictures of EARF's lamps in Ember (a deep red), made as each lamp page's second picture (the first is the lamp switched off). Find what is right and wrong, with measurements and crops as evidence. Say only what you saw.\n\nTHE PRODUCTS (cast tinted acrylic; nothing built yet; every picture is a disclosed render that must look like a real photograph):\n- …",
+      "promptFramed": true,
+      "lastProgressAt": 1795263410283,
+      "tokens": 225659,
+      "toolCalls": 60,
+      "durationMs": 990289,
+      "resultPreview": "{\"findings\":[{\"id\":\"B1\",\"severity\":\"blocking\",\"frame\":\"core-lit\",\"where\":\"Core base body, the cone below the red band under the ball (full res x 520-1110, y 1530-1740)\",\"what\":\"At 480 x 600 the base body reads as black or dark brown, not Ember. Body mean sRGB (22.2, 0.3, 0.2), L* 1.5, C* 7.1, the same at 480. None of its pixels reach R 40 at 480 (round 5: 98 %, body (47.7, 1.0, 0.8), L* 5.9, C* 24…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "judge:product",
+      "phaseIndex": 1,
+      "phaseTitle": "Judge",
+      "agentId": "a9bab7d817a489817",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795262419993,
+      "queuedAt": 1795262419914,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "The dark base reads right for a lamp that is on in a dark s…",
+      "promptPreview": "You are one of two critics judging the two LIT pictures of EARF's lamps in Ember (a deep red), made as each lamp page's second picture (the first is the lamp switched off). Find what is right and wrong, with measurements and crops as evidence. Say only what you saw.\n\nTHE PRODUCTS (cast tinted acrylic; nothing built yet; every picture is a disclosed render that must look like a real photograph):\n- …",
+      "promptFramed": true,
+      "lastProgressAt": 1795263633357,
+      "tokens": 226454,
+      "toolCalls": 63,
+      "durationMs": 1212720,
+      "resultPreview": "{\"findings\":[{\"id\":\"core-base-reads-black\",\"severity\":\"fix\",\"frame\":\"core-lit\",\"where\":\"Core LIT-c, the base flank below the red shoulder band: x 470-1180, y 1530-1770 (full frame); the base silhouette at 480 x 600\",\"what\":\"The base flank is a flat near-black. Median RGB is 21-23,0,0 (L* p5/p50/p95 1.0/1.5/2.3). Centre 1.9 against edges 1.5, foot band 1.2. No satin, shading or foot band can be see…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "verify:photo",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "a9b427be208ad0e6f",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795263410324,
+      "queuedAt": 1795263410290,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "I agree with the critic's photographic verdict and with the…",
+      "promptPreview": "You are one of two critics judging the two LIT pictures of EARF's lamps in Ember (a deep red), made as each lamp page's second picture (the first is the lamp switched off). Find what is right and wrong, with measurements and crops as evidence. Say only what you saw.\n\nTHE PRODUCTS (cast tinted acrylic; nothing built yet; every picture is a disclosed render that must look like a real photograph):\n- …",
+      "promptFramed": true,
+      "lastProgressAt": 1795263989344,
+      "tokens": 151388,
+      "toolCalls": 32,
+      "durationMs": 579020,
+      "resultPreview": "{\"verdicts\":[{\"id\":\"B1\",\"verdict\":\"confirmed\",\"severity\":\"note\",\"measurement\":\"I measured with my own code (verify-photo/v.py) on the same box, x 520-1110, y 1530-1740. Core r6 body at full size: mean sRGB (22.2, 0.29, 0.24), median L* 1.54, C* 7.05. At 480 (Lanczos): (22.2, 0.17, 0.10), L* 1.54, C* 7.06. At 480, 7 of 11,151 px reach R 40, all on the box's bottom two rows (lip and floor), so 'none…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "verify:product",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "a20664843297d5a07",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795263633367,
+      "queuedAt": 1795263633362,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "I agree with the critic on the substance: the base is physi…",
+      "promptPreview": "You are one of two critics judging the two LIT pictures of EARF's lamps in Ember (a deep red), made as each lamp page's second picture (the first is the lamp switched off). Find what is right and wrong, with measurements and crops as evidence. Say only what you saw.\n\nTHE PRODUCTS (cast tinted acrylic; nothing built yet; every picture is a disclosed render that must look like a real photograph):\n- …",
+      "promptFramed": true,
+      "lastProgressAt": 1795264127620,
+      "tokens": 142652,
+      "toolCalls": 31,
+      "durationMs": 494253,
+      "resultPreview": "{\"verdicts\":[{\"id\":\"core-base-reads-black\",\"verdict\":\"confirmed\",\"severity\":\"fix\",\"measurement\":\"Core LIT-c (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b60/core-ember-lit-c.png), base flank measured with a silhouette mask (G<10, R<90) inside x 470-1180, y 1530-1770, eroded 6 px, 156k px: median RGB 21,0,0, L* p5/p50/p95 1.00/1.54/2.32, C* 6.9, h 19. This mat…"
+    }
+  ],
+  "totalTokens": 746153,
+  "totalToolCalls": 186
+}
