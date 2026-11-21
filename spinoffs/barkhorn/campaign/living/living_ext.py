@@ -356,6 +356,13 @@ def softbox(bpy, name, p, kit):
         y_ = -h / 2 + h * k / ny
         f_ = bm.faces.new([bm.verts.new((-w / 2, y_, -0.001)), bm.verts.new((w / 2, y_, -0.001)), bm.verts.new((w / 2, y_, -gd)), bm.verts.new((-w / 2, y_, -gd))])
         f_.material_index = 1
+    # (fixed-8) a black top flag: the box's top side (local +y, toward world up) carried `top_flag` m forward past the
+    # face, beyond any skirt; it cuts the light that would go up toward a horn, the wall's top and the ceiling
+    tf = float(p.get('top_flag', 0.0))
+    if tf > sk:
+        f_ = bm.faces.new([bm.verts.new((-w / 2, h / 2, -sk)), bm.verts.new((w / 2, h / 2, -sk)),
+                           bm.verts.new((w / 2, h / 2, -tf)), bm.verts.new((-w / 2, h / 2, -tf))])
+        f_.material_index = 1
     bm.normal_update()
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free(); me.materials.append(em); me.materials.append(bk)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)

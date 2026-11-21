@@ -22,6 +22,15 @@ if v.startswith('a'):
     # 6.03), centre z 2.26, facing the room, at strength X
     P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.6, 0.52], 'depth': 0.005,
               'position': [8.25, 6.02, 2.26], 'target': [8.25, 4.0, 2.26], 'strength': X, 'color': '#FFF4E6'})
+# P3/P4, the far softbox (prop22 in the probe: it is the far horn's grey screen)
+for p in P:
+    if p.get('fn') == 'softbox' and p['size'] == [1.2, 0.9] and p['position'][0] < 7:
+        if v == 'p3off':                       # one light off: the far softbox removed, to name the far horn's screen
+            P.remove(p); break
+        if v.startswith('p34') or '--far-grid' in sys.argv:
+            # an egg-crate grid (6 x 4 cells, 0.25 m deep: about +-20 deg) and a 0.6 m black top flag, so its light stays
+            # on the far cabinet and off the far horn's mirror ray, the wall's top, the ceiling and the print
+            p.update(grid=[6, 4], grid_depth=0.25, top_flag=0.6)
 if v.startswith('w'):
     # (a, wide) the opal panel across the whole near niche back above the cabinet (x 7.93-8.57, z 1.93-2.51), warm
     # (#FFE2C0, the bar's lamps) where a1/a3's cool #FFF4E6 read blue beside the horn; the horn's left half saw past a1
