@@ -1,0 +1,214 @@
+{
+ "results": [
+  {
+   "part": "product",
+   "found": {
+    "findings": [
+     {
+      "id": "trade-hidden",
+      "severity": "fix",
+      "frame": "README table + sheet columns 3 and 4 (0.3x vs 0.1x), both tints",
+      "what": "The README says the top reads C* 11 at both 0.3x and 0.1x. That average hides the real choice. Where the top is lit from below (over the floor), 0.3x has about twice the colour of 0.1x. On the satin edges, 0.1x has about twice the colour of 0.3x. The owner should be told it is a trade, colour in the top against colour in the edges, not that the top is the same at both.",
+      "evidence": "Patches on the 800x1000 frames. Left overhang: Ember 0.3x L52 C46 h25 vs 0.1x L66 C24 h24; Poison 0.3x L64 C49 h145 vs 0.1x L74 C26 h144. Strip just behind the front edge: Ember C32 vs C22, Poison C33 vs C23. Front edge band (polygon mask): Ember 0.3x L16 C23 vs 0.1x L26 C44; Poison 0.3x L14 C14 vs 0.1x L31 C40. Chroma map: critic-product/chroma-03-vs-01.png; placement checks: band-overlay.png, strip-overlay.png, patch-overlay.png"
+     },
+     {
+      "id": "1x-label",
+      "severity": "fix",
+      "frame": "sheet column 2 'Speakers' dye, 1x' (ember-k1.png, poison-k1.png)",
+      "what": "The column named after the speakers' own dye looks least like the speakers: a dark deck with near-black edges. Going by the label alone, the owner could pick it as the literal 'like the speakers'. The sentence sent with the sheet, or the label, has to say that a 25 mm deck at the speakers' strength goes dark.",
+      "evidence": "Front band at 1x: Ember L9 C4, Poison L9 C4. Pixels with C*>15: Ember 19,125 and Poison 15,362 at 1x, against 36,005 and 36,685 at 0.1x. At the 300 px tile (critic-product/row-300.png) both read dark red-black and green-black."
+     },
+     {
+      "id": "lighter-than-speakers",
+      "severity": "note",
+      "frame": "ember-k0.1.png, poison-k0.1.png beside the Tropos tiles",
+      "what": "At 0.1x the deck reads as the same kind of clear tinted acrylic as the Tropos. It is see-through: the base, tonearm pillar, sub-platter and the edge's inner reflection all show. Its edges are on the Tropos hue. It is clearly lighter than the speakers, and over the dark base the top reads grey. That is right for a 25 mm slab, but the owner should hear 'lighter than the speakers' before he says yes.",
+      "evidence": "Mean C* of the coloured pixels (C*>15): Tropos tile Ember 55, Poison 46; 0.1x deck Ember 35, Poison 31. Top over the base (x 480-560, y 545-575): Ember L33 C14, Poison L36 C15. Edge hue: Ember 35 vs Tropos patches h34-39 (median 35); Poison 141 vs Tropos h136-141 (median 140). Seen at about 480 px: critic-product/tropos-vs-decks-480.png"
+     },
+     {
+      "id": "03-edges-dark",
+      "severity": "note",
+      "frame": "ember-k0.3.png, poison-k0.3.png",
+      "what": "At 0.3x the satin edges read dark, so the satin finish the owner asked for barely shows. Poison's front edge is near black across its middle. This supports 0.1x as the pick.",
+      "evidence": "Front band, middle third: Poison 0.3x L9 C8, Ember 0.3x L12 C19 (whole bands: Poison L14 C14, Ember L16 C23). At about 480 px the edge is a dark bottle-green or maroon band (critic-product/tropos-vs-decks-480.png, ember-frontedge-zoom.png, poison-frontedge-zoom.png)."
+     },
+     {
+      "id": "ember-top-pink",
+      "severity": "note",
+      "frame": "ember-k0.1.png (and ember-k0.3.png)",
+      "what": "Ember's top reads pinker than the Tropos. At 480 px beside the speaker, the top looks pink-red while the cabinet looks scarlet. The edges are on hue. This is the light model's prediction for a pour nobody has made yet, so it should be checked on the cast sample that comes with the quote before the site shows it.",
+      "evidence": "Top hue where lit from below: 0.1x h23-24 (overhang L66 C24 h24; strip L36 C22 h23); 0.3x h25-26. Tropos patches h34-39. The deck's own front edge is h35."
+     },
+     {
+      "id": "poison-emerald",
+      "severity": "note",
+      "frame": "poison-k0.1.png beside the Poison Tropos",
+      "what": "Poison now reads emerald like its Tropos, with no olive left. It is lighter than the Tropos, as noted above.",
+      "evidence": "0.1x edge band h141 (L31 C40); top h144-145. Tropos Poison patches h136-141 (median of coloured pixels 139.7). Seen at 480 px and in the 300 px tile."
+     },
+     {
+      "id": "no-white",
+      "severity": "note",
+      "frame": "all eight frames",
+      "what": "Nothing white is under or on the deck in any frame. The palest parts of the 0.1x top are tinted glass over the white studio floor. The only bright spot is a small pale glint at the bore under the tonearm base, which reads as a highlight.",
+      "evidence": "Near-white deck pixels (L>70, C<12) number about the same at 1x and 0.1x (192-215), all on the mask's border. Palest top: Ember L66 C24, Poison L74 C26. Bore glint at 0.1x: Ember L78 C25, Poison L90 C29, about 40x8 px in an 800 px frame (critic-product/armbase-zoom.png)."
+     },
+     {
+      "id": "satin-reads",
+      "severity": "note",
+      "frame": "0.1x satin vs 0.1x polished, both tints",
+      "what": "The satin edge reads as an even, matte, glowing band with no reflections. Even at the 300 px tile it is clearly calmer than the polished edge, which shows dark refracted shapes of the parts inside. The README's 'about twice the colour' holds on the right side face but not on the front face.",
+      "evidence": "Front band: satin Ember C44 vs polished C36, Poison C40 vs C33 (about 1.2x). Right side face: Ember C25 vs C13, Poison C23 vs C11 (about 2x). Zooms: critic-product/ember-frontedge-zoom.png, poison-frontedge-zoom.png, rightcorner-zoom.png; masks: band2-overlay.png"
+     },
+     {
+      "id": "from-above-claim",
+      "severity": "note",
+      "frame": "README 'What the physics allows', first point",
+      "what": "The README says the pale top is 'the same thing the speakers do when you look at them from above'. No picture on the sheet shows that, so it should not go to the owner unless a picture does.",
+      "evidence": "In the Tropos tile (sheet x 140-540, y 80-580) the cabinet top shows only as a dark line about 5 px tall under the horn (critic-product/tropos-patch-overlay.png)."
+     }
+    ],
+    "pick": "0.1x with satin edges, in both tints, shown with 0.3x beside it so the owner sees the trade: 0.1x has glowing edges and a lighter top, 0.3x has a deeper top and dark edges.",
+    "owner_sentence": "Every deck here uses the speakers' own dye, with satin edges and nothing white underneath, but a 25 mm deck at the speakers' strength goes dark with nearly black edges, so we suggest a custom pour at one tenth of that strength, where the edges glow in the speakers' colour and the top is lighter than the speakers, like tinted glass (three tenths gives a deeper top but darker edges).",
+    "summary": "I looked at the sheet and all eight frames at full size, at about 480 px and at the 300 px row tile, and measured them with my own masks. Nothing looks fake and I found no blocking issue.\n\n0.1x matches the owner's words best. It is the same kind of see-through tinted acrylic as the Tropos, nothing white shows anywhere, and the satin edges glow in the speakers' hue: front band Ember L26 C44 h35 and Poison L31 C40 h141, against Tropos hues of about 35 and 140. Poison reads emerald, with no olive left. It is lighter than the speakers: the coloured pixels average C* 35 (Ember) and 31 (Poison) against 55 and 46 on the Tropos, the top reads grey over the base, and Ember's top reads pinker (h23-24).\n\n0.3x is the real alternative. Where the top is lit from below it is about twice as colourful (C* 46-49 against 24-26), but the satin edges go dark: Poison's band is L14 C14, near black in the middle. The README's 'top C* 11 at both' hides this trade, so the owner should be told it plainly.\n\n1x has near-black edges (band L9 C4). Its label 'Speakers' dye' could lead the owner to pick it as the literal 'like the speakers', so the sentence has to say it goes dark.\n\nAn in-between strength such as 0.2x was not rendered. It is the frame to make if the owner finds 0.1x too pale on top; I make no claim about how it would look.\n\nEvidence images and scripts are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product/. The ones to open first are tropos-vs-decks-480.png, row-300.png, chroma-03-vs-01.png, ember-frontedge-zoom.png, poison-frontedge-zoom.png and band.py."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "trade-hidden",
+      "verdict": "confirmed",
+      "reasoning": "I built my own masks. The front-band mask uses the band's real outline, taken from where the satin and polished frames differ: top y=503+0.2455(x-80), bottom y=529+0.2477(x-80). Top face over the floor: left overhang 0.3x vs 0.1x reads Ember L52 C44 h25 vs L66 C23 h24 (1.9x) and Poison L64 C47 h145 vs L74 C26 h144 (1.8x). The back-right corner over the floor reads Ember C43 vs C22 and Poison C48 vs C26. The strip just behind the front edge (x 100-300) is only 1.4-1.5x: Ember C32 vs C21, Poison C33 vs C23. Satin front band 0.3x vs 0.1x: Ember L15 C27 vs L28 C52 (1.9x); Poison L13 C14 vs L34 C46 (3.3x, more than twice). The top over the dark base stays C7-17 at every loading, and that is what the README's 'C* 11 at both' reflects. So the trade is real and the average hides it. One correction: the critic's band polygon drifts above the band toward the right. 31% of its pixels right of x=380 lie on the top face, and it covers only 61-73% of the band (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product-verify/band-mask-check.png). That is why its 0.1x band reads C44/C40 against my C52/C46. The conclusion does not change."
+     },
+     {
+      "id": "1x-label",
+      "verdict": "confirmed",
+      "reasoning": "The 1x front band measures L8 C4 in both tints. Pixels with C*>15 over the full frame: 19,125 (Ember) and 15,362 (Poison) at 1x, against 36,005 and 36,685 at 0.1x; the counts match exactly. At my 300 px tiles both 1x decks read dark red with black edges and dark green with black edges (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product-verify/row-300-both.png). Two nuances. First, the speakers' own panel edges also read near black on the Tropos tile (vertical edges L0-7 C0-10, 3-4 px wide), so dark edges are what this dye does at this strength. Second, the 1x top over the floor is as close to the Tropos face colour as 0.3x: dE 43 vs 44 for Ember and 27 vs 28 for Poison, with Ember at hue 30, the closest of any loading. So '1x looks least like the speakers' holds for the overall look, not for every part. The real problem with 1x is that its satin edges read black, so the satin the owner asked for cannot be seen. The label or sentence must still say this."
+     },
+     {
+      "id": "lighter-than-speakers",
+      "verdict": "confirmed",
+      "reasoning": "Mean C* of pixels with C*>15: Tropos tile Ember 55.3 and Poison 46.2; 0.1x deck 34.6 and 31.2. The coloured pixels' mean L is higher on the deck (Ember 33.8 vs 25.7, Poison 40.3 vs 29.3), so the deck is both paler and lighter. Top over the base (x 480-560, y 545-575) reads Ember L33 C14 h29 and Poison L37 C15 h141, which looks greyish at 480 px. Front-band hue at 0.1x: Ember 36 and Poison 141. The Tropos's coloured-pixel median is 35.4 and 139.7, and my Tropos face patches read h37-40 and h136-139. In my 3x zooms of the deck's right half I can see the tonearm pillar, the sub-platter arc, the base and the L-shaped inner reflection of the edges through the deck. At 480 px beside the Tropos the 0.1x deck reads as the same see-through tinted acrylic, clearly lighter (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product-verify/ember-480-tropos-03-01.png, poison-480-tropos-03-01.png)."
+     },
+     {
+      "id": "03-edges-dark",
+      "verdict": "confirmed",
+      "reasoning": "0.3x front band on the true outline: Poison L13 C14, middle third L10 C9; Ember L15 C27, middle third L13 C21. In Poison 68% of the band's pixels are below L12, against 0% at 0.1x. At 480 px and in 4x zooms, Poison's 0.3x front edge is a near-black bottle green across its left and middle (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product-verify/poison-right-zoom.png). Ember's 0.3x edge is darker but not black: it reads as an even, matte maroon band. So 'barely shows' fits Poison fully and Ember mostly. It supports 0.1x."
+     },
+     {
+      "id": "ember-top-pink",
+      "verdict": "confirmed",
+      "reasoning": "Ember top hue where lit from below at 0.1x: overhang L66 C23 h24, strip L35 C21 h24, back-right corner L74 C22 h24. At 0.3x it is h25-26, and at 1x h30. Tropos face patches read h37-40 (mean L42 C84 h39). The deck's own front band at 0.1x is h36. At 480 px beside the scarlet Tropos, the 0.1x top reads as a rose pink-red. Part of the pink comes from the top being light and weak (L66 C23), and part from the hue moving about 15 degrees toward magenta. The hue drifts the same way as the loading drops, so it is the model's prediction for an unmade pour. Checking it on a cast sample is the right step."
+     },
+     {
+      "id": "poison-emerald",
+      "verdict": "confirmed",
+      "reasoning": "Poison 0.1x: 92% of the deck's coloured pixels (C*>8) have hue 128-155 and only 2.2% have hue 95-128. The chroma-weighted mean hue is 141. Front band reads L34 C46 h141, top h143-145, top over the base h141. The Tropos face is h138, with patches h136-139. On the earlier decision sheet the stock-dye Poison decks read olive; here no olive is visible at 300 px or 480 px. It is lighter than the Tropos, as noted: overhang L74 C26 against the Tropos face L46 C68."
+     },
+     {
+      "id": "no-white",
+      "verdict": "confirmed",
+      "reasoning": "Inside the deck outline, shrunk 4 px with the record label left out, near-white pixels (L>70, C<12) number 0-3 in every frame. The rest of the near-white pixels sit on the outline's border or on the studio floor around the base (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product-verify/nearwhite-overlay-ember-k0.1.png). Under the deck I see only the dark base and black parts. Glint under the tonearm base at 0.1x: Ember 285 px (x 621-669, y 491-508), mean L73, max L82, C24; Poison 350 px (x 610-669, y 491-509), mean L80, max L93, C27. It is a thin arc of about 50x8 px and reads as a highlight (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product-verify/armbase-glint-zoom.png). One correction: the palest top is not the overhang the critic quotes but the back-right corner over the floor. There Ember reads L74 C22 with pixels up to L80, and Poison L83 C26 with pixels up to L90. It is still clearly tinted glass over the floor, so the conclusion stands."
+     },
+     {
+      "id": "satin-reads",
+      "verdict": "confirmed",
+      "reasoning": "0.1x front band on the true outline: satin vs polished Ember C52 vs C45 and Poison C46 vs C40, about 1.15x. Right side face: Ember C26 vs C12 and Poison C23 vs C10, about 2.2x. So the README's 'about twice' holds only on the side face, and its front-band polished values of 26/22 do not reproduce on the front band. The satin band is even: L sd 4.1-4.9 and mean neighbour difference |dL| 0.37-0.43. The polished band has L sd 12.0-14.9 and |dL| 1.20-1.28. In 4x zooms the polished band shows sharp, dark refracted shapes of the parts inside, and those are still visible at my 300 px tiles. The satin band is a smooth glowing gradient with no sharp reflections."
+     },
+     {
+      "id": "from-above-claim",
+      "verdict": "confirmed",
+      "reasoning": "On the sheet's Tropos tiles (400x500) the cabinet top shows only as a black line 4-5 px tall (L0-8 at y 191-196 for x 150, 200 and 255) under the horn. The camera sees it nearly edge-on (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product-verify/tropos-top-zoom.png). No other picture on the sheet shows a speaker from above. The README's comparison has no picture behind it."
+     }
+    ],
+    "pick_check": "I keep the pick: 0.1x satin in both tints, with 0.3x beside it. At 0.1x the satin edge is the only part of any deck close to the speakers' colour (front band dE 36 Ember, 25 Poison, against the Tropos face; 0.3x band 64/63). At 0.1x the satin also shows as an even, glowing band, and the owner asked for satin edges. But the trade is not the same in the two tints. For Ember it is even: top over the floor 0.3x C44 vs 0.1x C23, edge 0.1x C52 vs 0.3x C27, about 1.9x each way. The Ember 0.3x top is also much closer to the speaker face (dE 44 vs 67). So under 'deep colour' Ember 0.3x is a real contender. For Poison, 0.1x clearly wins: its edge has 3.3x the chroma of 0.3x, and 68% of the 0.3x Poison band is near black (L<12). Changes to the sentence: (1) 'Every deck here ... with satin edges' is false for the sheet's last column (0.1x polished). Either drop that column from the owner's copy or name it. (2) Tie 1x to his own ask. At the speakers' strength the satin edges turn black (band L8 C4, as dark as the speakers' own panel edges, L0-7), so the satin cannot be seen. That is the reason to drop 1x, not only that it goes dark. (3) Tell him the Ember top looks a little pink beside the speakers (h24 vs h39). (4) Say the custom pour is not yet quoted and the colour will be checked on a cast sample. This follows the 'technically possible' and 'shown truly' rules and the ember-top-pink finding. (5) Use short sentences in place of one 75-word sentence with brackets. Suggested text: \"Every deck uses the speakers' own dye, with nothing white under it and satin edges (the last picture has polished edges, to compare). At the speakers' full strength a 25 mm deck goes dark and its satin edges turn black, so the satin can't be seen. At one tenth of that strength the edges glow in the speakers' colour and the top is lighter, like tinted glass; in Ember the top looks a little pink. At three tenths the top is deeper but the edges are dark, nearly black in Poison. We suggest one tenth. It needs a custom pour that isn't quoted yet, and we'd check the colour on a sample first.\" No loading between 0.1x and 0.3x was rendered. If the owner wants a deeper Ember top with glowing edges, rendering one is the only way to see whether it gives both. Evidence and scripts are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-product-verify/ (masks.py, vlab.py, row-300-both.png, ember-480-tropos-03-01.png, poison-480-tropos-03-01.png, ember-leftoverhang-4load.png, poison-leftoverhang-4load.png, band-mask-check.png)."
+   }
+  },
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "F1-satin-twice",
+      "severity": "fix",
+      "frame": "README line 'Satin edges carry the colour better than polished' and sheet column 5 (ember-k0.1-polished-edge.png, poison-k0.1-polished-edge.png)",
+      "what": "'About twice the colour' holds only on the left half of the long front face, where the posts and phono box sit behind a polished edge, and on the short right face. On the right half of the front face, polished carries the same colour as satin. Over the whole front face the gap is about 15% by Lab mean, and none by linear-light mean. The physics: a polished edge is a window down the deck's length. It shows deep colour where the long path ends on the bright backdrop and goes dark where it meets the posts and holes. Satin blurs that into one even band. So the README's 'reflects most of it back inside and shows the interior' is only half right. A plain line that matches the frames: 'Satin spreads the colour evenly round the edge; polished shows it in patches, with the posts showing through, and its short sides go grey.'",
+      "evidence": "My regions (critic-photo/py/regions.py, overlay critic-photo/regions-overlay.png). C* of mean Lab, satin vs polished at 0.1x. Front face, left half (x 100-312): Ember 45.6 vs 29.8, Poison 42.0 vs 27.2, which reproduces the lane's 46/26 and 42/22. Front face, right half (x 312-525): Ember 59.0 vs 59.0, Poison 51.3 vs 52.0. Whole front face: 52.5 vs 45.0 and 46.8 vs 40.1 (linear-light mean 53.5 vs 55.0 and 47.6 vs 49.0). Short right face: 25.5 vs 12.0 and 22.6 vs 10.2. Along the polished front face, 53-px segments run from C* 9 to 74 (Ember) and 8 to 65 (Poison). Visible at 480 px in critic-photo/pair480-ember.png and pair480-poison.png."
+     },
+     {
+      "id": "F2-top-one-patch",
+      "severity": "fix",
+      "frame": "README table 'Top' column and the lines 'The top cannot match the Tropos front ... C* 5-11' and 'Lighter dye does not raise the top past C* 11'",
+      "what": "The lane's top numbers come from the strip in front of the platter, over the black base, and they reproduce there. Where the floor shows up through the deck (the overhangs), the top is much stronger: 0.3x is close to the Tropos, 0.1x is about half of that, and at 0.1x Ember turns pink (hue 24 against the Tropos's 36). The physics is sound (Beer-Lambert): the long edge path favours light dye and the short top path favours heavier dye. But the sheet should show this as a trade: 0.1x gives edges near the speakers and a pale top; 0.3x gives a top near the speakers where light comes through, with dark edges. You can see it in the 300 px row: 0.3x reads as a coloured deck, 0.1x as pale glass with a coloured rim. 'The top can't' is not true for the whole top.",
+      "evidence": "1x/0.3x/0.1x. Front strip over the base (x 205-530): Ember 6.8/11.4/10.5, Poison 4.5/11.5/10.6 (lane: 7/11/11 and 5/11/10). Left overhang with the floor below: Ember C* 41.9/43.9/23.3 (h 30/25/24, L 42/52/66), Poison 39.6/46.8/25.9 (h 141/145/144). Whole visible top, minus record, platter and arm: Ember 19.2/23.7/16.1, Poison 16.7/25.1/17.5. Front edge: Ember 3.3/26.5/52.5, Poison 3.1/13.4/46.8. Tropos: 61 at h 36 and 58 at h 138. Rows in critic-photo/row300-ember.png and row300-poison.png."
+     },
+     {
+      "id": "F3-satin-legibility",
+      "severity": "note",
+      "frame": "Satin front (long) face, all loadings, both tints",
+      "what": "Nothing looks painted. At 0.1x the satin band changes smoothly along its length and is brighter where the polished frame shows bright backdrop through it, which is what a frosted edge does with the light behind it. Its top arris is a 1 px darker line that reads as a machined chamfer, with no seam. But nothing on the long face says 'bead-blasted': there is no lighter frosted sheen at any loading. At 1x the satin face is as black as the tonearm, so satin and polished can't be told apart there, and at 0.3x it reads as a dark glossy edge. This fits the light, not a physics error: the polished front face in the same spot also reflects only a dim part of the room. Satin reads as satin only on the short right face, which is lighter and softer.",
+      "evidence": "Darkest channel (linear), median, satin front face: Ember 0.0060 (1x), 0.0060 (0.3x), 0.0065 (0.1x); Poison 0.0052 (0.1x). Polished front face: 0.0110 (Ember) and 0.0091 (Poison). Satin right face: 0.045 (L 34.7 at 0.1x). Median L of the 1x satin front face is 7.2, against 3.0 for the tonearm pillar and 4.4 for the base front face. 0.1x Ember band, C* per 53-px segment: satin 45 49 43 46 45 62 67 61 53, polished 9 53 16 41 33 64 74 66 24. Arris at x=150: top L 62.0, then L 14.6 at y=522, then band L 25.4. Crops: critic-photo/chamfer-x6.png, crop-left-ember-k1.png."
+     },
+     {
+      "id": "F4-polished-top-physics",
+      "severity": "note",
+      "frame": "Polished top and underside, all frames",
+      "what": "The polished top and underside behave as real acrylic. The room reflects as a neutral grey veil of the right strength for this ~65 degree view (about 12% Fresnel). The strip in front of the platter goes near-black because it mirrors the platter's dark side. The base's back edge shows through the left overhang as a sharp, tinted line. You can't see the posts through the top, because they are black over a black base; they show only through the polished edges. Light colour does reach the floor seen through the overhang (pink or mint).",
+      "evidence": "Veil at x=520, y=546-556: rgb 86-94/82-84/76-78, L 35-36, C* 4-6, against a backdrop of L 85-95 (x 0.12 gives about L 34-36). Front strip at x=350, y=532-566: rgb at most (34,4,3). Overhang at x=150: L 68, C* 24, h 23 (Ember 0.1x)."
+     },
+     {
+      "id": "F5-far-face-same",
+      "severity": "note",
+      "frame": "Far-edge strip seen through the top, ember-k0.1 vs ember-k0.1-polished-edge (and the Poison pair)",
+      "what": "The thin grey-brown strip along the far edges, where you look through the deck at its far side faces, is the same in the satin and polished frames and at every loading. A bead-blasted far face seen from inside should look different from a polished one (frosted glow against mirror). So either the comparison frames changed only the two near faces, or the satin material shows no frost from inside. It does not read as CG at 480 px (a thin dark rim), but it should be checked so the comparison is like for like.",
+      "evidence": "Strip 1.5-6 px inside the far-left silhouette, x 105-195 (409 px). Ember: satin L 37.6, C* 8.7 vs polished L 37.4, C* 8.1. Poison: L 38.7, C* 8.2 vs L 39.3, C* 9.8. Ember at 1x/0.3x/0.1x: L 33.9/34.8/37.6, C* 5.6/7.1/8.7. The pink top right beside it changes with loading (C* 46.0/46.9/24.0)."
+     },
+     {
+      "id": "F6-no-colour-on-floor",
+      "severity": "note",
+      "frame": "Floor around the deck, all frames (also the Tropos tiles)",
+      "what": "No coloured light lands on the floor next to the deck: the floor is the same colour in Ember and in Poison. The accepted Tropos tiles show the same, so this belongs to the whole house set, not to this sheet. I note it because coloured shadows are a cue people expect from tinted acrylic.",
+      "evidence": "Floor below the front edge (x 150-300, y 600-700): Ember a* -0.33, b* 4.31 vs Poison a* -0.98, b* 4.38. Floor under the right face: a* -0.10 vs -1.01. Tropos tile, floor right of the speaker: a* 0.04 vs -0.77."
+     }
+    ],
+    "pick": "0.1x with satin edges (the lane's pick), in both tints. The frames look like real photographs, and the edges carry the speakers' own hue (Ember 36, Poison 141) at C* 47-52. Two of the sheet's claims need fixing first: satin makes the colour even rather than double, and the 0.1x top is pale wherever light comes through, while 0.3x gives a stronger top with darker edges.",
+    "owner_sentence": "All of these look like real photographs. At 0.1x the satin edges carry the speakers' own red and green evenly all the way round, and the top looks like lightly tinted glass (pinkish in Ember). At 0.3x the top is nearly as strong as the speakers, but the edges go dark.",
+    "summary": "Nothing reads as CG at 480 px or at full size. The satin bands change smoothly with the light behind them, the 1 px chamfer reads as a machined arris, and the polished top behaves as real acrylic over a dark interior.\n\n**My numbers against the lane's:**\n- **Edges:** I reproduce the lane's figures only on the left half of the front face (Ember 45.6, Poison 42.0). Over the whole front face satin reads 52.5 and 46.8; on the short right face 25.5 and 22.6.\n- **Top:** I reproduce the lane's figures only on the strip over the base (Ember 10.5, Poison 10.6 at 0.1x).\n\n**Two claims are wrong:**\n- \"Satin carries about twice the colour of polished\" holds on the short right face and the left half of the front face, but not on the right half of the front face (Ember 59.0 vs 59.0). Over the whole front face satin is about 15% stronger by Lab mean (52.5 vs 45.0; 46.8 vs 40.1), and about equal by light. Satin's real gain is evenness.\n- \"The top can't pass C* 11\" is true only over the black base. Over the overhangs, 0.3x reaches 44-47 and 0.1x only 23-26, and 0.1x Ember turns pink (hue 24). That is a real dye trade the owner should see plainly.\n\n**Smaller notes:**\n- The satin finish shows as frost only on the short side. On the long face it shows only as evenness, and it is invisible at 1x.\n- The far-edge strip is identical in the satin and polished frames, so check that the comparison frame changed all four sides.\n- No coloured light reaches the floor. This is the same in the Tropos tiles, so it belongs to the whole house set.\n\nFiles are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-photo/:\n- regions-overlay.png\n- row300-ember.png\n- row300-poison.png\n- pair480-ember.png\n- pair480-poison.png\n- chamfer-x6.png\n- py/regions.py\n- py/measure.py"
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "F1-satin-twice",
+      "verdict": "confirmed",
+      "reasoning": "I drew my own front-face and short-face bands, checked against the arris at x=100, 150 and 350 and at the near corner, and used three insets (2, 3 and 4 px); the numbers barely move between insets. Satin vs polished at 0.1x, C* of the Lab mean. Front face, left half: Ember 45.6 vs 30.0, Poison 42.0 vs 27.3. Right half: 59.1 vs 59.5 and 51.3 vs 52.5. Whole front face: 52.6 vs 45.3 and 46.8 vs 40.4, so about 16% more. By linear-light mean polished is slightly higher: 53.6 vs 55.3 and 47.6 vs 49.2. Short right face: 25.8 vs 12.2 and 22.8 vs 10.3. In 25 px segments along the front face, polished runs from C* 7 to 75 and satin from 41 to 68. Per column, satin brightness follows polished (r 0.75 / 0.71) with half the spread (CV 0.27 vs 0.59). That is the 'even band' reading, and it fits the physics: satin averages what polished shows. At 5x the dark post shapes show plainly through the polished left half (critic-photo-verify/x5-frontleft-*.png). Two corrections. First, even on the left half the gap is about 1.5x, not twice; only the short face is about 2x. Second, the proposed line 'evenly round the edge' goes too far. The satin short face carries about half the colour of the long face (Ember C* 26 vs 53, Poison 23 vs 47), is lighter (L 35 vs 28 in Ember) and pinker (h 28 vs 36), and this shows at 480 px. 'Its short sides go grey' holds for polished: C* 12, with 25 px segments mostly 7 to 9."
+     },
+     {
+      "id": "F2-top-one-patch",
+      "verdict": "confirmed",
+      "reasoning": "I built my own top regions (critic-photo-verify/top-regions-overlay.png). Strip in front of the platter, over the base, 1x/0.3x/0.1x: Ember C* 7.9/12.5/11.4, Poison 4.8/12.2/11.2. That is the lane's 7/11/11 and 5/11/10. Overhangs with the floor below them: Ember C* 43.9/45.7/24.0 (h 30/25/24, L 43/54/68), Poison 41.4/48.6/26.6. Front edge: 3.3/26.5/52.6 and 3.1/13.4/46.8. So the README's 'the top cannot ... not past C* 11' holds only over the base, and the 0.1x vs 0.3x trade is real. It shows in my 300 px rows: 0.3x reads as a coloured deck, 0.1x as paler glass with a strong rim. Three points are overstated. (1) '0.3x is close to the Tropos' is true for chroma only. Against a Tropos front patch I measured from the sheet (Ember L 26 C 60 h 37; Poison L 29 C 47 h 140), the 0.3x overhang is much lighter (L 55/69), at dE76 34 and 40. The 1x overhang has the same chroma and is closer, at dE 25 and 22. (2) The 0.3x hue (25) is the same as 0.1x (24). The 0.1x pink comes from L 70 and C* 24, not from the hue. (3) The overhangs are only about 24% of the visible top. Over the base, the top stays dark at every loading (C* 9 to 15)."
+     },
+     {
+      "id": "F3-satin-legibility",
+      "verdict": "confirmed",
+      "reasoning": "Darkest channel (linear), median on the satin front face: Ember 0.0060/0.0060/0.0065 at 1x/0.3x/0.1x; Poison 0.1x 0.0056. Polished front face: 0.0110 and 0.0091. Satin right face: 0.045. Median L of the 1x satin front face is 7.3, against L 6 to 10 for the base front face and about 0 to 10 for the arm pillar. Satin follows polished along the face (r 0.75), with half the swing. In stacked near-corner crops (x2-nearcorner-k1-k03-k01-pk03.png), the long face reads as a black band at 1x, a dark glossy red or green band at 0.3x and an even saturated band at 0.1x. Only the short face looks soft and frosted. I saw no painted look and no seam. One nit: the dark arris line is 2 px, not 1 (x=150: L 62.0 at y520, 17.2 at y521, 14.6 at y522, then the band at 24-26)."
+     },
+     {
+      "id": "F4-polished-top-physics",
+      "verdict": "confirmed",
+      "reasoning": "At x=520, y=546-556 I measured rgb 86-94/82-84/76-79, L 35.1 to 36.5, C* 3.8 to 5.8. That point sits over the dark base. Fresnel for n=1.49 at 65 degrees is 11.9%, which turns a backdrop of L 85 to 95 into L 34 to 39, so the veil fits. The front strip at x=350, y=532-566 is near black (largest pixel I found: rgb 37,0,0). The 0.1x Ember overhang at x=150 reads L 66 to 69, C* 24 to 25, h 23. In a 5x gridded crop (x5-leftoverhang-grid.png) a sharp, tinted line of the base does show through the left overhang. Its slope (about -0.6) runs front to back, so it is most likely the base's left edge, not its back edge. Nearby, the pink area's vertical right boundary at x of about 200 is the platter's mirror image. That is a naming slip and does not change the finding."
+     },
+     {
+      "id": "F5-far-face-same",
+      "verdict": "refuted",
+      "reasoning": "I reproduce the region means (x105-195: Ember satin L 37.4 C* 8.5 vs polished 37.0, 7.9; Poison 38.4, 7.9 vs 38.9, 9.6), but the pixels are not the same. A satin-minus-polished difference map (diff-sat-pol-ember.png) lights up the whole far-left rim and the back rim. Per-pixel dE76 in the far-left strip (x105-285) averages 8.2 (Ember) and 9.2 (Poison), with p90 of 23 and 26. On the record, a control area, it is 0.05. In 30 px segments the satin rim stays an even mauve-brown (C* 10/8/8/5/3/10). The polished rim goes grey near the front corner (C* 3.9, h 65) and light pink toward the back (L 70, C* 20). The back strip is tinted in satin (C* 7 to 14) and grey in polished (C* 4 to 6). The means match only because grey and pink patches average out. So the comparison frames changed all four faces and are like for like, and satin does change the far face: it is even where polished is patchy. The rim also changes with loading (C* 5.0/6.6/8.5, h 57/42/36), so it is not the same at every loading either."
+     },
+     {
+      "id": "F6-no-colour-on-floor",
+      "verdict": "confirmed",
+      "reasoning": "There is no visible coloured light on the floor, and the Tropos tiles behave the same way. I reproduce the critic's box: Ember a* -0.33, b* 4.31 vs Poison a* -0.98, b* 4.38. Strictly, a faint tint is there: Ember minus Poison a* is +0.65 to +0.97 on the floor in front of and left of the base, up to 2.8 at most, against +0.13 far away and +0.07 on the backdrop. A map (floor-da-map.png) shows it as a soft halo around the base. The Tropos tiles show the same, +0.55 to +1.25 near the speaker and +0.12 far away. A difference of about 1 dE cannot be seen, so the note holds as a house-wide trait. 'No coloured light lands' is too absolute; 'too faint to see' is accurate."
+     }
+    ],
+    "pick_check": "Keep the pick, 0.1x with satin edges, but give it its strongest support and fix three phrases.\n\n(1) The strongest support. The 0.1x satin front edge is the closest colour anywhere on the deck to the speakers. Against a Tropos front patch I measured from the sheet (Ember L 26 C* 60 h 37; Poison L 29 C* 47 h 140) it is dE76 7 in Ember and 5 in Poison. Nothing on the top comes within dE 22 at any loading.\n\n(2) 'The edges carry ... C* 47-52' is true of the long front edge only. The short right side is C* 23-26, lighter (L 35-38) and, in Ember, pinker (h 28). That shows at 480 px.\n\n(3) 'Satin makes the colour even rather than double' should say: even along each face, with no more colour overall (equal by linear mean on the front face), and a paler short side.\n\n(4) '0.3x gives a stronger top' holds only where the floor shows through the deck. That is the two overhangs, about a quarter of the visible top. Even there the top is much lighter than the speakers (L 55-69 against 26-29; dE 34-40). The 1x top has as much colour there (C* 42-45) and is closer (dE 22-25). Over the base the top is dark at every loading.\n\n(5) Drop F5 from the sheet fixes: the comparison frames are like for like.\n\nIn the owner sentence, 'evenly all the way round' and 'nearly as strong as the speakers' are not what the frames show.\n\nSuggested owner sentence: \"All of these look like real photographs. At 0.1x the satin front edge is the speakers' own red or green, the short side is a paler shade, and the top looks like lightly tinted glass (pinkish in Ember). At 0.3x the top has more colour where the floor shows through it, but it is still lighter than the speakers, and the edges go dark, very dark in green. At 1x, the speakers' own loading, the edges are black.\"\n\nMy files are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b65/critic-photo-verify/ (scripts in py/, images such as diff-sat-pol-ember.png, farleft-at480-x3.png, top-regions-overlay.png and row300-*.png)."
+   }
+  }
+ ]
+}
