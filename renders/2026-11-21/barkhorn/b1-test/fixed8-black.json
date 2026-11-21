@@ -898,8 +898,8 @@
   "strength": 0.0
  },
  "render": {
-  "samples": 256,
-  "adaptive": 0.005,
+  "samples": 512,
+  "adaptive": 0.003,
   "denoise": true,
   "clamp": 0,
   "bounces": 24,
