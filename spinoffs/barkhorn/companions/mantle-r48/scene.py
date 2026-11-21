@@ -135,6 +135,7 @@ def wear(nt, strength=1.0, scale=1.0):
 
 
 WEAR = 1.0             # --wear: the acrylic's scratches and dust (gate 4: they read as wrinkles under the glow)
+DECK_LOAD = 1.0           # --deck-load: a test of a lighter pour for the deck
 GLASS_SHADOWS = False     # --glass-shadows (v4's lit deck): shadow rays pass flat acrylic, tinted by its volume
 
 
@@ -161,7 +162,9 @@ def acrylic(name, bands, tint, rough=0.004, wear_on=True, ring=None, edge_rough=
     """`bands`: [(z0, z1, 'tint'|'clear')] in metres. The material has slots: 0 glassy (cast faces), 1 polished edge,
     2 buffed tread, 3 machined satin, 4 bead-blasted (a frosted band). One node tree per slot, the volume shared."""
     st = sigma_tint(tint)
-    D = max(st) * 1.0001
+    if name == 'plinth' and DECK_LOAD != 1.0:   # --deck-load (a TEST, 2026-11-21): the deck's dye per mm scaled, a lighter pour
+        st = [x * DECK_LOAD for x in st]
+    D = max(max(st), max(SIGMA_CLEAR)) * 1.0001
     mats = []
     for slot, (r, wr) in enumerate(((rough, True), (edge_rough, False), (0.045, False), (0.07, False), (0.55, False), (0.0, False), (0.0, False), (0.0, False), (0.0, False))):   # bores vapor-polished
         m, nt, out = node_tree(f'{name}-{slot}')
@@ -1097,6 +1100,8 @@ def build(args):
     global GLASS_SHADOWS, WEAR
     WEAR = args.wear
     GLASS_SHADOWS = bool(getattr(args, 'glass_shadows', False))
+    global DECK_LOAD
+    DECK_LOAD = float(getattr(args, 'deck_load', 1.0))
     bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
     model = os.path.join(HERE, args.model)
@@ -1170,6 +1175,10 @@ def build(args):
     # proposal A's parts (mantle_strata.py)
     if 'plinth-L1-stack' in objs or 'plinth-L1-skin' in objs:
         bands_pl = remap([(l['z0'] * mm, l['z1'] * mm, l['kind'], l['inset'] * mm) for l in meta['lams']])
+        if getattr(args, 'deck_lamina', 0.0):
+            # --deck-lamina T (a TEST, 2026-11-21): the deck as a T mm stock tinted sheet bonded over clear, as the platter
+            zb_, zt_ = min(b_[0] for b_ in bands_pl), max(b_[1] for b_ in bands_pl)
+            bands_pl = [(zb_, zt_ - args.deck_lamina * mm, 'clear', 0.0), (zt_ - args.deck_lamina * mm, zt_, 'tint', 0.0)]
         o0 = meta['P']['margin'] * mm
         M['plinth'] = acrylic('plinth', bands_pl, tint, ring=(o0, o0, o0 + (meta['W0']) * mm, o0 + meta['D0'] * mm, rw * mm) if rw else None,
                               ar=tuple(args.ar_top) if args.ar_top else None,
@@ -1651,7 +1660,8 @@ if __name__ == '__main__':
     ap.add_argument('--debug-emit', default='')
     ap.add_argument('--crop', type=float, nargs=4, default=None)
     ap.add_argument('--blank-label', action='store_true')
-    ap.add_argument('--platter-clear', action='store_true')   # the platter's clear lamina clear under --tint-mode custom   # the record's label with nothing printed (the owner, 2026-11-20)
+    ap.add_argument('--platter-clear', action='store_true')
+    ap.add_argument('--deck-load', type=float, default=1.0); ap.add_argument('--deck-lamina', type=float, default=0.0)   # the platter's clear lamina clear under --tint-mode custom   # the record's label with nothing printed (the owner, 2026-11-20)
     ap.add_argument('--vignette', type=float, default=0.12)   # the post step's corner falloff (0 on the house ground, 2026-11-20)
     a = ap.parse_args(argv)
     NO_EDGE_BEVEL = a.no_edge_bevel
