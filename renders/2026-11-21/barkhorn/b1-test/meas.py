@@ -1,4 +1,4 @@
-"""B1: live against fixed, L* / C* means in boxes of the 1600 x 900 frame (and mean |dRGB| per box).
+"""B1: live, fixed and fixed-2, L* / C* means in boxes of the 1600 x 900 frame.
     python3 meas.py   ->  meas.md"""
 import numpy as np
 from PIL import Image
@@ -11,11 +11,11 @@ BOX = {'near horn, bell': (1040, 40, 1320, 240), 'near cabinet, front': (1060, 2
        'far cabinet': (450, 240, 590, 620), 'hemispheres': (100, 220, 440, 460), 'cores': (60, 620, 350, 720),
        'drinks': (340, 760, 620, 880), 'deck and Mantle': (860, 720, 1300, 840), 'record wall': (620, 200, 980, 600),
        'bar top': (700, 820, 1000, 900), 'dark left wall': (0, 0, 300, 200), 'whole frame': (0, 0, 1600, 900)}
-im = {v: np.asarray(Image.open(v + '.png').convert('RGB')).astype(float) for v in ('live', 'fixed')}
+im = {v: np.asarray(Image.open(v + '.png').convert('RGB')).astype(float) for v in ('live', 'fixed', 'fixed2')}
 lc = {v: lab(a) for v, a in im.items()}
-rows = ['| box | live L* / C* | fixed L* / C* | mean dRGB |', '|---|---|---|---|']
+rows = ['| box | live L* / C* | fixed L* / C* | fixed-2 L* / C* |', '|---|---|---|---|']
 for n, (x0, y0, x1, y1) in BOX.items():
     s = np.s_[y0:y1, x0:x1]
-    c = [f'{lc[v][0][s].mean():5.1f} / {lc[v][1][s].mean():5.1f}' for v in ('live', 'fixed')]
-    rows.append(f'| {n} | {c[0]} | {c[1]} | {np.abs(im["live"][s] - im["fixed"][s]).mean():5.1f} |')
+    c = [f'{lc[v][0][s].mean():5.1f} / {lc[v][1][s].mean():5.1f}' for v in ('live', 'fixed', 'fixed2')]
+    rows.append(f'| {n} | {c[0]} | {c[1]} | {c[2]} |')
 open('meas.md', 'w').write('\n'.join(rows) + '\n'); print('\n'.join(rows))

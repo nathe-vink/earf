@@ -20,3 +20,18 @@
     - the ice reads as clear cubes in the whisky;
     - the liquid is a little darker, 35.1 to 30.4;
     - the green glow behind them goes.
+
+## fixed-2 (the coordinator, 10:00): fixed plus two real lights (`gen2.py`, `gen3.py`; `fixed2.json`)
+
+- **track-front1:** one more head on the bar's ceiling track (z 3.35, a 14 cm disc, #FFE2C0, a 22 degree spread).
+  - It hangs at (8.6, 3.9), 1.4 m in front of the near bay, aimed at the cabinet's front (8.25, 5.45, 1.5), at 10 W/m2.
+  - It is out of frame, 67 degrees above the camera's axis. Every ray visibility is on.
+- **ceiling-panel:** a 1.6 x 0.8 m soft light panel under the ceiling at (10.5, 4.0, 3.2), behind and right of the camera, at strength 15.
+  - It faces the near bell, on the bell's probed mirror ray (`--probe waveguide`).
+  - Its diffuse and specular are both on. Like every engine panel, it casts no shadow.
+  - The bell mirrors mostly itself (55 %). The niche's header frames what else it can see, so the panel gives the bell's left flank a wedge-shaped highlight and lights its rim.
+  - A 3.0 x 1.6 m panel gave the same wedge (`crops-front10-card0-6-15.png`, `fixed2c-10-L8.json`).
+- **Readings:** `meas.md`.
+  - The near cabinet's front reads 54.7, against 35.6 live and 15.4 fixed.
+  - The bell reads 2.0, against 8.9 live and 0.3 fixed.
+  - The deck and Mantle read 24.0, and the whole frame 20.3, against 14.8 live.
