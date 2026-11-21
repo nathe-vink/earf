@@ -1,0 +1,98 @@
+{
+ "shot": "renders/2026-11-04/barkhorn/rollout/A-polished-tallr7/site-front-off-tall-ember.shot.json",
+ "mass_kg": 72.6,
+ "mass_lb": 160.2,
+ "by_model_kg": {
+  "studio/products/barkhorn-cloud.json": 69.48,
+  "studio/products/barkhorn-variants.json": 3.17
+ },
+ "by_source_kg": {
+  "parts list": 59.34,
+  "volume x density": 5.11,
+  "parts list, by volume": 8.15
+ },
+ "parts": 110,
+ "com_m": [
+  0.0,
+  0.0136,
+  0.5322
+ ],
+ "top_m": 1.2951,
+ "heaviest": [
+  [
+   "back",
+   9.49,
+   "bom"
+  ],
+  [
+   "left",
+   8.56,
+   "bom"
+  ],
+  [
+   "right",
+   8.56,
+   "bom"
+  ],
+  [
+   "front-panel",
+   7.04,
+   "bom"
+  ],
+  [
+   "bottom",
+   5.19,
+   "bom"
+  ],
+  [
+   "top",
+   5.18,
+   "bom"
+  ],
+  [
+   "hf-motor",
+   2.99,
+   "hf by volume"
+  ],
+  [
+   "waveguide",
+   2.39,
+   "bom"
+  ],
+  [
+   "brace",
+   1.26,
+   "bom"
+  ],
+  [
+   "brace-2",
+   1.26,
+   "bom"
+  ],
+  [
+   "woofer-frame",
+   1.23,
+   "woofer by volume"
+  ],
+  [
+   "woofer-motor",
+   1.2,
+   "woofer by volume"
+  ],
+  [
+   "rib-back-1",
+   1.11,
+   "bom"
+  ],
+  [
+   "rib-back-2",
+   1.11,
+   "bom"
+  ],
+  [
+   "caldera-1",
+   1.05,
+   "1190 kg/m3"
+  ]
+ ]
+}
