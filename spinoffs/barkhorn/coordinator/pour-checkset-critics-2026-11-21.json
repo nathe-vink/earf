@@ -1,0 +1,782 @@
+{
+  "summary": "Two critics judge the seven pour check sets (colour by measurement; a buyer by eye at web size) and pick the best pendant/Core pour pair per tint; a skeptic checks each",
+  "agentCount": 4,
+  "logs": [
+    "pour check-set critics: 2 of 2 returned"
+  ],
+  "result": {
+    "results": [
+      {
+        "part": "colour",
+        "found": {
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "decision",
+              "tint": "ember",
+              "product": "pair",
+              "where": "checkset/red; my numbers in critic-colour/ana-off.txt, anchor.txt, lit-extra.txt",
+              "what": "No rendered Ember pair meets the rule. The best rendered pair, pendant 0.7x with Core 0.5, measures 2.4 on my plain-body mean (2.1 median, 1.1 with highlights, 2.8 from the coordinator). Two estimated pairs reach 2 or less: pendant 0.55-0.65x with today's Core 0.5 (1.4-1.6), or pendant 0.7x with Core 0.55 (1.9, interpolated). A deeper Core alone cannot match today's pendant, because the red Core loses chroma as it deepens: the best estimate is Core 0.825 at 4.2.",
+              "expected": "Recommendation: pendant about 0.6x with Core 0.5 (or 0.7x with Core 0.55). Render it OFF and LIT before the owner sees it.",
+              "sure": "likely",
+              "evidence": "Rendered OFF pairs (mine / coordinator): P1.8+C0.5 = 11.4 / 11.5; P1+C0.5 = 5.2 / 5.6; P0.7+C0.5 = 2.4 / 2.8 (dL +2.6, dC -3.5). Interpolation model checked leave-one-out on the three pendant pours: errors 0.3-1.2. Pendant at equal L* to Core 0.5 is 0.49x (dE00 1.6). Crop: critic-colour/crop-off-ember.png. By eye at 480x600, the 0.7x shade and the 0.5 ball read as the same cherry red. Today's 1.8x reads oxblood beside them."
+            },
+            {
+              "id": "F2",
+              "severity": "decision",
+              "tint": "ember",
+              "product": "pendant",
+              "where": "LIT, house exposure, glow face of the pendant; critic-colour/crop-ember-lit-clip.png",
+              "what": "A lighter Ember pendant would probably clip its red channel when lit. Estimated share of the glow face with R >= 250: about 16% at 0.7x and about 29% at 0.6x. Today's 1.8x clips 0% and 1.0x clips 0.04-0.08%. If it clips, the top band of the glow becomes a flat red patch, or turns pink under a roll-off tone curve. Neither 0.7x nor 0.6x has a LIT frame.",
+              "expected": "Render the Ember pendant at 0.6-0.7x LIT before choosing. If it clips, either keep the pendant at 0.85x or deeper (estimated OFF 2.6 with Core 0.6), or lower the exposure for that one frame and say so.",
+              "sure": "likely",
+              "evidence": "Red p99 on the face: 233 at 1.8x (house9), 248 at 1.0x. The estimate is a per-pixel log-linear extrapolation from those two frames, smoothed to suppress noise (ember_clip2.py). In the estimated crop, the speckle comes from the extrapolation and is not real. The magenta area (channel >= 250) covers the upper half of the face."
+            },
+            {
+              "id": "F3",
+              "severity": "decision",
+              "tint": "dust",
+              "product": "core",
+              "where": "checkset/orange; crop-off-dust.png",
+              "what": "A pour cannot fix Dust, because the gap is hue, not lightness. At equal L*, the Core ball is 16-19 deg redder than the pendant (CIELAB h, dE00 12-14). The best pour pair anywhere on the interpolated grid is about 8.4. Today's 1.5 ball reads tomato red (h 38.5) beside an orange shade (h 46) and the Tropos (h 55). The Core is 13-15 from the Tropos at both pours.",
+              "expected": "Keep today's Dust pours on the site. A match needs a yellower dye balance in the Core's pour: about +13 deg h at L* 51, toward the pendant at 2.1x (h 52) and the Tropos (h 55). After that change, render again. Otherwise the owner accepts the gap.",
+              "sure": "certain",
+              "evidence": "Rendered pairs (mine / coordinator): 3x+1.5 = 8.7 / 8.2 (dh -7.6); 2.1x+1.5 = 10.3 (dh -13.2); 2.1x+0.8 = 9.6 / 8.7. Core 0.8 base: h 42.5 against its own ball at h 48.8 (5.2). Lit, the hues agree: pendant OKLab h 42.3, Core 41.4."
+            },
+            {
+              "id": "F4",
+              "severity": "decision",
+              "tint": "acid",
+              "product": "pair",
+              "where": "checkset/amber; README 'Acid's Core step is lighter, toward the lemon Tropos'",
+              "what": "The coordinator's Acid pick only just meets the rule. Pendant 2.1x with Core 1.5 measures 2.1 mean / 1.9 median here (1.7 for the coordinator). A better pair was never rendered: the as-built 3x pendant with a deeper Core of about 2.0 is estimated at 1.6, and both lamps then sit within 1.7-3.1 of the Tropos. The lighter pair sits 3-8 from it. The check set's Core step went the wrong way. The README assumed a lighter Core moves toward the lemon Tropos, but Core 1.5 is already lighter than the Tropos (L* 71.8 against 62.3 plain, 65.7 horn, 66.3 panels), and Core 1.0 lands 13.9 from it.",
+              "expected": "Recommendation: pendant 3x with Core about 2.0, rendered OFF and LIT. Fallback: pendant about 1.9x with Core 1.5 (estimated 1.4). Cost: at Core 2.0 the base darkens to olive (estimated L* 55, 9.4 from the pendant).",
+              "sure": "likely",
+              "evidence": "anchor.txt: P3x -> Core 1.975 (extrapolated from 1.0 and 1.5), dE00 1.6; P to Tropos 1.9/2.5/2.5, C to Tropos 2.5/1.7/3.1. Pendant model leave-one-out error 0.2-0.4. Today's Core 1.5 base (63.1/59.7/100.3) already matches the 3x pendant (2.1), while the ball matches 2.1x. Crop: crop-off-acid.png. The 5x pendant reads olive beside the lemon Core."
+            },
+            {
+              "id": "F5",
+              "severity": "decision",
+              "tint": "poison",
+              "product": "pendant",
+              "where": "checkset/green (only pendant 0.7x was added; no Core candidate)",
+              "what": "Pendant 0.7x with today's Core 0.3 measures 4.8 here (5.5 for the coordinator), so it is not a match. The estimate for a match is about 0.55x, not 0.5x: 0.55-0.6x gives 2 or less, and 0.5x would overshoot. The matched pair then reads like the Tropos's horn (0.9 / 1.7) but sits about 15 from its panels.",
+              "expected": "Render pendant 0.55x OFF and LIT. Today's pair is the LIT match (1.3), and 0.55x would glow about 12 L* brighter than the Core.",
+              "sure": "likely",
+              "evidence": "Pendant at equal L* to the Core: 0.56x, dE00 0.9, extrapolated from 0.7x and 1.0x. A similar extrapolation in Ember erred by 1.2. Estimated LIT at 0.55x: L* 48.6 against Core 36.2, same hue (138 / 137), no clipping. Crop: crop-off-poison.png. At 0.7x the shade still reads darker than the ball."
+            },
+            {
+              "id": "F6",
+              "severity": "decision",
+              "tint": "ice",
+              "product": "core",
+              "where": "checkset/blue; crop-off-ice.png, crop-lit-ice.png",
+              "what": "No Ice pour gets under about 4.5. At equal L*, the Core is +16-19 C* more saturated and 6-9 deg more violet. Pendant 3x with Core 1.5 measures 4.7 (confirmed). Pendant 2.1x matches the Tropos (2.3/1.5/2.5), but no Core pour matches 2.1x (best estimate 4.7). Lit, the coordinator's point holds: the hues come together (253 against 260). The 3x pendant is still 9.3 L* brighter than the Core lit (dE00 8.4), and both glow turquoise (OKLab h 236-240), not the Tropos's blue.",
+              "expected": "Practical pick: pendant 3x with Core 1.5. A real match needs a Core-specific dye (less violet, less chroma), not a pour.",
+              "sure": "certain",
+              "evidence": "Rendered pairs (mine): 3x+1.5 = 4.7 (dC +17.0, dh +6.6); 6x+2.25 = 5.8; 2.1x+1.5 = 10.3. Equal-L* gaps: Core 1.5 dC +19.2, dh +8.8; Core 2.25 dC +16.9, dh +5.6. By eye: the 3x shade reads azure, the 1.5 ball reads royal ultramarine."
+            },
+            {
+              "id": "F7",
+              "severity": "decision",
+              "tint": "haze",
+              "product": "pair",
+              "where": "checkset/violet; crop-off-haze.png, crop-lit-haze.png",
+              "what": "Haze bottoms out at about 3.4 by pour: the Core is about 4 deg bluer at equal L*. The coordinator's reading holds: pendant 1x (as built) with today's Core 0.5 measures 4.3 (coordinator 4.4), and the pendant then matches the Tropos (0.8 plain, 0.5 panels). Lit, this pair reads as one magenta tint (h 340 against 339), with the pendant 6.4 L* brighter (dE00 5.1). Today's lit pair does not read as one tint: the 1.8x pendant glows purple at h 322, the Core magenta at h 339.",
+              "expected": "Recommendation: pendant 1x with Core 0.5. Both frames exist. Core about 0.6 would gain only 0.9 OFF and add about 3 L* to the lit gap.",
+              "sure": "certain",
+              "evidence": "Rendered pairs (mine): P1+C0.5 = 4.3 (median 3.2), P0.7+C0.5 = 3.7, P1+C0.75 = 4.2. anchor.txt: P1x -> Core 0.625 = 3.4; P0.8x -> Core 0.5 = 3.4. By eye: the 0.7x shade reads redder-purple than the bluer 0.5 ball."
+            },
+            {
+              "id": "F8",
+              "severity": "decision",
+              "tint": "smoke",
+              "product": "core",
+              "where": "checkset/black; crop-off-smoke.png",
+              "what": "On the body itself, Core 0.6 matches the 1.2x pendant: median 1.4, mean 3.8 (coordinator 4.9). The residual in the mean comes from the floor reflecting in the lower ball, which no pour removes. Core 0.6 has no LIT frame. Extrapolation suggests it would glow darker than the pendant (estimated L* 7 against 15.7), but the model is unreliable for near-black: its leave-one-out errors are 2-6. Core 0.45 measures 2.9 median / 5.9 mean OFF and matches lit (1.9).",
+              "expected": "Recommendation: Core 0.6, with 0.5 as the hedge. Render Core 0.6 LIT, and 0.5 OFF and LIT, before choosing. Today's Core 0.3 reads slate-grey glass beside a black shade.",
+              "sure": "likely",
+              "evidence": "Rendered: 1.2x+0.6 = 3.8 mean / 1.4 median / 0.9 with highlights; 1.2x+0.45 = 5.9 / 2.9 / 1.1; today 14.5 / 13.1. The Tropos plain mask mixes a clear horn (L* 70) with a black cabinet, so for Smoke only the panels comparison means anything: pendant 1.6, Core 0.6 5.3."
+            },
+            {
+              "id": "F9",
+              "severity": "note",
+              "tint": "all",
+              "product": "pair",
+              "where": "LIT row of every sheet; critic-colour/ana-lit.txt",
+              "what": "One pour cannot match both OFF and LIT at the house exposure. Today's pours are already the LIT match in Ember (1.4) and Poison (1.3), and nearly so in Acid (5.2). Every OFF pick that lightens a pendant makes the pendant glow 9-17 L* brighter than its Core: Ember +14-16, Acid +17, Poison +12, Ice +9, Haze +6 to +12. The lit hue stays one tint in Ember, Acid, Poison and Dust. In Ice and Haze it moves with the pour (Ice 290 to 253, Haze 322 to 340).",
+              "expected": "The owner chooses knowing the lit pair will no longer match, unless the LIT pictures are shown singly.",
+              "sure": "certain",
+              "evidence": "Glow medians on my fixed face masks, matching the coordinator within 0.9-2.3 L* and 2 deg. Clipping in every rendered LIT frame is at most 0.08% (>= 250) and 0% at 255."
+            },
+            {
+              "id": "F10",
+              "severity": "note",
+              "tint": "all",
+              "product": "row",
+              "where": "sheets: the 'LIT not rendered' cells",
+              "what": "The check set does not show the owner the picks. The pours the numbers favour have no LIT frame: Ember 0.7x, Acid 2.1x, Ice 2.1x, Haze 0.7x, Smoke Core 0.6. Several best estimates were not rendered at all: Ember 0.6x, Ember Core 0.55, Poison 0.55x, Acid Core about 2.0, Haze Core about 0.6.",
+              "expected": "Render the picks (table 'needs_render') OFF and LIT. The brief asked for the choice to be checked by render before the owner sees it.",
+              "sure": "certain",
+              "evidence": "checkset folder listings, and blank LIT cells in sheet-red, sheet-amber, sheet-blue, sheet-violet and sheet-black."
+            },
+            {
+              "id": "F11",
+              "severity": "note",
+              "tint": "all",
+              "product": "pendant",
+              "where": "live site: bar pictures (desktop and phone heroes, 'At the bar' on Hemisphere, Core and Tropos, the lighting page) and the lumen figures",
+              "what": "Cost of the picks. The bar pictures show today's pendants lit. A lighter pendant glows brighter, and in Ember probably clips, so every changed tint (Ember, Acid, Poison, Ice, Haze) would need the bar set re-rendered, along with the singles, rows and group. The stated lumens (Hemisphere 307...260 lm, Core 45...35 lm) were computed at today's pours, so a lighter pendant or a deeper Acid Core changes them. They must be measured again before the site states them.",
+              "expected": "Count these costs in the decision. Do not change pours on the site without re-rendering and re-measuring.",
+              "sure": "certain",
+              "evidence": "Brief (bar pictures show today's pours). The photometry figures come from the coordinator's record of 17 Nov. The LIT gaps are in F9."
+            },
+            {
+              "id": "F12",
+              "severity": "note",
+              "tint": "all",
+              "product": "tropos",
+              "where": "Tropos fronts (b58/tropos), regions from the morning masks",
+              "what": "Lightening the pendants moves Ember and Poison away from the Tropos panels: Ember goes from 0.6 to 9.3-10.9, Poison from 1.7 to about 15. The matched pairs then sit at the colour of the Tropos horn (Poison 0.9) or between horn and panels (Ember 5-7 from the plain). Acid's 2.1x pick also moves the pendant away from the Tropos (1.9 to 6.1 plain), but the 3x pendant with a deeper Core does not. Ice and Haze move toward the Tropos. All picks are lighter than today: pendant L* Ember 23 to 35-37, Acid 53 to 64-71, Poison 28 to 43, Ice 20 to 35, Haze 12 to 20. That cuts against the owner's 'deep colour'.",
+              "expected": "Show the owner each pick beside the Tropos.",
+              "sure": "certain",
+              "evidence": "ana-off.txt, the 'to Tropos' lines."
+            },
+            {
+              "id": "F13",
+              "severity": "note",
+              "tint": "all",
+              "product": "core",
+              "where": "Core base against ball",
+              "what": "Within each Core, the base (same pour over the white liner) differs from the ball by 2-7.5 at today's pours: Ember 5.9, Acid 7.4, Poison 7.5, Dust 2.1, Ice 4.4, Haze 3.8. The pendant can match the ball or the base, not both. All my pair numbers use the ball, as the coordinator's do.",
+              "expected": "Worth knowing when the owner judges 'match' by eye.",
+              "sure": "certain",
+              "evidence": "ana-off.txt, the 'base' lines. The P-base column shows, for example, Acid 3x against base 1.5 at 2.1."
+            },
+            {
+              "id": "F14",
+              "severity": "note",
+              "tint": "ice",
+              "product": "all",
+              "where": "checkset README: 'Ice's and Haze's hue is not changed by a pour'",
+              "what": "For Ice this is false. OFF, the pendant's hue moves from 300.9 (6x) to 288.3 (3x) to 278.8 (2.1x), and the Core's from 301.2 (2.25) to 294.9 (1.5). Lit, the pendant moves from 290 to 253. For Haze it holds OFF (307.6 to 311.4) but not lit (322 to 340).",
+              "expected": "Correct the README note.",
+              "sure": "certain",
+              "evidence": "ana-off.txt, ana-lit.txt"
+            },
+            {
+              "id": "F15",
+              "severity": "note",
+              "tint": "all",
+              "product": "all",
+              "where": "method",
+              "what": "With my own masks, the coordinator's numbers hold. Per lamp within 0.1-1.2 dE00; pair dE00 within about 1.0. LIT glow L* within 0.9-2.3 (mine read darker because they cover the whole face, not the brighter half), hue within 2 deg, clipping near zero in both. The wall corners are identical across pours (pendant 17.6/24.0/15.8, Core 16.4/23.5), so the house9 Ember LIT frames share the check set's studio and exposure. All check frames register to today's frames at zero shift. Including highlights, as a 480x600 view does, brings every pair closer (Ember 0.7x+0.5 1.1, Acid 2.1x+1.5 1.4, Poison 0.7x+0.3 2.3), so the plain-body numbers are the strict test.",
+              "expected": "No action.",
+              "sure": "certain",
+              "evidence": "reg2.py (best shift 0,0 for all 17 frames); own-off.json; own-lit.json; mask overlays ov-*.png and ovlit-*.png"
+            }
+          ],
+          "picks": [
+            {
+              "tint": "ember",
+              "pendant": "about 0.6x (or 0.7x if the Core goes to 0.55)",
+              "core": "0.5 (today), or 0.55 with the 0.7x pendant",
+              "off_match": "estimated 1.4-1.6 (0.6x with 0.5); 0.7x with 0.55 estimated 1.9; rendered 0.7x with 0.5 = 2.4 mine / 2.8 coordinator",
+              "lit": "pendant glow estimated L* 54-57 against Core 40.7 (+14-16), same hue (OKLab h 28-29); red channel >= 250 on an estimated 16% (0.7x) to 29% (0.6x) of the face; today the lit pair matches (1.4)",
+              "needs_render": "yes: pendant 0.6x OFF and LIT, pendant 0.7x LIT, Core 0.55 OFF and LIT",
+              "why": "Only route to 2 or less, because a deeper red Core loses chroma (best Core-only 4.2). Cost: the pendant goes 9-11 from the Tropos panels, where today it is 0.6."
+            },
+            {
+              "tint": "dust",
+              "pendant": "3x (today); no pour pick",
+              "core": "1.5 (today); needs a yellower dye balance",
+              "off_match": "none by pour: best 8.4-8.7; at equal L* the Core ball is 16-19 deg redder (dE00 12-14)",
+              "lit": "today: Core glow 9.9 L* darker than the pendant, same hue (OKLab h 41 against 42), no clipping",
+              "needs_render": "yes, after the Core's Dust recipe is shifted about +13 deg in h (toward h 50-55)",
+              "why": "A hue difference, not a lightness one. Pendant 2.1x is nearer the Tropos (5.9/5.4/5.5) but no nearer the Core."
+            },
+            {
+              "tint": "acid",
+              "pendant": "3x (as built)",
+              "core": "about 2.0 (deeper; not rendered)",
+              "off_match": "estimated 1.6; fallback pendant about 1.9x with Core 1.5 estimated 1.4 (2.1x with 1.5 rendered: 2.1 mine / 1.7 coordinator)",
+              "lit": "pendant 3x glow L* 69.8 against Core 2.0 estimated about 54 (+16), same hue (92), no clipping; fallback 1.9x 74.4 against 57.0 (+17)",
+              "needs_render": "yes: Core 2.0 OFF and LIT (pendant 1.9x if the fallback is chosen)",
+              "why": "Both lamps then sit within 1.7-3.1 of the Tropos (fallback 3-8). The rendered Core step (1.0) went the wrong way. Cost: the base turns olive (L* about 55)."
+            },
+            {
+              "tint": "poison",
+              "pendant": "about 0.55x",
+              "core": "0.3 (today)",
+              "off_match": "estimated 0.9-1.1 (0.55-0.6x reach 2 or less); rendered 0.7x = 4.8 mine / 5.5 coordinator",
+              "lit": "pendant estimated L* 48.6 against Core 36.2 (+12), same hue (138 / 137), no clipping; today the lit pair matches (1.3)",
+              "needs_render": "yes: pendant 0.55x OFF and LIT",
+              "why": "Lightness gap only; the pair then matches the Tropos horn (0.9 / 1.7) but sits about 15 from its panels."
+            },
+            {
+              "tint": "ice",
+              "pendant": "3x (as built)",
+              "core": "1.5 (today)",
+              "off_match": "4.7, no match; about 4.5 is the floor for any pour (Core +16-19 C*, 6-9 deg more violet)",
+              "lit": "rendered: pendant L* 40.7 h 253 against Core 31.4 h 260, dE00 8.4 (pendant +9.3 L*); both glow turquoise; today 10.4",
+              "needs_render": "no for this pair; a true match needs a Core dye change and a render",
+              "why": "Best a pour can do. Pendant 2.1x would match the Tropos (2.3/1.5/2.5), but no Core pour comes within 4.7 of it."
+            },
+            {
+              "tint": "haze",
+              "pendant": "1x (as built)",
+              "core": "0.5 (today)",
+              "off_match": "4.3 (coordinator 4.4); floor about 3.4 by any pour (Core about 4 deg bluer)",
+              "lit": "rendered: pendant L* 28.2 h 340 against Core 21.8 h 339, one magenta tint, dE00 5.1 (pendant +6.4); today 9.3 with an 18 deg hue gap",
+              "needs_render": "no (both frames exist); Core about 0.6 only if the owner wants the last 0.9 OFF",
+              "why": "The pendant then matches the Tropos (0.8 plain, 0.5 panels), and the lit hues become one tint. The rest of the OFF gap is hue, not pour."
+            },
+            {
+              "tint": "smoke",
+              "pendant": "1.2x (today)",
+              "core": "0.6 (0.5 as the hedge)",
+              "off_match": "body median 1.4 (mean 3.8, coordinator 4.9; the residual is floor reflections in the ball)",
+              "lit": "0.6 not rendered; extrapolation says it glows darker than the pendant (estimated L* 7 against 15.7; unreliable); Core 0.45 lit matches (1.9)",
+              "needs_render": "yes: Core 0.6 LIT; Core 0.5 OFF and LIT",
+              "why": "0.6 and 0.45 both read black beside the shade at 480x600; today's 0.3 reads slate grey."
+            }
+          ],
+          "table": [
+            "Tint | today OFF dE00 coord/mine | pick (pendant + Core) | pick OFF dE00 | pendant to Tropos plain/horn/panels | Core to Tropos | pick LIT: pendant vs Core glow L*, hue, clipping",
+            "Ember | 11.5 / 11.4 | ~0.6x + 0.5 (or 0.7x + 0.55) | est 1.4-1.6 (0.7x+0.5 rendered 2.4) | 0.55x: 6.9/6.4/10.9; 0.7x: 5.2/7.5/9.3 | 0.5: 7.1/6.3/11.1 | est 54-57 vs 40.7, one hue, R clips on est 16-29% of the face",
+            "Dust | 8.2 / 8.7 | none by pour (keep 3x + 1.5) | best 8.4-8.7, hue gap 16-19 deg | 3x: 7.8/10.8/8.0 (2.1x: 5.9/5.4/5.5) | 1.5: 14.1/15.3/13.2 | 54.3 vs 44.4, one hue, no clipping",
+            "Acid | 15.4 / 16.2 | 3x + ~2.0 (fallback ~1.9x + 1.5) | est 1.6 (fallback est 1.4; 2.1x+1.5 rendered 2.1) | 3x: 1.9/2.5/2.5 | ~2.0: est 2.5/1.7/3.1 (1.5: 7.8/5.1/4.9) | 69.8 vs est ~54, one hue, no clipping",
+            "Poison | 13.6 / 13.2 | ~0.55x + 0.3 | est 0.9-1.1 (0.7x rendered 4.8) | 0.55x: 11.8/0.9/14.9 | 0.3: 11.1/1.7/14.3 | est 48.6 vs 36.2, one hue, no clipping",
+            "Ice | 14.0 / 14.0 | 3x + 1.5 | 4.7 (floor ~4.5: chroma/hue) | 3x: 7.1/7.5/10.4 | 1.5: 9.9/10.1/12.2 | 40.7 vs 31.4, h 253 vs 260 (turquoise), no clipping",
+            "Haze | 9.3 / 9.2 | 1x + 0.5 | 4.3 (floor ~3.4: hue) | 1x: 0.8/6.6/0.5 | 0.5: 3.5/3.9/4.0 | 28.2 vs 21.8, h 340 vs 339 (magenta), no clipping",
+            "Smoke | 15.4 / 14.5 | 1.2x + 0.6 | median 1.4 / mean 3.8 | 1.2x: panels 1.6 | 0.6: panels 5.3 | 0.6 not rendered (est darker than the pendant); 0.45 matches 1.9"
+          ],
+          "summary": "With my own masks, the coordinator's numbers hold. My masks are built per tint at half size: today's full-size frames are reduced in linear light, the silhouette is found by colour, highlights and edges are removed in every pour, and the masks are intersected over the pours. LIT uses a fixed glow face plus a centre patch. Agreement: OFF per lamp within 0.1-1.2 dE00, pairs within about 1, LIT within 1-2 L* and 2 deg. Clipping is near zero in every rendered LIT frame, and all frames share one studio and exposure (house9 included, zero registration shift).\n\nBy the owner's rule (about 2), no rendered pour pair matches in any tint. Ember 0.7x+0.5 is 2.4 (2.8 for the coordinator). Acid 2.1x+1.5 is 2.1, only at the limit. Poison 0.7x+0.3 is 4.8.\n\nEstimated matches:\n- Ember: pendant about 0.6x with Core 0.5 (est 1.4-1.6).\n- Poison: pendant about 0.55x, not 0.5x (est 0.9-1.1).\n- Acid: the as-built 3x pendant with a deeper Core of about 2.0 (est 1.6). Both lamps then sit within about 3 of the Tropos. The check set rendered the Core step the wrong way: Core 1.5 is already lighter than the Tropos.\n\nA pour cannot fix Dust, Ice or Haze, because the gap there is hue or chroma, not lightness. At equal L*:\n- Dust: the Core is 16-19 deg redder (12-14 dE00).\n- Ice: the Core is +16-19 C* and 6-9 deg more violet; the floor is about 4.5 (practical pick 3x + 1.5 at 4.7).\n- Haze: the Core is about 4 deg bluer; the floor is about 3.4 (practical pick 1x + 0.5 at 4.3).\nEach needs a Core dye-balance change. Smoke Core 0.6 matches on the body (median 1.4; the mean gap of 3.8 is floor reflections in the ball), but it has no LIT frame.\n\nThe OFF picks cost the LIT match. At the house exposure, today's pours are the LIT match in Ember (1.4) and Poison (1.3). Lighter pendants glow 9-17 L* brighter than their Cores. The Ember pendant at 0.6-0.7x probably clips its red channel over about a sixth to a third of the glow face (estimated, not rendered).\n\nFurther costs: Ember and Poison pendants move about 10-15 away from the Tropos panels. Every pendant gets lighter, against the owner's 'deep colour'. The bar pictures, singles, rows and the stated lumens would all need redoing for each changed tint.\n\nNone of the favoured pours has a LIT frame, and several (Ember 0.6x, Ember Core 0.55, Poison 0.55x, Acid Core 2.0, Smoke Core 0.6 LIT) were not rendered at all. Render those OFF and LIT before the owner chooses.\n\nFiles are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-colour/:\n- ana-off.txt, ana-lit.txt, anchor.txt, lit-extra.txt\n- own-off.json, own-lit.json\n- crop-off-<tint>.png and crop-lit-<tint>.png\n- crop-ember-lit-clip.png\n- mask overlays ov-*.png and ovlit-*.png\n- scripts own.py, run_off.py, run_lit.py, ana_off.py, ana_lit.py, lit_extra.py, anchor.py, ember_clip2.py"
+        },
+        "verified": {
+          "verdicts": [
+            {
+              "id": "F1",
+              "verdict": "uncertain",
+              "severity": "decision",
+              "measurement": "My masks differ from both earlier sets. I used the render meter's own masks (meter/shade.png, ball.png), reduced 2x2 and eroded 6 px. Two measures: A is the per-pixel CIELAB median with no highlight removal; B is a trimmed linear mean that drops pixels above median L*+12 and the darkest 3%. Files: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/off.txt, est.txt, lit.txt. Rendered pairs (A/B): P1.8+C0.5 11.3/12.0; P1+C0.5 4.9/5.9; P0.7+C0.5 2.5/3.3 (dL +3.3, dC -5.4). Estimates with Core 0.5, from three pour models (log-linear, offset plus Beer-Lambert through three pours, linear in Lab): 0.65x 2.2-2.4/2.9; 0.6x 1.9-2.3/2.5-2.6; 0.55x 1.8-2.4/2.2-2.4. P0.7+C0.55 2.6/2.8. Best pendant for Core 0.5: 0.47-0.49x at 2.0-2.3 (B), 0.54-0.60x at 1.8-2.3 (A). Deeper Core alone: C0.825 with P1.8 3.6/4.8. Pendant-model leave-one-out error: 0.6-1.9. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/pairs-ember-0.png and body-ember.png.",
+              "reasoning": "Reproduced: no rendered pair is at 2 or less on any of the three mask sets. The best is P0.7+C0.5: 2.4 for the critic, 2.5/3.3 for me, 2.8 for the coordinator. Also reproduced: a deeper Core cannot reach today's pendant, because the ball loses chroma as it deepens (C* 62.6 at 0.5, 50.9 at 0.75). Not reproduced: the estimates behind the recommendation. On my masks, 0.55-0.65x with Core 0.5 comes to 1.8-2.9, not 1.4-1.6, and 0.7x with 0.55 comes to 2.6-2.8, not 1.9. The ball stays 5-8 C* below the lighter pendants, which holds the floor near 2. The gain of 0.6x over the rendered 0.7x is 0.2-0.7, inside the model's own leave-one-out error. By eye at 480x600, the 0.7x shade and the 0.5 ball read as the same cherry red, and 1.8x reads oxblood beside them; both confirmed. My recommendation: pendant 0.7x with Core 0.5, and render its LIT frame. Render 0.6x only if the owner wants the number itself under 2."
+            },
+            {
+              "id": "F2",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Glow face = the brighter half of the meter shade mask. Rendered: R>=250 on 0.00% at 1.8x and 0.08% at 1.0x; R p99 232 and 246 after a 5x5 blur. Per-pixel log-linear extrapolation in linear light from the blurred 1.8x (house9) and 1.0x frames: R>=250 on 0.9% at 0.85x, 33% at 0.7x and 55% at 0.6x; R p99 253 at 0.7x. Tone curve, from the rendered 1.0x face: as R rises through 220-225, 230-235, 240-245 and 248-253, mean G goes 12, 19, 43, 53 and B goes 7, 15, 41, 52. G and B rise together near the top. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/ember-lit-clip.png",
+              "reasoning": "The risk is real. My extrapolation uses a different face mask and blurs before extrapolating, and it puts more of the face at the top than the critic's: 33% and 55% against 16% and 29%. Both agree that 0.7x already reaches the top. One correction: the frames are not hard-clipped. The 1.0x render shows a highlight roll-off that lifts G and B together as R nears 255. So the expected result is a salmon-pink top band, already faint at 1.0x in my crop, not a flat red patch. For the same reason, both sets of percentages are extrapolations in display values and show direction only. Render 0.7x LIT (and 0.6x if it stays in play) before choosing."
+            },
+            {
+              "id": "F3",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "My masks as in F1 (A/B). Today 3x+1.5: 6.9/8.2 (dh -6.9). 2.1x+0.8: 7.4/9.2 (dh -2.3, dL +9.8). 2.1x+1.5: 9.5/9.4. 3x+0.8: 12.0/13.8. Grid (three models, two masks): best pair anywhere 6.1-7.6; best pendant for today's Core 6.9-8.0. Hue h: ball 36.4 (1.5) and 46.6 (0.8); shade 43.2 (3x) and 48.9 (2.1x); Tropos 54-59. At equal L* (pendant extrapolated below 2.1x), the Core is about 15-18 deg redder. Core to Tropos: 13.0-16.5. LIT: OKLab h 42.2 pendant, 41.3 Core; Core 8.1 L* darker. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/pairs-dust-0.png, body-dust.png and lit-dust.png",
+              "reasoning": "Reproduced: no pour pair comes near 2. The ball is redder than the shade at equal lightness. Today's 1.5 ball reads tomato red beside an orange shade. Lit, today's pair glows one orange. The critic's floor of about 8.4 is 6-7.6 on my masks, which does not change the conclusion. The size of the equal-L* gap depends on extrapolating the pendant below its two rendered pours, so treat it as approximate. One thing for the owner: the rendered 2.1x + 0.8 pair holds the hue (dh -2 to -3) and reads as one orange at 480x600. Its ball is 10 L* lighter, though, and by dE00 it is no better (7.4-9.2)."
+            },
+            {
+              "id": "F4",
+              "verdict": "uncertain",
+              "severity": "decision",
+              "measurement": "My masks as in F1 (A/B). P2.1+C1.5: 1.4/2.2 (critic 1.9/2.1, coordinator 1.7). P3+C1.5: 4.6/6.2. P2.1+C1.0: 6.3/8.3. P3+C1.0: 10.6/12.7. Estimate P3x+C2.0 (Core extrapolated from 1.0 and 1.5): 1.8 and 2.2 on B, 2.3 and 2.8 on A. Fallback 1.9x+C1.5: 1.6-1.7. Ball 1.5 L* 71.4-72.9; Tropos plain/horn/panels L* 62.3/65.7/66.3, but its bright front band (front_top) is L* 92.2. Core 1.0 to Tropos 13.8/11.2/10.5. Estimated Core 2.0 to Tropos 2.1/3.3/4.1; estimated base 2.0 L* 55.8, 7.7 from the 3x pendant. Today's base 1.5 to 3x pendant: 1.4. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/pairs-acid-0.png, pairs-acid-1.png, body-haze-acid.png and tropos-acid.png",
+              "reasoning": "Confirmed: 2.1x + 1.5 sits right at the line (1.4-2.2 across the three mask sets). The lighter Core 1.0 step made both the pair and the Tropos match worse. Today's 1.5 base matches the 3x shade. Not reproduced: 'a better pair'. On my masks 3x + 2.0 comes to 1.8-2.8, no better than the rendered 2.1x + 1.5, and it extrapolates a full step past the last rendered Core pour. 'Core 1.5 is lighter than the Tropos' holds only for the masked body regions. The Tropos reads lemon because of its bright front band (L* 92), which is lighter than any lamp. What does hold is that 3x + 2.0 would sit nearer the Tropos body (about 2-4 against 2.4-7.3). That makes it a fair render to try, not the pick. By eye at 480x600, 2.1x and 1.5 read as one yellow."
+            },
+            {
+              "id": "F5",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "My masks as in F1 (A/B). P0.7+C0.3: 5.1/6.5 (critic 4.8, coordinator 5.5). Today: 13.9/14.5. Best pendant for Core 0.3: 0.49-0.51x at 1.7-1.8 (B), 0.54-0.56x at 0.7 (A). By pour: 0.55x 0.7-0.9/2.1-2.6; 0.5x 1.6-2.7/1.8; 0.6x 1.6-2.0/3.5-3.9. Estimated 0.55x to Tropos plain/horn/panels: 9.8/2.7/13.1. LIT on my glow mask: today's pair 3.3 (critic 1.3); P0.7 L* 43.8 against C0.3 38.8; extrapolated 0.55x about L* 48.7 (+10). Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/pairs-poison-0.png",
+              "reasoning": "Confirmed: 0.7x is not a match, and at 480x600 it still reads a shade darker than the ball. A pendant near 0.5-0.55x reaches 2 or less on both my masks. That pair sits near the Tropos's horn and far from its panels. Lit, it would glow about 10 L* above the Core, and today's pair stays the closest lit pair. Not supported: '0.55x, not 0.5x; 0.5x would overshoot'. My two masks disagree on which pour is better (B favours 0.5x, A favours 0.55x), and both pours are extrapolations past the two rendered pendant frames. Render 0.5x and 0.55x together."
+            },
+            {
+              "id": "F6",
+              "verdict": "uncertain",
+              "severity": "decision",
+              "measurement": "My masks as in F1 (A/B). P3+C1.5: 4.3/4.3 (dL +2.3, dC +14.5, dh +5.8). P6+C2.25: 5.2/6.0 (dh +0.1). Today: 14.0/14.3. P2.1+C1.5: 11.0/9.4. P2.1 to Tropos: 2.7/2.0/2.5. At Core 1.5's L* (pendant about 2.7x), the Core is about +17 C* and +8 deg h. Estimates with today's 6x pendant: Core 2.5 3.4-4.4; Core 2.75 2.7-3.9 (three models, two masks; Core extrapolated past 2.25). LIT on my mask: P3 L* 40.9 h 253.4 against C1.5 33.8 h 257.9, dE00 6.4; P6+C2.25 4.1. Glow OKLab h 235.7 and 238.8. Reference OKLab hues: turquoise 185, cyan 195, deep sky blue 232, dodger blue 253; Tropos OFF 248-251. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/pairs-ice-0.png, pairs-ice-1.png, body-ice.png and lit-ice.png",
+              "reasoning": "Confirmed: 3x + 1.5 is the lowest rendered pair (about 4.5). At equal L* the Core has more chroma and leans violet. The 2.1x pendant matches the Tropos. Lit, the hues come together while the 3x shade glows clearly brighter. Not supported: 'no Ice pour gets under about 4.5'. With today's 6x pendant, a Core of 2.5-2.75 is estimated at 2.7-4.4, as good as or better than 3x + 1.5, and it keeps one hue. In my body crop, 6x and 2.25 read as one ultramarine, while 3x reads azure beside the royal-blue 1.5 ball. Lit, the rendered 6x + 2.25 is already 4.1 against 6.4. Its cost is distance from the azure Tropos (about 20). Wording: OKLab 236-239 is sky blue (deep sky blue is 232); turquoise is about 185. The glow reads cyan-leaning sky blue, greener than the Tropos, but it is not turquoise."
+            },
+            {
+              "id": "F7",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "My masks as in F1 (A/B). P1+C0.5: 3.0/4.4 (dh -2.9). P0.7+C0.5: 4.0/3.6. P1+C0.75: 4.3/4.1. Today: 8.7/9.4. Grid floor: 2.5 (A) and 3.3-3.4 (B), near P 0.85-0.93x with C 0.54-0.575. At equal L* the Core is 3.8 deg bluer. P1 to Tropos plain/horn/panels: 0.7/6.5/1.1. LIT: P1 26.0/52.2/339.3 against C0.5 20.5/46.5/338.4, dE00 4.4, pendant 5.5 L* brighter. Today lit: P1.8 h 321.1 against C0.5 h 338.4. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/pairs-haze-0.png, pairs-haze-1.png, body-haze-acid.png and lit-haze.png",
+              "reasoning": "Reproduced in the numbers and by eye. The 1x shade reads violet-purple, a little redder than the bluer 0.5 ball; what gap remains is hue, which no pour moves. Lit, 1x and 0.5 glow one magenta, while today's 1.8x glows purple beside a magenta Core. The floor depends on the mask (2.5 on A, 3.4 on B), so 'about 3.4' is the cautious figure. Both frames exist, so no render is needed."
+            },
+            {
+              "id": "F8",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Whole ball on my mask (A/B): C0.6 5.8/3.9; C0.45 7.6/6.1; C0.3 15.7/14.9 (coordinator 4.9/7.0/15.4). Median L* by thirds of the ball (upper/middle/lower): C0.6 7.6/3.0/18.8; C0.45 10.1/5.6/22.0; C0.3 24.5/21.6/33.9. Shade 1.2x median L* 3.4. Mean L* of the darkest 40%: shade 2.2, C0.6 1.6, C0.45 4.0, C0.3 16.2. LIT on my mask: C0.45 L* 16.8 against P1.2 12.8 (dE00 3.3); C0.3 30.7. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-colour/pairs-smoke-0.png and lit-smoke.png",
+              "reasoning": "The critic's median of 1.4 depends on a mask that keeps the dark body; over my whole ball the median is 5.8. Split by thirds, the claim holds. The middle of the 0.6 ball is L* 3.0 against the shade's 3.4, and the excess sits in the lower third (L* 18.8), where the light floor reflects in a glossy sphere. That is correct physics, and no pour removes it. At 480x600, the 0.6 and 0.45 balls read as the same black glass as the shade; today's 0.3 reads slate grey and see-through. Lit, 0.45 is close to the pendant (3.3 on my mask), and 0.6 extrapolates darker. The recommendation to render Core 0.6 LIT, and Core 0.5 OFF and LIT, is sound."
+            }
+          ],
+          "picks_check": [
+            {
+              "tint": "ember",
+              "keep": "change",
+              "your_pick": "Pendant 0.7x with today's Core 0.5. The 0.7x OFF frame exists; render its LIT frame. Render 0.6x beside it only if the owner wants the number itself under 2.",
+              "why": "On my masks, the 0.6x estimate (1.9-2.6) is within model error of the rendered 0.7x (2.5 and 3.3 mine, 2.4 critic, 2.8 coordinator). At 480x600, 0.7x and 0.5 already read as one cherry red. Going lighter moves the pendant further from the Tropos panels (9.5 to 10.6) and pushes more of the lit face into the roll-off (estimated 33% to 55% at the top; 1.0x already shows a salmon band). A rendered frame is evidence; an estimate is not."
+            },
+            {
+              "tint": "dust",
+              "keep": "keep",
+              "your_pick": "Today's pendant 3x and Core 1.5 stay on the site. No pour fixes Dust; it needs a yellower Core recipe and a new render.",
+              "why": "No pair comes in under 6 on any mask (today 6.9-8.7, 2.1x+0.8 7.4-9.6, grid floor 6.1-8.4). Today's pair is the deepest, no worse by dE00, and one orange lit. For the owner: the rendered 2.1x+0.8 keeps the hue (dh -2 to -3 against -7) but its ball is 10 L* lighter. It is the better option only if he puts hue ahead of depth."
+            },
+            {
+              "tint": "acid",
+              "keep": "change",
+              "your_pick": "Pendant 2.1x with today's Core 1.5. The OFF frame exists; render the 2.1x LIT. Render 3x with Core 2.0 only as the deeper alternative.",
+              "why": "It is the only rendered pair at about 2 on all three mask sets (1.4-2.2), and it reads as one yellow at 480x600. On my masks the critic's 3x+2.0 estimate is 1.8-2.8, no better. It extrapolates a full step past the last Core pour and darkens the base to L* about 56. Its advantage, being nearer the Tropos body (about 2-4), is real, so it is worth a render if the owner wants Acid deeper."
+            },
+            {
+              "tint": "poison",
+              "keep": "keep",
+              "your_pick": "Pendant about 0.5-0.55x with today's Core 0.3. Render both 0.5x and 0.55x, OFF and LIT.",
+              "why": "0.7x measures 5.1-6.5 here, not a match. Both estimates reach 2 or less (0.7-1.8 at the best pour), but my two masks disagree on which pour (B: 0.5x, A: 0.55x), so render both. The cost: lit, the pendant glows about 10 L* above the Core, and today's pair is the closest lit pair."
+            },
+            {
+              "tint": "ice",
+              "keep": "keep",
+              "your_pick": "Pendant 3x with Core 1.5 as the best rendered pair. Also render Core 2.5 with today's 6x pendant, OFF and LIT, before the owner chooses.",
+              "why": "3x+1.5 is the lowest rendered OFF pair on every mask (4.3-4.7) and the nearest to the Tropos, so the pick stands. It is not the floor, though. 6x with Core 2.5-2.75 is estimated at 2.7-4.4 and keeps one ultramarine hue (6x with 2.25 already reads as one blue). It is deeper, which is the owner's rule, and lit it matches better (4.1 against 6.4). The cost is distance from the azure Tropos (about 20)."
+            },
+            {
+              "tint": "haze",
+              "keep": "keep",
+              "your_pick": "Pendant 1x (as built) with today's Core 0.5.",
+              "why": "Rendered OFF and LIT. OFF it measures 3.0-4.4, and the only other candidate, 0.7x, is 3.6-4.0. The pendant then matches the Tropos (0.7 plain, 1.1 panels), and lit the pair glows one magenta (h 339 against 338), where today's pair does not. The rest of the gap is the Core's bluer hue, which no pour moves."
+            },
+            {
+              "tint": "smoke",
+              "keep": "keep",
+              "your_pick": "Today's pendant 1.2x with Core 0.6. Render Core 0.6 LIT, plus Core 0.5 OFF and LIT as the hedge.",
+              "why": "At 0.6 the ball's body matches the shade (middle third L* 3.0 against 3.4), and at 480x600 it reads as the same black glass. The residual is the floor reflecting in the lower ball, which no pour removes. Today's 0.3 reads slate grey. Lit, 0.6 extrapolates darker than the pendant, so 0.5 is the sensible hedge."
+            }
+          ]
+        }
+      },
+      {
+        "part": "buyer",
+        "found": {
+          "findings": [
+            {
+              "id": "B1",
+              "severity": "decision",
+              "tint": "dust",
+              "product": "core",
+              "where": "Home row at 300 px and the 480 x 600 tile: row-off/core-orange-off.png (Core 1.5, today) beside the Dust Tropos and the Ember row",
+              "what": "Today's Dust Core looks red, not orange. Its ball hue is h 38.6, which is the Ember Tropos's hue (h 38.4). The Dust Tropos is h 54.8, and the Ember Core is only 3 degrees away at h 35.4. In the row a buyer sees an orange speaker, a red-orange pendant and a red ball, and the ball looks like it belongs to the Ember row. With pendant 2.1x and Core 0.8, both lamps look orange (pendant h 52.1, Core h 48.9) and Dust stays clearly apart from Ember (the two Cores are dE00 24.8 apart, against 14.8 today). That pair still does not match by the owner's rule: dE00 8.7, mostly lightness, with the Core 9 L* lighter. Today's pair is 8.2 apart, mostly hue.",
+              "expected": "Put pendant 2.1x with Core 0.8 to the owner as 'better than today, still not a match', and say plainly that a pour alone cannot close the gap. A Core dark enough to match the pendant turns red (1.5 is h 38.6); a Core orange enough to match turns light (0.8 is L 60.8). Closing it needs a change to the Core's dye mix, not a pour.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/cmp-ember-dust.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/alt-rows-dust.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-dust-off.png; meas-off.txt (Dust Core 1.5 ball L 52.8 C 82.0 h 38.6; Core 0.8 L 60.8 C 73.1 h 48.9; 2.1x + 0.8 = 8.7 with dL +9.0 dh -3.2; today 8.2 with dh -7.9); my between-tint dE00 run: Dust/Ember Core 14.8 today, 24.8 with the pick"
+            },
+            {
+              "id": "B2",
+              "severity": "decision",
+              "tint": "ice",
+              "product": "pendant",
+              "where": "cmp-ice-haze.png: the Ice and Haze rows at 300 px, today and pick",
+              "what": "Today the Ice and Haze pendants are the hardest pair of tints to tell apart in the set: dE00 7.7 (Ice 6x L 20.7 h 300.8, Haze 1.8x L 12.8 h 307.8). At 300 px both look deep indigo, and only the Tropos next to each one tells them apart. With Ice 3x and Haze 1x the pendants are 20.5 apart: Ice looks cobalt and Haze looks violet. The Cores do not change and stay 13.9 apart, mostly on lightness (Ice 1.5 L 37.4 h 294.8, Haze 0.5 L 25.6 h 306.9). The Ice Core still leans toward Haze: h 294.8 against the Ice Tropos's h 275.",
+              "expected": "Take Ice 3x and Haze 1x, partly because together they make the two tints easy to tell apart. Tell the owner that the Ice Core's violet lean (20 degrees off its Tropos) comes from the dye, not the pour.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/cmp-ice-haze.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/overview-lamps.png; between-tint dE00 from meas-off.json: Ice/Haze pendants 7.7 today and 20.5 with the picks; Ice/Haze Cores 13.9"
+            },
+            {
+              "id": "B3",
+              "severity": "decision",
+              "tint": "ice",
+              "product": "pair",
+              "where": "strip-ice-lit.png: checkset/blue/hemi-lit-L3.0.png and core-lit-L1.5.png at 480 x 600",
+              "what": "With the pick, both Ice lamps glow turquoise when lit (pendant 3x h 252.9, Core 1.5 h 259.8). Off, they look cobalt (h 288-295), and the Tropos is azure (h 275). The two glows now match each other, while today's pair does not (pendant 6x h 289.6 against Core h 259.8). A buyer will call the lit Ice lamps turquoise, not ice blue.",
+              "expected": "The owner decides whether a turquoise glow is acceptable. If the site will show it, check it against a real dyed sample under the real LED first, because a tint that lightens toward cyan may be a quirk of the renderer.",
+              "sure": "likely",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-ice-lit.png; meas-lit.txt (pendant 3x glow L 41.9 C 31.8 h 252.9; Core 1.5 L 32.3 C 28.2 h 259.8; pendant 6x h 289.6)"
+            },
+            {
+              "id": "B4",
+              "severity": "decision",
+              "tint": "haze",
+              "product": "pair",
+              "where": "strip-haze-lit.png: checkset/violet/hemi-lit-L1.0.png and core-lit-L0.5.png at 480 x 600",
+              "what": "Haze lamps glow magenta-pink when lit (pendant 1x h 339.7, Core 0.5 h 337.2), while off they and the Tropos look violet (h about 310). With the pick, the pendant's glow is more magenta than today's 1.8x (h 321.7), but it now matches the Core's glow. At 480 px a buyer sees a violet lamp that turns pink when switched on.",
+              "expected": "The owner decides. Show the magenta glow truthfully, and check it against a real sample before the site depends on it.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-haze-lit.png; meas-lit.txt (pendant 1x glow L 27.0 C 53.3 h 339.7; Core 0.5 L 19.5 C 45.6 h 337.2; pendant 1.8x h 321.7)"
+            },
+            {
+              "id": "B5",
+              "severity": "decision",
+              "tint": "acid",
+              "product": "pendant",
+              "where": "strip-acid-off.png and rows-acid.png: row-off/hemisphere-amber-off.png (5x) against checkset/amber/hemi-off-L2.1.png",
+              "what": "Today's 5x pendant looks olive-khaki at 300 and 480 px. 41% of its pixels are dark yellow (yellow hue, L* below 55), against 10% at 2.1x and 10% in the Core 1.5. At 2.1x the pendant looks yellow and matches the Core (dE00 1.7). When lit, the Acid Core 1.5 glows mustard (L 57.9 C 62.2 h 92.4), which looks dull rather than acid. The 2.1x pendant has no LIT frame.",
+              "expected": "Put pendant 2.1x with today's Core 1.5 to the owner, and render the 2.1x pendant LIT first.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-acid-off.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-acid-lit.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/alt-rows-acid.png; my olive-share measure on the 'sil' masks: 5x 40.6%, 3x 14.1%, 2.1x 10.1%, Core 1.5 10.0%, Core 1.0 6.2%"
+            },
+            {
+              "id": "B6",
+              "severity": "decision",
+              "tint": "smoke",
+              "product": "core",
+              "where": "alt-smoke.png and strip-smoke-off.png at 480 x 600",
+              "what": "Today's Core 0.3 looks like see-through slate-grey glass next to a gloss-black pendant (ball L 26.3 against 3.0), so a buyer sees two different materials. Cores 0.45 and 0.6 both look black at 300 and 480. The 0.45 shows only a faint grey in the lower half of the ball. By number, 0.6 is the better off match (4.9 against 7.0), but by eye the two are hard to tell apart. 0.45 is the one with a LIT frame, and its glow matches the pendant's (L 16.2 C 14.5 h 79.3 against 14.4 / 13.9 / 84.3).",
+              "expected": "Put Core 0.45 to the owner, since both off and lit are shown and both read black. If he prefers 0.6, render 0.6 LIT first; its glow should come out dimmer than the pendant's.",
+              "sure": "likely",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/alt-smoke.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/rows-smoke.png; meas-off.txt (Core 0.6 ball L 10.8, 0.45 L 14.2, 0.3 L 26.3, pendant L 3.0); meas-lit.txt"
+            },
+            {
+              "id": "B7",
+              "severity": "decision",
+              "tint": "ember",
+              "product": "pendant",
+              "where": "alt-rows-ember.png and strip-ember-off.png",
+              "what": "Pendant 0.7x with today's Core 0.5 looks like one cherry red at 300 and 480 px (dE00 2.8, against 11.5 today). Pendant 1x, the as-built pour, with Core 0.5 measures 5.6 and looks one step darker than the ball, but it does have a LIT frame. In every pick the Tropos looks one step deeper than both lamps (Tropos plain L 28.8, pendant 0.7x L 35.3, Core L 37.9), yet the row still reads as one red family. The 0.7x pendant has no LIT frame. At 1x the pendant already glows brighter than today's (L 50.3 against 43.8).",
+              "expected": "Put pendant 0.7x with Core 0.5 to the owner, after rendering the 0.7x pendant LIT to check that it does not clip or outshine the Core's glow (L 42.0).",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/alt-rows-ember.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-ember-off.png; meas-off.txt and meas-lit.txt"
+            },
+            {
+              "id": "B8",
+              "severity": "decision",
+              "tint": "poison",
+              "product": "pendant",
+              "where": "rows-poison.png and strip-poison-off.png",
+              "what": "At 300 px, today's row and the pick row both read as one green family. The Core ball looks a lighter emerald than either pendant. The best rendered pair is 0.7x with 0.3 at 5.5 (13.6 today), and it moves the pendant away from the Tropos (Tropos plain 2.5 rises to 5.9). A 0.5x pendant, the likely match, has not been rendered.",
+              "expected": "Render the pendant at about 0.5x, OFF and LIT, before the owner chooses. If he must choose now, 0.7x is the better of the rendered pours.",
+              "sure": "likely",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/rows-poison.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-poison-off.png; meas-off.txt (pendant 1x L 27.5, 0.7x L 37.3, Core 0.3 L 43.4)"
+            },
+            {
+              "id": "B9",
+              "severity": "note",
+              "tint": "all",
+              "product": "core",
+              "where": "Every Core LIT frame (checkset/*/core-lit-*.png, house9/core-ember-lit.png), the base",
+              "what": "In every Core LIT frame the base reads as a black plinth at 480 px, not as the tint. The base's median L* is 0 to 9: Ember 0.75 is 0.8, house9 Ember is 1.5, Poison is 1.3, Ice 1.5 is 1.0, Haze 0.5 is 0.4, Smoke is 0.0, Dust and Acid are 5 to 9. Only a thin lit rim shows at the top. This is not caused by the pour. It was recorded for Ember only (task #63); it holds in all seven tints.",
+              "expected": "Carry the fix planned for the Ember LIT base to all seven tints. Before showing these LIT frames to the owner, tell him the base will not look black on the site.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-poison-lit.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-ice-lit.png; base median L* from the m-core-base mask reduced 2x2"
+            },
+            {
+              "id": "B10",
+              "severity": "note",
+              "tint": "dust",
+              "product": "core",
+              "where": "strip-dust-off.png: Core 0.8 and Core 1.5, the base",
+              "what": "At 480 px the Dust Core's base looks salmon or coral pink under an orange ball, so a buyer sees two colours. At 0.8 the base is h 42.3 against the ball's h 48.9 (dE00 4.9 between them); at 1.5 the base is a flat coral-red. Both rendered pours show it.",
+              "expected": "Raise this with the owner together with the Dust Core dye question (B1). A pour will not fix it.",
+              "sure": "likely",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/strip-dust-off.png; meas-off.txt (ball-base 4.9 at 0.8, 1.5 at 1.5)"
+            },
+            {
+              "id": "B11",
+              "severity": "note",
+              "tint": "all",
+              "product": "core",
+              "where": "Core LIT glow at native half size: checkset/green/core-lit-L0.3.png and checkset/red/core-lit-L0.75.png, near frame y 565 of 1000",
+              "what": "A thin horizontal line runs across the lower half of the glowing opal ball, faintly visible at 480 px on Poison. At native size the Ember glow also shows soft blotchy mottling. Neither comes from the pour. I cannot tell from the frames whether the line is a true reflection of the room's horizon.",
+              "expected": "Check this before the final LIT renders. It is not a pour question.",
+              "sure": "unsure",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/crop-core-lit-native.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/crop-core-lit-balls.png"
+            },
+            {
+              "id": "B12",
+              "severity": "note",
+              "tint": "all",
+              "product": "row",
+              "where": "Ground patches (TL TR ML MR LL BR) of every candidate OFF frame against today's frame of the same lamp",
+              "what": "The ground in the candidate frames matches today's to within 0.2 L*. The Core's lower corners move by up to 1.3 with its coloured light, as the README expects. Swapping the pour leaves no seam or patchiness in the row. The pendant and Core grounds differ from each other as they already do today (TL 87.5 against 85.9).",
+              "expected": "None needed.",
+              "sure": "certain",
+              "evidence": "My corner run on all checkset OFF frames against row-off/ and house8/ (for example blue hemi 3x TL 87.6 / ML 84.8 against today 87.5 / 84.8)"
+            }
+          ],
+          "picks": [
+            {
+              "tint": "ember",
+              "pendant": "0.7x",
+              "core": "0.5 (today)",
+              "off_match": "dE00 2.8 (today 11.5); by eye one cherry red at 300 and 480 px. The Tropos is one step deeper than both lamps (L 28.8 against 35.3 / 37.9) but still reads as the same family.",
+              "lit": "Not rendered for 0.7x. At 1x the pendant glows L 50.3 h 38.0 against the Core's L 42.0 h 40.0: the same hue, but brighter.",
+              "needs_render": "Pendant 0.7x LIT.",
+              "why": "Of the rendered pairs, it is the only one close to the rule of about 2. Pendant 1x (as built) with Core 0.5 is the fallback: 5.6, and the pendant looks one step darker."
+            },
+            {
+              "tint": "dust",
+              "pendant": "2.1x",
+              "core": "0.8",
+              "off_match": "dE00 8.7 (today 8.2), so not a match. The gap is lightness: the Core is 9 L* lighter. Today's gap is hue: the Core is Ember-red.",
+              "lit": "Pendant 2.1x glows h 57.5, Core 0.8 h 60.9: both a matched amber-orange.",
+              "needs_render": "No pour fixes this. The Core needs a dye mix change. If more pours are tried, render Core 1.0-1.1 against pendant 2.5x, OFF.",
+              "why": "It is the only pair where both lamps look orange and Dust stays apart from Ember. Today's Core 1.5 has the Ember Tropos's hue."
+            },
+            {
+              "tint": "acid",
+              "pendant": "2.1x",
+              "core": "1.5 (today)",
+              "off_match": "dE00 1.7, a match (today 15.4). The pendant goes from olive-khaki to yellow.",
+              "lit": "Not rendered for 2.1x. The Core 1.5 glows mustard (L 57.9 C 62.2 h 92.4).",
+              "needs_render": "Pendant 2.1x LIT.",
+              "why": "It meets the owner's rule, and it removes the olive look of today's 5x pendant."
+            },
+            {
+              "tint": "poison",
+              "pendant": "0.7x (interim); 0.5x likely",
+              "core": "0.3 (today)",
+              "off_match": "dE00 5.5 at 0.7x (today 13.6). By eye, both today's row and the pick read as one green family at 300 px; the Core ball is lighter.",
+              "lit": "Pendant 0.7x glows h 137.0, Core h 137.3: the same hue.",
+              "needs_render": "Pendant about 0.5x, OFF and LIT.",
+              "why": "No rendered pour matches. 0.5x is the likely match and has not been rendered."
+            },
+            {
+              "tint": "ice",
+              "pendant": "3x (as built)",
+              "core": "1.5 (today)",
+              "off_match": "dE00 4.7 (today 14.0). Lightness matches; the Core is more saturated and a little more violet (dC +16, dh +7). By eye, one cobalt family.",
+              "lit": "Both glow turquoise (h 252.9 and 259.8), so they match each other but not the cobalt off colour.",
+              "needs_render": "Nothing needed for the choice; both frames exist. Check the cyan glow against a real sample.",
+              "why": "It brings the pendant from indigo back to blue, toward its Tropos (20.9 down to 6.4), and separates Ice from Haze (pendants 7.7 apart now 20.5)."
+            },
+            {
+              "tint": "haze",
+              "pendant": "1x (as built)",
+              "core": "0.5 (today)",
+              "off_match": "dE00 4.4 (today 9.3). The pendant is within 0.5 of the Tropos; the Core looks bluer (dh -3.4).",
+              "lit": "Both glow magenta (h 339.7 and 337.2), matched to each other.",
+              "needs_render": "None for the choice. A pour cannot close the Core's hue gap.",
+              "why": "It is the as-built pour, it matches the Tropos, and it makes Haze clearly violet next to Ice."
+            },
+            {
+              "tint": "smoke",
+              "pendant": "1.2x (today)",
+              "core": "0.45",
+              "off_match": "dE00 7.0 (0.6 measures 4.9; today 15.4). By eye, 0.45 and 0.6 both look black at 300 and 480 px.",
+              "lit": "The Core 0.45 glow (L 16.2 h 79.3) matches the pendant's (L 14.4 h 84.3).",
+              "needs_render": "Core 0.6 LIT, only if the owner prefers 0.6.",
+              "why": "It fixes today's grey Core, and it is the only pour shown both off and lit."
+            }
+          ],
+          "table": [
+            "Tint | today OFF dE00 | my pick | pick OFF dE00 | one family with its Tropos at 300 px | LIT",
+            "Ember | 11.5 | pendant 0.7x + Core 0.5 | 2.8 | better: the lamps now match; the Tropos is one step deeper | 0.7x not rendered",
+            "Dust | 8.2 (Core is Ember-red) | pendant 2.1x + Core 0.8 | 8.7 (Core lighter) | better: both lamps look orange; still not a match | matched amber-orange",
+            "Acid | 15.4 (pendant olive) | pendant 2.1x + Core 1.5 | 1.7 | better: the pendant looks yellow | 2.1x not rendered; the Core glow is mustard",
+            "Poison | 13.6 | pendant 0.7x + Core 0.3 (0.5x not rendered) | 5.5 | about the same | matched hue",
+            "Ice | 14.0 (pendants close to Haze, 7.7) | pendant 3x + Core 1.5 | 4.7 | better: blue again, apart from Haze | both glow turquoise",
+            "Haze | 9.3 | pendant 1x + Core 0.5 | 4.4 | better: the pendant matches the Tropos within 0.5 | both glow magenta",
+            "Smoke | 15.4 (Core grey) | pendant 1.2x + Core 0.45 | 7.0 (0.6: 4.9, but no LIT) | better: the Core looks black | glows matched"
+          ],
+          "summary": "Through a buyer's eyes, the coordinator's picks look better than today's pours in six of the seven tints. In Poison, today's row and the pick look about the same at 300 px. Two of today's problems matter most to a buyer. First, the Dust Core looks red, with the Ember Tropos's hue (h 38.6 against 38.4), so it looks like it belongs to the Ember row. Second, the Ice and Haze pendants are the hardest pair of tints to tell apart (dE00 7.7); both look deep indigo. The picks fix both: Dust's pendant 2.1x and Core 0.8 both look orange, and Ice 3x and Haze 1x read as cobalt and violet. I checked the coordinator's numbers against meas-off.txt and meas-lit.txt and they hold. Only Acid (pendant 2.1x with Core 1.5, dE00 1.7) actually meets the owner's rule of about 2. Ember 0.7x with Core 0.5 comes close at 2.8. Ice 4.7, Haze 4.4 and Poison 5.5 are much improved but are not matches. Dust cannot be matched with a pour: a Core dark enough turns red, and an orange one is too light. Its Core needs a dye mix change, and that belongs with the owner. For Smoke, I would put Core 0.45 to the owner rather than 0.6. By eye both look black, and 0.45 is the one shown lit, with a glow that matches the pendant's. Before the owner chooses, these need LIT renders: the Ember pendant at 0.7x and the Acid pendant at 2.1x. Poison needs a pendant at about 0.5x, OFF and LIT; it has not been rendered at all. Smoke needs Core 0.6 LIT only if the owner prefers 0.6. When lit, a buyer will read some colours differently from what the tint names promise: Ice glows turquoise, Haze glows magenta, and the Acid Core glows mustard. The picked pairs match each other lit, so these are the owner's calls, and they should be checked against real samples before the site depends on them. Two things are not pour questions. In every LIT Core frame the base looks black (median L* 0 to 9), which was recorded only for Ember so far. The Dust Core's base looks salmon under an orange ball. Swapping a pour leaves no seam in the row's ground (within 0.2 L*). Evidence is in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/critic-buyer/: rows-<tint>.png (today over pick at 300 px), cmp-ice-haze.png, cmp-ember-dust.png, overview-lamps.png, strip-<tint>-off.png and strip-<tint>-lit.png (480 x 600 tiles; the single tiles are tile-*.png), alt-rows-*.png, alt-smoke.png, crop-core-lit-native.png; the scripts are in its scripts/ folder."
+        },
+        "verified": {
+          "verdicts": [
+            {
+              "id": "B1",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "My numbers are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vm.txt, vb.txt and vg.txt. I used three OFF estimators. A is the coordinator's linear mean on the b58 'plain' masks; I reproduced it exactly. B is a per-pixel Lab median on the same masks. C is a median over the whole 'sil' silhouette, rims and highlights included. The mask overlay (verify-buyer/ov-masks-4.png) shows the 2x2-reduced masks sit correctly on the half-size frames. The full-size frames for today, box-reduced to half size, give A within 0.1. Results: Dust Core 1.5 is h 38.6 (B 39.1, C 38.0), the Ember Tropos plain is h 38.4, the Dust Tropos plain is h 54.8 and the Ember Core is h 35.4. The Dust/Ember Cores are 14.8 apart today and 24.8 with the pick (B 15.3/25.2, C 15.4/24.7). Pendant to Core: today 8.2/7.9/6.6 and the pick 8.7/8.3/7.2 (A/B/C). I interpolated each lamp in log pour. Inside the rendered range the best pair is pendant 2.1x with Core about 1.0, at 7.9 (A) or 6.3 (C). With 1.5x extrapolation either way it is 7.4 or 5.7. At equal lightness the Core is 14-15 degrees redder than the pendant across the pours. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b1-ember-dust-300.png",
+              "reasoning": "At 300 px today's Dust Core 1.5 is a bright red ball next to an orange Tropos and a red-orange pendant. In the pick, both lamps look orange and the Core 0.8 is visibly lighter. The hue, lightness and between-tint figures all reproduce. 'A pour alone cannot close the gap' also holds: no pair, interpolated or modestly extrapolated, gets below about 6. One wording fix before this goes to the owner. The pick is not 'better than today' by his own measure: it is 0.4-0.6 dE00 further apart in every estimator. It only moves the gap from hue to lightness, so both lamps read as Dust. Say 'about as far apart as today, but both now look orange'. The frames cannot tell whether the cause is the Core's dye mix or the thick ball. They do show that no pour fixes it."
+            },
+            {
+              "id": "B2",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Source: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vb.txt. The Ice/Haze pendants are 7.7 apart today (8.0 with B and C), by far the closest pendant pair in the set; the next is Ember/Dust at 21.1. With the picks they are 20.5/21.3/20.1 (A/B/C), and the Cores stay 13.9/15.4/14.4. The Ice Core 1.5 is h 294.8 and the Ice Tropos plain h 275.0. Pour moves hue a lot: the pendant goes from h 300.8 at 6x to 287.9 at 3x and 278.3 at 2.1x; the Core from 301.0 at 2.25 to 294.8 at 1.5. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b2-ice-haze-300.png",
+              "reasoning": "At 300 px today's Ice 6x pendant (deep royal blue) and Haze 1.8x pendant (deep indigo) are near-twins. Side by side, the Haze is only a little darker and more purple. Ice 3x (cobalt) and Haze 1x (violet) are clearly apart. The numbers reproduce with every mask. One part is only partly right: 'the violet lean comes from the dye, not the pour'. A deeper pour does make Ice more violet. But at equal lightness the Core is still 7-11 degrees more violet than the pendant, and at the Tropos's lightness about 18 degrees more violet than the Tropos, so much of the lean is not the pour. With the picks, Ember/Dust becomes the closest pendant pair (19.0), which is still far apart."
+            },
+            {
+              "id": "B3",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Source: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vl.txt and vlm.txt. The coordinator's glow numbers reproduce: pendant 3x h 252.9 L 41.9 C 31.8; Core 1.5 h 259.8 L 32.3; pendant 6x h 289.6. A top-quarter mean gives 253.3/257.5/289.6 and a whole-mask mean 255.6/262.4/290.6. Pendant-to-Core glow dE00: today 10.4 (hue), the pick 8.8 (the pendant 9.6 L* brighter). Today's pendant with Core 2.25 gives 3.6. Reference hues: turquoise #40E0D0 h 185, teal h 196, cerulean #007BA7 h 249, steel blue h 263. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b3-ice-lit-480.png. Swatches: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-glow-swatches.png",
+              "reasoning": "At 480 px the pick's two glows are the same muted cyan-blue, while today's pendant glows royal blue against the Core's cyan-blue. The substance holds. 'Turquoise' is not the true plain word: the glow sits on cerulean and steel blue, 60-70 degrees away from turquoise and teal. Say 'a muted cyan-blue'. The glows match in hue only; at the fixed LIT exposures the pendant is about 10 L* brighter. The shift toward cyan is consistent within the renders: the 6x pendant's glow (one pass through the tint, h 289.6) has the same hue as the 3x pendant OFF (two passes, h 287.9). Blue dyes generally go cyan when thinner, so this is probably not a renderer quirk. The real-sample check under the real LED is still sensible, because the renderer works in three RGB bands and does not model the LED's spectrum."
+            },
+            {
+              "id": "B4",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Source: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vl.txt and vlm.txt. The coordinator's glow numbers reproduce: pendant 1x h 339.7 L 27.0, Core 0.5 h 337.2 L 19.5, today's 1.8x h 321.7 L 14.4. A top-quarter mean gives 339.6/338.6/321.7 and a whole-mask mean 337.5/335.2/320.5. Off, the lamps are h 307-311. Pendant-to-Core glow dE00: today 7.8, the pick 6.0 (the pendant 7.6 L* brighter). Reference hues: magenta h 328, hot pink h 351. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b4-haze-lit-480.png",
+              "reasoning": "At 480 px the 1x pendant and the Core 0.5 both glow the same dark magenta, and today's 1.8x glows purple. The hue claims reproduce with every estimator. 'Pink' overstates it: at L* 19-27 the glow reads as dark magenta or fuchsia, not pink, so say 'magenta'. The match is in hue only; the pendant glows brighter at the fixed exposure. The render is self-consistent: deeper pours glow bluer (Core 0.75 h 325, pendant 1.8x h 322)."
+            },
+            {
+              "id": "B5",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Source: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vo.txt. My dark-yellow share (hue 70-120, L* below 55), all at half size: on 'sil', 5x 44.2%, 3x 14.4%, 2.1x 10.1%, Core 1.5 10.1%, Core 1.0 6.2%. On 'plain': 48.8/9.2/6.0/3.3/1.4%. Hue windows 80-110 and 85-115 give the same. My 44% against the critic's 40.6% most likely comes from frame size. The 5x mean (L 53.8 C 58.7 h 98.5) is dE00 3.3 from sRGB olive #808000. Pendant 2.1x with Core 1.5: 1.7/1.6/1.4 (A/B/C). Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b5-acid-300.png",
+              "reasoning": "At 300 px the 5x pendant looks olive-khaki, and the 2.1x looks yellow like the Core. The owner should also hear three things. First, 2.1x moves the pendant away from the Tropos: plain 2.4 at 3x becomes 6.6, horn 2.3 becomes 4.5. Second, the dull lit Core is today's pour, which the pick does not change; Core 1.0 glows the same h 92.4. By number that glow is a dim dark yellow, nearer olive (8.9) than mustard (14.3). Third, the 2.1x LIT will glow much brighter than the Core: extrapolated L about 77 against 57.9. The 3x pendant is already 11.9 apart from the Core lit, against 6.2 today."
+            },
+            {
+              "id": "B6",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Source: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vm.txt, vl.txt and vlm.txt. Ball L* with A: 0.3 26.3, 0.45 14.2, 0.6 10.8, against the pendant's 3.0. Pixel medians (B): 24.0/8.8/5.5 against 2.9. Pendant to Core, 0.6 against 0.45: A 4.9/7.0, B 2.2/3.7, C 5.9/7.8; today 15.4/13.8/15.6. LIT glow, 0.45 against the pendant: 2.0 (coordinator's method), 2.8 (top-quarter mean); today's 0.3 is 11.3. The 0.6 glow, extrapolated, is about L 6 against the pendant's 14.4. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b6-smoke-300.png and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b6-smoke-480.png",
+              "reasoning": "At 300 and 480 px the 0.3 Core is a see-through slate-grey ball next to a gloss-black pendant. The 0.45 and 0.6 Cores both look black; the 0.45 has a faint grey lower half. 0.6 is the closer OFF match with every mask, and with the pixel median it meets the rule at 2.2. 0.45 is the one shown lit, and its glow matches the pendant's. A 0.6 LIT should come out about 8 L* dimmer than the pendant."
+            },
+            {
+              "id": "B7",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Source: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vm.txt, vg.txt, vlm.txt and vx.txt. Pendant 0.7x with Core 0.5: 2.8/2.1/2.4 (A/B/C). Pendant 1x with Core 0.5: 5.6/4.6/5.0. Today 11.5/11.0/11.2. Interpolated, the best pair in the rendered range is 0.7x with Core 0.54, at 2.5. LIT glow, pendant to Core: today 1.8 (1.0 by top-quarter mean); 1x with Core 0.5 is 8.2, the pendant 8.3 L* brighter. The 0.7x glow, extrapolated, is about L 54 against the Core's 42.0. The Tropos is L 28.8 plain, 23.6 panels, 42.4 horn. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b7-b8-ember-poison-300.png and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b7-ember-480.png",
+              "reasoning": "At 300 and 480 px the 0.7x pendant and the 0.5 ball look like the same cherry red, and 1x is a shade deeper. The OFF claims hold. The LIT check the critic asks for already has an answer: the 1x pendant already glows 8 L* brighter than the Core, and 0.7x will glow about 12 brighter. Today's pair matches lit (1.8). The owner should hear that the pick gives up today's LIT match to get the OFF match. 'The Tropos looks one step deeper than both lamps' is true of its cabinet. Its horn (L 42.4) is lighter than both lamps."
+            },
+            {
+              "id": "B8",
+              "verdict": "confirmed",
+              "severity": "decision",
+              "measurement": "Source: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vm.txt, vx.txt and vlm.txt. Pendant 0.7x with Core 0.3: 5.5/5.4/4.9 (A/B/C); today 13.6/13.8/13.6. Pendant to Tropos plain goes from 2.5 to 5.9, but to the horn from 14.0 to 5.7. Extrapolating the pendant in log pour (A/C): 0.5x 3.7/4.4, 0.55x 1.7/1.9, 0.6x 2.1/1.3. LIT glow, pendant to Core: today 1.0; 0.7x 7.4, the pendant 7.9 L* brighter. A 0.55x glow, extrapolated, is about L 51 against the Core's 37.0. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/v-b7-b8-ember-poison-300.png",
+              "reasoning": "At 300 px both rows read as one green family, with the ball the lightest, as the critic says. Two refinements. First, by extrapolation 0.5x probably overshoots: the pendant would come out lighter than the Core. The likely match is 0.55-0.6x, so render 0.55x, or 0.5x and 0.6x to bracket it. Second, the pick moves the pendant away from the Tropos's cabinet but toward its horn, so 'away from the Tropos' is only half true. Today's pair matches lit (1.0), and every lighter pendant will glow brighter than the Core."
+            }
+          ],
+          "picks_check": [
+            {
+              "tint": "ember",
+              "keep": "keep",
+              "your_pick": "Pendant 0.7x with Core 0.5 (today). Render the 0.7x pendant LIT before the owner sees it.",
+              "why": "It is the best OFF pair with every mask (2.8/2.1/2.4), and nothing in the rendered range does better (2.5 interpolated). It costs the LIT match: today's pair glows alike (1.8), 1x already glows 8 L* brighter than the Core, and 0.7x should be about 12 brighter. Tell the owner that trade. The fallback is 1x (as built) with Core 0.5: 4.6-5.6, with a LIT frame."
+            },
+            {
+              "tint": "dust",
+              "keep": "keep",
+              "your_pick": "Pendant 2.1x with Core 0.8, as an interim. If one more pour is rendered, try Core 1.0 with pendant 2.1x, not 2.5x.",
+              "why": "Both lamps look orange, and Dust stays clearly apart from Ember (Cores 24.8 apart, against 14.8 today). But by the owner's number the pick is not better than today: 8.7 against 8.2, and 8.3/7.9 and 7.2/6.6 with my other masks. No pour reaches 2. The best interpolated pair in range is 2.1x with Core about 1.0, at 7.9 (6.3 with C). Lit, the two glows share a hue, but the pendant is 8 L* brighter (8.5 apart)."
+            },
+            {
+              "tint": "acid",
+              "keep": "keep",
+              "your_pick": "Pendant 2.1x with Core 1.5 (today). Render the 2.1x pendant LIT first.",
+              "why": "It is the only rendered pair that meets the rule (1.7/1.6/1.4), and it ends the olive look (the 5x pendant is 3.3 from sRGB olive). Tell the owner the costs. The pendant moves away from the Tropos (plain 2.4 at 3x becomes 6.6). Lit, it should glow about 19 L* brighter than the Core. The Core's dull glow is today's pour and stays as it is."
+            },
+            {
+              "tint": "poison",
+              "keep": "change",
+              "your_pick": "Pendant about 0.55x (or 0.5x and 0.6x to bracket it) with Core 0.3 (today), OFF and LIT, rendered before the choice. 0.7x if he must choose now.",
+              "why": "0.7x is the best rendered pour (5.5/5.4/4.9). Extrapolated in log pour, the match falls at 0.55-0.6x (1.3-2.1), and 0.5x probably overshoots (3.7-4.4). The pick's LIT line leaves something out: today's pair glows alike (1.0), the 0.7x pendant glows 8 L* brighter (7.4 apart), and lighter pours will be brighter still."
+            },
+            {
+              "tint": "ice",
+              "keep": "keep",
+              "your_pick": "Pendant 3x (as built) with Core 1.5 (today).",
+              "why": "OFF it is 4.7/4.9/4.3, about the same as the deeper alternative (today's 6x pendant with Core 2.25: 5.7/4.8/4.9). It also brings the pendant back to its Tropos (20.9 down to 6.4) and away from Haze (7.7 up to 20.5). It is not a match by the rule: the Core is more saturated (dC +16). Tell the owner plainly that the glows share a cyan-blue hue, not turquoise, but the pendant glows about 10 L* brighter (8.8 apart). The deeper alternative matches lit (3.6) but keeps Ice indigo."
+            },
+            {
+              "tint": "haze",
+              "keep": "keep",
+              "your_pick": "Pendant 1x (as built) with Core 0.5 (today).",
+              "why": "It measures 3.2-4.4, close to the best any pour gives (about 0.85-0.9x interpolated, 2.8-3.5). The pendant sits on the Tropos (0.5), and Haze stays clearly apart from Ice. It is not a match by the rule. Lit, both glow the same magenta, with the pendant about 7.6 L* brighter (6.0 apart, against 7.8 today)."
+            },
+            {
+              "tint": "smoke",
+              "keep": "keep",
+              "your_pick": "Core 0.45 with pendant 1.2x (today).",
+              "why": "0.6 is the closer OFF match with every mask (4.9/2.2/5.9 against 7.0/3.7/7.8), but both look black at 300 and 480 px. 0.45 is shown lit, and its glow matches the pendant's (2.0). Extrapolated, a 0.6 glow lands near L* 6, darker than the LIT floor (about L* 12-21), so the lit Core could look switched off. If the owner prefers 0.6, render its LIT first."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Judge"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "judge:colour",
+      "phaseIndex": 1,
+      "phaseTitle": "Judge",
+      "agentId": "a5279be22e82429a3",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795264761629,
+      "queuedAt": 1795264761588,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "With my own masks, the coordinator's numbers hold. My masks…",
+      "promptPreview": "You are one of two critics judging a pour check set for EARF's website before the owner chooses. Find what is right and wrong, with measurements and crops as evidence. Say only what you saw.\n\nTHE PRODUCTS (EARF, cast tinted acrylic; nothing is built yet; every picture is a disclosed render that must look like a real studio photograph of the real part):\n- Tropos: a horn loudspeaker (cabinet of acry…",
+      "promptFramed": true,
+      "lastProgressAt": 1795266529767,
+      "tokens": 272101,
+      "toolCalls": 61,
+      "durationMs": 1768136,
+      "resultPreview": "{\"findings\":[{\"id\":\"F1\",\"severity\":\"decision\",\"tint\":\"ember\",\"product\":\"pair\",\"where\":\"checkset/red; my numbers in critic-colour/ana-off.txt, anchor.txt, lit-extra.txt\",\"what\":\"No rendered Ember pair meets the rule. The best rendered pair, pendant 0.7x with Core 0.5, measures 2.4 on my plain-body mean (2.1 median, 1.1 with highlights, 2.8 from the coordinator). Two estimated pairs reach 2 or less:…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "judge:buyer",
+      "phaseIndex": 1,
+      "phaseTitle": "Judge",
+      "agentId": "ad6d6fb83905fad35",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795264761629,
+      "queuedAt": 1795264761589,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Through a buyer's eyes, the coordinator's picks look better…",
+      "promptPreview": "You are one of two critics judging a pour check set for EARF's website before the owner chooses. Find what is right and wrong, with measurements and crops as evidence. Say only what you saw.\n\nTHE PRODUCTS (EARF, cast tinted acrylic; nothing is built yet; every picture is a disclosed render that must look like a real studio photograph of the real part):\n- Tropos: a horn loudspeaker (cabinet of acry…",
+      "promptFramed": true,
+      "lastProgressAt": 1795265448759,
+      "tokens": 221318,
+      "toolCalls": 57,
+      "durationMs": 686244,
+      "resultPreview": "{\"findings\":[{\"id\":\"B1\",\"severity\":\"decision\",\"tint\":\"dust\",\"product\":\"core\",\"where\":\"Home row at 300 px and the 480 x 600 tile: row-off/core-orange-off.png (Core 1.5, today) beside the Dust Tropos and the Ember row\",\"what\":\"Today's Dust Core looks red, not orange. Its ball hue is h 38.6, which is the Ember Tropos's hue (h 38.4). The Dust Tropos is h 54.8, and the Ember Core is only 3 degrees away…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "verify:buyer",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "aac0497de4f4e1008",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795265448800,
+      "queuedAt": 1795265448766,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "You are one of two critics judging a pour check set for EARF's website before the owner chooses. Find what is right and wrong, with measurements and crops as evidence. Say only what you saw.\n\nTHE PRODUCTS (EARF, cast tinted acrylic; nothing is built yet; every picture is a disclosed render that must look like a real studio photograph of the real part):\n- Tropos: a horn loudspeaker (cabinet of acry…",
+      "promptFramed": true,
+      "lastProgressAt": 1795266306233,
+      "tokens": 242838,
+      "toolCalls": 46,
+      "durationMs": 857432,
+      "resultPreview": "{\"verdicts\":[{\"id\":\"B1\",\"verdict\":\"confirmed\",\"severity\":\"decision\",\"measurement\":\"My numbers are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/verify-buyer/vm.txt, vb.txt and vg.txt. I used three OFF estimators. A is the coordinator's linear mean on the b58 'plain' masks; I reproduced it exactly. B is a per-pixel Lab median on the same masks. C is a med…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "verify:colour",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "afa40259510437e3b",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795266529781,
+      "queuedAt": 1795266529776,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "You are one of two critics judging a pour check set for EARF's website before the owner chooses. Find what is right and wrong, with measurements and crops as evidence. Say only what you saw.\n\nTHE PRODUCTS (EARF, cast tinted acrylic; nothing is built yet; every picture is a disclosed render that must look like a real studio photograph of the real part):\n- Tropos: a horn loudspeaker (cabinet of acry…",
+      "promptFramed": true,
+      "lastProgressAt": 1795267740047,
+      "tokens": 312480,
+      "toolCalls": 60,
+      "durationMs": 1210265,
+      "resultPreview": "{\"verdicts\":[{\"id\":\"F1\",\"verdict\":\"uncertain\",\"severity\":\"decision\",\"measurement\":\"My masks differ from both earlier sets. I used the render meter's own masks (meter/shade.png, ball.png), reduced 2x2 and eroded 6 px. Two measures: A is the per-pixel CIELAB median with no highlight removal; B is a trimmed linear mean that drops pixels above median L*+12 and the darkest 3%. Files: /tmp/claude-0/-hom…"
+    }
+  ],
+  "totalTokens": 1048737,
+  "totalToolCalls": 224
+}
