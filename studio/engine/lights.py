@@ -177,6 +177,8 @@ def panel(bpy, name, spec, centre):
     nt.links.new(mix.outputs['Shader'], out.inputs['Surface'])
     me.materials.append(m)
     ob.visible_camera = bool(spec.get('camera', False)); ob.visible_shadow = False
+    if spec.get('transmission') is False:       # not seen through clear parts, as an area lamp's flag (no shot set it before 21 Nov)
+        ob.visible_transmission = False
     d, s = _share(spec.get('diffuse', True)), _share(spec.get('specular', True))
     ob.visible_diffuse = d >= 1.0; ob.visible_glossy = s >= 1.0
     ob['engine_light'] = True

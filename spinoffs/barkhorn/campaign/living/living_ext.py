@@ -171,9 +171,16 @@ def water_glass(bpy, name, p, kit):
         b.inputs['Base Color'].default_value = (*col, 1.0); b.inputs['Roughness'].default_value = 0.0
         b.inputs['Transmission Weight'].default_value = 1.0; b.inputs['IOR'].default_value = ior
         return m
+    # (the bar test B1, 21 Nov: any liquid: `ior` (default water's 1.33), `color` its tint at its two interfaces, as the
+    # kit's resin carried it; left out, the water glass as before)
+    ior = float(p.get('ior', 1.33))
+    def lin(h):
+        h = h.lstrip('#'); c = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+        return tuple(x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4 for x in c)
+    tint = lin(p['color']) if p.get('color') else None
     g_air = mat(f'{name}-glass-air', 1.5, (0.97, 0.97, 0.96))
-    g_wat = mat(f'{name}-glass-water', 1.5 / 1.33, (1.0, 1.0, 1.0))
-    w_air = mat(f'{name}-water-air', 1.33, (0.96, 0.985, 0.985))
+    g_wat = mat(f'{name}-glass-water', 1.5 / ior, tint or (1.0, 1.0, 1.0))
+    w_air = mat(f'{name}-water-air', ior, tint or (0.96, 0.985, 0.985))
     def revolve(nm, pr, m, out_dir):
         bm = bmesh.new()
         rings = []
@@ -211,7 +218,43 @@ def water_glass(bpy, name, p, kit):
             revolve(f'{name}-water-top', surf, w_air, lambda c: Vector((0, 0, 1)))]
     if p.get('top') is False:                               # (a diagnostic: the water's top surface left out)
         bpy.data.objects.remove(objs.pop(), do_unlink=True)
-    print('WATER GLASS:', [o.name for o in objs], 'fill', fill, 'meniscus', men, 'wet to', round(zw, 4))
+    # ice (B1): each cube {size, position (world), rotate (deg XYZ), ease} split at the liquid's top: above it ice | air
+    # at `ice_ior` (1.31), below it ice | liquid at 1.31 / ior; the liquid's top cut away inside each cube, so no ray
+    # meets a liquid surface inside the ice (no overlapping volumes)
+    cubes = []
+    for j, c in enumerate(p.get('ice') or []):
+        from mathutils import Matrix, Euler
+        bm = bmesh.new()
+        bmesh.ops.create_cube(bm, size=1.0)
+        bmesh.ops.scale(bm, vec=Vector(c['size']), verts=bm.verts)
+        if c.get('ease'):
+            bmesh.ops.bevel(bm, geom=list(bm.edges), offset=float(c['ease']), segments=3, affect='EDGES', profile=0.5)
+        R = Euler([math.radians(a) for a in c.get('rotate', [0, 0, 0])], 'XYZ').to_matrix().to_4x4()
+        bm.transform(Matrix.Translation(Vector(c['position']) - Vector(p['position'])) @ R)
+        bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], plane_co=(0, 0, fill), plane_no=(0, 0, 1))
+        bm.normal_update()
+        ia = mat(f'{name}-ice{j}-air', float(p.get('ice_ior', 1.31)), (0.97, 0.985, 0.99))
+        il = mat(f'{name}-ice{j}-liquid', float(p.get('ice_ior', 1.31)) / ior, (1.0, 1.0, 1.0))
+        for m_ in (ia, il):
+            m_.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value = float(p.get('ice_roughness', 0.12))
+        for f in bm.faces:
+            f.material_index = 0 if f.calc_center_median().z > fill else 1
+        me = bpy.data.meshes.new(f'{name}-ice{j}'); bm.to_mesh(me); bm.free()
+        me.materials.append(ia); me.materials.append(il)
+        ob = bpy.data.objects.new(f'{name}-ice{j}', me); bpy.context.scene.collection.objects.link(ob)
+        ob.location = Vector(p['position'])
+        cubes.append(ob)
+    if cubes and p.get('top') is not False:
+        topo = objs[-1]
+        for ob in cubes:
+            md = topo.modifiers.new('ice-cut', 'BOOLEAN'); md.operation = 'DIFFERENCE'; md.solver = 'EXACT'
+            md.use_hole_tolerant = True; md.object = ob
+        dg = bpy.context.evaluated_depsgraph_get()
+        me = bpy.data.meshes.new_from_object(topo.evaluated_get(dg))
+        topo.modifiers.clear(); old = topo.data; topo.data = me; bpy.data.meshes.remove(old)
+        print('WATER GLASS ice: top faces', len(me.polygons), 'area', round(sum(q.area for q in me.polygons) * 1e4, 2), 'cm2')
+    objs += cubes
+    print('WATER GLASS:', [o.name for o in objs], 'ior', ior, 'fill', fill, 'meniscus', men, 'wet to', round(zw, 4))
     return objs
 
 
