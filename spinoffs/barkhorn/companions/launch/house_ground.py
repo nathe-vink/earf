@@ -263,7 +263,7 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         me_.materials.append(mb_)
     if os.environ.get('HOUSE_BOUNCE'):
         sd_ = bpy.data.lights.new('house-bounce-spot', 'SPOT'); sd_.energy = pw_; sd_.spot_size = math.radians(cone_)
-        sd_.spot_blend = 0.3; sd_.shadow_soft_size = 0.01
+        sd_.spot_blend = 0.3; sd_.shadow_soft_size = float(os.environ.get('HOUSE_BOUNCE_SOFT', '0.01'))   # its emitting radius (a 3 mm LED: 0.003)
         so_ = bpy.data.objects.new('house-bounce-spot', sd_); bpy.context.scene.collection.objects.link(so_)
         so_.location = (lx_, ly_, lz_)
         so_.rotation_euler = (Vector((cx_, cy_, az_)) - Vector((lx_, ly_, lz_))).to_track_quat('-Z', 'Y').to_euler()
