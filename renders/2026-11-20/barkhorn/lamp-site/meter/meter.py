@@ -4,7 +4,7 @@ base: Core's base (mask base.png): left/right low, bottom band, lip top, the coo
 share: the base's body share at 30/45/55/65 deg, row y 1650-1670 (full scale), half-width from the mask
 body MASK: lower/middle third and whole L*/C* of a body's mask (ball.png, shade.png)
 pair MASK: the LIT pair's two glow masks inside MASK (A: L*>18, C*>45, h 25-50; B: R>100 and L*>25),
-  each median and p10/p90 L*; R>=250 in the frame and in MASK; floor patches (Core frames: left, right, front)
+  each median and p10/p90 L*; the brightest channel >= 250 (R for Ember) in the frame and in MASK; floor patches (Core frames: left, right, front)
 glow MASK: red-dominant pixels of a body's mask after a 3x3 median: median L*/C*, R>=250 share; walls TL/TR"""
 import sys, os, numpy as np
 from PIL import Image, ImageFilter
@@ -52,11 +52,17 @@ for f in args:
         print(nm(f), '  '.join(f'{r} {np.median(L[q]):.1f}/{np.median(C[q]):.1f}' for r, q in parts.items()))
     elif mode == 'pair':
         L_, A_, B_ = lab(a); h_ = np.degrees(np.arctan2(B_, A_)) % 360; m = mask(mk, H, W); k = W / 1600
-        mA = m & (L_ > 18) & (C > 45) & (h_ >= 25) & (h_ <= 50); mB = m & (a[..., 0] > 100) & (L_ > 25)
-        q = lambda v: f'{np.median(v):.1f} ({np.percentile(v, 10):.1f}-{np.percentile(v, 90):.1f})'
+        # (2026-11-21) any tint: A's hue window is 25-50 for Ember and, for the others, +-12.5 deg round the median hue of
+        # the mask's strong pixels (Ember's median sits in 25-50); B's R > 100 is the brightest channel > 100 (R for Ember)
+        sat_ = m & (L_ > 18) & (C > 45)
+        hm_ = float(np.median(h_[sat_])) if sat_.any() else 37.5
+        hc_ = 37.5 if 25 <= hm_ <= 50 else hm_
+        dh_ = (h_ - hc_ + 180) % 360 - 180
+        mA = sat_ & (abs(dh_) <= 12.5); mB = m & (a.max(-1) > 100) & (L_ > 25)
+        q = lambda v: (f'{np.median(v):.1f} ({np.percentile(v, 10):.1f}-{np.percentile(v, 90):.1f})' if v.size else 'empty')
         fl = {'left floor': (120, 420, 1480, 1700), 'right floor': (1250, 1500, 1480, 1700), 'front': (550, 1050, 1820, 1960)}
         fs = '  '.join(f'{n_} {np.median(L_[int(y0 * k):int(y1 * k), int(x0 * k):int(x1 * k)]):.1f}' for n_, (x0, x1, y0, y1) in fl.items())
-        print(nm(f), f'A {q(L_[mA])} n{mA.sum()}  B {q(L_[mB])} n{mB.sum()}  R>=250 frame {(a[..., 0] >= 250).sum()} px, mask {100 * (a[m][:, 0] >= 250).mean():.2f}%  R=255 {(a[..., 0] >= 255).sum()} px  floors {fs}')
+        print(nm(f), f'A(h {hc_:.0f}) {q(L_[mA])} n{mA.sum()}  B {q(L_[mB])} n{mB.sum()}  top>=250 frame {(a.max(-1) >= 250).sum()} px, mask {100 * (a[m].max(-1) >= 250).mean():.2f}%  top=255 {(a.max(-1) >= 255).sum()} px  floors {fs}')
     elif mode == 'glow':
         m = mask(mk, H, W); px = a[m]; g = (px[:, 0] > 30) & (px[:, 0] > 2 * px[:, 1] + 10)
         Lg, Cg = LC(px[g][None]); a0 = load(f); L0 = lab(a0)[0]
