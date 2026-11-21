@@ -6,7 +6,7 @@ the frame). fixed-7b (the quarter test with grids: the record wall stayed at 45 
 than the cone's, ratio 0.38): skirts only, and the ceiling-flush diffuser removed. Optionally `wall` scales the record-wall heads (a real dimmer).
     (fixed-7c, no skirts and the wall heads at 0.35: the ratio 0.35 without the ceiling diffuser, so that diffuser was
     what lit the batts from above; the record wall 42.3, the left wall 10.0)
-    python3 gen7.py [WALL] [--grid] [--noskirt] [--diffuser] [--diffuser-strength D] [--strength S] [--out NAME]  ->  fixed7.json and fixed7q.json (the quarter test: 800 x 450, 96 samples)"""
+    python3 gen7.py [WALL] [--grid] [--noskirt] [--diffuser] [--diffuser-strength D] [--strength S] [--near S] [--out NAME]  ->  fixed7.json and fixed7q.json (the quarter test: 800 x 450, 96 samples)"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 wall = float(sys.argv[1]) if len(sys.argv) > 1 and not sys.argv[1].startswith('--') else 1.0
@@ -34,6 +34,12 @@ if '--strength' in sys.argv:
     for p in s['set']['props']:
         if p.get('fn') == 'softbox' and p['size'] == [1.2, 0.9]:
             p['strength'] = float(sys.argv[sys.argv.index('--strength') + 1])
+# (fixed-7f) --near S: the near softbox at S with no skirt (fixed-6's unskirted near box passed the ratio at 0.15; the
+# far box's skirt is what keeps the left wall dark); fixed-7e's diffuser at 15 left the ratio at 0.49
+if '--near' in sys.argv:
+    for p in s['set']['props']:
+        if p.get('fn') == 'softbox' and p['size'] == [1.2, 0.9] and p['position'][0] > 7:
+            p['strength'] = float(sys.argv[sys.argv.index('--near') + 1]); p.pop('skirt', None)
 for k, l in s['lights'].items():
     if k.startswith('track-wall'):
         l['irradiance'] = round(l['irradiance'] * wall, 3)
