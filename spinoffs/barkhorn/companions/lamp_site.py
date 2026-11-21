@@ -92,6 +92,19 @@ if not (os.environ.get('LOAD_BUILT') or os.environ.get('RIG_LEGACY')):
     CORE_TINT_LOAD.update(CORE_MIX)
 # TINT_LOAD_SET 'tint:L,...' (2026-11-15, the coordinator: a choice sheet of Smoke's gray at 0.5x and 0.8x): one tint's dye
 # loading changed, the rest as signed; unset, nothing changes (after the mix, so it wins over it)
+# THE POURS (2026-11-21, the owner: "Yes on all as long as they look the same off"): the default since then. The
+# pendant's loading (x the base pour) and the Core's (here as CORE_TINT_LOAD = absolute / 0.5), from the pour check set
+# (renders/2026-11-20/barkhorn/lamp-site/checkset/) and the Core dye test (checkset/dye/); CORE_ABS_TINT below is the
+# Core's re-mixed dye for Dust, Ice and Haze. POURS=mix gives the 17 Nov mix; LOAD_BUILT=1 / RIG_LEGACY as before.
+POURS_HEMI = {'red': 0.7, 'orange': 2.1, 'amber': 3.0, 'green': 1.0, 'blue': 3.0, 'violet': 1.0, 'ice': 1.0, 'black': 1.2}
+POURS_CORE = {'red': 0.5, 'orange': 2.6, 'amber': 2.0, 'green': 0.45, 'blue': 1.72, 'violet': 0.6, 'ice': 0.5, 'black': 0.5}
+# the Core's dye re-mix per tint: (R, G, B) factors on its absorption, and a neutral absorption in 1/m (a touch of black)
+CORE_ABS_TINT = {'orange': ((1.0, 0.35, 2.5), 16.0), 'blue': ((3.2, 0.85, 1.19), 0.0), 'violet': ((0.89, 2.2, 1.09), 0.0)}
+if os.environ.get('LOAD_BUILT') or os.environ.get('RIG_LEGACY') or os.environ.get('POURS') == 'mix':
+    CORE_ABS_TINT = {}
+else:
+    TINT_LOAD.update(POURS_HEMI)
+    CORE_TINT_LOAD.clear(); CORE_TINT_LOAD.update({t_: v_ / 0.5 for t_, v_ in POURS_CORE.items()})
 for kv_ in filter(None, os.environ.get('TINT_LOAD_SET', '').split(',')):
     TINT_LOAD[kv_.split(':')[0]] = float(kv_.split(':')[1]); CORE_TINT_LOAD.pop(kv_.split(':')[0], None)
 def core_load(t_):
@@ -670,21 +683,24 @@ def build(frame, samples, scale):
             for o in objs:   # turn the dock's cable away from the camera, about the lamp's axis (the parts' origin)
                 o.rotation_euler[2] = math.radians(rot)
 
-    if os.environ.get('CORE_ABS'):
-        # CORE_ABS 'R,G,B' (2026-11-21, the coordinator: a test for the owner, no product changes): the Core's own dye
-        # balance, its absorption per channel times these factors (ball, base and the ball's cast colour alike), the
-        # same tint name and loading; the pendant untouched. A maker's re-mix of the thick part's dyes
-        _core0 = core; _abs0 = SC.absorption; _k = [float(v) for v in os.environ['CORE_ABS'].split(',')]
-        def core(*a, **kw):
-            # CORE_ABS_ADD (1/m, 2026-11-21): a neutral absorption added to every channel, a touch of black in the mix
-            # (Dust's dye passes red almost whole, so no factor darkens it without moving its hue)
-            _ad = float(os.environ.get('CORE_ABS_ADD', '0'))
-            SC.absorption = lambda t_, l_=1.0: [x * k + _ad for x, k in zip(_abs0(t_, l_), _k)]
-            print('CORE_ABS', _k, 'add', _ad)
-            try:
-                return _core0(*a, **kw)
-            finally:
-                SC.absorption = _abs0
+    # the Core's own dye balance: CORE_ABS 'R,G,B' (a test switch; with CORE_ABS_ADD, 1/m) or, by default, CORE_ABS_TINT
+    # (2026-11-21, the owner's pours): its absorption per channel times these factors plus a neutral term (ball, base and
+    # the ball's cast colour alike), the same tint name and loading; the pendant untouched. A maker's re-mix of the thick
+    # part's dyes (Dust's carries a touch of black: its dye passes red almost whole, so no factor darkens it)
+    _core0 = core; _abs0 = SC.absorption
+    def core(tint, *a, **kw):
+        if os.environ.get('CORE_ABS'):
+            _k = [float(v) for v in os.environ['CORE_ABS'].split(',')]; _ad = float(os.environ.get('CORE_ABS_ADD', '0'))
+        elif tint in CORE_ABS_TINT:
+            _k, _ad = CORE_ABS_TINT[tint]
+        else:
+            return _core0(tint, *a, **kw)
+        SC.absorption = lambda t_, l_=1.0: [x * k + _ad for x, k in zip(_abs0(t_, l_), _k)]
+        print('CORE_ABS', tint, list(_k), 'add', _ad)
+        try:
+            return _core0(tint, *a, **kw)
+        finally:
+            SC.absorption = _abs0
 
     def section(c):
         """The cutaway (2026-11-12): every part of the lamp cut on the vertical plane y = c.y through its axis, the near
