@@ -21,28 +21,29 @@ BATTS = part('front-panel'); BATTS[:400] = False; BATTS[546:] = False; BATTS[:, 
 def box(x0, y0, x1, y1):
     b = np.zeros(ids.shape, bool); b[y0:y1, x0:x1] = True; return b
 SILL, BELL, FAR, FRONT = box(1010, 712, 1240, 735), box(1040, 40, 1320, 240), box(450, 240, 590, 620), box(1060, 260, 1300, 560)
-rows = ['| frame | cone L* | cap L* | cone/batts Y | sill L* | bell L* | bell top 5 % L* / C* / h | far bay L* (% > 10) | front L* |',
-        '|---|---|---|---|---|---|---|---|---|']
-for arg in sys.argv[1:]:
-    name, rest = arg.split('=')
-    png, off = (rest.split('@') + [None])[:2]
-    ox, oy = (int(v) for v in off.split(',')) if off else (0, 0)
-    a = np.asarray(Image.open(png).convert('RGB')).astype(float)
-    L = np.full(ids.shape + (3,), np.nan); Y = np.full(ids.shape, np.nan)
-    l, y = lab(a); h, w = a.shape[:2]
-    L[oy:oy + h, ox:ox + w] = l; Y[oy:oy + h, ox:ox + w] = y
-    def mean(mask, ch=0, arr=None):
-        v = (arr if arr is not None else L[..., ch])[mask]; v = v[~np.isnan(v)]
-        return f'{v.mean():.1f}' if v.size else '-'
-    cy, by = Y[CONE], Y[BATTS]
-    ratio = f'{np.nanmean(cy) / np.nanmean(by):.2f}' if (~np.isnan(cy)).any() and (~np.isnan(by)).any() else '-'
-    bl = L[BELL]; bl = bl[~np.isnan(bl[:, 0])]
-    if bl.size:
-        top = bl[bl[:, 0] >= np.percentile(bl[:, 0], 95)]; la, aa, bb = top.mean(0)
-        bt = f'{la:.1f} / {np.hypot(aa, bb):.1f} / {np.degrees(np.arctan2(bb, aa)) % 360:.0f}'
-    else:
-        bt = '-'
-    fv = L[FAR][:, 0]; fv = fv[~np.isnan(fv)]
-    far = f'{fv.mean():.1f} ({100 * (fv > 10).mean():.0f} %)' if fv.size else '-'
-    rows.append(f'| {name} | {mean(CONE)} | {mean(CAP)} | {ratio} | {mean(SILL)} | {mean(BELL)} | {bt} | {far} | {mean(FRONT)} |')
-print('\n'.join(rows))
+if __name__ == '__main__':
+    rows = ['| frame | cone L* | cap L* | cone/batts Y | sill L* | bell L* | bell top 5 % L* / C* / h | far bay L* (% > 10) | front L* |',
+            '|---|---|---|---|---|---|---|---|---|']
+    for arg in sys.argv[1:]:
+        name, rest = arg.split('=')
+        png, off = (rest.split('@') + [None])[:2]
+        ox, oy = (int(v) for v in off.split(',')) if off else (0, 0)
+        a = np.asarray(Image.open(png).convert('RGB')).astype(float)
+        L = np.full(ids.shape + (3,), np.nan); Y = np.full(ids.shape, np.nan)
+        l, y = lab(a); h, w = a.shape[:2]
+        L[oy:oy + h, ox:ox + w] = l; Y[oy:oy + h, ox:ox + w] = y
+        def mean(mask, ch=0, arr=None):
+            v = (arr if arr is not None else L[..., ch])[mask]; v = v[~np.isnan(v)]
+            return f'{v.mean():.1f}' if v.size else '-'
+        cy, by = Y[CONE], Y[BATTS]
+        ratio = f'{np.nanmean(cy) / np.nanmean(by):.2f}' if (~np.isnan(cy)).any() and (~np.isnan(by)).any() else '-'
+        bl = L[BELL]; bl = bl[~np.isnan(bl[:, 0])]
+        if bl.size:
+            top = bl[bl[:, 0] >= np.percentile(bl[:, 0], 95)]; la, aa, bb = top.mean(0)
+            bt = f'{la:.1f} / {np.hypot(aa, bb):.1f} / {np.degrees(np.arctan2(bb, aa)) % 360:.0f}'
+        else:
+            bt = '-'
+        fv = L[FAR][:, 0]; fv = fv[~np.isnan(fv)]
+        far = f'{fv.mean():.1f} ({100 * (fv > 10).mean():.0f} %)' if fv.size else '-'
+        rows.append(f'| {name} | {mean(CONE)} | {mean(CAP)} | {ratio} | {mean(SILL)} | {mean(BELL)} | {bt} | {far} | {mean(FRONT)} |')
+    print('\n'.join(rows))
