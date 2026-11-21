@@ -17,6 +17,7 @@
       t6, t7  a diffuser flush under the ceiling over the bay, and a frontal softbox at strength IRR (gen6.py t6 10).
       t8, t9  t7's lights (frontal softbox at IRR) with the niches in a mid warm-grey felt (an option: a set change).
       t10  t7's lights, the frontal softbox at IRR (40), and a hidden 40 W LED washer up the near niche's back wall.
+      full  fixed-6: t7's lights with the frontal softbox at IRR (40) on both bays (gen6.py full 40 -> fixed6.json).
     python3 gen6.py VARIANT [IRR]  ->  fixed6-VARIANT.json"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -47,10 +48,10 @@ if v.startswith('t2'):
 elif v.startswith('t3'):
     L['track-front1'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.14, 0.14], 'position': [8.25, 4.95, 3.35], 'target': AIM,
                          'irradiance': irr, 'spread_deg': 14, 'color': '#FFE2C0'}
-s['title'] = f'B1 fixed-6 {v}: Planet EARF bar, the record wall from a seat at the bar (a test, not a final)'
+s['title'] = ('B1 fixed-6: ' if v == 'full' else f'B1 fixed-6 {v}: ') + 'Planet EARF bar, the record wall from a seat at the bar (a test, not a final)'
 s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
                           'fn': 'shadow_ray_report'})                       # (prints what the cut left; changes nothing)
-if v[:2] in ('t6', 't7', 't8', 't9') or v.startswith('t10'):
+if v[:2] in ('t6', 't7', 't8', 't9') or v.startswith('t10') or v == 'full':
     # t6/t7: two real softboxes (living_ext.softbox: a glowing diffuser in a black body, every ray on, casting shadows)
     #   ceiling-panel: a 1.4 x 0.9 m diffuser flush under the ceiling over the bay's front (z 3.36-3.40), facing
     #     down, strength 6. The live horn card spanned z 3.04-3.58, more than half of it above the ceiling.
@@ -65,6 +66,13 @@ if v[:2] in ('t6', 't7', 't8', 't9') or v.startswith('t10'):
                               'position': [8.05, 4.9, 3.37], 'target': [8.05, 4.95, 0.0], 'strength': 6.0, 'color': '#FFE2C0'})
     s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [1.2, 0.9], 'depth': 0.1,
                               'position': [8.6, 4.3, 3.0], 'target': [8.25, 5.6, 1.55], 'strength': irr, 'color': '#FFE2C0'})
+if v == 'full':
+    # fixed-6 (the coordinator, 15:20: t10's washer failed, so t7's lights with the softbox at 40 on both bays): the
+    # same frontal softbox on the far bay, moved toward the room so it stays out of frame (at the near one's mirrored
+    # place its corner showed in the frame's top left): (6.1, 3.9, 2.98), z 2.63-3.39, aimed at the far cabinet.
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
+                              'fn': 'softbox', 'size': [1.2, 0.9], 'depth': 0.1, 'position': [6.1, 3.9, 2.98],
+                              'target': [5.55, 5.6, 1.55], 'strength': irr, 'color': '#FFE2C0'})
 if v.startswith('t10'):
     # t10 (the coordinator, 15:20): t7's lights with the frontal softbox at `irr` (40), and a hidden LED wall washer in
     # the near niche: a real fixture (living_ext.softbox as a linear washer, a 0.5 x 0.03 m glowing face on a 4 cm black
@@ -82,5 +90,5 @@ if v.startswith('t8') or v.startswith('t9'):
     for p_ in s['set']['props']:
         if p_.get('fn') == 'restyle':
             p_['swap']['kit-felt'] = {'kind': 'plain', 'color': '#8C8379', 'rough': 0.95}
-json.dump(s, open(os.path.join(HERE, f'fixed6-{v}.json'), 'w'), indent=1)
+json.dump(s, open(os.path.join(HERE, 'fixed6.json' if v == 'full' else f'fixed6-{v}.json'), 'w'), indent=1)
 print(v, s['title'], sorted(L))
