@@ -1,0 +1,691 @@
+{
+ "results": [
+  {
+   "part": "colour",
+   "found": {
+    "findings": [
+     {
+      "id": "CO-00",
+      "severity": "decision",
+      "tint": "all",
+      "product": "pair",
+      "where": "All 16 lamp OFF frames. Pendant shell body against Core ball body, lit-body means",
+      "what": "The pendant and Core do not match OFF in any of the eight tints on the house ground. In every tint the Core is lighter. Core minus pendant dL*: Ember +14.1, Dust +5.5, Acid +17.8, Poison +16.0, Ice +16.7, Haze +12.8, Fog +8.4, Smoke +23.4. dE00 runs 5.2 to 15.4. Matching the lightness alone would leave dE00 of about 3 in Ember, Acid, Poison and Haze, about 6 in Dust and Ice (a hue gap) and 0.2 to 1.6 in Fog and Smoke. The 17 Nov mix deepened the pendants after judging them on dark grounds. On this light ground the Core shows the light ground through itself and reads lighter, so the mix now works against the match. My Beer-Lambert model (rgb = fog x (now/fog)^s, minus a reflection floor) puts the as-built pendant loadings close to their Cores: Ember 1.0 gives L* about 35 against the Core's 37.9, Ice 3 gives 39.0 against 37.4, Haze 1.0 gives about 24.4 against 25.6.",
+      "expected": "The owner's rule: pendant and Core match OFF (dE00 of about 2 or less side by side) on the ground they are shown on.",
+      "sure": "certain",
+      "evidence": "Measured values are certain; the as-built estimates come from the model and are likely. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/analyse.txt, model2.txt, swatches-lit-means.png, rows300-ember-dust-acid-poison.png, rows300-ice-haze-fog-smoke.png. Recommendation: make the pendants lighter rather than the Cores deeper, tint by tint (CO-03 to CO-08). Check it with a render (LOAD_BUILT=1 covers Ember, Ice and Haze) before putting it to the owner."
+     },
+     {
+      "id": "CO-01",
+      "severity": "decision",
+      "tint": "Ice, Haze",
+      "product": "pendant",
+      "where": "hemisphere-blue-off.png and hemisphere-violet-off.png, shell body y 1045-1470 with windows and rim excluded; also core-blue/violet",
+      "what": "Of all the products, the Ice and Haze pendants are the closest pair of tints: dE00 7.7. Ice is L*20.7 C*72.4 h300.8, Haze L*12.8 C*71.3 h307.8, and the hue gap is only 12.7 deg in OKLab. The Ice pendant sits nearer the Haze Tropos horn (dE00 10.0) than its own Ice Tropos horn (21.5). Side by side the two can be told apart: Haze is darker and indigo, Ice is royal/ultramarine. On its own page, either reads as deep ultramarine, and the Haze pendant does not read violet. The Cores part better (dE00 13.9, OKLab gap 18.5 deg), but the Ice Core is still royal blue (OKLab h 263.6) where the Tropos Ice is azure (248-251).",
+      "expected": "Each lamp reads as its Tropos. Ice should be azure/cobalt (Tropos horn L*41 C*48 h278, OKLab 251). Haze should be violet (horn L*28 C*97 h310, OKLab 290). The Tropos's own Ice-Haze gap is dE00 25.5 on the horn and 38 deg in OKLab.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/crop-ice-haze-pendant.png, crop-ice-haze-core.png, rows300-ice-haze-fog-smoke.png. Model estimate (likely): lightening both pendants (Ice 6 to about 3.2, Haze 1.8 to about 0.95 times base, near the as-built 3 and 1.0) parts them to dE00 20.8 with an OKLab gap of about 37 deg, and each matches its Core (dE00 5.7 and 3.5). Deepening the Cores instead would merge the Cores too: dE00 13.9 to 9.6, hue gap 18.5 to 5.6 deg."
+     },
+     {
+      "id": "CO-02",
+      "severity": "decision",
+      "tint": "Dust",
+      "product": "core",
+      "where": "core-orange-off.png, ball and base",
+      "what": "The Dust Core reads scarlet. Its lit mean is L*52.8 C*82.0 h38.6 (OKLab 30.7), within 3 deg OKLab of the Ember Core (27.8) and the Ember Tropos (29.2), and 19-21 deg from the Dust Tropos (horn 51.8, front 49.7). It is nearer the Ember Tropos horn (dE00 10.3) than the Dust Tropos horn (15.3). Against the Ember Core the difference is only lightness and chroma (dE00 14.8, the second-closest pair of Cores). The Dust pendant sits between them, red-orange at h46.5 (OKLab 36.9). At 300 px the Dust row reads orange, red-orange, red. The cause is green: in linear light G/R is 0.05 in the Core, 0.08 in the pendant and 0.21-0.27 in the Tropos.",
+      "expected": "Dust reads orange across the row, as the approved Tropos does (h 54-59 CIELAB).",
+      "sure": "certain",
+      "evidence": "Measured hue is certain; the model behaviour is likely. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/crop-ember-dust-core.png, crop-ember-dust-tropos.png, rows300-ember-dust-acid-poison.png. In the model, loading alone cannot make the Core orange: at 0.25 to 1.5x it stays h 38-43. The pendant does turn Tropos-orange when lighter (0.6-0.7x gives h 53-56 and dE00 4.3 to the Tropos horn), but then the pair splits by hue (dE00 11.2). Recommendation: if Dust must stay orange in the Core, the Core's Dust needs a yellower dye balance (less green absorbed). That is a formulation question, not a loading one."
+     },
+     {
+      "id": "CO-03",
+      "severity": "decision",
+      "tint": "Ember",
+      "product": "pair",
+      "where": "hemisphere-red-off.png and core-red-off.png",
+      "what": "The OFF match fails: pendant L*23.8 C*56.9 h37.8 against Core L*37.9 C*67.3 h35.4, dE00 11.5, dL +14.1. Hue is one family, with OKLab 29.3 / 27.8 / Tropos 29.2. The pendant reads maroon, while the Core matches the Tropos's lit faces (front over the batts dE00 4.7, horn 6.4).",
+      "expected": "The pair matches, and both read as the Tropos red.",
+      "sure": "likely",
+      "evidence": "Model (likely): a lighter pendant (1.8 to about 0.85x; the as-built 1.0 is close) gives dE00 3.1 and C* rises 57 to 60. The pendant then sits 5.2/7.1 from the Tropos front/horn (from 13.1/16.5); the cost is that it moves away from the Tropos's whole-panel mean (0.3 to 11.2), which is dominated by the shaded side. A deeper Core (2.4x) gives dE00 4.5, but the Core dulls (C* 67 to 46) and leaves the Tropos lit faces (4.7 to 15.5). /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/model2.txt"
+     },
+     {
+      "id": "CO-04",
+      "severity": "decision",
+      "tint": "Acid",
+      "product": "pair",
+      "where": "hemisphere-amber-off.png and core-amber-off.png",
+      "what": "The OFF match fails: pendant L*53.8 C*58.7 h98.5 against Core L*71.6 C*69.0 h99.9, dE00 15.4, dL +17.8. The 'olive' reading is confirmed and it comes from lightness, not hue. The lamps are within 1-6 deg of the Tropos in hue (OKLab 104-106 against 103-109). The Tropos reads lemon because of its lit front over the white batts (L*92 C*84). Its horn (L*66) is itself olive-yellow. The pendant at L*54 is olive, the Core at L*72 mustard.",
+      "expected": "The pair matches and reads as the Tropos lemon-yellow.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/crop-acid-tropos-pendant.png and swatches-lit-means.png. Model: a lighter pendant (5 to about 1.85x; the as-built 3 reaches only L* about 65) gives dE00 2.9 and moves nearer the Tropos (front 29.5 to 15.0, horn 10.9 to 6.2). A deeper Core (2.1x) gives dE00 2.4, but both lamps would be olive (Core to Tropos front 14.6 to 30.1)."
+     },
+     {
+      "id": "CO-05",
+      "severity": "decision",
+      "tint": "Poison",
+      "product": "pair",
+      "where": "hemisphere-green-off.png and core-green-off.png",
+      "what": "The OFF match fails: pendant L*27.5 C*46.6 h138.5 against Core L*43.4 C*57.6 h140.2, dE00 13.6, dL +16.0. Hue is one family (OKLab 143.8 / 144.6 / Tropos 142.6-143.5). The Core matches the Tropos lit faces (front 3.2, horn 2.1); the pendant is dark green.",
+      "expected": "The pair matches and reads as the Tropos green.",
+      "sure": "likely",
+      "evidence": "Model: a lighter pendant (about 0.6x) gives dE00 1.8 and C* rises 47 to 55; it moves nearer the Tropos front/horn (14.1/14.0 to 4.9/3.8). Alternatively, returning the Core from 0.6 to about 1.0 (as built) gives dE00 2.7, but the Core leaves the Tropos lit faces (3.2 to 15.4). /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/model2.txt"
+     },
+     {
+      "id": "CO-06",
+      "severity": "decision",
+      "tint": "Ice",
+      "product": "pair",
+      "where": "hemisphere-blue-off.png and core-blue-off.png",
+      "what": "The OFF match fails: pendant L*20.7 C*72.4 h300.8 against Core L*37.4 C*75.6 h294.8, dE00 14.0, dL +16.7, dh -6. Both lamps are 12-16 deg (OKLab) more violet than the Tropos Ice (pendant 264.1, Core 263.6, Tropos 248-251). The pendant is the furthest of the three from the Tropos (horn dE00 21.5, front 45.5).",
+      "expected": "The pair matches and reads as the Tropos azure.",
+      "sure": "likely",
+      "evidence": "Model: a lighter pendant (6 to about 3.2x, close to the as-built 3) gives dE00 5.7; the remainder is hue and chroma. The hue swings back toward azure (h 285.5, OKLab about 257) and the pendant moves to 5.2 from the Tropos horn (from 21.5). A deeper Core (2.6x) gives dE00 3.1, but the Core goes violet (h 304) and leaves the Tropos (horn 9.9 to 23.6). The Ice and Haze Cores would merge (see CO-01)."
+     },
+     {
+      "id": "CO-07",
+      "severity": "decision",
+      "tint": "Haze",
+      "product": "pair",
+      "where": "hemisphere-violet-off.png and core-violet-off.png",
+      "what": "The OFF match fails: pendant L*12.8 C*71.3 h307.8 against Core L*25.6 C*84.3 h306.9, dE00 9.3, dL +12.8, dC +12.9. The whole pendant body is below L*20, and at that depth it reads navy/indigo (OKLab 276.8) rather than violet (Tropos 288-290). The Core is nearer the Tropos (horn dE00 3.8, front 7.8).",
+      "expected": "The pair matches and reads violet.",
+      "sure": "likely",
+      "evidence": "Model: a lighter pendant (1.8 to about 0.95x, close to the as-built 1.0) gives dE00 3.5. The pendant's C* rises 71 to 80, it turns violet again (OKLab about 291) and moves to 3.9 from the Tropos horn (from 11.9). A deeper Core (2.6x) gives dE00 6.3 and the Core's C* falls 84 to 49. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/crop-ice-haze-pendant.png"
+     },
+     {
+      "id": "CO-08",
+      "severity": "decision",
+      "tint": "Smoke",
+      "product": "pair",
+      "where": "hemisphere-black-off.png and core-black-off.png",
+      "what": "This is the largest OFF gap: pendant L*3.0 against Core L*26.3, dE00 15.4, dL +23.4. The pendant reads as opaque black glass, with no trace of its opal. The Core reads charcoal, its opal showing only as a faint lighter lower band (lower L*33, middle L*19). The Tropos cabinet is black (panels L*0.6), but its horn is light grey (L*70).",
+      "expected": "The pair matches. The owner should decide whether Smoke lamps are black like the cabinet or charcoal.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/crop-smoke-pair.png and rows300-ice-haze-fog-smoke.png. Model: a lighter pendant (1.2 to about 0.58x) gives dE00 1.3 and the opal would show, but the pendant leaves the black cabinet (dE00 1.6 to 16.9). A deeper Core cannot get darker than about L*7: the reflection floor caps it even at 20x."
+     },
+     {
+      "id": "CO-09",
+      "severity": "note",
+      "tint": "Fog",
+      "product": "pair",
+      "where": "hemisphere-ice-off.png and core-ice-off.png",
+      "what": "Fog is one neutral family, but the pendant's opal reads light grey (L*86.3, C*1.6) where the Core reads white (L*94.7) and the Tropos lit front is L*96. The pair's dE00 is 5.2 (dL +8.4). With no dye in Fog, loading cannot change this; it comes from the clear shell and opal, and from the lighting.",
+      "expected": "Pendant and Core whites within about 2 dE00.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/meas.txt and swatches-lit-means.png"
+     },
+     {
+      "id": "CO-10",
+      "severity": "note",
+      "tint": "Smoke",
+      "product": "core",
+      "where": "core-black-off.png, ball and base",
+      "what": "The Smoke Core has a cool slate cast: a* -1.4 / b* -1.5 on the ball (middle -1.7/-2.6, base -1.4/-1.9). The Smoke pendant (-0.6/-0.3) and the Tropos Smoke panels (-0.1/-0.2) are neutral. On the warm ground (b* +4.7 to +5.5) the Core looks blue-grey in the crop.",
+      "expected": "One neutral smoke in all three products.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/crop-smoke-pair.png"
+     },
+     {
+      "id": "CO-11",
+      "severity": "note",
+      "tint": "Haze",
+      "product": "core",
+      "where": "core-violet-off.png, base",
+      "what": "The dark Haze base is the dark Haze pour; I found no separate defect. 18.6% of the eroded base silhouette is below L*20. The base centre (L*28.2) is lighter than the ball median (24.2). Flank/centre is 0.75/0.67, against Ice and Poison at 0.81/0.74, Ember 0.84/0.76 and Smoke 0.66/0.54: in L* terms, darker pours fall off more at the flanks.",
+      "expected": "n/a",
+      "sure": "certain",
+      "evidence": "Measured in my own pass (eroded 6 px, y 1560-1840); the figures are in this record."
+     },
+     {
+      "id": "CO-12",
+      "severity": "note",
+      "tint": "all",
+      "product": "pair",
+      "where": "The others' claim 'every Core reads 12-16 L* lighter than its pendant'",
+      "what": "The claim holds only in part. Core minus pendant L* (lit means; medians in brackets): Ember +14.1 (13.5), Poison +16.0 (16.0) and Haze +12.8 (11.1) fall in the 12-16 range. Ice +16.7 and Acid +17.8 are just above it. Dust is only +5.5 (5.1), Fog +8.4 and Smoke +23.4. Dust's real failure is hue (CO-02), not lightness.",
+      "expected": "n/a",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/analyse.txt"
+     },
+     {
+      "id": "CO-13",
+      "severity": "note",
+      "tint": "all",
+      "product": "row",
+      "where": "The ground beside each product (Ember frames)",
+      "what": "The ground is consistent enough across the row for colour judgement. The median ground L* is 93.1 (Tropos), 92.9 (pendant) and 93.5 (Core). The left strip at mid-height is 87.9 / 85.0 / 88.9, the right 94.4 / 92.4 / 93.3. a*/b* is +0.2-0.3 / +4.6-5.5 everywhere.",
+      "expected": "n/a",
+      "sure": "certain",
+      "evidence": "Measured in my own pass; the figures are in this record."
+     }
+    ],
+    "table": [
+     "METHOD. Masks are built once per product from all eight frames, which share one geometry. Silhouette: pixels whose sRGB differs across the eight tints (sd > 0.06). Highlights: the median over the seven non-clear tints of linear min(R,G,B), thresholded at 0.02 (pendant), 0.08 (Core) or 0.03 (Tropos) and dilated by 10 px (4 px on the Tropos). Edges: the maximum over tints of the smoothed L* gradient, above 3 (4 on the Tropos) per px, dilated by 6 px. Lamp silhouettes are eroded by 22 px. Pendant: y 1045-1470, between the cap foot and the lip. Core ball: a fitted circle of r-22 px, above y 1385. Core base: the eroded base. Tropos: front = the front band above the woofer, lit, over the white batts; horn = the flare left of the throat; panels = front plus the shaded side; plain = horn plus all cabinet faces. Each region gets the per-pixel median L*/C*/h (circular), and a lit-body mean taken in linear light and converted to Lab (D65). Mask overlays: ov-pendant-ember.png, ov-core-ember.png, ov-tropos-ember.png. Every file is in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/",
+     "Columns, all lit-body means as L*/C*/h: Tropos front | Tropos horn | Tropos panels | pendant | Core ball | Core base || dE00 for Tropos(front/horn/panels) to pendant | Tropos to Core | pendant to Core (dL)",
+     "EMBER  38.4/82.0/39.9 | 42.4/86.0/39.4 | 23.6/57.8/37.7 | 23.8/56.9/37.8 | 37.9/67.3/35.4 | 34.2/56.1/32.9 || 13.1/16.5/0.3 | 4.7/6.4/11.5 | 11.5 (+14.1)",
+     "DUST   68.7/65.4/55.4 | 51.4/67.0/58.6 | 48.3/56.0/54.0 | 47.3/79.4/46.5 | 52.8/82.0/38.6 | 52.6/81.1/36.7 || 20.7/10.3/7.9 | 18.9/15.3/13.2 | 8.2 (+5.5, dh -7.9)",
+     "ACID   92.2/84.1/103.2 | 65.7/68.2/97.3 | 66.3/65.6/102.8 | 53.8/58.7/98.5 | 71.6/69.0/99.9 | 65.3/60.3/100.5 || 29.5/10.9/11.5 | 14.6/5.0/4.7 | 15.4 (+17.8)",
+     "POISON 42.9/67.5/136.3 | 43.2/64.5/138.0 | 26.3/48.3/136.3 | 27.5/46.6/138.5 | 43.4/57.6/140.2 | 37.7/46.4/143.0 || 14.1/14.0/1.4 | 3.2/2.1/14.5 | 13.6 (+16.0)",
+     "ICE    65.2/50.2/269.1 | 41.1/47.6/277.0 | 44.4/41.8/272.6 | 20.7/72.4/300.8 | 37.4/75.6/294.8 | 34.2/76.2/296.6 || 45.5/21.5/24.2 | 31.2/9.9/12.0 | 14.0 (+16.7, dh -6.0)",
+     "HAZE   33.3/109.5/309.9 | 28.1/96.5/310.2 | 20.1/81.9/309.6 | 12.8/71.3/307.8 | 25.6/84.3/306.9 | 23.9/74.6/305.4 || 16.5/11.9/5.5 | 7.8/3.8/4.5 | 9.3 (+12.8)",
+     "FOG    96.1/2.3 | 93.1/4.6 | 73.8/1.9 | 86.3/1.6 | 94.7/1.8 | 96.5/2.4 || 6.3/5.8/8.8 | 1.9/3.9/13.9 | 5.2 (+8.4)",
+     "SMOKE  0.7/0.7 | 69.9/4.1 | 0.6/0.2 | 3.0/0.7 | 26.3/2.0 (a* -1.4, b* -1.5) | 24.9/2.4 || 1.6/56.2/1.6 | 16.8/43.4/16.8 | 15.4 (+23.4)",
+     "Per-pixel medians, pendant L*/C*/h: Ember 24.5/58.7/38.1; Dust 48.5/81.6/46.8; Acid 55.3/60.1/98.6; Poison 28.5/48.2/138.4; Ice 21.4/74.2/300.8; Haze 13.1/73.3/307.9; Fog 88.2/1.8; Smoke 2.9/0.9. Core ball: Ember 38.0/69.7/37.7; Dust 53.6/84.3/39.1; Acid 72.8/70.2/99.9; Poison 44.5/59.0/140.4; Ice 38.1/76.6/294.9; Haze 24.2/86.9/307.6; Fog 95.7/1.8; Smoke 24.0/2.4. Tropos whole plain body: Ember 18.1/44.4/35.2, L* p10-p90 6.8-43.1, so the Tropos has no single lightness.",
+     "OKLab hue, Tropos horn / Tropos front / pendant / Core: Ember 29.1/29.2/29.3/27.8; Dust 51.8/49.7/36.9/30.7; Acid 102.9/109.3/104.4/105.6; Poison 143.5/142.6/143.8/144.6; Ice 251.2/248.3/264.1/263.6; Haze 289.7/288.4/276.8/282.1",
+     "Closest pairs of tints within each product (dE00 of lit means). Pendant: Ice-Haze 7.7, Ember-Dust 21.1, Haze-Smoke 24.9. Core ball: Ice-Haze 13.9, Ember-Dust 14.8, Haze-Smoke 20.2. Core base: Ice-Haze 11.0, Ember-Dust 18.2. Tropos horn: Fog-Smoke 15.9, Ember-Dust 17.4, Ice-Haze 25.5. Tropos panels: Ember-Dust 23.0, Ice-Haze 29.7. Tropos front: Ember-Dust 31.6, Ice-Haze 43.0.",
+     "Across products: the Ice pendant is 10.0 from the Haze Tropos horn but 21.5 from the Ice Tropos horn. The Dust Core is 10.3 from the Ember Tropos horn but 15.3 from the Dust Tropos horn.",
+     "Model of the options (s = new loading / current; lighter pendant | deeper Core; dE00 pendant-Core after; distance to the Tropos front/horn before and after). Ember: s_p 0.46, dE 3.1, P 13.1/16.5 to 5.2/7.1 | s_c 2.37, dE 4.5, C 4.7/6.4 to 15.5/18.6. Dust: s_p 0.70, dE 11.2, hue to 53 | s_c 3.17, dE 7.2, hue stays 38. Acid: s_p 0.37, dE 2.9, P 29.5/10.9 to 15.0/6.2 | s_c 2.10, dE 2.4, C 14.6/5.0 to 30.1/11.3. Poison: s_p 0.59, dE 1.8, P 14.1/14.0 to 4.9/3.8 | s_c 1.65, dE 2.7, C 3.2/2.1 to 15.4/15.2. Ice: s_p 0.53, dE 5.7, P 45.5/21.5 to 29.2/5.2 | s_c 2.58, dE 3.1, C 31.2/9.9 to 46.8/23.6. Haze: s_p 0.53, dE 3.5, P 16.5/11.9 to 8.3/3.9 | s_c 2.62, dE 6.3 (C* to 49). Smoke: s_p 0.48, dE 1.3 | the Core is floor-limited at about L*7.",
+     "Base fall-off, flank/centre L*: Ember 0.84/0.76, Dust 0.92/0.86, Acid 0.87/0.82, Poison 0.81/0.74, Ice 0.81/0.74, Haze 0.75/0.67, Fog 0.99/0.99, Smoke 0.66/0.54. Share of the base below L*20: Haze 18.6%, Smoke 27.7%, others 0%."
+    ],
+    "recommendations": [
+     "Fix the OFF match by making the pendants lighter, not the Cores deeper. Estimated loadings in times the base pour: Ember about 0.85 (as-built 1.0 is close), Acid about 1.9 (as-built 3 falls short, at L* about 65 against 71.6), Poison about 0.6, Ice about 3.2 (as-built 3), Haze about 0.95 (as-built 1.0), Smoke about 0.6. Leave the Cores as they are. Estimated pendant-Core dE00 afterwards: Ember 3.1, Acid 2.9, Poison 1.8, Ice 5.7, Haze 3.5, Smoke 1.3. Before the owner sees it, render a check set on the house ground (LOAD_BUILT=1 covers Ember, Ice and Haze) and measure it with these masks; these numbers come from a model.",
+     "Why this direction: lighter pendants move toward the Tropos's lit faces (front over the batts, horn) in Ember, Acid, Poison, Ice and Haze. For Ember, Haze and Poison they also gain chroma, because today's pendants are deeper than their chroma peak. Deeper Cores would leave the Tropos (Ember front 4.7 to 15.5, Poison 3.2 to 15.4, Ice horn 9.9 to 23.6), dull Ember and Haze (C* 67 to 46, 84 to 49), and merge the Ice and Haze Cores. The cost of lighter pendants: they move away from the Tropos's overall panel mean, which is dominated by its shaded side and interior, and Ice loses chroma (72 to 55).",
+     "Dust: decide whether the Core's Dust should be orange. If it should, its dye balance has to change (yellower, less green absorbed); no loading does it. As it stands the Dust Core has Ember's hue and differs from the Ember Core only in lightness. A lighter Dust pendant (about 0.65x) would read as the Tropos orange but would then split from the Core by hue.",
+     "Ice and Haze: the lighter pendants above already part them (estimated dE00 7.7 to about 21). If the Ice lamps still read violet against the azure Tropos (now 12-16 deg OKLab apart), the Ice lamps' dye needs to move toward cyan; Haze needs no dye change once it is not over-deep.",
+     "Smoke: the owner should decide whether the Smoke lamps are black like the cabinet or charcoal. Matching means lightening the pendant to about 0.6x, which would also show its opal; the Core cannot get below about L*7. Separately, neutralise the Smoke Core's cool cast (b* -1.5 to -2.6), which the pendant and the Tropos do not have.",
+     "Judge pours on the ground they are shown on, at 300 px and full size. The 17 Nov mix was judged on dark grounds, and its pendant increases are what break the match on the house ground."
+    ],
+    "summary": "I measured all 24 frames with tint-independent masks per product, over the plain body only (highlights, edges and rims removed): per-pixel median L*/C*/h, a lit-body mean taken in linear light, and dE00 between products and between tints. Mask overlays, crops, swatches, 300 px rows and the tables are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-colour/.\n\n(a) Family reading across the three products:\n- **Ember and Poison** are one family by hue: they sit within 2 deg of each other in OKLab, and the Core matches the Tropos's lit faces (dE00 2-6). The pendant reads darker (maroon, deep green), about 14-16 L* below.\n- **Acid** is one family by hue (within 1-6 deg). The lamps read olive or mustard because they are darker (pendant L*54, Core 72) than the Tropos's lemon front (L*92). Lightness is the cause, not hue.\n- **Fog** is one neutral family, though the pendant's opal is greyer (L*86 against 95).\n- **Smoke** is neutral in all three, but split by lightness: a black pendant (L*3), a charcoal Core (L*26) with a cool cast, a black cabinet and a grey horn.\n- **Haze**: the Core belongs to the family (dE00 3.8 to the horn). The pendant is so deep (L*12.8) that it reads navy-indigo (OKLab 277 against 290).\n- **Ice is not one family.** Both lamps are 12-16 deg OKLab more violet than the azure Tropos, and the Ice pendant is nearer the Haze Tropos (dE00 10.0) than its own (21.5).\n- **Dust is not one family.** The Core has Ember's hue (OKLab 30.7 against 27.8) and reads scarlet; the pendant is red-orange; the Tropos is orange.\n- The Tropos has no single lightness. In Ember its plain body runs L* 7-43. Its lit faces are what a viewer names as the tint, and the Cores match them better than the pendants do.\n\n(b) The OFF match fails in all eight tints, with the Core always lighter. dE00 / dL*: Ember 11.5 / +14.1, Dust 8.2 / +5.5 (plus 8 deg of hue), Acid 15.4 / +17.8, Poison 13.6 / +16.0, Ice 14.0 / +16.7, Haze 9.3 / +12.8, Fog 5.2 / +8.4, Smoke 15.4 / +23.4. The claim of '12-16 L* lighter' is right only for Ember, Poison and Haze.\n\n(c) Lighten the pendants, roughly halving their current loadings. A Beer-Lambert model suggests that on this ground the as-built pendant loadings would nearly match their Cores in Ember (1.0), Ice (3) and Haze (1.0); Acid needs about 1.9, and Poison and Smoke about 0.6. This brings the pendants nearer the Tropos lit faces and, in Ember, Haze and Poison, raises their chroma; the cost is moving away from the Tropos's shaded overall mean. Deepening the Cores would take them away from the Tropos, dull them and merge Ice with Haze. Smoke is the exception: there a deeper Core would move toward the black cabinet, but it cannot get below about L*7. Dust cannot be fixed by loading; it needs a yellower Core dye if it is to read orange.\n\n(d) Ice and Haze can be told apart side by side in every product, but they are the closest pair of tints everywhere among the lamps: pendant dE00 7.7, Core 13.9, against 25.5-43 on the Tropos. On its own page the Haze pendant does not read violet. Lighter pendants would part them (estimated dE00 about 21, hue gap about 37 deg); deeper Cores would merge the Cores (dE00 9.6, gap 5.6 deg).\n\nAll measurements are certain; the loading estimates come from a model and should be checked by rendering."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "CO-00",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "My own masks: silhouette = union of C*>12 over the six coloured tints; reflections removed using the Smoke frame itself (L*>15 pendant, >40 Core, dilated 8 px); 20 px erosion; MEDIAN Lab where the critic used linear mean (overlay-masks.png). Core minus pendant dL*: Ember +13.9, Dust +5.7, Acid +18.1, Poison +16.4, Ice +16.9, Haze +11.4, Fog +8.2, Smoke +20.6. dE00: 11.3, 8.2, 15.5, 14.1, 14.1, 8.4, 5.1, 13.4 (linear means 5.1-16.1, within 0.6 of the critic's). Whole silhouettes including highlights (what a 300 px tile averages to): dL +4.6 to +14.5, dE00 5.5-12.6, Core lighter in all eight. Residual dE00 with lightness matched: 3.2/6.0/2.8/3.5/5.5/3.2/0.4/1.7. The gap is visible in every tint in my 300 px rows (rows300-a.png, rows300-b.png), smallest in Dust.",
+      "reasoning": "The finding reproduces with different masks and statistics. Counting highlights shrinks the gap but never closes it. The cause the critic gives (a set-up effect, not the pour) is supported by the 16 Nov records. In the one off rig, Fog, which has no dye, read Hemisphere 131 against Core 117 sRGB (lamps/corematch/notes.md). On the house ground the Fog Core is 8.2 L* lighter. The sign flips with no dye at all, so the set-up decides the balance, and the mix's match does not carry over. The critic's stated mechanism ('the Core shows the light ground through itself') is not demonstrated. The model's as-built estimates reproduce on my masks: Ember 1.0x gives L*33-34 against the Core's 37.4, Ice 3x 38 against 37, Haze 1x 23.6-24.5 against 25.1. But I ran the same model on the 16 Nov renders that exist at both loadings in one rig (table3.txt). With the critic's floor it predicted the as-built pendants lighter than rendered by 4.9 L* (Ember, Ice) and 7.2 L* (Haze). So 'as-built is close to the Core' stays unproven until it is rendered. This is a pour question."
+     },
+     {
+      "id": "CO-01",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Medians: Ice pendant L20.8 C73.4 h300.8, Haze pendant L12.7 C72.3 h307.8; dE00 7.9, OKLab gap 12.5 deg. The Ice pendant is 10.3 from the Haze Tropos horn and 22.8 from its own Ice horn. Cores: dE00 15.1, OKLab gap 17.5. Tropos horns: dE00 26.6, OKLab gap 39.9. Full-size crop (crop-ice-haze-pendant.png): Ice reads cobalt and Haze deep indigo, separable side by side; at 300 px both read deep blue. 16 Nov renders at both loadings (one rig): Ice 6x / Haze 1.8x dE00 4.9 against Ice 3x / Haze 1x 11.2. Haze OKLab 270.5 -> 279.9, Ice 260.6 -> 254.0.",
+      "reasoning": "Every measured claim reproduces within about 1 dE00 or 1 deg. The 16 Nov renders support the direction: lighter pendants part the pair, Haze moves violet and Ice moves azure. The model's figures (dE00 20.8, about 37 deg) cannot be trusted. On that same data the model predicted the as-built Haze would turn bluer (OKLab 264.8), but the render turned violet (279.9). It also put the as-built Ice 4 L* too light and 5 deg too azure. Even at 1x, Haze stopped near OKLab 280 there, short of the Tropos's 287-291."
+     },
+     {
+      "id": "CO-02",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Dust Core median L53.4 C84.2 h39.1 (OKLab 31.0) against Ember Core L37.8 C69.7 h37.4 (OKLab 29.1): 1.9 deg apart, dE00 15.3. Dust Tropos: horn OKLab 53.1, front 50.6. The Dust Core is 10.4 from the Ember horn and 15.9 from the Dust horn. Linear G/R: Core 0.054, base 0.052, pendant 0.077, Tropos 0.22-0.27. Full-size crop (crop-ember-dust-core.png): the Dust Core reads scarlet or vermilion beside Ember's cherry. Against this, the 16 Nov off rig rendered the Dust Core at 1.6x as well as 3x: sRGB 106,16,0 -> 112,41,0, CIELAB h 40.6 -> 52.0, OKLab 32.9 -> 43.9 (table4.txt).",
+      "reasoning": "The observation is confirmed by number and by eye: the Dust Core reads scarlet, with Ember's hue, far from the Dust Tropos. The model claim behind the recommendation is refuted by renders. That claim is 'loading alone cannot make the Core orange; h 38-43 at 0.25-1.5x'. In the 16 Nov Step A cells, a lighter Core pour moved the Dust Core 11 deg toward orange, close to the Tropos's 54-60 (lamps/corematch/notes.md). That option was turned down on 16 Nov because of the lit look: the lit Core glass went paler, toward peach (lamps/mix/notes.md). Each tint's dye comes from the same absorption table for every product (SC.absorption in lamp_site.py, 10 Nov copy). A yellower Dust for the Core alone would therefore be a different material from the Tropos's Dust."
+     },
+     {
+      "id": "CO-03",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Pendant L23.9 C57.5 h37.9 against Core L37.8 C69.7 h37.4: dE00 11.3 (11.6 with the mean mask), dL +13.9. OKLab hue 29.3 / 29.1 / Tropos 29.2-29.3. Core to Tropos front 3.1, horn 6.2; pendant 12.2 and 16.9. At 300 px the pendant reads oxblood or maroon, the Core cherry. The model on my masks matches the Core at 0.77-0.84x, residual dE00 2.2-3.0.",
+      "reasoning": "The measurements reproduce. 'About 0.85x, dE00 3.1' comes from the model only. In the 16 Nov two-loading test, the model with the critic's floor over-predicted the as-built Ember pendant by 4.9 L* (by 0.5 with a 14-level floor). The loading that matches may therefore be lower than 0.85x."
+     },
+     {
+      "id": "CO-04",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Pendant L54.3 C59.4 h98.5 against Core L72.4 C69.9 h99.8: dE00 15.5, dL +18.1. OKLab 104.5 / 105.5. Tropos horn L67.2 C69.6 (OKLab 103.2); front L92.6 C84.8 (OKLab 109.2). Pendant to front 29.3, horn 11.5; Core 14.2 and 4.4. Crops (crop-acid-pair.png, crop-tropos-tops.png): pendant olive, Core mustard or chartreuse, Tropos horn olive-yellow, Tropos front lemon. Model: 3x reaches only L*63 against 71; the match needs 1.72-1.75x.",
+      "reasoning": "Every part reproduces. 'Olive comes from lightness, not hue' holds: the hues agree within 1-5 deg in OKLab. For Acid the model passed the 16 Nov two-loading test (dE00 0.5-2.8), so its estimate that the as-built 3x falls short is the most credible in the set."
+     },
+     {
+      "id": "CO-05",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Pendant L27.7 C47.1 h138.7 against Core L44.1 C58.7 h140.4: dE00 14.1, dL +16.4. OKLab 143.9 / 144.7 / Tropos 142.6-143.7. Core to Tropos front 3.3, horn 2.3; pendant 13.7 and 15.3. Model: 0.57-0.58x gives dE00 1.9-2.0.",
+      "reasoning": "The measurements reproduce. The Poison pendant is already at the as-built pour (it was not in the mix), so 0.6x would be a new, lighter Hemisphere pour, not a return to an earlier one. The estimate comes from the model only."
+     },
+     {
+      "id": "CO-06",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Pendant L20.8 C73.4 h300.8 against Core L37.8 C76.4 h295.0: dE00 14.1, dL +16.9. OKLab 263.5 against 264.0 (Tropos 247.5-250.8). Pendant to Tropos horn 22.8, front 45.7; Core 10.9 and 31.3. 16 Nov renders: Ice pendant 6x -> 3x moved OKLab 260.6 -> 254.0; the model predicted 248.7 and a pendant 3.9 L* lighter than rendered.",
+      "reasoning": "The measured parts reproduce. The 'dh -6' is CIELAB's uneven blue region at two different lightnesses: in OKLab the two lamps are 0.5 deg apart. The hue problem is therefore both lamps against the Tropos (13-16 deg), not pendant against Core. The model's claim that the hue swings back toward azure (OKLab about 257, 5.2 from the horn) is overstated: on rendered data it overshot azure by 5 deg and lightness by 4 L*."
+     },
+     {
+      "id": "CO-07",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Pendant median L12.7 C72.3 h307.8 (mean 12.3) against Core L24.0 C86.5 h307.5: dE00 8.4 (9.3 with the mean), dL +11.4 (+12.8 with the mean). 100 % of my pendant plain mask is below L*20. OKLab 276.1 against the Tropos's 287.4-290.7. Core to horn 4.6, front 8.0. At 300 px the pendant reads indigo or navy.",
+      "reasoning": "The measurements reproduce; my median gives a slightly smaller gap. The 16 Nov renders show the as-built 1x Haze pendant moved violet-ward (OKLab 270.5 -> 279.9), which supports the direction. On that same data the model's prediction went the wrong way (264.8) and was 4.2 L* too light, so '0.95x, dE00 3.5, OKLab 291' is not reliable."
+     },
+     {
+      "id": "CO-08",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Pendant L2.9 (all three zones 2.6-3.3) against Core median L23.6 (mean 25.7): dE00 13.4-14.9, dL +20.6 / +22.7. Core zones: lower 33.4, middle 18.9, upper 22.7; Core a* -1.4, b* -1.7. Tropos front L0.5, horn L71.6. Crop (crop-smoke-pair.png): the pendant is opaque black glass; the Core is charcoal-slate, with the inner ball's rim faintly visible.",
+      "reasoning": "The measurements reproduce. Two parts are assumptions, not measurements. First, 'the Core cannot get below about L*7' comes from a floor the critic chose (0.008); in the 16 Nov rig the Core at 1.2x read 3,3,4 sRGB. Second, the lighter lower band may be partly the lit floor reflected in the ball's lower half, not the opal. The pendant's near-vertical lower band reflects dark surroundings and reads L*3. Neither is shown either way."
+     }
+    ],
+    "recommendation_check": "Where things are: every finding reproduces with my own masks, but the critic's loading model does not hold up against real renders. The 16 Nov records contain renders of one tint at two pours in the same rig (lamps/hemimatch/notes.md, lamps/corematch/notes.md). I tested the critic's model on them. With the critic's floor, it predicted the as-built Ember and Ice pendants 4.9 L* lighter than rendered and the Haze pendant 7.2 L* lighter, and it predicted Haze's hue shift in the wrong direction. Only Acid passed (dE00 0.5-2.8). Details are in table3.txt and table4.txt.\n\n(1) Lighter pendants, with loadings and dE00 estimates: CHANGE. Keep 'render a check set on the house ground before the owner sees it'. Drop the loadings and dE00 figures from anything the owner sees; on my masks the model gives the same answers (Ember 0.77-0.84x, Acid 1.72-1.75x, Poison 0.57x, Ice 3.1x, Haze 0.93-0.98x, Smoke 0.57x), but the model itself is unreliable. The real matching pours are probably lower than estimated, so the check set should bracket them: LOAD_BUILT=1 and about 0.7x of as built. Also render the deeper-Core direction for Ember, Ice and Haze. The critic leaves out the lit cost. The 17 Nov mix moved each tint 'the lamp that keeps its lit color rich' (lamps/mix/notes.md). Reverting it pales the lit pendants: Ice lit glass 79,153,234 -> 144,195,233; Haze 141,95,201 -> 202,150,207. That works against the owner's 'deep colour'. Show OFF and LIT together.\n\n(2) Why this direction: KEEP the measured point that the Cores sit nearer the Tropos's lit faces. My values: Ember front 3.1, Poison horn 2.3, Acid horn 4.4, Haze horn 4.6. DROP the model figures for the deeper-Core alternative (15.5, 15.4, 23.6; C* 67 -> 46 and 84 -> 49); they come from the same untested model.\n\n(3) Dust: CHANGE. The scarlet Dust Core is confirmed, but 'no loading does it' is refuted. On 16 Nov a 1.6x Dust Core rendered at CIELAB h 52 against 41 as built (OKLab 44 against 33), close to the Tropos's 54-60. The owner's choices are: a lighter Core pour (same dye; more orange off, peach-paler lit, which is why it was turned down on 16 Nov), a separate Core-only dye (a different material from the Tropos's Dust, since every product takes its dye from the same absorption table), or leave it as it is.\n\n(4) Ice and Haze: KEEP the direction. The 16 Nov renders show the earlier, lighter pours part the pair (dE00 4.9 -> 11.2). DROP 'dE00 7.7 to about 21' and 'Haze needs no dye change': at 1x, Haze reached only OKLab about 280, against the Tropos's 287-291. Moving the Ice dye toward cyan would make the lamps' Ice a different material from the Tropos's Ice. That is the owner's call.\n\n(5) Smoke: KEEP the black-or-charcoal question for the owner, but say that on 16 Nov he asked for 'Smoke darker yes'. The 0.6x charcoal pendant goes against that. DROP or downgrade 'neutralise the Core's cool cast'. The cast is real (b* -1.7, a slate tone at full size), but the pendant (L*3) and cabinet (L*0.5) are too dark to show any cast, and all products share one Smoke dye, so the cast probably belongs to that dye. 'The Core cannot get below about L*7' rests on a floor the critic assumed, not one measured.\n\n(6) Judge pours on the ground they are shown on: KEEP, and it is the strongest point. Fog flips from Hemisphere-lighter in the 16 Nov rig to Core-lighter by 8.2 L* here, with no dye involved. Add that any OFF match holds only for the studio it was judged in.\n\nThe temp volume ran out of space at 11:09 UTC (0 MB free). I worked in /dev/shm until 11:21, then moved everything into /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/verify-colour/ and deleted the copy in /dev/shm. Nothing else was changed."
+   }
+  },
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "P1",
+      "severity": "note",
+      "tint": "all",
+      "product": "pair",
+      "where": "All 14 new lamp frames, compared pixel by pixel with the Ember frame of the same product",
+      "what": "The 14 new frames match the Ember recipe and read as studio photographs, as the Ember pair does. I compared each frame with the Ember: the ground, grain, edges and reflection shapes are the same. Shadows and floor spill change with the tint, the way light through or off the tint would. Nothing reads as CG at 480 x 600 or in a 300 px row.",
+      "expected": "Same as found.",
+      "sure": "certain",
+      "evidence": "Far-field patches are the same in every tint: pendant TL 81.5-81.6, TR 92.9, wallL 82.6, wallR 92.0-92.1; Core TL 80.1-80.2, TR 93.0, wallL 87.7, wallR 92.9-93.0 L*. Pendant ground against the Ember (82% of the frame): mean dE 0.22-0.32, p99 1.11, which is grain only. Core ground: mean dE 0.75-1.53, all of it around the base (spill and shadow). Grain measured as a high-pass sigma of L* on the ground: 0.26-0.38 in all 16. No silhouette halos: the ground stays at 87-88 L* (pendant) and 91-92 L* (Core) right up to the edge in every tint, and edge widths are equal. Tinted highlights (pink on Ember, cream on Acid, grey on Smoke) are a white reflection over the body colour, the same in every tint. Files: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/diff-vs-ember-pend.png, .../critic-photo/diff-vs-ember-core.png, .../critic-photo/sheet-pend-shade.png, .../critic-photo/sheet-core-ball.png, .../critic-photo/stack-pend-rim.png, .../critic-photo/stack-core-seat.png"
+     },
+     {
+      "id": "P2",
+      "severity": "fix",
+      "tint": "fog",
+      "product": "core",
+      "where": "core-ice-off.png: the base face (x 480-1150, y 1450-1690) and the opal ball",
+      "what": "The Fog Core's white base and opal sit in the highlight shoulder, so they have almost no modelling. The base face is nearly one flat white, about as light as the floor beside it. Its only form cues are a thin dark contact line and a little grey at the extreme flanks. At full size it looks like a cut-out. At 480 x 600 and 300 px it still passes as a high-key white piece.",
+      "expected": "The modelling the Ember base has under the same light: a lighter centre, darker flanks and a soft roll at the top edge (Ember L* 27.7-36.9 across the face).",
+      "sure": "likely",
+      "evidence": "Base face L* across y 1600: 96.0 96.2 96.5 96.6 96.7 96.9 96.7 96.5 96.5 96.4 95.9 94.9. In linear light the flank-to-centre ratio is about 0.95 (Ember 0.53-0.72). Base median 96.5, p99 97.5, no pixel at 255, so it is compressed, not clipped. Opal: 95.6-96.0 L* lower/middle (helpers 95.7/95.6), and the profile at y 1130 is flat at 93-96. Floor beside the base: 92-96. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/crop-fog-core-base-full.png against .../critic-photo/crop-ember-core-base-full.png; .../critic-photo/crop-fog-base-edge-x3.png; .../critic-photo/core480-ember-fog-smoke-haze.png"
+     },
+     {
+      "id": "P3",
+      "severity": "note",
+      "tint": "ice, haze, dust, acid, poison",
+      "product": "core",
+      "where": "Core floors: in front of and right of the base, and the two lower corners",
+      "what": "The tint's light spills onto the floor and reaches the frame's lower corners. It is physical (bounce off the lit base and light through the ball) and reads real. It is strongest in Ice: the floor under the Ice and Haze Cores reads lavender next to the Tropos floor in the row. The corner audit missed it because it checked L* only, and the corners do match in L*.",
+      "expected": "Physically right as rendered. The audit should also check chroma at the corners.",
+      "sure": "certain",
+      "evidence": "Lower corners, BL/BR b*: Ice 1.9/0.8 and Haze 2.5/1.4, against Ember 4.3/3.6 and Tropos 3.6/3.2. Dust BR a* 2.1 against Ember 0.7. Acid BL/BR b* 5.4/5.0 against 4.3/3.6. Floor in front of the base (x 700-900, y 1880-1960), a*/b*: Ember +2.7/+4.4, Ice +1.2/-3.2, Haze +1.2/-1.2, Dust +6.4/+6.1, Acid -1.6/+7.7, Poison -2.7/+4.6. Floor centre: Ice Core b* -2.8 against Tropos Ice +1.8 (dE about 5). Shadows are tinted the same way: shadow core b* Ice +0.4, Ember +4.1; a* Dust +3.5, Ember +1.4. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/sheet-core-base-floor.png, .../critic-photo/shadow-core-1.png, .../critic-photo/shadow-core-2.png, .../critic-photo/row300-gap-ice.png"
+     },
+     {
+      "id": "P4",
+      "severity": "note",
+      "tint": "haze",
+      "product": "core",
+      "where": "core-violet-off.png base",
+      "what": "The Haze base is dark, and that is right for the pour, not a fault. The flanks keep full violet chroma, so they do not go dead black. The falloff follows the same geometry as the Ember base, and the base is as light as its ball, as in every tint. At 300 px it reads as deep violet.",
+      "expected": "As rendered.",
+      "sure": "likely",
+      "evidence": "In my region 30.9% of the base is under L* 20 (helpers: 26.5%). Flanks L* 20.8 and 18.1 against centre 27.1, with C* 75.8 and 70.4 against 73.8, hue 305-306. Linear flank-to-centre ratio 0.52-0.64 (Ember 0.57-0.72). Base against ball whole L*: Haze 27.2 vs 26.3, Ember 37.0 vs 39.3, Ice 37.4 vs 39.1. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/sheet-core-base-floor.png"
+     },
+     {
+      "id": "P5",
+      "severity": "note",
+      "tint": "smoke",
+      "product": "core",
+      "where": "core-black-off.png ball",
+      "what": "The Smoke opal is faint, and that is right for the pour. Light passes the smoke twice to show the opal, so the opal hardly stands out from the rim. The ball reads as a uniform charcoal glass sphere and still reads real. Haze is nearly as faint.",
+      "expected": "As rendered.",
+      "sure": "likely",
+      "evidence": "Step at the opal edge in a horizontal profile at y 1130: Smoke rim 17-23, interior 17-21 L* (step 0-2). Haze step 2-3, Ember 5-9, Ice 6-12, Poison 9-15, Acid 11-20, Fog 10-17. The lower half is lighter (33.8) from the floor reflection, as in every tint. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/crop-ball-rim-UL-fog-ember-smoke.png, .../critic-photo/sheet-core-ball.png"
+     },
+     {
+      "id": "P6",
+      "severity": "note",
+      "tint": "fog",
+      "product": "core",
+      "where": "core-ice-off.png floor right of and below the base",
+      "what": "The Fog Core's lighter shadow is right: a clear shell lets more light through. The falloff is smooth, with no hot spot or blotch even under a hard contrast stretch.",
+      "expected": "As rendered.",
+      "sure": "likely",
+      "evidence": "Shadow core (x 1260-1360, y 1460-1520) L* 88.9 against 85.0-86.3 in the other seven. Lower corners +1.5/+2.5 L* over the Ember (helpers: +1.4/+2.5). Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/floor-stretched-ember-vs-fog.png, .../critic-photo/shadow-core-2.png"
+     },
+     {
+      "id": "P7",
+      "severity": "note",
+      "tint": "all",
+      "product": "row",
+      "where": "Rows of Tropos, pendant and Core at 300 px, equal height, for all eight tints",
+      "what": "Each row is one ground. The only visible differences within a row are the pour colours (D1-D4), not the studio. Corners differ between products by up to 3.9 L*, but those offsets are the same in every tint and in the passed Ember row, and they do not show across a gutter.",
+      "expected": "As rendered.",
+      "sure": "certain",
+      "evidence": "Mean ground L* per tile is 91.8-92.3 in every row (the Fog and Smoke Tropos read 90.8-90.9 because the mask catches clear or black parts), and a*/b* are within about 1. With tiles abutting, the step at each join is -10 to -12 L* in all eight rows, identical to the Ember row: each frame is darker on its left. Corners, Tropos against pendant and Core: TL 77.7 vs 81.6/80.1, BL 92.7 vs 96.5/91.6, BR 84.4 vs 88.0/87.8, TR 92.6 vs 92.9/93.0. Files: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/rows300-all-gap.png, .../critic-photo/rows300-all-abut.png, .../critic-photo/rows300-fog-smoke-haze-acid.png"
+     },
+     {
+      "id": "P8",
+      "severity": "note",
+      "tint": "all",
+      "product": "pendant",
+      "where": "Under the cap at the front, about x 825, y 990-1005 at full size",
+      "what": "Confirmed: the dark tick is in all eight pendants, the Ember included. It is about 1 px at 480 x 600. It is logged separately.",
+      "expected": "Logged separately.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/stack-pend-cap.png"
+     },
+     {
+      "id": "D1",
+      "severity": "decision",
+      "tint": "smoke",
+      "product": "pair",
+      "where": "Smoke row",
+      "what": "The Smoke pair does not match switched off on the house ground. The pendant is black, like the Tropos. The Core reads charcoal or slate, with a slight cool cast that the Tropos and pendant lack. This is the largest Core-to-pendant gap of the eight.",
+      "expected": "Owner's rule: the Hemisphere and Core colours match when off. My recommendation: darken the Smoke Core, raising its 0.6 loading toward the pendant's 1.2, so the row reads black.",
+      "sure": "certain",
+      "evidence": "Pendant lower L* 2.9, sRGB (7,10,11). Core ball mid L* 18.7, (40,46,50); ball whole 28.7; base 29.6, (65,70,73). Core C* 1.5-3.7 at hue 219-239, against pendant C* 0.9. Tropos Smoke front L* 1, side L* 8, C* 0.5. Core minus pendant: +25 L*. File: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/rows300-fog-smoke-haze-acid.png"
+     },
+     {
+      "id": "D2",
+      "severity": "decision",
+      "tint": "ice, haze",
+      "product": "pendant",
+      "where": "Ice and Haze rows",
+      "what": "Confirmed: the Ice and Haze pendants are nearly the same deep blue. The Ice lamps have moved toward violet and lost the Tropos's azure. The Haze pendant is too dark to read as violet.",
+      "expected": "My recommendation: lighten the Hemisphere Ice (6x) and Haze (1.8x) loadings. That brings each back toward its Tropos and also narrows the gap to its Core.",
+      "sure": "certain",
+      "evidence": "Ice pendant lower: sRGB (0,37,152), L* 22.5, hue 300. Haze pendant lower: (32,0,121), L* 14.0, hue 308, so 8 deg apart. Tropos Ice: front (59,150,228), horn (3,102,178), hue 269-276. Tropos Haze: front (86,12,199), hue 310, so 34-41 deg from the Tropos Ice. Ice Core: ball hue 296, base 296. File: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/pend480-ember-fog-ice-haze.png"
+     },
+     {
+      "id": "D3",
+      "severity": "decision",
+      "tint": "acid",
+      "product": "pair",
+      "where": "Acid row",
+      "what": "Confirmed: the Acid lamps read olive where the Tropos reads lemon. The hue is the same in all three products; the difference is lightness. The Tropos's lemon comes from its front panels lit through over white batts.",
+      "expected": "My recommendation: lighten the Hemisphere Acid, from 5x toward its as-built 3x. The Core is already near the Tropos horn.",
+      "sure": "certain",
+      "evidence": "Hue 97-103 everywhere. Tropos front above the woofer: L* 85, C* 78, (221,220,48). Tropos horn: L* 67, (180,165,9). Pendant lower: L* 57, (149,139,1). Core ball mid: L* 71.5, (188,180,7). Core base: L* 68."
+     },
+     {
+      "id": "D4",
+      "severity": "decision",
+      "tint": "dust",
+      "product": "core",
+      "where": "Dust row",
+      "what": "Confirmed: the Dust Core reads scarlet, within a few degrees of the Ember Core's hue and only lighter. In the 300 px row it reads red next to an orange Tropos. The pendant sits in between.",
+      "expected": "My recommendation: a more orange Core pour. A thick ball shifts this dye toward red, and a lighter Core loading would move it back toward orange.",
+      "sure": "certain",
+      "evidence": "Hue angles: Dust Core ball mid 40.8 (234,53,23), ball low 37.3, base 35.6 (238,67,54). Ember Core ball 38.9, base 31.1. Dust pendant 43-47 (213,66,3). Tropos Dust front 55 (231,126,61), horn 59. File: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/row300-gap-dust.png"
+     },
+     {
+      "id": "D5",
+      "severity": "decision",
+      "tint": "all",
+      "product": "pair",
+      "where": "All lamp pairs on the house ground",
+      "what": "The 'every Core 12-16 L* lighter than its pendant' claim holds for five tints only. Dust and Fog are much closer, and Smoke is much further apart.",
+      "expected": "My recommendation: re-judge the 17 Nov mix on the house ground. The direction that also fixes D2 and D3 is lighter Hemisphere loadings, with Smoke the exception: there the Core should go darker (D1).",
+      "sure": "certain",
+      "evidence": "Core minus pendant, whole L* (helpers' meters; my samples agree): Ember +13.6, Acid +16.4, Poison +15.5, Ice +16.5, Haze +12.0, Dust +4.5, Fog +6.5, Smoke +25.3."
+     }
+    ],
+    "table": [
+     "Ember (reference) | pendant and Core as passed | ground = the house ground; Tropos-to-lamp corners differ by up to 3.9 L* (TL 77.7/81.6/80.1), the same in every tint | row: one ground",
+     "Dust | pendant clean; Core clean, warm floor spill (a* +6.4 in front of the base) | Core hue 36-41 vs Tropos 55-59 and Ember Core 31-39: reads scarlet (D4) | row: one ground",
+     "Acid | both clean; lower corners +0.6/+0.8 L*, b* +1.1/+1.4 | olive is lightness (pendant L* 57, Core 71.5 vs Tropos front 85); hue 97-103 everywhere (D3) | row: one ground",
+     "Poison | both clean; green floor spill (a* -2.7 in front) | Core +15.5 L* over pendant | row: one ground",
+     "Ice | both clean; lavender floor spill reaching both lower corners (b* -2.4/-2.8 vs Ember) | lamps hue 296-300 vs Tropos 269-276; pendant close to the Haze pendant (D2) | row: one ground, floor under the Core slightly cooler",
+     "Haze | both clean; dark base right for the pour (flank C* 70-76) | pendant L* 14 reads deep blue (D2) | row: one ground",
+     "Fog | pendant clean; Core base and opal flat at L* 95-97 (P2, fix); lighter shadow is right | Core +6.5 L* over pendant | row: one ground",
+     "Smoke | both clean; faint opal right for the pour | Core charcoal (40,46,50) vs black pendant (7,10,11) and Tropos (D1) | row: one ground, Core reads grey"
+    ],
+    "recommendations": [
+     "Pass the 14 new frames as photographs. They match the Ember recipe (same ground, grain and edges, no halos, physical tinted shadows and spill), and nothing reads as CG at 480 x 600 or 300 px.",
+     "Fog Core only: pull the white base and opal out of the highlight shoulder so the base shows the Ember's modelling. Lower the opal and liner whiteness or the key on the product, and leave the ground untouched. Accepting it is defensible at the web sizes.",
+     "Extend the corner audit from L* to chroma (dE, or a* and b*). The L*-only check passed the Ice Core's lavender lower corners (b* -2.4/-2.8).",
+     "Take the pour questions to the owner with the sheet and these numbers. Smoke Core: darker, to read black like its pendant and Tropos. Hemisphere Ice, Haze and Acid: lighter, to recover azure, violet and lemon and to narrow the Core gap. Dust Core: a more orange pour, since it reads scarlet now.",
+     "The tick under the cap is in all eight pendants, Ember included; keep it on its separate log."
+    ],
+    "summary": "The 14 new lamp frames read as studio photographs of the parts, as the Ember pair does. The ground matches the Ember's to within 0.1 L* away from the product, grain is the same in all 16 frames, edges are clean, and reflections are the same shape in every tint. Shadows and floor spill take the tint's colour, as real light through the tint would. Every 300 px row is one ground. I found no blocking fault.\n\nOne fault to fix at full size: the Fog Core's white base and opal sit flat at L* 95-97, so the base looks like a cut-out next to the Ember base's modelling.\n\nThe others' notes, checked:\n- The dark Haze base is right for its pour: the flanks keep full violet colour.\n- The faint Smoke opal is right for its pour: it barely stands out from the rim.\n- The Fog Core's lighter shadow is right for a clear shell.\n- The tint's light on the floor reaches the Core's lower corners, most in Ice (lavender). It is physical, but the L*-only corner audit cannot see it.\n\nWhat shows in the rows is pour colour, which is the owner's decision:\n- The Smoke Core reads charcoal (L* about 29) next to a black pendant and Tropos (L* about 3).\n- The Ice and Haze pendants are nearly the same deep blue: their hues are 8 deg apart, against 34-41 deg between the two Tropos.\n- The Acid lamps read olive because they are darker than the Tropos; the hue is the same.\n- The Dust Core reads scarlet, close to the Ember Core.\n- The Core is 12-16 L* lighter than its pendant in only five tints; Dust is +4.5, Fog +6.5 and Smoke +25.\n\nCrops, sheets, measurements and the scripts that made them are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-photo/."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "P2",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "core-ice-off.png (Fog). Base face along y 1600, 13 px windows from x 500 to 1140: L* 96.0 to 96.8, then 95.8 at x 1140. In linear light the flanks are 0.95 to 0.99 of the centre. On the Ember at the same x positions they are 0.57 to 0.76. Face box x 520-1120, y 1500-1680: highest channel value 250, no pixel at 255, L* p1/p50/p99 95.0/96.5/97.5. Floor beside the base: left 96.1, front 93.6, right (in the shadow) 89.5. Opal across y 1130, inside the rim: 93.5 to 95.8. Control: under the same light the Acid base, whose brightness comes almost entirely from R and G that its dye barely absorbs, gives 0.54 to 0.77. So the lighting does model a base, and the Fog's flatness comes from the tone curve's highlight shoulder. Crops: verify-photo/v-base-fog-over-ember-full.png, v-fog-base-stretch-L86-98.png, v-fog-base-leftedge-x2.png, v-fog-base-rightedge-x2.png, v-core480-ember-fog-smoke-acid.png.",
+      "reasoning": "The place and the numbers reproduce: in my crop at about full size the face is one flat white. Stretching L* 86-98 shows modelling is there, but only 1 to 2 L* deep. One correction to the text: the critic missed a form cue. A soft grey occlusion band sits under the ball seat (L* about 78 at x 820, y 1490), in addition to the contact line and the flank grey. So 'flat' is right and 'cut-out' is a little strong. At 480 x 600 it reads as a high-key white piece. It is a fault at full size only, so 'fix', low priority."
+     },
+     {
+      "id": "D1",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Masks are taken from the Ember silhouette (chroma > 25, rows filled, eroded 10 px, top 3 % of L* dropped as specular). Values are linear-light means plus per-pixel medians. Pendant lower band (y 1340-1460): L* 2.7 mean, 2.9 median, sRGB (8,10,11), C* 0.8, h 220. Core ball mid sides: L* 18.9 (42,47,49). Ball lower: 35.0 (80,83,83). Whole ball: median 25.5 to 28.5, and even its darkest 5 % is L* 14.7. Base centre: 29.4 (65,70,73), C* 2.6, h 238. Tropos Smoke front: L* 0.8, C* 0.4. Tropos side box: per-pixel mean 7.6, median 0.5, warm hue 96. Core median minus pendant median: +22.3 (helpers +25.3). Row: verify-photo/v-rows300-smoke-ember-fog.png. Full crop: v-smoke-core-full.png.",
+      "reasoning": "This reproduces. At 300 px the Core reads charcoal with a faint cool cast beside a black pendant and Tropos, and it is the largest gap of the eight. The recommendation needs a caveat. Part of the Core's lightness is the bright floor reflected in the glossy ball, with a visible horizon on its lower half. Acrylic reflects about 4-5 % of the floor (Y about 0.76), which alone gives about L* 20. So a darker pour (toward 1.2) will darken the base and the transmitted light, but it cannot make the ball as black as the pendant's L* 3 band, which faces the dark side of the studio. The 17 Nov match was judged on dark grounds, where that reflection was dark. Recommendation: show the owner a test render of a darker Core, not a promise of a match."
+     },
+     {
+      "id": "D2",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Ice pendant lower: (1,36,148), L* 21.6, CIELAB h 300.3. Haze pendant lower: (31,1,117), L* 13.2, h 308.1. That is 7.7 deg apart in CIELAB and 14 deg in Oklab (263.8 vs 277.9). Tropos Ice front (60,149,227): h 269 (Oklab 248.5). Ice horn (6,103,179): h 276 (Oklab 250.6). Tropos Haze (86,13,198): h 310 (Oklab 288.6). The two Tropos are 34-41 deg apart in CIELAB and 38-40 in Oklab. Ice Core ball 294-296, base 295.7 (Oklab 263-266.5). Haze Core 304.5-307.6 (Oklab 280-284). Crops: verify-photo/v-480-tropIce-pendIce-pendHaze-tropHaze.png, v-480-core-ice-haze-dust-ember.png.",
+      "reasoning": "At 480 the pendants read royal blue and dark indigo, close together, while the two Tropos read azure and violet. The finding stands, with two refinements. (1) CIELAB compresses this hue range. In Oklab the pendants are 14 deg apart, about a third of the Tropos separation, not 8. (2) The Ice lamps read royal or ultramarine blue (Oklab 264, the hue of sRGB primary blue), not violet. 'Lost the azure' is the accurate claim. The Haze pendant is too dark to read violet: confirmed. For the recommendation: the Ice Core is the same royal blue as its pendant. Lightening only the Hemisphere Ice could split the pair's hue while it narrows the L* gap, so render both before deciding."
+     },
+     {
+      "id": "D3",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "CIELAB hue is 97.5 to 103.1 in all three products. Tropos front top: L* 85.1, C* 78.3, (220,219,50). Horn: L* 67.2, (180,166,13). Side: 47.3. Pendant lower: L* 55.4 mean, 57.2 median, (144,135,2). Core ball mid sides: 67.9 (178,169,20); ball lower 73.4; base centre 68.4 (178,170,50). Crop: verify-photo/v-480-acid-row.png.",
+      "reasoning": "At 480 the pendant reads olive or mustard and the Core reads olive-yellow close to the Tropos horn; only the Tropos front reads lemon. The hue is the same everywhere and the difference is lightness, so this reproduces. The pendant is the outlier (L* 55-57 against the Core's 68-73), so lightening it toward 3x follows. The realistic target is the Core and the horn: the front's L* 85 comes from white batts behind thin panels, and no shade pour will reach it."
+     },
+     {
+      "id": "D4",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "CIELAB hue: Dust Core ball mid 40.0 (224,50,26), ball lower 36.0, base 35.7 (238,67,54). Ember Core 31.4 to 37.1. Dust pendant 40.2 to 47.2 (207,64,4). Tropos Dust front 55.4 (229,126,63), horn 58.8. Oklab: Dust Core 28.8-31.2, Ember Core 25.3-28.2, Tropos Ember front 29.1, Dust pendant 33.1-37.5, Tropos Dust 49.6-52.2. Crop: verify-photo/v-480-dust-row-plus-ember-core.png.",
+      "reasoning": "At 480 the Dust Core reads tomato-scarlet: a lighter, more chromatic red than the crimson Ember Core, and plainly not the orange of its Tropos. It sits on the Tropos Ember's own hue in Oklab, so this reproduces, and a thick section shifting an orange dye toward red is sound physics. Caveat on the remedy: Dust is the closest pair in L* (+3.8 to +4.5). A lighter Core loading would make the Core lighter still and widen that gap. A yellower dye blend at the same strength would move the hue without that cost. The pendant is also red-orange, nearer the Core than the Tropos."
+     },
+     {
+      "id": "D5",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "The helpers' differences recompute correctly: +13.6, +4.5, +16.4, +15.5, +16.5, +12.0, +6.5, +25.3. My own figures, using per-pixel median L* of the ball against the shade (masks from the Ember silhouette): Ember +12.8, Dust +3.8, Acid +15.4, Poison +14.9, Ice +15.9, Haze +10.8, Fog +5.9, Smoke +22.3.",
+      "reasoning": "The pattern holds with independent masks: Dust and Fog are small, Smoke is large. Haze sits at the low edge (10.8 to 12.0), so 'four or five tints' is fairer than five. Re-judging on the house ground is right: the 17 Nov match was judged on dark grounds, and a bright floor lightens a glossy ball more than a shade. One correction to the stated direction: Poison's Hemisphere is already as built. Its +15 gap comes from the Core lightened to 0.6, so 'lighter Hemisphere loadings' does not cover Poison. Its lever is either a pendant below as built or the Core back toward as built, which is the owner's call."
+     }
+    ],
+    "recommendation_check": "1. Pass the 14 frames as photographs: KEEP. I looked at all 16 frames at 480 x 600 (verify-photo/v-480-*.png) and the Smoke, Ember and Fog rows at 300 px, and saw nothing that reads as CG. Pendant corners are within dE 0.4 of the Ember's and the Cores' upper corners within dE 0.3. Edges at 3x (Smoke pendant rim, Haze ball, Smoke base) fall off monotonically, with no halo. The ball-seat line in every Core is the base rim seen edge-on, which is plausible. The one caveat is P2 (the Fog Core at full size).\n\n2. Fog Core: KEEP the diagnosis, CHANGE the remedy. Under the same light the Acid base shows 0.54-0.77 modelling against the Fog's 0.95-0.99, so the cause is the tone curve's shoulder. Do not make the liner or opal greyer than the real white acrylic or opal: that would misstate the product and break the owner's 'technically true' rule. Lower the key on the product only (a flag) with the ground unchanged, or accept the frame at web sizes. The text should also name the occlusion band under the ball seat as a cue that remains.\n\n3. Corner audit: KEEP the extension to chroma, CHANGE the wording and the rule. The Ice Core's lower corners are b* +1.8/+0.7 absolute with a* about 0, which is db -2.5/-2.9 (dE 2.6/3.0) against the Ember. That is a cooler neutral, not lavender, and not a negative b*. The cast falls off smoothly from the Core (db -8.9 in front of the base, -2.3 at the edge), which is physical spill. Every tinted Core shows it in its lower corners (dE 1.2-3.0). A plain dE gate would fail correct frames, so allow spill that falls off from the product and flag only uniform shifts.\n\n4. Pour questions to the owner: KEEP, with these additions.\n(a) Smoke: a darker Core helps the base and the transmitted light, but the glossy ball reflects the bright floor (about L* 20 at any pour; its darkest 5 % is L* 14.7 now). It cannot reach the pendant's L* 3, so show a test render.\n(b) Ice: the Core is the same royal blue as its pendant (Oklab 263-266 against 264). Lightening only the pendant can split the pair's hue, so render both.\n(c) Dust: a lighter Core loading widens the closest L* gap (+4). A yellower blend at the same strength would fix the hue without that.\n(d) Poison's Hemisphere is already as built; its gap comes from the Core at 0.6.\n(e) Quote blue and violet hues in Oklab or show swatches: CIELAB puts the Ice and Haze pendants 8 deg apart, Oklab 14.\n\n5. Tick under the cap: KEEP. At 2x it is in all eight pendants, Ember included (verify-photo/v-capjunction-8-x2.png), and it is invisible at 480."
+   }
+  },
+  {
+   "part": "buyer",
+   "found": {
+    "findings": [
+     {
+      "id": "B1",
+      "severity": "decision",
+      "tint": "Ice",
+      "product": "row",
+      "where": "hemisphere-blue-off.png and core-blue-off.png next to tropos/front-ice.png (shade y 1020-1500, ball y 670-1440, base y 1500-1790, cabinet y 420-1090; masks are pixels with C*>20 in the Ember frame of each product)",
+      "what": "The Ice lamps are a different blue from the approved Ice Tropos. They are deeper and more violet: cobalt or ultramarine against the Tropos's azure. Oklab hue: Tropos cabinet 251, horn 253; pendant 267; Core ball 265, base 265 (CIELAB 269-280 against 292-300). The mean colour of the Ice pendant is closer to the Haze Tropos cabinet (dE00 9.2) than to its own Ice Tropos cabinet (dE00 16.9). In the 300 px row the change of blue is the first thing you see.",
+      "expected": "A buyer who picked Ice on the Tropos expects lamps in the Tropos's lighter, slightly cyan blue, within a few degrees of hue.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/row300-ice.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/panel-family-crops.png (Ice row); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/row300-abut-4.png; numbers in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/hue.json and hue2.json. RECOMMENDATION: before the owner decides, render the Ice pair lighter on the house ground (pendant back to the as-built 3x instead of 6x; Core near 0.6x) and keep the loading that brings the lamps within about 5 degrees of Oklab hue of the Tropos while the pendant and Core still match. I could not test whether lighter pours fix this. I only measured that the shift is the same size in the 6x pendant and the as-built Core."
+     },
+     {
+      "id": "B2",
+      "severity": "decision",
+      "tint": "Ice/Haze",
+      "product": "pendant",
+      "where": "hemisphere-blue-off.png vs hemisphere-violet-off.png, whole shade",
+      "what": "The Ice and Haze pendants are the hardest pair to tell apart in the whole set. The dE00 between their mean colours is 6.7 and the Oklab hue gap is 10 degrees, against 21-26 dE00 and a 34-37 degree gap between the Ice and Haze Tropos. Side by side at 480x600 you can just tell them apart: Haze is darker and slightly violet. Seen alone, the Haze pendant reads as navy or indigo blue, not violet. The Cores keep more distance (dE00 12.5, hue gap 17 degrees) and can be told apart side by side.",
+      "expected": "Eight pendants a buyer can name on sight, with Ice and Haze as far apart as they are on the Tropos.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/pair480-pendant-ice-haze.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/strip300-pendant.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/pair480-core-ice-haze.png. RECOMMENDATION: settle this together with B1 and B3. A lighter, more cyan Ice and a lighter, more violet Haze would pull the two apart. Fix the pendant first."
+     },
+     {
+      "id": "B3",
+      "severity": "decision",
+      "tint": "Haze",
+      "product": "row",
+      "where": "hemisphere-violet-off.png and core-violet-off.png next to tropos/front-haze.png",
+      "what": "The Haze lamps read indigo or blue-violet, not the Tropos's violet. Oklab hue: Tropos 287-288; pendant 277; Core ball 282, base 280. In the lightest third of the coloured pixels the Tropos is a vivid violet (CIELAB h 310, C* 93) and the lamps a muted blue-violet (pendant h 301, C* 56; Core h 302, C* 62). The Haze pendant is the darkest coloured pendant (helpers' whole L* 14.3).",
+      "expected": "Lamps that read purple or violet like the Haze Tropos.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/row300-haze.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/panel-family-crops.png (Haze row); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/tile480-pendant-haze.png. RECOMMENDATION: test the Haze pendant at the as-built 1.0x instead of 1.8x so it is less dark and its violet can show. Leave the Core as built unless the pair stops matching."
+     },
+     {
+      "id": "B4",
+      "severity": "decision",
+      "tint": "Dust",
+      "product": "row",
+      "where": "hemisphere-orange-off.png and core-orange-off.png next to tropos/front-dust.png; compared with core-red-off.png",
+      "what": "The Dust lamps read red-orange to scarlet, not the Tropos's orange. The Core is the worst: ball and base read as a bright red. Oklab hue: Dust Tropos 47-50; Dust pendant 34; Dust Core ball 30, base 29; the Ember is at 27-29. The Dust and Ember Cores are only 2.6 degrees apart in hue and differ mainly in lightness and chroma (ball L* 54 against 41, dE00 13.7). Side by side they read as bright red and dark red; alone, a buyer would call the Dust Core red. The Dust Core is as far from its own Tropos horn (dE00 16.3) as from the Ember Tropos horn (15.7).",
+      "expected": "Dust lamps that read orange like the Dust Tropos, with a clear hue step from Ember.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/row300-dust.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/pair480-core-ember-dust.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/panel-family-crops.png (Dust row: the Core base reads coral red). RECOMMENDATION: both Dust lamps are at the as-built pour. Ask the owner for a lighter or yellower Dust lamp pour. Test the Core near 0.5-0.6x and the pendant near 0.7x on the house ground, aiming for an Oklab hue of at least 42."
+     },
+     {
+      "id": "B5",
+      "severity": "decision",
+      "tint": "Acid",
+      "product": "row",
+      "where": "hemisphere-amber-off.png and core-amber-off.png next to tropos/front-acid.png",
+      "what": "The Acid lamps read olive or khaki where the Tropos reads lemon. The hue is not the cause: Oklab hue is 103-107 on all three products. The difference is lightness and chroma in the lit parts. In the lightest third: Tropos side panel L* 86.5 / C* 76; pendant 73.0 / 51; Core 81.4 / 65. In the 300 px row the 5x pendant reads khaki and the Core olive-yellow. (The Tropos horn alone is also a darker yellow; the lemon comes from the cabinet panels over the white batts.)",
+      "expected": "Lamps that read the same lemon as the Acid Tropos.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/row300-acid.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/panel-family-crops.png (Acid row). RECOMMENDATION: put the Acid pendant back to the as-built 3x (or lower) and re-check its OFF match with the Core on the house ground. The Core as built is nearer to lemon and can probably stay."
+     },
+     {
+      "id": "B6",
+      "severity": "decision",
+      "tint": "all",
+      "product": "pair",
+      "where": "each pendant's shade against its Core's ball (same masks as above)",
+      "what": "I checked the claim that on the house ground every Core reads 12-16 L* lighter than its pendant. It holds for Ember, Acid, Poison, Ice and Haze only. Core minus pendant, my masks: Ember +10.6, Dust +3.3, Acid +13.5, Poison +13.1, Ice +12.7, Haze +9.0, Fog +6.3, Smoke +16.3. From the helpers' whole meters: +13.6, +4.5, +16.4, +15.5, +16.5, +12.0, +6.5, +25.3. Pendant and Core hue match within 5 degrees of Oklab hue in every tint. In the rows a buyer reads the gap as the dome being a deeper shade of the same colour, not as a different colour. Smoke has the widest gap: a jet-black pendant beside a charcoal ball.",
+      "expected": "The owner's rule is that the OFF colours of the pendant and Core match.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/hue.json; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/rows300-all.png. RECOMMENDATION: do not re-pour Ember or Poison for the lightness gap alone, because a buyer sees one family. Fold the L* match into the Dust, Ice, Haze and Acid re-pours. For Smoke, if the owner holds to the match rule, lighten the pendant (1.2x) rather than darken the Core: a darker Core would read as a solid black ball."
+     },
+     {
+      "id": "B7",
+      "severity": "fix",
+      "tint": "Fog",
+      "product": "core",
+      "where": "core-ice-off.png, left and upper-left rim of the ball (around x 420-520, y 700-1100)",
+      "what": "At full size the edge of the clear outer ball is soft and doubled. The edge fades into the ground over about 10 px, with a separate grey band inside it. L* across the left edge at y 990, in steps of 4 px: 92 87 83 75 67 63 52 58 59 73 77 79 83. At 480x600 the left rim looks hazy, as if out of focus. The Ember ball has the same soft silhouette (the same recipe), but its dark colour hides it.",
+      "expected": "A crisp silhouette on a polished acrylic ball, as on the base edges in the same frame.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/crop-core-leftedge-x3-fog-ember.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/crop-core-UL-rim-fog-ember.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/tile480-core-fog.png"
+     },
+     {
+      "id": "B8",
+      "severity": "note",
+      "tint": "all",
+      "product": "pendant",
+      "where": "all eight hemisphere-*-off.png, just under the cap at the front, about x 822, y 1000-1018",
+      "what": "I confirmed the dark tick. It is a vertical line 1-2 px wide and about 18 px tall, L* 3-4 against 10-22 around it in Fog. I see it in the Fog, Ember and Smoke crops at full size. At 480 it is below one pixel and at 300 it cannot be seen.",
+      "expected": "A clean junction between the shade and the cap.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/crop-pend-cap-fog-ember-smoke.png; the L* table printed by /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/py/checks.py"
+     },
+     {
+      "id": "B9",
+      "severity": "note",
+      "tint": "Smoke",
+      "product": "row",
+      "where": "hemisphere-black-off.png, core-black-off.png, tropos/front-smoke.png",
+      "what": "The Smoke Tropos reads as see-through smoked acrylic: the woofer, ports and frame show through, and the horn is a translucent grey. Neither lamp shows that it is smoked acrylic. The pendant reads as opaque glossy black with no translucency even at the rim. The Core reads as a solid charcoal ball with no hint of the opal inside (L* 11-22 across its middle row). The row still reads as one black family, so this is not a blocker.",
+      "expected": "Some sign of smoke translucency, or of the opal ball inside the Core.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/crop-smoke-three.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/row300-smoke.png"
+     },
+     {
+      "id": "B10",
+      "severity": "note",
+      "tint": "all",
+      "product": "core",
+      "where": "every coloured core-*-off.png, lower fifth of the ball, at the height of the top of the base",
+      "what": "A straight horizontal edge runs across the whole width of the ball, with deeper colour below it. Close up it reads as the cup of the base seen through the ball. At 300 px it reads as the ball sitting in its cup, though a buyer could take it for a liquid level. I did not check whether it is physically right.",
+      "expected": "Nothing the buyer would read as liquid inside the ball.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/crop-core-junction-red-blue-fog-smoke.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/pair480-core-ember-dust.png"
+     },
+     {
+      "id": "B11",
+      "severity": "note",
+      "tint": "all",
+      "product": "row",
+      "where": "the three frames of a row placed edge to edge",
+      "what": "Each frame darkens toward its left edge, so tiles placed edge to edge show a visible vertical step at each join. At mid-height the Tropos's right edge is L* 94.5 and the pendant's left edge 83.6; the pendant's right edge is 92.3 and the Core's left edge 88.3. The pendant's lower ground is also lighter (bottom-left 96.5 against 93.9 on the Tropos and 92.6 on the Core). With a white gutter between tiles the three read as one studio, and the lamp grounds agree across the eight tints to within 0.1-0.6 L* (the Fog Core's floor below the ball is lighter, as stated).",
+      "expected": "One studio ground across a row.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/row300-abut-4.png against /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/rows300-all.png; output of /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/py/ground.py"
+     },
+     {
+      "id": "B12",
+      "severity": "note",
+      "tint": "Haze",
+      "product": "core",
+      "where": "core-violet-off.png base, y 1500-1790",
+      "what": "I checked the claim that the Haze base is dark. With my mask, 19.0 % of it is under L* 20 (Smoke 28.2 %, every other tint 0.3 % or less), and its flanks are 0.77 and 0.68 of the centre (Ember 0.85/0.78, Ice 0.82/0.75). It sits 5.5 L* below its ball, about the same step as Ember (6.5) and Ice (5.6). At 480 it reads as a deep indigo satin base, not as a fault; it is simply a dark tint.",
+      "expected": "A base in the same colour as the ball.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/tile480-core-haze.png; output of /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/py/checks.py"
+     }
+    ],
+    "table": [
+     "Tint | Oklab hue: Tropos cabinet/horn | pendant | Core ball/base | L* pendant -> Core (my masks) | what a buyer sees in the 300 px row | verdict",
+     "Ember | 29/29 | 27 | 27/27 | 30.1 -> 40.7 | one red family: Tropos red, pendant wine red, Core cherry | READY",
+     "Dust | 47/50 | 34 | 30/29 | 50.8 -> 54.1 | Tropos orange, pendant vermilion, Core scarlet; Dust Core close to Ember (2.6 degree hue gap) | OWNER DECISION",
+     "Acid | 107/103 | 104 | 105/106 | 58.1 -> 71.6 | same hue, but the lamps read olive or khaki against a lemon Tropos (pendant worst) | OWNER DECISION",
+     "Poison | 144/144 | 145 | 145/146 | 32.3 -> 45.4 | one green family | READY",
+     "Ice | 251/253 | 267 | 265/265 | 27.0 -> 39.7 | Tropos azure, lamps cobalt or ultramarine; pendant close to the Haze pendant | OWNER DECISION",
+     "Haze | 288/287 | 277 | 282/280 | 20.7 -> 29.7 | Tropos violet, lamps indigo or blue-violet | OWNER DECISION",
+     "Fog | neutral (C* 1.5-3.9) | neutral | neutral | 87.9 -> 94.2 | clear Tropos, white-opal lamps in clear shells: one family | READY (Core rim softness is a full-size fix)",
+     "Smoke | neutral (C* 0.9-3.5) | neutral | neutral | 13.7 -> 30.0 | black Tropos, black pendant, charcoal Core: one family, but the lamps read opaque | READY (note)",
+     "Pairs a buyer must tell apart, dE00 of mean colours (Oklab hue gap): Ice vs Haze: Tropos 21-26 (34-37), pendant 6.7 (10), Core ball 12.5 (17). Ember vs Dust: Tropos 15-23 (18-21), pendant 20.0 (7), Core ball 13.7 (2.6).",
+     "Within each tint, the Oklab hue gap between the Tropos cabinet and the lamps: Ember -1 to -2, Acid -2 to -3, Poison +1 to +3, Dust -12 to -18, Ice +14 to +16, Haze -6 to -10."
+    ],
+    "recommendations": [
+     "Use the Ember, Poison and Fog lamp frames as tiles and first pictures now. Smoke can go too: its row reads as one black family. Note B9 (no sign of smoke or opal in the lamps) and B7 (soft Fog Core rim at full size).",
+     "Do not publish the Dust, Ice, Haze and Acid lamp frames as the face of those tints until the owner rules on the pour. Each makes a buyer who chose the Tropos colour see a different colour: Dust reads red, Ice ultramarine, Haze indigo, Acid olive.",
+     "Before asking the owner, render one test pair each for Dust, Ice, Haze and Acid at lighter loadings on the house ground. Suggested: Ice pendant 3x as built instead of 6x; Haze pendant 1.0x as built instead of 1.8x; Acid pendant 3x as built instead of 5x; Dust and Ice Cores near 0.6x; Dust pendant near 0.7x. Show him each as a 300 px row next to its Tropos, with the target of lamp hue within about 5 degrees of Oklab hue of the Tropos and the pendant and Core still matching. I have not seen such renders, so whether lighter pours bring the hue back is untested.",
+     "Put the question to the owner as matching the Tropos, not only pendant against Core. On the house ground the pendant and Core already agree in hue within 5 degrees in every tint. What breaks is hue against the Tropos (Dust, Ice, Haze) and lightness (Acid). The Core being 10-16 L* lighter than the pendant does not break a family for a buyer.",
+     "Treat Ice and Haze together. Their pendants are the hardest pair to tell apart in the set (dE00 6.7), so a fix that moves Ice toward cyan and Haze toward violet answers both complaints at once.",
+     "Keep a white gutter between tiles in every row. Edge to edge, each frame's darker left side makes a visible seam.",
+     "Fix in the next render pass, not before publishing: the 1-2 px dark tick under the pendant cap (invisible at tile sizes) and the soft, doubled silhouette of the Core ball, which only shows on Fog."
+    ],
+    "summary": "I looked as a buyer on the website: a 300 px row per tint (Tropos, pendant, Core at equal height, with gutters and edge to edge), each lamp alone at 480x600, strips of each product across the eight tints, and full-size crops. I measured Oklab and CIELAB hue, L* and C* on fixed masks per product (pixels with C*>20 in the Ember frame) and dE00 between tints. No frame reads as CG, fake or cheap at 300 or 480. The lamp grounds agree across tints, and with gutters each row reads as one studio. The problem is colour family.\n\nq1, ready as they are: Ember, Poison and Fog are ready as tiles and first pictures. Each reads as one colour family, with lamp hue within 3 degrees of Oklab hue of the approved Tropos. Smoke is also ready: the row reads as one black family. The only caveat is a note that neither lamp looks like smoked acrylic: the pendant is opaque black and the Core a solid charcoal ball with no opal showing. The Fog Core's soft, doubled rim is a full-size fix only.\n\nq2, owner's pour decision first: Dust, Ice, Haze and Acid. In each, the pendant and Core match each other in hue but not the Tropos.\n- Ice: the lamps are 14-16 degrees more violet (cobalt against azure). The Ice pendant's mean colour is closer to the Haze Tropos (dE00 9.2) than to the Ice Tropos (16.9). Recommendation: pendant back to 3x and Core near 0.6x, test first.\n- Haze: the lamps are 6-10 degrees bluer and much duller, reading indigo against violet. Recommendation: pendant back to 1.0x.\n- Dust: the lamps are 12-18 degrees redder. The Dust Core sits 2.6 degrees from the Ember, so a buyer would call it red. Recommendation: a lighter or yellower Dust lamp pour; test the Core near 0.5-0.6x and the pendant near 0.7x.\n- Acid: the hue is right, but the lamps' lit parts are darker and duller (pendant L* 73 / C* 51 against the Tropos side panel's 86.5 / 76), so they read olive against lemon. Recommendation: pendant back to 3x.\nThe Core is lighter than its pendant by about 10-16 L* in Ember, Acid, Poison, Ice and Haze, but by only 3-4.5 in Dust, about 6 in Fog and 16-25 in Smoke. A buyer reads this gap as the same colour in a different shape, so I would not re-pour Ember or Poison for it alone.\n\nq3, what a buyer would read as wrong: a Dust lamp that is red, not orange. Ice lamps in a darker, more purple blue than the Ice speaker. Haze lamps that look blue, and an Ice pendant and Haze pendant that are hard to tell apart (dE00 6.7, against 21-26 on the Tropos). Acid lamps that look olive or mustard, not lemon. Less important: Smoke lamps that look like black plastic rather than smoked acrylic. A buyer who picked Ice on the Tropos would be surprised by the Ice lamps.\n\nFiles are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/critic-buyer/, with scripts in its py/ folder. Key files:\n- rows300-all.png and row300-<tint>.png\n- row300-abut-4.png\n- tile480-pendant-<tint>.png and tile480-core-<tint>.png\n- strip300-tropos.png, strip300-pendant.png, strip300-core.png\n- panel-family-crops.png\n- pair480-pendant-ice-haze.png\n- pair480-core-ember-dust.png\n- crop-core-leftedge-x3-fog-ember.png\n- crop-pend-cap-fog-ember-smoke.png\n- crop-smoke-three.png\n- hue.json and hue2.json"
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "B1",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "My masks: C*>20 in each tint's own frame, not the Ember frame. I also used a 'body' mask that drops specular highlights and pixels under L* 5. Ice, Oklab hue: Tropos cabinet 252.7 (251.0 with the Ember mask), horn 252.9; pendant 267.2 (body median 264.1); Core ball 265.2, base 265.6. CIELAB: Tropos 274-280, pendant 299.7, Core 294.5-296.8. dE00 from the Ice pendant mean: to the Ice Tropos cabinet 13.6 (own mask) to 17.8 (Ember mask, linear mean); to the Haze Tropos cabinet 9.3-11.2; horns 12.0-13.3 against 8.1-10.8. Median RGB: Tropos [12,80,139] (G/B 0.58); pendant [2,37,152] (G/B 0.24), with R at 0 in 54 % of its pixels; Core [31,81,205] (G/B 0.40). Crops: verify-buyer/row300-ice-haze-poison.png, trio480-ice.png.",
+      "reasoning": "Reproduced under all four of my mask and averaging variants. At 300 px the Tropos is azure and the lamps are cobalt or ultramarine; the pendant is the deepest. The lamps sit on the hue of the sRGB blue primary (Oklab 264), which is the effect of a denser pour, so the critic's mechanism is plausible. One caveat on the wording: the pendant is nearer the Haze Tropos in dE00 because of its lightness and chroma. In Oklab hue it is still nearer its own Tropos (15 degrees against 20.5)."
+     },
+     {
+      "id": "B2",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Pendants, Ice against Haze: dE00 6.5 (own mask) / 6.7 (Ember mask), 5.2-5.3 on the linear mean; Oklab hue 267.2 against 277.3, a gap of 10.1 degrees. This is the smallest pair among all 28 pendant pairs; the next smallest are Ember-Dust 19.6 and Haze-Smoke 22.2. Tropos Ice against Haze: dE00 21.4-29.1, hue gap 34.7. Cores: dE00 11.2-12.6, hue gap 16.9. Crop: verify-buyer/pair480-pend-ice-haze.png.",
+      "reasoning": "At 480x600 side by side, Haze is darker and slightly more violet. On its own it reads as indigo or navy. The numbers reproduce, and the Ice-Haze pendants are the hardest pair in the set."
+     },
+     {
+      "id": "B3",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Haze, Oklab hue: Tropos cabinet 287.4-287.7, horn 287.1-287.4; pendant 277.3; Core ball 282.1, base 280.2. The critic's lightest third reproduces: Tropos 33.7/92.7, h 310; pendant 38.4/55.7, h 300.6; Core 43.4/61.7, h 302.2. That figure includes the white window highlights. With highlights removed (body mask): Tropos L* 34.1, C* 94.1, h 310.1; pendant 38.1, 58.9, 301.3; Core 40.6, 70.1, 303.2. Crops: verify-buyer/trio480-haze.png, row300-ice-haze-poison.png.",
+      "reasoning": "With highlights out the lamps' chroma rises a little, but the gap to the Tropos remains. At 480 the Tropos reads violet-purple, the pendant indigo and the Core blue-violet. The Core is closer to the Tropos (5.4 degrees of Oklab hue) than the pendant (10 degrees)."
+     },
+     {
+      "id": "B4",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Dust, Oklab hue: Tropos cabinet 44.6 (own mask) / 46.7 (Ember mask), horn 49.7; pendant 34.2 (body median 35.8); Core ball 29.8, base 29.1. Ember Core ball 27.2, so the two Cores are 2.6 degrees apart. Ball L* 54.5 against 40.7; dE00 13.7-14.1. Dust Core ball against the Dust Tropos horn 16.3-17.3 and the Ember horn 15.0-16.3. Against the cabinets: Dust 13.5-16.7, Ember 26.3-29.1. Median RGB: Core [237,66,45], Tropos [151,64,12]. Crops: verify-buyer/trio480-dustT-dustC-emberT.png, row300-dust-ember-acid.png.",
+      "reasoning": "At 480 the Dust Core is plainly red (scarlet or tomato) beside an orange Tropos, and the pendant is red-orange. Its hue is the Ember's hue. One correction: 'as far from its own Tropos as from the Ember' holds only for the horns; against the cabinets the Dust Core is much nearer its own Tropos. With my own mask the Dust Tropos range is 45-50, not 47-50."
+     },
+     {
+      "id": "B5",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Acid, Oklab hue: Tropos cabinet 107.0-107.7, horn 102.6; pendant 103.9; Core 105.0-105.5. Lightest third: Tropos cabinet 87.0/76.9 (Ember mask) and 83.5/74.6 (own mask); pendant 72.5-72.8 / 51.6-51.8; Core 81.3 / 64.2-64.9. Body masks give the same picture. The critic's 'side panel 86.5/76' is the whole cabinet. My side-panel box (x 612-716) is only 59-61 / 59-62. Crops: verify-buyer/trio480-acid.png, row300-dust-ember-acid.png.",
+      "reasoning": "Hue is matched and lightness and chroma differ, as claimed. At 480 the pendant reads khaki or olive. The Core reads olive-yellow too, nearer the Tropos horn than the lemon cabinet. So I would not pre-clear the Acid Core as the critic's recommendation does."
+     },
+     {
+      "id": "B6",
+      "verdict": "confirmed",
+      "severity": "decision",
+      "measurement": "Core ball minus pendant L*, Ember mask: +10.5, +3.3, +13.5, +13.1, +12.7, +9.0, +6.2, +16.3 (matches the critic exactly). Own masks: Dust +4.0, Acid +14.0, Poison +11.8, Ice +13.2, Haze +9.1. dE00 pendant against ball: Ember 9.4, Dust 5.3-5.6, Acid 11.4-11.9, Poison 11.0-12.1, Ice 11.3-11.6, Haze 7.2-7.4, Fog 3.9, Smoke 11.6. Oklab hue, pendant against ball: within 0.1-4.8 degrees in the six coloured tints (Dust base 5.1-5.4). Fog and Smoke have C* under 2, so their hue is meaningless. Crops: verify-buyer/trio480-smoke.png, row300-fog-smoke.png.",
+      "reasoning": "The numbers reproduce. Two small corrections. By the critic's own mask, Ember (+10.6) and Haze (+9.0) fall below 12-16; only the helpers' meters put them inside. And 'lighten the pendant (1.2x)' should read 'below its current 1.2x'. The Smoke gap shows plainly at 480: a jet-black dome beside a charcoal ball. Whether the gap breaks the family is the owner's call under his match rule."
+     },
+     {
+      "id": "B7",
+      "verdict": "refuted",
+      "severity": "none",
+      "measurement": "Fog L* at y 990, every 4 px from x 420: 92 87 83 75 67 63 52 58 59 73 77 79 83 (reproduces). At 1 px steps the ground is a clean 92-93 up to x 419 in Fog, Ember and Smoke alike, so nothing spreads outward. The Ember silhouette has a sharp 92->67 step within 3 px (x 419-422), then a smooth fall to 20 by x 433. The Fog's inner contour is sharp: 63->47 within 2 px at x 440-442. The base edges in the same frames are sharp: Fog y 1650 49->85->93 within 2 px; Ember 53->23. Crops: verify-buyer/rim-left-x3-fog-ember.png, rim-UL-x2-fog.png, tile480-core-fog.png, fog-core-left-half-1to1.png.",
+      "reasoning": "This is not blur. A defocused edge would spread both ways, and the base edges at the same depth are sharp. The soft zone lies entirely inside the silhouette and is about the width expected for a highly reflective rim on a 400 px radius ball against a light ground (reflectance falls from about 0.6 to 0.25 between 1.5 and 14 px in). The second contour about 21 px in fits the clear shell's view of the opal ball. The Ember does not share a soft silhouette; it has a sharp step. At 480 the Fog ball reads as a clear glass ball, and at 300 none of this is visible."
+     }
+    ],
+    "recommendation_check": "How I worked: the disk was full when I started (0 MB free), so I could not create the folder. I worked in /dev/shm and moved everything into /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b58/verify-buyer/ once space came back at 11:19. Nothing else was written. The scripts are in its py/ folder, and the numbers are in m2_hue.txt, m3_de.txt, m5_rim.txt, m6_body.txt and m7_clip.txt.\n\n1) \"Use Ember, Poison and Fog now; Smoke can go too\": CHANGE.\n- Keep Fog. Its pendant and Core differ by only dE00 3.9 (+6 L*), and B7 is not a fault.\n- Hold Ember and Poison for the owner's answer. Their rows read as one family at 300 px. But their Cores are +10.5 and +12-13 L* lighter than their pendants (dE00 9.4 and 11-12), which breaks his rule that the OFF colours must match. He approved that match on the old dark grounds, and the Ember gap is already an open owner question.\n- Drop Smoke from \"go now\". It has the widest gap (+16.3 L* by mask, +25 by the helpers' meters, dE00 11.6): a jet-black dome beside a charcoal ball at 480. The critic's own B9 also says there is no sign of smoke or opal in it. This contradicts the critic's own B6.\n\n2) Do not publish the Dust, Ice, Haze and Acid frames as the face of those tints yet: KEEP. B1, B3, B4 and B5 all reproduce in my numbers and crops.\n\n3) Lighter test pairs: KEEP, with changes.\n- My data supports the mechanism. The lamps sit on the hues of the sRGB primaries: the Ice lamps' median hue is 264, the same as sRGB blue, and the Dust Core is at 29-30, the same as sRGB red. Many pixels have a channel at 0, and the Ice pendant's G/B ratio is 0.24 against the Tropos's 0.58. That is the pattern of a denser pour, so lighter pours should pull the hue back. Nobody has tested it.\n- For Ice, Haze and Acid, a lighter pendant also narrows the pendant-Core lightness gap, so the two rules pull the same way.\n- For Dust, the Core is already lighter than the Tropos (L* 54 against 42-46), and a 0.5-0.6x pour makes it lighter still. Test that trade-off.\n- Add an Acid Core step; it also reads olive-yellow.\n- Mind the owner's rule of deep colour: show the tests beside the current frames, not as replacements.\n\n4) Frame the question as matching the Tropos: CHANGE to asking both questions. The hue agreement between pendant and Core holds in the six coloured tints. But \"a 10-16 L* gap does not break a family\" overrides the owner's own match rule. Give him the gap numbers and let him rule.\n\n5) Treat Ice and Haze together: KEEP. Their pendants are the closest pair in the whole set (dE00 6.5-6.7, 5.2-5.3 on the linear mean).\n\n6) Keep a white gutter between tiles: KEEP. In my edge-to-edge strip the seams are visible: a top-left corner at L* about 79.5 meets the previous tile's top-right at about 93, and the bottom corners step the other way (90.7 against 86.9).\n\n7) Next render pass: CHANGE. Drop the Core-silhouette item; the measurements under B7 show it is physically right, not a fault. I did not check the dark tick under the pendant cap, so that item stands as the critic logged it."
+   }
+  }
+ ]
+}
