@@ -192,6 +192,11 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
                     col_ = cp.light_linking.blocker_collection; col_.objects.unlink(co_)
     if os.environ.get('HOUSE_ROOM', '1') == '1':
         room(bpy, s)
+    if os.environ.get('HOUSE_CARD'):
+        for i_, c_ in enumerate(os.environ['HOUSE_CARD'].split(';')):      # several cards: 'X,Y,...;X,Y,...'
+            card(bpy, [float(v) for v in c_.split(',')], lift, i_)
+    if os.environ.get('HOUSE_FLOORCARD'):
+        floor_card(bpy, [float(v) for v in os.environ['HOUSE_FLOORCARD'].split(',')], lift)
     cam = json.loads(json.dumps(R['camera']))
     for k in ('position', 'target', 'focus'):
         cam[k] = _mul(cam[k], s); cam[k][2] += lift
@@ -281,6 +286,65 @@ def barn_door(bpy, ob, phi, s):
     m.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1)
     me.materials.append(m)
     return o
+
+
+def card(bpy, p, lift=0.0, i=0):
+    """HOUSE_CARD 'X,Y,Z,W,H,ALB[,TZ]' (2026-11-20, the critics: Core's base went near-black low on its flanks once the
+    floor cutters took away the floor's bounce): a white bounce card, as a photographer sets one low beside the product.
+    Its centre (X, Y, Z) in metres at the product's own scale (not the set's s), W x H, albedo ALB, turned to face the
+    point (0, 0, TZ) (default 0.03 m, the base's middle). It reflects the studio's light like any card, but is not seen
+    by the camera or in reflections, and casts no shadow: only the light it bounces reaches the set. It stays visible
+    through glass, as the base's white liner sees it through the clear pour."""
+    x, y, z, w, h, alb = p[:6]; tz = p[6] if len(p) > 6 else 0.03
+    me = bpy.data.meshes.new(f'house-card{i}')
+    me.from_pydata([(-w / 2, -h / 2, 0), (w / 2, -h / 2, 0), (w / 2, h / 2, 0), (-w / 2, h / 2, 0)], [], [(0, 1, 2, 3)])
+    ob = bpy.data.objects.new(f'house-card{i}', me); bpy.context.scene.collection.objects.link(ob)
+    ob.location = (x, y, z + lift)
+    d = Vector((0, 0, tz + lift)) - Vector(ob.location)
+    ob.rotation_euler = d.to_track_quat('Z', 'Y').to_euler()          # its face (+Z) toward the base
+    m = bpy.data.materials.new('house-card'); m.use_nodes = True
+    bs = m.node_tree.nodes.get('Principled BSDF')
+    bs.inputs['Base Color'].default_value = (alb, alb, alb, 1.0); bs.inputs['Roughness'].default_value = 1.0
+    bs.inputs['Specular IOR Level'].default_value = 0.0
+    me.materials.append(m)
+    ob.visible_camera = ob.visible_glossy = ob.visible_shadow = ob.visible_volume_scatter = False
+    return ob
+
+
+def floor_card(bpy, p, lift=0.0):
+    """HOUSE_FLOORCARD 'RIN,ROUT,Z,ALB' (2026-11-20, the critics: the floor cutters darkened the floor round Core's base,
+    and with it the base's flanks, which that floor's bounce had lit): the floor next to the base spared for the base
+    alone. A flat white ring round the product, RIN to ROUT m from its axis, Z m above the floor, albedo ALB, lit by
+    the studio's lamps without the cutters' shade (the cutters shade the sweep's lamps alone). The camera does not see
+    it, nor do reflections; it casts no shadow. The floor in frame is unchanged; the base sees a lit floor about it."""
+    rin, rout, z, alb = p[:4]; gl = len(p) > 4 and p[4] > 0; n = 96      # (a 5th value 1: seen in reflections too)
+    vs = [(r * math.cos(2 * math.pi * i / n), r * math.sin(2 * math.pi * i / n), z + lift) for r in (rin, rout) for i in range(n)]
+    fs = [(n + i, n + (i + 1) % n, (i + 1) % n, i) for i in range(n)]       # wound so its face (+Z) looks up
+    me = bpy.data.meshes.new('house-floorcard'); me.from_pydata(vs, [], fs)
+    ob = bpy.data.objects.new('house-floorcard', me); bpy.context.scene.collection.objects.link(ob)
+    m = bpy.data.materials.new('house-floorcard'); m.use_nodes = True
+    bs = m.node_tree.nodes.get('Principled BSDF')
+    bs.inputs['Base Color'].default_value = (alb, alb, alb, 1.0); bs.inputs['Roughness'].default_value = 1.0
+    bs.inputs['Specular IOR Level'].default_value = 0.0
+    # one-sided: its underside is clear, or the floor 1 mm below would see it in place of the room and change tone
+    nt = m.node_tree; out = nt.nodes.get('Material Output')
+    gm = nt.nodes.new('ShaderNodeNewGeometry'); tr = nt.nodes.new('ShaderNodeBsdfTransparent'); mx = nt.nodes.new('ShaderNodeMixShader')
+    nt.links.new(gm.outputs['Backfacing'], mx.inputs[0]); nt.links.new(bs.outputs[0], mx.inputs[1]); nt.links.new(tr.outputs[0], mx.inputs[2])
+    nt.links.new(mx.outputs[0], out.inputs['Surface'])
+    me.materials.append(m)
+    ob.visible_camera = ob.visible_glossy = ob.visible_shadow = ob.visible_volume_scatter = False
+    ob.visible_glossy = gl
+    # lit as the floor it stands for: the lamps that light the sweep alone light it too (not the cutters' floor copies:
+    # the lamps they copy light it unshaded already)
+    for L_ in [o for o in bpy.context.scene.objects if o.type == 'LIGHT' and not o.name.endswith('-floor')]:
+        col_ = L_.light_linking.receiver_collection
+        if col_ is None or 'sweep' not in [o.name for o in col_.objects]:
+            continue
+        st_ = dict(zip([o.name for o in col_.objects], [c.light_linking.link_state for c in col_.collection_objects]))
+        if st_['sweep'] == 'INCLUDE' and ob.name not in col_.objects:
+            col_.objects.link(ob)
+            print('FLOORCARD lit by', L_.name)
+    return ob
 
 
 def room(bpy, s):
