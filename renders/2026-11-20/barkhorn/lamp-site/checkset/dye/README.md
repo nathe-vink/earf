@@ -19,3 +19,15 @@ What each mix means physically:
 After round 2 the hue is within about 1° for Ice and Haze, and 3.4° for Dust (12.5° before). Chroma is within 1.5-3.3. Each Core is now 4-5.5 L* lighter than its pick; a heavier Core pour (CORE_LOAD) would close that.
 
 The darkest channel of each tint (Dust's B, Ice's R, Haze's G) barely responds to its factor: the clear ball's neutral surface reflections set its floor.
+
+## Rounds 3-4 (17:00-18:55), the Core's pour as well (CORE_LOAD; today Dust 1.5, Ice 1.5, Haze 0.5)
+
+dE00 is the CIEDE2000 colour difference between the Core body's median L*/C*/h and the pendant pick's.
+
+| Tint | Today | Round 2 | Round 3 | Round 4 |
+|---|---|---|---|---|
+| Dust | 9.4 | 5.6 | pour 2.1, 1.0 / 0.61 / 2.0: 54.6 / 77.5 / 40.6, 7.2 | pour 2.1, 1.0 / 0.45 / 2.5: 58.6 / 73.1 / 47.1, **4.6** |
+| Ice | 4.2 | 3.3 | pour 1.95, 2.5 / 0.87 / 1.19: 34.5 / 68.1 / 295.1, 5.9 | pour 1.72, 3.2 / 0.85 / 1.19: 38.6 / 64.9 / 291.7, **2.4** |
+| Haze | 3.4 | 3.0 | pour 0.7, 0.89 / 2.5 / 1.09: 21.6 / 65.7 / 304.5, 3.4 | pour 0.65, 0.89 / 1.6 / 1.09: 22.6 / 68.3 / 305.0, **2.7** |
+
+The pour and the dye mix interact. A heavier pour on round 2's mix (round 3) reached the lightness but pulled the hue back, so round 4 retuned the mix at the heavier pour. Round 4 is the best on every tint so far.
