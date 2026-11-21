@@ -173,6 +173,12 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         cut_obs = [bpy.data.objects[n] for n in cuts]
         for L_ in lamps_:                     # no lamp is cut by a cutter unless named below
             excl(L_, cut_obs)
+        if os.environ.get('HOUSE_FACE_UNCUT', '1') == '1':
+            # (2026-11-21, the coordinator's audit) the softbox faces are emissive meshes: the cutters blocked the direct
+            # (next-event) samples toward them but not the glossy and transmission hits, so their light on rough surfaces
+            # differed between the two samplings. No cutter shadows a face; the cutters still shade the floor's lamps
+            for fc_ in [o for o in bpy.context.scene.objects if o.type == 'MESH' and o.name.startswith('house-') and o.name.endswith('-face')]:
+                excl(fc_, cut_obs)
         for n, names in cuts.items():
             co_ = bpy.data.objects[n]
             if floor_:                        # shadow only: not in reflections, nor through glass, nor soaking bounce
@@ -391,6 +397,10 @@ def room(bpy, s):
         b.inputs['Specular IOR Level'].default_value = 0.0
         o.data.materials.append(m)
     X, Yf, Yb, Z = 4.5, -4.5, 4.5, 5.0
+    if os.environ.get('HOUSE_ROOM_BIG', '1') == '1':   # (the default since 2026-11-21; 0 the old room)
+        # (2026-11-21, the coordinator's audit, a test) the room round the whole sweep (18 m wide, its backdrop at 5.5 m):
+        # the sides outside it, the back behind it, the ceiling above it, so a grazing reflection meets the backdrop
+        X, Yf, Yb, Z = 9.5, -4.5, 6.0, 6.0
     wall('room-left', [(-X, Yf, 0), (-X, Yb, 0), (-X, Yb, Z), (-X, Yf, Z)], 0.8)
     wall('room-right', [(X, Yf, 0), (X, Yf, Z), (X, Yb, Z), (X, Yb, 0)], 0.8)
     wall('room-back', [(-X, Yb, 0), (X, Yb, 0), (X, Yb, Z), (-X, Yb, Z)], 0.8)
