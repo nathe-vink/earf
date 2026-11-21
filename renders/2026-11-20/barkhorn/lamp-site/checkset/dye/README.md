@@ -31,3 +31,19 @@ dE00 is the CIEDE2000 colour difference between the Core body's median L*/C*/h a
 | Haze | 3.4 | 3.0 | pour 0.7, 0.89 / 2.5 / 1.09: 21.6 / 65.7 / 304.5, 3.4 | pour 0.65, 0.89 / 1.6 / 1.09: 22.6 / 68.3 / 305.0, **2.7** |
 
 The pour and the dye mix interact. A heavier pour on round 2's mix (round 3) reached the lightness but pulled the hue back, so round 4 retuned the mix at the heavier pour. Round 4 is the best on every tint so far.
+
+## Round 5 (19:10-19:40)
+
+dE00 to the pick, with round 4 in brackets:
+
+| Tint | Pour; R / G / B | L* / C* / h | dE00 |
+|---|---|---|---|
+| Haze | 0.6; 0.89 / 2.2 / 1.09 | 23.8 / 71.2 / 305.8 | **2.1** (2.7) |
+| Haze | 0.65; 0.89 / 2.5 / 1.09 | 22.6 / 68.3 / 305.0 | 2.7 |
+| Ice | 1.72; 3.2 / 0.75 / 1.19 | 41.9 / 58.8 / 287.0 | 3.1 (2.4; round 4 stays best) |
+| Dust | 2.6; 1.0 / 0.35 / 2.5 | 58.4 / 71.1 / 49.1 | **3.9** (4.6) |
+| Dust | 2.9; 1.0 / 0.30 / 2.5 | 58.6 / 69.2 / 51.0 | 4.1 |
+
+- **Haze:** the 0.65 frame matches round 4 exactly although its green factor changed. Haze's green absorption is already saturated, so raising it shows nothing.
+- **Dust:** the hue and chroma now match, but it stays about 4 L* light at any pour. Its dye passes red almost whole, so multiplying the red absorption does nothing.
+- **Round 6:** Dust with a neutral absorption added to every channel (CORE_ABS_ADD, a touch of black in the mix).
