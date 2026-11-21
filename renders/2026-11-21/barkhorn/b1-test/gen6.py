@@ -34,5 +34,7 @@ elif v.startswith('t3'):
     L['track-front1'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.14, 0.14], 'position': [8.25, 4.95, 3.35], 'target': AIM,
                          'irradiance': irr, 'spread_deg': 14, 'color': '#FFE2C0'}
 s['title'] = f'B1 fixed-6 {v}: Planet EARF bar, the record wall from a seat at the bar (a test, not a final)'
+s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
+                          'fn': 'shadow_ray_report'})                       # (prints what the cut left; changes nothing)
 json.dump(s, open(os.path.join(HERE, f'fixed6-{v}.json'), 'w'), indent=1)
 print(v, s['title'], sorted(L))

@@ -299,3 +299,17 @@ def soft_fabric(bpy, name, p, kit):
             nt.links.new(bump.outputs['Normal'], b.inputs['Normal'])
     print('SOFT FABRIC:', done_o, sorted(done_m), 'levels', lv)
     return []
+
+
+def shadow_ray_report(bpy, name, p, kit):
+    """A diagnostic (B1, 21 Nov): every material with a Light Path 'Is Shadow Ray' output still linked, and where it goes.
+    Place it after no_glass_shadows to list what the cut left. Changes nothing."""
+    found = []
+    for m in bpy.data.materials:
+        if not m.use_nodes:
+            continue
+        for n in m.node_tree.nodes:
+            if n.type == 'LIGHT_PATH' and n.outputs['Is Shadow Ray'].links:
+                found.append((m.name, [f'{l.to_node.type}.{l.to_socket.name}' for l in n.outputs['Is Shadow Ray'].links]))
+    print('SHADOW RAY LINKS LEFT:', len(found), found[:60])
+    return []
