@@ -285,6 +285,18 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
             mm_ = bpy.data.materials.new('house-bounce-cut'); mm_.use_nodes = True; bm2_ = mm_.node_tree.nodes['Principled BSDF']
             bm2_.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); bm2_.inputs['Roughness'].default_value = 0.9; mc_.materials.append(mm_)
             print('BOUNCE_CUT', [tuple(round(c, 4) for c in v) for v in vs_])
+        if os.environ.get('HOUSE_BOUNCE_TOP'):
+            # HOUSE_BOUNCE_TOP 'D0,D1,ZT,W' (2026-11-21, the critics on LIT-f: the ball's lower front saw the lamp face, a pink
+            # speck): the top barn-door leaf, a black card lying level at height ZT above the snoot, D0 to D1 m out along the
+            # beam, W wide; rays climbing past ZT within it stop, so its soft edge lands on the seat ring, above the base's lip
+            t0_, t1_, zt_, wt_ = [float(v) for v in os.environ['HOUSE_BOUNCE_TOP'].split(',')]
+            fd_ = Vector((cx_ - lx_, cy_ - ly_, 0.0)).normalized(); sd2_ = Vector((-fd_.y, fd_.x, 0.0)); P_ = Vector((lx_, ly_, zt_))
+            vt_ = [P_ + fd_ * t0_ - sd2_ * wt_ / 2, P_ + fd_ * t1_ - sd2_ * wt_ / 2, P_ + fd_ * t1_ + sd2_ * wt_ / 2, P_ + fd_ * t0_ + sd2_ * wt_ / 2]
+            mt_ = bpy.data.meshes.new('house-bounce-top'); mt_.from_pydata([tuple(v) for v in vt_], [], [(0, 1, 2, 3)])
+            ct_ = bpy.data.objects.new('house-bounce-top', mt_); bpy.context.scene.collection.objects.link(ct_)
+            mk_ = bpy.data.materials.new('house-bounce-top'); mk_.use_nodes = True; bk_ = mk_.node_tree.nodes['Principled BSDF']
+            bk_.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); bk_.inputs['Roughness'].default_value = 0.9; mt_.materials.append(mk_)
+            print('BOUNCE_TOP', [tuple(round(c, 4) for c in v) for v in vt_])
         print('BOUNCE', (cx_, cy_, w_, d_), (lx_, ly_, lz_), cone_, pw_, 'colour', tuple(round(c, 3) for c in sd_.color), 'scale', tuple(so_.scale))
     if os.environ.get('HOUSE_KEY_PRODUCT') == '1':
         # (2026-11-21, the Core LIT: the key off lit the floor out, and the base with it) the key lights everything but
