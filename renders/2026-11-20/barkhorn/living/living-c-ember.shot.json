@@ -1508,7 +1508,9 @@
    },
    {
     "kind": "kit",
-    "shape": "lathe",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
+    "fn": "water_glass",
     "profile": [
      [
       0,
@@ -1525,54 +1527,18 @@
      [
       0.044,
       0.092
-     ],
-     [
-      0.040499999999999994,
-      0.092
-     ],
-     [
-      0.0,
-      0.016
      ]
     ],
+    "wall": 0.0035,
+    "base": 0.016,
+    "fill": 0.078,
+    "meniscus": 0.0015,
+    "segments": 128,
     "position": [
      -2.0700000000000003,
      1.4,
      0.5511999999999999
-    ],
-    "material": "glass",
-    "color": "#F8F8F6",
-    "segments": 64
-   },
-   {
-    "kind": "kit",
-    "shape": "lathe",
-    "profile": [
-     [
-      0.0,
-      0.0166
-     ],
-     [
-      0.03902325581395348,
-      0.0166
-     ],
-     [
-      0.03952790697674418,
-      0.06
-     ],
-     [
-      0.0,
-      0.06
-     ]
-    ],
-    "position": [
-     -2.0700000000000003,
-     1.4,
-     0.5511999999999999
-    ],
-    "material": "glass",
-    "color": "#EEF3F4",
-    "segments": 64
+    ]
    },
    {
     "kind": "kit",
@@ -1595,7 +1561,8 @@
       "floor_z": 0.5507,
       "rot": 0.0
      }
-    ]
+    ],
+    "lamps_commit": "ecb1650c24"
    },
    {
     "kind": "kit",
@@ -1656,7 +1623,8 @@
   "transmission_bounces": 32,
   "caustics_refractive": true,
   "caustics_reflective": true,
-  "look": "AgX - Base Contrast"
+  "look": "AgX - Base Contrast",
+  "filter_glossy": 0.0
  },
  "materials": {
   "builtin-led": {

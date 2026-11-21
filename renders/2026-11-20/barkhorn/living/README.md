@@ -199,3 +199,35 @@ lifted 0.2 mm off the table, and its turned surfaces in 768 segments. The previo
 
 The left flank now matches the centre's colour. The right flank is still paler: its box takes in the table's warm
 highlight through the satin edge, which lowers the hue.
+
+## C, the fourth: the base fixed, the water in contact, filter_glossy 0 (2026-11-21)
+
+C was rendered again from its own shot file with only the audit's fixes:
+- **The Core:** at the lamps lane's ecb1650c24, pinned in the shot (`cores_off` checks LAMPS_ROOT against it) and
+  written into `living-c-ember.report.json` under `lamps`. That commit's skin is 6 mm along its normals with the lip
+  closed, both passes tinted, and the liner in contact.
+- **The water:** the set piece `water_glass`. Glass to air at 1.5, glass to water at 1.5/1.33 with no air film, water
+  to air at 1.33, a 1.5 mm meniscus. It stands at 78 mm, as in A.
+- **`filter_glossy` 0.**
+
+The previous C is kept as `living-c-ember-v3.png`, and the crops are in `c-crops-r3/`.
+
+- 1600 x 2000, 256 samples, 37 minutes. Audit: hidden 0, equipment 0.
+
+**The ball and base against the lamps lane's studio Core OFF** (r32-lamps-final 35d059fec,
+`house7/core-ember-off.png`; `c_ball_vs_studio.py`, medians of L* / C* / hue):
+
+| | ball, whole disc | ball, lower middle | base centre | base flanks, left / right |
+|---|---|---|---|---|
+| room C | 47.6 / 65.0 / 38 | 43.4 / 76.8 / 41 | 37.2 / 49.2 / 35 | 32.0 / 44.5 / 38 and 42.0 / 25.0 / 16 |
+| studio | 39.5 / 64.2 / 35 | 41.0 / 65.7 / 34 | 34.0 / 64.3 / 36 | 34.9 / 37.2 / 30 and 29.0 / 40.4 / 32 |
+
+- **The ball:** the same chroma and nearly the same hue in both. The room's ball is lighter: the window behind it
+  fills its disc with daylight reflections. In the lower middle, away from most reflections, the two are within 2.4 L*.
+- **The base:**
+  - Its centre is within 3.2 L* and 1 degree of hue of the studio's.
+  - Its chroma is lower in the room (49 against 64): the room's light is soft daylight from behind, the studio's a key
+    from the front.
+  - The room's right flank box takes in the table's warm highlight.
+- **The two transforms differ:** the room renders through AgX (Base Contrast), the studio through its own view, so
+  C* is not strictly comparable. That is the audit's L4.
