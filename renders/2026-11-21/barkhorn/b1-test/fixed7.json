@@ -791,6 +791,29 @@
     "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
     "fn": "softbox",
     "size": [
+     1.4,
+     0.9
+    ],
+    "depth": 0.02,
+    "position": [
+     8.05,
+     4.9,
+     3.37
+    ],
+    "target": [
+     8.05,
+     4.95,
+     0.0
+    ],
+    "strength": 6.0,
+    "color": "#FFE2C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
+    "fn": "softbox",
+    "size": [
      1.2,
      0.9
     ],
@@ -805,7 +828,7 @@
      5.6,
      1.55
     ],
-    "strength": 40.0,
+    "strength": 20.0,
     "color": "#FFE2C0",
     "skirt": 0.3
    },
@@ -829,7 +852,7 @@
      5.6,
      1.55
     ],
-    "strength": 40.0,
+    "strength": 20.0,
     "color": "#FFE2C0",
     "skirt": 0.3
    }
@@ -923,7 +946,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 1.785,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -944,7 +967,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 1.785,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -965,7 +988,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 1.785,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
@@ -986,7 +1009,7 @@
     5.72,
     1.7
    ],
-   "irradiance": 5.1,
+   "irradiance": 1.785,
    "spread_deg": 20,
    "color": "#FFD2A0",
    "shape": "DISK"
