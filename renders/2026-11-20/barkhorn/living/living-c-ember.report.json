@@ -1,9 +1,9 @@
 {
- "shot": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v4/living-c-ember.json",
- "image": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v4/living-c-ember.png",
+ "shot": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v9/c.json",
+ "image": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v9/living-c-ember.png",
  "seconds": {
-  "build": 30.2,
-  "render": 2257.5
+  "build": 28.0,
+  "render": 0.0
  },
  "samples": 256,
  "size": [
@@ -4083,10 +4083,15 @@
    "depth_m": -0.278
   }
  },
+ "mirrors": {
+  "image": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v9/living-c-ember.mirror.png",
+  "step": 2,
+  "parts": {}
+ },
  "masks": {
-  "image": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v4/living-c-ember.mask.png",
+  "image": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v9/living-c-ember.mask.png",
   "parts": 180,
-  "swatch": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v4/living-c-ember.swatch.png",
+  "swatch": "/tmp/claude-0/-home-user-earf/e9eacb03-86e9-502d-ab9f-ed75453cbf0d/scratchpad/living/v9/living-c-ember.swatch.png",
   "paints": 2
  }
 }

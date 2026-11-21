@@ -175,3 +175,27 @@ credited here all the same. They are fetched and cached by `studio/engine/assets
 | the rug | `poly_wool_herringbone` | colormass, Rico Cilliers |
 
 The record covers are this repository's own (`spinoffs/barkhorn/campaign/bar_life/tex`, invented covers).
+
+## C again: the Core's base with its liner in contact (2026-11-21)
+
+The owner saw the Core's base as "smoke frosted" at its edges: red in the middle, a gray-brown band down each side. The
+cause was in the lamps lane's `lamp_site.py`: a 0.4 mm air gap between the satin skin's smooth inner face and the white
+liner, where the CAD has them in contact. Light leaving the base at grazing angles was lost in that gap.
+
+C was rendered again from its own shot file, unchanged. The only differences are the lamps lane's code at 7e08871d9
+(`LAMPS_ROOT`) and `BASE_CONTACT=1`. That commit also brings the lane's other new defaults for the Core: the skin's foot
+lifted 0.2 mm off the table, and its turned surfaces in 768 segments. The previous C is kept as `living-c-ember-v2.png`.
+
+- 1600 x 2000, 256 samples, 35 minutes. Audit: hidden 0, equipment 0.
+- Outside the Core's box (x 500 to 950, y 1150 to 1450) the frame is unchanged: the mean difference is 0.02/255.
+- `c-base-v2-v3.png`: the base before (left) and after (right), at 1.5x.
+
+**The base** (`base_readings.py`, L* / C* / hue, 60 rows at y 1320 to 1380):
+
+| | left flank (x 565-600) | centre (x 690-750) | right flank (x 840-875) |
+|---|---|---|---|
+| before (v2) | 26.8 / 31.0 / 37 | 38.8 / 54.6 / 36 | 39.5 / 20.9 / 12 |
+| after | 37.5 / 53.2 / 36 | 41.0 / 55.5 / 35 | 45.4 / 33.9 / 22 |
+
+The left flank now matches the centre's colour. The right flank is still paler: its box takes in the table's warm
+highlight through the satin edge, which lowers the hue.
