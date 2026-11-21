@@ -3,7 +3,8 @@ against fixed.
    live:  the site's frame, its committed shot file (renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar.shot.json,
           14 Nov; planet_bar.py's own source commit is not in this shallow clone), size halved
    fixed: 1. the shadow-ray shortcut cut wherever caustics are on (living_ext.no_glass_shadows, last in the set: the
-             Tropos acrylic, Mantle's, the Cores'); the frame's refractive caustics stay on
+             Tropos acrylic, Mantle's, the Cores'); both caustics on and clamp 0, S1 b's light model (the coordinator,
+             07:38: reflective on as well)
           2. the horn-card panel hidden from transmission (planet_bar.py:256-258; the engine's panel takes the flag
              from 21 Nov)
           3. the two drinks as liquid in contact with the glass at its own IOR (whisky 1.36, living_ext.water_glass),
@@ -22,7 +23,7 @@ live['size'] = [1600, 900]
 live['title'] = 'B1 live: ' + live['title']
 fixed = copy.deepcopy(live)
 fixed['title'] = live['title'].replace('B1 live', 'B1 fixed')
-fixed['render']['filter_glossy'] = 0.0
+fixed['render'].update(filter_glossy=0.0, caustics_refractive=True, caustics_reflective=True, clamp=0)
 fixed['lights']['horn-card']['transmission'] = False
 props = fixed['set']['props']
 glasses = [pr for pr in props if pr.get('shape') == 'lathe' and pr.get('material') == 'glass' and pr['position'][2] > 1.0]
