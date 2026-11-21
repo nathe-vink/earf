@@ -46,7 +46,11 @@ Assumptions to confirm:
 
 - **Dust's "16 Nov 1.6x Core" read as Core 0.8** (1.6 × 0.5). If it meant something else, change the `orange` line.
 - **Acid's Core step is lighter**, toward the lemon Tropos. A deeper step would be 2.25.
-- **Ice's and Haze's hue** is not changed by a pour. Pours move lightness and chroma; the violet lean against the Tropos needs a different dye, which no switch here gives.
+- **Ice's and Haze's hue: corrected after the renders.** I wrote that a pour does not move hue. That is false for Ice, and for Haze lit. Ice's hue moves with its pour: OFF h 300.8 at 6x, 288 at 3x, 278 at 2.1x; LIT 290 to 253. Haze's lit hue moves 322 to 340. A dense pour pins one channel near zero, which shifts the hue; the critics' measurements, 2026-11-21.
+
+## Round 2
+
+`checkset.sh TINT "LAMP:STATE:LOAD ..."` renders an explicit list instead of the tint's default.
 
 ## Checks and commit
 

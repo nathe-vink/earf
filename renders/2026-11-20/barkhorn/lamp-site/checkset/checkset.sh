@@ -1,7 +1,8 @@
 #!/bin/bash
 # The pour CHECK SET (2026-11-21, the coordinator after the eight-tint critics): per tint, the pendant and Core at
 # candidate loadings, OFF and LIT, half size (800 x 1000), on the house ground, for the owner.
-#   renders/2026-11-20/barkhorn/lamp-site/checkset/checkset.sh TINT   (red orange amber green blue violet black)
+#   renders/2026-11-20/barkhorn/lamp-site/checkset/checkset.sh TINT [SET]   (red orange amber green blue violet black)
+# SET (optional, round 2): the frames to render instead of the tint's default list, e.g. "hemi:lit:0.7 core:off:2.0"
 # Loadings are given directly: HEMI_LOAD (the 3 mm shade, a multiple of the base pour; lamp_site.py TINT_LOAD) and
 # CORE_LOAD (the 6 mm ball and its base, absolute: 0.5 = the chart figure; today's value is 0.5 x CORE_TINT_LOAD).
 # OFF exactly as row-off/ (Ember round 5 OFF); LIT exactly as round 6 (ember-r6-hemi.sh, ember-r6-core.sh), the same
@@ -25,6 +26,8 @@ case $T in
   black)  SET="core:off:0.45 core:off:0.6 hemi:lit:1.2 core:lit:0.3 core:lit:0.45" ;;                          # today hemi 1.2, core 0.3
   *) echo "unknown tint $T"; exit 1 ;;
 esac
+[ -n "${2:-}" ] && SET="$2"   # round 2: an explicit list replaces the default
+echo "SET: $SET"
 HOFF="LIGHTS_OFF=1 HOUSE_ROOM_TRANS=1 HOUSE_S=0.2 HOUSE_LIFT=0.25 HOUSE_LIFT_RX=bg-left HOUSE_KEYFLAG=0,60,25,60,2 HOUSE_WALL_LL=0.35 HOUSE_WALL_LL_SPREAD=30 HOUSE_BG=1.16"
 COFF="LIGHTS_OFF=1 HOUSE_ROOM_TRANS=1 HOUSE_S=0.19 CORE_DOCK=0 HOUSE_CUT2=fill,1.0 HOUSE_FLOORCARD=0.0755,2.5,0.0005,-1,1 HOUSE_BG=1.16"
 HLIT="HOUSE_SOFTBOX_SEEN=0 DENOISE_PASSES=RGB HOUSE_STUDIO=3.5 HOUSE_EV=-5.15 HOUSE_SWEEP_AO=0 HOUSE_ROOM_TRANS=1 HOUSE_S=0.2 HOUSE_LIFT=0.25 HOUSE_LIFT_RX=bg-left HOUSE_KEYFLAG=0,60,25,60,2 HOUSE_BG=1.16"
