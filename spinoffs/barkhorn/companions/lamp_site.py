@@ -491,8 +491,14 @@ def build(frame, samples, scale):
                     lo_ = [(r_, max(z_, lo_[0][1] + lift_)) for r_, z_ in lo_]
                 sk = acrylic(f'base-skin-{tint}', 0.55, tname, ld_)        # satin outside: a fine bead-blast, as rough glass
                 revolve(f'base-skin-{base}-{tint}', lo_, sk)
-                revolve(f'base-skin-in-{base}-{tint}', lo_, acrylic(f'base-skin-in-{tint}', 0.0, tname, ld_), flip=True, off=6.0)
-                revolve(f'base-liner-{base}-{tint}', lo_, SC.principled('base-liner', '#EDEDEA', 0.8), off=6.4)
+                # BASE_CONTACT=1 (2026-11-21, a test for the owner's "smoke frosted" edges): the white liner in optical
+                # contact with the skin (cast on or bonded), its face at the skin's inner face, with no air gap between them.
+                # Default 0: as the parts list has it, two formed parts nested, the liner 0.4 mm inside the skin's inner face
+                if os.environ.get('BASE_CONTACT', '0') == '1':
+                    revolve(f'base-liner-{base}-{tint}', lo_, SC.principled('base-liner', '#EDEDEA', 0.8), off=6.0)
+                else:
+                    revolve(f'base-skin-in-{base}-{tint}', lo_, acrylic(f'base-skin-in-{tint}', 0.0, tname, ld_), flip=True, off=6.0)
+                    revolve(f'base-liner-{base}-{tint}', lo_, SC.principled('base-liner', '#EDEDEA', 0.8), off=6.4)
             else:
                 revolve(f'base-{base}-{tint}', lo_, satin_black)
             if up_:
