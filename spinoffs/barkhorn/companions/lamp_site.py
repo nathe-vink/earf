@@ -97,9 +97,9 @@ if not (os.environ.get('LOAD_BUILT') or os.environ.get('RIG_LEGACY')):
 # (renders/2026-11-20/barkhorn/lamp-site/checkset/) and the Core dye test (checkset/dye/); CORE_ABS_TINT below is the
 # Core's re-mixed dye for Dust, Ice and Haze. POURS=mix gives the 17 Nov mix; LOAD_BUILT=1 / RIG_LEGACY as before.
 POURS_HEMI = {'red': 0.7, 'orange': 2.1, 'amber': 3.0, 'green': 1.0, 'blue': 3.0, 'violet': 1.0, 'ice': 1.0, 'black': 1.2}
-POURS_CORE = {'red': 0.5, 'orange': 2.6, 'amber': 2.0, 'green': 0.45, 'blue': 1.72, 'violet': 0.6, 'ice': 0.5, 'black': 0.5}
+POURS_CORE = {'red': 0.5, 'orange': 2.6, 'amber': 2.0, 'green': 0.45, 'blue': 1.72, 'violet': 0.5, 'ice': 0.5, 'black': 0.5}
 # the Core's dye re-mix per tint: (R, G, B) factors on its absorption, and a neutral absorption in 1/m (a touch of black)
-CORE_ABS_TINT = {'orange': ((1.0, 0.35, 2.5), 16.0), 'blue': ((3.2, 0.85, 1.19), 0.0), 'violet': ((0.89, 2.2, 1.09), 0.0)}
+CORE_ABS_TINT = {'orange': ((1.0, 0.35, 2.5), 16.0), 'blue': ((3.2, 0.85, 1.19), 0.0), 'violet': ((0.89, 2.5, 1.09), 0.0)}   # Haze: round 2 at today's pour (the final off check, 21:59: round 5 read indigo against the shade's violet)
 if os.environ.get('LOAD_BUILT') or os.environ.get('RIG_LEGACY') or os.environ.get('POURS') == 'mix':
     CORE_ABS_TINT = {}
 else:
