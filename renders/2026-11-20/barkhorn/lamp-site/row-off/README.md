@@ -30,7 +30,7 @@ It then prints the meters.
 
 ## Check before committing
 
-- The audit: every `out` line 0.0 % (no hidden mesh casts into frame). CASTCHECK all 0.0.
+- The audit: every `out` line 0.0 % (no hidden mesh casts into frame). CASTCHECK 0.0 for every entry except house-wall_left 5.45 and house-key-flag 18.71, which the Ember OFF audit shows too (lamps and a flag outside the frame, not cast into it).
 - `meter.py corners`: the six wall and floor patches (TL TR ML MR LL BR, L*/a*/b*). The Ember OFF reads 83.9 / 93.1 / 84.0 / 92.3 / 96.5 / 88.3. The ground must not depend on the tint: each corner within about 1 L* of these. A bigger gap means a set difference; report it, don't commit.
 - `meter.py body shade.png`: the shell's L*/C* (lower third, middle third, whole). The Ember OFF reads 25.4 / 28.3 / 25.7 L*. Other tints differ by their pour; report them, there is no target.
 - Look at it at half size: the reflections single, the foot closed, cap and cord as in the Ember frame.
