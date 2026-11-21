@@ -209,6 +209,8 @@ def water_glass(bpy, name, p, kit):
             revolve(f'{name}-glass-inner-dry', inner_dry, g_air, lambda c: -radial(c)),           # into the empty glass
             revolve(f'{name}-glass-wet', wet, g_wat, lambda c: -radial(c) if c.z > base + 1e-4 else Vector((0, 0, 1))),
             revolve(f'{name}-water-top', surf, w_air, lambda c: Vector((0, 0, 1)))]
+    if p.get('top') is False:                               # (a diagnostic: the water's top surface left out)
+        bpy.data.objects.remove(objs.pop(), do_unlink=True)
     print('WATER GLASS:', [o.name for o in objs], 'fill', fill, 'meniscus', men, 'wet to', round(zw, 4))
     return objs
 
