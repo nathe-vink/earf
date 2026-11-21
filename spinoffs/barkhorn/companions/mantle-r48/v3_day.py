@@ -922,9 +922,10 @@ def house(gain=1.0, cam=None, lights=None, sweep_k=0.5, extra=None, wb=5600.0, a
             n_ = (R_ @ p_.normal).normalized(); c_ = M_ @ p_.center
             if pl.material_slots[p_.material_index].material.name == 'plinth-chamfer-polished': continue
             if n_.z > 0.9 and abs(c_.z - zt) < 0.0005: p_.material_index = sl['plinth-1' if '--top-satin' in mine else 'plinth-0']; nt_ += 1
-            elif n_.z < -0.9 and abs(c_.z - zb) < 0.0005: p_.material_index = liner_i if '--white-liner' in mine else sl['plinth-1']; nb_ += 1
+            elif n_.z < -0.9 and abs(c_.z - zb) < 0.0005: p_.material_index = liner_i if '--white-liner' in mine else sl['plinth-0' if '--polished-underside' in mine else 'plinth-1']; nb_ += 1
             elif abs(n_.z) < 0.1 and min(c_.x - X0_, X1_ - c_.x, c_.y - Y0_, Y1_ - c_.y) < 0.0015: p_.material_index = sl['plinth-1']; ne_ += 1
-        print(f'v3_day: the deck to the signed finish: top polished ({nt_} faces), underside satin ({nb_}), outer edge satin ({ne_})', flush=True)
+        ub_ = 'polished' if '--polished-underside' in mine else 'satin'   # the owner, 2026-11-21: like the speakers, satin edges only
+        print(f'v3_day: the deck to the signed finish: top polished ({nt_} faces), underside {ub_} ({nb_}), outer edge satin ({ne_})', flush=True)
     rp = bpy.data.objects.get('rear-plate')
     if rp is not None and not any(sl.material for sl in rp.material_slots):
         # the rear plate came without a material (it rendered as the default white): black nickel satin with its legends
