@@ -91,6 +91,15 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
                 # (2026-11-21, the coordinator's audit, a test) specular_factor 0 may not hide the lamp from glossy and
                 # transmission rays in Cycles; ray visibility does. The softbox's face then stands alone in reflections
                 ob.visible_glossy = ob.visible_transmission = False
+            if os.environ.get('HOUSE_SOFTBOX_SEEN', '1') == '0':
+                # (2026-11-21, the coordinator: the LIT frames) the softboxes flagged off the lamp, as for a lamp that is
+                # on: face and housing hidden from glossy and transmission rays (their outlines read as cracks in the
+                # polished shell). The light on the set is unchanged; the room still reflects; the floor ring is untouched
+                for nm_ in (ob.name + '-face', ob.name + '-housing'):
+                    o_ = bpy.data.objects.get(nm_)
+                    if o_ is not None:
+                        o_.visible_glossy = o_.visible_transmission = False
+                        print('SOFTBOX_UNSEEN', nm_)
         if sp.get('receivers'):
             # HOUSE_BG: the lamps that light the sweep alone, times one declared factor, so the paper behind a small
             # lamp reads as it does behind the speaker (whose own bounce lifts it); 1 is the recipe as it stands
