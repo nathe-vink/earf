@@ -676,8 +676,11 @@ def build(frame, samples, scale):
         # same tint name and loading; the pendant untouched. A maker's re-mix of the thick part's dyes
         _core0 = core; _abs0 = SC.absorption; _k = [float(v) for v in os.environ['CORE_ABS'].split(',')]
         def core(*a, **kw):
-            SC.absorption = lambda t_, l_=1.0: [x * k for x, k in zip(_abs0(t_, l_), _k)]
-            print('CORE_ABS', _k)
+            # CORE_ABS_ADD (1/m, 2026-11-21): a neutral absorption added to every channel, a touch of black in the mix
+            # (Dust's dye passes red almost whole, so no factor darkens it without moving its hue)
+            _ad = float(os.environ.get('CORE_ABS_ADD', '0'))
+            SC.absorption = lambda t_, l_=1.0: [x * k + _ad for x, k in zip(_abs0(t_, l_), _k)]
+            print('CORE_ABS', _k, 'add', _ad)
             try:
                 return _core0(*a, **kw)
             finally:
