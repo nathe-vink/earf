@@ -245,6 +245,23 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         ou_ = nt_.nodes.new('ShaderNodeOutputWorld'); nt_.links.new(bg_.outputs[0], ou_.inputs['Surface'])
     if os.environ.get('HOUSE_FLOORCARD'):
         floor_card(bpy, [float(v) for v in os.environ['HOUSE_FLOORCARD'].split(',')], lift)
+    if os.environ.get('HOUSE_KEY_PRODUCT') == '1':
+        # (2026-11-21, the Core LIT: the key off lit the floor out, and the base with it) the key lights everything but
+        # the ground: the sweep and the floor ring excluded from its receivers, so it lights the lamp and its base alone.
+        # Light linking, which a studio cannot do exactly (a flag or snoot only approximates a cut at the base's foot)
+        K_ = bpy.data.objects.get('house-key')
+        if K_ is not None:
+            col_ = K_.light_linking.receiver_collection
+            if col_ is None:
+                col_ = bpy.data.collections.new('house-key-not-ground'); K_.light_linking.receiver_collection = col_
+            for nm_ in ('sweep', 'house-floorcard'):
+                o_ = bpy.data.objects.get(nm_)
+                if o_ is not None and o_.name not in col_.objects:
+                    col_.objects.link(o_)
+            for o_, c_ in zip(col_.objects, col_.collection_objects):
+                if o_.name in ('sweep', 'house-floorcard'):
+                    c_.light_linking.link_state = 'EXCLUDE'
+            print('KEY_PRODUCT', [(o_.name, c_.light_linking.link_state) for o_, c_ in zip(col_.objects, col_.collection_objects)])
     cam = json.loads(json.dumps(R['camera']))
     for k in ('position', 'target', 'focus'):
         cam[k] = _mul(cam[k], s); cam[k][2] += lift
