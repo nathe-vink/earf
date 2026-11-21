@@ -1,0 +1,226 @@
+{
+ "results": [
+  {
+   "part": "owner",
+   "found": {
+    "findings": [
+     {
+      "id": "F1",
+      "severity": "fix",
+      "about": "fixed-7 (black horn) as the Tropos bar picture",
+      "what": "At 1600 and 800 the horn reads as a black glass panel with a thin rim, and the driver barely shows. The Tropos reads as a lemon cabinet with a black slab on top, not as a lemon horn loudspeaker. At 168 the horn is gone. A buyer would take the horn for black or smoked glass, which goes against the studio front. Nothing in it reads as CG; it is honest but wrong about the horn's colour.",
+      "evidence": "Horn box (1030,38)-(1308,238): 2.5 % of pixels above L* 5, lemon pixels 0.1 % of the niche opening. Seen in comp-fixed7-1600.png, speaker-800-x2.png and owner-thumbs-168.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-owner/"
+     },
+     {
+      "id": "F2",
+      "severity": "note",
+      "about": "All six backlit options: one horn, two-tone",
+      "what": "Every backlit option shows lemon only to the right of a near-vertical edge through the middle of the bell. The lemon is a flat fill with no shading from rim to throat; the flare shows only as the rim line and the driver's dark silhouette. The rim stays unbroken, so it reads as one horn, not a broken one. But it is two-tone (black left, lemon right), not one lemon horn with natural shading. Dimming the light does not soften the edge; it only lowers the contrast.",
+      "evidence": "Black-to-lemon rise at full-frame rows 140, 180 and 215: a1, a3, w1, w2 rise in 1-2 px at x 1138-1148, from L* 0.1 to 23-44. b160 rises in 15/4/3 px and b400 in 8/2/3 px at x 1141-1144. Horn 2x crops: horn-x2-w1-b160.png, horn-x2-a1-b400.png, horn-x2-fixed7-w2.png"
+     },
+     {
+      "id": "F3",
+      "severity": "fix",
+      "about": "b160 and b400: bright streaks across the dark half of the bell",
+      "what": "Thin, straight, bright yellow lines run from the lower-left rim toward the driver. They are clear at 1600 and still show at 800. They read as a crack or scratch in the horn, which is a product-truth risk, or as a render glint. a and w do not have them. The b niche also reads most like a vitrine: the top lip and left cheek are lit, with light fading downward. The band under the horn is dark (L* 0.5), so the horn's posts do not show.",
+      "evidence": "Full frame about (1060-1210, 185-240): streak-x3-b160-w1.png and speaker-800-x2.png. b400's streaks are stronger, and its niche reads as a lit grey box (niche-1to1-a3-w2-b400.png)."
+     },
+     {
+      "id": "F4",
+      "severity": "fix",
+      "about": "a1 and a3: the panel reads cold",
+      "what": "The visible back is a blue-grey rectangle, bluer than any white in the frame. In a warm bar it reads as a cold lightbox or a window. It also shifts the horn's lemon greener than the cabinet. a3 is the brightest pale area in any niche and makes the horn lighter than its cabinet. At 800, a1 is otherwise the same picture as w1, so a adds nothing over w.",
+      "evidence": "Panel strip (1302-1320, 90-220): a1 L* 53.4, b* -9.6; a3 L* 69.5, b* -9.0. The frame's whites (sleeve, record label, lamp undersides) are b* +0.4 to +1.7. Horn lit half: a1 h 103.6 and a3 h 104.8 (L* 41.8), against the cabinet's h 97.3 and L* 32.3."
+     },
+     {
+      "id": "F5",
+      "severity": "note",
+      "about": "w1 and b160 (the lane's modest pair): horn darker than its own cabinet",
+      "what": "Their lit horn half is about a quarter to a third darker than the lemon cabinet below it. At 1:1 and at 800 it reads as a darker olive next to the cabinet, so a buyer could take the horn for a smokier tint. In the approved studio front the horn is slightly lighter than the cabinet.",
+      "evidence": "Lit horn half (C* >= 20, L* > 10) against the same frame's cabinet (1050,270)-(1320,600). w1: 22.2 / 31.1 / h 98.3. b160: 24.4 / 33.4 / h 95.0. Cabinet: 32.3 / 34.9 / h 97.3. Studio front: horn 65.5 / 68.1, cabinet front 61.2 / 58.2. See w1-w2-b160-1to1.png."
+     },
+     {
+      "id": "F6",
+      "severity": "note",
+      "about": "w2: horn and cabinet read as the same lemon; what it costs",
+      "what": "w2's lit horn half matches its cabinet in lightness and is a little stronger in colour, the same relation as in the studio front. Its edges are clean, with no streaks. The panel shows as a pale strip beside the horn and a band under it, with the horn's posts in silhouette. At 168 its lemon patch shows most clearly of the w options; b400 and a3 are brighter but have the faults in F3 and F4. Cost against w1: a brighter strip covering the same area, still slightly cooler than the frame's whites. At 1600 and 800 the strip reads as a pale back panel, not a glare.",
+      "evidence": "w2 horn 32.6 / 41.2 / h 99.1 against cabinet 32.3 / 34.9 / 97.3. Horn/cabinet ratio: w2 L* 1.01, C* 1.18; studio 1.07, 1.17; w1 0.69, 0.89. Panel strip: w2 L* 61.1 vs w1 51.0. Band under the horn: 38.5 vs 28.8. Pale share of the niche opening: 10.5 % vs 10.3 %. Strip b* -4.3 in both. Files: comp-w2-1600.png, owner-pair-fixed7-w2-800.png."
+     },
+     {
+      "id": "F7",
+      "severity": "note",
+      "about": "Niche: real fixture or display case",
+      "what": "a and w show the back only in slivers, about 10 % of the opening above the cabinet. They read as a backlit back panel, the kind bars put behind shelves. b lights the whole alcove from the top lip, which reads more as a vitrine. Every option lights only the near bay. In my composites the far bay stays black felt as in fixed-7, and the w1 shot file has a single panel, at x 8.25, so a careful viewer sees only the hero speaker lit.",
+      "evidence": "Pale non-lemon pixels in the niche opening (1010,25)-(1325,262): a1 10.4 %, a3 10.7 %, b160 6.4 %, b400 10.2 %, w1 10.3 %, w2 10.5 %, fixed-7 2.0 %. In crop8-w1.shot.json, props[23] is the only panel. Files: niche-1to1-fixed7-w1-b160.png, niche-1to1-a3-w2-b400.png."
+     },
+     {
+      "id": "F8",
+      "severity": "note",
+      "about": "The 168 px thumbnail",
+      "what": "The horn is about 29 x 21 px at this size. No option shows a horn shape. The backlit ones show a small lemon square with a dark dot on top of the cabinet; fixed-7 shows a black top; live shows a gold flared shape. Only live's horn reads as a horn at every size, because its inside is shaded from rim to throat by the light that must go.",
+      "evidence": "thumbs-1to1.png, thumbs-x3.png, thumbs-retina2x.png and owner-thumbs-168.png. The site thumbnail matches a 168 x 94 Lanczos downscale of the whole frame (mean difference 3.5 levels)."
+     },
+     {
+      "id": "F9",
+      "severity": "note",
+      "about": "How the composites were made, and their limits",
+      "what": "Every crop sits at x 960, y 0 in fixed-7, matched on the shelving. I pasted each one with a 16 px feather on its left, right and bottom edges. No seam shows at 800. Outside the crop the frame is fixed-7's, so the owner should see a real full-frame render of the chosen option, not my paste. I judged only the look; I did not audit the w2 panel's light honesty (the lane's description: a warm #FFE2C0 opal panel, 0.64 x 0.58 m, at y 6.02).",
+      "evidence": "Shelving match score 0.992 for all six. Difference from fixed-7: 0.9 levels mean on the right shelving, 2.2-3.0 mean (95th percentile 7-9) at the crop edges. Whole-frame L*: 17.4-17.8 against 17.1 for fixed-7. Scripts are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-owner/scripts/"
+     }
+    ],
+    "recommendation": "Put w2 (the warm opal panel over the niche back, strength 2) to the owner against fixed-7's black horn. It is the only backlit option where the horn's lemon matches its own cabinet, as it does in the approved studio front: lit horn half L* 32.6, C* 41.2, h 99.1 against cabinet 32.3 / 34.9 / 97.3. It has no streaks (the b options look cracked), and its panel is not blue (the a options read as a cold lightbox). w1 and b160 make the horn read darker and more olive than the cabinet. w2's costs, which the owner should see in a real full-frame render rather than my paste: the horn is still two-tone (black left half, hard edge at x about 1140); a pale panel shows beside and under the horn (about 10 % of the niche opening, strip L* 61, slightly cool); only the near bay is lit. At 168 px no option reads as a horn shape, though w2 at least shows the top as lemon. If the critics find w2's panel too bright, w1 is the same picture one step dimmer, with a darker horn.",
+    "owner_sentence": "Both are lit only by lights a real bar could have: in the first the clear lemon horn looks black because black felt is behind it; in the second a soft light panel at the back of the niche shows the horn the same lemon as the cabinet, though only on its right half, and the pale panel shows beside it.",
+    "summary": "Each crop sits at (960, 0) in fixed-7, matched on the shelving (score 0.992). I pasted all six with a 16 px feather and looked at 1600, 800 and 168 beside live and the studio front. fixed-7 shows the horn as a black glass slab, and it vanishes at 168. Every backlit option shows one unbroken horn that is two-tone: lemon only right of a 1-4 px vertical edge at x about 1140, flat and unshaded. No option makes the flare read the way live's does. a1 and a3 add a blue-grey lightbox (b* -9.6). b160 and b400 add thin yellow streaks that read as a crack, and b lights the whole alcove like a vitrine. w1 and b160 make the horn about 10 L* darker than its own cabinet. w2's horn matches its cabinet (32.6 against 32.3 L*), as in the studio front, at the cost of a brighter pale strip (L* 61 against 51) over the same area. I recommend w2 against the black horn, shown as a real full-frame render. Files are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-owner/ (comp-*-1600/800/168.png, owner-pair-fixed7-w2-800.png, speaker-800-x2.png, horn-x2-*.png, streak-x3-b160-w1.png, thumbs-*.png)."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "F1",
+      "verdict": "confirmed",
+      "reasoning": "I measured the raw fixed-7 frame. In the horn box, 2.5 % of pixels are above L* 5 and the median C* is 0.0. Lemon pixels (C* >= 20, L* > 10) are 0.1 % of the niche opening (1010,25)-(1325,262). I looked at it at 1:1 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-owner-verify/v-horn-1to1-all.png): the horn is a black glass slab with a thin rim, and the driver is only a faint dark disc. At 800 (v-speaker-800-x2.png, same folder) the driver does not show at all, and the Tropos reads as a lemon cabinet with a black slab on top. At 168 (v-thumbs-x5.png) the top is a black rectangle and the horn is gone. Nothing in the frame read as CG to me."
+     },
+     {
+      "id": "F2",
+      "verdict": "confirmed",
+      "reasoning": "I measured single rows on the raw crops. The lemon starts at x 1138-1141 in w1 and w2, x 1145-1148 in a1 and a3, and x 1142-1145 in b. In a and w the jump from L* about 0 to 23-45 takes 1-2 px. Dimming does not move or soften it: w1 and w2 share the same x and the same 1-2 px rise, and so do a1 and a3. The fill is flat: 16 px block medians in w2's lemon area are 32-36 over most of it, 26-29 near the right rim and 21-26 at the bottom, with no shading from rim to throat. The rim is unbroken in every option. One correction: b's edges are not 15/4/3 and 8/2/3 px wide. Five-row profiles at rows 140, 180 and 215 rise in 2-4 px (b160 0>1>14>21, 0>5>21, 1>6>13>25>35; b400 1>5>27>36, 1>15>35, 4>11>20>38>48), as hard as a and w, so the judge's method miscounted them. F2 does not give the cause, and I found it: the edge is the left end of the lit back seen straight through the clear horn. The w1 shot puts the panel's left edge at x 7.93, y 6.02, which projects to x 1141. Straight camera rays switch from the left side wall to the back at x 1141.5 in every row. The pale band under the horn ends at that same x (1141 in w2, 1148 in a3; v-band-x3.png). a's panel starts 2 cm further right, and its edge sits 7 px further right, against 7.2 px projected."
+     },
+     {
+      "id": "F3",
+      "verdict": "confirmed",
+      "reasoning": "In my 3x crops (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-owner-verify/v-streak-x3-b-w.png), b160 and b400 have thin, straight, bright yellow lines running from the lower-left rim toward the driver. One runs about (1105,245)-(1167,213), with a fainter one below it, and b400's are stronger. w1 and w2 have none, and a1 and a3 have none either (v-niche-1to1.png). The line still shows at 800 (v-speaker-800-x2.png). In b, the niche's top and the upper part of its left wall are lit grey and fade downward, so it reads as a lit display box; b400 reads most like a grey box. The band under the horn measures L* 0.5 in b160 and 1.6 in b400, and the posts do not show. Whether the lines read as a crack or as a reflection glint is a judgment; to me they read as a glint or a scratch line."
+     },
+     {
+      "id": "F4",
+      "verdict": "confirmed",
+      "reasoning": "The panel strip (1302-1320, 90-220) reproduces: a1 L* 53.4, b* -9.6; a3 L* 69.5, b* -9.0. It looks blue-grey at 1:1 and at 800. The judge's range for the frame's whites leaves one out: sleeve stripes +1.7, record label +1.0, lamp undersides +0.4, but the triangle sign's white is -0.7. That is in the judge's own whites.py, and a is still far bluer than all of them. At 800, a1 against w1 differs by a mean of 0.16 levels, all of it inside the horn and panel (800 px x 566-661, y 21-143), so it is otherwise the same picture. Two sub-claims depend on which part of the cabinet you compare. 'Greener': h 103.6 and 104.8 against the cabinet-box median 97.3, but only 3-4 degrees against the cabinet's top band directly below (h 100.7), and I cannot see it. 'Lighter than its cabinet': a3's horn (41.8) is lighter than the cabinet median (32.3) but darker than that top band (52.9)."
+     },
+     {
+      "id": "F5",
+      "verdict": "confirmed",
+      "reasoning": "The readings reproduce: w1 22.2 / 31.1 / 98.3 and b160 24.4 / 33.4 / 95.0. Both lit halves are darker than every lemon part of their cabinet. That includes the cabinet's clear lemon ring around the woofer, which I measured at L* 28.5, C* 31.0, h 94.1 in every option. They are much darker than the top band directly below the horn (L* 53.0), which is about 55 % darker, not a quarter to a third. At 800 (v-speaker-800-x2.png) both horns read as dark olive. The studio part depends on which box you use. The studio horn (plain patch L* 66.8) is lighter than the judge's whole cabinet-front box (61.2) and the side (45.8), but darker than the cabinet's top band (92.3)."
+     },
+     {
+      "id": "F6",
+      "verdict": "uncertain",
+      "reasoning": "Every number reproduces: horn 32.6 / 41.2 / 99.1, strip 61.1 against 51.0, band 38.5 against 28.8, pale share 10.5 % against 10.3 %, strip b* -4.3. Edges are clean with no streaks, the posts show in silhouette, and at 800 the strip reads as a pale panel, not glare. The doubtful part is 'matches its cabinet in lightness'. That holds only for the median over the whole cabinet face, which spans L* 19.6-55.4 from p10 to p90. The top band directly under the horn reads 53.0 / 40.7 / 100.7: w2's horn has the same chroma and hue but is 20 L* darker. It is 4 L* lighter than the clear woofer ring (28.5). At 1:1 and 800 I see a lemon horn a shade darker and more olive than the cabinet's pale top. The studio horn also sits below its top band (66.8 against 92.3), so the relation is similar but not the same. As a ratio to the top band, w2 is 0.61 against the studio's 0.72, and a3 (0.79) and b400 (0.75) come closer."
+     },
+     {
+      "id": "F7",
+      "verdict": "confirmed",
+      "reasoning": "The pale shares reproduce exactly (a1 10.4, a3 10.7, b160 6.4, b400 10.2, w1 10.3, w2 10.5, fixed-7 2.0 %). The a3 and w1 shot files differ only in props[23], a single panel at x 8.25, so a and w light only the near bay. In fixed-7 the far niche is black above the far Tropos (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-owner-verify/v-farbay-x2.png). In a and w the panel shows as a rectangle: the strip's hard top edge at y about 70 is the panel's own top edge, which projects to y 72. It reads as a backlit back panel, and b reads as a lit box (v-niche-1to1.png). I could not check that b lights only the near bay, because there is no b shot file."
+     },
+     {
+      "id": "F8",
+      "verdict": "confirmed",
+      "reasoning": "At 168 the horn is 29.2 x 20.9 px. At 1:1 and at 5x (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-owner-verify/v-thumbs-x5.png), every backlit option shows a lemon square with a dark disc, fixed-7 shows a black top, and live shows a shaded gold wedge. Only live's reads as a flared shape. The site thumbnail differs from a 168 x 94 Lanczos downscale of the site's 1600 webp by 3.50 levels on average, and from one of live.png by 4.03."
+     },
+     {
+      "id": "F9",
+      "verdict": "confirmed",
+      "reasoning": "My own pixel-difference search puts all six crops at (960,0): 1.07-1.18 mean difference on the shelving, against 1.84 or more one pixel off. The crop's edge bands differ from fixed-7 by 1.9-3.0 mean (95th percentile 6-9), the right shelving by 0.86-0.93, and whole-frame L* is 17.42-17.79 against 17.07. No seam shows at 800, even with a hard paste (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-owner-verify/v-seam-800-x2.png). My 24 px-feather composites differ from the judge's by 0.01 mean at 800. The light honesty of w2's panel has indeed not been audited."
+     }
+    ],
+    "recommendation_check": "I agree with putting a real full-frame w2 render beside fixed-7. Of the six tests, w2 is the brightest with no streaks, no lit box and no blue panel. Its horn reads lemon, while w1 and b160 read dark olive: their horns (L* 22-24) are darker even than the cabinet's clear woofer ring (28.5).\n\nWhat I would change:\n\n1. Drop \"the only backlit option where the horn's lemon matches its own cabinet, as it does in the approved studio front\". It rests on the median over the whole cabinet face (L* 19.6-55.4 from p10 to p90). The top band directly under the horn reads 53.0 / 40.7 / 100.7. w2's lit half has the same chroma and hue but is 20 L* darker, and at 1:1 and 800 I see it a shade darker and more olive. The studio horn is also darker than its top band (66.8 against 92.3). As a ratio to the top band, a3 (0.79) and b400 (0.75) come closer to the studio's 0.72 than w2 (0.61). Say instead that the horn reads as the cabinet's lemon, a shade darker than its pale top, as in the studio front.\n\n2. Say why the horn is two-tone. The edge at x about 1140 is the left end of the lit niche back seen straight through the clear horn. Straight camera rays switch from the black left side wall to the back at x 1141.5. The pale band under the horn ends at the same x (1141). a's panel, whose edge is 2 cm further right, moves the edge 7 px right, as projected (7.2 px). So the left half faces the niche's black side wall. That is real, not a render fault, and no back light can change it. Only a lit or pale left wall could, and none of the six tests tried that.\n\n3. The sentence claims \"lit only by lights a real bar could have\" for w2, which nobody has audited (F9). Read the full w2 render's emitter and shadow-ray reports first; its shot file asks for both. Keep the clause only if they come back clean, as fixed-7's audit did.\n\n4. Small fixes:\n- \"the b options look cracked\" should become \"the b options show thin bright lines across the dark half that can read as scratches\".\n- F2's b edge widths are a measuring error: the b edges rise in 2-4 px, as hard as a and w.\n- F4's whites leave out the triangle sign at b* -0.7.\n\nThe sentence I would send, once the audit is clean: \"Both are lit only by lights a real bar could have. In the first, the clear lemon horn looks black because black felt is behind it. In the second, a soft light panel on the back of the niche shows the right half of the horn in the cabinet's lemon, a shade darker. The left half still looks black because it faces the niche's black side wall, and the pale panel shows beside and under the horn.\""
+   }
+  },
+  {
+   "part": "options",
+   "found": {
+    "summary": "From the B1 seat the clear horn acts like a lemon-tinted window. I traced 18 camera rays through product.py's air path, with a formed wall about 6 to 8.5 mm thick. Each one crosses a single wall (its two faces, about 4 % reflected at each, no total internal reflection) and lands within about 1 cm of where a straight line would.\n- Rays through the left part land on the niche's left cheek felt.\n- Rays through the top band land on the niche ceiling felt.\n- Only the right-centre part sees the back.\n\nI built a geometric zone map from the camera model and a niche fitted to the w1 crop. It was not fitted to the horn's colours, and it predicts the lemon and black split in all six tests: the back zone is 97-100 % above L* 5 in every lit test, the cheek zone 4-11 %, the ceiling zone 0-2 %. Pixel-weighted, the horn's mouth from this seat shows:\n- back 33 %\n- left cheek 33 %\n- ceiling 15 %\n- pod 18 %\n\nSo no light on the back can make more than about a third of the horn lemon. None of the lane's tests changed the cheek or the ceiling.\n\nOnly two real routes make nearly the whole horn lemon:\n- **(i) Light the whole bay.** Give the cheeks and ceiling a pale finish lit by the lane's strip. The bay becomes a lit box, the strongest display-case look of any option.\n- **(iii) Move to a near-frontal seat.** About 0.85 m left and 0.6 m back from the B1 seat, at 21 mm. That is a different picture.\n\n(ii) A light on the cheek fails: the horn looks straight at that spot, so the fixture shows through it as a hot spot.\n\n(iv) Moving the speaker 2 cm right and 5 cm deeper in its bay takes the back zone from 33 % to 44 % with no new light. It is a free improvement to the lane's option (1), not a whole horn.",
+    "findings": [
+     {
+      "id": "F1",
+      "severity": "fix",
+      "about": "Why the left half and the top band are black (corrects the lane's read)",
+      "what": "The left half is black because the horn shows the left cheek's 1 % felt straight through one wall. It is not internal reflection, and it is not the back. The top band (15 % of the mouth) shows the niche ceiling's felt in the same way; the lane's read missed it. None of the tests (a1, a3, b160, b400, w1, w2) changed either surface, so 'black whatever is behind it' is true only of the back.",
+      "evidence": "Camera: the engine's level camera with lens shift. Its projection lays the horn rim (mouth at y 5.506, axis z 2.202, 556 x 366) on the render to within a few px (ov1.png).\n\nNiche, fitted from the w1 crop's felt and walnut edges: inner x 7.9175 to 8.5825, surround front y 5.455, inner top z 2.53, back y 6.03 (the w1 panel sits at 6.02).\n\nRay traces through the left half:\n- incidence 14-43 deg, R 3.9-4.7 % per face\n- exit at 10-27 deg, so no total internal reflection\n- 6.6-8.5 mm of acrylic\n- they land on the left cheek at y 5.66-6.02, z 2.13-2.45\n\nRays through the top band hit the top wall at 40-55 deg and land on the ceiling at y 5.87-5.94. First-face mirror rays point back into the room's dark right side or down to the cabinet top.\n\nThe zone masks, eroded 4 px, measured in each test (L* median, share of pixels above L* 5):\n- cheek zone: L* 0.3-0.8, 4-11 %\n- ceiling zone: 0-2 %\n- back zone: 97-100 %, with L* / C* as follows: a1 23.7/32.9, a3 41.9/48.7, b160 24.4/33.4, b400 39.6/46.8, w1 22.1/31.0, w2 32.6/41.2\n\nFiles: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-options/zones-on-tests.png, plan-rays.png, trace.py, zones.py."
+     },
+     {
+      "id": "F2",
+      "severity": "note",
+      "about": "What a back light can reach from this seat",
+      "what": "Pixel-weighted, the horn's mouth (about 42.4k px at full resolution) shows: back 33 %, left cheek 33 %, ceiling 15 %, pod 18 %. Any back light, however strong, tops out at the back zone. That matches w1's 32 % and w2's 33 % of the box above L* 5. The pod zone is dark on the real product too, as in front-acid.png. The right cheek is never seen through the horn from this seat.",
+      "evidence": "Label map: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-options/straight-9.30.npy (full frame), drawn in lab-w1-9.30.png and vis-w1.png.\n\nSeen directly in the bay (full-res px): back 9.0k, left cheek front 23.2k, cheek rear 3.3k, ceiling front 13.8k, ceiling rear 3.0k."
+     },
+     {
+      "id": "F3",
+      "severity": "note",
+      "about": "Option (i): pale cheek and ceiling lit by the same concealed strip",
+      "what": "This is the only route to a nearly whole lemon horn in the approved composition.\n\nEstimated from a line-source model of the strip under the top lip (my geometry, not a render):\n- **Cheek zone** (seen through the horn): 0.4-1.2x the light on the back behind the horn. Expected L* about 14-27, lemon, brighter top-front, darker lower-rear.\n- **Ceiling zone**: about 0.02x direct light, so bounce only. The top band stays dim olive.\n- **Lemon share**: the horn's share above L* 5 should go from about 32 % to about 70-75%. The pod stays dark.\n\nCost: the cheek's front strip beside the speaker (23k px, seen directly) gets 9.6x the back's light at z 2.48, 3.2x at 2.40, 1.0x at 2.20, 0.24x at 1.80 and 0.06x at 1.20. That gives a near-white band at the top left of the bay, fading down beside the cabinet. The lit area seen directly in the bay grows about 5x (9k to about 49k px). It is the strongest display-case read of any option.\n\nA variant that lights only the rear of the cheek and ceiling (an opal 'lantern') adds only about 6k px of visible glow. But that glow hugs the horn's top and left rims like a halo, so I would expect it to read as lit for the camera.\n\nA walnut or warm lining would show amber through the lemon horn, which misstates its colour.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-options/strip.py.\n\nThe b crops show the strip already lights the felt cheek's top: p90 L* 13.4 (b160) and 27.9 (b400) at 1 % albedo.\n\nvis-w1.png shows the directly seen cheek and ceiling regions."
+     },
+     {
+      "id": "F4",
+      "severity": "note",
+      "about": "Option (ii): a real light inside the niche on the left cheek",
+      "what": "This does not work. The horn's left part looks straight at the cheek's upper rear (y 5.66-6.02, z 2.13-2.45). A fixture there shows through the horn as a hot spot that reads as a lamp inside the horn, which would mislead about the product. Mounted lower, it hides behind the clear cabinet, risks showing through the acrylic, and lights the cheek in scallops. An evenly lemon left half needs an evenly bright cheek, which is option (i).",
+      "evidence": "Ray landings from trace.py (F1)."
+     },
+     {
+      "id": "F5",
+      "severity": "note",
+      "about": "Option (iii): a camera move along the bar",
+      "what": "No modest move works.\n\nWith the back lit (mouth-plane sampling, back / cheek / ceiling / pod):\n- now: 31 / 40 / 14 / 16\n- eye at 1.55: 34 / 41 / 8 / 18\n- 0.4 m left (8.9, 3.5, 1.55): 50 / 24 / 10 / 17. With the same target, the leftmost pendant and Core are cut at the left edge, Mantle is mostly out bottom right and the drinks are out.\n- 0.6 m left: 59 / 16 / 9 / 16\n\nA whole horn needs the seat within about 5 deg of the horn's axis. Example: (8.45, 2.9, 1.55), 21 mm, target (6.9, 5.7, 1.45) gives back 78 %, cheek 4 %, ceiling 2 %, pod 17 % with the lane's back panel only.\n\nWhat else changes at that seat (projected, not rendered):\n- The near speaker is frontal (4.4 deg off axis, was 27.6) and smaller: 242 px wide against 342.\n- Mantle is cut at the right edge unless moved about 0.15-0.2 m left.\n- The far bay, all five pendants, the Cores and the drinks stay in frame.\n- The position is a step back from the stools.\n\nThat is a different picture.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-options/sweep.py, seats.py and seats5.py.\n\nzones-seats.png shows the three cases side by side."
+     },
+     {
+      "id": "F6",
+      "severity": "note",
+      "about": "Option (iv): small real changes that keep the composition",
+      "what": "- **Speaker set 2 cm right and 5 cm deeper in its bay**, B1 camera unchanged: back zone 33 to 44 %, cheek 33 to 26 %, ceiling 15 to 12 % (pixel-weighted). No light added. The visible felt gap left of the cabinet widens from about 34 to about 52 px.\n- **Adding a 1.55 m seated eye** (target z 1.635 holds the near speaker in place): about 49 / 25 / 6. But Mantle's front and the drinks drop about 30 px toward the bottom edge.\n- **Toe-in**: no. At 15 deg the cabinet clears each cheek by about 7 mm, its front-left corner stands about 1 cm proud of the surround, and the horn's right edge goes behind the right upright. The zones are fixed by the niche, not by the horn.\n- **A wider or taller bay**: the cheek would need to sit at x 7.64 or less and the top at z 2.63 or more, which means a much bigger lit back.\n- **Reflections**: about 4 % per face, so no.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-options/pixmap.py and nudge.py; straight-nudge2r5b.npy.\n\nThe clearances come from my fitted bay (inner width 0.665; back at 6.0225 or deeper). The lane should confirm them against the room module before moving the speaker: the cabinet's back would sit at y 5.976, so the amplifier plate needs the real niche depth."
+     },
+     {
+      "id": "F7",
+      "severity": "fix",
+      "about": "Lit for the camera: only the near bay is lit",
+      "what": "The w1 shot file puts its opal panel only in the near bay (props #23 at 8.25, 6.02, 2.22). The far bay, in frame at about X 445-542, keeps its felt. A lit near bay next to an identical unlit far bay reads as lit for the camera. The lane's option (1) and both tests below should light both bays alike. This is inferred from the shot file; I did not see a full w1 frame.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/crops/crop8-w1.shot.json, set.props[23]: the only niche panel."
+     }
+    ],
+    "recommendation": "Neither whole-horn route is a clean win over the lane's option (1); each trades the black left part for a different cost. Run at most these two tests so the owner can see the trade plainly.\n\n**T1, lit pale bay** (keeps the composition)\n- b160's shot file, unchanged except: the near bay's left cheek, right cheek and ceiling get the same pale finish b160 gives its back, replacing kit-felt #1A1918. My fitted bay is x 7.9175-8.5825, y 5.455-6.03, z 1.09-2.53.\n- The concealed strip under the top lip stays at 160.\n- Same 576 x 765 crop at (960, 0), 256 samples, fixed-8 rig. For a full frame, treat the far bay (x 5.2175-5.8825) the same.\n- Read the three zones with /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-options/zones.py (mask straight-9.30.npy), and the directly seen cheek strip at crop x 52-78, y 45-90, 150-230 and 400-500.\n- Expected: the cheek zone turns lemon at about L* 14-27, the ceiling band stays dim, and the horn above L* 5 goes from about 32 % to about 70-75%. The top of the cheek goes near-white and the bay reads as a lit box.\n\n**T2, frontal seat** (keeps the light)\n- w1's shot file with the camera at position (8.45, 2.9, 1.55), target (6.9, 5.7, 1.45), lens 21 mm, level, f/2.8, focus (8.25, 5.55, 2.2).\n- Add a matching far-bay panel: softbox 0.64 x 0.58, depth 0.005, position (5.55, 6.02, 2.22), target (5.55, 4.0, 2.22), strength 1, #FFE2C0.\n- Render 800 x 450 first.\n- Expected: about 78 % of the horn lemon (cheek 4 %, ceiling 2 %). The near speaker is frontal and about 0.7x its present width, and Mantle is cut at the right edge.\n\n**If the owner turns down both:** the best honest version is the lane's option (1), with both bays lit alike and the speaker 2 cm right and 5 cm deeper in its bay (back zone 33 to 44 %).",
+    "owner_sentence": "From this seat you look straight through the clear horn's left side at the black felt on the niche's side wall. That part can only show lemon if the whole niche is lit, which makes it look like a display case, or if the camera sits almost square in front of the speaker, which makes it a different picture."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "F1",
+      "verdict": "confirmed",
+      "reasoning": "I built my own camera from render.py (a level camera with shift_y). It puts the horn rim and the cabinet's top edge on the w1 crop (ov-w1.png), and gradient correlation with fixed7.png confirms the crop origin (960, 0). The judge's niche front edges match the walnut/felt boundaries. Back at y 6.03 fits the ceiling-back edge right of the horn better than 6.08 (ov2-b400.png).\n\nI wrote my own refraction trace through the shell as horn.py builds it: 6 mm offset, rim growing to 10 mm, smooth max with the 100 mm pod, so the neck is solid. In w1, a3, b160 and b400 the lemon/black boundaries sit on the traced back/cheek line and back/ceiling line (zones-mine-on-tests.png).\n\nThrough the cheek zone:\n- incidence: median 23 deg (p2 7, p98 77)\n- R: median 3.9 %\n- exit: median 15 deg, max 40; no TIR\n- landing: left cheek at y 5.60-6.02, z 2.09-2.52\n- first-face mirror rays: 82 % leave through the mouth into the room (rightward and up), 4 % hit the cabinet top\n\nThe top band is 14-15 % of the mouth and lands on the ceiling at y 5.76-6.03. With straight-line zones I reproduce the judge's readings exactly:\n- back: a1 23.7/32.9 ... w2 32.6/41.2, 96-100 % lit\n- cheek: 4-10 % lit\n- ceiling: 0-1 % lit\n\nThe strongest evidence is one the judge did not use. The strip in b160/b400 lights the felt cheek, and the horn's left part responds:\n- cheek-zone p90 L*: 0.5 (w1), 3.1 (b160), 7.2 (b400)\n- lit share: 5, 9, 11 %\n- lit hue: 103\nIn horn-gamma-4.png, b400's left part shows dim olive.\n\nTwo small corrections:\n- horn.py offsets the 6 mm wall within each section, so the path in resin is about 4.5-8 mm (median 4.9), not 6.6-8.5.\n- Reflection is not absent. Along the bottom-left rim the incidence is near grazing (R up to about 30 %), and that makes the gold streaks in b160/b400 (streaks-vs-grazing.png).\n\nNeither correction changes the finding."
+     },
+     {
+      "id": "F2",
+      "verdict": "confirmed",
+      "reasoning": "My own straight-line map gives 42,335 mouth px:\n- back 33.5 %\n- cheek 33.1 %\n- ceiling 15.3 %\n- pod 18.1 %\n- right cheek 0 % (0.3 % with refraction)\n\nThe tops-out claim holds. In the share of the mouth above L* 5:\n- a1 to a3 (3x the strength): 34.6 to 36.5 %\n- w1 to w2: 34.9 to 36.0 %\n\nI reproduce the lane's box shares (w1 32.2, w2 33.3). But the box has about 7 % lit pixels outside the mouth (the panel beside the horn and the rim), so 'matches' is loose. The mouth's own lit share is 35-36 %, and its lemon share (C* >= 20, hue 85-115) is 30-32 %.\n\nfront-acid.png does show the driver pod as a dark disc on the real product.\n\nDirect counts (mine against the judge's):\n- cheek: 25.6k against 26.5k\n- ceiling: 17.4k against 16.8k\n- back: 6.3k against 9.0k. The judge's vis.py does not treat the horn's outer shell as an occluder."
+     },
+     {
+      "id": "F3",
+      "verdict": "uncertain",
+      "reasoning": "The mechanism is plausible and partly seen: in b400 the strip-lit felt already shows through the horn as dim lemon.\n\nBut the judge's strip model does not match the rendered strip. On the directly seen felt cheek's front strip, b400 reads:\n- L* 9.2 at z 2.48\n- 14.3 at z 2.40\n- 7.0 at z 2.30\n- 2.4 at z 2.20\n- 0.8 at z 2.0\n- 0.3 (w1's level) at z 1.8 and below\n\nb160 has the same shape. So the render peaks at about z 2.40, with a darker band right under the lip. The model peaks at z 2.48 (9.6x, against 3.2x at 2.40). The AgX toe stops me checking the lower ratios (0.24x, 0.06x).\n\nSo the cheek zone at 0.4-1.2x the back, L* 14-27, and 70-75 % are unverified guesses. 70-75 % above L* 5 is also more than back plus cheek (66.6 %), so it relies on the ceiling band, which the judge calls dim, crossing L* 5: dim olive counted as lemon.\n\n'Only route' is too strong. The judge's own lantern variant is another route, and a pale lining lit by the back panel itself is untested.\n\nThe 49k px lit-area arithmetic checks: 6.3k + 25.6k + 17.4k."
+     },
+     {
+      "id": "F4",
+      "verdict": "confirmed",
+      "reasoning": "My trace lands the cheek zone on the cheek at y 5.60-6.02, z 2.09-2.52, the area the judge names. A fixture there would be seen straight through the horn's left part.\n\nThe points about a lower mount (hidden behind the cabinet or showing through it, scalloping the cheek) are judgment. I did not measure them."
+     },
+     {
+      "id": "F5",
+      "verdict": "confirmed",
+      "reasoning": "I reproduce the mouth-plane shares (back/cheek/ceiling/pod, %):\n- now: 30.5/39.3/14.4/15.8\n- eye 1.55: 33.7/40.3/8.5/17.5\n- 0.4 m left: 48.8/24.6/10.4/16.2\n- 0.6 m left: 56.1/17.0/11.3/15.6 (the judge has 59/16/9/16)\n- frontal seat: 77.7/3.9/2.0/16.4 (pixel-weighted 78.4/3.1/2.0/16.5)\n\nThe framing checks out:\n- 4.4 deg off axis against 27.6\n- speaker silhouette 242 px against 342\n- at the frontal seat the drinks (X 1000 and 1186), Cores, pendants and far bay project inside the frame\n- at 0.4 m left with the same target, pendant 1 and a Core sit at the left edge, and Mantle and the drinks fall below the frame\n\nI did not check that Mantle is cut at the frontal seat; I don't have its size.\n\nOne nuance: the angle alone is not enough. From (8.25, 3.5, 1.55), straight on but on the bar's seat line, the ceiling band stays at about 13 %. The step back to y 2.9 is what drops it to 1.7 %."
+     },
+     {
+      "id": "F6",
+      "verdict": "confirmed",
+      "reasoning": "My own code reproduces the main claims:\n- 2 cm right, 5 cm back: back 44.4, cheek 25.8, ceiling 11.5, pod 18.3 %\n- felt gap left of the cabinet: 33.5 to 54 px\n- with the 1.55 m eye and target z 1.635: 47.8/26.4/5.7\n- toe-in 15 deg: 7.5 mm clearance each side, front-left corner 1.4 cm proud of the surround\n- bay limits: x 7.64 and z 2.62\n\nOne correction: the 1.55 m eye drops the drinks about 44-48 px, not about 30. Their bases go to Y 908-923, outside the 900 px frame.\n\nOne benefit the finding does not state: the nudge halves the lit panel seen directly beside the horn (6.05k to 2.87k px). The directly seen felt cheek grows from 25.6k to 37.4k px."
+     },
+     {
+      "id": "F7",
+      "verdict": "refuted",
+      "reasoning": "The fact holds: props[23] is the only niche panel in the w1 shot.\n\nThe claimed look does not hold for B1:\n- The far bay's back corners project at X 574-665, behind the opening's right edge at X 535 (the bay's right walnut upright). Inside the opening (X 451-535) you see only the far left cheek's felt, the far speaker and its horn (farbay-fixed7.png).\n- Seen 62 deg off its axis, the far horn shows only the far left cheek: 100 % of its straight lines land there.\n\nSo a matching far panel would change nothing visible in B1, apart from possible faint spill. The near/far contrast the finding describes cannot be seen from this seat.\n\nIn T2 a matching far panel would show only a little: about 6 % of the far horn's mouth and a strip about 14 px wide.\n\nThis is a consistency note at most, not a fix."
+     }
+    ],
+    "recommendation_check": "Keep the overall shape: the lane's option (1) against the black horn, with at most two extra tests. I would change these points.\n\n1. **Drop F7 as a reason.** From B1 the far bay's back is hidden behind its right upright, and the far horn shows only its left cheek. Lighting both bays alike is fine as consistency, but it does not change the B1 picture. In T2 it shows only as a sliver.\n\n2. **T1's expected numbers are guesses.** They come from a strip model that does not match the rendered strip: on the felt cheek the render peaks at z 2.40, not just under the lip.\n   - Judge T1 by lemon, not by the share above L* 5. Back plus cheek is only 66.6 % of the mouth, so 70-75 % above L* 5 would count the dim olive ceiling band as lemon.\n   - Use C* >= 20 and hue 85-115: the mouth is 29.7 % lemon now in w1 and 31.4 % in b160.\n   - Also use the 168 px thumbnail and the studio front's horn (L* 52.7, C* 55.3, h 97).\n   - Use one baseline: the lane's 32 % is a box share, which includes about 7 % lit pixels outside the mouth.\n   - T1 will carry b160's gold streaks along the horn's lower-left rim. They are grazing reflections of the strip-lit niche (R up to about 30 %), and the owner may read them as a render fault.\n\n3. **Render the fallback first.** It is the likely final and nobody has seen it: w1 with the speaker 2 cm right and 5 cm deeper, as a crop, before T2.\n   - Use w1 rather than b160 for it: no streaks and no lit cheek top.\n   - My numbers: back 44 %, cheek 26 %, ceiling 12 %.\n   - The nudge also halves the lit panel seen beside the horn (6.0k to 2.9k px), so the display-case read is less. The cost is more felt seen directly: the gap left of the cabinet goes from 34 to 54 px.\n   - Confirm the niche depth before moving the speaker back.\n   - Do not add the 1.55 m eye: it pushes the drinks' bases out of the frame.\n\n4. **T2 needs two notes.**\n   - The gain comes as much from stepping back to y 2.9 as from the angle. Straight on but still on the bar's seat line (y 3.5), the ceiling band stays at about 13 %.\n   - The lit w1 panel still shows directly, as an L-shaped glow under and right of the horn: about 5.9k px, the same as B1's 6.0k.\n\n**Owner sentence.** As written it has three problems:\n- It leaves out the black top edge, which is the ceiling: 15 % of the mouth.\n- It says \"only\", but the nudge enlarges the lemon part with no new light.\n- It states \"look like a display case\" before anyone has seen T1, which breaks \"say only what you saw\".\n\nSuggested wording: \"The horn is clear, so from this seat its left side and top edge look straight through to the black felt on the niche's side wall and ceiling; only the part in front of the lit back shows lemon. Setting the speaker a little deeper and to the right makes that lemon part bigger. Making nearly all of it lemon would need the niche's walls lit too, or a seat almost straight in front of the speaker and further back, and I'll show you each as a picture before you choose.\"\n\nMy files are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b64/judge-options-verify/. The pictures are zones-mine-on-tests.png, horn-gamma-4.png, ov2-b400.png, farbay-fixed7.png, panel-halo-B1-T2.png and streaks-vs-grazing.png. The scripts are vtrace.py, vstraight.py, direct2.py and cheekprof.py."
+   }
+  }
+ ]
+}
