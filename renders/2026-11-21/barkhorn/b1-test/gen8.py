@@ -37,7 +37,12 @@ for p in P:
             # 7-22 from the horn) to (7.5, 3.6, 2.95), azimuth 44 deg, still aimed at the far cabinet; every corner above
             # the frame, the body's top z 3.397. 20 % further from the cabinet, so strength 28. Skirt and grid kept.
             p.update(position=[7.5, 3.6, 2.95], strength=28.0, grid=[6, 4], grid_depth=0.25)
-            p.pop('top_flag', None)
+            # (the coordinator, 19:25: keep the grid and the top flag for P4; p3m without the flag let the ceiling,
+            # the wall's top and the print back up to 3.7 / 13.6 / 15.9; the flag's corners stay above the frame here)
+            if v != 'p3m':
+                p['top_flag'] = 0.6
+            else:
+                p.pop('top_flag', None)
 if v.startswith('w'):
     # (a, wide) the opal panel across the whole near niche back above the cabinet (x 7.93-8.57, z 1.93-2.51), warm
     # (#FFE2C0, the bar's lamps) where a1/a3's cool #FFF4E6 read blue beside the horn; the horn's left half saw past a1
