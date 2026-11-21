@@ -1,0 +1,340 @@
+{
+ "results": [
+  {
+   "part": "physics",
+   "found": {
+    "q1_ready": "Partly. The frames can be trusted on the main question, liner or no liner. Every option without the liner reads dark (deck-top median C* 3.8-6.5) and every option with the liner reads colored (23.4-37.5), as the lane says. The light cues are physical and consistent, there is no stray light, and the scene is identical to the stock frames outside the product.\n\nThe package is not ready as it stands, for three reasons:\n1. The lane's single \"deck median\" table ranks the laminates far below the pour (Ember 22.4/25.0 vs 32.5). Measured by region, the gap is in the edge faces, not the top. On the top, the Ember laminates with liner equal the pour with liner (35.0/36.5 vs 37.5), and Ember 6 mm + liner is the closest match to the Tropos Ember front (hue 36.5 vs 35.9).\n2. The Poison row has no Poison reference.\n3. The stock frames exist only as half-size thumbnails.\n\nMost trustworthy renders: the six liner frames, with pour + liner the cleanest. Least trustworthy: poison-lam6-designed and poison-lam3-designed (22% and 13.6% of the top clipped to pure black, denoiser mottle under a lift), though they still read correctly as near-black.",
+    "measured": [
+     "Region medians, C*/L*, at 800x1000 with my masks (overlay in critic-physics/mask-check.png), in the order Ember pour, pour+L, 6mm, 6mm+L, 3mm, 3mm+L; Poison the same. TOP: 6.1/27.3, 37.5/39.9, 4.7/26.7, 35.0/35.7, 5.9/27.2, 36.5/39.9; 6.5/29.3, 32.2/52.6, 3.8/26.8, 23.4/36.6, 5.0/28.0, 33.3/45.3",
+     "TOP see-through zone (where the polished top mirrors the platter and arm, 43% of the top), C*/L*: Ember 8.3/1.9, 55.9/27.9, 3.7/0.8, 56.9/23.7, 7.8/1.8, 55.1/27.6; Poison 7.6/3.9, 45.0/44.6, 0.0/0.0, 42.0/25.0, 3.3/1.6, 50.4/37.9. The other 57% of the top is a grey reflection of the sweep, L* about 34 and C* 4-6, in every no-liner frame",
+     "FRONT edge face C*/L*: Ember 29.3/16.2, 30.4/19.0, 14.3/16.6, 10.7/25.6, 20.6/20.3, 10.7/29.0; Poison 24.4/20.7, 26.1/27.8, 6.9/15.1, 8.0/26.0, 12.2/19.4, 9.2/29.8. RIGHT face C*: Ember 11.3, 16.0, 6.0, 5.1, 9.1, 5.5; Poison 10.1, 14.2, 3.9, 4.3, 5.9, 4.8",
+     "DECK median (top plus faces) vs the lane's table: Ember 8.3 vs 7.3, 34.7 vs 32.5, 5.6 vs 5.1, 30.8 vs 22.4, 7.5 vs 6.5, 32.7 vs 25.0; Poison 8.5 vs 7.5, 30.3 vs 28.2, 4.3 vs 3.8, 20.1 vs 13.3, 6.0 vs 5.3, 29.9 vs 20.0. To reproduce the lane's liner numbers from my top and face distributions, its mask would need 43-48% low-chroma edge pixels",
+     "Stock decks, measured from the phys-sheet at 400x500: DECK C* Ember as designed 3.2, top satin 8.6, white liner 11.2 (see-through zone 29.4/7.9); Poison 2.7, 3.6, 3.1 (Poison white-liner see-through zone L* 0.0). Stock Ember front face C* 4.8 at L* 7.7",
+     "Front-face profile at x=250 (26 rows): pour Ember C* about 30 from top to bottom; 6mm no-liner stripe zone 17.6/L*15.4 vs band 13.5/17.2; 3mm 21.2 vs 20.4 (no stripe); 6mm+liner fades L* 8 to 37 and C* 16 to 3, no step. At x=115, over the floor: 6mm no-liner shows about 4.5 rows at C* 31-35, then a band at L* 36-41, C* 9-13; 3mm about 2 rows. Right face at x=660: 2-3 rows at C* 17-28 over C* 5-10",
+     "Family: Tropos Ember front (colour-sheet panel, pixels with C*>25): hue 35.9, L* 26.1, C* 55.8. Ember see-through zone with liner: 6mm hue 36.5 / L* 23.9 / C* 57.2; pour 28.5/28.0/56.1; 3mm 28.2/27.7/55.3. Ground: Tropos panel L* 93.1 vs deck panel 94.5",
+     "Scene: all 12 frames identical outside the product (ground above row 350: max dE 1.1). New ember-pour-designed vs the stock Ember frame outside the product: mean 0.7, max 2 of 255. The colour-sheet thumbnails match the full frames (mean abs diff about 0.5). The colour-sheet 'as specified' panels equal the phys-sheet 'as designed' panels (0.25). The Poison row's reference panel is identical to the Ember row's (diff 0.0)",
+     "Floor next to the base, L*, no liner vs liner: (350,690) 89.0 vs 91.2; (560,690) 86.4 vs 90.6. Far floor 90.9 in all frames",
+     "Pure (0,0,0) pixels on the deck top: poison-lam6-designed 22.0% (6,809 px), poison-lam3-designed 13.6%, ember-lam6-designed 9.9%, poison-pour-designed 4.6%, ember-lam3-designed 2.8%, ember-pour-designed 1.9%, liner frames 0-0.1%. Isolated bright speckles in the see-through zone: 2.6-5.9 per 1000 px without the liner vs 1.7-1.9 with it",
+     "Liner cutout: black ellipse about 36x13 px at x 402-438, y 546-559, L* about 1 inside vs 25-47 around it, in all six liner frames. Glint on the right face of the 3mm no-liner frames at (672-675, 501-504): L* 72-73 against 59-62 around it",
+     "Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-physics/ (grid-frontleft-corner.png, grid-frontright-corner.png, grid-frontface-x236-8x.png, grid-hole.png, hole-6x.png, hole-6x-lift.png, lift-under-deck.png, lift-top-mottle.png, true-top-mottle.png, grid-rightface-glint.png, grid-backright.png, diffmaps.png, mask-check.png, sheet-poison-row-reference.png); scripts in critic-physics/scripts/"
+    ],
+    "findings": [
+     {
+      "id": "table-hides-top-edge-split",
+      "severity": "fix",
+      "frame": "all six white-liner frames (ember/poison pour, lam6, lam3 + white-liner) and the lane's C* table",
+      "where": "deck top vs edge faces",
+      "what": "The lane's single 'deck median C*' ranks the laminates with liner far below the pour with liner: Ember 22.4 and 25.0 vs 32.5; Poison 13.3 and 20.0 vs 28.2. Measured by region, the gap is in the edge faces, not the top. Top medians: Ember pour+L 37.5, 6mm+L 35.0, 3mm+L 36.5 (equal within 2.5); Poison pour+L 32.2, 3mm+L 33.3, 6mm+L 23.4 (only Poison 6mm is truly weaker). With the liner, the laminates' front faces read grey (C* 10.7 at L* 25.6-29.0) while the pour's reads red (C* 30.4). My top+faces median matches the lane within about 2 C* for the six no-liner frames and the two pour+liner frames, but is 7-10 higher for the four laminate+liner frames (Ember 30.8/32.7, Poison 20.1/29.9). Read as it stands, the table could push the owner toward the custom pour (open quote) for top color that the frames do not show.",
+      "expected": "Report top and edges separately: on the top, the stock-sheet laminate with liner gives the same Ember color as the custom pour with liner; what the laminate costs is a grey edge band.",
+      "sure": "certain",
+      "evidence": "Output of critic-physics/scripts/regions.py; mask overlay critic-physics/mask-check.png; edge crops critic-physics/grid-frontface-x236-8x.png and grid-frontright-corner.png. The lane's mask is unknown: reproducing its liner numbers needs 43-48% low-chroma edge pixels in the mask."
+     },
+     {
+      "id": "stock-frames-missing",
+      "severity": "fix",
+      "frame": "ember-designed.png, poison-designed.png and the other stock (phys-sheet) frames",
+      "where": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/",
+      "what": "The stock-as-specified frames the task places in b53 are not there, nor anywhere on disk (find / -name 'ember-designed*.png' returns nothing). They exist only as 400x500 panels inside phys-sheet.png, which is byte-identical to b51/phys-sheet.png (md5 d544102d...). The baseline cannot be compared at 800x1000 with the twelve option frames.",
+      "expected": "The stock frames at 800x1000 beside the option frames.",
+      "sure": "certain",
+      "evidence": "ls of b53 shows 12 option frames plus two sheets. Half-size stock measurements: Ember deck C* 3.2, Poison 2.7, consistent with the lane's 'near black'."
+     },
+     {
+      "id": "poison-row-has-ember-reference",
+      "severity": "fix",
+      "frame": "colour-sheet.png, row 2 (Poison)",
+      "where": "first panel of the Poison row",
+      "what": "The Poison row opens with the Tropos EMBER front, pixel-identical to the Ember row's panel (mean abs diff 0.0). No Poison family reference appears on the sheet, so the owner's one-family rule cannot be judged for any Poison option. The task text describes the sheet this way, but it does not serve the decision.",
+      "expected": "A Tropos Poison front at the head of the Poison row, on the same ground.",
+      "sure": "certain",
+      "evidence": "critic-physics/sheet-poison-row-reference.png; output of critic-physics/scripts/sheetcheck.py ('Tropos panel row0 vs row1 mean abs diff 0.0')."
+     },
+     {
+      "id": "key-claim-holds-pour-edge-colored",
+      "severity": "note",
+      "frame": "ember-pour-designed, poison-pour-designed (and all no-liner frames)",
+      "where": "deck top; front edge face",
+      "what": "Consistent with the lane's key claim: without the liner every option's top reads dark. Top median C* is 3.8-6.5; the zone where the top mirrors the platter and arm is L* 0.0-3.9; the other 57% of the top is a grey reflection of the sweep (L* about 34, C* 4-6). Red or green light lands on the base top under the deck only in these frames. The pour's front edge is colored without the liner, though: Ember C* 29.3 at L* 16.2, Poison 24.4 at 20.7, even from top to bottom (the 'even edge' holds). A no-liner pour therefore reads as a dark top with a colored edge line, not all black. The stock front face measures C* 4.8 at L* 7.7.",
+      "expected": "Worth stating beside the table, since the edge is the only place a no-liner pour shows its color.",
+      "sure": "certain",
+      "evidence": "Output of critic-physics/scripts/regions.py; scripts/cprof.py at x=250 and x=115; critic-physics/lift-under-deck.png (red or green light on the base only without the liner); critic-physics/grid-frontleft-corner.png."
+     },
+     {
+      "id": "laminate-edge-look",
+      "severity": "note",
+      "frame": "ember/poison lam6 and lam3, designed and white-liner",
+      "where": "front edge face (most of its length) and right face",
+      "what": "The described 'thin tinted stripe over a clear frosted band' appears only where the deck overhangs the floor and on the right face. At x=115, Ember 6mm without liner shows about 4.5 rows at C* 31-35 over a light band (L* 36-41, C* 9-13); 3mm shows about 2 rows. On the right face at x=660 there are 2-3 rows at C* 17-28 over C* 5-10. Along most of the front face, which sits over the black base, there is no stripe. Without the liner the face reads as one even dull red-brown, like a pour: 6mm stripe zone 17.6/L*15.4 vs band 13.5/17.2; 3mm 21.2 vs 20.4. With the liner it is a smooth fade from dark at the top to light grey at the bottom (L* 8 to 37, C* 16 to 3 at x=250); the green and blue channels ramp evenly over all 26 rows with no step at the bond line. The laminate + liner deck reads as a colored top over a grey slab.",
+      "expected": "A frosted clear band taking the light of what lies beneath is plausible. A cemented tinted/clear bond is a sharp material boundary, though, and these frames do not settle whether a built edge would show a crisper line than this fade.",
+      "sure": "unsure",
+      "evidence": "critic-physics/grid-frontface-x236-8x.png (6x crop: no stripe in any laminate frame at x 236-286); critic-physics/grid-frontleft-corner.png (stripe visible near the left corner); critic-physics/grid-backright.png and grid-rightface-glint.png (stripe on the right face); profiles from scripts/cprof.py at x=115, 250, 660."
+     },
+     {
+      "id": "liner-cutout-black-spot",
+      "severity": "note",
+      "frame": "all six white-liner frames",
+      "where": "deck top just in front of the platter, near (420,552)",
+      "what": "A black ellipse about 36x13 px (x 402-438, y 546-559), L* about 1 inside against L* 25-47 around it. No bore wall or lit ring is visible, so it reads as a cutout in the liner under solid acrylic, with a dark part showing through. It is the most visible dark mark on the colored top. The lane's description does not mention it (it says the liner hides the view down to the base, posts and phono box). In the no-liner frames the same spot is lost in the dark.",
+      "expected": "Say what passes through there, and whether the built liner needs this cutout. If not, the liner frames carry a black spot the product would not have.",
+      "sure": "certain",
+      "evidence": "critic-physics/hole-6x.png, hole-6x-lift.png, grid-hole.png; dE map critic-physics/diffmaps.png (the spot does not change between liner and no-liner)."
+     },
+     {
+      "id": "clipped-black-and-mottle-in-dark-options",
+      "severity": "note",
+      "frame": "poison-lam6-designed (worst), poison-lam3-designed, ember-lam6-designed; less in the other no-liner frames",
+      "where": "deck top, zone mirroring the platter",
+      "what": "Pure (0,0,0) covers 22.0% of the deck top in poison-lam6-designed (6,809 px), 13.6% in poison-lam3-designed, 9.9% in ember-lam6-designed and 1.9-4.6% in the pours; 0-0.1% in the liner frames. Under a gamma lift, these zones show irregular, wavy-edged dark blotches (denoiser-like) and isolated bright pixels: 2.6-5.9 per 1000 px vs 1.7-1.9 in the liner frames. At true exposure it shows only as a soft mottle on a near-black top. These are the least trustworthy renders of the set, but they still convey 'near black' correctly.",
+      "expected": "A photograph would keep some tone and grain in these blacks; this does not change the decision.",
+      "sure": "certain",
+      "evidence": "critic-physics/lift-top-mottle.png (lifted) vs true-top-mottle.png (true exposure); critic-physics/scripts/zeros.py and scripts/speckle.py."
+     },
+     {
+      "id": "lam3-right-face-glint",
+      "severity": "note",
+      "frame": "ember-lam3-designed, poison-lam3-designed",
+      "where": "right face at (672-675, 501-504)",
+      "what": "A small bright spot, L* 72-73 on a face of L* 59-62, about 4x4 px, on a bead-blasted face. It is absent in the pour and 6mm frames and softened in the 3mm liner frame. It reads as a tiny light dash: either a caustic hot spot through the clear core or a leftover firefly.",
+      "expected": "A frosted face shows no sharp glint; minor.",
+      "sure": "unsure",
+      "evidence": "critic-physics/grid-rightface-glint.png; L* map printed around (662-686, 490-509)."
+     },
+     {
+      "id": "liner-rendered-without-edge",
+      "severity": "note",
+      "frame": "all six white-liner frames",
+      "where": "bottom of the front and right edge faces",
+      "what": "No white line shows at the bottom of the edge faces: the bottom rows sit at L* 33-37 at x=250, then the dark gap. The liner is therefore rendered with no visible edge, like paint or a sheet inset from the edge. The lane lists 'opaque white sheet or paint'; a flush white sheet would show its edge as a white line under the 25.4 mm face.",
+      "expected": "If the build uses a sheet, render its edge or state that it is inset.",
+      "sure": "likely",
+      "evidence": "Profiles from scripts/cprof.py at x=115 and x=250; critic-physics/grid-frontface-x236-8x.png."
+     },
+     {
+      "id": "ember-6mm-liner-matches-tropos",
+      "severity": "note",
+      "frame": "ember-lam6-white-liner vs the Tropos Ember front (colour-sheet panel 1)",
+      "where": "top, zone mirroring dark objects",
+      "what": "Ember 6mm + liner: hue 36.5, L* 23.9, C* 57.2. Tropos Ember front: hue 35.9, L* 26.1, C* 55.8. These match. Ember pour + liner (28.5 / 28.0 / 56.1) and 3mm + liner (28.2 / 27.7 / 55.3) are about 7-8 degrees more crimson. Over the whole top, including the reflection veil, the hues are 30.6 (6mm), 26.8 (pour) and 26.5 (3mm). The grounds read as one: Tropos panel L* 93.1 vs deck panel 94.5.",
+      "expected": "Relevant to the one-family rule and absent from the lane's table.",
+      "sure": "certain",
+      "evidence": "Output of critic-physics/scripts/family.py."
+     },
+     {
+      "id": "scene-and-light-cues-consistent",
+      "severity": "note",
+      "frame": "all 12",
+      "where": "whole frame",
+      "what": "Right. Outside the product, all 12 frames are identical (ground above row 350: max dE 1.1) and match the stock frames (mean 0.7, max 2 of 255 at half size): same camera and light, only the deck changes. The platter is identical within each liner/no-liner pair. The polished top shows sharp reflections of arm and platter in every frame; the edges are diffuse. Red or green light reaches the base top only without the liner. With the liner, the floor next to the base is lighter (+2.2 L* at (350,690), +4.2 at (560,690)), consistent with the white underside bouncing floor light back down. I saw no stray light or edge lamps.",
+      "expected": "n/a (confirms the comparison is fair)",
+      "sure": "certain",
+      "evidence": "critic-physics/diffmaps.png; scripts/diffs.py, scripts/patches.py, scripts/stock.py; critic-physics/lift-under-deck.png."
+     },
+     {
+      "id": "right-face-greyer-than-front",
+      "severity": "note",
+      "frame": "all 12",
+      "where": "right side face",
+      "what": "In every option the right face reads much greyer than the front face. Pour without liner: Ember front C* 29.3 vs right 11.3, Poison 24.4 vs 10.1. Pour with liner: 30.4 vs 16.0. Laminates' right face: C* 3.9-6.0. This is consistent with a frosted surface's sheen at a grazing view. The deck's color reads only from the top and the front face at this angle.",
+      "expected": "Plausible; worth knowing when judging the corner.",
+      "sure": "certain",
+      "evidence": "Output of scripts/regions.py; profiles at x=560, 600, 630, 660; critic-physics/grid-frontright-corner.png."
+     }
+    ]
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "table-hides-top-edge-split",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "I used my own geometric masks, built from the corner crops. All 12 frames line up pixel for pixel: static regions differ by less than 0.25 levels. Mask sizes: TOP 25,784 px, FRONT 12,138 px, RIGHT 4,629 px, so faces are 39% of top+faces.\n\nMedian C* on the top:\n- Ember: pour+L 37.4, 6mm+L 34.9, 3mm+L 36.5\n- Poison: pour+L 32.2, 6mm+L 23.2, 3mm+L 33.2\n\nFront face, median C* / L*:\n- Ember: pour+L 30.5/19.1, 6mm+L 11.8/24.8, 3mm+L 11.5/28.4\n- Poison: pour+L 26.0/27.9, 6mm+L 8.5/25.5, 3mm+L 9.8/29.8\n\nTop colour (L*, a*, b*):\n- Ember 3mm+L 42.4/33.0/15.8 against pour+L 42.3/33.7/16.2, a difference of about 0.8 (dE).\n- Ember 6mm+L is 4.4 L* darker (37.9) at the same chroma.\n- Poison 3mm+L top is 6.2 L* darker than pour+L (47.5 against 53.7).\n\nMy top+faces median against the lane's table:\n- +0.6 to +2.8 on the six no-liner frames and the two pour+liner frames.\n- +5.3 to +7.7 on the four laminate+liner frames.\n- My top+faces pixels plus 15% neutral (C*=0) pixels reproduce all 12 lane numbers within \u00b11.1 (mean 0.4).\n\nThe laminate+liner decks have two separate colour groups. In Ember 3mm+L, 87% of top pixels are at C* 28 or above and 78% of face pixels are below 15. The lane's 25.0 falls in a band that holds only 11% of the top and 16% of the faces.",
+      "reasoning": "Confirmed with my own masks, numbers and crops. My top medians match the critic's within 0.2, and my face numbers match within about 0.5.\n\nCrops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-physics/deck-ember-liner-1x.png and deck-poison-liner-1x.png show the 3 mm laminate top in the same red as the pour, with a grey slab under it. frontface-ember-liner-6x.png and frontface-poison-liner-6x.png show the same faces at 6x.\n\nThe frames themselves are right physically:\n- The 12% Ember pour times 25.4 mm is about 3.05 mm of stock dye, the same light path as the 3 mm sheet. So equal tops are what the physics predicts.\n- The 6% Poison pour is about 1.5 mm of stock dye, so the 3 mm Poison laminate top should be darker. It is.\n- The 6 mm laminate tops should be darker in both colours. They are.\n- At x=250, the laminate face shows a faint, darker tinted stripe on top: about 6 rows at C* 14-16 for 6 mm and about 3 rows for 3 mm. The rest is grey that lightens toward the liner. That matches the lane's own making note.\n\nSo the fault is only in the table. Its single median lands between the two colour groups and describes neither surface, and the whole ranking gap comes from the edges.\n\nTwo refinements to the critic's write-up:\n- The '7-10 higher' depends on how much of the mask is faces. With my 39% face mask the gap is 5-8.\n- The lane's numbers are not wrong only for the laminates. All 12 fit one mask: top+faces diluted by about 15% dark non-deck pixels. That is close to the critic's estimate of 43-48% low-chroma pixels.\n\nThe 'expected' line needs one qualifier. The 3 mm laminate gives the same Ember top. The 6 mm laminate gives the same chroma but is 4.4 L* darker.\n\nSeverity: fix, not blocking. The frames render the options correctly, and the lane's text does mention the frosted edge band. But the numbers could steer the owner toward the custom pour for top colour that it does not add.\n\nData: measure-regions.txt, lanemask.txt and bimodal.txt in the verify-physics folder."
+     },
+     {
+      "id": "stock-frames-missing",
+      "verdict": "confirmed",
+      "severity": "note",
+      "measurement": "b53 holds the 12 option frames, the two sheets and the critic/verify folders, and nothing else.\n\nName search, case-insensitive, for *ember*design*, *poison*design*, *2423* and *2092*: no full-size stock frame anywhere. No JPG, WebP, EXR or TIFF from the last day either.\n\nContent search: I compared 297 PNG frames in 4:5 format (at least 200 KB, written since 20 Nov) against each stock panel, over the deck region. None matches. The best mean difference is 2.6-8.4, against 0.39 for a resample of the same source.\n\nphys-sheet.png has md5 d544102d52d6655943b91348dd06eebb, the same as b51/phys-sheet.png. It holds 11 panels of 400x500 under a 30 px label strip.\n\nThe colour sheet's 'as specified' panels are the same renders (0.25 difference after resizing). So the stock frames also exist as 300x375 panels there, not only at 400x500.\n\nHalf-size deck C* with my masks: Ember 2423 as designed 3.2, Poison 2092 as designed 2.7. Both reproduce the critic's numbers.\n\nHalf-size against full-size on b53 frames: deck C* 10.3 against 10.1, and 30.9 against 30.7.",
+      "reasoning": "The facts reproduce. The files the task places in b53 do not exist on this disk under any name or format. The sheet in b53 is the b51 sheet, byte for byte.\n\nI lower the severity to note:\n- Measurements at half size match full size within 0.2 C*.\n- The stock decks read near black (C* 3) on both sheets.\n- As designed is already out under the deep-colour rule, so no choice among the twelve options depends on full-size stock files.\n\nWhat is lost is a full-size realism check of the baseline. That matters for review, not for the owner's choice.\n\nSmall correction: 'only as 400x500 panels' should read '400x500 in phys-sheet and 300x375 in colour-sheet'.\n\nEvidence: findstock2.txt, sheets.txt and stock-half.txt in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-physics/"
+     },
+     {
+      "id": "poison-row-has-ember-reference",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "Colour sheet:\n- Row 1, panel 0 (y 26-400) against row 2, panel 0 (y 427-801): mean abs diff 0.000, max 0. Pixel-identical, and both are labelled 'Tropos Ember front'.\n- Their source is b26/front-ember.png (0.48 difference after resizing).\n\nA Tropos Poison front on the same ground exists on disk: scratchpad/black-rods/front-poison.png. Its Ember sibling, black-rods/front-ember.png, matches the b26 Ember front within a mean difference of 0.18, and the background patch is identical (RGB 203.6/197.6/188.5).\n\nMedian colour of the tinted body (pixels with C* > 20):\n- Tropos Poison: h 139.3, C* 50.8\n- Poison deck tops with liner: h 122.2 (pour), 130.7 (6 mm), 125.0 (3 mm); C* 23-33\n- For comparison, Tropos Ember h 35.9 against Ember deck tops h 26.5-30.3",
+      "reasoning": "Reproduced exactly. The Poison row repeats the Ember Tropos panel, and there is no Poison family reference anywhere on the sheet.\n\nThe gap is not a formality. A Poison front on the same ground is already on disk. Its body hue is 8-17\u00b0 from the Poison deck tops, which are yellower. Judging the one-family rule needs exactly that side-by-side, and the sheet as built cannot show it.\n\nThe panel is labelled correctly, so it does not mislead. But it leaves one of the owner's rules unjudgeable for half the options, and the fix is cheap: swap in black-rods/front-poison.png. Severity: fix.\n\nEvidence: colour-sheet-tropos-row1-left-row2-right.png and poison-row-with-tropos-poison-front.png (the on-disk Poison front placed before the sheet's Poison row), plus sheets.txt, tropos.txt and tropos-hue.txt, all in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-physics/"
+     }
+    ]
+   }
+  },
+  {
+   "part": "buyer",
+   "found": {
+    "findings": [
+     {
+      "id": "B1",
+      "severity": "fix",
+      "frame": "colour-sheet.png, Poison row",
+      "where": "Poison row, first tile (label 'Tropos Ember front')",
+      "what": "The Poison row's family reference is the red Tropos, so the sheet cannot show the owner that every Poison deck leans olive and light next to the green Tropos.",
+      "expected": "Start the Poison row with the Tropos Poison front so the owner compares green with green. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/black-rods/front-poison.png uses the same camera and ground; its Ember twin differs from b26/front-ember.png by 0.18 levels.",
+      "sure": "certain",
+      "evidence": "Both rows of the sheet start with 'Tropos Ember front'. Tropos Poison, pixels with C*>25: L* 35.5, C* 53.9, h 139.4. Mantle Poison options at C*>25: hue 122.3 (pour+liner), 123.9 (3 mm+liner), 130.0 (6 mm+liner), 125.1 (pour). Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/row-poison-300-a.png, row-poison-300-b.png, swatches.png"
+     },
+     {
+      "id": "B2",
+      "severity": "fix",
+      "frame": "poison-pour-white-liner.png, poison-lam3-white-liner.png (also poison-lam6-white-liner.png, poison-pour-designed.png)",
+      "where": "deck top and faces",
+      "what": "No Poison option reads as the Tropos Poison. Next to the emerald, bottle-green Tropos, the pour+liner reads as a flat, light olive slab; of all twelve frames it comes nearest to painted plastic. The 3 mm+liner reads moss green. Only the denser 6 mm path gets close to the hue, and it loses chroma doing so.",
+      "expected": "A Poison deck whose strongly coloured pixels sit near h 139 and L* 35. The 6 mm+liner frame shows that a denser path moves the hue toward it (130). The 6 % pour lands furthest away.",
+      "sure": "certain",
+      "evidence": "Pixels with C*>25 (L*/C*/h): Tropos Poison 35.5/53.9/139.4. pour+liner 49.1/31.6/122.3, dE76 28.9. 3 mm+liner 45.2/35.9/123.9, dE76 23.6. 6 mm+liner 27.3/41.8/130.0, dE76 16.6. Scale: Core Ember vs Tropos Ember is dE76 10.2. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/swatches.png, web480-poison-liner.png"
+     },
+     {
+      "id": "B3",
+      "severity": "fix",
+      "frame": "all six *-white-liner.png",
+      "where": "deck top in front of the platter, x 400-444, y 540-558 (800x1000)",
+      "what": "The motor pocket renders as a flat, pure-black void with no visible wall and nothing inside it. At 480 it is a black dot in front of the platter that reads as a hole or a missing part. In the no-liner frames the same pocket vanishes into the dark deck, so the liner brings it out; the lane did not list this.",
+      "expected": "Some shading on the pocket's black-painted walls (mantle-README: holes' walls 'painted white toward the acrylic, then black'), not RGB 0 throughout. The owner should also be told that the liner makes the pocket a visible dark hole.",
+      "sure": "certain",
+      "evidence": "Row y=552 grey levels are 0-4 from x 404 to 434. Pocket pixels have median L* 1.6 (ember pour+liner), 0.0 (poison pour+liner) and 0.8 (ember 6 mm+liner). /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/hole-5x.png, frontright-ember-2x.png, frontright-poison-2x.png"
+     },
+     {
+      "id": "B4",
+      "severity": "note",
+      "frame": "ember-/poison-lam6-white-liner.png, ember-/poison-lam3-white-liner.png",
+      "where": "front and right faces of the deck",
+      "what": "On the lamina+liner decks the faces read as a grey frosted band under a thin, dark red-brown or dark green line. At 480 these decks look like a coloured top sheet on a grey slab. The pour+liner is the only liner build with a coloured edge; the Tropos panel edges read as solid tint.",
+      "expected": "The owner should weigh this edge look: it is what makes the stock-sheet route read differently from a solid tinted deck.",
+      "sure": "certain",
+      "evidence": "Front-face median C*: pour+liner 30.3 Ember / 26.0 Poison; 6 mm+liner 11.6 / 8.3; 3 mm+liner 11.4 / 9.7. Profile at x=150, where the face is about 1 px per mm (y 522-546): Ember 6 mm+liner C* runs 30, 21, 20, 18 down the top 6 px, then falls smoothly 15 to 5 with L* rising 25 to 40. 3 mm+liner runs 31, 25, 15 in 4 px, then 14 to 7. There is no crisp step. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/front-face-6x.png, edge-left-ember-3x.png, edge-left-poison-3x.png, web480-ember-liner.png"
+     },
+     {
+      "id": "B5",
+      "severity": "note",
+      "frame": "all six *-designed.png (no liner)",
+      "where": "deck top",
+      "what": "Without the liner every deck top reads near black at web size, and only the pour's front face carries colour. The pour reads as burgundy or bottle-green glass, the laminae as black-brown or black-green. This confirms the lane's claim: nothing reaches C* 30 without the liner.",
+      "expected": "Nothing further: these frames are consistent with the lane's table.",
+      "sure": "certain",
+      "evidence": "Top median C* 3.8-6.7 at L* 27.5-30.2, with 46-47 % of top pixels at L*<20. Front face C*: pour 29.3 / 24.4, 3 mm 20.5 / 12.2, 6 mm 14.3 / 6.9. Share of deck pixels with C*>25: Ember 24 / 1.6 / 2 % (pour / 3 mm / 6 mm), Poison 12.7 / 0.2 / 0.4 %. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/web480-ember-nolin.png, web480-poison-nolin.png"
+     },
+     {
+      "id": "B6",
+      "severity": "note",
+      "frame": "ember-pour-designed.png vs ember-pour-white-liner.png (same in Poison)",
+      "where": "deck top, the float gap, the floor",
+      "what": "From this camera the see-through view to posts and phono box is not legible even without the liner. The deck top is dominated by reflections, and nothing resolves even with exposure lifted 3x. The float gap stays open with the liner. What the liner changes is the material: dark glass becomes an opaque glossy coloured slab, like the Core's tint over white. It also brightens the floor under the front edge.",
+      "expected": "When the owner weighs the change to the floating look, this hero view shows it as a change of material, not a lost view of the parts underneath.",
+      "sure": "likely",
+      "evidence": "Floor visible between deck and base at x=150, y 549-555: L* 81 without liner, 83 with. Floor below the front-left edge L* 71.2 vs 72.9; floor in front 86.5 vs 88.8. Floor C* 4-5 with and without the liner, so no coloured light reaches the floor. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/seethrough-lift3.png, float-web480-2x.png, diff-ember-pour-vs-liner-x4.png"
+     },
+     {
+      "id": "B7",
+      "severity": "note",
+      "frame": "all poison-*.png vs ember-*.png",
+      "where": "platter rim under the record",
+      "what": "The Poison platter reads black while the Ember platter reads red, so a Poison Mantle shows a black platter on a green deck, and an Ember Mantle a red one.",
+      "expected": "The owner should know the stock-sheet platter carries Ember but not Poison.",
+      "sure": "certain",
+      "evidence": "Platter-rim mask: Ember L* 6.4-10.6, C* 17.7-24.6, h 26-27. Poison L* 0.1-7.7, C* 0.0-7.3 (pour-designed: L* 0.4, C* 0.5). /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/platter-rim-3x.png"
+     },
+     {
+      "id": "B8",
+      "severity": "note",
+      "frame": "all option frames at home-row tile size",
+      "where": "whole 300x375 tile",
+      "what": "Even the strongest option shows strong colour on about a third of the area the Tropos does at tile size. The black record and the small, low turntable dominate the tile, which limits the one-family read whatever the deck build.",
+      "expected": "For the home row, the Mantle tile's framing matters alongside the deck build.",
+      "sure": "certain",
+      "evidence": "% of tile with C*>25 / C*>40: Tropos Ember 16.6 / 11.7; Tropos Poison 13.9 / 8.9; Core 22.3 / 20.0. Ember pour+liner 5.0 / 1.7, 6 mm+liner 3.5 / 1.5, 3 mm+liner 3.7 / 1.6, pour 1.3 / 0.1. Poison pour+liner 4.3 / 1.4, 3 mm+liner 3.3 / 1.4, 6 mm+liner 1.8 / 0.9, pour 0.6 / 0.0."
+     },
+     {
+      "id": "B9",
+      "severity": "note",
+      "frame": "all ember-*.png",
+      "where": "deck, pixels with C*>25",
+      "what": "All Ember options stay in the family red. The pour and 3 mm lean slightly crimson; the 6 mm is truest. The gap to the Tropos is mostly saturation: the liner decks are about 20 C* weaker, with lightness close to the Tropos.",
+      "expected": "Nothing to change; the hue is right.",
+      "sure": "certain",
+      "evidence": "Hue: Tropos 34.7, Core 33.9; pour+liner 27.9, 3 mm+liner 26.7, 6 mm+liner 32.3, pour 31.7. L*/C*: Tropos 27.3/57.6, Core 37.3/59.4, pour+liner 29.9/36.0. dE76 to the Tropos: 6 mm+liner 20.4, pour+liner 22.4, 3 mm+liner 22.9, pour 29.4. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/row-ember-300-a.png, row-ember-300-b.png, swatches.png"
+     },
+     {
+      "id": "B10",
+      "severity": "note",
+      "frame": "all twelve",
+      "where": "backdrop and floor",
+      "what": "The ground matches the Tropos front, so one ground holds for every option.",
+      "expected": "Nothing to change.",
+      "sure": "certain",
+      "evidence": "Six patches at the same relative positions, L* difference from the Tropos: +1.0, +0.7, -0.3, -0.1, -1.7, -2.2. Mantle a* -0.5 to -0.8 (Tropos -0.7 to +0.4); b* 3.5-6.0 (Tropos 3.8-5.7). All 12 frames are pixel-aligned: backdrop differs by at most 0.03 mean levels."
+     },
+     {
+      "id": "B11",
+      "severity": "note",
+      "frame": "ember-designed.png, poison-designed.png (named in the brief)",
+      "where": "b53 folder",
+      "what": "The stock-as-specified frames named in the brief are not in b53, or anywhere on disk. Only the 400x500 tiles inside phys-sheet.png exist; I measured from those.",
+      "expected": "Nothing further for the decision: the stock tiles read black (deck median C* 3.2 Ember, 2.7 Poison).",
+      "sure": "certain",
+      "evidence": "Searched the whole disk for ember-designed* and poison-designed*: no hits. Tiles are cut from phys-sheet.png at y 30-530, 400 px wide."
+     },
+     {
+      "id": "B12",
+      "severity": "note",
+      "frame": "all six *-white-liner.png",
+      "where": "bottom edge of the front and right faces",
+      "what": "No white liner edge shows along the bottom of the deck: the frames show the liner as paint, with no thickness. A sheet liner would add a white line under the coloured slab, and these frames do not show one.",
+      "expected": "If the liner is to be a sheet, the frames understate that line.",
+      "sure": "likely",
+      "evidence": "Front-face profile at x=150: the bottom pixels go L* 28 (pour+liner) or 40-41 (laminae) at C* 3-25, then straight to floor L* 83, with no lighter line between."
+     }
+    ],
+    "q1_ready": "Ranking from a buyer's eye. The order is the same for Ember and Poison. Only the liner frames read as the tint.\n1. Pour + liner: the only build whose whole deck, top and edges, reads as its colour at 480 (deck C* 35 Ember / 30 Poison; front face C* 30 / 26). It looks like a solid glossy slab, like the Core's tint over white. Ember reads as the family red (hue 28 vs Tropos 35). Poison reads as a flat, light olive (hue 122 vs 139, L* 49 vs 35, dE 29 to the Tropos Poison), so the 6 % Poison pour is its weak point. Costs: the dark-glass look goes, the black motor pocket shows, and it needs a custom cast.\n2. 3 mm lamina + liner: nearly as much colour on top from stock sheet (top C* 37 / 33), but the faces read as a grey frosted band (C* 11 / 10) under a thin dark line, so it looks like a coloured sheet on a grey slab. Poison reads moss-olive (124).\n3. 6 mm lamina + liner: closest hue to the Tropos (32 and 130; Poison dE 17, the best of all twelve), but the dullest of the three liner builds (Poison top C* 23; 31 % of deck pixels strongly coloured), with the same grey band. It reads as dark red or forest green on grey.\n4. Pour, no liner: the most glass-like, and it keeps the dark floating look; its edges glow (C* 29 / 24). But the top reads near black (C* 6-7), so it reads as burgundy and bottle-green, not Ember or Poison, beside the Tropos.\n5. 3 mm lamina, no liner: black-brown or black-olive top (C* 6 / 5) with a dull edge (C* 20 / 12).\n6. 6 mm lamina, no liner: black, like the stock deck (deck C* 5.9 / 4.4 vs stock 3.2 / 2.7). No gain.\nAt 480, no frame reads as CG except the pure-black motor pocket in the liner frames. All twelve share the Tropos ground within 2.3 L*. Before the owner judges Poison, put it beside the green Tropos, not the red one.",
+    "measured": [
+     "Deck median C* (top + front + right faces; one mask made from the liner pair and applied to all 12 frames at 800x1000): Ember pour 9.0, pour+liner 34.7, 6 mm 5.9, 6 mm+liner 30.6, 3 mm 8.0, 3 mm+liner 32.6. Poison 9.0, 30.3, 4.4, 20.0, 6.4, 29.7. Stock as specified (phys-sheet tiles): Ember 3.2, Poison 2.7. Same order as the lane's table; my laminate+liner values run higher because the masks differ.",
+     "Deck top only, median C*: Ember 6.4 / 37.6 / 4.7 / 35.2 / 6.0 / 36.7. Poison 6.7 / 32.2 / 3.8 / 23.4 / 5.1 / 33.4 (order: pour, pour+liner, 6 mm, 6 mm+liner, 3 mm, 3 mm+liner).",
+     "Front face, median C*: Ember 29.3 / 30.3 / 14.3 / 11.6 / 20.5 / 11.4. Poison 24.4 / 26.0 / 6.9 / 8.3 / 12.2 / 9.7 (same order).",
+     "Pixels with C*>25, L*/C*/hue: Tropos Ember 27.3/57.6/34.7; Core Ember 37.3/59.4/33.9; Tropos Poison 35.5/53.9/139.4. Ember pour+liner 29.9/36.0/27.9, 6 mm+liner 31.0/37.6/32.3, 3 mm+liner 37.1/38.0/26.7, pour 17.0/30.1/31.7. Poison pour+liner 49.1/31.6/122.3, 6 mm+liner 27.3/41.8/130.0, 3 mm+liner 45.2/35.9/123.9, pour 31.6/27.8/125.1.",
+     "dE76 to the Tropos of the same tint: Ember 6 mm+liner 20.4, pour+liner 22.4, 3 mm+liner 22.9, pour 29.4. Poison 6 mm+liner 16.6, 3 mm+liner 23.6, pour 28.1, pour+liner 28.9. For scale, Core vs Tropos Ember is 10.2.",
+     "Share of deck pixels with C*>25: Ember 24 / 88 / 2 / 61 / 1.6 / 64 %. Poison 12.7 / 79 / 0.4 / 31 / 0.2 / 60 %.",
+     "Front-face profile at x=150 (about 1 px per mm, y 522-546): pour+liner C* stays 29-39. 6 mm+liner: 30, 21, 20, 18 down the top 6 px, then 15 to 5. 3 mm+liner: 31, 25, 15 in 4 px, then 14 to 7.",
+     "Motor pocket in the liner frames: RGB 0-1 across x 404-434 at y 552; pocket median L* 0.0-1.6. It is invisible in the no-liner frames.",
+     "Platter rim: Ember L* 6.4-10.6, C* 17.7-24.6, h 26-27. Poison L* 0.1-7.7, C* 0.0-7.3.",
+     "Ground vs Tropos at six relative patches: L* difference +1.0 / +0.7 / -0.3 / -0.1 / -1.7 / -2.2; a* -0.5 to -0.8; b* 3.5 to 6.0. Frames are pixel-aligned (record at most 0.08 and backdrop at most 0.03 mean levels apart).",
+     "Liner floor bounce: floor below front-left edge L* 71.2 to 72.9, floor in front 86.5 to 88.8. Floor C* 4-5 with and without the liner.",
+     "Strong colour at 300x375 tile size, % of tile with C*>25 / C*>40: Tropos Ember 16.6 / 11.7, Tropos Poison 13.9 / 8.9, Core 22.3 / 20.0. Ember pour+liner 5.0 / 1.7, 3 mm+liner 3.7 / 1.6, 6 mm+liner 3.5 / 1.5, pour 1.3 / 0.1. Poison pour+liner 4.3 / 1.4, 3 mm+liner 3.3 / 1.4, 6 mm+liner 1.8 / 0.9, pour 0.6 / 0.0.",
+     "Green reference used: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/black-rods/front-poison.png. Its Ember twin differs from b26/front-ember.png by 0.18 mean levels.",
+     "All crops, masks, scripts and raw numbers are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/critic-buyer/ (measurements.txt, row-*-300*.png, web480-*.png, edge-left-*-3x.png, frontright-*-2x.png, front-face-6x.png, hole-5x.png, platter-rim-3x.png, swatches.png, float-web480-2x.png, seethrough-lift3.png, diff-ember-pour-vs-liner-x4.png, mask-check.png)"
+    ]
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "B1",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "Both rows of colour-sheet.png start with the same tile, pixel for pixel (diff 0.0, mean RGB 200.9/175.9/169.5 each). It is b26/front-ember.png: after resizing it differs by 0.48 levels, against 12.6 for black-rods/front-poison.png. The proposed replacement holds up. black-rods/front-ember.png against b26/front-ember.png differs by a mean of 0.184 levels (the critic's 0.18 reproduces), and the differences are only the lower box's ports, amp and screws (0.8 % of pixels over 10 levels). The ground of black-rods/front-poison against b26/front-ember differs by a mean of 0.20 levels (max 5). With my own Lab code and mask (pixels where the Ember and Poison Tropos differ by more than 25), the Tropos Poison pixels with C*>25 read L* 35.5, C* 53.9, h 139.4, exactly as claimed. Poison deck hue at C*>25 on my own deck mask: pour+liner 122.3, 3 mm+liner 123.9, 6 mm+liner 129.9, pour 125.2. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/sheet-poison-row-a.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/poison-row-with-tropos-poison-300.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/tropos-b26-vs-blackrods-ember-diff-x4.png",
+      "reasoning": "Confirmed by my own crop. In the Poison row, a red Tropos stands next to green decks. When I swap in the Tropos Poison at the sheet's 300 px tile size, the mismatch shows at once: the decks are olive or moss green beside an emerald front. The swap file is the same rig and ground, so the swap is valid. The lane chose the Ember front for both rows on purpose (the brief says so), but the like-for-like check for a tint's family read is the Tropos front of the same tint. One overstatement: 'every Poison deck leans olive and light'. All six do lean olive (h 116-131 against 139). Only the pour+liner (L* 49) and 3 mm+liner (44) are lighter. The 6 mm+liner is darker (27.3 against 35.5), and the three decks without a liner read near-black. Fix rather than blocking: no option is rendered wrongly, and the label is truthful. But the sheet should not go to the owner for the Poison decision without this swap."
+     },
+     {
+      "id": "B2",
+      "verdict": "confirmed",
+      "severity": "note",
+      "measurement": "Pixels with C*>25 on my own deck mask (top, front and right faces, 49,266 px, platter, arm and disc removed), median L*/C*, circular-mean h, against Tropos Poison 35.5/53.9/139.4:\n- pour+liner: 49.0/31.8/122.3, dE76 28.7, dE2000 15.9, dH* 12.4\n- 3 mm+liner: 44.2/36.1/123.9, dE76 23.1, dE2000 11.5, dH* 11.9\n- 6 mm+liner: 27.3/41.6/129.9, dE76 16.8, dE2000 8.6, dH* 7.8\nAll within about 1 unit of the critic's figures.\nScale and context:\n- Core Ember against Tropos Ember: dE76 10.2 (reproduced), dE2000 8.0.\n- The Ember options against Tropos Ember: dE2000 8.0, 10.4 and 6.6; dH* 5.5, 6.6 and 2.0.\nTop-face medians:\n- pour+liner: L* 51.4, C* 31.6, h 121.7\n- 3 mm+liner: 43.7/32.3/123.6\n- 6 mm+liner: 33.0/22.2/130.2; only 27.6 % of its deck is over C* 25, against 67.6 % for pour+liner.\nCrops and numbers: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/poison-row-with-tropos-poison-300.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/liner-left-2x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/b2stats.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/b2de.txt",
+      "reasoning": "The look and the numbers reproduce. Next to the emerald Tropos, the pour+liner is a light yellow-olive slab, the 3 mm+liner is moss, and the 6 mm+liner is the closest. It is still not a fault in the frames. The hue moves steadily toward the Tropos as the dye path gets denser (122, 124, 130, then 139 for the Tropos), which is how a green tint behaves (thin is yellower, thick is purer). Nothing I saw shows an option rendered wrongly, though I cannot check the supplier dye data. Three corrections:\n- 'No Poison option' is too strong in perceptual terms. The 6 mm+liner is at dE2000 8.6, the same spread as Core Ember against Tropos Ember (8.0), which is the critic's own family scale. It is still 9 degrees yellower and 8 L* darker. dE76 inflates these high-chroma gaps.\n- 'Loses chroma' is true by area (top C* 22 against 32), but its strongly coloured pixels are the most chromatic (41.6).\n- 'Nearest to painted plastic' I can only partly back. The pour+liner edge is tinted all the way through with no clear band, so it carries the fewest glass cues of the liner options. At 800 px it still reads to me as glossy acrylic over white; at 300-480 px it reads as an opaque olive plinth.\nThis is important for the owner's family rule: give it to him with B1's swap. It is not a render fix."
+     },
+     {
+      "id": "B3",
+      "verdict": "refuted",
+      "severity": "note",
+      "measurement": "The darkness reproduces. In all six liner frames the disc in front of the platter is near black:\n- core median L* 0.0 in five frames, 2.1 in poison 3 mm+liner\n- row y=552 grey 0-5 across x 404-434\n- an 8x exposure lift shows no wall and nothing inside\n- at 480 px it is a black dot\n- in the frames without a liner, the whole 45x19 box is L* under 5\nBut it is not the motor pocket.\n- The motor and pulley are at the back-left. The b53 frames show a black disc with a centre bore there, and the v3 drawing (b28/mantle-dimensions.png) puts the motor circle about 185 mm from the spindle at the back-left, belt to the platter.\n- I mapped the disc's centre (421, 549) onto the deck plane with an affine fit, checked on the spindle, arm pivot and motor to within about 6-25 px. It lands at X about 303 mm from the left edge, where the drawing's right-hand posts stand (X 290-320).\n- The clear Fog house frame (audit/mantle/mantle-house-fog.png, same camera) shows a soft grey post end at exactly that spot, with no hole outline in the top.\n- The README's own history (r48-mantle-README.md lines 578 and 822) names 'the ellipse in front of the platter' as the front-right post's bonded seat seen through the deck.\nCrops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/pocket-lift8-8x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/b3-feature-map-affine.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/postseat-fog-vs-liners-3x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/b53-backleft-motor-4x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b53/verify-buyer/web480-three-deck-band.png",
+      "reasoning": "This is a misreading of the design. The feature is where the white liner gives way to the front-right post's bonded seat, seen down through the deck. It is not a motor pocket missing its walls and pulley. The critic's expected result, shading on black-painted pocket walls, quotes the v4 lit-deck proposal's paint for holes that are not this one. The physics of a black disc is plausible. A polished post end under two passes of tint, mirroring the dark platter rim behind it, would photograph near-black too; my rough estimate is L* under 1. What survives, as a note: as modelled, the liner opens a dark disc in front of the platter. It shows at the 300 px sheet tile and at 480 px, reads like a hole, and is gone without the liner. Whether the real deck would show it depends on how the liner meets the posts: a white sheet run under the posts hides it, paint stopped at the bond shows it. The owner should be told about it as the post seat, not as a pocket."
+     }
+    ]
+   }
+  }
+ ]
+}
