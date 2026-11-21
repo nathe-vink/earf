@@ -51,7 +51,10 @@ WIN_RIGHT = {'wall': 'right', 'along': 1.6, 'sill': 0.3, 'size': [1.6, 2.15], 'm
 # fronts paler than the studio's, chroma 44 against 80. Tested: at 2.0 m and 1.2 m the fronts mirror plain wall, and the
 # cabinets went darker and no deeper, chroma 42/37 and 36/33. The studio's depth is its 'through' lamp aimed through the
 # cabinet; the honest twin here is the sun through the cabinets. Proof 2's run kept.)
-WIN_FRONT = {'wall': 'front', 'along': 0.0, 'sill': 0.3, 'size': [4.6, 2.15], 'mullions': [5, 2]}
+# (the A critics, round 2: the horns' phase plugs mirrored the run head-on, a pale eye; the proof of 21 Nov: a 1.2 m
+# stretch of wall in its middle, behind the lens, took the eye from L* 62/49 to 51/38 and the cones' left-right gap from
+# 10.5 to 5; the room 3 L* darker, won back by +0.15 exposure)
+WIN_FRONT = [{'wall': 'front', 'along': sg * 1.45, 'sill': 0.3, 'size': [1.7, 2.15], 'mullions': [2, 2]} for sg in (-1, 1)]
 SKY = {'kind': 'hdri', 'polyhaven': 'garden_nook', 'res': '4k', 'rotation_deg': 144.2, 'strength': 1.0}
 # (assets.py sun garden_nook: azimuth 54.2 - rotation, elevation 25.9. Proof 1 (101.2, azimuth -47, from the front
 # left) put the sun on the left speaker's front and its cone: the coordinator, 20 Nov 11:58, no sun on a front. At 144.2
@@ -247,7 +250,7 @@ def _life():
     ]
 
 
-WATER = 0.06                                    # the water's height in the 92 mm glass (the A critics, round 2: it read empty)
+WATER = 0.078                                   # the water's height in the 92 mm glass (the A critics, round 2: it read empty at 60 mm)
 
 
 def _side_table():
@@ -300,7 +303,7 @@ def base(tint='ember', size=(2400, 1600)):
     s['products'].append(shots._mantle(MANTLE[0], MANTLE[1], MANTLE[2], MANTLE[3], tint=tint))
     s['set'] = {'kind': 'room', 'size': [W, D, H], 'center': [CX, CY],
                 'wall': {'color': '#E6E0D5'}, 'ceiling': '#EFECE6', 'frame': STEEL, 'skirting': {'h': 0.09, 'color': '#E3DED4'},
-                'windows': [WIN_BACK, WIN_LEFT, WIN_FRONT, WIN_RIGHT],
+                'windows': [WIN_BACK, WIN_LEFT, *WIN_FRONT, WIN_RIGHT],
                 'props': [_floor()] + _rug() + _console() + _window_bars() + _cables() + _life() + _side_table() + [_cores(tint),
                           {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_portal', 'windows': ['wall-back']},
                           # (the A critics, round 2: the sofa read as rubber, its outline faceted: subdivided, a sheen, a nap)
@@ -319,7 +322,7 @@ def base(tint='ember', size=(2400, 1600)):
     # On: the opal shows, and the cabinets' fronts deepen, C* 38.7 to 50.0 in a region test)
     s['render'] = {**s['render'], 'caustics_refractive': True, 'caustics_reflective': True,
                    'samples': 128, 'adaptive': 0.01, 'denoise': True, 'clamp': 0, 'view': 'AgX', 'look': 'AgX - Base Contrast',
-                   'exposure': 5.35, 'white_balance_k': 5600, 'white_balance_tint': 0.0}
+                   'exposure': 5.5, 'white_balance_k': 5600, 'white_balance_tint': 0.0}
     s.pop('finish', None)
     return s
 
