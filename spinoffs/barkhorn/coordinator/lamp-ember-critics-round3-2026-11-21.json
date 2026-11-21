@@ -1,0 +1,407 @@
+{
+ "results": [
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "C-off-r4-edges",
+      "severity": "note",
+      "frame": "core-off",
+      "where": "Base: the outer ~7 px of the right flank (x about 1185-1215, y 1560-1700), the left edge (x 434-470), and the foot band (y 1700-1780)",
+      "what": "The smoky gray flanks are gone. Round 4 changed only the base: every pixel outside it matches round 3 (ground patches differ by 0.00-0.03 L*, contact zone by 0.3 L*). Two things remain, and both read as light, not material. (1) The right flank's outermost ~7 px carry a dusky mauve sheen: L* 36-40, C* 6.5-27, against C* 40-72 just inside. (2) The foot band is darker but stays deep red: L* 20-33, C* 40-61, not gray. The left edge now carries a pale pink grazing sheen (L* 52-59, C* 11-28). At 3x this reads as bead-blasted acrylic catching light at a grazing angle, lit on the key side and in shadow on the other. At 100 % the right edge is only a slightly duller red, and at 480 and 300 it is ordinary shading. One more small change: there is now a thin pale line on the cup's inner lip where round 3 had a dark one. At 2x it reads as a highlight on a satin edge.",
+      "expected": "Keep as is for the tile and picture 1.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/c-off-flank-right-3x-r3-left-r4-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/c-off-flank-left-3x-r3-left-r4-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/c-off-base-100-r3-left-r4-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/c-off-480-r3-left-r4-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/c-off-cup-rim-r3-top-r4-bottom-2x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/diff-r4-r3-mask.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/measurements.txt"
+     },
+     {
+      "id": "C-lit-base-gap",
+      "severity": "note",
+      "frame": "core-lit",
+      "where": "Base, x 430-1220, y 1380-1790",
+      "what": "This frame was rendered with the air gap, but the base does not look smoked or spray-painted. It reads as a dark red satin cone lit from above by the ball. The upper centre is L* 16 (C* 44), the lower centre L* 2-5, and the flanks and foot L* 0.5-2.3 (C* 1.4-9). I see no gray veil at 100 %, at +3 EV, at 480 or at 300. The flanks are dark because almost no light reaches them, which is what a dark room does. The floor round the base reads right too: a red pool, a darker ring at the foot where the base blocks the ball's light, and a soft shadow to the right as in the OFF frame. To size the effect of the fix: in the OFF frame the liner fix raised the base by x1.12 at the mid centre and x1.29-1.63 at the flanks, in linear light. Applied to this frame, that is about +1 L* at the centre and +1 L* at the flanks, below what can be seen at 480.",
+      "expected": "Re-rendering is not needed for the look. Re-render only if the record must match the CAD.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/c-lit-base-plus3EV-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/c-lit-lamp-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/c-lit-floor-stretch-half.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/pair-lit-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/measurements.txt"
+     },
+     {
+      "id": "pair-lit-glow-gap",
+      "severity": "note",
+      "frame": "pair-lit",
+      "where": "Glows: pendant x 560-1050, y 1150-1300; Core x 620-1040, y 950-1150. Walls: corner and edge patches in both frames",
+      "what": "I do not measure the lit pair as matched in lightness. Pendant glow: median L* 43.2, C* 86.2, h 39.2 (mid patch 48.9 / 88.7 / 36.7), red peak 251. Core glow: median L* 33.1, C* 72.9, h 39.6 (centre patch 34.3 / 73.5 / 39.2), red peak 198 of 255, about 0.8 EV short of clipping. Even the Core's brightest 5 % (L* 38.5) sits below the pendant's median. Hue matches within 0.4 degrees, and neither glow clips. The Core's room is also darker: walls L* 9.5-22.8 against the pendant's 15.3-25.5. Against its own OFF frame the Core's room sits at -5.2 to -5.8 EV, the pendant's at -3.5 to -5.0. Seen alone, each reads as a real photograph. Side by side at 480, or in a lit row at 300, the Core's ball reads a deeper, duller red in a darker room.",
+      "expected": "If the lit pictures are shown together (a lit home row), raise the Core's glow about 10 L* and its room about 0.7 EV, or correct the record. On separate pages, keep as is.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/pair-lit-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/row-300-lit.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/measurements.txt"
+     },
+     {
+      "id": "H-lit-room-light",
+      "severity": "note",
+      "frame": "pendant-lit",
+      "where": "Wall beside the shade: x 150-300 and 1350-1500, y 1150-1300. Floor: bottom-left x 0-500, y 1650-2000, and bottom centre",
+      "what": "The room is lit by studio lights, not visibly by the lamp. I divided this frame by the pendant OFF frame in linear light. The left wall comes out at exactly -5.0 EV. Elsewhere the extra light is neutral (red and green rise together, within 0.1-0.3 EV): a soft background light high behind the cord (+1.3 EV at the top centre) and a light on the floor at the bottom left (+1.5 EV). That makes the bottom-left floor the brightest ground in the frame: L* 34.4, against 28.6 at the bottom centre and 19.9 at the bottom right. The wall right next to the glowing shade has no red rise: a* 0.9-1.0, the same as the far wall. The only warm light from the lamp is faint, on the bottom-centre floor (a* 2.1, b* 5.9). At 480 the frame reads as a styled studio shot of a glowing lamp with a background light, which is believable if the backdrop is far away. The brighter bottom-left floor reads as light from something off frame to the left, not from the pendant.",
+      "expected": "Acceptable as a studio photograph. If it should read as the lamp lighting its surroundings: keep the bottom-left floor no brighter than the floor nearest the lamp, and let the lamp's warm light show on that floor.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/hlit-over-off-EV-quarter.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/hlit-plus2EV-half.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/hlit-stretch-L0-45-quarter.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/pair-lit-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/measurements.txt"
+     },
+     {
+      "id": "H-lit-cap-black",
+      "severity": "note",
+      "frame": "pendant-lit",
+      "where": "Cap and cord, x 544-1103, y 0-1010",
+      "what": "The cap and cord are pure black: RGB 0-2 over about 114,000 px, with the tier faces at 0.1. The tiers can be told apart only in an 8x stretch. At normal viewing the cap is a flat black silhouette, held apart from the wall only by the lit back paper behind it (L* 20-25). This matches the OFF frame's edge highlights taken down 5 EV, and the lane disclosed it. It reads as crushed blacks, which are common in low-key photographs. The small tick on the collar under the cap (recorded last round) shows only in the stretch.",
+      "expected": "Keep as is. Add a faint rim light on the step edges only if the cap should read as satin metal when lit.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/h-lit-shade-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/h-lit-cap-stretch0-30-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/hlit-zero-map-quarter.png"
+     }
+    ],
+    "owner_question_answered": "Yes, it is fixed. In round 3 the flanks had lost their color: at four sample points by the edges, C* was 5-18. Round 4 keeps the base's red at the same points (C* 27-40), and the flanks are 1.3-1.6 times brighter in linear light. The base now reads as red satin acrylic over white, not smoke or spray paint, at full size, at 480 and in the 300 px row. Only the base changed: every other pixel matches round 3. What remains is a darker foot (still deep red: L* 20-33, C* 40-61) and a darker right side, whose outer ~7 px carry a dusky mauve sheen (L* 36-40, C* 6.5-27). At 3x that sheen looks like satin catching grazing light on the shadow side, the mirror of the pale pink sheen on the lit left edge (L* 52-59). This fits the lane's reading that what is left comes from the key light and the floor, not the material.",
+    "q1_ready": "From my lens, all four can go ahead. The Core OFF round 4 is ready as the tile and the Core's first picture. The base is fixed, the ground is within 1.6 L* of the Tropos at seven patches, the contact and shadow are unchanged from round 3, and nothing reads as CG at 480 or 300. The pendant OFF: I found nothing the two critics missed. Its known TL +3.6 and ML -3.5 against the Tropos are unchanged, and the cap, rim and reflections read as real. The pendant LIT and the Core LIT both read as real low-key product photographs. Neither clips (red peaks 251 and 198), I see no banding in stretched walls, and the grain is an even luminance grain like a camera's (1.3-1.4 levels sd). The Core throws a believable red pool on its floor. The Core LIT's base, rendered with the gap, does not need re-rendering for its look. The one thing a viewer would notice is when the lit pair is shown side by side: the Core's glow is about 10 L* darker.",
+    "q2_pattern": "The liner-in-contact fix should carry to every tint. It changed only the base and removed the gray at its source. For the lit frames, the dimmed studio with a background light works in both, and the two read as the same studio. Two things come from the set and the exposure rather than from Ember, so settle them before the other tints are rendered. First, the glow levels: the Core's is L* 33 against the pendant's 43, and its red peaks at 198 of 255. Second, the room level: the Core's room is about 0.7 EV darker. That matters if the owner may choose a lit home row. Also, the pendant's lit room takes its floor light from a neutral source at the bottom left, not from the lamp, and that would repeat in every tint. I have seen only Ember. On pale tints, the OFF base's mauve right-edge sheen and the black lit cap may read differently.",
+    "q3_reads_wrong": "At 480 and in the 300 px row, nothing reads as CG. The OFF row reads as one studio: same paper, a dark top-left, shadows to the right. The Core's base now reads as the same red as the other products. At full size: the Core LIT's glow shows a faint cloudy mottle (denoiser, recorded before), and the pendant LIT's cap is a flat black cut-out. The pendant's lit room carries almost no light from the lamp: no red rise on the wall, and the brightest floor is at the bottom left, away from the lamp. It reads as a studio shot of a glowing lamp rather than a lamp lighting its room. Side by side, the Core's lit glow is darker and duller than the pendant's. The known OFF gap, measured and not reported as a fault: the Core's ball is L* 40.7 against the pendant's shade at 29.2 (11.5 L*). By mask medians it is 41.1 against 28.6 (12.5 L*), with hue 33.7 against 37.8.",
+    "measured": [
+     "Core OFF r4 against r3: only the base changed (difference over 4 levels inside x 435-1209, y 832-1829). Ground patches differ by 0.00-0.03 L*; the floor just below the front edge by 0.3 L*.",
+     "Base flanks, r3 to r4 (L*/C*): y 1580 left edge 45.7/9.8 to 53.4/32.8, right at 0.94 of the width 28.9/18.2 to 38.0/39.7; y 1630 left at 0.06 37.7/6.7 to 46.5/33.6, right at 0.94 26.1/5.1 to 33.6/27.1. Outermost right px: 36-40 / 6.5-27. Foot band 20-33 / 40-61.",
+     "Base, linear luminance r4/r3: upper centre 0.97, mid centre 1.12, low centre 1.44, flanks 1.29-1.63. Base mask median now L* 40.2, C* 61.9, h 31.3.",
+     "OFF ground L* at 1600x2000 patches, Tropos / Mantle / pendant / Core: TL 81.0/81.3/84.6/82.6; TR 92.8/92.7/93.5/93.5; ML 87.5/85.0/84.0/88.5; MR 94.5/93.8/92.9/93.2; LL 97.0/95.3/93.5/95.7; BL 94.7/94.1/96.5/93.2; BR 89.0/87.3/88.3/90.1. a* -0.8 to 1.3 and b* 3.2 to 5.7 in all four. Core within 1.6 L* of the Tropos everywhere.",
+     "Core OFF ball horizon: a soft 30 px change at y 1150-1180 (C* 86 to 70), read as the reflection of the bright floor.",
+     "Known OFF gap: plain-body patches pendant L* 29.2 C* 66.8 h 39.2 against Core 40.7 / 71.7 / 34.8, gap 11.5 L*. Mask medians 28.6 against 41.1.",
+     "Lit glows: pendant median L* 43.2, C* 86.2, h 39.2 (mid patch 48.9/88.7/36.7), red max 251, 0 px at 254 or above, 0.46 % of the frame at R 240 or above. Core median 33.1/72.9/39.6 (centre patch 34.3/73.5/39.2), red max 198.",
+     "Lit walls, L*: pendant TL 15.4, top centre 25.5, TR 23.9, ML 15.3, MR 22.3, BL 34.4, bottom centre 28.6, BR 19.9. Core TL 9.5, top centre 22.8, TR 16.9, ML 12.7, MR 16.7, LL 27.4, bottom centre 14.6 (a* 10.0), BR 14.7. Walls a* 0.3-1.1 and b* 3-4.4 in both.",
+     "Lit over OFF, log2 of Y: pendant -5.0 at TL and ML, -3.7 top centre, -3.5 BL, -3.9 bottom centre; red minus green 0.1-0.3 EV, so the extra light is neutral. Core -5.2 to -5.8 on the walls; bottom-centre floor red -4.41 against green -5.62 (its red pool).",
+     "Lit base (Core, with the gap): upper centre L* 16.3, C* 44.4; flanks L* 0.6-2.3, C* 1.4-9.4; foot L* 0.5-2.0. Predicted lift with the liner in contact: about +1 L*.",
+     "Grain: luminance-only, 1.31-1.39 8-bit levels sd in both lit rooms (in the Core, red 1.9). No contour banding in walls stretched to full range.",
+     "Pendant LIT cap and cord: RGB 0-2 over about 114,000 px. The 4-5 px orange-tan band under the rim (RGB 96,50,34 at x 800, y 1501) is the rim's cut edge seen from slightly below and reads as acrylic edge glow.",
+     "Crops, row mocks and log: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-photo/ (measurements.txt, row-300-off-r4.png, row-300-lit.png, pair-off-480.png, pair-lit-480.png)"
+    ]
+   },
+   "verified": {
+    "verdicts": []
+   }
+  },
+  {
+   "part": "optics",
+   "found": {
+    "findings": [
+     {
+      "id": "C-off-flank-sheen",
+      "severity": "note",
+      "frame": "core-off",
+      "where": "Core OFF base, along the silhouette of the lower flanks, widest at the foot corners: right x 1150-1210, y 1600-1690; left x 436-480, y 1600-1680",
+      "what": "This is the only thing the owner could still point to, and only at full size. A narrow, less saturated band runs along the outline of the lower flanks. It is the band where C* falls below 35. On the key side it is a pale pink sheen: L* 42-55, C* 15-30 in the outer 15 px. At the right foot corner it is a dusky mauve: L* 23-30, C* 15-22, hue 19-21. The hue stays red. In round 3 the flanks were slate gray at C* 2-5. The band is 2-63 px wide, measured along the row; in round 3 it was 30-131 px. At 960 and 480 px it reads as shadow and satin sheen, not smoke.",
+      "expected": "Keep as is. A bead-blasted surface does this at grazing angles: it reflects its surroundings. Here that makes the outline lighter on the key side and darker by the shadowed floor on the right. It is not the trapped-light gray of round 3.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/corners-6x-r4-left-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/flank-left-3x-r3-left-r4-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/flank-right-3x-r3-left-r4-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/tile960-core-r3-left-r4-right.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/flank-band-width.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/base-linear-ratios.txt"
+     },
+     {
+      "id": "C-lit-base-air-gap",
+      "severity": "note",
+      "frame": "core-lit",
+      "where": "Core LIT base, x 435-1212, y 1440-1785",
+      "what": "At its exposure the lit base is a near-black maroon pedestal. The flanks and foot are L* 0.3-2.5 (C* 1-5). The top centre, lit red by the ball above, is L* 6-13; the middle centre is L* 4-7. The air gap still shows, but only when the frame is brightened by 3 EV. The glow from the ball lights the base the same way all round, yet at y 1600 the flank, 5 % of the width in from the edge, has 0.25 of the centre's luminance (L* 1.5 against 5.9). In the OFF frames the same ratio was 0.77 (key side) and 0.33 (far side) with the gap, and 1.09 and 0.57 in contact. Brightened, the lit base shows the round-3 pattern: a centre glow fading to smoky edges. At 480 px it reads as a dark base with a red-lit top, and nothing looks wrong.",
+      "expected": "No re-render is needed for the gap at this exposure. With the liner in contact I estimate the flanks would rise from about L* 1-2 to about 2-5. The base would show a little more even dim red across its width, and the frame would still read the same. Render every new lit Core (the other tints, or a re-render of this one for any reason) with the liner in contact.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/lit-base-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/lit-base-plus3EV-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/lit-base-grid.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/tile480-hlit-clit-coreoff.png"
+     },
+     {
+      "id": "C-off-lip-line",
+      "severity": "note",
+      "frame": "core-off",
+      "where": "Front lip of the base's cup under the ball, x 560-1000, y 1467-1477",
+      "what": "A pale line, 1-2 px wide, now runs along the front lip of the cup (L* 57, C* 31). In round 3 the same edge was a dark line. At 4x it reads as an edge catching light, or as the liner's edge showing at the lip. It cannot be seen at 480 px.",
+      "expected": "Fine if the CAD's lip is a small radius or shows the liner. Otherwise it is a highlight and harmless.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/lip-4x-r3-top-r4-bottom.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/junction-2x-r4.png"
+     },
+     {
+      "id": "pair-off-gap",
+      "severity": "note",
+      "frame": "pair-off",
+      "where": "Hemisphere shade (300-1320, 980-1520) against the Core ball and base (400-1250, 660-1790); plain patches as in round 2",
+      "what": "Known gap, measured with the same method on both lamps (mask C* > 30, red hue, median). Hemisphere shade: L* 28.6, C* 57.1, h 37.7. Core ball: 40.9, 66.6, 33.5. Core base: 40.2, 61.5, 31.0 (34.8 in round 3). Whole Core: 41.0, 64.8, 31.9. The Core is +12.4 L* and +7.7 C* against the shade, with hue -5.8 degrees and dE76 15.8. The plain patches give 41.0 against 29.2 (+11.8). The base fix made the base 5.4 L* lighter, so it now matches the ball. The ball itself did not change (40.8 to 40.9).",
+      "expected": "The owner decides whether to deepen the Core. This is not a fault.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/off-colors.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/row300-tropos-hemi-core4-mantle.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/tile480-r3-r4-pendant.png"
+     },
+     {
+      "id": "C-lit-glow-top-heavy",
+      "severity": "note",
+      "frame": "core-lit",
+      "where": "Glowing opal, x 460-1185, y 720-1440",
+      "what": "The lit opal is brightest at the top and darkest at the bottom, next to the window where the LED's light comes in. Down the centre: L* 36-40 at y 740-1020, 33 at y 1080, 30 at y 1200, 26 at y 1320 and 21.5 at y 1420. That is about 3:1 in luminance, and the iso-lines are horizontal. At 480 px it reads as a lit ball, a little darker at the bottom.",
+      "expected": "Check this against the CAD's LED and window. An LED set below a small window lights the upper globe most, and then the render is right. A bare LED at the globe's bottom would light a hollow opal globe about evenly, and a solid opal would be brightest at the bottom.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/lit-core-L-bands3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/measurements.txt"
+     }
+    ],
+    "owner_question_answered": "Yes. The new Core OFF base reads as the ball's red poured over white, in satin, and the smoky gray flanks are gone. Of the base's pixels, gray ones (C* under 20) fell from 11.0 % to 1.8 %. Smoky dark ones (C* under 30 and L* under 25) fell from 7.0 % to 0.5 %, and those under L* 20 from 11.6 % to 1.2 %. About 35-40 px in from the outline the flanks went from C* 5-28 to C* 23-56. The base's median went from L* 35.7 / C* 53.7 to 41.5 / 61.7. Between round 3 and round 4 only the base and the bottom of the ball changed; the rest of the frame moved less than 0.3 L*. That confirms the air gap as the cause. What is left behaves the way light through the material should, not like paint. The right side and the foot are darker, but they are a purer red: linear G/R is 0.013-0.038 at the foot against 0.044-0.054 in the centre. Paint keeps one colour as it darkens; light that has gone through more of the red gets deeper. The right side is also darker on the ball and the floor shadow falls right, so this is the front-left key. At the outline there is a thin sheen, pale on the key side and dusky at the right foot corner, which is what bead-blasted acrylic does at grazing angles. The base now matches the ball: L* 40.2 against 40.9, hue within 2.5 degrees. The pictures to show him are base-100-r3-top-r4-bottom.png and tile960-core-r3-left-r4-right.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/.",
+    "q1_ready": "From my lens, nothing blocks.\n\n- **Core OFF r4:** ready to be the Core's tile and first picture. The base reads as the designed part. The ball reads right too:\n  - The opal's edge shows as a faint ring inside the rim, with layered rings at the top left.\n  - The band of colour at the rim measures 50-55 px each side in both the OFF and LIT frames; the CAD's 10 mm is 50 px at 5.04 px/mm.\n  - The right rim refracts the bright ground.\n  - A black stripe in the upper-left rim (L* 18-26, C* 3-5) reads as a studio flag reflected in the glass.\n  - The lower half reflects the floor (C* falls from 85-89 to 54-71). Below a sharp, straight edge at y 1393-1398 it reflects the base (C* 72).\n  - The softbox reflections match the pendant's.\n  - No dock, no cable, no lettering.\n- **Pendant OFF:** keep. I found nothing new.\n- **Pendant LIT:** reads right and can go.\n  - The glow is brightest by the LED ring under the cap (L* 51.5) and falls to 24.6 at the rim.\n  - The black collar makes the dark band under the cap (L* under 1.1).\n  - The layer edges show at the rim.\n  - The opal's cut edge glows warm along the bottom (L* 23, a* 18, b* 18), which is right for light leaving an exposed edge.\n- **Core LIT:** can stay. Its base is near-black at this exposure; the air-gap pattern shows only when brightened 3 EV. Render any new lit Core with the liner in contact.",
+    "q2_pattern": "The fix is in the model (the liner in contact), not in the tint or the studio. It changed nothing but the base: ground, floor, shadow and ball all moved less than 0.3 L*. So it carries to every tint and to the lit frames. Every new Core frame, OFF or LIT, in any tint, should be rendered with the contact. I have only seen Ember. How strong the grazing sheen looks against the body depends on the tint, so check the flanks on the darkest and palest tints when they come in. The known off gap should be measured for each tint after rendering. The base is now 5.4 L* lighter than in round 3, so the whole Core is lighter than before: +12.4 L* against the pendant in Ember.",
+    "q3_reads_wrong": "- **At 300 and 480 px:** nothing in the Core OFF reads as CG or as smoke any more. The base reads as satin red under the polished red ball. The Core does read lighter red than the pendant beside it (the known gap, +12.4 L*).\n- **At 100 % in the Core OFF:**\n  - The right foot corner has a dusky mauve sheen (L* 23-30, C* 15-22). It is the closest thing to the old look, but it stays red and is small.\n  - A pale 1-2 px line runs along the cup's front lip.\n- **In the Core LIT:** the opal glows about three times brighter at the top than at the bottom by the LED window. Whether that is right depends on the CAD's LED.\n- **In the pendant frames:** nothing new.",
+    "measured": [
+     "Scale: Core ball 807 px at y 1090 is 5.04 px/mm. Base bottom 778 px (about 154 mm at the same scale; 150 mm in the brief).",
+     "Round 4 minus round 3, L*: base mean +4.65 (p99 +15.0); ball low band +1.96; ground, floor, right shadow and ball body within -0.3 to +0.5.",
+     "Base pixels, rows 1480-1790, round 3 to round 4: C* under 20: 11.0 % to 1.8 %. C* under 30 and L* under 25: 7.0 % to 0.5 %. L* under 20: 11.6 % to 1.2 %. L* under 15: 3.2 % to 0.2 %. Median L*/C*: 35.7/53.7 to 41.5/61.7.",
+     "Base at 5 % / 50 % / 95 % of the width, round 3 to round 4, L*/C*. y 1550: left 42.7/23.5 to 52.3/46.9; centre 49.8/72.3 to 52.2/73.3; right 28.7/20.4 to 38.2/43.4.",
+     "Same cells at y 1600: left 40.7/15.5 to 49.3/37.8; centre 45.8/73.4 to 47.5/72.8; right 27.9/10.9 to 36.3/32.0.",
+     "Same cells at y 1650: left 36.0/5.3 to 43.6/28.9; centre 39.5/65.2 to 42.9/68.5; right 24.7/5.3 to 31.1/23.4.",
+     "Same cells at y 1700: left 21.7/18.0 to 30.7/37.7; centre 32.0/55.4 to 36.8/62.7; right 15.4/17.0 to 22.4/33.2.",
+     "Same cells at y 1730: left 16.1/31.5 to 24.8/47.6; centre 25.7/50.4 to 31.5/59.5; right 13.2/29.1 to 20.2/42.5.",
+     "Low-chroma band (C* under 35) in from the base outline: round 3 30-131 px; round 4 2-63 px, widest at y 1630-1670.",
+     "Right foot corner, round 4 (y 1660, x 1150-1200): L* 23-30, C* 15-22, h 19-21. Left foot corner (x 446-470): L* 42-44, C* 17-27.",
+     "Linear G/R on the round-4 base: centre 0.044-0.054; foot (y 1740) 0.013-0.038, a purer red in shadow; outer edges 0.16-0.43 (sheen). In round 3 the edges reached 0.78 at lower luminance (gray).",
+     "Base centre, round 4 (round 3): upper L* 59.2, C* 63.8, h 25.3 (58.9/66.9/28.2); mid 47.3/72.0/31.3 (45.5/72.4/33.0); low 34.5/61.2/32.9 (29.0/53.5/33.7).",
+     "Off colours, mask C* over 30, red hue, median: Hemisphere shade L* 28.6, C* 57.1, h 37.7. Core ball 40.9/66.6/33.5. Core base r4 40.2/61.5/31.0 (r3 34.8/57.3/32.0). Whole Core r4 41.0/64.8/31.9.",
+     "Off gap, whole Core minus shade: dL* +12.4, dC* +7.7, dh -5.8, dE76 15.8. Plain patches (round-2 boxes): 41.0 against 29.2 (+11.8). Band patches (b35 boxes): 41.2 against 28.6 (+12.6).",
+     "Ball rim band: 50-55 px each side, in OFF and LIT (CAD 10 mm = 50 px).",
+     "Ball upper body L* 42-44, C* 85-89, h 37-40. Lower half L* 40-43, C* 54-71, h 30-33 (floor reflected).",
+     "Straight reflection edge at y 1393-1398 across x 545-1090, C* about 52 above to 72 below.",
+     "Upper-left rim stripe L* 18-26, C* 3-5.",
+     "Floor by the Core: 10-30 px in front L* 78.6, a* 5.2 (a faint pink bounce); far floor a* 0.6-3.3.",
+     "Core LIT base: flanks and foot L* 0.3-2.5 (C* 1-5); top centre L* 5.9-13.1 (C* 25-39); mid centre 4.1-7.5. Flank/centre luminance at y 1600: 0.25 (left), 0.13 (right).",
+     "Core LIT glow down the centre: L* 36-40 (y 740-1020), 33.1 (1080), 29.9 (1200), 25.7 (1320), 21.5 (1420). Across at y 1080: 29.7 / 33.7 / 29.1.",
+     "Pendant LIT down the centre: cap and collar L* 0-1 to y 1028; dim red 4.5-13 at y 1036-1092; glow edge 47.5 at y 1100; 51.5 at y 1120-1240; 24.6 at y 1460; warm bottom edge L* 23.1, a* 17.9, b* 17.9 at y 1500.",
+     "Red pixels on the red primary (G and B at or under 2): Core OFF ball 8.9 %, base 1.4 %, pendant OFF 22.8 %, pendant LIT 60.7 %, Core LIT 45.2 %, Tropos front 57.4 %. R = 255 in 0.03 % or fewer everywhere.",
+     "All crops, grids and notes: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-optics/ (measurements.txt, base-grid.txt, flank-band-width.txt, base-shares.txt, base-linear-ratios.txt, off-colors.txt, lit-base-grid.txt)."
+    ]
+   },
+   "verified": {
+    "verdicts": []
+   }
+  },
+  {
+   "part": "lit",
+   "found": {
+    "findings": [
+     {
+      "id": "core-lit-base-black-sides",
+      "severity": "blocking",
+      "frame": "core-lit",
+      "where": "Core base x 450-1190, y 1480-1790. Flanks about 30 px in from each edge (for example x 470-520 and 1150-1200), rows y 1560-1720.",
+      "what": "Lit, the base reads as a near-black pedestal with black sides; only the collar under the ball is red.\n- Down the centre: collar lip L* 13.9 (RGB 80,0,2), upper 7.3, mid 5.2, low 2.4, bottom band 1.3 (RGB 20,0,0).\n- Flanks: L* 0.3-2.0 (RGB 6-11,1,0). The floor just outside them is L* 11-18 on the left and 3.4-9.7 on the right.\n- On rows y 1560-1680 the flanks keep only 0.12-0.29 of the centre's luminance. On the same rows OFF r3 (air gap) keeps 0.29-0.78 and OFF r4 (contact) keeps 0.34-1.13, about 1.0 on its key side. Near the foot (y 1720) all three are alike, because the centre is dark there too.\n- The ball sits centred over the base, so its light reaches every side of the cone alike. A liner in contact would hold most of the centre's level out to the silhouette.\n- The black sides are the air gap's signature, and stronger than r3's gray: the trapped rays find a dark room where r3's found the white studio.\n- At 480 the base is maroon only in its middle, and its sides merge into the dark ring of floor at its foot.\n- The centre and the collar are right for a base lit only by the ball: the upper centre is 0.20-0.24 of the ball's lower glow in luminance (L* 7.3 against 21.5-23.6).\n- It is not gray or smoky: in the dark there is nothing white for the satin to show.",
+      "expected": "Re-render the Core LIT with the liner in contact (BASE_CONTACT=1), at the exposure in pair-lit-exposure. Lit only by the ball, the base should be a deep red cone: brightest at the collar lip and just under the ball (as now), fading toward the foot. It should stay red out to its silhouette: the flanks at about half to all of the centre on each row (about L* 2-5.5 at y 1600-1640, not 0.5-1.4), never black, standing in its red pool.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/c-lit-base-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/c-lit-base-100-gain4.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/c-lit-base-at-480-x2.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/core-off-base-r3-top-r4-bottom-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/flank-ratios.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/contact-gain.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/core-base-lit.txt"
+     },
+     {
+      "id": "pair-lit-exposure",
+      "severity": "fix",
+      "frame": "pair-lit",
+      "where": "Whole frames: the glows (pendant x 330-1290, y 1000-1470; Core x 420-1240, y 680-1460) and the wall patches TL, TR, ML, MR.",
+      "what": "The Core LIT is about 0.83 EV darker than the pendant LIT, in glow and room alike.\n- Glow medians: L* 31.9, C* 71.4 against 42.1, 85.5. p90: 37.8 against 51.2.\n- Mean glow luminance: 0.071 against 0.125 (x1.77).\n- At matched heights on the two opals the Core is 4-17 L* darker (10.5 at mid-height).\n- Walls: TL 10.4 against 16.9, TR 17.0 against 24.3, ML 13.0 against 15.9, MR 16.3 against 22.0.\n- Hue and wall colour match: glows h 39.4 and 39.0; walls a* 0.3-1.3, b* 3.1-4.6.\n- The lane's chosen balance reported delta E 2.4 between the glows, with 93 % of the Core's glow under R 248. This frame's brightest pixel anywhere is R 198, so it is not at that balance.\n- Side by side, at 480 and in a 300 px row, the Core reads dimmer and a duller red. Alone, each frame reads right.\nIt would become blocking if the lit pair is ever shown together.",
+      "expected": "One exposure for the pair: the Core frame about +0.83 EV (linear x1.77), or rendered at that exposure in the same pass as the base fix. Simulated on the existing frame (evidence only, files named SIM): glow median L* 42.0, C* 86.6, h 39.9 against the pendant's 42.1, 85.5, 39.0; walls TL 16.0, TR 24.0, MR 23.1 against 16.9, 24.3, 22.0; one pixel reaches R 255.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/pair-lit-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/pair-480-pendant-core-coreSIMx1.77.png (right tile is the simulation) ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/SIM-core-lit-x1.77.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/exposure-sim.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/grounds-lit.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/glow-rim-cap.txt"
+     },
+     {
+      "id": "pendant-lit-floor-light",
+      "severity": "note",
+      "frame": "pendant-lit",
+      "where": "Bright floor x 0-700, y 1680-2000. Warm tint x 800-1300, y 1880-2000. Wall beside the shade x 250-320 and 1300-1370, y 1150-1300.",
+      "what": "The brightest ground in the lit pendant frame is the floor at the lower left: L* 34-35.5, neutral (a* 1, b* 4). It is not the floor under the lamp. Against the OFF frame, that corner kept 0.089 of its luminance where the other patches kept 0.032-0.050. So it is lit mostly by a studio lamp left on, most likely the low sweep lamp added to lift the OFF frame's lower left.\nThe pendant's own downlight shows only as a faint warm tint at the bottom right: a* 3-4, b* 7-8 at L* 19-20. The wall shows no red spill beside the shade: near 18.3 and 23.0, far 15.8 and 23.8, a* 0.9-1.0 on both sides. That is plausible for a wall and floor a metre or more away.\nAt 480 the lower left reads as soft studio light; nothing looks wrong, but the room's light does not come from the lamp.",
+      "expected": "In the lit set, switch off or lower the OFF ground's lift lamp, so the floor's brightest part is the lamp's warm pool, as the Core frame's red pool is.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/h-lit-lower-075.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/lit-pair-stretched-x3.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/pendant-floor.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/ground-ratios.txt"
+     },
+     {
+      "id": "lit-glow-colour",
+      "severity": "note",
+      "frame": "pair-lit",
+      "where": "Both glows; the pinkish spot is the large softbox reflection at the pendant's upper left, about x 560-660, y 1150-1250.",
+      "what": "Both glows read Ember red, not salmon, coral or pink, and are unclipped.\n- R reaches 248 on 0.01 % of the pendant's glow pixels (max 251) and on none of the Core's (max 198).\n- Median hue: 39.0 (pendant) and 39.4 (Core), against the OFF bodies' 39.1 and 33.4-34.4.\n- 48 % of the pendant's glow pixels and 18 % of the Core's sit at G = B <= 1, on the sRGB red primary (h 40.0). Light through a deep red tint lies outside sRGB, so a camera records it the same way. The ramp is smooth (R 125-240), with no banding.\n- The only pink is the brightest softbox reflection at the pendant's upper left: its whitest 200 pixels are RGB 244/86/85 (L* 58.7, h 29.2). It is local and reads as a reflection.\n- The PNGs carry no ICC profile, so browsers show them as sRGB.",
+      "expected": "As is. For the other tints, check each lit glow for channels pinned at 0 or 255, and its hue against its OFF body, as here.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/h-lit-shade-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/h-lit-glow-Rmap-Gmap.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/c-lit-glow-Rmap-Gmap.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/glow-rim-cap.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/pendant-vprofile.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/core-profiles.txt"
+     },
+     {
+      "id": "core-rim-band-dark-lit",
+      "severity": "note",
+      "frame": "core-lit",
+      "where": "The 10 mm band of colour between the opal's edge and the ball's silhouette, r 360-405 px from (822, 1076), all round.",
+      "what": "Lit, the band of colour at the ball's rim is near black: L* 1.2-4.0 (RGB 13-38, 0-6, 0-3), with no edge glow. That fits the dim studio: the OFF band (L* 22-54) times this frame's lit/off ground ratio (0.019-0.031) gives about L* 0.6-6. It also fits light from the opal crossing the polished shell rather than being piped along it. It reads as a dark glass rim around the glow, not as Ember, and that is the physics at this exposure.",
+      "expected": "As is. It lifts to about L* 2-6.5 with the pair exposure.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/c-lit-whole-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/glow-rim-cap.txt"
+     },
+     {
+      "id": "pendant-cap-cord-black",
+      "severity": "note",
+      "frame": "pendant-lit",
+      "where": "Cap x 540-1100, y 735-1000; cord x 808-836, y 0-735.",
+      "what": "The cap and cord are pure black: median L* 0.00, p95 0.27-0.72, max 2.07, against the wall at L* 26.4 beside the cord. The steps read by their outline only; their faces merge, and no rim light from the kicker reaches the cap or cord. At 6x gain the step faces separate and the small tick on the collar under the cap shows. At 480 it reads as a black stepped cap on a black cord, which is what satin black anodizing gives at this exposure.",
+      "expected": "Acceptable. A faint rim on the step edges would show the satin finish; optional.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/h-lit-cap-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/h-lit-cap-100-gain6.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/glow-rim-cap.txt"
+     },
+     {
+      "id": "glow-softbox-lines",
+      "severity": "note",
+      "frame": "pair-lit",
+      "where": "Pendant glow x 500-980, y 1100-1450 (a vertical line at x 905-920 runs from the window down to y 1450). Core glow around the window x 560-1100, y 820-1040, and a horizontal line across the ball near y 1120.",
+      "what": "Thin lines cross both glows: the softbox frames, a diagonal housing edge and a vertical line below the window. They are 2-5 R levels deep (about 0.4-1 L*), up to 10 at the window's edge, and a few px wide. On the Core, the studio horizon is reflected across the ball. They are reflections in the glossy shells; the same vertical line shows in the OFF frame at 1-2 levels. At 3x they look like faint scratches; at 480 they cannot be seen. Mottle is low: band-pass 0.29 / 0.24 L* (Core, 100 % / 480) and 0.23 / 0.15 (pendant), against 0.29 / 0.28 for the OFF ball's real shading.",
+      "expected": "Acceptable; these are real reflections.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/h-lit-seam-905-3x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/h-off-same-area-3x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/c-lit-glow-100-R-gain2.5.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/mottle.txt"
+     },
+     {
+      "id": "lit-tiles-off-the-row-ground",
+      "severity": "note",
+      "frame": "row",
+      "where": "300 px home row with the two lit tiles in place of the off ones.",
+      "what": "The lit frames cannot stand on the home row's ground. Their grounds are L* 10-35, against the house's 80-97, so a lit row puts two dark rooms beside the Tropos's and the Mantle's white studio. They read as each lamp's picture 2.",
+      "expected": "Keep the lit frames off the home row. If both rows go to the owner as planned, note that a lit row breaks his one-ground rule.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/row-300-off-vs-lit.png"
+     },
+     {
+      "id": "off-gap-measured",
+      "severity": "note",
+      "frame": "pair-off",
+      "where": "Hemisphere [600,1310,1050,1370] and shade band (450-1200, 1330-1400); Core [600,1100,1050,1350] and ball band (560-1060, 1130-1250); whole-body masks C* > 30, red hue.",
+      "what": "The known off gap, measured and not counted as a fault.\n- Plain-body patches: Hemisphere L* 29.2 (C* 67.1, h 39.2), Core r4 L* 41.0 (C* 69.3, h 33.4): 11.8 L*.\n- Bands: 28.6 against 41.2: 12.6 L*.\n- Whole-body medians: 28.6 against 40.9: 12.3 L*.\n- The Core is also about 5 degrees pinker in hue. Its ball is unchanged from r3 (40.9).\n- Lit, the relation reverses: the Core's glow is 10.2 L* darker in median, which the pair exposure would remove.",
+      "expected": "Owner's decision.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/off-gap.txt"
+     }
+    ],
+    "owner_question_answered": "For the off picture, yes, as far as the base shows. The round-4 base keeps its red out to the left flank where round 3 went gray: flank C* 38.9 and 24.3 against 11.5 and 7.2, linear red x3.25 and x2.49. What remains is a darker right side and foot: the key's dark side and the floor, as the even-light test found. It reads as a satin red pour, not spray paint.\n\nFor the lit picture, no. core-ember-lit.png still has the air gap, and in the dark the same fault shows as black sides instead of gray: on rows y 1560-1680 the flanks keep 0.12-0.29 of the centre, against 0.34-1.13 for the contact base. It needs the same fix before it goes up (finding core-lit-base-black-sides).",
+    "q1_ready": "Pendant LIT: ready as the Hemisphere's picture 2.\n- The glow is Ember red and unclipped: median L* 42.1, C* 85.5, h 39.0; R at 248 or above on 0.01 % of glow pixels.\n- It spreads evenly from the LED ring with no LED spots: the band under the opal's edge has sd 1.48 R levels and no periodic peak.\n- It falls smoothly from L* 51 under the opal's edge to 25 at the rim, and to 25-30 at the sides.\n- The dark band under the cap reads as designed. So do the layered rim, the black stepped cap and the black cord.\n- Only notes remain: a lower-left floor lit by a studio lamp, a pure-black cap, softbox frame lines at 3x.\n\nCore LIT: not ready.\n- Its base has black sides from the air gap (blocking).\n- The whole frame is 0.83 EV darker than the pendant's (fix).\n- One re-render with the liner in contact, at an exposure 0.83 EV higher, settles both.\n- The rest of its glow is right: Ember (h 39.4), unclipped, even across (L* 29.6-32.8 at y 1100). It is brighter at the top (38 down to 21.5), as a hollow opal lit through a bottom port should be. It sits in a red pool on the floor (a* 8.6-10.5) with a darker ring at the foot.\n\nNeither lit frame is a home-row tile: their grounds are L* 10-35, against the house's 80-97.",
+    "q2_pattern": "The lit pattern can be copied with three changes:\n1. Render every lit Core with the liner in contact, as the OFF frames now are. The gap shows more in the dark than in daylight (black where daylight made it gray), so every tint would carry it.\n2. Set each pair to one exposure: place each tint's Core frame so its glow median matches its pendant's (Ember needs +0.83 EV). Check by glow median and wall patches, not by the balance test alone, which this frame does not match.\n3. In the lit pendant set, switch off or lower the OFF ground's lower-left lift lamp, so the floor's light reads as the lamp's.\n\nPer tint, check what Ember shows:\n- channels pinned at 0 or 255 in the glow. Ember pins at the red primary, which is right for a deep red.\n- glow hue against the OFF body: Ember is 39 lit against 39 off.\n\nThe pendant's glow spread, the dark band, the cap and cord, and the Core's red pool and wall hue (a* about 1, b* 3-4.6 in both rooms) carry over as they are.",
+    "q3_reads_wrong": "At 480 and 300 px:\n- The lit Core's base looks like a black-sided dark pedestal under a red collar.\n- Beside the pendant, the lit Core looks dimmer and a duller red, in a darker room (glow L* 31.9 against 42.1; walls 10-17 against 16-24).\n- Nothing in the pendant LIT reads wrong.\n\nAt full size:\n- Thin softbox frame lines on both glows (0.4-1 L*).\n- A pinkish softbox reflection at the pendant's upper left (RGB 244/86/85).\n- The cap and cord are a featureless black silhouette.\n- The pendant's brightest floor is at the lower left, lit by the studio rather than the lamp.\n\nThe Core's 10 mm rim band is near black when lit (L* 1.2-4.0); that is right at this exposure. Both glows read Ember red, not salmon, coral or pink.",
+    "measured": [
+     "Glow, whole mask (L* > 18, C* > 45, h 25-50): pendant median L* 42.1, C* 85.5, h 39.0 (p10 26.5, p90 51.2, p99 55.7); Core median 31.9, 71.4, 39.4 (p10 24.1, p90 37.8, p99 39.6); mean luminance 0.125 against 0.071 (x1.77, 0.83 EV)",
+     "Clipping: R at 248 or above on 0.01 % of pendant glow pixels (frame max RGB 251/90/90) and 0 % of the Core's (frame max 198/74/69). G = B <= 1 (sRGB red primary) on 47.9 % and 17.9 % of glow pixels",
+     "Pendant glow, centre column: L* 49-51.9 from y 1100 to 1240 (the softbox window adds G = B 33-44), 46.5 at y 1280, 38.6 at 1350, 32.4 at 1400, 25 at 1450-1464. Across at y 1350: 38.6 at the centre, 30.2 and 29.5 at x 460 and 1180, about 25 at the silhouette. Across at y 1150: 51 at the centre, 44-45 at the edges",
+     "Pendant dark band under the cap (by design): L* 0.7-12.9 from y 1000 to 1090, then a hard opal edge to 49.3 at y 1100. No LED spots: the band 8-14 px under the opal's edge has sd 1.48 R levels and no periodic peak",
+     "Core glow, centre column: L* 36-38 at the top (y 740-900), 32.5 at y 1100, 26.6 at 1280, 21.5 at 1420. Across at y 1100: flat at 29.6-32.8",
+     "Matched heights (0.05 to 0.95 of each opal), pendant minus Core: 16.7, 13.2, 10.8, 10.5, 7.8, 4.3, 4.8 L*",
+     "Lit walls, pendant / Core: TL 16.9/10.4, TR 24.3/17.0, ML 15.9/13.0, MR 22.0/16.3, LL 17.3/27.9, BL 34.3/18.2, BC 28.5/14.6, BR 19.8/15.3; a* 0.3-2.3 and b* 3.1-5.5, except the Core's floor patches (a* 3.3-9.8, from its red pool)",
+     "Lit/off luminance ratio per ground patch: pendant 0.032-0.050, except BL 0.089 and BC 0.064; Core 0.019-0.031, except LL 0.060",
+     "Core base lit, down the centre: lip L* 13.9 (RGB 80,0,2), upper 7.3, mid 5.2, low 2.4, bottom band 1.3. Flanks 0.8 (11,1,0) and 0.5 (6,1,0). Floor: beside the foot 7.9-12.9, in front 12.1 (a* 8.6), far front 14.6 (a* 10.5), far left 25.5 (a* 5.0)",
+     "Base flank/centre luminance, rows y 1560-1680 (left, right): lit 0.18-0.29, 0.12-0.17; OFF r3 (gap) 0.60-0.78, 0.29-0.35; OFF r4 (contact) 0.75-1.13, 0.34-0.56. At y 1720 all three are 0.27-0.54",
+     "OFF r3 to r4 at the same base pixels: linear red gain at the centre 1.09-1.39, bottom band 1.67, flanks 2.49-3.25; flank C* from 7.2-11.5 to 24.3-38.9",
+     "Exposure simulation (Core x1.77): glow median L* 42.0, C* 86.6, h 39.9; walls TL 16.0, TR 24.0, ML 19.2, MR 23.1; one pixel at R 255",
+     "Core rim band (r 360-405 px): lit L* 1.2-4.0, OFF 22-54",
+     "Pendant cap and cord lit: median L* 0.00, p95 0.27-0.72, max 2.07; wall beside the cord 26.4",
+     "Pendant whitest 200 glow pixels (softbox reflection, upper left): RGB 244/86/85, L* 58.7, h 29.2",
+     "Pendant wall near/far beside the shade: left 18.3/15.8, right 23.0/23.8, a* 0.9-1.0 (no red spill). Floor warm tint at x 900-1200, y 1900-2000: a* 3.0-3.9, b* 6.0-8.0",
+     "Mottle (band-pass sd L*, 100 % / 480): Core 0.29/0.24, pendant 0.23/0.15, OFF ball's real shading 0.29/0.28",
+     "Off gap (not a fault): plain-body patches 29.2 against 41.0 (11.8 L*), bands 28.6 against 41.2 (12.6), whole-body medians 28.6 against 40.9 (12.3); hue 37.8-39.2 against 33.4-34.4; Core ball r3 = r4 (40.9 and 41.0)",
+     "Off/lit alignment: cord x 808-836 against 809-835; Core silhouette at y 1300 x 475-1173 against 474-1172",
+     "Log: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-lit/measurements.txt (all crops and scripts are in the same folder)"
+    ]
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "core-lit-base-black-sides",
+      "verdict": "confirmed",
+      "severity": "blocking",
+      "measurement": "The critic's boxes on core-ember-lit.png give the same numbers to the decimal. Centre of the base: collar lip L* 13.9 / C* 40.2 (RGB 80,0,2), upper 7.3 / 28.3 (54,1,2), mid 5.2 / 23.2 (45,0,0), low 2.4 / 11.2 (29,0,0), bottom band 1.3 / 6.4 (20,0,0). Flanks: left L* 0.8, C* 2.7 (11,1,0); right L* 0.5, C* 1.4 (6,1,0). Floor outside: left 12.9, right 7.9. The upper centre is 0.20-0.23 of the ball's lower glow in luminance. With my own flank bands (15-65 px inside a silhouette found by gradient; the axis is x 822 on every row), across rows 1520-1700 the flanks keep this share of the centre's luminance: LIT left 0.19-0.37, right 0.11-0.24; OFF r3 0.36-0.97 / 0.18-0.41; OFF r4 0.60-1.19 / 0.33-0.58. Flank L* in LIT is 0.4-2.7. The view angle 40 px in from the edge is about 63 deg, so this is not an extreme grazing angle. Which version: the frame is round 2 (commit 338cb60a43, ember-tests2.sh, no BASE_CONTACT), so it has the air gap; contact became the default only at 63609cbf51. The lane's own gap-vs-contact LIT quarter test (the ff8ec0c9 message, repeated in the coordinator's 03:13 note) found: lip top L*/C* 2.0/7.8 -> 5.9/24.6, flanks +8 to +10 C*. Files: verify-lit/base-flank-ratios-verify.txt, v-core-lit-base-100.png, v-core-lit-base-100-gain4.png, v-core-lit-base-at480-x3.png, v-pair-lit-480.png, verify-notes.txt.",
+      "reasoning": "I tried to refute this and could not. Every number reproduces. My full-size crop and my 480 view show the same thing: a maroon middle, sides that read black, and a foot that merges into the dark contact ring. The frame was rendered with the 0.4 mm gap, which the CAD and the build do not have. The lane's own A/B test under this LIT rig shows that contact turns the flanks from black toward dark red (+8-10 C*) and the dark ring under the ball red (lip top +3.9 L*, +16.8 C*). So the frame misstates the lit base, and blocking stands. The coordinator had already sent it to re-render for this reason at 02:41. Corrections to the finding: (1) 'Only the collar under the ball is red' goes too far: the cone's centre band is maroon too (L* 5-7, C* 23-28). (2) The base is not lit by the ball alone. The audit shows the studio in this rig at 0.8x (key 0.817, fill 2.293). The left flank's lead over the right (0.19-0.37 against 0.11-0.24) and the lighter floor on the left come from the key. (3) The expected result is optimistic at its upper end. At low L* this red keeps C* at about 4.5-4.9 times L*, so +8-10 C* puts the flanks near L* 2-2.8. That is about half the centre on those rows: the low end of 'half to all', not 'most of the centre's level'. (4) The re-render must carry the 03:12 fixes, L1 (with contact only one tint pass is counted) and L3 (the lip thins to nothing). Without them the contact base will read lighter and pinker than the ball, with a pale pink top band."
+     },
+     {
+      "id": "pair-lit-exposure",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "My own glow mask (R>=80 and R>2G+20). Pendant LIT: 300k px, median L* 41.4, C* 83.9, h 38.4, p90 51.1, mean Y 0.1208. Core LIT: 419k px, median L* 31.8, C* 70.7, h 39.4, p90 37.8, mean Y 0.0698. That is x1.73 (0.79 EV); with R>=120 it is x1.74. The two median glows are dE76 16.3 apart. Brightest region along each opal's centre line: pendant 52, Core 38-40. Walls, my own 200x200 patches, pendant against Core: TL 17.4 / 10.9 (+0.93 EV), TR 24.3 / 17.2 (+0.86), ML 16.3 / 13.0 (+0.43), MR 22.0 / 16.4 (+0.70), TC 30.4 / 22.3 (+0.63). Wall hue matches (h 73-86). Brightest pixel: Core RGB 198,74,69; pendant 251,90,90. Scaling the Core x1.77 gives TL 16.6, TR 24.2, MR 23.2 and glow mean Y 0.124, which reproduces the critic's simulation. Files: verify-lit/v-pair-lit-480.png, v-pair-lit-300row.png, v-glows-100-pendant-left-core-right.png, verify-notes.txt.",
+      "reasoning": "The substance reproduces. The Core LIT sits about 0.8 EV below the pendant LIT in its glow and its upper walls. The hues match, and one scale factor brings both glow and walls into line. Side by side at 480 and in a 300 px row I can see it: the Core's room is darker and its glow a dimmer, duller red. So the pair is not 'matched by L*/C*/hue' as the brief assumes. One part of the finding is refuted: 'R 198 max, so it is not at that balance.' ember-tests2.sh renders the Core at exactly the chosen balance (studio 0.8 at -3.5 EV), and commit 338cb60a records that its ball disc reads 162/4/1 against 156/5/3 in the balance. The balance's 7 % at R 248+ was, in the lane's words, quarter-size sampling noise. So the frame is at the balance. What failed is the balance's own reading of the match ('Core L* 44.6, dE 2.4'): in the full render no typical part of the glow comes near L* 44.6 (its p99 is 39.6). The remedy is therefore a new Core exposure, about +0.8 EV (HOUSE_EV about -2.7), set in the same pass as the base re-render, not 'return to the balance'. Alone, each frame reads right, so this is a fix, not blocking. It becomes blocking if the owner picks the lit home row, which the coordinator plans to mock."
+     }
+    ]
+   }
+  },
+  {
+   "part": "buyer",
+   "found": {
+    "findings": [
+     {
+      "id": "core-lit-base-near-black",
+      "severity": "note",
+      "frame": "core-lit",
+      "where": "Base, x 430-1215, y 1470-1785. Flanks x 455-500 and 1150-1195, y 1640-1680; floor beside the foot x 370-420 and 1235-1285, y 1700-1750",
+      "what": "At 480 the lit base reads as a near-black, smoked-maroon cone with a red rim at the shoulder, under the glowing ball. Measured: shoulder L* 8.0 (RGB 56,1,1), upper centre 6.1, mid centre 3.7, low centre 1.6, flanks L* 0.8 and 0.4 (RGB 10,1,0 and 6,0,0); median 4.3. The floor beside the foot is L* 16.0 / 13.9 and in front 10.6. The flanks still carry the air gap: their flank-to-floor ratio in linear red is 0.06-0.10, the same as the gap-era OFF base (round 3: 0.07-0.12), not round 4 (0.18-0.33). They are black, not gray (C* 1.4-2.4), so the owner's smoke does not show here. If contact lifts the lit base by the same factors it lifted the OFF base (x2.5-2.75 at the flanks, x1.24-1.55 at the centre), the flanks come to about L* 1-2 and the centre to about 3-4.5. That is still black at 480. A re-render for the gap alone would not change what a buyer sees. A buyer will still read the base as a dark material, although picture 1 shows it red.",
+      "expected": "No re-render needed for the gap at visitor sizes. If the lit base should read as red over white, it needs more light on it (the ball's own spill, or fill), not only contact. The other tints' new lit Cores should use the contact model anyway.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core_lit-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core-lit-base-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core-lit-base-100-plus3EV.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core-off-lit-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/measurements.txt"
+     },
+     {
+      "id": "lit-pair-not-matched",
+      "severity": "note",
+      "frame": "pair-lit",
+      "where": "Pendant glow x 396-1240, y 1064-1466; Core glow x 462-1181, y 719-1410; walls at the frame corners",
+      "what": "The two lit pictures do not match in level. Only the hue matches. Glow medians: pendant L* 42.6, C* 85.9, h 39.1; Core L* 32.6, C* 72.2, h 39.5. Plain patches below the reflections: 36.0 / 78.2 against 32.1 / 71.5. The rooms differ too, corners TL/TR/ML/MR: pendant 16.0/24.2/15.5/22.0, Core 10.0/16.9/12.9/16.3. Side by side at 480, the pendant glows brighter and more orange-red in a lighter room, and the Core reads a deeper red in a darker room. On separate lamp pages a buyer will not see this. In a lit home-row mock (planned as the owner's choice) the two would sit together.",
+      "expected": "If the lit frames are ever shown together, glows and rooms within a few L*. Otherwise as is.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/lit-pair-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/lit-pair-300.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/measurements.txt"
+     },
+     {
+      "id": "lit-glows-on-red-primary",
+      "severity": "note",
+      "frame": "pair-lit",
+      "where": "Both glows (pendant x 396-1240, y 1064-1466; Core x 462-1181, y 719-1410)",
+      "what": "The round-1 salmon clip is gone: no glow pixel has R at 250 or above, and both glows read as deep Ember red at 480. They now sit on the sRGB red primary instead. G and B are at 5 or below on 58.8 % of the pendant's glow pixels and 83.3 % of the Core's (92.3 % at 10 or below). The hue is pinned at 39.8-40.0, the red primary's hue, so the glow is shaded by the red channel alone. On the Core this gives a very even disc: its middle row varies only L* 30.7-34.2 across 640 px. Only the top-to-bottom fall (37.9 to 22.5) and a dim softbox window give it form. At 480 it reads as a glowing ball, a little flat. For Ember this works. For q2 it is a warning: the same balance may put other strong tints on a display primary too.",
+      "expected": "Per tint, a lit glow that keeps some headroom in the off channels and the tint's own hue. Check each new tint for channels at 0 or 255.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core-lit-body-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/hemi-lit-shade-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/lit-pair-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/measurements.txt"
+     },
+     {
+      "id": "core-off-base-edge-sheen",
+      "severity": "note",
+      "frame": "core-off",
+      "where": "Base silhouettes: left x 433-515, right x 1135-1217, y 1580-1700; right flank and foot",
+      "what": "What is left on the fixed base. A band along each silhouette is less saturated than the base's face. It is 63 px (left) and 80 px (right) wide at y 1660, 43/61 at y 1600 and 10/15 near the foot (C* under 40). In round 3 it was 140/154, 89/110 and 135/149. On the lit left side it is a dusty rose: low flank L* 41.0, C* 30.3, h 24, RGB 144,76,76. On the right it is maroon: L* 29.4, C* 24.1, RGB 104,53,54. At 3x the right flank still has a faint mauve cast. At 480 and in the 300 px row it reads as satin sheen and shade from the front-left key, not as smoke or paint. The base's face is a slightly pinker red than the ball (h 27.6-31.9 against the ball's 34.4) and reads as the same red in a frosted finish.",
+      "expected": "As is. This is shading from the key light, as the lane's even-light test found.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core-base-100-r3-top-r4-bottom.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core-off-r4-leftflank-3x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core-off-r4-rightflank-3x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/core_off-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/measurements.txt"
+     },
+     {
+      "id": "pendant-lit-cord-cap-pure-black",
+      "severity": "note",
+      "frame": "pendant-lit",
+      "where": "Cord x 812-833, y 0-740; cap x 500-1140, y 745-1000",
+      "what": "In the lit pendant the cord is crushed to pure black: max RGB 2, and 64.9 % of its pixels are exactly 0,0,0. 39.7 % of the cap box is exactly 0. At 100 % the cord is a flat, hard-edged black bar with no roundness or sheen; in the OFF frame it has some shading (max RGB 16-19). At 480 it reads as a black cord. The cap's steps stay readable as silhouettes against the L* 27 wall. The lane disclosed this last round.",
+      "expected": "As is for 480. A faint sheen line on the cord only if a full-size zoom is offered.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/hemi-lit-top-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/hemi-lit-shade-100.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/hemi_lit-480.png"
+     },
+     {
+      "id": "pendant-lit-room-not-lit-by-lamp",
+      "severity": "note",
+      "frame": "pendant-lit",
+      "where": "Wall round the shade x 150-400 and 1240-1500, y 900-1400; floor band y 1600-2000",
+      "what": "Nothing in the room shows the pendant's light. The wall stays neutral (a* 0.7-2.2 everywhere, the same near the shade as far from it). The brightest ground is the floor at the lower left: corner LL L* 34.3 against BR 19.9, and the bottom row runs 34.2 to 20.0 from left to right. That is away from the lamp, so it comes from the studio, not the pendant. At 480 it reads as a dim studio with a lighter patch of floor at the bottom left. The Core's frame at least shows a faint red pool round its base (floor a* 5-10).",
+      "expected": "As is for a picture 2, unless the lit frames should show the lamp lighting its surroundings.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/hemi_lit-480.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/lit-pair-480-plus2EV.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/measurements.txt"
+     }
+    ],
+    "owner_question_answered": "Yes, the smoke is gone. In round 4 the base reads as the lamp's own red in a satin finish in the 300 px row and at 480. The low flanks the owner saw were gray in round 3: left L* 32.2, C* 7.7 (RGB 90,72,72); right L* 22.7, C* 7.2 (RGB 66,50,52). Now they are red: left L* 41.0, C* 30.3 (RGB 144,76,76); right L* 29.4, C* 24.1 (RGB 104,53,54). The mid flanks went from C* 22-28 to 42-48. The share of the base that is gray-black (C* under 30 and L* under 25) fell from 6.7 % to 0.5 %, and the share under L* 20 from 11.3 % to 1.4 %. The low-chroma band along the silhouettes narrowed from 140-154 px to 63-80 px at mid-height, and from 135-149 px to 10-15 px at the foot. A difference map shows that only the base changed (x 433-1209, y 1365-1787); the ground and ball are the same to 0.0-0.2 L*. What is left matches the lane's even-light test: a lighter, dusty-rose lit flank, a maroon shadow flank and a darker foot. That follows the front-left key and reads as shading, not paint or smoke. At 100 % the base reads as frosted red over white.",
+    "q1_ready": "All four are ready in Ember; nothing is blocking. (1) Pendant OFF: ready as the tile and first picture. It is byte-identical to the version passed last round, and I saw nothing new. (2) Core OFF round 4: ready as the tile and first picture. The base now reads as the same red as the ball. In the 300 px row the four read as one studio and one family. The one thing a buyer will notice is the known gap: the Core is a lighter cherry red beside the pendant and the Tropos (now about 12 L*; owner's decision). (3) Pendant LIT: ready as the second picture. It reads as a real red pendant glowing in a dim room, the glow is red, not salmon, and there is no hot spot on the wall. Notes only: the cord is pure black at full size, and the room shows no light from the lamp. (4) Core LIT: ready as the second picture. It reads as a glowing red ball on a dark base with a faint red pool. Its base was rendered with the gap and still has the gap-era flank darkness. A contact re-render would only lift it to about L* 1-2 at the flanks and 3-4.5 at the centre, so it would still read black at 480. I would not re-render it for buyers. To make the lit base read red, it needs light on it.",
+    "q2_pattern": "Yes, with checks. OFF: the contact fix is in the model, not the tint, so it carries over. The remaining flank shading comes from the key light and will repeat in every tint as shading. On the pale tints (Ice, Fog, Haze, Dust), check that the grazing sheen band (63-80 px) does not read gray; I have only seen Ember. The Core-lighter-than-pendant gap will repeat unless the owner deepens the Core. Note that it grew back between round 2 (b42: Core band L* 37.5, gap about 9) and round 3/4 (41.2, gap about 12.6). LIT: the balance cured the salmon clip, but it put Ember's glow on the sRGB red primary: G and B at most 5 on 59 % (pendant) and 83 % (Core) of glow pixels, with the hue pinned at 40. For each new tint, check its lit glow for channels at 0 or 255 and for hue drift from its off colour, since strong tints may land on a display primary the same way. Render every new lit Core with the liner in contact. If lit frames will ever sit together (a lit home row), match them first: the pendant's glow is 4-10 L* brighter and its walls 5-8 L* lighter than the Core's.",
+    "q3_reads_wrong": "Off, in the row and at 480, nothing reads as CG, fake or cheap. Same paper, the same three softbox windows on both lamps, shadows on the same side, and no lettering. The Core's base reads as part of the lamp now. What a buyer would notice off: the Core is a lighter, brighter cherry red than the deep wine-red pendant and the Tropos beside it (the known gap; the Core's ball is also about 4.7 degrees pinker in hue, h 34.4 against 39.1). On: (a) the Core's base looks like a near-black smoked pedestal under the glowing ball, so a buyer could take it for a dark material even though picture 1 shows it red; (b) the pendant's light stops short of the cap, with a dark band under it (true to the CAD), and its outer layers read as a darker smoky rim round the glowing bowl. That reads as layered acrylic, not as a fault. (c) Side by side, the pendant glows brighter and more orange-red than the Core, in a lighter room. (d) Neither lamp visibly lights the wall; the pendant's frame has its brightest floor at the lower left, away from the lamp. (e) Only at full size: the lit pendant's cord is a flat pure-black bar.",
+    "measured": [
+     "Row built like the old mock: full frames, Lanczos, 4:5 (row-ember-v2 reproduced at mean absolute difference 0.0). My rows: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/row300-new.png (round 4) and row300-old-r3.png (round 3). Singles at 480x600: hemi_off-480.png, core_off-480.png, hemi_lit-480.png, core_lit-480.png (same folder)",
+     "Pendant OFF b47 is byte-identical to b42 (mean absolute difference 0.0, max 0)",
+     "Core OFF round 4 minus round 3: blurred |dL*| over 1 only inside x 433-1209, y 1365-1787 (the base); ground corners and ball upper/mid change 0.0-0.2 L*",
+     "Core base round 3 to round 4: top band L* 51.3 to 53.0 (h 30.5 to 27.6, RGB 229,68,76); mid centre 37.5 to 41.6; low centre 24.6 to 30.4; bottom band 20.4 to 26.6; left flank low 32.2/C* 7.7 to 41.0/C* 30.3; right flank low 22.7/C* 7.2 to 29.4/C* 24.1; mid flanks C* 27.6/22.3 to 47.6/42.5; base median L* 36.2, C* 53.4 to 41.9, C* 61.5 (h 31.1)",
+     "Core base share, round 3 to round 4: C* under 30 and L* under 25: 6.7 % to 0.5 %; L* under 20: 11.3 % to 1.4 %; C* under 20: 12.7 % to 3.6 %",
+     "Low-chroma band (C* under 40) along the silhouettes, left/right px: y 1600 89/110 to 43/61; y 1660 140/154 to 63/80; y 1720 135/149 to 10/15",
+     "Core LIT base: shoulder L* 8.0 (RGB 56,1,1); upper centre 6.1; mid 3.7; low 1.6; flanks 0.8 and 0.4 (RGB 10,1,0 and 6,0,0); median 4.3. Floor: left/right of foot 16.0/13.9, in front 10.6 (a* 8.3), far left 24.0",
+     "Flank-to-floor ratio in linear red: Core lit 0.06-0.10; OFF round 3 0.07-0.12; OFF round 4 0.18-0.33. Projected lit base after contact (round 3 to 4 factors): flanks about L* 1-2, centre about 3-4.5",
+     "Lit glows: pendant median L* 42.6, C* 85.9, h 39.1 (R p5 128, p95 240); Core median 32.6, C* 72.2, h 39.5 (R p5 125, p95 183). No pixel with R at 250 or above in either; no channel at 255 anywhere in either frame. Plain patches: pendant (500-1150, 1320-1400) 36.0/78.2/39.9; Core (520-1120, 1050-1150) 32.1/71.5/39.8",
+     "Glow pixels with G and B both at 5 or below: pendant 58.8 %, Core 83.3 % (92.3 % at 10 or below)",
+     "Core glow form: middle row y 1057 L* 30.7-34.2 across x 502-1142; centre column 37.9 (y 839) to 22.5 (y 1399)",
+     "Lit rooms, corners TL/TR/ML/MR/LL/BR: pendant 16.0/24.2/15.5/22.0/34.3/19.9; Core 10.0/16.9/12.9/16.3/18.1/15.2. Wall a* 0.3-2.2 in both; pendant top edge smooth (max L* 33.0 next to the cord, no hot spot)",
+     "Pendant lit cord: max RGB 2, 64.9 % exactly 0; cap box 39.7 % exactly 0 (OFF cord max 16-19, 0 %)",
+     "Core rim band (OFF silhouette against lit glow edge): 44-47 px a side at y 1000-1100; ball 810 px = 160 mm, so about 9 mm against the CAD's 10",
+     "Known off gap (measured, not a fault): pendant band (450-1200, 1330-1400) L* 28.6, C* 65.8, h 39.1; Core band (560-1060, 1130-1250) L* 41.2, C* 72.2, h 34.4: gap 12.6. Plain patches 29.2 against 41.0 (11.8). Whole-body masks (C* over 30, red) 28.6 against 41.0 (12.4; the Core's mask includes its base). Round 2's b42 Core band was 37.5, h 39.0 (gap 8.9), so the Core's ball went 3.7 L* lighter and 4.6 degrees pinker in round 3/4. Tropos mask L* 30.4, C* 61.5, h 36.6",
+     "Lane's ground corners for the Core OFF are unchanged by round 4 (TL 81.5, TR 93.5, ML 88.3, MR 93.2, LL 92.6, BR 89.2 against the Tropos's 80.0, 92.8, 87.2, 94.5, 94.0, 87.4; largest difference 1.8)",
+     "Log and scripts: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/measurements.txt and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b47/critic-buyer/scripts/"
+    ]
+   },
+   "verified": {
+    "verdicts": []
+   }
+  }
+ ]
+}
