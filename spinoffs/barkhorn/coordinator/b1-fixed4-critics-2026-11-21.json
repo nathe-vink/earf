@@ -1,0 +1,485 @@
+{
+  "summary": "Two critics judge the bar picture B1 (live against fixed-4): an honest-light audit of every light and flag in the scene, and the picture as a photograph of the real products at the sizes the site shows; a skeptic checks each",
+  "agentCount": 4,
+  "logs": [
+    "B1 critics: 2 of 2 returned"
+  ],
+  "result": {
+    "results": [
+      {
+        "part": "lights",
+        "found": {
+          "findings": [
+            {
+              "id": "L1",
+              "severity": "blocking",
+              "frame": "fixed4",
+              "where": "Near Tropos horn (bell box 1040,40-1320,240), at 800 px and in the 168 px thumbnail",
+              "what": "With honest light, the near lemon-clear horn reads as a black shape. The only mark on it is a hard grey triangle: the ceiling-panel's mirror image cut off by the niche header. At site sizes it reads as a play icon on a black panel, not as a yellow acrylic horn. The track-horn1 head aimed at the horn (4.5 W/m2, 12 deg) adds nothing you can see, because clear acrylic does not scatter light. The panel behaves honestly; the problem is how the picture reads.",
+              "expected": "A horn that reads as the approved lemon horn, lit by something a real bar or photographer could have. It must be something the polished horn can mirror, or be seen against (a lit niche back, a large real softbox on its mirror rays). A reflection-only card does not qualify.",
+              "sure": "likely",
+              "evidence": "Bell box L* live 8.9 / fixed 0.3 / fixed-4 1.2. Pixels over L* 30 in the bell box: live 7538, fixed-4 22. 99.5th percentile: live 76.5, fixed-4 19.9. Wedge box (1045,140-1150,240): panel 0/6/15 = 0.0/3.6/8.7, and 5.2 in fixed-4. Crops: critic-lights/horn.png, site800-site-live-fixed4.png, thumb168-site-live-fixed4-x2.png"
+            },
+            {
+              "id": "L2",
+              "severity": "blocking",
+              "frame": "fixed4",
+              "where": "Near Tropos woofer cone and dust cap (woofer-cone#1 box 1100,388-1256,547)",
+              "what": "track-front1 turns the cone into the brightest large surface on the speaker. It reads light grey to silver, and at 800 px and 168 px the woofer reads as a metal cone. Under the same head, the cone (left flank L* 63.2, cap 64.2) outreads the white lining beside the woofer (41.4 and 45.8). In the approved Acid front the cone is dark (14-26 L* against a wall of 89). The head is honest; the trouble is what its hot spot does to the product read. I could not read the cone material's albedo or gloss (the product material files are not in the folder), so I cannot tell whether the model's cone is too light or the head is simply too hot on it.",
+              "expected": "A dark cone, as in the approved front, with the cabinet still lit. For example, aim the head so its hot spot grazes the cabinet and the cone sits at the pool's edge, or use a larger, softer source.",
+              "sure": "likely",
+              "evidence": "Cone left flank (1120,430-1150,520): live 21.9 / fixed 1.3 / fixed-3 58.6 / fixed-4 63.2. Dust cap: 9.4 / 0.3 / 57.9 / 64.2. Lining left/right of the woofer in fixed-4: 41.4 / 45.8. White amp box: 81.5. front-acid.png: cone 14.1-26.2, cap 24.5, wall 88.9. The cone is grey in the card-0 tile of crops-front10-card0-6-15.png, so the head causes it, not the panel. Crops: critic-lights/cabinet-sill.png, near-speaker.png"
+            },
+            {
+              "id": "L3",
+              "severity": "fix",
+              "frame": "fixed4",
+              "where": "lights.horn-card: panel 1.4 x 0.9 m at (8.05, 4.9, 3.34)",
+              "what": "fixed-4 still carries a ray-visibility trick. horn-card is an emitter that exists only in reflections: diffuse 0 (visible_diffuse False, so it lights nothing), specular 1, camera off, shadow off (panel() sets visible_shadow False), transmission off (gen.py), one-sided (back transparent), and ramped 0.25-1-0.25 along x. No real card behaves like that. In fixed-4 I found no visible effect: with the ceiling panel at 0, the near horn is black (bell 0.1, wedge box 0.0), and the Cores look the same as in fixed when zoomed. No frame without the card exists, so its remaining effect elsewhere is unmeasured. Geometry says it can reach the camera only through a final glossy bounce on curved surfaces (Cores, shades, horns), a few pixels at most.",
+              "expected": "Delete it (fixed-5 = fixed-4 without horn-card; on the measured evidence nothing visible should change). Alternatively, make it a real card or softbox with every ray on (diffuse 1, shadow on, transmission on) and measure what it then lights.",
+              "sure": "certain",
+              "evidence": "fixed4.json lights.horn-card = {diffuse 0.0, specular 1.0, transmission false, ramp ...}. lights.py panel(): visible_camera = camera (False), visible_shadow = False, visible_diffuse = d>=1, visible_glossy = s>=1, transmission False -> visible_transmission False. Tiles card0: bell 0.1, wedge 0.0. Crop: critic-lights/cores-zoom.png"
+            },
+            {
+              "id": "L4",
+              "severity": "blocking",
+              "frame": "live",
+              "where": "live frame (the site's tropos-bar.webp): near horn and near cabinet",
+              "what": "Live's look rests on two tricks. First, the horn's whole glow is the horn card seen through the clear horn: a camera-invisible, diffuse-invisible, shadowless, graduated emitter that lights nothing. Second, the cabinet's inner glow comes from the shadow-ray shortcut on the Tropos materials. These are lights no real place could have, and they change what the picture shows. live.json also leaves filter_glossy at the engine default 0.5 and reflective caustics off.",
+              "expected": "Replace live with an honest frame.",
+              "sure": "certain",
+              "evidence": "live.json horn-card has no transmission key, so it is transmission-visible. Bell L* live 8.9 vs fixed 0.3; 7538 vs 22 px over L* 30. Cabinet front 35.6 vs 15.4 with the shortcut cut (meas.md). live.json render: caustics_reflective false, no filter_glossy key; render.py blur_glossy = R.get('filter_glossy', 0.5)"
+            },
+            {
+              "id": "L5",
+              "severity": "fix",
+              "frame": "both",
+              "where": "lights.house (3.0 m disc at 6.9, 0.2, 2.6) and lights.house-left (2.0 m disc at 4.6, 2.2, 3.0)",
+              "what": "The two declared fills reach through the ceiling plane. The heads hang at R.CEIL - 0.05 = 3.35, so the ceiling is at 3.40. house's top edge is at z 4.01 (0.61 m above it, about 16 % of the disc) and its lower edge is at y -0.32, which may be behind the front wall (the room file is not in the folder). house-left's top is at z 3.99 (0.59 m above, about 25 % of the disc). Neither a bar nor a photographer could place a light there. The part below the ceiling works like a large bounce, so the visible effect is small.",
+              "expected": "Fill sources that fit inside the room. One option is planet_bar._track()'s own 1.6 m house disc at (6.9, 0.6, 2.3), whose top is about 3.05. Another is a 2.4 m frame or a lit wall below 3.40.",
+              "sure": "likely",
+              "evidence": "critic-lights/geom.txt: disc top z = centre + r*sqrt(1 - n_z^2): house 2.6 + 1.5*0.937 = 4.01; house-left 3.0 + 1.0*0.993 = 3.99. planet_bar.py lines 129 and 256: R.CEIL - 0.05 and R.CEIL - 0.06 give 3.35 and 3.34"
+            },
+            {
+              "id": "L6",
+              "severity": "fix",
+              "frame": "fixed4",
+              "where": "lights.ceiling-panel (1.6 x 0.8 m at 10.5, 4.0, 3.2) and lights.horn-card",
+              "what": "The 'panel under the ceiling' is nearly vertical (it faces 20 deg down) and its top edge is at z 3.58, 0.18 m above the 3.40 ceiling plane, so 22 % of its height is inside or above the ceiling. horn-card's top is also at 3.58. Otherwise the ceiling-panel is honest in what it does: diffuse and specular full, transmission on. It lights what it faces: right walnut pillar 10.2 -> 14.1, records right of the niche +0.6, bell +0.9. It shows in reflections (the wedge). The engine properties it carries (camera ray off, body casts no shadow, back transparent) change nothing here, because it sits behind the camera and no light passes its position.",
+              "expected": "Hang it fully below the ceiling: centre z 3.0 or lower, or a shorter panel. Then re-check the wedge.",
+              "sure": "likely",
+              "evidence": "geom.txt: top = 3.2 + 0.4*0.9395 = 3.58. Tiles (front head 10 W/m2): right pillar panel 0/6/15 = 30.8/32.5/35.1, records right 7.0/7.4/8.2. The 14 deg head barely reaches the right pillar (head 6 vs 4: 13.7 vs 13.5). Crop: critic-lights/heat-tiles-panel6-panel15-head6vs4.png"
+            },
+            {
+              "id": "L7",
+              "severity": "note",
+              "frame": "fixed4",
+              "where": "lights.track-front1 (14 cm disc at 8.6, 3.9, 3.35)",
+              "what": "This is an honest track head: an area lamp with diffuse, glossy, transmission and volume rays on. No receivers, flags or shares. Its spill lands where geometry puts it: cabinet front 15.4 -> 41.2, cone 2.6 -> 61.5, amp box 12.1 -> 81.5, left pillar 6.7 -> 9.8, niche sill 7.4 -> 34.5 (a hot pinkish strip under the cabinet). It sits 67.9 deg above the lens axis. One correction to the README: 'every ray visibility is on' is not literal, because area() leaves the camera ray off for every engine area lamp. That changes nothing here, since the hidden-in-frame audit reads 0 px. It hangs on a sixth y-line of heads (3.0 / 3.6 / 3.9 / 4.4 / 4.9 / 5.27). No track or can is modelled for any head, and none is in frame.",
+              "expected": "Keep it as a real light. Its aim and size are the levers for L2.",
+              "sure": "certain",
+              "evidence": "lights.py area(): _visibility(ob, spec.get('camera', False)), and lamp_shares returns no twins at diffuse = specular = 1. fixed4.equipment.txt: hidden in frame 0 px. regions.txt and tilemeas.txt. Crop: critic-lights/heat-fixed4-minus-fixed.png (whole frame +2.91; near niche +12.13; outside it +0.33)"
+            },
+            {
+              "id": "L8",
+              "severity": "note",
+              "frame": "fixed4",
+              "where": "track-front1's power label",
+              "what": "The head's 5 W/m2 is a Lambertian label (area_power: E * pi * d^2) that ignores spread. Narrowing it to 14 deg concentrated the light, so fixed-4 puts more light on the cone than fixed-3's 6 W/m2 at 22 deg, not less. A 14 deg head at 5 lands about where a 22 deg head at 8 would.",
+              "expected": "Read the head as stronger than its label. If the cone has to come down, measure on the cone, not by the W/m2 label.",
+              "sure": "likely",
+              "evidence": "Cone left flank luminance Y 0.285 (fixed-3) -> 0.345 (fixed-4); dust cap 0.273 -> 0.341; amp box 0.633 -> 0.691. Cone box L* fixed-3 56.8, fixed-4 61.5, fixed-2 (10 W/m2 at 22 deg) 66.1. Head tiles at 14 deg: 6 W/m2 = 64.1, 4 W/m2 = 56.9"
+            },
+            {
+              "id": "L9",
+              "severity": "note",
+              "frame": "fixed4",
+              "where": "Materials and render settings",
+              "what": "The render settings are the honest ones: refractive and reflective caustics on, clamp 0 (sample_clamp_indirect 0; the engine never sets a direct clamp), filter_glossy 0, bounces 24/12/24/8. There is no light linking (no receivers), no shadow linking or flags, no shadow_on_set, no glints, no portals, no world Light Path (sky.visible unset, strength 0), and no haze. Every room DARK emitter and product glow is at 0. The shadow-ray cut is the prop living_ext.no_glass_shadows, last in fixed4.json's set (index 19). It is inherited gen.py -> fixed.json -> gen2/gen3, and products are built before the set. I could not verify the cut itself: living_ext.py and the render log line 'NO GLASS SHADOWS: N materials' are not in the folder, and the report has no material listing. The README records 7 materials.",
+              "expected": "Keep the log line or a material dump with the frame, so the cut can be checked.",
+              "sure": "certain",
+              "evidence": "fixed4.json render {caustics_refractive true, caustics_reflective true, clamp 0, filter_glossy 0.0}. render.py lines 281-286. fixed4.report.json: glints [], applied [], pending []. find / -name living_ext.py found nothing"
+            },
+            {
+              "id": "L10",
+              "severity": "note",
+              "frame": "both",
+              "where": "Practicals: 5 Hemisphere pendants and 3 Cores (stage2_props.lamps)",
+              "what": "These are the only lights in frame and are real lamps. Their emitter code (stage2_props.py) is not in the folder, so I could not check their ray flags. The hidden-in-frame audit (0 px) would not catch a camera-invisible LED inside a clear shade, because the mask pass makes the shades opaque. They read the same across live, fixed and fixed-4 (hemispheres 17.1 / 17.8 / 17.7).",
+              "expected": "Confirm every emitter in the lamps has all ray visibility on.",
+              "sure": "certain",
+              "evidence": "render.py _masks(): material_override emission with object index, so clear parts are opaque in the mask pass. meas.md hemispheres row"
+            }
+          ],
+          "lights_table": [
+            "Frame geometry: camera (9.3, 3.5, 1.42), level, 24 mm on a 36 mm horizontal sensor, shift_y 0.063, horizon at px y 550. Ceiling 3.40 (R.CEIL; heads at R.CEIL - 0.05). Every engine area lamp is camera-invisible by default; the hidden-in-frame audit reads 0 px.",
+            "track-wall1..4 | area disc 0.12 m | (6.2/7.0/9.0/9.8, 4.9, 3.35) | out of frame, 31-73 deg above the axis | face the record wall (x+0.1, 5.72, 1.7), 63 deg down | 5.1 W/m2, 20 deg, #FFD2A0 | non-physical: camera ray off (no effect); bare disc, no can or track | real bar: YES",
+            "track-bar0..2 | area disc 0.12 m | (5.6/7.0/8.4, 3.6, 3.35) | out of frame, 35-70 deg above (bar0 also past the left edge) | face the bar top (x, 4.2, 1.07) | 1.05 W/m2, 24 deg | as above | real bar: YES",
+            "track-bay0 | area disc 0.14 m | (5.55, 4.4, 3.35) | out of frame, 67 px above the top edge | faces the far cabinet (5.55, 5.67, 2.04) | 36.3 W/m2, 14 deg, #FFE2C0 | as above | real bar: YES",
+            "track-bay1 | area disc 0.14 m | (8.25, 5.27, 3.35) | out of frame, 44 deg above | faces down into the near bay (8.25, 5.67, 1.79), 76 deg down | 16.5 W/m2, 14 deg | as above | real bar: YES",
+            "track-horn0/1 | area disc 0.12 m | (5.85/8.55, 4.4, 3.35) | out of frame, 32/59 deg above | face the horns (x, 5.57, 2.21) | 4.5 W/m2, 12 deg | as above; no visible effect on the clear horns | real bar: YES",
+            "track-mantle | area disc 0.10 m | (8.9, 3.0, 3.35) | behind the camera | faces Mantle (8.5, 4.32, 1.07) | 10.5 W/m2, 18 deg, #FFD8B0 | as above | real bar: YES",
+            "house | area disc 3.0 m | (6.9, 0.2, 2.6) | behind the camera | faces the bar (6.9, 4.5, 1.0), 20 deg down | 1.8 W/m2, no spread, #FFC890 | top edge z 4.01, 0.61 m through the ceiling; lower edge y -0.32, maybe behind the front wall | real bar: NO as placed (a photographer's big bounce could do this job inside the room)",
+            "house-left | area disc 2.0 m | (4.6, 2.2, 3.0) | past the left edge (px x -989) | faces the left wall (4.0, 5.6, 2.6) | 1.5 W/m2, #FFC890 | top edge z 3.99, 0.59 m through the ceiling | real bar: NO as placed",
+            "mantle-front | area disc 0.15 m | (9.7, 3.15, 1.55) | behind and right of the camera | faces Mantle's front (8.5, 4.2, 1.11) | 15 W/m2, 14 deg | camera ray off (no effect) | photographer on location: YES (a small head on a stand behind the seat)",
+            "mantle-side | area disc 0.20 m | (9.45, 4.25, 1.20), 13 cm above the bar top | past the right edge (px 2480, 1123) | faces Mantle from the side | 18 W/m2, 8 deg | camera ray off (no effect) | photographer: YES (a small light on the bar)",
+            "horn-card | panel 1.4 x 0.9 m, ramp 0.25-1-0.25 on x 7.4-8.7 | (8.05, 4.9, 3.34), in front of the near bay at the ceiling | out of frame, 46 deg above | faces the near horn (8.25, 5.62, 2.19), 57 deg down | strength 10, #FFE2C0 | diffuse 0 (lights nothing), specular 1, camera off, shadow off, transmission off, back transparent, top 0.18 m through the ceiling | real place: NO (a trick)",
+            "track-front1 | area disc 0.14 m | (8.6, 3.9, 3.35) | out of frame, 67.9 deg above | faces the near cabinet front (8.25, 5.45, 1.5), throw 2.44 m, 49 deg down | 5 W/m2 label (more in fact), 14 deg, #FFE2C0 | camera ray off (no effect); bare disc | real bar: YES",
+            "ceiling-panel | panel 1.6 x 0.8 m, even | (10.5, 4.0, 3.2), nearly vertical, facing 20 deg down | behind and right of the camera | faces the near bell (8.25, 5.57, 2.2), throw 2.92 m | strength 8, #FFE2C0 | diffuse 1, specular 1, transmission on; camera off, body casts no shadow, back transparent (no effect here); top 0.18 m through the ceiling | photographer on location: YES once hung below the ceiling",
+            "Practicals in frame: 5 Hemisphere pendants (x 6.18-7.66, rims 1.66-1.86) and 3 Cores on the bar | the products' own lamps | ray flags unverified (stage2_props.py not in the folder) | real bar: YES",
+            "Off: the room's DARK emitters (dome, sphere, disc, name, niche_strip, spk_niche_strip, sink, screen, etch, shade, flat, flame, windows, counter_strip, sconces, plinths) all 0; product led / uplight / glow at 0; world strength 0",
+            "Render, fixed-4: caustics refractive and reflective on, clamp 0, filter_glossy 0, shadow-ray shortcut cut by living_ext.no_glass_shadows (last set prop; not independently verified). Live: reflective caustics off, filter_glossy 0.5, shortcut on (7 materials per the README), horn-card transmission-visible"
+          ],
+          "recommendation": "On honesty, fixed-4 can replace live with named exceptions. As a picture it is not ready yet. Before it goes up: (1) delete horn-card, the one remaining ray-visibility trick. With the ceiling panel at 0 the near horn is black either way, so removing it should change nothing visible; a fixed-5 without it would confirm. (2) Hang ceiling-panel fully below the 3.40 ceiling. (3) Bring house and house-left inside the room, for example planet_bar's own 1.6 m house at (6.9, 0.6, 2.3). track-front1, ceiling-panel, the track heads and the two Mantle heads are lights a bar or a location photographer could have, and they behave honestly. Separately from honesty, at 800 px and at the 168 px thumbnail the near Tropos reads as a silver woofer under a black horn with a grey triangle: cone L* 63-64 against 14-26 in the approved Acid front; bell 1.2 against 8.9 live. Fix it with a different honest plan, not a trick. Keep the head's hot spot off the cone. Give the horn something real to mirror or be seen against, such as a lit niche back from the room's own speaker-niche strip (now 0; untested) or a real softbox on its mirror rays with every ray on.",
+          "summary": "I read fixed4.json, lights.py, render.py and planet_bar.py, and measured live, fixed, fixed-3, fixed-4 and the README's crop tiles. I located the tiles in the frame (box 960,0-1536,631 at 0.75; mean error 1.46 levels) and used them to separate the panel's effect (card 0/6/15) from the head's (4 vs 6 W/m2). fixed-4 has 19 lights, all out of frame, plus the in-frame Hemisphere and Core practicals. Its render settings are honest: both caustics on, clamp 0, filter_glossy 0. The shortcut-cut prop is last in the set, but its code and log are not in the folder, so I could not verify the cut. horn-card is still a reflection-only emitter (diffuse 0, shadow off, camera off, transmission off, ramped) whose measured effect in fixed-4 is nil on the horn. track-front1 is an honest head. It does what such a light does: cabinet front 15.4 -> 41.2, sill 7.4 -> 34.5. Its 14 deg spread lands more light than its 5 W/m2 label, so the cone (61.5) is brighter than in fixed-3 (56.8). ceiling-panel is honest in behaviour: right pillar +4, the wedge on the horn, bell +0.9. Its top edge, horn-card's, and the house and house-left discs' all pass through the 3.40 ceiling (by 0.18, 0.18, 0.61 and 0.59 m). Live's horn glow and cabinet glow were both tricks (bell 8.9 -> 0.3 and front 35.6 -> 15.4 once cut). At the site's sizes fixed-4 misreads the near Tropos: the woofer cone looks silver and the horn black with a triangle. Evidence is in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-lights/: near-speaker.png, horn.png, cabinet-sill.png, site800-site-live-fixed4.png, thumb168-site-live-fixed4-x2.png, heat-fixed4-minus-fixed.png, heat-tiles-panel6-panel15-head6vs4.png, cores-zoom.png, tilemeas.txt, regions.txt, geom.txt."
+        },
+        "verified": {
+          "verdicts": [
+            {
+              "id": "L1",
+              "verdict": "confirmed",
+              "severity": "blocking",
+              "measurement": "Bell box 1040,40-1320,240, L* for live / fixed / fixed-3 / fixed-4: 8.9 / 0.3 / 1.2 / 1.2. Pixels over L* 30: 7538 / 16 / 20 / 22. 99.5th percentile: 76.5 / 5.2 / 19.9 / 19.9. All reproduce. On the exact near-waveguide mask pixels (45,518 px), the mean is 11.0 live against 1.5 in fixed-4, and the median is 0.3 in every honest frame. Wedge box, measured on the coordinator's tiles: 0.0 / 3.6 / 8.7 with the panel at 0 / 6 / 15, and 5.2 in fixed-4. With no ceiling panel (horn-card on, transmission off) the bell reads 0.1. Seen in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/verify-lights/site800-site-live-fixed-fixed4.png, thumb-site-live-fixed4-x4.png (the real 168 x 94 size) and horn-plus3-2x-live-fixed-fixed4.png.",
+              "reasoning": "At 800 px and at the real 168 x 94 thumbnail, the fixed-4 horn is a black area with a neutral grey triangle outline pointing right. It reads as a graphic, not as a lemon horn. At +3 stops the triangle is hard-edged and untinted, as a reflection off the outer surface would be. The triangle comes from the panel: with the panel at 0 the horn is fully black. track-horn1 adds at most the 0.3 L* that fixed shows. The physics is honest: the horn is clear and stands in front of the niche's near-black felt (#1A1918, rough 0.95, planet_bar.py line 174), so honest light leaves it black. The fault is in how it reads, and at site sizes it misstates the Acid horn."
+            },
+            {
+              "id": "L2",
+              "verdict": "confirmed",
+              "severity": "blocking",
+              "measurement": "Cone left-flank box, live / fixed / fixed-3 / fixed-4: 21.9 / 1.3 / 58.6 / 63.2 (reproduces). On exact masks of the near woofer: cone 26.4 (C* 17) / 5.8 / 56.9 / 60.9 (C* 3.9); dust cap 8.3 / 0.4 / 57.4 / 64.0. Lining beside the woofer in fixed-4 (my boxes x 1066-1092 and 1268-1296, y 400-560): 48.8 and 47.1. Amp box 73.7. Approved front-acid.png: cone ring 22.5 L* (p10-p90 about 10-34), cap 25.5, wall 89-93 (front-acid-cone-rings.png). Tiles: cone 65.6 with the panel at 0, 6 and 15 alike (head 10 W/m2, 22 deg). Head variants: 56.3 at 6 W/m2 / 22 deg, 64.1 at 6 W/m2 / 14 deg, 56.9 at 4 W/m2 / 14 deg. Seen in near-tropos-1to1-live-fixed-fixed4.png and in the thumbnail sheets.",
+              "reasoning": "The cone is a smooth, neutral light grey. At 1:1, at 800 px and at 168 px it reads as a metal (aluminium) cone, and it is the brightest large surface on the speaker. The head causes it: the cone reads the same whatever the panel's strength. The read inverts the product: in the approved front the cone is among the darkest parts, and here it outreads the white lining beside it. planet_bar.py line 136 records that the bay head was set steep on purpose to keep 'the cone in its cabinet's shade'. At the same 6 W/m2, narrowing the head from 22 to 14 degrees raised the cone from 56.3 to 64.1, so cutting watts alone will not fix it; the pool has to move off the cone. Like the critic, I could not check the cone material's albedo or gloss."
+            },
+            {
+              "id": "L3",
+              "verdict": "confirmed",
+              "severity": "fix",
+              "measurement": "fixed4.json horn-card: panel 1.4 x 0.9 m at (8.05, 4.9, 3.34), strength 10, diffuse 0.0, specular 1.0, transmission false, ramp 0.25-1-0.25 along x. lights.py panel(), lines 179-183: visible_camera False (no camera key), visible_shadow False, visible_transmission False when the spec says false, visible_diffuse = d >= 1 (False), visible_glossy = s >= 1 (True). The back face is a transparent BSDF. There are no twins, since the shares are 0 and 1. The no-panel tile is fixed2-10 with horn-card on: bell 0.1, wedge 0.0. My geometry check: 37.7 % of the card's area is above z 3.40.",
+              "reasoning": "Every flag the critic lists matches the code, and no real card behaves like that. On the horn its effect is nil. One correction: 'a few pixels at most' understates its reach. With visible_glossy on, plus reflective caustics and filter_glossy 0 in fixed-4, the card feeds every glossy lobe that faces it. It can also reach diffuse surfaces through any glossy bounce, for example off the glossy bar top. Its effect away from the horn is still unmeasured, so a fixed-5 without the card is the right test. It is a dishonest light with a small or unmeasured effect, so 'fix'."
+            },
+            {
+              "id": "L4",
+              "verdict": "confirmed",
+              "severity": "blocking",
+              "measurement": "live.json horn-card has no transmission key, so panel() leaves it visible to transmission. It is also diffuse 0, camera off and shadow off. live render: caustics_reflective false and no filter_glossy key, so render.py line 282 gives blur_glossy = 0.5. Bell 8.9 -> 0.3; pixels over L* 30: 7538 -> 16 (the critic's 22 is fixed-4's count). Cabinet front box 35.6 -> 15.4; on the exact front-panel mask 43.3 -> 17.7. site-tropos-bar.webp differs from live.png by a mean of 3.2 levels and from fixed4.png by 13.7, so the site file is live. At +3 stops, live's glow is brightest mid-mouth and fades to the sides (horn-plus3-2x-live-fixed-fixed4.png).",
+              "reasoning": "The live horn's lemon glow has the card ramp's shape. It goes when the card's transmission visibility goes off, and the black felt behind the horn could not produce it. The shadow-ray shortcut is documented by README and gen.py (no_glass_shadows); the material code is not in the folder. Fixed changed four things at once, so the cabinet's fall from 35.6 to 15.4 cannot be put on the shortcut alone. In live, 'lights nothing' is loose wording: a card visible to transmission can reach whatever lies behind clear acrylic. Both tricks are in live, and they make the look of the near Tropos, so 'blocking'."
+            },
+            {
+              "id": "L5",
+              "verdict": "confirmed",
+              "severity": "fix",
+              "measurement": "My own surface sampling (geom_v.txt): house disc z 1.19 to 4.01, with 15.8 % above 3.40; y -0.32 to 0.72, with 26.3 % at y < 0. house-left z 2.01 to 3.99, with 25.0 % above 3.40. R.CEIL = 3.40 from planet_bar.py lines 129, 136, 138 and 142 (R.CEIL - 0.05 = 3.35) and line 256 (R.CEIL - 0.06 = 3.34). The pendants also hang from top_z = R.CEIL (line 68). I projected z 3.2 / 3.4 / 3.6 onto the record-wall plane (ceiling-lines-fixed4-plus3.png): the wall's top rail sits near z 3.2-3.3 with the ceiling beams just above it.",
+              "reasoning": "The geometry reproduces. The room file is not here, so the deck height between beams and the front wall's position are inferred, not seen. Still, 0.6 m above the head line is above any plausible deck. The effect is small: the part past the ceiling or wall is blocked, and the rest is a large soft fill. A correction to 'expected': planet_bar.py lines 240-242 record that the 1.6 m house disc at (6.9, 0.6, 2.3) was tried for this same frame and 'washed the throw and the near stone'. That is why it became 3 m. At house's own aim, a 3 m disc fits only with its centre at z <= 1.99 and y >= 0.52."
+            },
+            {
+              "id": "L6",
+              "verdict": "confirmed",
+              "severity": "fix",
+              "measurement": "ceiling-panel faces 20.0 deg down (normal -0.771, 0.538, -0.342) and spans z 2.82 to 3.58, with 23.4 % of its area above 3.40 (the critic says 22 %). horn-card's top is also 3.58. Tiles with the head at 10 W/m2, 22 deg: right pillar 30.8 / 32.5 / 35.1 at panel 0 / 6 / 15. Head 6 against 4 W/m2 (14 deg, panel 8): 13.7 against 13.5. Frames, fixed -> fixed-4: right pillar 10.2 -> 14.1, records right of the niche 6.6 -> 7.2, bell 0.3 -> 1.2. Panel code: diffuse 1 -> visible_diffuse, specular 1 -> visible_glossy, no transmission key -> visible to transmission.",
+              "reasoning": "The numbers reproduce, and the panel lights, reflects and is seen through clear parts as a real one would. One wording error: 'no light passes its position' is not right. The house and house-left emitters both face (10.5, 4.0, 3.2), so a real panel's body would shade a patch of wall or ceiling behind it. That patch is out of frame and in no reflection I could find, so 'changes nothing here' holds. Lowering the panel moves its mirror image, so the wedge has to be re-checked."
+            }
+          ],
+          "recommendation_check": "CHANGE it. Keep the verdict and the core plan; correct three things.\n\n1. On honesty, fixed-4 can replace live. Live's horn and cabinet rest on two tricks (L4, blocking). Fixed-4 has one trick with a small effect (L3) and lights placed through the ceiling (L5, L6).\n2. Delete horn-card: keep. Its effect on the horn is nil (bell 0.1 with the card on and no panel). Away from the horn, 'should change nothing visible' is a prediction, not a measurement: the card is visible to glossy rays and reflective caustics are on, so it can reach diffuse surfaces through glossy bounces. Fixed-5 is the test.\n3. Hang ceiling-panel below 3.40 (its top is now 3.58, 23 % of it above): keep, and re-check the wedge afterwards.\n4. Bring house and house-left inside the room: keep, but CHANGE the example. planet_bar.py lines 240-242 record that the 1.6 m disc at (6.9, 0.6, 2.3) was tried for this same frame and washed the throw and the near stone; that is why it became 3 m. Instead, keep the 3 m disc's softness inside the room: at its own aim its centre must sit at z <= 1.99 and y >= 0.52, or use a same-area panel under the ceiling, or a lit front wall.\n5. The other lights: I agree they are honest here. The engine hides every area lamp and panel from the camera by default, but that does nothing in this frame: the audit finds 0 px of hidden objects in frame, and nothing visible lies behind the panel.\n6. As a picture, fixed-4 is not ready: L1 and L2 are confirmed at 800 px and at the real 168 x 94 thumbnail. Keep 'hot spot off the cone'. Add that narrowing the head made the cone brighter (56.3 -> 64.1 at 6 W/m2), so cutting watts alone will not darken it; move the pool or feather it with a real flag.\n7. CHANGE the horn ideas. The niche behind the horn is near-black felt (#1A1918, rough 0.95, planet_bar.py line 174), so lighting the niche back gives the clear horn almost nothing to be seen against. A softbox on the bell's mirror ray was already tried at 1.6 x 0.8 m and 3.0 x 1.6 m, and both gave the same wedge cut off by the niche header (README). The only niche strip in the room's mask legend, 'hidden: backbar-niche-strip', is a camera-hidden mesh; check its other ray visibilities before using it. Options worth testing instead: a real light seen through the horn from above, where the live card hung, with every ray on (accepting that it also lights the bay, the speaker top and the walnut), or a lighter lining behind the horn."
+        }
+      },
+      {
+        "part": "photo",
+        "found": {
+          "summary": "Neither frame is ready. Live misstates the light. Fixed-4 misstates the product. Fixed-4 looks like a real room: the record wall gets real fill, the ice is clear, and the acrylic shows its caustics. But every giveaway sits on the near Tropos, which is where the viewer looks. Its woofer cone is a silver disc, its horn is a black shape with a cool grey triangle, and the walnut sill under the cabinet is bleached. Live reads as the more convincing picture of the speaker at 800-1400 px and at 168 px. Its giveaways are that the cabinet glows evenly like a lightbox and the bell glows from inside; at 100 % there is also a white blob of ice and a green haze behind the drinks. Live's speaker gets its look from renderer tricks the owner's rules forbid.\n\n(a) At the site's sizes, live reads as the better photograph of the products. Fixed-4 reads as the better photograph of the room.\n\n(b) Product truth, measured against front-acid.png:\n- Cone: approved L* 22. Fixed-4 is 62 (lower half 72.5, dust cap 63), brighter than the white batts beside it (luminance ratio cone to batts 2.18, against 0.06 approved and 0.17 live). That is a misstatement. The brief's \"mid grey, about 50\" understates it.\n- Horn: fixed-4 shows no yellow at all (bell C* 0.1). The approved horn reads C* 55, hue 97; live's bell is gold (brightest 5 %: L* 66, hue 99, C* 45). That is a misstatement in fixed-4.\n- The fixed-4 cabinet \"brought back to 41.2\" is the cone. In meas.md's front box, the woofer disc reads 52.0 (live 21.2) and the rest of the front 33.3 (live 46.2).\n- The acrylic yellow and the batts are about equal in both, warmer and less saturated than the approved front.\n\n(c) The far Tropos is a loss, and physics did not force it. Only the near bay got a front head and a panel; its bay opening reads 6.2 against 13.9 in live.\n\n(d) The brighter record wall is right. It is the light model, it appears where the wall was near-black, and it shows no blotches.\n\n(e) Fixed-4 with named changes first. Live stays up until the changed frame passes.\n\nThe site file matches live: cone 26.5 against 26.6, mean difference 3.2 levels.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/ (crops, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt and the scripts in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/tools/).",
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "blocking",
+              "frame": "fixed4",
+              "where": "near Tropos, woofer cone and dust cap (centre about 1183,474 in the 1600 x 900 frame)",
+              "what": "The black woofer cone reads as a silver-grey cone. Cone annulus L* 62.1 (top half 51.6, bottom half 72.5), dust cap 63.4, near neutral (C* 4, hue 250). That is about 40 L* lighter than the approved front and brighter than the white batts beside it. At 800-1400 px it is the brightest broad surface on the speaker and reads as an aluminium driver. At 168 px it is a grey disc. The head's hot centre sits on the woofer: in meas.md's front box the woofer disc reads 52.0 (live 21.2) and the rest of the front 33.3 (live 46.2). Fixed-4's 'front 41.2' is the cone lit up, not the cabinet brought back. The brief's 'mid grey, about 50' understates it.",
+              "expected": "A black or charcoal cone that stays darker than the lit batts around it. The approved front reads cone L* 22.0, cap 23.8, with cone-to-batts luminance 0.06 (live 0.17, fixed-4 2.18). The bar's own rule is planet_bar.py:136, 'the cone in its cabinet's shade'.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/woofer-live-fixed4-front.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/near-tropos-vs-approved.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (wmeas.py, yellow.py, front-box split: live 35.6 = rest 46.2 + disc 21.2; fixed-4 41.2 = rest 33.3 + disc 52.0). The same silver cone appears with the head alone in crops-front10-card0-6-15.png, so the cause is the head, not the panel."
+            },
+            {
+              "id": "F2",
+              "severity": "blocking",
+              "frame": "fixed4",
+              "where": "near Tropos, horn and bell (box 1040,40-1320,240)",
+              "what": "The yellow clear acrylic horn reads as a black horn. The bell box reads L* 1.2, C* 0.1, with no yellow anywhere even when lifted three stops. Its only feature is a hard-edged, cool-grey triangle from ceiling-panel (L* 18.6, hue 218, C* 2.5). At 800-1400 px the horn reads as a black panel with a grey 'play' triangle, echoing the triangle print on the wall. In the 168 px thumbnail the horn vanishes: the horn loudspeaker shows as a yellow box with a grey disc.",
+              "expected": "The horn reads as lemon-yellow see-through acrylic, as in the approved front (horn box L* 54, C* 55, hue 97). Live's bell gets the hue right (brightest 5 %: L* 66, hue 99, C* 45), but only through a card that is not real (F3).",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/horn-2x-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/bell-plus3stops-fixed-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/at800-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/thumb-3x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (hornmeas.py). The 'play icon' reading is my judgement of the look; the measurements are certain."
+            },
+            {
+              "id": "F3",
+              "severity": "blocking",
+              "frame": "live",
+              "where": "near Tropos as a whole: the cabinet glow and the gold bell",
+              "what": "Live's speaker look rests on two tricks the owner's rules forbid. (1) The Light Path shadow-ray shortcut on the Tropos acrylic and the sink lets light through acrylic without refraction. With it cut, the front outside the woofer falls from 46.2 to 22.2. (2) horn-card is a 1.4 x 0.9 m panel with diffuse 0 and specular 1, transmission on, camera off, and no shadow. It is seen through the clear horn and in reflections but lights nothing, and it is the bell's gold (bell 8.9 against 0.3 once hidden from transmission). Both are things no real bar or location rig has, and they change what the picture shows.",
+              "expected": "Every light behaves like a real one: a card has every ray visibility on, lights what it faces and casts shadows; acrylic refracts.",
+              "sure": "certain",
+              "evidence": "live.json lights.horn-card {diffuse 0.0, specular 1.0, no transmission key}; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/src/studio/engine/lights.py panel() lines 179-183 (visible_camera False, visible_shadow False, visible_diffuse = d >= 1.0); b1-test README (bell 8.9 to 0.3; shortcut on 7 materials); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (front-box split, fixed 22.2)."
+            },
+            {
+              "id": "F4",
+              "severity": "fix",
+              "frame": "fixed4",
+              "where": "walnut sill under the near cabinet (box 1010,712-1240,735), behind the Mantle",
+              "what": "The front head's spill bleaches the walnut sill to a pale pinkish strip: L* 53.4 (p90 83.0), C* 7.5, rgb about 143/129/121. Live reads 18.1, C* 18.8 (warm brown). It is the brightest walnut in the frame (the walnut cells in the wall read 17-19) and shows at 800 px as a hot spot at the speaker's foot.",
+              "expected": "The walnut stays warm brown and darker than the speaker, near live's 18. Re-aiming the head higher (F1) should take the spill off the sill.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/sill-1p5x-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/ports-2x-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (sill.py)."
+            },
+            {
+              "id": "F5",
+              "severity": "fix",
+              "frame": "fixed4",
+              "where": "far Tropos in its bay (opening 455,240-540,640)",
+              "what": "The far speaker is nearly lost. The opening reads L* 6.2 (live 13.9), and only 14 % of it is lit above L* 10 (live 32 %). What remains is the upper batt band, a white streak on the horn rim and the amplifier box; the woofer ring is barely traceable even at 2x. At 800 px and 168 px the pair reads as one speaker beside a dark doorway. Physics did not force this: only the near bay got a front head and a panel.",
+              "expected": "Both bays lit the way a real bar's track would light them: a matching front head for the far bay (track-front0), so the second Acid Tropos reads as the same product.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/far-tropos-2x-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/thumb-3x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (cab.py); fixed4.json has no front head for bay 0."
+            },
+            {
+              "id": "F6",
+              "severity": "fix",
+              "frame": "fixed4",
+              "where": "lights.horn-card in fixed4.json",
+              "what": "horn-card stays in the scene as a card that only mirrors can see: diffuse 0, specular 1, transmission off, camera off, no shadow. By the owner's rules that is a ray-visibility trick. Per the README it now shows nowhere (bell 0.3 in fixed).",
+              "expected": "Delete it, or make it a real card with every ray visibility on. A real card would light the horn, be seen through it and cast shadows, and might give the bell its yellow honestly.",
+              "sure": "certain",
+              "evidence": "fixed4.json lights.horn-card {diffuse 0.0, specular 1.0, transmission false}; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/src/studio/engine/lights.py lines 179-183."
+            },
+            {
+              "id": "F7",
+              "severity": "fix",
+              "frame": "fixed4",
+              "where": "lights.ceiling-panel (1.6 x 0.8 m at 10.5, 4.0, 3.2)",
+              "what": "Turned to face the bell, the panel tilts 20 degrees from vertical, so its top edge reaches z 3.576. The ceiling is at z 3.40 (the track heads hang at R.CEIL - 0.05 = 3.35), so about 23 % of the panel's height sits inside the ceiling. As an engine panel it also casts no shadow and has a see-through back. Its only visible job in the frame is the cool triangle of F2.",
+              "expected": "Remove it if the bell gets its yellow some other way. If it is kept, hang it wholly below the ceiling (centre about 3.0 m or lower) and judge the triangle again at 800 px.",
+              "sure": "likely",
+              "evidence": "gen3.py (position, target, size); lights.py aim() uses to_track_quat('-Z','Y'), and panel() builds a w x h quad in local X x Y with ob.visible_shadow False and a transparent back face; corner computation in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (last block). Likely rather than certain: I inferred the ceiling height from the heads' z and could not read r37_plan."
+            },
+            {
+              "id": "F8",
+              "severity": "note",
+              "frame": "fixed4",
+              "where": "record wall (620-980 x 200-600) and the ceiling",
+              "what": "The brighter wall is right. It is already in fixed, which has no new lights, so it comes from the light model. It is largest where live was near-black: linear Y rises 5.8x and 3.2x in rows y 180-300 and 1.65x on the ceiling, against 1.1-1.4x in the lit cells. Lifted two stops, it shows no blotches, and it reads as the fill a real room gets from glossy shelves, sleeves, the bar top and the deck. The empty cell under the triangle print turns from a dark blue square into a pale pink-beige panel (the sleeve's back, now lit). The side effect is that the wall (37.6) now sits about level with the near front outside the woofer (33.3), so the speaker no longer leads.",
+              "expected": "Keep it. If the speaker must lead, dim the wall heads (a real dimmer) rather than add light on the product.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/recwall-1x-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/upperwall-plus2-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/emptycell-2x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (ratio.py)."
+            },
+            {
+              "id": "F9",
+              "severity": "note",
+              "frame": "both",
+              "where": "near cabinet's acrylic and batts",
+              "what": "The yellow is about the same in both frames, and both are warmer and less saturated than the approved front (lit pixels, woofer excluded): live L* 46.8, C* 35.8, hue 96.4 (C*/L* 0.76); fixed-4 47.0, 30.6, 97.2 (0.65); approved 54.3, 47.7, 101.4 (0.88). Locally, live's top batt band washes to cream (L* 81, C*/L* 0.33) and looks evenly self-lit. Fixed-4's band is olive-mustard (L* 42, C*/L* 0.85), with mottled caustic patches and a yellow-green streak on the right strip (hue up to 122) that shows only at 100 %. The batts read as batts in both.",
+              "expected": "Lemon yellow close to front-acid.png. Neither frame misstates it at the site's sizes.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/batts-top-2x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/cab-right-2x-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/cab-left-3x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (yellow.py, cab.py)."
+            },
+            {
+              "id": "F10",
+              "severity": "note",
+              "frame": "live",
+              "where": "near cabinet, bell, drinks",
+              "what": "Live's giveaways: at the site's sizes the cabinet glows evenly like a lightbox and the bell glows from inside, with a soft blotchy texture at 2x. At 100 % the right glass holds a white blob of ice and there is a green haze behind the drinks. Fixed's drinks fix these (clear ice, no haze) and stand apart from the lighting choice.",
+              "expected": "Keep the new drinks whichever light model is chosen.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/near-tropos-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/horn-2x-live-fixed4.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/drinks-1p5x.png."
+            },
+            {
+              "id": "F11",
+              "severity": "note",
+              "frame": "fixed4",
+              "where": "woofer cone material (product definition)",
+              "what": "Under fixed-4's head the cone outshines the white batts beside it (cone-to-batts luminance 2.18). A black paper cone under the same light should not do that, and the approved front's cone reads 17x darker than its batts. The bar's Tropos may carry a lighter cone material than the approved front. I could not check this: studio/products/barkhorn-cloud.json is not in this snapshot.",
+              "expected": "Before re-lighting, confirm the bar's cone material matches the approved front's.",
+              "sure": "unsure",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/measurements.txt (yellow.py ratios)."
+            },
+            {
+              "id": "F12",
+              "severity": "note",
+              "frame": "both",
+              "where": "pendants, Cores, Mantle",
+              "what": "The Hemispheres are unchanged (17.1 / 17.7). The Cores are a touch lighter in fixed-4 (26.7 to 31.3): the Acid Core paler and milkier, the red Core with visible internal veining. The Mantle reads cleaner in fixed-4, without live's yellow cast on the plinth top, but sits in front of the bleached sill (F4).",
+              "expected": "Nothing to change here beyond F4.",
+              "sure": "certain",
+              "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/pendants-1p5x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/cores-3x.png; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/critic-photo/mantle-1p2x.png."
+            }
+          ],
+          "lights_table": [
+            "track-wall1-4 | both | 12 cm disc heads on the ceiling track (z 3.35), 5.1 W/m2, 20 deg, onto the record wall | real bar heads, all rays on, out of frame | honest",
+            "track-bar0-2 | both | 12 cm heads, 1.05 W/m2, 24 deg, down onto the bar top | real bar heads | honest",
+            "track-bay0 / track-bay1 | both | 14 cm heads steep from above onto each bay, 36.3 / 16.5 W/m2, 14 deg | real bar heads; in live their light reaches the batts through the shadow-ray shortcut, in fixed-4 only by refraction | honest light",
+            "track-horn0 / track-horn1 | both | 12 cm heads from the room side at each horn, 4.5 W/m2, 12 deg | real bar heads; in fixed-4 they leave the near bell at L* 1.2 | honest",
+            "track-mantle | both | 10 cm head, 10.5 W/m2, 18 deg, onto the Mantle | real bar head | honest",
+            "house / house-left | both | 3 m and 2 m discs, 1.8 / 1.5 W/m2, warm fill from the room behind and left | a lit room or large bounce, out of frame | honest",
+            "mantle-front / mantle-side | both | 15 / 20 cm discs at bar height (z 1.55 / 1.2), 15 / 18 W/m2, 14 / 8 deg, onto the Mantle | a photographer's low spots on location, not bar fixtures; all rays on; in the honest model their gloss off the deck adds to the record wall | honest",
+            "horn-card | live | panel 1.4 x 0.9 m at the ceiling over the near bay, strength 10, diffuse 0, specular 1, transmission on, camera off, no shadow | seen through the clear horn and in reflections, lights nothing; it makes the bell's gold (8.9, against 0.3 without it) | DISHONEST, changes the picture",
+            "horn-card | fixed-4 | as in live, plus transmission off: glossy rays only | a card that exists only in mirrors; per the README it shows nowhere now | DISHONEST, small effect: delete it or make it a real card",
+            "track-front1 | fixed-4 | 14 cm head on the track at (8.6, 3.9, 3.35), 5 W/m2, 14 deg, aimed at (8.25, 5.45, 1.5) | a real bar head like the others, all rays on, out of frame | honest light, wrong aim: its hot centre is the woofer (cone L* 62) and its spill bleaches the sill (L* 53)",
+            "ceiling-panel | fixed-4 | 1.6 x 0.8 m panel at (10.5, 4.0, 3.2), strength 8, diffuse 1, specular 1, behind and right of the camera | a photographer's soft panel is plausible on location, but as an engine panel it casts no shadow, has a see-through back, and its top edge reaches z 3.58 above the 3.40 ceiling (likely) | mostly honest rays, impossible placement; its only visible effect is the cool triangle on the bell",
+            "shadow-ray shortcut (a material trick, not a lamp) | live | Light Path trick on 7 materials (the Tropos acrylic, the sink): light through acrylic without refraction | no real material does this | DISHONEST, changes the picture (front outside the woofer 46.2 in live, 22.2 in fixed)"
+          ],
+          "recommendation": "Fixed-4 with named changes first. Do not put fixed-4 up as it stands: its silver cone and black horn would misstate the Acid Tropos on all eight colour pages. Keep live up only until the changed frame passes, because live's bell and cabinet glow rest on the shadow-ray shortcut and a card that lights nothing.\n\nThe changes:\n(1) Re-aim track-front1 so its hot centre falls on the upper cabinet and the horn's throat, not the woofer (planet_bar.py:136, 'the cone in its cabinet's shade'). It passes when:\n- the cone reads within about 10 L* of the approved front's 22 and darker than the batts beside it (cone-to-batts luminance about 0.2 or less);\n- the walnut sill is back near live's 18.\n(2) Give the bell its yellow by a real means. Options: make horn-card a real card with every ray visibility on, and/or let the re-aimed head light the niche behind the horn so the tinted horn is seen against a lit ground. It passes when the bell's brightest 5 % read yellow (hue about 95-105, C* well above 10), not neutral grey.\n(3) Delete ceiling-panel unless (2) still needs a highlight. If it is kept, hang it wholly below the ceiling and check the triangle at 800 px.\n(4) Delete the glossy-only horn-card if (2) does not use it.\n(5) Give the far bay the same front head as the near one, so the pair reads.\n(6) Keep the honest model, the brighter record wall and the new drinks. If the speaker then no longer leads, dim the wall heads rather than add light on the product.\n(7) Before re-lighting, confirm the bar's cone material matches the approved front's.\n\nRe-judge at 1600, 800 and 168 px beside front-acid.png."
+        },
+        "verified": {
+          "verdicts": [
+            {
+              "id": "F1",
+              "verdict": "confirmed",
+              "severity": "blocking",
+              "measurement": "My own Lab code reproduces every figure. The measured rings sit on the cap and the cone in both frames and in front-acid (woofer-regions-check.png). Cone r 33.6-69.7 around (1183,474): fixed-4 L* 62.1 (top 51.6, bottom 72.5), C* 4.0, h 250. Cap: 63.4. Approved front: cone 22.0, cap 23.8. Front box split: live 46.2 rest / 21.2 disc; fixed-4 33.3 / 52.0. In the test's crop sheet (head at 10 W/m2, ceiling panel at 0, 6 and 15) the cone reads 66.3 in all three, so the head alone makes it. At 3x even the surround ribs and gasket read mid-grey (woofer-sides-fixed4-3x.png). At 800 px the woofer is the speaker's big grey disc (fixed4-800.png). At 168 px it is a grey disc on a yellow box (thumbs-168-x4.png). Evidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b62/verify-photo/ (near-speaker-4up-1x.png, woofer-regions-check.png, woofer-sides-fixed4-3x.png, diff-maps-near.png, measurements.txt).",
+              "reasoning": "The silver driver is real and shows at every site size, so it misstates the approved black cone: blocking. Two details are wrong, and neither changes the verdict. (1) The head's axis is not on the woofer. I projected it through the engine's camera (render.py:161-173), checking the projection on the two drinks, which land at x 387 and 588. The axis meets the woofer plane (y about 5.60) at z 1.32, which is 0.26 m below the woofer centre and just under its rim, at pixel (1167,600). The woofer centre is 3.9 degrees off-axis in a 7-degree half-spread, so the woofer sits in the beam's upper half. (2) 'Brighter than the batts beside it' only holds against the upper band (cone/batts Y 2.18), which sits at the pool's edge. The batt strips beside the woofer at its own height read L* 64.5 and 83.3 and are brighter than the cone (ratios 0.82 and 0.52). That is still about ten times the approved front's 0.06."
+            },
+            {
+              "id": "F2",
+              "verdict": "confirmed",
+              "severity": "blocking",
+              "measurement": "Bell box (1040,40,1320,240): fixed-4 L* 1.2, C* 0.1. Its brightest 5 % read L* 18.1, h 214.7, C* 2.1. Only 6 of 56,000 pixels are yellow (h 80-115, C* above 10), against 11,770 in live. Live's brightest 5 % read L* 66.0, h 98.7, C* 45.5. Wedge (L* above 15): 18.6, h 218, C* 2.5. Front-acid horn box: L* 54.4, C* 54.7, h 97.1. Lifted three stops, fixed-4's horn is still black with only the grey triangle (horn-live-fixed4-lift3.png). The crop sheet's panel-0 frame has no triangle, so the triangle comes from ceiling-panel. At 800 px the horn is a black panel with a grey right-pointing triangle beside the wall's triangle print; at 168 px it is gone (thumbs-168-x4.png).",
+              "reasoning": "Reproduced exactly, and the look matches at all three sizes. A clear tinted horn against a near-black niche is physically meant to look dark, so this is not a renderer error. It still shows a black horn where the product is lemon-yellow see-through acrylic, which misstates the product: blocking. The 'play icon' reading is judgement, and I see it too at 800 px."
+            },
+            {
+              "id": "F3",
+              "verdict": "confirmed",
+              "severity": "blocking",
+              "measurement": "live.json horn-card: panel 1.4 x 0.9, diffuse 0.0, specular 1.0, no transmission key. Per lights.py:179-183 that gives visible_camera False, visible_shadow False, visible_transmission at its default (True), visible_diffuse False and visible_glossy True. Its corners, computed the way lights.py:104-116 builds and aims the quad, run up to z 3.584; R.CEIL is 3.40 (lamps top_z 3.4; planet_bar.py:256 puts the card at R.CEIL - 0.06), so 38 % of the card sits inside the ceiling. The front split reproduces: live 46.2 outside the woofer, fixed 22.2. Live's bell gold reads h 98.7, C* 45.5.",
+              "reasoning": "The card trick is certain from the code. It also hangs partly inside the ceiling, so no real place could rig it, and it changes what the bell shows. The shortcut is not in the render reports, and I cannot open the .blend, so its existence rests on the README's audit. The cabinet drop points to it by elimination. Fixed's other changes are reflective caustics, filter_glossy 0 (live renders at the default 0.5, render.py:282), the card's transmission and the drinks. These either only add light or do not reach the cabinet. The bell's 8.9 to 0.3 drop is the card and the shortcut together; the card explanation fits its soft, ramped warm shape. 'Lights nothing' is slightly loose: the card shows in gloss but gives no diffuse light."
+            },
+            {
+              "id": "F4",
+              "verdict": "confirmed",
+              "severity": "fix",
+              "measurement": "Box (1010,712,1240,735): fixed-4 L* 53.4, p90 83.0, C* 7.5, rgb 143/129/121. Live: 18.1, C* 18.8, rgb 61/42/14. Fixed: 6.1. Fixed-3: 60.3. The overlay shows the box on the walnut sill, with a few record-edge and tonearm pixels at its lower right (sill-2x-live-fixed-fixed4.png). Other walnut in fixed-4: far bay pillar 22.4, near pillars 16.4 and 18.8. The diff map puts the sill inside the head's pool: its -3.5 degree ray meets the front at z 1.05, and the sill top is at about 1.09.",
+              "reasoning": "Reproduced: a pale pink-white strip, the brightest walnut in the frame. At 800 px it shows only as a small light band at the speaker's foot and does not misstate a product: fix. Aiming the head higher would take it off; with the axis at z 1.9 on the front, the beam's lower edge lands near 1.50."
+            },
+            {
+              "id": "F5",
+              "verdict": "confirmed",
+              "severity": "fix",
+              "measurement": "Opening (455,240,540,640): fixed-4 L* 6.2 with 13.9 % lit above L* 10. Fixed: 6.2 and 14.0 %. Fixed-3: 6.3. Live: 13.9 and 32.5 %. At 2x, fixed-4 keeps the upper batt band, a white streak on the horn rim and a faint amp box; the woofer ring is barely traceable, while live shows the yellow ring and a lit cabinet (far-bay-2x.png). At 800 px the bay reads as a dark niche (fixed4-800.png).",
+              "reasoning": "Reproduced. The honest model darkened the far bay, and fixed-4 adds nothing there, since fixed4.json has no head for bay 0. At 168 px the far speaker is faint in live too, so the loss matters mainly at 800-1400 px. It is a real fault without a product misstatement: fix."
+            },
+            {
+              "id": "F6",
+              "verdict": "confirmed",
+              "severity": "fix",
+              "measurement": "fixed4.json horn-card: diffuse 0.0, specular 1.0, transmission false. Per lights.py:179-183 it is seen only by gloss rays, casts no shadow and gives no diffuse light. Like live's card it reaches z 3.584, so 38 % of it is above the 3.40 ceiling. In fixed, with the card present, the bell reads 0.3 and the cone 5.3.",
+              "reasoning": "A gloss-only card breaks the owner's rule that a real card has every ray visibility on. 'Shows nowhere' cannot be proven without a render, but it leaves no visible trace on the speaker in fixed. So it is a dishonest light with little or no effect: fix."
+            },
+            {
+              "id": "F7",
+              "verdict": "confirmed",
+              "severity": "fix",
+              "measurement": "My own corner computation: lights.py:104-107 lays w along local X and h along local Y, and aim() uses to_track_quat('-Z','Y') without roll. That gives a 20.0-degree tilt and z 2.824 to 3.576. The ceiling is now confirmed, not inferred: fixed4.json's lamps top_z is 3.4 (R.CEIL), and planet_bar.py:256 puts horn-card at R.CEIL - 0.06 = 3.34. So 23 % of the panel's height is inside the ceiling. visible_shadow False and the transparent back face are at lights.py:165-167 and 179. In the crop sheet, ceiling-panel 0 to 15 adds 0.8 L* to the cabinet, 0.0 to the cone, and 2.2 L* in the horn rows (the triangle).",
+              "reasoning": "The critic's 'likely' can be upgraded: the ceiling height is in the scene files. The ceiling hides the part of the panel above it, so the bell sees what a real, shorter panel hung under the ceiling would give. The impossible geometry and the missing shadow therefore have a small visible effect of their own, and the triangle itself is covered by F2: fix."
+            }
+          ],
+          "recommendation_check": "Keep it, with changes. 'Do not put fixed-4 up' stands: I reproduced the silver driver and the black horn at 1600, 800 and 168 px. 'Live rests on tricks' also stands: the card is in the code, and the shortcut follows by elimination.\n\nChange (1) as written will probably fail its own test. Projected through the engine's camera, the head's axis already lands 0.26 m below the woofer centre, just under its rim. Its 14-degree cone covers about 1 m of the front at this throw (z 0.73-1.76). Aiming at the upper cabinet sweeps the beam's core across the woofer: an aim at z 1.9 still covers z 1.50-2.23, which includes the woofer's upper half. The spill does leave the sill. Re-aiming alone will not put the cone in its cabinet's shade, so pair it with a real flag or snoot on that head (the owner's own flag rule), or a steeper head like track-bay1. Keep the pass tests, but measure cone-to-batts against the batts beside the woofer at its own height: the upper band the critic used sits at the pool's edge (2.18 there, against 0.52-0.82 on the side strips).\n\nChange (2a): the current horn-card also pokes 38 % above the ceiling, so a real card must hang lower. With diffuse on it will light the cone from above-front, so re-run the cone test. Change (2b) needs a test first: the niche behind the horn is near black in every frame (planet_bar.py:135 made the bay's back darker on purpose), so a lit ground may read brown-olive rather than lemon.\n\nChange (5) must copy the corrected head, not fixed-4's, or the far cone turns silver too. Changes (3), (4) and (6) stand. Change (7) is supported: fixed-4's cone is 2-3 times the luminance of its own surround and gasket, which roughly match the cone in the approved front.\n\nKeeping live up meanwhile fits the owner's ordering ('a bad job of looking real is the worst case'), but it breaks his 'no ray-visibility tricks'. He should choose that knowingly. The other option is to pull the bar view from the Tropos gallery until a frame passes."
+        }
+      }
+    ]
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Judge"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Verify"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "judge:lights",
+      "phaseIndex": 1,
+      "phaseTitle": "Judge",
+      "agentId": "a23e583190fae4338",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795265179902,
+      "queuedAt": 1795265179866,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "On honesty, fixed-4 can replace live with named exceptions.…",
+      "promptPreview": "You are one of two critics judging a picture for EARF's website before the owner chooses. Find what is right and wrong, with measurements, crops and code as evidence. Say only what you saw.\n\nTHE PRODUCTS (EARF, cast tinted acrylic; nothing is built yet; every picture is a disclosed render that must look like a real photograph of the real parts in a real place):\n- Tropos: a horn loudspeaker; a cabi…",
+      "promptFramed": true,
+      "lastProgressAt": 1795266347242,
+      "tokens": 291817,
+      "toolCalls": 56,
+      "durationMs": 1167339,
+      "resultPreview": "{\"findings\":[{\"id\":\"L1\",\"severity\":\"blocking\",\"frame\":\"fixed4\",\"where\":\"Near Tropos horn (bell box 1040,40-1320,240), at 800 px and in the 168 px thumbnail\",\"what\":\"With honest light, the near lemon-clear horn reads as a black shape. The only mark on it is a hard grey triangle: the ceiling-panel's mirror image cut off by the niche header. At site sizes it reads as a play icon on a black panel, not…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "judge:photo",
+      "phaseIndex": 1,
+      "phaseTitle": "Judge",
+      "agentId": "ae8bc0dee98b1e24b",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795265179902,
+      "queuedAt": 1795265179866,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Neither frame is ready. Live misstates the light. Fixed-4 m…",
+      "promptPreview": "You are one of two critics judging a picture for EARF's website before the owner chooses. Find what is right and wrong, with measurements, crops and code as evidence. Say only what you saw.\n\nTHE PRODUCTS (EARF, cast tinted acrylic; nothing is built yet; every picture is a disclosed render that must look like a real photograph of the real parts in a real place):\n- Tropos: a horn loudspeaker; a cabi…",
+      "promptFramed": true,
+      "lastProgressAt": 1795266406416,
+      "tokens": 263078,
+      "toolCalls": 70,
+      "durationMs": 1225791,
+      "resultPreview": "{\"summary\":\"Neither frame is ready. Live misstates the light. Fixed-4 misstates the product. Fixed-4 looks like a real room: the record wall gets real fill, the ice is clear, and the acrylic shows its caustics. But every giveaway sits on the near Tropos, which is where the viewer looks. Its woofer cone is a silver disc, its horn is a black shape with a cool grey triangle, and the walnut sill under…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "verify:lights",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "abbaa8db60d65f9d3",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795266347270,
+      "queuedAt": 1795266347247,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "CHANGE it. Keep the verdict and the core plan; correct thre…",
+      "promptPreview": "You are one of two critics judging a picture for EARF's website before the owner chooses. Find what is right and wrong, with measurements, crops and code as evidence. Say only what you saw.\n\nTHE PRODUCTS (EARF, cast tinted acrylic; nothing is built yet; every picture is a disclosed render that must look like a real photograph of the real parts in a real place):\n- Tropos: a horn loudspeaker; a cabi…",
+      "promptFramed": true,
+      "lastProgressAt": 1795267327021,
+      "tokens": 282303,
+      "toolCalls": 43,
+      "durationMs": 979751,
+      "resultPreview": "{\"verdicts\":[{\"id\":\"L1\",\"verdict\":\"confirmed\",\"severity\":\"blocking\",\"measurement\":\"Bell box 1040,40-1320,240, L* for live / fixed / fixed-3 / fixed-4: 8.9 / 0.3 / 1.2 / 1.2. Pixels over L* 30: 7538 / 16 / 20 / 22. 99.5th percentile: 76.5 / 5.2 / 19.9 / 19.9. All reproduce. On the exact near-waveguide mask pixels (45,518 px), the mean is 11.0 live against 1.5 in fixed-4, and the median is 0.3 in ev…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "verify:photo",
+      "phaseIndex": 2,
+      "phaseTitle": "Verify",
+      "agentId": "ad4a0288dfd13253b",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1795266406424,
+      "queuedAt": 1795266406419,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Keep it, with changes. 'Do not put fixed-4 up' stands: I re…",
+      "promptPreview": "You are one of two critics judging a picture for EARF's website before the owner chooses. Find what is right and wrong, with measurements, crops and code as evidence. Say only what you saw.\n\nTHE PRODUCTS (EARF, cast tinted acrylic; nothing is built yet; every picture is a disclosed render that must look like a real photograph of the real parts in a real place):\n- Tropos: a horn loudspeaker; a cabi…",
+      "promptFramed": true,
+      "lastProgressAt": 1795267391248,
+      "tokens": 269099,
+      "toolCalls": 51,
+      "durationMs": 984823,
+      "resultPreview": "{\"verdicts\":[{\"id\":\"F1\",\"verdict\":\"confirmed\",\"severity\":\"blocking\",\"measurement\":\"My own Lab code reproduces every figure. The measured rings sit on the cap and the cone in both frames and in front-acid (woofer-regions-check.png). Cone r 33.6-69.7 around (1183,474): fixed-4 L* 62.1 (top 51.6, bottom 72.5), C* 4.0, h 250. Cap: 63.4. Approved front: cone 22.0, cap 23.8. Front box split: live 46.2 r…"
+    }
+  ],
+  "totalTokens": 1106297,
+  "totalToolCalls": 220
+}
