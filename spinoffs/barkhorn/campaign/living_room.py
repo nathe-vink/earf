@@ -250,6 +250,7 @@ def _life():
     ]
 
 
+LAMPS_COMMIT = 'ecb1650c24'                     # r32-lamps-final: the Core's base fixed (the coordinator, 21 Nov 03:23); checked by cores_off
 WATER = 0.078                                   # the water's height in the 92 mm glass (the A critics, round 2: it read empty at 60 mm)
 
 
@@ -287,7 +288,7 @@ def _sleeve_plain():
 
 
 def _cores(tint):
-    return {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'cores_off', 'core_load': shots.CORE_LOAD, 'core_cable': False,
+    return {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'cores_off', 'lamps_commit': LAMPS_COMMIT, 'core_load': shots.CORE_LOAD, 'core_cable': False,
             'cores': [{'tint': shots.KEY[tint], 'x': CORE[0], 'y': CORE[1], 'floor_z': CORE[2], 'rot': 0.0}]}
 
 

@@ -18,7 +18,23 @@ def _stage2():
     return mod
 
 
+def lamps_pin(p):
+    """The lamps lane's commit the shot asks for (`lamps_commit`, a sha or its prefix), checked against LAMPS_ROOT's HEAD
+    (the audit, 21 Nov: LAMPS_ROOT was neither pinned nor recorded). Returns (root, sha); exits on a mismatch."""
+    import subprocess
+    root = os.environ.get('LAMPS_ROOT') or p.get('lamps_root')
+    sha = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=root, capture_output=True, text=True).stdout.strip() if root else ''
+    want = p.get('lamps_commit')
+    if want and not sha.startswith(want):
+        raise SystemExit(f'cores_off: LAMPS_ROOT {root} is at {sha[:10]}, the shot asks for {want}')
+    env = {k: os.environ[k] for k in ('BASE_CONTACT', 'BASE_FIX', 'BASE_LIFT', 'REV_SEG', 'CORE_LOAD') if k in os.environ}
+    print('LAMPS PIN:', root, sha, 'asked', want or '(none)', 'env', env)
+    return root, sha
+
+
 def cores_off(bpy, name, p, kit):
+    root, sha = lamps_pin(p)
+    bpy.context.scene['lamps_commit'] = sha                  # kept in the scene, and in the report by the room's script
     before = set(bpy.context.scene.objects)
     objs = _stage2().lamps(bpy, name, p, kit)
     new = [o for o in bpy.context.scene.objects if o not in before]
