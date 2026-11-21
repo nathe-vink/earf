@@ -115,8 +115,9 @@ SOLIDS.setdefault('acrylic-trucast-formed-satin', dict(
         'the inside as formed, edges polished'),
     density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('acrylic-opal-core-bonded', dict(
-    title=SOLIDS['acrylic-opal-core']['title'] + ', bonded to the skin\'s inside with a clear polymerising acrylic cement '
-          '(Acrifix 192 kind), no air between them (or the white a coating on the skin\'s inside instead)',
+    title='OPAQUE white (2026-11-21: an opal sheet would let the black body show through and darken the base): a white '
+          'coating on the skin\'s inside, or an opaque white cast acrylic liner bonded to the skin\'s inside with a clear '
+          'polymerising acrylic cement (Acrifix 192 kind), no air between them; formed over an aluminium core mould',
     density=1.19, usd_per_cm3=0.18))
 SOLIDS.setdefault('acrylic-tint-3-formed', dict(title='Cast acrylic sheet 1/8 in, TruCast stock tint in the line\'s code, '
                                                 'drape-formed; CUSTOM POURS (2026-11-11): Dust the same dye at 3x the stock loading; the mix (the owner '
@@ -723,7 +724,8 @@ def orb_parts(p=O):
                       'to the body. The mould is a one-time cost (setup). The whole base in colour: about $150-200 a lamp '
                       '[E] (the skin $30-50 at volume, the body $100-120, the liner $8-12, the electrode $10-15)']),
           Part('liner', liner, Machined('acrylic-opal-core-bonded', 'formed'), finish='liner', group='base', inside=True,
-               notes=['a 0.5 white opal liner under the skin, so the colour reads evenly and nothing inside shows; '
+               notes=['an OPAQUE white layer under the skin (2026-11-21: was "a 0.5 white opal liner"; an opal sheet would '
+                      'let the black body show through), so the colour reads evenly and nothing inside shows; '
                       'IN OPTICAL CONTACT WITH THE SKIN (2026-11-21, the coordinator, from the owner\'s "smoke frosted" edges): '
                       'bonded to the skin\'s inside with a clear polymerising acrylic cement (Acrifix 192 kind), no air left '
                       'between them, or the white a coating on the skin\'s inside instead of a separate liner. A loose sleeve '

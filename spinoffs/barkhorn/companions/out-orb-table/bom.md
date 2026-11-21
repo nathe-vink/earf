@@ -7,7 +7,7 @@
 | grommet | lathe | 1 | Aluminium 6061 | 62 x 62 x 23 | 47.25 |
 | base | lathe | 1 | Black cast acrylic rod, turned, bead-blasted SATIN close to matte (2026-11-11; OPTION: 6061 turned, satin black anodized) | 139 x 139 x 40 | 131.39 |
 | skin | formed | 1 | Cast acrylic sheet 6 mm, tinted through in the speaker's TruCast code, drape-formed over an aluminium mould, the outside fine glass-bead blasted (satin) and sealed with a matte anti-fingerprint hardcoat, the inside as formed, edges polished; CUSTOM POURS (2026-11-11): Dust, Acid, Ice at 3x the chart loading; Smoke 0.6x the chart loading (2x the speakers' own pour; 2026-11-16, matched to Hemisphere off); Poison 0.6x the chart loading (the mix, the owner 2026-11-17, matched to Hemisphere off) | 114 cm3, 160 x 160 x 54 | 1,212.55 |
-| liner | formed | 1 | Cast acrylic sheet 3 mm, white opal (Hemisphere's diffuser's), formed over an aluminium core mould, bonded to the skin's inside with a clear polymerising acrylic cement (Acrifix 192 kind), no air between them (or the white a coating on the skin's inside instead) | 6 cm3, 147 x 147 x 42 | 46.22 |
+| liner | formed | 1 | OPAQUE white (2026-11-21: an opal sheet would let the black body show through and darken the base): a white coating on the skin's inside, or an opaque white cast acrylic liner bonded to the skin's inside with a clear polymerising acrylic cement (Acrifix 192 kind), no air between them; formed over an aluminium core mould | 6 cm3, 147 x 147 x 42 | 46.22 |
 | ring | lathe | 1 | Aluminium 6061 | 108 x 108 x 17 | 49.83 |
 | well | lathe | 1 | PTFE rod, white (virgin) | 42 x 42 x 16 | 48.44 |
 | window | lathe | 1 | Cast acrylic tube, tinted through | 40 x 40 x 16 | 45.98 |
