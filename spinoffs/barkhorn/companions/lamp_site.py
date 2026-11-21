@@ -493,8 +493,9 @@ def build(frame, samples, scale):
                 revolve(f'base-skin-{base}-{tint}', lo_, sk)
                 # BASE_CONTACT=1 (2026-11-21, a test for the owner's "smoke frosted" edges): the white liner in optical
                 # contact with the skin (cast on or bonded), its face at the skin's inner face, with no air gap between them.
-                # Default 0: as the parts list has it, two formed parts nested, the liner 0.4 mm inside the skin's inner face
-                if os.environ.get('BASE_CONTACT', '0') == '1':
+                # The default since 2026-11-21 (the coordinator: contact is the design, as the CAD has it); 0 the old render's
+                # 0.4 mm air gap between the skin's smooth inner face and the liner
+                if os.environ.get('BASE_CONTACT', '1') == '1':
                     revolve(f'base-liner-{base}-{tint}', lo_, SC.principled('base-liner', '#EDEDEA', 0.8), off=6.0)
                 else:
                     revolve(f'base-skin-in-{base}-{tint}', lo_, acrylic(f'base-skin-in-{tint}', 0.0, tname, ld_), flip=True, off=6.0)
