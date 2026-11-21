@@ -17,7 +17,7 @@ L.pop('track-bar1', None); L.pop('track-horn1', None)
 # P1, the near horn: something bright behind it on the camera's line of sight (it sees the felt at about x 7.99,
 # z 2.2-2.6 through the clear horn). Real fixtures only (living_ext.softbox meshes, every ray on, casting shadows).
 X = float(sys.argv[2]) if len(sys.argv) > 2 else 1.0
-if v.startswith('a'):
+if v.startswith('a') and v[1:].isdigit():
     # (a) a backlit opal panel as the near niche's back, behind the horn: 0.6 x 0.52 m, its face at y 6.02 (the felt at
     # 6.03), centre z 2.26, facing the room, at strength X
     P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.6, 0.52], 'depth': 0.005,
@@ -65,7 +65,7 @@ if v.startswith('w'):
     # (#FFE2C0, the bar's lamps) where a1/a3's cool #FFF4E6 read blue beside the horn; the horn's left half saw past a1
     P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.64, 0.58], 'depth': 0.005,
               'position': [8.25, 6.02, 2.22], 'target': [8.25, 4.0, 2.22], 'strength': X, 'color': '#FFE2C0'})
-if v.startswith('b'):
+if v.startswith('b') and v[1:].isdigit():          # (b160, b400; not 'black')
     # (b) the near niche's back pale (an off-white plaster panel, 6 mm, over the felt behind and above the cabinet),
     # lit by a concealed LED strip under the niche's top lip (0.6 x 0.02 m, its face at z 2.505 just behind the
     # face frame's head, aimed back and down at the wall behind the horn; the niche's head sits above the frame)

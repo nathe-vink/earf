@@ -858,45 +858,6 @@
    },
    {
     "kind": "kit",
-    "shape": "box",
-    "size": [
-     0.62,
-     0.006,
-     0.58
-    ],
-    "position": [
-     8.25,
-     6.022,
-     2.22
-    ],
-    "material": "paper",
-    "color": "#E6E0D6"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
-    "fn": "softbox",
-    "size": [
-     0.6,
-     0.02
-    ],
-    "depth": 0.01,
-    "position": [
-     8.25,
-     5.52,
-     2.505
-    ],
-    "target": [
-     8.25,
-     6.03,
-     2.1
-    ],
-    "strength": 1.0,
-    "color": "#FFE2C0"
-   },
-   {
-    "kind": "kit",
     "shape": "ext",
     "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
     "fn": "shadow_ray_report"
