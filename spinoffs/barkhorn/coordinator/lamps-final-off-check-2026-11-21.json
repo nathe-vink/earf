@@ -1,0 +1,229 @@
+{
+ "results": [
+  {
+   "part": "buyer",
+   "found": {
+    "per_tint": [
+     {
+      "tint": "Ember",
+      "same_off": "yes",
+      "what_differs": "At 480 px and 300 px the shade and the ball are the same signal red and look like the same glossy acrylic. Side by side the ball is very slightly duller. The Core's satin base looks darker and leans a little maroon. My medians, with highlights left out: shade L37 C72 h37, ball L39 C66 h35, base L33 C58. Shade to ball is dE00 2.2.",
+      "fix": "None."
+     },
+     {
+      "tint": "Dust",
+      "same_off": "yes",
+      "what_differs": "Same orange and same material. The ball is a touch browner and duller than the shade (the touch of black). The base is darker and redder, like rust. Shade L54 C74, ball L54 C68. dE00 1.8.",
+      "fix": "None."
+     },
+     {
+      "tint": "Acid",
+      "same_off": "yes",
+      "what_differs": "Same olive-yellow. The ball is a touch duller. The base is clearly darker khaki (L56 against the shade's L67). That is the biggest step from base to ball of the eight tints, but the hue is the same. Shade to ball is dE00 2.4.",
+      "fix": "None for the pair."
+     },
+     {
+      "tint": "Poison (deep: pendant 1x + Core 0.45)",
+      "same_off": "close",
+      "what_differs": "At 300 px both are the same bottle green. At 480 px side by side, the pendant is the more vivid of the two. The ball is a little duller and greyer and slightly lighter in its lower half, and the base is a dark forest green. Medians: shade C43, ball C39, no hue shift. dE00 1.8. A buyer would call it the same green. The difference only shows when you look for it at the page size.",
+      "fix": "Keep the deep pair. Its pendant is the one that matches the deep body of the Tropos."
+     },
+     {
+      "tint": "Poison (fallback: pendant 0.55x + today's Core 0.3)",
+      "same_off": "yes",
+      "what_differs": "The two match more closely than the deep pair (dE00 1.2, both about L45). But both are a clearly lighter, brighter emerald. Next to the Tropos they match its bright horn, not its deep green body.",
+      "fix": "Do not switch. It fixes nothing a buyer would notice in the deep pair, and it costs depth. Offer it only if the owner prefers the closer match to the deeper green."
+     },
+     {
+      "tint": "Ice",
+      "same_off": "yes",
+      "what_differs": "Same royal blue and same material. Side by side the ball is a touch more vivid and very slightly more violet (median C67 against 61, hue 4 degrees apart). The shade's lower rim looks a little more azure. The base is darker. dE00 2.3.",
+      "fix": "None."
+     },
+     {
+      "tint": "Haze",
+      "same_off": "yes",
+      "what_differs": "Same violet. In the 240 px sheet cell the Core looked a little bluer, but at 480 px the two look the same. The ball is very slightly duller and bluer (C76 against 80, hue 2.5 degrees bluer). The base is a darker indigo. dE00 2.0.",
+      "fix": "None."
+     },
+     {
+      "tint": "Fog",
+      "same_off": "close",
+      "what_differs": "Both look clear over white, but the Core is whiter and flatter (L96 against the pendant's L89). The ball shows almost no shading or highlight. The clear ball's outer rim is a soft, smeared halo with a grey crescent at the upper left. The base looks like flat white plaster. Nothing is clipped (the brightest pixel is 253). This is the least real-looking cell on the sheet.",
+      "fix": "Let the Fog lighting test that is running now decide. The Core needs to come down in brightness so the ball and base show shading the way the pendant does. Check the rim at full size afterwards."
+     },
+     {
+      "tint": "Smoke",
+      "same_off": "yes",
+      "what_differs": "Both are glossy black. The lower half of the ball picks up a dark, warm-grey reflection of the floor. My median over the whole ball is L12 against the shade's L3 (dE00 5.5), but it looks like a reflection, not a lighter colour.",
+      "fix": "None."
+     }
+    ],
+    "sheet_problems": "1) The labels use three different starting points. 'original' means the first pour. 'as today' and 'Nov 17 mix' both mean what the site shows now. For the Acid, Ice and Haze pendants, 'original' is lighter than the site today (5x to 3x, 6x to 3x, 1.8x to 1x, from the lane's meas-off-r3.txt). The Ember pendant goes from 1.8x to 0.7x under the label 'lighter than original'. A reader could take 'original' to mean 'no change'. Fix: describe every cell against one starting point, for example 'lighter than now', 'as now', 'deeper than now', 'new dye mix'. 2) 'Nov 17 mix' (Smoke pendant) and 'as today' (Fog) mean the same thing. Use one plain phrase. 3) The mixed frame sizes do not mislead. At the sheet's 240 px and the site's 480 px and 300 px, I saw no difference in sharpness or grain between the 800 x 1000 and 1600 x 2000 frames (background grain at 480 px is 0.72 against 0.61 grey levels). The framing is the same, and the walls match within about 0.3 levels across all pendant frames and across all Core frames. 4) Missing from the sheet: the Poison fallback, so the owner cannot compare it here, and any note that Fog's Core is still being re-lit. 5) Not a pendant-against-Core problem, but visible on the sheet: the Ice Tropos looks sky blue, while both Ice lamps look royal blue (the lane's hues are 275 against 288 and 292). 6) Every cell has the file the brief names.",
+    "summary": "Judged by a buyer's eye at the site's sizes (480 px on a page, 300 px in a row of eight), six of the eight pairs look the same colour and the same glossy acrylic switched off: Ember, Dust, Acid, Ice, Haze and Smoke.\n\nPoison is close. It is the same bottle green, but at 480 px the Core's ball is a little duller and greyer than the pendant. Keep the deep pair. The fallback (pendant 0.55x with today's Core 0.3) matches more closely, but it is a clearly lighter, less deep green, and it fixes nothing a buyer would notice.\n\nFog is close and is the weakest cell on the sheet. The Core looks whiter and flatter than the pendant, its clear rim is smeared, and its base looks like plaster. The Fog lighting test running now should settle it.\n\nIn every tint the Core's satin base looks darker and duller than its ball, in the same hue.\n\nOn the sheet itself, the labels mix three starting points ('original', 'as today', 'Nov 17 mix'). 'original' on the Acid, Ice and Haze pendants means lighter than the site shows now, and a reader could take it to mean 'no change'. The mixed frame sizes do not show at any size I checked.\n\nMy medians (dE00, shade to ball) back up what I saw: Ember 2.2, Dust 1.8, Acid 2.4, Poison 1.8, Ice 2.3, Haze 2.0, Smoke 5.5 (the floor reflection), Fog 4.1, Poison fallback 1.2.\n\nFiles are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b66/judge-buyer/:\n- pair480-<tint>.png: each pair side by side at page size\n- row300-half0.png and row300-half1.png: the rows of eight\n- body-<tint>.png: shade and ball cropped at the same scale\n- poison-deep-vs-fallback.png and poison-row300-tropos-deep-fallback.png: the Poison comparison\n- fog-core-full-crop.png: the Fog Core at full size\n- lab.py: the measuring script"
+   },
+   "verified": {
+    "per_tint_check": [
+     {
+      "tint": "Ember",
+      "agree": "agree",
+      "reasoning": "I looked at the 480 px view (speaker | pendant | Core, judge-buyer-verify/v480-Ember.png), the 300 px rows (v300-0.png) and same-scale body crops (body-Ember.png). Shade and ball are the same signal red and look like the same glossy acrylic. The ball is very slightly duller. The base is darker and a little more maroon. My own masks (ball disk split at its equator, shade band below the cap, brightest 8 % dropped as glints): shade L37 C72 h37, ball L39 C70 h37, base L33 C58. Shade to ball is dE00 1.7 by median and 1.0 by linear mean (judge 2.2, lane 2.8). I agree with no fix. One thing on the sheet, outside the pair question: both Ember lamps look a brighter, lighter red than the speaker's body, closer to its horn."
+     },
+     {
+      "tint": "Dust",
+      "agree": "agree",
+      "reasoning": "Same orange and same material at 480 and 300 px. The ball is a touch browner and duller. The base is darker and redder, like rust. Mine: shade L54 C74 h51, ball L54 C70 h51, base L47 C63 h47. dE00 1.1 by median, 1.6 by mean. I agree with no fix."
+     },
+     {
+      "tint": "Acid",
+      "agree": "agree",
+      "reasoning": "Same olive-yellow. The ball is a touch duller. The base is clearly darker khaki. Mine: shade L67 C67 h101, ball L66 C63 h99, base L57 C53. Shade to ball dE00 1.9. Ball to base is dE00 8.1, the largest of the eight tints (Dust is next at 7.6), which backs the judge's note. I agree with no fix for the pair."
+     },
+     {
+      "tint": "Poison (deep: pendant 1x + Core 0.45)",
+      "agree": "agree",
+      "reasoning": "'Close' is the honest word, and keeping the deep pair is right, but it is the owner's one decision. At 300 px both are the same bottle green. At 480 px side by side (v480-Poison.png, body-Poison.png), the pendant's lower band is richer. The ball looks flatter and a little greyer, and its lower half is a touch lighter. Over the whole shade and ball my medians are closer than the judge's: shade L29 C43 h140, ball L31 C40.5 h141, dE00 1.4. That is no worse than the tints rated yes. But the eye goes to the shade's vivid lower band (C49). Against that band the ball has 18 % less colour (dE00 3.2). The other tinted pairs lose only 7 to 11 % (dE00 2.2 to 2.9). The ball's darkest tenth is also lighter (L25 against L16), so it has less depth. The lane found that a dye re-mix does not help, so the only pair on file that matches exactly is the lighter fallback. The owner should choose which of his two rules wins here: 'look the same' or 'deep colour'. Recommend deep."
+     },
+     {
+      "tint": "Poison (fallback: pendant 0.55x + today's Core 0.3)",
+      "agree": "agree",
+      "reasoning": "The two look the same. Mine: dE00 0.7 to 1.1, both L45, hue 141. Both are a clearly lighter, brighter emerald than the speaker's body. I agree: do not switch unless the owner prefers the exact match. This pair is not on the sheet, so I built the labelled picture the owner message calls the 'second picture': /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b66/judge-buyer-verify/poison-two-ways.jpg. It shows the Poison speaker, the deeper pendant and Core, and the lighter pendant and Core, 480 px each, all off. It needs to be sent with the sheet."
+     },
+     {
+      "tint": "Ice",
+      "agree": "agree",
+      "reasoning": "Same royal blue and same material. The ball is a touch more vivid and slightly more violet. The shade's lower rim is a little more azure. The base is darker. Mine: shade L38 C60.5 h288, ball L38 C68 h292, base L32.5. dE00 2.4. I agree with no fix. I also see what the judge's sheet note says: the Ice speaker looks lighter and more sky-blue than both lamps. That is outside the pair question, and the new 3x pendant is closer to the speaker than the live 6x."
+     },
+     {
+      "tint": "Haze",
+      "agree": "agree",
+      "reasoning": "Same violet at 480 and 300 px. In the sheet's 240 px cell the ball looks a hair bluer, as the judge says. Mine: shade C80 h309, ball C78.5 h307 (2 degrees bluer). dE00 1.5. The base is a darker indigo (L20 C67). I agree with no fix."
+     },
+     {
+      "tint": "Fog",
+      "agree": "agree",
+      "reasoning": "'Close' on colour. Both are neutral (C 1.6), but the Core is whiter: L96 against the pendant's L89, dE00 4.2. In the native 1600 x 2000 frame (fog-core-rim-native.png), the clear ball has a grey crescent at its upper left and a soft, smeared halo on the right. Both are in the frame itself, not caused by resizing. Nothing is clipped (the brightest pixel is 253, and no ball pixel reaches 250). But the ball is flat: 90 % of it sits between grey levels 236 and 246 (spread 3), against 166 to 247 (spread 27) on the pendant. It is the least real-looking cell on the sheet. I agree to let the lighting test running now decide. Afterwards, check the rim at full size, because a lighting change alone may not remove the halo. In the owner message I call Fog 'not yet' rather than close, because looking unreal is his worst case."
+     },
+     {
+      "tint": "Smoke",
+      "agree": "agree",
+      "reasoning": "Both are glossy black at 480 and 300 px. Mine: the upper half of the ball matches the shade (dE00 1.2 to 1.6, L4 to 5 against L3). The lower half is L15 to 16, which is the floor reflected in the ball. That lifts the whole-ball median to dE00 5.8. It looks like a reflection, not a lighter black. I agree with no fix."
+     },
+     {
+      "tint": "Sheet problems",
+      "agree": "agree",
+      "reasoning": "I checked all six. (1) The pendants live on the site now are 1.8x, 5x, 6x and 1.8x (meas-off-r3 'today' and the 17 Nov record). The first pours were 1x, 3x, 3x and 1x. So 'original' on the Acid, Ice and Haze pendants means lighter than the site now, but on the Poison pendant it means unchanged. One word has two meanings. (2) 'Nov 17 mix' and 'as today' mean the same thing. (3) The mixed frame sizes do not show. At 480 px the wall grain is 0.71 to 0.73 grey levels on the half-size frames and 0.59 to 0.61 on the full-size ones. The corner wall is 211.9 to 212.2 on every pendant frame and 208.1 to 208.5 on every Core frame. The coloured outlines of the bright tints line up within 3 px. (4) The Poison fallback is missing, and so is any note that Fog is being re-lit. (5) The Ice speaker does look different from the Ice lamps. (6) Every cell uses the file the brief names. If the labels are not fixed before sending, the owner message includes one line explaining 'original'."
+     }
+    ],
+    "owner_message": "Here are the eight colours with both lamps switched off, next to the speaker.\n\nThey look the same off in Ember, Dust, Acid, Ice, Haze and Smoke. In Smoke the bottom of the ball shows the floor reflected in it. It looks like a reflection, not a lighter black. On every Core the base looks a little darker than the ball.\n\nPoison is very close but not exact. It is the same bottle green, but side by side the ball looks a touch duller than the pendant. A different dye mix did not make the ball richer. The other way is a lighter green on both lamps. Those two look the same, but both are lighter than the speaker's body (second picture). We would keep the deeper green.\n\nFog is not there yet. The Core looks whiter and flatter than the pendant, and the edge of its clear ball looks smudged. We are re-lighting it now and will send it when it is done.\n\nOn the labels, \"original\" means the first pour, not \"unchanged\". The Ember, Acid, Ice and Haze pendants come out lighter than on the site today, so that they match their Core.\n\nYour one decision: for Poison, the deeper green (our pick) or the lighter one?"
+   }
+  },
+  {
+   "part": "colour",
+   "found": {
+    "per_tint": [
+     {
+      "tint": "Ember",
+      "same_off": "yes",
+      "what_differs": "By eye, the same red at 480 px and at 300 px. Measured on matched body regions, medians, Core minus pendant: dE00 2.2 (dL* +2.2, dC* -3.2, dh +1.1 deg). The linear mean is 3.1 and the plain centre patches are 2.6. The lower half of the ball is a little lighter and more orange-red. The base is a darker, duller brick red, 5.1 from the pendant (dL* -2.5, dC* -16.8, dh -3.2 deg).",
+      "fix": "None needed."
+     },
+     {
+      "tint": "Dust",
+      "same_off": "yes",
+      "what_differs": "By eye, the same orange. The ball is a shade less vivid. Bodies: dE00 1.5 (dL* +0.2, dC* -5.9, dh -0.7 deg). The linear mean is 1.9 and the patches are 2.8 (dC* -8.2). With the black added, the base reads terracotta: darker, duller and redder than the pendant, 7.7 from it (dL* -5.8, dC* -14.2, dh -5.4 deg). After Acid's, it is the most noticeable base.",
+      "fix": "None for the ball. It is the best match of the eleven Dust Cores I measured. If the base's terracotta bothers the owner, the 'black 8' mix brings the base closer (5.3 instead of 7.7) but makes the ball match a little worse (2.7 instead of 1.5). I would keep the pick."
+     },
+     {
+      "tint": "Acid",
+      "same_off": "close",
+      "what_differs": "The same yellow-green, but the Core is a touch more olive: a little less vivid and slightly warmer than the pendant's chartreuse. You see it side by side and on flat swatches. Bodies: dE00 2.0 (dL* -0.8, dC* -5.5, dh -1.9 deg). The linear mean is 1.7 and the patches are 3.1 (dL* -2.5, dC* -8.1). The base is olive-khaki, the biggest base gap of the set: 8.5 from the pendant (dL* -8.6, dC* -16.1).",
+      "fix": "None needed for 'the same off'. The only pair in the set that matches better is the 2.1x pendant with today's Core 1.5 (bodies 1.7, patches 1.6, base 5.2). It is about 6 L* lighter, so less deep. Keep the pick."
+     },
+     {
+      "tint": "Poison",
+      "same_off": "close",
+      "what_differs": "The same deep green, but the Core is a little duller, greyer and slightly lighter. This is the biggest gap among the coloured pairs. Bodies: dE00 2.5 (dL* +1.7, dC* -5.9, dh +1.8 deg). The linear mean is 3.5 (dC* -7.7), raised by a lighter band in the lower half of the ball. The patches are 3.6 (dC* -10.1). The base is a dark grey-green, 7.4 from the pendant (dL* -3.1, dC* -18.2, dh +6.3 deg, bluer). I confirm that the dye re-mix gains no chroma. The re-mix Core has C* 53.1 at L* 39.3, and a straight line between the plain pours (0.45: L* 30.1, C* 42.0; 0.3: L* 44.8, C* 59.6) gives 53.0 at that lightness.",
+      "fix": "Keep the pick. It is the deepest pair, and at 300 px and 480 px it reads as the same green with the Core a touch duller. If the owner says no, the fallback (pendant 0.55x with Core 0.3) is the best match (bodies 1.2, patches 2.6). It is about 16 L* lighter than the pick and about 14 L* lighter than the speaker's body. There is also a middle pair that is already rendered: pendant 0.7x with the dye 1.0/0.7/1.0 Core at pour 0.5 measures 1.8 (patches 2.5) and is about 10 L* lighter than the pick."
+     },
+     {
+      "tint": "Ice",
+      "same_off": "close",
+      "what_differs": "The same blue. The Core is a bit more vivid and a touch more violet (ultramarine); the pendant is a slightly more azure blue. Bodies: dE00 2.9 (dL* +1.2, dC* +8.0, dh +4.4 deg). The linear mean is 2.7 and the patches are 2.8. The base is a deeper violet-blue, 5.5 from the pendant (dL* -3.9, dC* +6.1, dh +6.5 deg).",
+      "fix": "None needed. On bodies it is the best of the eight Ice Cores I measured. The 3.2/0.75/1.19 mix matches the pendant's hue and chroma exactly (h 287.4 vs 287.7, C* 61.6 vs 60.4) and its base is closer (2.2). At pour 1.72, though, it is 4.6 L* lighter, so it would need a heavier pour and a new render."
+     },
+     {
+      "tint": "Haze",
+      "same_off": "close",
+      "what_differs": "The same violet. The Core is a touch bluer (indigo) and less vivid, mostly in the lighter band across the lower half of the ball. Bodies: dE00 1.9 (dL* +0.2, dC* -3.3, dh -2.4 deg). The linear mean is 3.2 (dL* +2.6, dC* -5.1) and the patches are 3.3. The base is a dull indigo, 4.7 from the pendant (dC* -16.1, dh -4.6 deg).",
+      "fix": "None needed. It is the best of the eight Haze Cores I measured."
+     },
+     {
+      "tint": "Fog",
+      "same_off": "no",
+      "what_differs": "The Core reads white and the pendant reads light grey. There is no hue difference: both are neutral (a* about -1.7, b* about 0). Bodies: dE00 4.7, all from lightness (Core L* 95.8, pendant 88.2). The patches are 3.7 (dL* +6.0) and the base is L* 96.6. Why the Core reads whiter: its ball is flat at L* 95 to 96.5 across the whole face. That is as light as the wall behind it (95.0) and within 2.5 L* of the lightest value in the frame (98.3), so the ball sits at the top of the tone curve. Its softbox reflections stand only 1.7 L* above the body (9.3 on the pendant), so it loses its shading and looks like a plain white ball. The pendant's opal keeps its shading: 79 to 89 under the black cap, 94 in the upper middle, 90 to 92 lower down, 82 at the clear rim, and 79 to 84 on the sides. The solid white base (96.6) adds a large area of the brightest white.",
+      "fix": "Change the light on the Core, not the pour. Bring the ball and base down to about the pendant's L* 88 to 90, so the ball shows its shading and reflections again. That also moves it toward the speaker's Fog (about L* 78). Judge the running lighting test against that target."
+     },
+     {
+      "tint": "Smoke",
+      "same_off": "yes",
+      "what_differs": "The same black, neutral in both (C* under 3). The leftover difference is reflection, not colour. From near the top of the ball to just below its middle, L* is 2.3 to 4, the same as the pendant's 3 to 4. Below a horizon just under the middle, the polished ball mirrors the light floor (L* 15 to 25, neutral). That is why the bodies are 2.1 by median but 6.3 by linear mean, and the patches are 7.7. The satin base reads charcoal (L* 12). A view stretched over L* 0 to 35 shows the floor band clearly.",
+      "fix": "None for colour. Keep pour 0.5. At 0.6 the parts of the ball that reflect nothing go darker than the pendant (L* 1.0 to 1.8), and the floor reflection stays. Do not paint the reflection out: it is what makes the ball read as polished."
+     }
+    ],
+    "sheet_problems": "The sheet shows the source colours faithfully. Every measured region on the 240 x 300 JPEG cells is within dE00 0.8 of its source frame. The ground is the same in every frame (wall and floor within about 1.5 L*). Half-size and full-size frames look alike at this size, and no label covers a lamp. Problems: (1) Fog is labelled 'as today' on both lamps, but it fails the owner's condition (the Core is clearly whiter), and nothing on the sheet says a lighting fix is coming. Hold the Fog row or say so. (2) The labels use three different words for pours that are not new: 'original', 'as today' and 'Nov 17 mix' (a date, not plain words). For the Acid, Ice and Haze pendants, 'original' is lighter than the pendant the site shows today (I measured the 5x Acid pendant in row-off at L* 55 against 66 for the 3x). From the labels, the owner cannot tell which pictures are new. (3) The Poison fallback is not on the sheet, so if he says no to Poison he has nothing to compare it with. (4) Every Core base reads as a darker, duller shade of its ball (dE00 4.7 to 8.5 from the pendant), most visibly in Acid (olive-khaki), Dust (terracotta) and Poison (grey-green). The sheet does not prepare him for this, and he may read it as a mismatch.",
+    "summary": "Judged by eye first, at 480 px and 300 px, then measured. My regions are: the shade's body between the cap's shadow and the rim, without the three softbox reflections or the sides; the ball inside 0.88 of its radius and above the base, without the reflections; the base's satin face; and a plain centre patch on each lamp. Seven of the eight pairs read as the same colour switched off. Fog does not.\n\n- **Yes:** Ember, Dust and Smoke.\n- **Close** (the same colour with a slight shift you see only side by side or on flat swatches): Acid (the Core a touch more olive), Poison (the Core a little duller and greyer; the biggest gap among the coloured pairs), Ice (the Core a bit more vivid and violet) and Haze (the Core a touch bluer).\n- **No:** Fog. The difference is all lightness (Core L* 95.8 against the pendant's 88.2). The Core's ball and base sit at the top of the tone curve, flat and as light as the wall behind, so the ball loses its shading and reflections and reads white. The fix is the light on the Core, not the pour: target about L* 88 to 90.\n\nThe coloured pairs measure dE00 1.5 to 2.9 by body median and 1.7 to 3.5 by linear mean, within 0.4 of the lane's figures.\n\nSmoke's leftover difference is the floor mirrored in the lower half of the polished ball. The rest of the ball is as black as the pendant, and 0.5 is the right pour.\n\nEvery Core base is a darker, duller shade than its ball. It reads as the same colour in shade, but the owner may notice it, most in Acid, Dust and Poison.\n\nPoison's fallback matches better (1.2) but is about 16 L* lighter. A rendered middle pair (pendant 0.7x with the dye 1.0/0.7/1.0 Core at 0.5) measures 1.8 at about 10 L* lighter. I would keep the pick.\n\nOne thing outside the owner's condition: against the speaker (rough, using the b58 Tropos plain means), the Ember and Dust lamps are 6 to 10 L* lighter. The Ice lamps are more vivid and more violet (+18 to +26 C*, +13 to +17 deg). Acid, Poison and Haze are within about 3.\n\nNumbers and pictures are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b66/judge-colour/:\n- measure.txt\n- matrix-a.txt and matrix-b.txt (every candidate)\n- look/matched-1.png, look/matched-2.png and look/matched-3.png (crops with flat swatches)\n- look/smoke-stretch.png\n- look/fog-stretch.png\n- look/poison-three-depths.png"
+   },
+   "verified": {
+    "per_tint_check": [
+     {
+      "tint": "Ember",
+      "agree": "agree",
+      "reasoning": "I agree with yes and with no fix. By eye it is the same red at 300 px, at 480 px and with the crops placed edge to edge. My own masks (Core minus pendant; the shade's body between the cap's shadow and the rim; the ball inside 0.88 R above the base; highlights removed) give these numbers. Body median dE00 is 2.2 (dL* +2.4, dC* -2.0) and the linear mean is 3.0. The ball's upper half is 2.2 from the pendant. The lower half is 4.4, lighter and duller where the polished ball reflects the light floor. I do not see it as 'more orange': its OKLab hue is the same (-0.3 deg). The base is a darker, duller brick red, 5.2 from the pendant."
+     },
+     {
+      "tint": "Dust",
+      "agree": "agree",
+      "reasoning": "I agree with yes and with keeping the pick. By eye it is the same orange, and the ball is a shade less vivid. Median 1.4 (dC* -5.3), linear mean 1.9, upper half of the ball 0.8. The base reads terracotta, 8.1 from the pendant (dL* -6.3, dC* -14.1, redder), so it is darker and duller, as the judge says."
+     },
+     {
+      "tint": "Acid",
+      "agree": "agree",
+      "reasoning": "I agree with close and with no fix. With the crops edge to edge and on flat swatches, the Core is a touch more olive and duller. At 300 px the pair reads as one colour. Median 1.6 (dC* -4.5, dh -1.7), linear mean 1.7, plain patches 2.6; the OKLab hue differs by -2.5 deg. The base is olive-khaki, 8.8 from the pendant, the largest base gap in the set."
+     },
+     {
+      "tint": "Poison",
+      "agree": "disagree",
+      "reasoning": "I disagree only with the verdict: I would call it yes, not close. It is also not the biggest gap among the coloured pairs. The ball's upper half matches the pendant almost exactly (dE00 0.4 on my masks; OKLab hue +0.1 deg). The whole ball is 2.0 by median (Ember is 2.2) and 2.7 by linear mean. The only difference is in the lower half (4.0), which is lighter and greyer where the polished ball reflects the floor. Ember shows the same effect (4.4), and the judge called Ember yes. At 300 px, at 480 px and edge to edge it is the same deep green. I agree with the fix: keep the pick. The fallback (pendant 0.55x with Core 0.3) matches a little better (1.0) but is about 16 L* lighter, so it is not needed."
+     },
+     {
+      "tint": "Ice",
+      "agree": "agree",
+      "reasoning": "I agree with close and with the fix. The Core is a richer, slightly more violet blue. You see this edge to edge and on flat patches (4.3 on my plain patches), but not at 300 px. Median 2.8 (dC* +8.0, dh +4.2), OKLab hue +3.0 deg. I confirm that the 3.2/0.75/1.19 mix matches the hue (OKLab +0.3 deg) but is about 5 L* lighter at pour 1.72."
+     },
+     {
+      "tint": "Haze",
+      "agree": "disagree",
+      "reasoning": "The judge's numbers are right, but they understate what the eye sees, and the shift is not where the judge puts it. The whole ball reads bluer (indigo against the pendant's violet), not mainly the lower band. On the sheet, at 480 px and edge to edge, it is the most visible difference among the coloured pairs. dE00 is weak at hue in blue-violet: the upper half is -1.7 deg in CIELAB but -8.0 deg in OKLab, and the whole ball is -6.6 deg (Acid is -2.5, Ice +3.0). Every rendered Core at pour 0.6 to 0.75 is bluer still (OKLab -6.6 to -17.8 deg), so being 'best of eight by dE00' does not settle it. The dye 0.89/2.5/1.09 at pour 1.0 is already rendered (checkset/dye/core-violet-off-abs0.89,2.5,1.09.png). It matches the violet (OKLab -1.7 deg; base 2.9 instead of 4.7) and is about 3.8 L* lighter (25.1 against 21.3), which is still deep. By eye it is the better match: see judge-colour-verify/look/abut-haze-cands.png and look/haze-pick-vs-alt-480.png. Fix: show it beside the pick, or swap to it. A deeper Core in the right violet would need a mix that absorbs less red, and none has been rendered. The owner message assumes this check happens. If the pick stays, the Haze line in the message should read 'close: the Core is a touch bluer'."
+     },
+     {
+      "tint": "Fog",
+      "agree": "agree",
+      "reasoning": "I agree that Fog must not go out as it is, and I agree with the fix. The pendant body is L* 89.0, the ball 95.9 and the base 96.6, all neutral (dE00 4.3, no hue difference). Both read white at 300 px. The difference is that the Core is brighter and flat: L* 95.9 to 97.5 across the whole opal, with faint reflections, so it looks like a white disc rather than a lit ball. That is a problem of looking real more than of colour. Light the Core so its opal comes down to about the pendant's L* 88 to 90. Keep the wall and floor the same as in the other frames, or the sheet stops comparing like with like."
+     },
+     {
+      "tint": "Smoke",
+      "agree": "agree",
+      "reasoning": "I agree with yes and with keeping pour 0.5. It is the same black. The ball's upper half is L* 2.6, against the pendant's 3.0 (1.9 to 3.9). The lower half mirrors the light floor (15.6), which reads as polish. I checked the other pours: at 0.6 the upper half goes darker than the pendant (1.2), and at 0.45 it is lighter (4.0). Keep the reflection."
+     },
+     {
+      "tint": "Sheet",
+      "agree": "agree",
+      "reasoning": "I agree with the judge's four sheet problems. Two more: (1) the Haze alternative is not on the sheet. (2) The 'original' labels hide how much lighter the picked pendants are than today's pendant pictures (house8 and row-off, which carry the site's pours): Ember +11.6, Dust +4.6, Acid +11.0, Ice +15.4 and Haze +8.3 L*. My files are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b66/judge-colour-verify/: measure.txt, patches.txt, oklab.txt, okcands.txt, haze-alt.txt and today.txt, plus look/swatches.png, look/abut-Ice-Haze-Poison-Acid.png, look/abut-haze-cands.png, look/haze-pick-vs-alt-480.png, look/p300-0.png, look/p300-1.png and look/p480-0.png to look/p480-4.png."
+     }
+    ],
+    "owner_message": "Lamps switched off: each colour's pendant beside its Core (all renders, same studio light).\n\nThese look the same off: Ember, Dust, Acid, Poison, Ice and Smoke. Right next to each other, Acid's Core is a touch more olive and Ice's Core a touch richer and more violet, but each pair reads as one colour.\n\nNot yet:\n- Haze: the Core ball looks a little bluer than the pendant's violet. We already have a mix that matches the violet better (a shade lighter, still deep) and are checking it now.\n- Fog: both are white, but the Core picture comes out too bright and flat, so it looks whiter than the pendant. That comes from the light in the picture, not the material. We are testing a lighting fix now.\n\nTwo things that are not mismatches. The Core's base is the same colour with a satin finish, so it looks darker and duller than the shiny ball (most in Acid, Dust and Poison). And the lower half of each shiny ball reflects the light floor, so it looks a little lighter there (most in Smoke).\n\nHeads-up: to match the Core, the Ember, Acid, Ice and Haze pendants are clearly lighter than the ones on the site now, and Dust a little lighter.\n\nNo decision needed from you now. You will see Haze and Fog again before the final pictures are made."
+   }
+  }
+ ]
+}
