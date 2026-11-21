@@ -1,0 +1,234 @@
+blendasset: Mantle Strata Ember 81 parts match the manifest
+RECORD WALL took over 75 cells; removed ['records-faceout', 'records-sleeves']
+RECORD WALL other cell (0, 4) 0
+RECORD WALL other cell (2, 1) 1
+RECORD WALL other cell (3, 0) 2
+RECORD WALL other cell (3, 3) 3
+RECORD WALL other cell (8, 3) 4
+RECORD WALL other cell (10, 3) 5
+RECORD WALL other cell (10, 4) 6
+RECORD WALL other cell (16, 1) 7
+RECORD WALL plain records in cell (18, 1)
+RECORD WALL {"cells": 75, "full": 49, "part": 12, "flat": 6, "other": 8, "per_full": [65, 77.0, 86], "shares": {"lp": 0.697, "gate": 0.153, "thin": 0.106, "box": 0.044}, "records": 4454}
+REMOVED ['dj-knobs', 'dj-labels', 'dj-plinths', 'dj-records', 'screen-boxes', 'screen-frames', 'screen-panels']
+RESTYLED ['backbar-top', 'chairs-brass', 'counter-rail', 'counter-zinc', 'panel-fabric', 'spk-niche-felt']
+LAMPS lamp_site from /home/user/lamps-ecb1 ecb1650c2468c82a0723744be2e3594f39d7fb0e
+LAMPS placed 5 Hemisphere, 0 Core; 120 lamps, 5000 lm at the emitters
+LAMPS lamp_site from /home/user/lamps-ecb1 ecb1650c2468c82a0723744be2e3594f39d7fb0e
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+LAMPS placed 0 Hemisphere, 3 Core; 3 lamps, 600 lm at the emitters
+CORE cable removed: 3
+LAMPS hemi_scale 1.0 cords to 3.4
+WATER GLASS ice: top faces 1155 area 38.07 cm2
+WATER GLASS: ['prop17-kit-glass-outer', 'prop17-kit-glass-inner-dry', 'prop17-kit-glass-wet', 'prop17-kit-water-top', 'prop17-kit-ice0', 'prop17-kit-ice1'] ior 1.36 fill 0.045 meniscus 0.0015 wet to 0.0465
+WATER GLASS ice: top faces 1158 area 40.74 cm2
+WATER GLASS: ['prop18-kit-glass-outer', 'prop18-kit-glass-inner-dry', 'prop18-kit-glass-wet', 'prop18-kit-water-top', 'prop18-kit-ice0', 'prop18-kit-ice1'] ior 1.36 fill 0.03 meniscus 0.0015 wet to 0.0315
+NO GLASS SHADOWS: 7 materials: ['bark@cloud-amber', 'bark@cloud-amber.001', 'clear-cast@cloud-amber', 'horn-formed@cloud-amber', 'horn-lot@cloud-amber', 'horn-satin@cloud-amber', 'sink-smoke']
+SOFTBOX prop20-kit face 1.4 x 0.9 strength 6.0 z 3.363 to 3.397
+SOFTBOX prop21-kit face 1.2 x 0.9 strength 20.0 z 2.453 to 3.361
+SOFTBOX prop22-kit face 1.2 x 0.9 strength 20.0 z 2.38 to 3.36
+SHADOW RAY LINKS LEFT: 0 []
+EMITTERS: 128
+  EMITTER amp-plate-led-on#0 MESH all on
+  EMITTER amp-plate-led-on#1 MESH all on
+  EMITTER led-amber AREA all on
+  EMITTER led-amber-0 AREA all on
+  EMITTER led-amber-1 AREA all on
+  EMITTER led-amber-10 AREA all on
+  EMITTER led-amber-11 AREA all on
+  EMITTER led-amber-12 AREA all on
+  EMITTER led-amber-13 AREA all on
+  EMITTER led-amber-14 AREA all on
+  EMITTER led-amber-15 AREA all on
+  EMITTER led-amber-16 AREA all on
+  EMITTER led-amber-17 AREA all on
+  EMITTER led-amber-18 AREA all on
+  EMITTER led-amber-19 AREA all on
+  EMITTER led-amber-2 AREA all on
+  EMITTER led-amber-20 AREA all on
+  EMITTER led-amber-21 AREA all on
+  EMITTER led-amber-22 AREA all on
+  EMITTER led-amber-23 AREA all on
+  EMITTER led-amber-3 AREA all on
+  EMITTER led-amber-4 AREA all on
+  EMITTER led-amber-5 AREA all on
+  EMITTER led-amber-6 AREA all on
+  EMITTER led-amber-7 AREA all on
+  EMITTER led-amber-8 AREA all on
+  EMITTER led-amber-9 AREA all on
+  EMITTER led-orange AREA all on
+  EMITTER led-orange-0 AREA all on
+  EMITTER led-orange-0.001 AREA all on
+  EMITTER led-orange-1 AREA all on
+  EMITTER led-orange-1.001 AREA all on
+  EMITTER led-orange-10 AREA all on
+  EMITTER led-orange-10.001 AREA all on
+  EMITTER led-orange-11 AREA all on
+  EMITTER led-orange-11.001 AREA all on
+  EMITTER led-orange-12 AREA all on
+  EMITTER led-orange-12.001 AREA all on
+  EMITTER led-orange-13 AREA all on
+  EMITTER led-orange-13.001 AREA all on
+  EMITTER led-orange-14 AREA all on
+  EMITTER led-orange-14.001 AREA all on
+  EMITTER led-orange-15 AREA all on
+  EMITTER led-orange-15.001 AREA all on
+  EMITTER led-orange-16 AREA all on
+  EMITTER led-orange-16.001 AREA all on
+  EMITTER led-orange-17 AREA all on
+  EMITTER led-orange-17.001 AREA all on
+  EMITTER led-orange-18 AREA all on
+  EMITTER led-orange-18.001 AREA all on
+  EMITTER led-orange-19 AREA all on
+  EMITTER led-orange-19.001 AREA all on
+  EMITTER led-orange-2 AREA all on
+  EMITTER led-orange-2.001 AREA all on
+  EMITTER led-orange-20 AREA all on
+  EMITTER led-orange-20.001 AREA all on
+  EMITTER led-orange-21 AREA all on
+  EMITTER led-orange-21.001 AREA all on
+  EMITTER led-orange-22 AREA all on
+  EMITTER led-orange-22.001 AREA all on
+  EMITTER led-orange-23 AREA all on
+  EMITTER led-orange-23.001 AREA all on
+  EMITTER led-orange-3 AREA all on
+  EMITTER led-orange-3.001 AREA all on
+  EMITTER led-orange-4 AREA all on
+  EMITTER led-orange-4.001 AREA all on
+  EMITTER led-orange-5 AREA all on
+  EMITTER led-orange-5.001 AREA all on
+  EMITTER led-orange-6 AREA all on
+  EMITTER led-orange-6.001 AREA all on
+  EMITTER led-orange-7 AREA all on
+  EMITTER led-orange-7.001 AREA all on
+  EMITTER led-orange-8 AREA all on
+  EMITTER led-orange-8.001 AREA all on
+  EMITTER led-orange-9 AREA all on
+  EMITTER led-orange-9.001 AREA all on
+  EMITTER led-red AREA all on
+  EMITTER led-red-0 AREA all on
+  EMITTER led-red-0.001 AREA all on
+  EMITTER led-red-1 AREA all on
+  EMITTER led-red-1.001 AREA all on
+  EMITTER led-red-10 AREA all on
+  EMITTER led-red-10.001 AREA all on
+  EMITTER led-red-11 AREA all on
+  EMITTER led-red-11.001 AREA all on
+  EMITTER led-red-12 AREA all on
+  EMITTER led-red-12.001 AREA all on
+  EMITTER led-red-13 AREA all on
+  EMITTER led-red-13.001 AREA all on
+  EMITTER led-red-14 AREA all on
+  EMITTER led-red-14.001 AREA all on
+  EMITTER led-red-15 AREA all on
+  EMITTER led-red-15.001 AREA all on
+  EMITTER led-red-16 AREA all on
+  EMITTER led-red-16.001 AREA all on
+  EMITTER led-red-17 AREA all on
+  EMITTER led-red-17.001 AREA all on
+  EMITTER led-red-18 AREA all on
+  EMITTER led-red-18.001 AREA all on
+  EMITTER led-red-19 AREA all on
+  EMITTER led-red-19.001 AREA all on
+  EMITTER led-red-2 AREA all on
+  EMITTER led-red-2.001 AREA all on
+  EMITTER led-red-20 AREA all on
+  EMITTER led-red-20.001 AREA all on
+  EMITTER led-red-21 AREA all on
+  EMITTER led-red-21.001 AREA all on
+  EMITTER led-red-22 AREA all on
+  EMITTER led-red-22.001 AREA all on
+  EMITTER led-red-23 AREA all on
+  EMITTER led-red-23.001 AREA all on
+  EMITTER led-red-3 AREA all on
+  EMITTER led-red-3.001 AREA all on
+  EMITTER led-red-4 AREA all on
+  EMITTER led-red-4.001 AREA all on
+  EMITTER led-red-5 AREA all on
+  EMITTER led-red-5.001 AREA all on
+  EMITTER led-red-6 AREA all on
+  EMITTER led-red-6.001 AREA all on
+  EMITTER led-red-7 AREA all on
+  EMITTER led-red-7.001 AREA all on
+  EMITTER led-red-8 AREA all on
+  EMITTER led-red-8.001 AREA all on
+  EMITTER led-red-9 AREA all on
+  EMITTER led-red-9.001 AREA all on
+  EMITTER prop20-kit MESH all on
+  EMITTER prop21-kit MESH all on
+  EMITTER prop22-kit MESH all on
+01:59.785  cycles           | WARNING CUEW initialization failed: Error opening the library
+waveguide: 3235 pixels sampled
+   54.6%  waveguide                          box [240, 26, 648, 198]  az [-145.5, -98.1, 62.6]  el [-69.9, -30.9, 60.2]
+    9.9%  beams                              box [240, 18, 652, 198]  az [-77.6, 60.0, 63.5]  el [15.8, 18.6, 36.1]
+    5.4%  ceiling-deck                       box [236, 24, 652, 198]  az [-55.5, 58.8, 64.1]  el [16.7, 18.3, 53.2]
+    4.5%  prop22-kit                         box [236, 48, 582, 194]  az [-32.9, 29.8, 32.7]  el [7.2, 10.2, 22.3]
+    3.1%  floor                              box [238, 22, 644, 196]  az [-80.8, -58.1, 38.6]  el [-72.2, -60.1, -23.0]
+    2.9%  opening                            box [524, 68, 578, 110]  az [53.8, 60.7, 64.7]  el [4.9, 13.0, 17.6]
+    2.8%  horn-throat                        box [596, 82, 626, 112]  az [-150.0, -133.4, -105.8]  el [-60.9, 34.9, 40.9]
+    2.2%  spk-niche-oak                      box [234, 24, 652, 200]  az [-85.6, -63.8, 65.4]  el [-68.9, 12.0, 72.4]
+    2.2%  counter-zinc                       box [238, 20, 646, 172]  az [-40.8, 6.0, 48.4]  el [-47.0, -36.9, -26.3]
+    1.9%  prop21-kit                         box [522, 18, 650, 130]  az [-22.5, 23.0, 54.7]  el [13.5, 22.2, 39.2]
+    1.6%  counter-back                       box [244, 22, 640, 194]  az [-50.0, 5.5, 38.3]  el [-64.7, -55.1, -41.8]
+    1.2%  prop20-kit                         box [526, 18, 646, 134]  az [-75.3, -36.6, 50.5]  el [39.1, 57.8, 70.1]
+    0.8%  lamp house                         box [236, 24, 614, 176]  az [-24.9, 22.0, 29.2]  el [-16.5, -3.4, 1.1]
+    0.7%  spk-niche-felt                     box [238, 18, 652, 158]  az [-154.1, -81.8, 122.5]  el [-64.4, 25.9, 65.3]
+    0.5%  zone-limewash                      box [528, 68, 562, 84]  az [45.1, 52.0, 55.1]  el [-13.6, -1.2, 2.3]
+    0.5%  lamp house-left                    box [234, 164, 236, 194]  az [-22.0, -18.3, -16.9]  el [8.1, 9.8, 12.8]
+    0.4%  panel-fabric                       box [526, 66, 572, 86]  az [45.3, 50.8, 54.2]  el [-12.2, -5.4, -3.0]
+    0.4%  altar-wall                         box [552, 80, 582, 90]  az [55.4, 57.0, 61.6]  el [-9.2, -1.0, 4.0]
+    0.3%  banq-base                          box [244, 22, 624, 170]  az [-28.9, -25.3, 16.1]  el [-23.2, -22.1, -20.9]
+    0.3%  record.ember                       box [532, 62, 552, 72]  az [25.7, 29.4, 33.2]  el [-48.7, -44.6, -43.5]
+    0.2%  plinth-L1-stack.ember              box [548, 68, 570, 80]  az [26.7, 34.4, 36.7]  el [-51.0, -47.6, -42.0]
+    0.2%  zone-carpet                        box [548, 74, 580, 88]  az [45.7, 52.4, 57.1]  el [-21.2, -16.3, -13.1]
+    0.2%  top                                box [254, 120, 608, 198]  az [-145.5, -130.0, -102.1]  el [-54.1, -31.9, -27.2]
+    0.2%  tubs                               box [530, 66, 584, 90]  az [45.4, 47.2, 57.5]  el [-18.6, -15.7, -11.2]
+    0.1%  chairs-leather                     box [236, 20, 634, 160]  az [-64.1, -34.3, -27.8]  el [-29.8, -19.4, -19.4]
+    0.1%  concrete-walls                     box [532, 20, 650, 136]  az [-45.6, -35.3, 10.0]  el [-13.1, -2.3, 7.2]
+    0.1%  glass                              box [250, 22, 644, 152]  az [-68.6, -61.7, -61.6]  el [-14.0, -11.6, -10.9]
+    0.1%  ball-red                           box [564, 36, 584, 44]  az [-33.6, -32.4, -31.5]  el [-36.1, -35.7, -35.5]
+    0.1%  tables36                           box [256, 58, 586, 174]  az [-26.6, 22.7, 23.4]  el [-21.5, -16.1, -15.3]
+    0.1%  partition-acrylic                  box [526, 64, 538, 70]  az [40.8, 42.0, 42.4]  el [-21.4, -21.3, -19.5]
+    0.1%  tub-tables                         box [556, 78, 568, 84]  az [49.7, 51.5, 51.8]  el [-16.5, -15.7, -11.7]
+    0.1%  tint-orange                        box [580, 20, 630, 38]  az [-28.2, -27.2, -26.6]  el [-21.3, -21.2, -20.0]
+    0.1%  tables36-bases                     box [536, 20, 632, 54]  az [-32.1, -26.8, -26.0]  el [-25.2, -25.1, -20.1]
+    0.1%  transom-glass                      box [242, 24, 646, 200]  az [-76.1, -62.7, -60.9]  el [3.3, 7.9, 8.3]
+    0.1%  prop16-kit                         box [594, 30, 614, 124]  az [-30.7, -29.9, -28.7]  el [-36.6, -32.9, -32.2]
+    0.1%  screen-banquette-b                 box [262, 64, 526, 176]  az [12.5, 31.2, 31.4]  el [-7.5, 0.4, 0.9]
+    0.1%  panel-sleeves                      box [548, 76, 564, 84]  az [49.8, 52.9, 53.1]  el [-8.3, -7.1, -6.9]
+    0.1%  zone-platform                      box [558, 78, 588, 90]  az [46.6, 55.5, 56.2]  el [-26.7, -26.3, -22.6]
+    0.1%  altar-cheeks                       box [576, 88, 582, 92]  az [58.4, 58.9, 60.5]  el [-5.0, -4.7, 0.8]
+    0.1%  hf-adaptor                         box [608, 96, 618, 104]  az [-151.1, -148.7, -135.4]  el [26.3, 29.4, 32.7]
+    0.1%  ArmChair_01                        box [236, 160, 242, 164]  az [0.9, 6.9, 7.8]  el [-31.8, -26.9, -24.5]
+    0.1%  cord                               box [248, 172, 252, 186]  az [29.8, 30.3, 30.4]  el [8.8, 11.2, 11.6]
+    0.1%  tint-red                           box [546, 20, 640, 50]  az [-43.4, -29.8, -29.8]  el [-22.0, -19.3, -19.3]
+    0.1%  banq-back                          box [526, 60, 532, 136]  az [-39.3, 0.5, 0.5]  el [-16.0, -9.9, -9.9]
+    0.1%  banq-seat                          box [258, 62, 528, 172]  az [19.0, 20.1, 20.1]  el [-21.3, -18.8, -18.8]
+    0.1%  panel-frames                       box [544, 74, 568, 86]  az [47.5, 54.6, 54.6]  el [-11.5, -5.8, -5.8]
+    0.1%  lamp mantle-side                   box [556, 76, 564, 80]  az [43.4, 46.0, 46.0]  el [-29.6, -27.6, -27.6]
+    0.1%  lamp track-wall3                   box [540, 118, 546, 122]  az [53.2, 54.1, 54.1]  el [45.5, 45.8, 45.8]
+    0.1%  life-coat                          box [242, 162, 248, 166]  az [3.6, 7.2, 7.2]  el [-31.9, -30.8, -30.8]
+    0.0%  prop9-kit                          box [636, 20, 638, 22]  az [-46.0, -46.0, -46.0]  el [-26.5, -26.5, -26.5]
+    0.0%  door                               box [644, 22, 646, 24]  az [-56.6, -56.6, -56.6]  el [-0.7, -0.7, -0.7]
+    0.0%  orb-cable                          box [574, 38, 576, 40]  az [-27.8, -27.8, -27.8]  el [-21.1, -21.1, -21.1]
+    0.0%  chairs-steel                       box [552, 46, 554, 48]  az [-29.7, -29.7, -29.7]  el [-21.9, -21.9, -21.9]
+    0.0%  prop11-kit-7                       box [548, 48, 550, 50]  az [-34.0, -34.0, -34.0]  el [-35.0, -35.0, -35.0]
+    0.0%  prop11-kit-3                       box [530, 58, 532, 60]  az [6.2, 6.2, 6.2]  el [-49.4, -49.4, -49.4]
+    0.0%  pulley.ember                       box [534, 62, 536, 64]  az [24.3, 24.3, 24.3]  el [-49.6, -49.6, -49.6]
+    0.0%  alcove-fir-0                       box [524, 66, 526, 68]  az [31.8, 31.8, 31.8]  el [0.1, 0.1, 0.1]
+    0.0%  glasses-r36                        box [538, 68, 540, 70]  az [40.4, 40.4, 40.4]  el [-28.1, -28.1, -28.1]
+    0.0%  partition-frames                   box [540, 70, 542, 72]  az [43.2, 43.2, 43.2]  el [-22.6, -22.6, -22.6]
+    0.0%  base-L1-stack.ember                box [554, 72, 556, 74]  az [32.2, 32.2, 32.2]  el [-50.4, -50.4, -50.4]
+    0.0%  tub-table-stems                    box [568, 82, 570, 84]  az [51.2, 51.2, 51.2]  el [-19.7, -19.7, -19.7]
+    0.0%  zone-coat                          box [572, 84, 574, 86]  az [54.1, 54.1, 54.1]  el [-14.7, -14.7, -14.7]
+    0.0%  hf-plug                            box [612, 100, 614, 102]  az [-149.3, -149.3, -149.3]  el [26.2, 26.2, 26.2]
+    0.0%  strata-collars                     box [630, 114, 632, 116]  az [-153.5, -153.5, -153.5]  el [-55.0, -55.0, -55.0]
+    0.0%  lamp track-bay1                    box [530, 128, 532, 130]  az [37.4, 37.4, 37.4]  el [73.1, 73.1, 73.1]
+    0.0%  screen-banquette-a                 box [556, 130, 558, 132]  az [-29.3, -29.3, -29.3]  el [-5.0, -5.0, -5.0]
+    0.0%  ball-amber                         box [536, 134, 538, 136]  az [-43.7, -43.7, -43.7]  el [-29.5, -29.5, -29.5]
+    0.0%  counter-flutes                     box [240, 158, 242, 160]  az [-55.8, -55.8, -55.8]  el [-46.8, -46.8, -46.8]
+    0.0%  life-label                         box [266, 172, 268, 174]  az [12.6, 12.6, 12.6]  el [-35.9, -35.9, -35.9]
+    0.0%  lamp track-horn0                   box [266, 182, 268, 184]  az [18.5, 18.5, 18.5]  el [41.6, 41.6, 41.6]
+    0.0%  storefront                         box [252, 196, 254, 198]  az [-60.9, -60.9, -60.9]  el [4.5, 4.5, 4.5]

@@ -365,3 +365,31 @@ def softbox(bpy, name, p, kit):
     zs = [(ob.matrix_world @ vv.co).z for vv in me.vertices]
     print('SOFTBOX', name, 'face', w, 'x', h, 'strength', p['strength'], 'z', round(min(zs), 3), 'to', round(max(zs), 3))
     return [ob]
+
+
+def emitter_report(bpy, name, p, kit):
+    """A diagnostic (B1 fixed-8, 21 Nov): the ray visibility (camera, diffuse, glossy, transmission, shadow, volume) of
+    every emitter in the scene so far: every light object, and every mesh with an emitting material (Emission Strength
+    over 0 on a Principled BSDF, or an Emission node). Place it last in the set; the engine's own lamps come after the set
+    and are plain area lamps (studio/engine/lights.py: camera off unless the spec asks, everything else on). Changes nothing."""
+    def emits(m):
+        if not m or not m.use_nodes:
+            return False
+        for n in m.node_tree.nodes:
+            if n.type == 'EMISSION' and n.inputs['Strength'].default_value > 0:
+                return True
+            if n.type == 'BSDF_PRINCIPLED' and n.inputs['Emission Strength'].default_value > 0 and \
+                    any(c > 0 for c in n.inputs['Emission Color'].default_value[:3]):
+                return True
+        return False
+    rows = []
+    for o in bpy.context.scene.objects:
+        if o.type == 'LIGHT' or (o.type == 'MESH' and any(emits(s.material) for s in o.material_slots)):
+            v = dict(cam=o.visible_camera, dif=o.visible_diffuse, glo=o.visible_glossy, tra=o.visible_transmission,
+                     sha=o.visible_shadow, vol=o.visible_volume_scatter)
+            off = [k for k, on in v.items() if not on]
+            rows.append((o.name, o.type if o.type == 'MESH' else o.data.type, 'all on' if not off else 'OFF: ' + ','.join(off)))
+    print('EMITTERS:', len(rows))
+    for r in sorted(rows):
+        print('  EMITTER', *r)
+    return []
