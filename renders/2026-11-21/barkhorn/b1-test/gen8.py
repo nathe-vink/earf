@@ -58,7 +58,7 @@ if v.startswith('mv') or v in ('full', 'black'):   # (mv, mv2, mv3)
             if abs(i['position'][0] - 8.25) < 1e-6:
                 # (fixed-8c, 'mv3': 2 cm deeper, not 5: at 5 cm the cone's lower flank faced more of the cabinet's own
                 # lit interior, a pale crescent (lower half L* 34.4 against fixed-7's 16.4), with or without the panels)
-                dy = 0.02 if v.startswith('mv3') else 0.05
+                dy = 0.02 if (v.startswith('mv3') or v in ('full', 'black')) else 0.05   # (the coordinator, 22:06: 8c wins)
                 i['position'] = [8.27, round(i['position'][1] + dy, 4), i['position'][2]]
     if v != 'black':
         v_panel = 'w'                        # and w2's warm opal over the near niche's back, strength 2
