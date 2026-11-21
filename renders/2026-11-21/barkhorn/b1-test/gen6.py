@@ -16,6 +16,7 @@
       t4, t5  no front head; the softbox a real one (a mesh diffuser in a body); track-bay1 times IRR (gen6.py t4 3).
       t6, t7  a diffuser flush under the ceiling over the bay, and a frontal softbox at strength IRR (gen6.py t6 10).
       t8, t9  t7's lights (frontal softbox at IRR) with the niches in a mid warm-grey felt (an option: a set change).
+      t10  t7's lights, the frontal softbox at IRR (40), and a hidden 40 W LED washer up the near niche's back wall.
     python3 gen6.py VARIANT [IRR]  ->  fixed6-VARIANT.json"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +50,7 @@ elif v.startswith('t3'):
 s['title'] = f'B1 fixed-6 {v}: Planet EARF bar, the record wall from a seat at the bar (a test, not a final)'
 s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
                           'fn': 'shadow_ray_report'})                       # (prints what the cut left; changes nothing)
-if v[:2] in ('t6', 't7', 't8', 't9'):
+if v[:2] in ('t6', 't7', 't8', 't9') or v.startswith('t10'):
     # t6/t7: two real softboxes (living_ext.softbox: a glowing diffuser in a black body, every ray on, casting shadows)
     #   ceiling-panel: a 1.4 x 0.9 m diffuser flush under the ceiling over the bay's front (z 3.36-3.40), facing
     #     down, strength 6. The live horn card spanned z 3.04-3.58, more than half of it above the ceiling.
@@ -64,6 +65,15 @@ if v[:2] in ('t6', 't7', 't8', 't9'):
                               'position': [8.05, 4.9, 3.37], 'target': [8.05, 4.95, 0.0], 'strength': 6.0, 'color': '#FFE2C0'})
     s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [1.2, 0.9], 'depth': 0.1,
                               'position': [8.6, 4.3, 3.0], 'target': [8.25, 5.6, 1.55], 'strength': irr, 'color': '#FFE2C0'})
+if v.startswith('t10'):
+    # t10 (the coordinator, 15:20): t7's lights with the frontal softbox at `irr` (40), and a hidden LED wall washer in
+    # the near niche: a real fixture (living_ext.softbox as a linear washer, a 0.5 x 0.03 m glowing face on a 4 cm black
+    # body, every ray on, casting shadows) on the niche floor behind the cabinet (the cabinet's back at y about 5.93, the
+    # felt at 6.03; the side gaps 5 cm and blocked by the cabinet from this camera), its face aimed up the back wall
+    # behind the horn. 40 W of LED (strength 850 = 40 / (pi x 0.015 m2)).
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
+                              'fn': 'softbox', 'size': [0.5, 0.03], 'depth': 0.04, 'position': [8.25, 5.985, 1.14],
+                              'target': [8.25, 6.03, 1.6], 'strength': 850.0, 'color': '#FFE2C0'})
 if v.startswith('t8') or v.startswith('t9'):
     # t8/t9 (the coordinator, 14:38: a set change, an option for the owner): t7's lights (t9 with the frontal softbox
     # at `irr`), and the speakers' niches in a mid warm-grey felt (#8C8379, albedo about 0.23) in place of the
