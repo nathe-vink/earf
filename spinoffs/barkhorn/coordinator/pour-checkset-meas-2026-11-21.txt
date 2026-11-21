@@ -329,3 +329,44 @@ DYE BALANCE ROUNDS 1-2 (21 Nov 16:38; r32 8dc72404c8, checkset/dye/; my lit-body
    Core today            ball L 25.6 C 84.3 h 306.9 base L 23.9 C 74.6 h 305.4 | to P1.8x today:  9.3  P1x:  4.4  P0.7x:  3.9 | Tropos plain  4.0 | ball-base  2.5
    Core abs0.89,1.46,1.08 ball L 26.0 C 82.0 h 308.5 base L 24.0 C 72.2 h 306.8 | to P1.8x today:  9.4  P1x:  3.9  P0.7x:  2.5 | Tropos plain  3.6 | ball-base  2.7
    Core abs0.89,2.5,1.09 ball L 25.9 C 81.7 h 308.5 base L 23.9 C 71.9 h 306.9 | to P1.8x today:  9.3  P1x:  3.9  P0.7x:  2.4 | Tropos plain  3.5 | ball-base  2.7
+
+ROUND 3 (21 Nov 18:20; Poison, frames r32 5fbdc340ba and 722280581f: core off 0.45/0.5/0.6, core lit 0.45/0.5):
+== poison (green); today pendant 1x, Core 0.3
+   Tropos  plain: L 30.5 C 49.9 h 138.0  horn: L 43.2 C 64.5 h 138.0  panels: L 26.3 C 48.3 h 136.3  front_top: L 42.9 C 67.5 h 136.3
+   pendant 1x (today)  L 27.5 C 46.6 h 138.5 | to Tropos plain  2.5 horn 14.0 panels  1.4
+   pendant 0.7x          L 37.3 C 56.7 h 139.1 | to Tropos plain  5.9 horn  5.7 panels  9.1
+   pendant 0.6x          L 41.4 C 60.5 h 139.6 | to Tropos plain  9.6 horn  2.1 panels 12.8
+   pendant 0.55x          L 43.7 C 62.4 h 139.9 | to Tropos plain 11.7 horn  1.2 panels 14.9
+   pendant 0.5x          L 46.1 C 64.2 h 140.4 | to Tropos plain 14.0 horn  2.9 panels 17.2
+   Core 0.6          ball L 20.7 C 24.3 h 141.1 base L 19.3 C 16.2 h 147.5 | to Tropos plain 12.0 horn 22.3 panels 10.1 | ball-base  4.8
+   Core 0.5          ball L 26.1 C 33.3 h 140.9 base L 23.3 C 23.6 h 145.8 | to Tropos plain  6.7 horn 17.1 panels  5.6 | ball-base  5.0
+   Core 0.45          ball L 29.6 C 38.6 h 140.7 base L 26.0 C 28.2 h 145.0 | to Tropos plain  4.0 horn 13.9 panels  4.5 | ball-base  5.2
+   Core 0.3 (today)  ball L 43.4 C 57.6 h 140.2 base L 37.7 C 46.4 h 143.0 | to Tropos plain 11.2 horn  2.1 panels 14.5 | ball-base  6.2
+   pendant vs Core (dE00; dL = Core - pendant):
+     P 1x + C 0.6: dE00  9.9 (dL  -6.7 dC -22.3 dh  +2.5)
+     P 1x + C 0.5: dE00  4.9 (dL  -1.3 dC -13.3 dh  +2.4)
+     P 1x + C 0.45: dE00  3.3 (dL  +2.1 dC  -8.0 dh  +2.2)
+     P 1x + C 0.3  <- today: dE00 13.6 (dL +16.0 dC +11.0 dh  +1.7)
+     P 0.7x + C 0.6: dE00 17.1 (dL -16.5 dC -32.4 dh  +2.0)
+     P 0.7x + C 0.5: dE00 11.7 (dL -11.1 dC -23.4 dh  +1.8)
+     P 0.7x + C 0.45: dE00  8.5 (dL  -7.7 dC -18.1 dh  +1.6)
+     P 0.7x + C 0.3: dE00  5.5 (dL  +6.2 dC  +0.9 dh  +1.1)
+     P 0.6x + C 0.6: dE00 20.4 (dL -20.7 dC -36.1 dh  +1.5)
+     P 0.6x + C 0.5: dE00 15.1 (dL -15.3 dC -27.2 dh  +1.3)
+     P 0.6x + C 0.45: dE00 11.9 (dL -11.8 dC -21.9 dh  +1.2)
+     P 0.6x + C 0.3: dE00  2.1 (dL  +2.1 dC  -2.9 dh  +0.6)
+     P 0.55x + C 0.6: dE00 22.3 (dL -22.9 dC -38.0 dh  +1.1)
+     P 0.55x + C 0.5: dE00 17.1 (dL -17.5 dC -29.1 dh  +1.0)
+     P 0.55x + C 0.45: dE00 13.9 (dL -14.1 dC -23.8 dh  +0.8)
+     P 0.55x + C 0.3: dE00  1.3 (dL  -0.2 dC  -4.8 dh  +0.3)
+     P 0.5x + C 0.6: dE00 24.4 (dL -25.4 dC -39.8 dh  +0.7)
+     P 0.5x + C 0.5: dE00 19.2 (dL -19.9 dC -30.9 dh  +0.5)
+     P 0.5x + C 0.45: dE00 16.1 (dL -16.5 dC -25.6 dh  +0.3)
+     P 0.5x + C 0.3: dE00  3.0 (dL  -2.6 dC  -6.6 dh  -0.2)
+== poison
+   Core    0.3  (today) glow L 37.0 C  59.7 h 137.3  clipped 0.00%  n 87948   [core-lit-L0.3.png]
+   Core    0.45          glow L 29.1 C  51.2 h 136.4  clipped 0.00%  n 86957   [core-lit-L0.45.png]
+   Core    0.5          glow L 26.8 C  48.8 h 136.4  clipped 0.00%  n 85702   [core-lit-L0.5.png]
+   pendant 0.55x         glow L 49.4 C  72.8 h 137.6  clipped 0.00%  n 45846   [hemi-lit-L0.55.png]
+   pendant 0.7x         glow L 44.9 C  68.4 h 137.0  clipped 0.00%  n 45870   [hemi-lit-L0.7.png]
+   pendant 1x (today) glow L 35.9 C  59.6 h 136.2  clipped 0.00%  n 44666   [hemi-lit-L1.0.png]
