@@ -46,6 +46,12 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
     for k in ('distance_m', 'core_distance_m'):
         if k in ct:
             ct[k] = ct[k] * s
+    if os.environ.get('HOUSE_SWEEP_AO', '1') == '0':
+        # (2026-11-21, the coordinator: LIT frames) the sweep's painted contact shadow off; in a dark studio it darkens
+        # the lamp's own red pool next to the base; the path-traced shadow is the true one
+        for k in ('strength', 'core_strength'):
+            if k in ct:
+                ct[k] = 0.0
     st['contact'] = ct
     st['flags'] = []; st['bounces'] = []
     sweep = St.sweep(bpy, st, {})[0]
@@ -338,7 +344,11 @@ def floor_card(bpy, p, lift=0.0):
     if alb < 0:
         # ALB -1 (2026-11-21, the coordinator's audit): the sweep's own material (its warm white, roughness and contact
         # darkening), so the base sees the floor as it is, not a brighter neutral card
-        m = bpy.data.materials['sweep'].copy(); m.name = 'house-floorcard'
+        # (2026-11-21 03:23, the coordinator) its colour and roughness, NOT its contact term: that painted shadow treats
+        # the tinted acrylic as opaque and stacks on the path-traced shadow the ring already receives
+        sys.path.insert(0, os.path.abspath(ENGINE)); import materials as M_
+        sp_ = recipe()['set']
+        m = M_.make(bpy, 'house-floorcard', 'sweep', {'color': sp_.get('color', '#B9B5AE'), 'contact': 0.0, 'core': 0.0})
     else:
         m = bpy.data.materials.new('house-floorcard'); m.use_nodes = True
         bs = m.node_tree.nodes.get('Principled BSDF')
