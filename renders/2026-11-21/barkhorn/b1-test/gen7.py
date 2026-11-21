@@ -4,15 +4,16 @@ egg-crate louvers 0.12 m deep), so the light stays on the bays and off the ceili
 The far softbox moves to (6.5, 3.4, 2.98) so its skirt stays out of frame (z 2.44-3.37; every corner and edge outside
 the frame). fixed-7b (the quarter test with grids: the record wall stayed at 45 and the grid cut the batts' light more
 than the cone's, ratio 0.38): skirts only, and the ceiling-flush diffuser removed. Optionally `wall` scales the record-wall heads (a real dimmer).
-    python3 gen7.py [WALL] [--grid]  ->  fixed7.json and fixed7q.json (the quarter test: 800 x 450, 96 samples)"""
+    python3 gen7.py [WALL] [--grid] [--noskirt] [--out NAME]  ->  fixed7.json and fixed7q.json (the quarter test: 800 x 450, 96 samples)"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
-wall = float(next((a for a in sys.argv[1:] if not a.startswith('--')), 1.0))
+wall = float(sys.argv[1]) if len(sys.argv) > 1 and not sys.argv[1].startswith('--') else 1.0
 s = json.load(open(os.path.join(HERE, 'fixed6.json')))
 grid = '--grid' in sys.argv
 for p in s['set']['props']:
     if p.get('fn') == 'softbox' and p['size'] == [1.2, 0.9]:
-        p.update(skirt=0.3)
+        if '--noskirt' not in sys.argv:
+            p.update(skirt=0.3)
         if grid:
             p.update(grid=[4, 3], grid_depth=0.12)
         if p['position'][0] < 7:
@@ -24,7 +25,8 @@ for k, l in s['lights'].items():
     if k.startswith('track-wall'):
         l['irradiance'] = round(l['irradiance'] * wall, 3)
 s['title'] = 'B1 fixed-7: Planet EARF bar, the record wall from a seat at the bar (a test, not a final)'
-json.dump(s, open(os.path.join(HERE, 'fixed7.json'), 'w'), indent=1)
+out = sys.argv[sys.argv.index('--out') + 1] if '--out' in sys.argv else 'fixed7'
+json.dump(s, open(os.path.join(HERE, out + '.json'), 'w'), indent=1)
 q = copy.deepcopy(s); q['size'] = [800, 450]; q['render']['samples'] = 96; q['title'] += ', the quarter test'
-json.dump(q, open(os.path.join(HERE, 'fixed7q.json'), 'w'), indent=1)
+json.dump(q, open(os.path.join(HERE, out + 'q.json'), 'w'), indent=1)
 print([(p['position'], p.get('skirt'), p.get('grid')) for p in s['set']['props'] if p.get('fn') == 'softbox'], 'wall x', wall)
