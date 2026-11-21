@@ -289,6 +289,29 @@ def build(frame, samples, scale):
             sphere(f'tint-in-{tint}', 97.0, c, acrylic(f'tint-in-{tint}', 0.0, tname, lt_), inward=True, cut=0.0, hole=H)
             sphere(f'clear-{tint}', 96.0, c, acrylic(f'clear-{tint}', 0.0, 'Clear'), cut=4.0, hole=H)
             sphere(f'clear-in-{tint}', 90.0, c, acrylic(f'clear-in-{tint}', 0.0, 'Clear'), inward=True, cut=4.0, hole=H)
+            if os.environ.get('CLEAR_CLOSE', '1') == '1':
+                # (2026-11-21, the coordinator's audit) the clear shell closed at its foot: its two spheres were open there
+                # (cut at z 4 mm, no face), so a ray through the rim reached the shell's inside with no refraction. The
+                # CAD closes the shell and bonds it to the rim. A band from the outer sphere's lowest ring to the inner's,
+                # vertex to vertex (both 256 round), clear acrylic, facing down
+                def low_ring(nm_):
+                    o_ = bpy.data.objects[nm_]; vs_ = o_.data.vertices; zm_ = min(v.co.z for v in vs_)
+                    rg_ = [v.co.copy() for v in vs_ if v.co.z < zm_ + 1e-7]
+                    return sorted(rg_, key=lambda q: math.atan2(q.y, q.x))
+                ro_, ri_ = low_ring(f'clear-{tint}'), low_ring(f'clear-in-{tint}')
+                if len(ro_) == len(ri_):
+                    bm = bmesh.new(); a_ = [bm.verts.new(q) for q in ro_]; b_ = [bm.verts.new(q) for q in ri_]; n_ = len(a_)
+                    for k in range(n_):
+                        f_ = bm.faces.new((a_[k], b_[k], b_[(k + 1) % n_], a_[(k + 1) % n_]))
+                        f_.normal_update()
+                        if f_.normal.z > 0:
+                            f_.normal_flip()
+                    me = bpy.data.meshes.new(f'clear-edge-{tint}'); bm.to_mesh(me); bm.free(); me.materials.append(acrylic(f'clear-edge-{tint}', 0.0, 'Clear'))
+                    ce_ = bpy.data.objects.new(f'clear-edge-{tint}', me); bpy.context.scene.collection.objects.link(ce_)
+                    ce_.location = bpy.data.objects[f'clear-{tint}'].location
+                    print('CLEARCLOSE', n_, 'outer z', round(ro_[0].z * 1000, 2), 'inner z', round(ri_[0].z * 1000, 2))
+                else:
+                    print('CLEARCLOSE skipped: rings differ', len(ro_), len(ri_))
             # the scattering face is the opal's INSIDE (facing the LEDs, so its light is sampled directly; a clear inside
             # face would block every shadow ray to them and leave only caustic paths); its outside and edge clear
             if os.environ.get('RIG_LEGACY'):
@@ -513,7 +536,12 @@ def build(frame, samples, scale):
                     (r0_, z0_), (r1_, z1_) = inn_[0], inn_[1]
                     zf_ = P_[0][1]; inn_[0] = (r0_ + (r1_ - r0_) * (zf_ - z0_) / (z1_ - z0_), zf_)
                     # the acrylic: the foot's ring from the inner cone out, the outside, and the lip's end face down to the inner arc
-                    revolve(f'base-skin-{base}-{tint}', [inn_[0]] + P_ + [inn_[-1]], sk)
+                    revolve(f'base-skin-{base}-{tint}', P_, sk)
+                    # the lip's end face and the foot's ring polished (the CAD: "edges polished with an even chamfer"; the
+                    # coordinator's audit 2026-11-21), the outside satin; the three share their edges, so the skin stays closed
+                    pk_ = acrylic(f'base-edge-{tint}', 0.0, tname, ld_)
+                    revolve(f'base-foot-{base}-{tint}', [inn_[0], P_[0]], pk_)
+                    revolve(f'base-lipend-{base}-{tint}', [P_[-1], inn_[-1]], pk_)
                     a_ = SC.absorption(tname, ld_)
                     lm_ = SC.principled(f'base-liner-{tint}', '#EDEDEA', 0.8); nt_ = lm_.node_tree; b_ = nt_.nodes['Principled BSDF']
                     lp_ = nt_.nodes.new('ShaderNodeLightPath'); cc_ = nt_.nodes.new('ShaderNodeCombineColor')
