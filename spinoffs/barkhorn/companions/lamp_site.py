@@ -1031,6 +1031,10 @@ def build(frame, samples, scale):
         # at 0.01 the bright glow stopped early and the denoiser drew every faint edge in the shell as a crackled seam
         sc.cycles.use_adaptive_sampling = True; sc.cycles.adaptive_threshold = float(os.environ['ADAPTIVE_THRESHOLD'])
         print('ADAPTIVE', sc.cycles.adaptive_threshold)
+    if os.environ.get('DENOISE_PASSES'):   # (2026-11-21, tests) OIDN's guides: RGB, RGB_ALBEDO, RGB_ALBEDO_NORMAL (Blender's)
+        sc.cycles.denoising_input_passes = os.environ['DENOISE_PASSES']; print('DENOISE_PASSES', os.environ['DENOISE_PASSES'])
+    if os.environ.get('DENOISE_PREFILTER'):   # NONE, FAST, ACCURATE (Blender's)
+        sc.cycles.denoising_prefilter = os.environ['DENOISE_PREFILTER']; print('DENOISE_PREFILTER', os.environ['DENOISE_PREFILTER'])
     sc.cycles.caustics_refractive = os.environ.get('REFR_CAUSTICS', '1') == '1'; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 in ('dome', 'orb') else '20')) * 2.0 ** (-sc.view_settings.exposure)   # a radiance, in display terms   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
     # the corrected method (2026-11-16): Filter Glossy off (scene.render_settings sets 1.0, which darkened light through glass)
     sc.cycles.blur_glossy = 1.0 if os.environ.get('RIG_LEGACY') else float(os.environ.get('BLUR', '0'))
