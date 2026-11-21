@@ -107,6 +107,17 @@ SOLIDS.setdefault('acrylic-trucast-formed', dict(title='Cast acrylic sheet 6 mm,
                                                  density=1.19, usd_per_cm3=0.06))
 SOLIDS.setdefault('acrylic-opal-core', dict(title='Cast acrylic sheet 3 mm, white opal (Hemisphere\'s diffuser\'s), formed '
                                             'over an aluminium core mould', density=1.19, usd_per_cm3=0.18))
+# Core's base B in its own colour (2026-11-21, the coordinator: the parts list said the ball's "polished both faces"
+# for the base's skin too): the skin satin outside, and the liner bonded to it, in optical contact
+SOLIDS.setdefault('acrylic-trucast-formed-satin', dict(
+    title=SOLIDS['acrylic-trucast-formed']['title'].replace(
+        'polished both faces', 'the outside fine glass-bead blasted (satin) and sealed with a matte anti-fingerprint hardcoat, '
+        'the inside as formed, edges polished'),
+    density=1.19, usd_per_cm3=0.06))
+SOLIDS.setdefault('acrylic-opal-core-bonded', dict(
+    title=SOLIDS['acrylic-opal-core']['title'] + ', bonded to the skin\'s inside with a clear polymerising acrylic cement '
+          '(Acrifix 192 kind), no air between them (or the white a coating on the skin\'s inside instead)',
+    density=1.19, usd_per_cm3=0.18))
 SOLIDS.setdefault('acrylic-tint-3-formed', dict(title='Cast acrylic sheet 1/8 in, TruCast stock tint in the line\'s code, '
                                                 'drape-formed; CUSTOM POURS (2026-11-11): Dust the same dye at 3x the stock loading; the mix (the owner '
                                                 '2026-11-17, matched to Core off): Acid 5x, Ice 6x, Ember 1.8x, Haze 1.8x the stock loading; '
@@ -704,14 +715,14 @@ def orb_parts(p=O):
                     'Turned from rod: 120 x 30 (round 32f\'s), the cup turned in it; from '
                     'below the hatch\'s counterbore (112), the middle pocket (50) for the chassis, the board and the LED, '
                     'the three cells\' bays, the ballast\'s corners and the cable notch']),
-    ] + ([Part('skin', skin, Machined('acrylic-trucast-formed', 'formed', setup_usd=1200.0), finish='body', group='base',
+    ] + ([Part('skin', skin, Machined('acrylic-trucast-formed-satin', 'formed', setup_usd=1200.0), finish='body', group='base',
                notes=['BASE B IN ITS OWN COLOUR (the owner, 2026-11-11: "Own color for sure"): one skin drape-formed from the '
                       'shell\'s own 6 mm lamp sheet (the same pour, so the same colour), from the ball\'s seat to the floor, '
                       'the lip a bullnose R12 in the same piece (R7 will not form in 6 mm), trimmed, edges polished with an even '
                       'chamfer, the outside fine glass-bead blasted and sealed with a matte anti-fingerprint hardcoat; bonded '
                       'to the body. The mould is a one-time cost (setup). The whole base in colour: about $150-200 a lamp '
                       '[E] (the skin $30-50 at volume, the body $100-120, the liner $8-12, the electrode $10-15)']),
-          Part('liner', liner, Machined('acrylic-opal-core', 'formed'), finish='liner', group='base', inside=True,
+          Part('liner', liner, Machined('acrylic-opal-core-bonded', 'formed'), finish='liner', group='base', inside=True,
                notes=['a 0.5 white opal liner under the skin, so the colour reads evenly and nothing inside shows; '
                       'IN OPTICAL CONTACT WITH THE SKIN (2026-11-21, the coordinator, from the owner\'s "smoke frosted" edges): '
                       'bonded to the skin\'s inside with a clear polymerising acrylic cement (Acrifix 192 kind), no air left '
