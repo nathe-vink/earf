@@ -791,29 +791,6 @@
     "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
     "fn": "softbox",
     "size": [
-     1.4,
-     0.9
-    ],
-    "depth": 0.02,
-    "position": [
-     8.05,
-     4.9,
-     3.37
-    ],
-    "target": [
-     8.05,
-     4.95,
-     0.0
-    ],
-    "strength": 6.0,
-    "color": "#FFE2C0"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "path": "spinoffs/barkhorn/campaign/living/living_ext.py",
-    "fn": "softbox",
-    "size": [
      1.2,
      0.9
     ],
@@ -830,12 +807,7 @@
     ],
     "strength": 40.0,
     "color": "#FFE2C0",
-    "skirt": 0.3,
-    "grid": [
-     4,
-     3
-    ],
-    "grid_depth": 0.12
+    "skirt": 0.3
    },
    {
     "kind": "kit",
@@ -850,7 +822,7 @@
     "position": [
      6.5,
      3.4,
-     2.98
+     2.92
     ],
     "target": [
      5.55,
@@ -859,12 +831,7 @@
     ],
     "strength": 40.0,
     "color": "#FFE2C0",
-    "skirt": 0.3,
-    "grid": [
-     4,
-     3
-    ],
-    "grid_depth": 0.12
+    "skirt": 0.3
    }
   ]
  },
