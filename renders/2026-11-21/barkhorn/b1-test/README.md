@@ -35,3 +35,12 @@
   - The near cabinet's front reads 54.7, against 35.6 live and 15.4 fixed.
   - The bell reads 2.0, against 8.9 live and 0.3 fixed.
   - The deck and Mantle read 24.0, and the whole frame 20.3, against 14.8 live.
+
+## fixed-3 and fixed-4 (the coordinator, 11:19 and 11:53)
+
+- **fixed-3:** the head at 6 W/m2 and the panel at 8. The front read 48.9 and the whole frame 19.1. The head's 22 degree cone flooded both of the bay's walnut pillars (right pillar 53 L*, against 11 live).
+- **fixed-4:** the head narrowed to the bay heads' 14 degrees, at 5 W/m2, with the panel kept at 8.
+  - Crop tests at 6 and 4 W/m2 are in `crops-fixed3-fixed4-6-4.png`.
+  - The front reads 41.2, the pillars 9.9 and 15.9, the deck and Mantle 18.7, and the whole frame 17.0.
+  - Most of the frame's excess over live (14.8) is the record wall (37.6 against 27.5). That lift comes from fixed's light model (reflective caustics, filter_glossy 0), not from the head.
+  - The panel still gives the bell its wedge highlight: bell 1.2, against 0.3 without it.
