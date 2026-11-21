@@ -245,6 +245,25 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         ou_ = nt_.nodes.new('ShaderNodeOutputWorld'); nt_.links.new(bg_.outputs[0], ou_.inputs['Surface'])
     if os.environ.get('HOUSE_FLOORCARD'):
         floor_card(bpy, [float(v) for v in os.environ['HOUSE_FLOORCARD'].split(',')], lift)
+    if os.environ.get('HOUSE_BOUNCE'):
+        # HOUSE_BOUNCE 'CX,CY,W,D,LX,LY,LZ,CONE,WATTS' (2026-11-21, the critics on the Core LIT: the base read black once the
+        # key went off): a real white card lying on the floor in front of the lamp, out of frame (centre CX,CY, W x D, m at
+        # the house scale), every ray visibility on, lit by a small spot at LX,LY,LZ aimed at the card's centre (cone CONE deg
+        # full angle, WATTS), no light linking: the spot lights whatever its cone reaches, the card bounces onto the base
+        cx_, cy_, w_, d_, lx_, ly_, lz_, cone_, pw_ = [float(v) for v in os.environ['HOUSE_BOUNCE'].split(',')]
+        me_ = bpy.data.meshes.new('house-bounce')
+        me_.from_pydata([(cx_ - w_ / 2, cy_ - d_ / 2, 0.0005), (cx_ + w_ / 2, cy_ - d_ / 2, 0.0005), (cx_ + w_ / 2, cy_ + d_ / 2, 0.0005),
+                         (cx_ - w_ / 2, cy_ + d_ / 2, 0.0005)], [], [(0, 1, 2, 3)])
+        bo_ = bpy.data.objects.new('house-bounce', me_); bpy.context.scene.collection.objects.link(bo_)
+        mb_ = bpy.data.materials.new('house-bounce'); mb_.use_nodes = True; bb_ = mb_.node_tree.nodes['Principled BSDF']
+        bb_.inputs['Base Color'].default_value = (0.85, 0.85, 0.84, 1); bb_.inputs['Roughness'].default_value = 0.9
+        me_.materials.append(mb_)
+        sd_ = bpy.data.lights.new('house-bounce-spot', 'SPOT'); sd_.energy = pw_; sd_.spot_size = math.radians(cone_)
+        sd_.spot_blend = 0.3; sd_.shadow_soft_size = 0.01
+        so_ = bpy.data.objects.new('house-bounce-spot', sd_); bpy.context.scene.collection.objects.link(so_)
+        so_.location = (lx_, ly_, lz_)
+        so_.rotation_euler = (Vector((cx_, cy_, 0.0)) - Vector((lx_, ly_, lz_))).to_track_quat('-Z', 'Y').to_euler()
+        print('BOUNCE', (cx_, cy_, w_, d_), (lx_, ly_, lz_), cone_, pw_)
     if os.environ.get('HOUSE_KEY_PRODUCT') == '1':
         # (2026-11-21, the Core LIT: the key off lit the floor out, and the base with it) the key lights everything but
         # the ground: the sweep and the floor ring excluded from its receivers, so it lights the lamp and its base alone.
