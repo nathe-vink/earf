@@ -44,3 +44,17 @@
   - The front reads 41.2, the pillars 9.9 and 15.9, the deck and Mantle 18.7, and the whole frame 17.0.
   - Most of the frame's excess over live (14.8) is the record wall (37.6 against 27.5). That lift comes from fixed's light model (reflective caustics, filter_glossy 0), not from the head.
   - The panel still gives the bell its wedge highlight: bell 1.2, against 0.3 without it.
+
+## fixed-5, a crop test (the coordinator, 12:46): fixed-4 with no horn card, and the ceiling panel as a real light (`gen5.py`)
+
+- **horn-card** is removed.
+- **ceiling-light** replaces the ceiling panel: an engine area lamp (a Cycles AREA light) of the same size, place, aim and colour.
+  - Every ray visibility is on, the camera's included, and its light casts shadows.
+  - Its power is 22.5 W, from 2.2 x strength x area. I measured that factor on 21 Nov on a white floor 1 m under a 1 m square: an emission strength of 1 read 0.277, and a 1 W area lamp read 0.126.
+- **Crops:** `fixed5-near.png` (x 960, y 0, at 256 samples) and `fixed5-wide.png` (x 560, y 270, at 128). Side by side with fixed-4: `fixed4-5-near.png` and `fixed4-5-wide.png`.
+- **Readings:** `meas5.md` (`python3 meas5.py`).
+  - The bell is 0.8 against 1.2, and its wedge highlight stays.
+  - The front is unchanged at 41.2.
+  - The pillars read 3.7 / 14.1 against 3.9 / 15.2.
+  - The deck and Mantle read 18.4 against 18.7.
+  - The whole frame is about 16.5 against 17.0.
