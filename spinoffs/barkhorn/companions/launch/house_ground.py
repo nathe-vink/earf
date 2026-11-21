@@ -195,6 +195,15 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
     if os.environ.get('HOUSE_CARD'):
         for i_, c_ in enumerate(os.environ['HOUSE_CARD'].split(';')):      # several cards: 'X,Y,...;X,Y,...'
             card(bpy, [float(v) for v in c_.split(',')], lift, i_)
+    if os.environ.get('HOUSE_DOME'):
+        # HOUSE_DOME 'STRENGTH' (2026-11-21, a test of the base's fall-off with view angle): every studio lamp off and
+        # the sky an even white of that strength, so the product sits in uniform light (the sweep still below it)
+        for L_ in [o for o in bpy.context.scene.objects if o.type == 'LIGHT' and o.name.startswith('house-')]:
+            L_.data.energy = 0.0
+        w_ = bpy.context.scene.world; w_.use_nodes = True; nt_ = w_.node_tree; nt_.nodes.clear()
+        bg_ = nt_.nodes.new('ShaderNodeBackground'); bg_.inputs['Color'].default_value = (1, 1, 1, 1)
+        bg_.inputs['Strength'].default_value = float(os.environ['HOUSE_DOME'])
+        ou_ = nt_.nodes.new('ShaderNodeOutputWorld'); nt_.links.new(bg_.outputs[0], ou_.inputs['Surface'])
     if os.environ.get('HOUSE_FLOORCARD'):
         floor_card(bpy, [float(v) for v in os.environ['HOUSE_FLOORCARD'].split(',')], lift)
     cam = json.loads(json.dumps(R['camera']))
