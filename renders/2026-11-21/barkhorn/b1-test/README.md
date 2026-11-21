@@ -79,3 +79,29 @@
 - **The room** (`meas.md`):
   - The softboxes' spill lifts the record wall to 48.0, the dark left wall to 13.2 and the whole frame to 22.8 (live 14.8).
   - Shadow-ray links left: 0. Audit 0 / 0.
+
+## fixed-7 (the coordinator, 16:09 and 16:30): fixed-6 with real light control (`gen7.py`, `fixed7.json` = `fixed7d.json` at full size)
+
+- **Quarter tests:** fixed7q, 7bq, 7cq, 7dq, 7eq and 7fq (800 x 450, 96 samples).
+  - Grids and skirts take the spill off the ceiling and the left wall. The record wall's lift is the softboxes' direct beam, which dimming the wall heads offsets.
+  - The quarter tests read the cone/batts ratio high (0.41-0.50). At 800 px the denoiser blends the 75 px woofer into its surround. The full frame reads 0.14.
+- **The lights:**
+  - both frontal softboxes at strength 20, each with a 0.3 m black fabric skirt; the far one at (6.5, 3.4, 2.92), so its skirt and body stay out of frame and under the ceiling (top z 3.36);
+  - the 1.4 x 0.9 diffuser flush under the ceiling over the near bay at 6;
+  - the record-wall heads on a dimmer at 0.35;
+  - no front head, no horn card, and house and house-left inside the room.
+- **Pass tests** (the coordinator's relaxed cone floor, 16:30):
+
+  | test | target | fixed-7 |
+  |---|---|---|
+  | record wall | about 42 or below | 37.9 |
+  | dark left wall | about 6 or below | 6.6 (marginal) |
+  | whole frame | about 18 or below | 17.1 |
+  | hemispheres | about 17-19 | 19.3 (marginal) |
+  | cone | 6-12, dark matte | 8.7 (cap 1.9) |
+  | cone/batts | about 0.25 or below | 0.14 |
+  | sill | 18-25 | 18.8 |
+  | far bay | as the near one reads | 15.9 (live 15.7) |
+  | bell's top 5 % | yellow | 11.1 / C* 2.3: a dark polished horn, as ruled |
+
+- **At 800 px:** no hard skirt edge shows. Audit 0 / 0; shadow-ray links left: 0. `live-over-fixed7.png` shows the two at 800 px.
