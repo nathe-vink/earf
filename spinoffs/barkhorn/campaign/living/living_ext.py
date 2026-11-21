@@ -339,6 +339,23 @@ def softbox(bpy, name, p, kit):
     faces = [((0, 3, 2, 1), 0), ((4, 5, 6, 7), 1), ((0, 1, 5, 4), 1), ((1, 2, 6, 5), 1), ((2, 3, 7, 6), 1), ((3, 0, 4, 7), 1)]
     for idx, mi in faces:
         f = bm.faces.new([v[i] for i in idx]); f.material_index = mi
+    # (fixed-7) a photographer's black fabric skirt, the box's four sides carried `skirt` m forward past the face, and
+    # an egg-crate `grid` [nx, ny] of fabric louvers `grid_depth` m deep across the face: real geometry that keeps the
+    # light on what the box faces (single quads, seen from both sides)
+    sk = float(p.get('skirt', 0.0))
+    if sk > 0:
+        for a_, b_ in ((0, 1), (1, 2), (2, 3), (3, 0)):
+            f_ = bm.faces.new([v[a_], v[b_], bm.verts.new((v[b_].co.x, v[b_].co.y, -sk)), bm.verts.new((v[a_].co.x, v[a_].co.y, -sk))])
+            f_.material_index = 1
+    nx, ny = p.get('grid', [0, 0]); gd = float(p.get('grid_depth', 0.1))
+    for k in range(1, int(nx)):
+        x_ = -w / 2 + w * k / nx
+        f_ = bm.faces.new([bm.verts.new((x_, -h / 2, -0.001)), bm.verts.new((x_, h / 2, -0.001)), bm.verts.new((x_, h / 2, -gd)), bm.verts.new((x_, -h / 2, -gd))])
+        f_.material_index = 1
+    for k in range(1, int(ny)):
+        y_ = -h / 2 + h * k / ny
+        f_ = bm.faces.new([bm.verts.new((-w / 2, y_, -0.001)), bm.verts.new((w / 2, y_, -0.001)), bm.verts.new((w / 2, y_, -gd)), bm.verts.new((-w / 2, y_, -gd))])
+        f_.material_index = 1
     bm.normal_update()
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free(); me.materials.append(em); me.materials.append(bk)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
