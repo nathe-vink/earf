@@ -1,0 +1,658 @@
+{
+ "results": [
+  {
+   "part": "photo",
+   "found": {
+    "findings": [
+     {
+      "id": "f1",
+      "severity": "blocking",
+      "version": "a",
+      "tint": "fog",
+      "where": "Base of the cabinet: the strip under the clear bottom panel and front edge, x 300-600, y 1026-1046 (in the 480 tile, x 120-420, y 420-560)",
+      "what": "The painted contact halo shows through the clear bottom panel as a near-black band along the whole width of the base. Under the front edge the band reads L* 34.2, and at x=400 the floor is L* 14.4-17.4 at y 1041-1044. The soft halo spreads out below it. At 480 x 600 and in the 300 px row this reads as a black base or plinth under a clear cabinet, and the four feet are lost in it (at 4x the left foot is only a dark stub inside the band).",
+      "expected": "A clear bottom panel standing on four small dark feet, with lit floor under and around it, as c shows: band 77.5, floor 97.8 at y 1044, feet visible.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c21-fog-480-base-x3.png, .../critic-photo/c09-all-300.png, .../critic-photo/c02-fog-base-x2.png, .../critic-photo/c11-fog-leftfoot-x4.png, .../critic-photo/c12-fog-rightfoot-x4.png"
+     },
+     {
+      "id": "f2",
+      "severity": "blocking",
+      "version": "b",
+      "tint": "fog",
+      "where": "Same base strip as f1, x 300-600, y 1026-1046",
+      "what": "Because the painted term is still on, b shows the same black band as a, only a little lighter: band 44.0, and 13.3-18.3 at y 1041-1044 at x=400. At 480 and in the row it reads as a black base, and the feet are hidden.",
+      "expected": "As in c: a clear bottom on four visible feet.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c21-fog-480-base-x3.png, .../critic-photo/c02-fog-base-x2.png, .../critic-photo/c03-fog-floor-1x-and-stretched.png"
+     },
+     {
+      "id": "f3",
+      "severity": "fix",
+      "version": "a",
+      "tint": "ember",
+      "where": "Floor around and under the base, the right-front corner, and the floor in front",
+      "what": "A neutral grey halo is painted round the whole footprint and is not shaped by the light. At x=400 the floor reads L* 4.0 at the front edge, 63 at 6 px, 78 at 21 px and 87.7 at 40 px. At the same spots c, lit only by the lights, reads 95.4-96.3. The halo wraps the right-front corner as a rounded pill (contour map). The red transparent body throws no colored light (floor in front a* -0.2 to 0.3, corner shadow neutral), and the feet are hidden. At 480 it passes as a soft studio shadow, but it is the shadow of an opaque object, not of red acrylic.",
+      "expected": "Shadows cast by the lights only, tinted red where light passes through the cabinet, with the feet visible. That is what c shows: a red wedge at the corner (a* up to 10.4) and a* +1.4 to +1.7 on the floor in front.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c10-floor-Lstar-contours.png, .../critic-photo/c15-floor-astar-map.png, .../critic-photo/c28-ember-corner-floor-x2.png, .../critic-photo/c01-ember-base-x2.png"
+     },
+     {
+      "id": "f4",
+      "severity": "fix",
+      "version": "b",
+      "tint": "ember",
+      "where": "Floor at the right-front corner and in front of the base",
+      "what": "Two light models meet at the base. The painted grey halo sits between the cabinet and the red light the lights now cast, so red shows only as a fringe outside the grey. The stretched crop shows a red rim around the halo at the right corner, and the red fan in front starts at the halo's edge. The band under the front edge reads L* 18.1, a* 16.9, against c's 39.1, a* 24.4. The feet are hidden, as in a.",
+      "expected": "A red-tinted shadow running unbroken from the cabinet edge outward, as in c.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c28-ember-corner-floor-x2.png, .../critic-photo/c15-floor-astar-map.png, .../critic-photo/c01-ember-base-x2.png"
+     },
+     {
+      "id": "f5",
+      "severity": "fix",
+      "version": "a",
+      "tint": "fog",
+      "where": "Batts behind the right side panel, about x 605-715, y 540-880",
+      "what": "The white batts read as mid-grey, slightly blue panels that darken from top to bottom (lane: 63.1 upper, 56.5 lower; right side face mean L* 58.0). At 2x they look like brushed metal. At 480 the side lining reads grey while the top lining reads white.",
+      "expected": "White batts lit through clear acrylic should read light grey to white, as in b (75.3 upper, 71.0 lower) and c (76.2 upper, 79.9 lower).",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c14-fog-rightside-x2.png, .../critic-photo/c08-fog-480.png"
+     },
+     {
+      "id": "f6",
+      "severity": "fix",
+      "version": "a",
+      "tint": "ember",
+      "where": "Right side panel and the batts behind it",
+      "what": "The light passing through the panels is understated. Behind the right side, the batts read 14.1/40.9 upper and 9.0/31.9 lower, hue 26 deg (brown-maroon). In b and c they read 25.3-25.9/60.6-61.6, hue 38 deg. In a the side reads as a dark maroon-brown slab rather than red acrylic over lit white lining. It is plausible at 480 as a deep red, but it is not what the lights do.",
+      "expected": "The lit red of b and c (lane: batts upper 18.5/45.0 and 18.8/45.6; audit box 21.3/53.2 and 22.0/54.4).",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c13-ember-rightside-x2.png, .../critic-photo/c08-ember-480.png"
+     },
+     {
+      "id": "f7",
+      "severity": "note",
+      "version": "c",
+      "tint": "fog",
+      "where": "Floor beside the right side panel and in front of the base; the lower compartment",
+      "what": "Almost no shadow shows outside the footprint. The floor right of the right side reads 94.9 against open floor at 95.7-97.5, and just below the front edge it reads 97.1-97.8. The lower compartment goes high-key: mean L* 90.3 and p5 71.0, against 71.2 and 29.1 in a. At 300 px the base is drawn only by the four dark feet and the thin bottom-edge line. It reads as standing on its feet, not floating, but its contact is the lightest of the six. It is also lighter than the Core lamp's: the Core's floor is 64-75 at its base edge and 83 at 40 px of 1600.",
+      "expected": "Acceptable as cast. If more weight is wanted, it has to come from where the lights throw the shadow, not from a painted term.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c10-floor-Lstar-contours.png, .../critic-photo/c09-all-300.png, .../critic-photo/c21-fog-480-base-x3.png, .../critic-photo/c19-core-vs-tropos-contact-x2.png"
+     },
+     {
+      "id": "f8",
+      "severity": "note",
+      "version": "c",
+      "tint": "ember",
+      "where": "Under the front bottom edge, x 330-590, y 1036-1046",
+      "what": "A 3-5 px band of saturated red runs the full front edge between the dark bottom edge and the floor: L* 29-44, a* up to 56, band mean 39.1, a* 24.4. At 4x its lower edge is crisp and even. At 480 it shows as a thin red line at the base. It reads as red light under a red transparent box, but at full size its evenness edges toward an LED underglow.",
+      "expected": "Colored light under the box that fades into the floor.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c06-ember-leftfoot-x4.png, .../critic-photo/c07-ember-rightfoot-x4.png, .../critic-photo/c21-ember-480-base-x3.png"
+     },
+     {
+      "id": "f9",
+      "severity": "note",
+      "version": "c",
+      "tint": "both",
+      "where": "Front feet at about (330,1025) and (578,1083); floor 0-10 px below the front edge",
+      "what": "The floor steps from the dark foot (L* about 10) to 96 within 2 px: at x=578 from 9.8 to 96.0, at x=330 from 18.2 to 96.9. Three pixels below the front edge it reads 95.7 (Ember) and 97.8 (Fog). At 4x the feet look set onto the paper rather than resting on it.",
+      "expected": "A faint penumbra of a pixel or two at each foot.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c07-ember-rightfoot-x4.png, .../critic-photo/c11-fog-leftfoot-x4.png, .../critic-photo/c12-fog-rightfoot-x4.png"
+     },
+     {
+      "id": "f10",
+      "severity": "note",
+      "version": "all",
+      "tint": "ember",
+      "where": "Panel edges, e.g. the front-left vertical edge x 300-306 and the right-front corner x 590-598, y 650-850",
+      "what": "In all three versions the panel edges render neutral near-black, with no red and no glints: front-left edge L* 2.8-2.9, C* 1.0-1.4; corner 3.7-3.9, C* 5-6. Each Ember panel reads framed in black at 480. The older Mantle deck in the same tint has edges that glow red.",
+      "expected": "Unsure. Deep red seen edge-on through a long path can look nearly black, but polished edges usually show some red and some glints.",
+      "sure": "unsure",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c13-ember-rightside-x2.png, .../critic-photo/c29-mantle-old-contact-x2.png"
+     },
+     {
+      "id": "f11",
+      "severity": "note",
+      "version": "c",
+      "tint": "ember",
+      "where": "Lit lining behind the front panel above the woofer, x 320-470, y 490-560 (also in b)",
+      "what": "At 4x, b and c show faint low-frequency mottling (soft cloudy patches) that a does not. High-pass std is 0.50 in b and 0.51 in c against 0.41 in a. It is invisible at 1x and could pass for batt texture.",
+      "expected": "An even or fibrous texture, without cloudy patches.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c18-ember-lining-x4.png"
+     },
+     {
+      "id": "f12",
+      "severity": "note",
+      "version": "c",
+      "tint": "ember",
+      "where": "Cabinet front against the horn",
+      "what": "The cabinet front is now about 5 L* lighter than the horn. Front above the woofer: 49.1/91.0 against horn 44.1/86.2. In a the two read 41.8/87.0 and 44.0/86.8. Lane: 42.7/84.3 against 35.6/72. The hue is the same (37.5 against 39 deg). At 480 they read as the same red, with the cabinet glowing a little more because white lining lit through the red sits behind it.",
+      "expected": "The same tint should read as the same red, and it does.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c08-ember-480.png, .../critic-photo/c04-ember-horn-x2.png, .../critic-photo/c16-ember-fronttop-x2.png"
+     },
+     {
+      "id": "f13",
+      "severity": "note",
+      "version": "c",
+      "tint": "fog",
+      "where": "Foreground floor, y 1220-1250 (also in b)",
+      "what": "In b and c the Fog foreground floor is lighter than in a: bottom center goes from 86.5 to 90.7 and 91.0, and bottom left and right each gain 2.0. This is light passing through the clear cabinet. The Ember foreground barely moves (85.2 to 86.0). So with c the floor in front differs between tints by 5 L* (Fog 91.0, Ember 86.0), where in a the gap was 1.3.",
+      "expected": "One ground across tints. This difference is physical (a clear box passes more light) and small, but it shows when the eight tints sit side by side.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c31-foreground-floor-stretched.png, .../critic-photo/c27-floor-b-minus-a.png"
+     },
+     {
+      "id": "f14",
+      "severity": "note",
+      "version": "row",
+      "tint": "ember",
+      "where": "Home-page row at 300 px: Tropos, Hemisphere, Core, Mantle",
+      "what": "c's ground matches the lamps' frames. Wall upper right: Tropos c 93.0, Core 93.1, Hemisphere 93.2. The floor in front carries a red cast like the Core's: a* +2.4 against +2.6, where a has 0.0. The contact differs in weight: the Core's cast contact (64-75 at its base edge) sits between a's halo (4 at the edge) and c's none. At 300 px both Tropos c and Core read grounded. The older Mantle (b39) has a neutral soft halo, no red cast on the floor, and edges that glow red, so with c the Mantle is the odd one in the row.",
+      "expected": "One studio ground and one light model across the row.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/c20-row-300-abc.png, .../critic-photo/c19-core-vs-tropos-contact-x2.png, .../critic-photo/c29-mantle-old-contact-x2.png"
+     },
+     {
+      "id": "f15",
+      "severity": "note",
+      "version": "c",
+      "tint": "both",
+      "where": "The fronts against the live 360 turn",
+      "what": "Per the brief, the 360 turn uses a's model. The a-to-c differences measured here are large enough to see if a c front sits next to an a-model turn. Ember: front +7.5 L*, batts +6.7 to +9.4, halo gone, feet visible. Fog: lining +13 to +23, base band 34 to 77.5.",
+      "expected": "The fronts and the turn on the same light model.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-photo/diff-ember-ac.png, .../critic-photo/diff-fog-ac.png"
+     }
+    ],
+    "pick_ember": "c",
+    "pick_fog": "c",
+    "why": "Ember c: it is the only version where every shadow comes from the lights, so the cabinet stands on its four visible feet, its shadow and the floor in front take a red tint as tinted acrylic's do (as the Core lamp's frame also shows), and the lining glows through the panels with more chroma than a (front 42.7/84.3 against 35.2/75.6). a and b wrap the base in a painted grey halo that ignores the light and hides the feet, while c's flaws (an even red line under the front edge, faint mottling in the lit lining) show only at full size. Fog c: only c shows a clear cabinet, with a clear bottom on four feet and white lining (76-80 L*), where a and b draw a near-black band through the clear bottom that reads as a black base at 480 and in the row, and a's lining reads grey and metallic. c's contact is light (almost no shadow outside the footprint and a high-key lower compartment), but it is what the lights cast, it reads as standing rather than floating, and it matches the lamps' unpainted ground.",
+    "horn_unchanged_explained": "The horn is an open flare seen against the sweep. Its color comes from camera rays refracting through its walls to a backdrop the lights reach directly. The changes tested here only alter light that reaches a surface through acrylic (the shortcut and the caustics) or the floor near the base (the painted term). Measured on the horn box (300-630, 210-450), Ember's mean |dL*| is 0.40 from a to b (1.1% of pixels over 3 L*) and 0.07 from b to c. The only thing lit through the horn is the compression driver. In Fog it darkens from 45.5 to 42.7 L* seen through the horn, which is most of Fog's 1.29 a-to-b change, and b to c is 0.07. In Ember it is seen through deep red, so it cannot change visibly (5.7 to 5.6). So an unchanged horn is what the physics predicts. I also saw no change in the horn's reflections.",
+    "contact_in_c": "At 480 and 300 px the cabinet stands on its feet; it does not float. Each of the four feet is a dark puck touching the paper (minimum L* 2-6 in Ember, 6-10 in Fog). The floor under the cabinet, seen through the gap, is darker: the band under the front edge reads L* 39.1 with a* 24.4 (red) in Ember and 77.5 in Fog. Outside the footprint the floor is not darkened at all: 3 px below the front edge it reads 95.7 (Ember) and 97.8 (Fog), and it steps from foot to 96 L* within 2 px. The only cast shadow in view is a soft wedge off the right-front corner, red-tinted in Ember (a* up to 10.4) and barely there in Fog (94.9 against open floor at 95.7-97.5). The contact is lighter than the Core lamp's (64-75 at its base edge). Fog c's base is the lightest of the six (lower compartment mean L* 90.3).",
+    "measured": [
+     "Floor L* profile at x=400 below the front edge, at y 1044/1047/1050/1056/1065: Ember a 4.0/55.6/63.0/70.4/78.3; b 3.7/55.8/64.0/71.7/80.1; c 95.7/95.2/96.3/96.3/95.4. Fog a 17.4/59.9/66.9/74.1/82.6; b 18.3/65.9/70.2/78.0/87.6; c 97.8/97.6/97.5/97.5/97.2",
+     "Band just under the front edge (x 350-560, y 1036-1046), L*/a*: Ember a 15.5/14.9, b 18.1/16.9, c 39.1/24.4. Fog a 34.2/-1.2, b 44.0/-1.2, c 77.5/-0.9",
+     "Floor right of the right side panel (720-760, 1010-1030), a/b/c: Ember 66.6/68.4/90.8; Fog 69.9/74.9/94.9. Open floor far left (60-140, 1150-1230): Ember 94.7/94.5/94.5; Fog 94.8/95.7/95.7",
+     "Floor 40 px in front of the front edge (380-440, 1080-1090), a/b/c: Ember 87.7/89.0/95.8; Fog 90.4/94.3/97.4",
+     "Feet in c: the floor steps from foot to 96 L* within 2 px (x=578: 9.8 to 96.0; x=330: 18.2 to 96.9). Foot minimum L*: Ember 2.2-5.9, Fog 5.7-10.1",
+     "Red on the floor (mean a*): front band (300-700, 1090-1200) Ember a -0.03, b 1.50, c 1.39; far front (300-700, 1200-1250) a -0.16, b 1.63, c 1.69; c's corner wedge max a* 10.4 at (634,1085), L* 86.0; Fog stays near -0.7 in all",
+     "Ember batts behind the right side, upper (615-655, 610-700) and lower (615-655, 780-860), as L*/C* and hue: a 14.1/40.9 h32 and 9.0/31.9 h26; b 25.3/60.6 h38 and 22.9/56.6 h37.5; c 25.9/61.6 and 23.9/58.2",
+     "Ember front above the woofer (330-420, 500-545) against the horn flare (330-430, 250-320), L*/C*: a 41.8/87.0 vs 44.0/86.8; b 49.1/91.0 vs 44.0/86.1; c 49.1/91.0 vs 44.1/86.2",
+     "Fog lower compartment (320-590, 900-1030), mean/p5 L*: a 71.2/29.1, b 82.7/49.3, c 90.3/71.0. Right side face mean: 58.0/73.2/78.6",
+     "Horn box (300-630, 210-450), mean |dL*|: Ember a-b 0.40, b-c 0.07; Fog a-b 1.29 (driver 45.5 to 42.7), b-c 0.07",
+     "Fireflies (isolated spots brighter than the ring max +6 and the 7x7 median +12), a/b/c: Ember 32/30/29, Fog 62/38/32. All sit on the same specular glints (driver phase plug 543,340; woofer bolts 361,677 and 412,619); none are new in b or c",
+     "Grain (std of L* minus a 2 px Gaussian): sweep 0.33 and 0.41 in all six; open floor 0.27-0.35; Ember lining above the woofer 0.41/0.50/0.51",
+     "Sweep wall (850-950, 300-400) reads 92.3-92.6 in all six. Fog foreground floor, bottom center (300-700, 1220-1250): 86.5/90.7/91.0; Ember 85.2/85.9/86.0",
+     "Row, wall upper right (0.85-0.95 x, 0.12-0.22 y): Tropos c 93.0, Core 93.1, Hemisphere 93.2, older Mantle 94.4. Floor low center a*: Ember c +2.4, Core +2.6, Ember a 0.0, Mantle -0.6",
+     "Core OFF (no painted term) at x=800 of 1600: floor L* 64.4, 73.0, 75.4, 78.8, 80.9, 82.8 over about 40 px below its base edge; open floor 90.2-93.3",
+     "Share of pixels changing more than 20 levels from b to c: Ember 3.9%, Fog 4.2%. The change is confined to a 40-80 px band round the footprint plus the lower interior, lit by bounce from the floor"
+    ]
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "f1",
+      "verdict": "confirmed",
+      "severity": "blocking",
+      "measurement": "fog-a, column x=400: L* 14.4 / 15.8 / 15.8 / 17.4 at y 1041-1044. c reads 95.5-97.8 at the same rows (97.8 at y 1044). From the front edge the floor climbs from 46.2 at y 1046 to 87.7 at y 1074. Box x380-420: y1028-1038 = 28.4 (b 34.4, c 54.0) and y1040-1045 = 23.8 (b 27.3, c 90.8). Strip x300-600 y1026-1046 mean = 45.0 (b 54.5, c 82.0). Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v21-fog-480-base-3xnn.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v04-fog-480-bottom-1x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v03-fog-300.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v05-fog-leftfoot-x4.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v18-fog-frontedge-x4.png",
+      "reasoning": "The place is right: the critic's crop and mine cover the same base. The critic's x=400 numbers came out exactly the same in my run. The band-mean figures (34.2 / 44.0 / 77.5) depend on the box, but every box I tried ranks them the same way. The only difference between b and c is the painted term, and c shows 95-98 in the gap under the front edge, so the near-black floor there is painted, not cast. In the 480 tile at true size and in the 300 px version, a shows a near-black strip all along the front and right side that reads as a black plinth under a clear cabinet. At 4x the left foot is only a chrome post whose foot sinks into the band, and the right foot does the same. This misstates the product (a clear bottom on four feet) at the sizes that matter, so it is blocking."
+     },
+     {
+      "id": "f2",
+      "verdict": "confirmed",
+      "severity": "blocking",
+      "measurement": "fog-b, x=400: L* 13.3 / 15.1 / 16.2 / 18.3 at y 1041-1044. c reads 95.5-97.8. Box x380-420 y1028-1038 = 34.4 (a 28.4). Strip mean x300-600 y1026-1046 = 54.5 (a 45.0, c 82.0). The c-minus-b L* difference map changes only around the base and the floor seen through the bottom: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v22-fog-diffmaps.png. Same base crops as f1 (v21, v04, v03).",
+      "reasoning": "Reproduced exactly. b keeps a's black band, only a few L* lighter. In the 480 tile (3x nearest) a and b are almost the same: a dark plinth strip with the feet swallowed. Turning off the painted term alone (c) removes it, so the band is the painted term and not the new light model. Same misstatement as a, so blocking."
+     },
+     {
+      "id": "f3",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "ember-a, x=400: L* 4.1 at y1044 (front edge), 63.0 at y1050, 78.3 at y1065, 89.4 at y1084. c reads 95.2-96.3 on the same rows. Floor tint: front patch x400-480 y1150-1200 a* -0.0 in a against 2.0 in c. Right-front corner floor (L*>60): median a* 0.09 in a against 1.50 in c; c's peak 5x5 a* is 8.4 at x678 y1067. Stretched L* map: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v07-ember-floor-stretch.png. a* map: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v15-ember-astar-map.png. Corner 2x: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v16-ember-corner-x2.png. Feet 4x: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v05-ember-leftfoot-x4.png and v06-ember-rightfoot-x4.png in the same folder.",
+      "reasoning": "The profile came out within about 2 L*; my 40 px value is 89.4 against the critic's 87.7. In the stretched map the halo follows the footprint, with a rounded corner at the right front, in a (and b) and is missing in c. The floor in a is neutral, while c's floor is red-tinted in front and in a wedge at the corner. At 4x a's feet are dark blobs lost in the halo, while c shows clear feet. At 480 a's base still passes as a soft studio shadow under a solid-looking box, so this is a real fault at full size but not a 480 failure. Fix."
+     },
+     {
+      "id": "f4",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "On the pixels where c's red line lies under the Ember front edge (x330-570): b reads L* 1.8 / a* 4.5, a reads 3.1 / 10.4, c reads 44.7 / 45.8. The critic's wider band (18.1/16.9 against 39.1/24.4) points the same way. In the a* map, b shows a pink fan in front-left and a red rim at the corner, both starting outside the grey halo: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v15-ember-astar-map.png. Front edge 4x, where b has a thin red line inside a black band: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v17-ember-frontedge-x4.png. Corner floor median a* is 0.67 in b, between a (0.09) and c (1.50).",
+      "reasoning": "Reproduced. The red light cast by the physical model shows only outside the painted grey, and near the edge the halo's core darkens everything, even the red light under the bottom panel. Two light models really do meet at the base, and the feet stay hidden. In the 480 tile b reads like a, so this is visible only at full size or in the a* map. Fix."
+     },
+     {
+      "id": "f5",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "Fog right-side batts. a: upper (x612-660 y610-700) 65.6, lower (y780-870) 52.1, whole face (x605-715 y540-880) 57.9, C* about 2, hue 213-220 (faintly blue). b: 82.7 / 77.4 / 75.7. c: 84.1 / 79.7 / 77.3. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v12-fog-rightside-x2.png and 480 true size /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v13-fog-480-body-1x.png",
+      "reasoning": "Reproduced: the face mean is 57.9 against the critic's 58.0, and it darkens from top to bottom. At 2x, a's batts are smooth grey panels with a vertical gradient that look like brushed aluminium, while b and c show light-grey fibrous panels. The physics points the same way: with the shortcut, bounce light from the white floor and sweep cannot reach the batts through the clear panel, so a is too dark. In the 480 tile a's side lining reads grey-blue next to the white top lining, but on the shadow side it can pass as white in shade. Fix, not blocking. In my boxes b and c are within 2.3 L* of each other (the lane's lower 71.0 for b is a different box)."
+     },
+     {
+      "id": "f6",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "Ember right-side batts (L*/C*/hue). a: upper 14.0/40.9/32 deg, lower 8.9/31.7/26 deg. b: 25.1/60.4/38 and 22.7/56.1/37. c: 25.7/61.4/38 and 23.6/57.8/38. Whole face: a 10.6/33.5, b 19.8/49.7, c 20.4/50.7. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v12-ember-rightside-x2.png and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v13-ember-480-body-1x.png",
+      "reasoning": "Reproduced within 0.2 L*. The critic's 'hue 26' is the lower box; the upper box is 32. At 2x a's side is a maroon-brown slab that darkens downward, and b and c are an evenly lit red. The cause is the same blocked bounce light as in f5, so a understates it. In the 480 tile a's side still reads as plausible deep red in shade, so this is a real fault at full size but not a 480 failure. Fix."
+     }
+    ],
+    "pick_check": "I agree: c for Ember and c for Fog.\n\nMy own crops back the critic's reasons:\n(1) Fog a and b draw a near-black plinth through the clear bottom. At x=400, y 1041-1044 the floor reads 14.4-17.4 in a and 13.3-18.3 in b, against 95.5-97.8 in c. The plinth swallows the feet in the 480 tile and at 300 px (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v21-fog-480-base-3xnn.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v03-fog-300.png). c shows a clear bottom on dark feet.\n(2) Ember c is the only version whose ground follows the lights. The front floor is a* 2.0 against a's 0.0; the corner wedge peaks at a* 8.4 (5x5), where a's corner median is 0.1; and the feet are visible. The Core lamp's unpainted shadow is likewise warm: a* 1.5-2.7 at L* 68-90, against 0.6-0.9 on its open floor.\n(3) The lining is lit in c: the Fog right face reads 77.3 against 57.9 in a, and the Ember right batts read 25.7/61.4 at 38 deg against 14.0/40.9 at 32 deg.\nc is no noisier than a: the high-pass s.d. in the batts is the same in all three, and there are no fireflies on the floor.\n\nCorrections and additions for the owner:\n(i) The even red line under Ember c's front edge is not full-size only. It survives in the 480 tile as a line about 2 px high (L* 40 / a* 56 at x192 y499). It reads as red light under red acrylic, not as a fault.\n(ii) Fog c's contact is light, but there is some. At y=1040 the floor right of the cabinet is 94-96, against 96-97 on the open floor, and a faint cast shadow lies to the right-back (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v19-c-floor-stretch-tight.png). The floor seen through the bottom panel darkens from 93.5 at the front-left to 70.2 at the back-right, which fits a clear lower compartment with opaque parts higher up. At 480 and 300 it stands on visible feet, though it looks lighter than a 73 kg box usually does.\n(iii) c also changes the approved look. The Ember front above the woofer reads 43.5/85.7 against a's 36.9/78.8 in my box: lighter, with more chroma. So it needs the owner's word. Because the 360 turn uses a's set, choosing c means redoing all eight fronts and the turn to keep them consistent.\n(iv) The old Mantle shows a broad, rounded dark halo under its deck (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-photo/v24-mantle-Lstretch.png). The row becomes one ground only when the Mantle is redone too.\n\nAll six findings are confirmed: f1 and f2 blocking, f3 to f6 fix."
+   }
+  },
+  {
+   "part": "optics",
+   "found": {
+    "findings": [
+     {
+      "id": "a-fog-batts-gray",
+      "severity": "blocking",
+      "version": "a",
+      "tint": "fog",
+      "where": "White batts seen through the right side panel; also the lower compartment and the handle recess",
+      "what": "The white lining reads mid-gray, like gray felt (L* 63.1 upper, 56.5 lower). Next to it the white brace and amp box in the same frame read near white. This fits the audit's shortcut: light from the white studio cannot reach the lining through the clear panel, only direct lamp light through the transparent-shadow trick.",
+      "expected": "A white lining behind clear acrylic, facing the white sweep, should read about L* 75-80. b and c give that: b 75.3 / 71.0, c 76.2 / 79.9. c's lower batts are lighter than its upper ones because the floor beside them is no longer painted dark, which is the physically consistent order.",
+      "sure": "likely",
+      "evidence": "My patch at x620-700, y600-760: a 62.5, b 79.6, c 81.0. The handle recess is dark gray in a and lit in b and c (fog_topjoint_4x.png). Visible at 480 x 600 (fog_480.png, fog_body_1x.png). Files are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "a-fog-black-base",
+      "severity": "blocking",
+      "version": "a",
+      "tint": "fog",
+      "where": "Floor under the cabinet, seen through the gap and through the clear bottom panel; front-bottom edge",
+      "what": "The painted contact term turns the floor under the clear cabinet nearly black. In the column at x430-460 there is a band 20 px tall at L* 7-25 (y1034-1054), then a neutral gray skirt (55 at 8 px, 68 at 12, 80 at 24, 91 at 48). The floor seen from above through the clear bottom panel is also black. The feet's black pucks merge into the band. At 480 x 600 and at 300 px the colorless cabinet reads as standing on a black plinth. That misstates the product: it stands on four small feet and its lower compartment is unlined.",
+      "expected": "The lights reach the floor under the cabinet through the clear lower compartment. Only the gap and the feet should be dark, as in c: a band 8 px tall at L* 31-50, then L* 97 from 4 px out, with the feet visible.",
+      "sure": "likely",
+      "evidence": "fog_frontfoot_2x.png, fog_bottomedge_4x.png, fog_lowercomp_2x.png, fog_floor_stretch.png, all_300.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "b-fog-black-base",
+      "severity": "blocking",
+      "version": "b",
+      "tint": "fog",
+      "where": "Floor under the cabinet and front-bottom edge",
+      "what": "b keeps the painted term, so it has the same black band and feet hidden in it: L* 8-29 at y1034-1054, a skirt to about L* 72 at 12 px, and the floor seen through the bottom panel still black. b's interior is now bright (lower compartment 90.9), so the black base contrasts more than in a. Beside the right side panel the floor is 46-74 L*, against 94-95 in c.",
+      "expected": "As in c: a light floor under the clear base, with only the gap line and the feet dark.",
+      "sure": "likely",
+      "evidence": "fog_bottomedge_4x.png, fog_wedge_3x.png, fog_480.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "a-ember-dark-interior",
+      "severity": "fix",
+      "version": "a",
+      "tint": "ember",
+      "where": "Batts behind the right side panel, the audit's box, the front above the woofer",
+      "what": "The inside of the cabinet is too dark: batts upper 12.1/33.5 against 18.5/45.0 in b, lower 15.7 against 21.3, the audit's box 9.9 against 21.3, the front above the woofer 35.2/75.6 against 42.7/84.2. At 480 x 600 the right side reads near-black maroon, so the tint looks denser and less luminous than red cast acrylic with a white lining would.",
+      "expected": "b and c's values: studio light reaching the white parts through the red panels gives a luminous, more saturated red.",
+      "sure": "likely",
+      "evidence": "My patch at x620-700, y600-760: a 12.0, b 22.8, c 23.3. ember_body_1x.png, ember_480.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "a-ember-opaque-skirt",
+      "severity": "fix",
+      "version": "a",
+      "tint": "ember",
+      "where": "Floor at the base: front edge, right of the right-front foot, beside the right side panel",
+      "what": "The halo is an opaque object's contact shadow, neutral gray around a red see-through cabinet. At the front edge the floor is L* 2-17 for the first 4 px, 49 at 8 px, 88.5 at 48 px. Beside the right side panel it is 32-68; right of the foot at y1040 it is 48-74. Its a* stays at +1.6 or less in front and +3.4 or less near the foot, so no red light reaches the floor near the base, and the feet are lost in it. In the first 8 px it is darker than the contact the physical model gives the Core lamp on the same ground (Core: 36 at the edge, 68-75 at 2-8 px).",
+      "expected": "Light through the unlined red lower compartment should leave a lighter, red-tinted floor at the base, with the feet visible, as in c.",
+      "sure": "likely",
+      "evidence": "ember_frontfoot_2x.png, ember_wedge_3x.png, ember_floor_redmap.png, core_base.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "b-ember-mixed-model",
+      "severity": "fix",
+      "version": "b",
+      "tint": "ember",
+      "where": "Floor around the base",
+      "what": "b shows two light models in one frame. The new model puts a faint red spill on the floor front-left of the cabinet (a* up to +3.5 against paper at +0.3; a has at most +1.6). Next to it the painted neutral skirt and black under-floor remain: front edge L* 3-17, then 50 at 8 px; beside the right side 34-68. So red light lands a hand's width away but not at the base, where light actually leaves the cabinet. No red wedge at the right-front corner (0 px with a* > +6, against 1094 in c).",
+      "expected": "c, where all floor light near the base comes through the cabinet.",
+      "sure": "likely",
+      "evidence": "ember_floor_redmap.png (middle tile), ember_floor_stretch.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "c-ember-pale-red-shadow",
+      "severity": "note",
+      "version": "c",
+      "tint": "ember",
+      "where": "Floor beside the right side panel and at the right-front corner",
+      "what": "c's colored shadow is real but pale. Beside the right side panel it is L* 83-86 with a* +2 to +7 (open floor 96 / 0). The red wedge from the right-front corner is strong only within about 10 px of the panel (a* about +12). Under the front edge there is a thin red line (L* 44 a* +31, then 81 / +14 within 4 px). Light passing through two deep-red side panels would by itself be strongly red; the large soft sources probably dilute it with white fill.",
+      "expected": "Likely right for very soft light. If the owner expects a clearly red shadow, check the tint's absorption against a sample, not the light model.",
+      "sure": "unsure",
+      "evidence": "ember_wedge_3x.png, ember_floor_redmap.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/; sampling across the right side's bottom edge at offsets 15-40 px"
+     },
+     {
+      "id": "c-no-front-occlusion",
+      "severity": "note",
+      "version": "c",
+      "tint": "both",
+      "where": "Floor directly in front of the front-bottom edge",
+      "what": "c has no darkening on the floor in front of the base. Ember reaches 95.6-96.1 from 8 px out (95 at 48 px); Fog reaches 97.3 from 4 px. The Core lamp on the same ground, with the same model and no painted term, darkens its floor 10-20 L* within about 20 px. For Fog's bright white-lined body this fits. For Ember's dark red body, which takes the place of part of the studio in the floor's view, I would expect a slight darkening near the base.",
+      "expected": "Possibly a few L* of darkening within a few cm of Ember's front edge. Not certain.",
+      "sure": "unsure",
+      "evidence": "Profile in column x430-460 from y1050; Core profile below its base center (scaled to Tropos pixels); core_base.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "c-fog-white-bottom",
+      "severity": "note",
+      "version": "c",
+      "tint": "fog",
+      "where": "Lower compartment (ports, amp box, bottom panel)",
+      "what": "The lower compartment goes near-white and low in contrast. Inside the left port it reads L* 96.4, against 94.2 for the open floor to the right; at 480 the amp box and port rings are faint. The cause is optically plausible: the view through the port opening is through air, and the floor under the cabinet is lit through clear panels. So this is not a light-model error, but the bottom reads almost invisible.",
+      "expected": "Physically defensible. Mentioned for the look critic.",
+      "sure": "likely",
+      "evidence": "fog_lowercomp_2x.png, fog_480.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "bc-no-new-artifacts",
+      "severity": "note",
+      "version": "all",
+      "tint": "both",
+      "where": "Darks (woofer cone, throat), floor, backdrop, cemented joints",
+      "what": "b and c add no fireflies, noise or seams. Pixels that are outliers in b or c but not in a: Ember 37 (b) and 51 (c), Fog 176 and 195, all on the woofer's clear surround ring. At 4x they are sharper specular glints (glossy filter 0), not isolated speckles. Fine noise on the woofer cone is 1.05-1.07 in all six images, and 5-17 px blotchiness on floor and backdrop is identical across a, b, c. The mottling in the a-to-b diff map is sub-visible. No seam at the cemented top corner joint at 4x.",
+      "expected": "",
+      "sure": "likely",
+      "evidence": "fog_ffcluster_4x.png, ember_ffcluster_4x.png, fog_topjoint_4x.png, diffs_sheet.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     },
+     {
+      "id": "horn-flare-plausible",
+      "severity": "note",
+      "version": "all",
+      "tint": "both",
+      "where": "Horn flare, throat, driver, posts",
+      "what": "The flare does not change (|dL| 0.2-0.6 in both tints), but the parts lit through the horn's acrylic do. Fog throat goes from 20.8 to 13.8 L*; the Fog driver ring changes by |dL| 5.1 (p95 13): a darker body behind the throat walls and sharper ring glints. The posts under the horn go -1.7 (Fog) and -0.8 (Ember). Ember's driver is near-black (8.6) in all three, so its change cannot show.",
+      "expected": "Consistent with the horn's material already being on the physical model (details in horn_unchanged_explained).",
+      "sure": "likely",
+      "evidence": "throat_4x.png (with b-minus-a overlay), ember_horn_2x.png, fog_horn_2x.png in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-optics/"
+     }
+    ],
+    "pick_ember": "c",
+    "pick_fog": "c",
+    "why": "I pick c for both tints. It is the only version where every light inside the cabinet and on the floor comes from the lights through the real materials, and the result matches how Tropos is built. Inside, c matches b (the front above the woofer is 42.7/84.3 in Ember, 94.7 in Fog), so the white lining reads as white behind clear acrylic and as a luminous deep red behind Ember. I found no place where b or c is lighter than its light path allows. On the floor, c casts a two-part shadow that follows the construction. Further back-right, the lined middle section (opaque batts) casts a neutral gray shadow (y960: Ember 79.9 to 92 over about 80 px, a* +0.3 to +1.5). Right beside the unlined lower compartment, the floor is lighter and, in Ember, pink-red (L* 83-86, a* +2 to +7; red wedge at the corner; red line under the front edge). The four feet are visible. b is not a resting point: its physical interior and red spill sit next to a painted neutral skirt and a black floor under the cabinet. a is too dark inside (Fog batts read gray), and its halo is an opaque object's contact shadow, which in Fog reads as a black plinth at 300 px. c also matches the lamps' ground: the Core, under the same model with no painted term, meets the floor with a thin line and a soft cast shadow, not a painted skirt. Caveats on c: the red in the shadow is pale for a deep tint; there is no darkening in front of Ember's base; Fog's lower compartment goes near-white. c also ends the dark, heavy base contact the owner approved, so it needs his word, and the eight fronts and the 360 turn would have to move together to stay matched.",
+    "horn_unchanged_explained": "The unchanged flare is plausible and does not point to the horn's material still using the shortcut. In the flare we see two things: the backdrop through one wall of acrylic, and the flare's own surface reflections. Both are lit directly by the lamps. The shortcut, the caustic switches and the glossy filter only change light that reaches a diffuse or rough surface after passing through acrylic, so the flare should not move, and it does not (Ember flat flare 44.1/86.7, 44.1/85.9, 44.2/86.0; Fog 93.5, 93.7, 93.7; |dL| 0.2-0.6). The parts of the horn that are lit through acrylic did change in b. The Fog compression driver, seen through the thick throat, darkens from 20.8 to 13.8 L* at the throat center, and its ring shows structured change (|dL| 5.1, p95 13): a darker body, with sharper glints from glossy filter 0. The posts under the horn darken by 1.7 (Fog) and 0.8 (Ember). If the horn were still on the transparent-shadow shortcut, the driver behind the throat walls would render as in a. Ember shows almost no change only because its driver is near-black (8.6 L*) in all three. Certainty: likely; this is from images only, not from the scene file.",
+    "contact_in_c": "c shows the lighter, colored shadow a clear or tinted cabinet should cast, and a shows an opaque object's halo.\n\nFloor right of the right-front foot, at y1040, x700-760: Ember a 48-74 L* (a* +1.2 to +1.6), b 50-75 (+2.3 to +2.7), c 86-91 (+2.4 to +3.9). Fog a 57-80, b 60-82, c about 95.\n\nBeside the right side panel, 15-40 px out: Ember c 83-86 with a* +2 to +7; Fog c 94-95 against 96-97 open floor; a and b 30-74.\n\nA red wedge runs from Ember's right-front corner in c only (1094 px with a* > +6; none in a or b). Under the front edge, c has a thin red line on the floor (L* 44 a* +31, then 81 / +14 within 4 px), where light through the red bottom panel lands. The feet show as black pucks at the corners.\n\nThe dark band that remains at c's base (Ember about L* 16, Fog about 38, 8 px tall at the height of the feet) carries streaky reflections at 4x, like a polished panel edge, so I read it as the bottom panel's front edge, not a shadow.\n\nFurther back-right, c keeps a neutral gray shadow from the lined middle section. That is right, because the batts are opaque.\n\na's halo is what an opaque box on short feet would get: neutral (a* about +1.5 or less), L* 2-17 for the first 4 px under the edge, 49 at 8 px, 88.5 at 48 px. In the first 8 px it is darker than the physically cast contact of the Core lamp on the same ground (36 at the edge, 68-75 at 2-8 px). On a see-through cabinet with an unlined lower compartment it is wrong. In Fog it blackens the floor seen through the clear bottom panel and hides the feet.\n\nWhat c lacks: any darkening in front of the base (96-97 from 4-8 px out). That is plausible for Fog's bright interior; for Ember's dark red body I am unsure.",
+    "measured": [
+     "Batts, right panel, my patch x620-700 y600-760: Ember a/b/c 12.0 / 22.8 / 23.3 L*; Fog 62.5 / 79.6 / 81.0. Lane: Ember upper 12.1 / 18.5 / 18.8, Fog 63.1 / 75.3 / 76.2",
+     "Lower compartment inside, left (x330-400 y930-980): Ember 36.4 / 38.5 / 46.7; Fog 81.8 / 90.9 / 96.4 (open floor right in c 94.2)",
+     "Front-bottom edge column x430-460: Fog a L* 7-25 over y1034-1054, b 8-29, c 31-66 over y1034-1046 then 97 from y1054. Ember a 2-17 to y1054 then 49 at y1058; b 3-17 then 50; c 15-25 (edge band), then the red line 44 / +31 and 81 / +14, then 96 from y1058",
+     "Floor right of the foot, y1040 x700-760: Ember a 48-74 (a* +1.2..+1.6), b 50-75 (+2.3..+2.7), c 86-91 (+2.4..+3.9); Fog a 57-80, b 60-82, c 95",
+     "Beside the right side panel (normal offsets 15-40 px from its bottom edge): Ember c 83-86 L*, a* +2..+7; Ember a and b 30-68; Fog c 94-95 against 96-97 open; Fog a and b 46-74",
+     "Red wedge, floor right of the right-front foot (x590-900 y1020-1120, floor L* > 60): pixels with a* > +6: a 0, b 0, c 1094",
+     "Red spill on the floor front-left: peak a* +3.5 in b at (398,1118), L* 93; a max +1.6; paper a* +0.3",
+     "Lined-section shadow at y960, x720-800: Ember c 79.9 -> 92.0; Ember a 73 -> 89.9 (91.7 by x840); Fog c 87 -> 93",
+     "Contact falloff below the front edge, px from y1050: Ember a 2, 17, 49, 63, 68, 76, 82, 88.5, 92.5 at 0, 4, 8, 12, 16, 24, 32, 48, 64; Ember c 44, 81, 96, 96, 96, 96, 96, 95, 95; Fog c 83, 97 flat. Core lamp, scaled to Tropos px: 36 at 0, 56 at 1, 68 at 2, 72-75 at 4-8, 76-80 at 10-20, 83-88 at 30-80",
+     "Horn flat flare (x330-420 y250-320): Ember 44.1/86.7, 44.1/85.9, 44.2/86.0; Fog 93.5 / 93.7 / 93.7; |dL| a->b 0.2-0.6 in all flare patches",
+     "Fog throat (r < 12 at 530,337): 20.8 / 13.8 / 13.9 L*. Fog driver ring (r 25-50): |dL| a->b 5.1, p95 13.2. Posts under the horn: Ember 22.7 / 21.9 / 21.9, Fog 33.2 / 31.5 / 31.5",
+     "Noise: high-pass (5 px box) std on the woofer cone 1.05-1.07 in all six; band-pass 5-17 px std: floor 0.05-0.09, backdrop identical across a, b, c",
+     "Outliers new vs a (5x5 median residual > 10 where a < 3): Ember b 37, c 51; Fog b 176, c 195; clustered on the woofer's clear surround ring, glints at 4x",
+     "Fog open floor far right (y960 x840-980): a 91.6-92.8, b 93.5-93.7; backdrop 88.1 -> 88.0 (no global shift)",
+     "Paper baseline a*/b* (x900-990 y1180-1240): Ember -0.2/3.3, +0.3/3.6, +0.3/3.8; Fog -0.4/3.3, -0.4/3.6, -0.4/3.7"
+    ]
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "a-fog-batts-gray",
+      "verdict": "confirmed",
+      "severity": "blocking",
+      "measurement": "Critic's patch x620-700,y600-760, L*: a 62.5, b 79.6, c 81.0 (exact match). Batt column x615-655, top to bottom: a 72 to 50, b 84 to 77, c 85 to 80. Handle recess x630-690,y532-552: a 38.6, b 76.3, c 77.4. Whites in the same frame of a: top brace 96.7, amp box front 91.2. Crops in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-optics/: fog_rightside_1x.png, fog_batts_4x.png, fog_480_body_1x.png, fog_480_abc.png.",
+      "reasoning": "The numbers match. At 4x, a's batts are a cool, flat mid-gray, like felt or brushed aluminium. b and c are pale. At 480 x 600 (fog_480_body_1x.png), a's right side reads as gray panels next to a white brace and a white amp box. a and b differ only in the light model, so this one-stop shortfall is the shortcut. Some viewers could read it as white in shade, because the side faces away from the key. In a colorless tint where the lining is the main thing you see, though, it most likely reads as a gray lining, which misstates the product, so blocking stands. One correction to the 'expected' text: at my patches, c's lower batts are not lighter than its upper ones (85 at the top, 80 at the bottom)."
+     },
+     {
+      "id": "a-fog-black-base",
+      "verdict": "confirmed",
+      "severity": "blocking",
+      "measurement": "fog-a, column x430-460: L* 29 at y1034, 5-18 over y1036-1052, 17 at y1054; then a skirt of 61.5 (y1060), 68.9 (1064), 80.7 (1076), 91.3 (1100); open floor 94-97. Floor through the bottom panel: x500-530,y1034-1052 is 21-49; x640-670,y1001-1031 is 30-42. c, same column: 28-45 over about 8 px, then 96.2 at y1054. In c, floor seen through the bottom panel is 80-93. Crops: fog_base_2x.png, fog_frontedge_4x.png, fog_a_base_grid_2x.png, fog_480_base_1x.png, fog_300_base_3xview.png.",
+      "reasoning": "The band and skirt reproduce to within 1-2 px. At 2x, the front feet merge into the black band. At 480 and in the 300 px view, the clear cabinet sits on a black strip and no feet show, while c shows them. The lower compartment is clear and unlined, so light reaches the floor under it (c measures 80-93 there). A black floor under it is the signature of an opaque box, so it misstates how the speaker stands. One small correction: seen through the bottom panel the floor is dark gray (L* 20-50). Only the gap band is black (5-18)."
+     },
+     {
+      "id": "b-fog-black-base",
+      "verdict": "confirmed",
+      "severity": "blocking",
+      "measurement": "fog-b, column x430-460: 35 at y1034, 5-23 over y1036-1052; skirt 65.6 (y1060), 73.2 (1064), 80.6 (1070). Through the bottom panel: x500-530,y1034-1052 is 26-62; x640-670,y1001-1058 is 40-60 (c: 79-95). Beside the right side: x640-670,y1061-1079 is 43-63 (c: 95); x725-760,y1010-1030 is 76.4 (c: 94.9). Lower compartment interior: 87-96. Crops: fog_base_2x.png, fog_rcorner_3x.png, fog_480_base_1x.png, fog_floor_stretch75.png.",
+      "reasoning": "This reproduces. b keeps a's black gap band and dark under-floor, and its feet are hidden. Above them the lower compartment is now bright (87-96), so the black base stands out more than in a. In fog_rcorner_3x.png, a pale streak of physical light even escapes onto the floor beyond the painted skirt, which is two light models in one frame. At 480 and 300 px it misstates the base the same way a does."
+     },
+     {
+      "id": "a-ember-dark-interior",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "Patch x620-700,y600-760, L*/C*: a 12.0/36.9, b 22.8/55.9, c 23.3/57.0 (match). Top brace front x340-420,y500-540: a 41.4/86.5, b 48.7/90.7, c 48.7/90.7. Amp box front: 33.2, 43.1, 45.9. Handle recess: 9.6, 19.9, 20.3. Crops: ember_rightside_1x.png, ember_480_abc.png.",
+      "reasoning": "The numbers reproduce. At 1x and 480, a's right side is a dense dark maroon, while b and c are a luminous red with the white parts glowing through. Seen alone, a still reads as a believable deep red box, so it neither looks CG nor misstates the tint at small sizes. It is under-lit by the shortcut, though, which makes it a real fault at full size: fix."
+     },
+     {
+      "id": "a-ember-opaque-skirt",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "ember-a, column x430-460: 2-5 over y1032-1052, then 9.8, 25, 41, 56 at +2/+4/+6/+8 px, 88.8 at +48 px. Front skirt a* by L* bin: +0.5 to +1.1 (c floor there: 95.9-96.1). Beside the right side, y1040 x680-770: 31-75. Dark skirt at the right-front corner, y1060-1080: a* +3 to +6 at L* 21-57. Core front contact (1600 px frame): 29.7 at the edge, 49.5/64.6/71.8 at 2/4/6 px, 84.8 at 62 px; open floor 88-92. Crops: ember_base_2x.png, ember_rcorner_3x.png, ember_base_chroma6x.png, ember_astar_map.png, core_base_low_1x.png.",
+      "reasoning": "Confirmed in substance. Under a red see-through cabinet, a has a black gap and a dark, almost neutral halo, and the feet are lost in it. In c the gap glows red and there is a pale red wedge. Two corrections. First, some red does reach a's dark skirt at the corner (a* up to +6), so it is darkened and nearly neutral rather than showing no red at all. Second, the Core comparison is loose, because the Core sits flat on the floor while the Tropos stands on feet. At 480 the halo reads as an ordinary contact shadow, so fix, not blocking."
+     },
+     {
+      "id": "b-ember-mixed-model",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "Front-left floor, 40x30 patches over x250-500,y1090-1240: b a* +1.5 to +2.9, c +1.4 to +2.5, a -0.6 to +0.7. Max of 15x15 means: b +3.25. Paper at the far bottom-left: b/c +0.3, a -0.6. Right-front corner box x590-780,y980-1110, pixels with a* > +6: a/b/c = 0/0/1188 with an L* > 60 mask; 39/258/1231 with L* > 40. b's front skirt a* by L* bin: +1.6 (L 50-70), +1.8 (70-85); a: +0.8, +0.5. b's gap band: L* 1-9. Crops: ember_base_chroma6x.png, ember_astar_map.png, ember_bg_astar_full.png.",
+      "reasoning": "Confirmed. b has the physical pink spill front-left, which a lacks and c shares, next to the painted darkening and a black gap. One overstatement: red does reach b's base. The skirt carries a* +1.5 to +1.8, and up to +6 at the corner, but it is darkened. What b lacks is brightness, the red line under the front edge and the bright corner wedge. 'No wedge' holds only for floor lighter than L* 60. At full size b's base reads like a's skirt fault, and the spill alone is subtle, so fix."
+     }
+    ],
+    "pick_check": "I agree: c for both tints, adopted as one model for all eight fronts and the 360 turn, and only with the owner's word. I looked at a, b and c at full size, 480 x 600 and 300 px. c is the only version where the clear (Fog) cabinet stands on visible feet instead of a black strip. c shows a white-reading lining, and gives Ember a luminous interior and a physically coherent base: a red line under the front edge, a pale red wedge at the right-front corner, and a neutral cast shadow to the back-right (Ember y960: 84 at x730, rising to 92.4 by x820). b is ruled out by the Fog black base. a is ruled out by that base and the gray lining. Between b and c, the changes are confined to the cabinet and the floor near it (nothing above y500 moves). c is no noisier than a: floor residual std is 0.26-0.32 in c against 0.32-0.42 in a, and there are no fireflies. I saw nothing in c that reads as CG.\n\nCorrections to the critic's case:\n(1) The Core is not 'a thin line and a soft cast shadow'. In front of its base there is also a broad soft contact zone, about L* 72-85 over roughly 60 px in its 1600 px frame, against open paper at 88-92. The Core's lighting (even world, no key) explains that. So c matches the lamps in method (no painted term), but in the row its front contact will look much lighter than the Core's. The open paper also measures 88-92 in the Core frame against 94-97 in the Tropos frame. That is the same in a, b and c, so it is a separate check for the one-ground rule, not a reason to choose among them.\n(2) 'No darkening in front of Ember' is close but not exact. The floor in front is 1.0-1.6 L* below the open floor at the same height, with a pink fan (a* +1.5 to +3) running toward the camera. That is what light from behind passing through red panels would give, so it fits the physics.\n(3) Not all four feet show. Both front feet are clear, and one rear foot shows through the clear panel in Fog; in Ember the rear feet are not visible.\n(4) c's lower Fog batts are not lighter than its upper ones.\n(5) Note: the thin saturated red line under Ember's front edge is physically right, but at full size it could be read as an under-glow.\n\nAll crops and numbers are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-optics/."
+   }
+  },
+  {
+   "part": "buyer",
+   "found": {
+    "findings": [
+     {
+      "id": "fog-a-black-base",
+      "severity": "blocking",
+      "version": "a",
+      "tint": "fog",
+      "where": "Bottom of the cabinet: the paper seen through the clear bottom panel and just in front of the front edge (full size x 330-610, y 1030-1060; 480 tile y about 495-510)",
+      "what": "The painted contact term turns the paper under the clear cabinet near-black. At x 470 it is L* 6-7 over about 20 px, and 13-17 at x 400. It then grades up to 88 over about 36 px. At 480 and in the 300 px tile this reads as a black base plate or a hard black line under a colorless speaker. The four feet are barely visible inside it.",
+      "expected": "Paper visible through the clear bottom, with the feet standing on it, as in fog c (L* 92-97 right under the edge).",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/fog-base480-3x.png, .../critic-buyer/fog-basestrip-2x.png, .../critic-buyer/lowerhalf-480-1x.png, .../critic-buyer/floor-stretch.png. Column profile at x=470, y 1020-1100: a reads 6,6,6,7,7, then 54 rising to 88. c reads 40,29,22 (the bottom rail), then 92-97."
+     },
+     {
+      "id": "fog-b-black-base",
+      "severity": "blocking",
+      "version": "b",
+      "tint": "fog",
+      "where": "Same place as in a: the paper under and in front of the clear bottom panel (x 330-610, y 1030-1060)",
+      "what": "b keeps the same near-black strip: L* 3-14 at x 470 and 11-18 at x 400. The interior above it is now brighter (lower compartment 42-52 vs 32-42 in a), so the strip reads at least as hard as in a. b is a mix: the speaker is lit by the physical model but the floor is still painted.",
+      "expected": "As fog c.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/fog-base480-3x.png, .../critic-buyer/fog-basestrip-2x.png, .../critic-buyer/lowerhalf-480-1x.png"
+     },
+     {
+      "id": "fog-a-grey-lining",
+      "severity": "fix",
+      "version": "a",
+      "tint": "fog",
+      "where": "White batts seen through the right side panel (full size x 630-700, y 560-1000)",
+      "what": "The lining reads mid-grey: L* 64.7 upper and 57.2 lower in my patches (the lane has 63.1 / 56.5), with a cool, metallic-looking gradient. At 480 it can pass for grey felt or brushed-metal panels instead of white batts.",
+      "expected": "Near-white batts in the box's shade, as in b and c (78.5-79.7 upper, 70-78 lower).",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/sidepanel-1x.png, .../critic-buyer/lining-texture-4x.png, .../critic-buyer/fog-abc-480-sheet.png"
+     },
+     {
+      "id": "ember-a-black-lining",
+      "severity": "fix",
+      "version": "a",
+      "tint": "ember",
+      "where": "Right side panel over the batts (x 630-700, y 560-700), and the whole body at tile size",
+      "what": "Seen through the red side, the white lining reads near-black: L* 13.3, C* 39 in my patch (lane 12.1 / 33.5). The side looks like a solid oxblood slab with no lining behind it. At the 480 tile, 42% of the speaker's red pixels are below L* 20. The color is deep, but darker than the light model allows: it understates the light inside the cabinet.",
+      "expected": "The lining readable as lit red behind the side panel, as in b and c (L*/C* 21.5-22.0 / 53.6-54.5).",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/sidepanel-1x.png, .../critic-buyer/tile300-abc-2x.png, .../critic-buyer/ember-abc-480-sheet.png"
+     },
+     {
+      "id": "ember-a-feet-hidden",
+      "severity": "fix",
+      "version": "a",
+      "tint": "ember",
+      "where": "Cabinet base at the front corners (about x 320-340 and 560-580, y 1080-1092)",
+      "what": "The four small feet the speaker stands on cannot be seen at any size in Ember a (b is the same). The base sits in a dark, rounded pool: the floor is L* 2-5 for about 20 px under the front edge, then grades over about 50 px. It reads as a box set flat on the paper.",
+      "expected": "Feet visible at the front corners, as in c.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/ember-basestrip-2x.png, .../critic-buyer/ember-feet-4x.png, .../critic-buyer/ember-base480-3x.png"
+     },
+     {
+      "id": "b-painted-pool-hybrid",
+      "severity": "fix",
+      "version": "b",
+      "tint": "both",
+      "where": "Floor around and under the cabinet",
+      "what": "b lights the speaker physically but keeps the painted pool. It is a rounded rectangle reaching in front of the footprint (plain to see in the L*-stretched floor). In Ember it hides the feet and blacks out the red light under the box. The floor within 25 px of the base is 5.1 L* below open floor (a: 5.7). The lamps beside it in the row have no painted term, so b's ground is made differently from theirs.",
+      "expected": "c's floor.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/floor-stretch.png, .../critic-buyer/contact-tropos-core-2x.png, .../critic-buyer/ember-feet-4x.png"
+     },
+     {
+      "id": "ember-bc-depth",
+      "severity": "note",
+      "version": "c",
+      "tint": "ember",
+      "where": "Whole speaker at the 480 tile (red pixels, a* > 20)",
+      "what": "b and c make Ember lighter and more saturated, not paler. Mean L*/C* goes 26.6/58.1 (a), 30.0/61.8 (b), 30.9/62.2 (c). The share below L* 20 goes 0.42, 0.25, 0.23. The lane's front-above-woofer reading goes from 35 to 43. It still reads as a deep red: level with the Hemisphere OFF (30.4) and darker than the Core OFF (38.0). The horn does not change, so the top of the speaker looks the same in all three.",
+      "expected": "Meets 'deep color'. The look moves from dark oxblood to a glowing deep red.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/ember-abc-480-sheet.png, .../critic-buyer/tile300-abc-2x.png, .../critic-buyer/ember-top-1x.png"
+     },
+     {
+      "id": "c-light-footed-in-row",
+      "severity": "note",
+      "version": "c",
+      "tint": "both",
+      "where": "Floor within 25 px of the base at the 480 tile, and the 300 px row",
+      "what": "With the painted term off, the Tropos casts little floor shadow. The floor within 25 px of the base is only 0.6 L* below open floor in Ember c, against 9.5 beside the Core OFF and 13.6 beside the Mantle. Right of the foot reads 95.5, against 89.2 in a. In the row it is the lightest-grounded of the three standing products. It still clearly stands: the feet touch the paper and a wedge of shadow runs back-right. The difference follows from its feet and see-through walls.",
+      "expected": "No change if the light model is right. The owner should expect a lighter footprint than the lamps.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/row300-lower-1p5x.png, .../critic-buyer/family-stretch-480.png, .../critic-buyer/contact-tropos-core-2x.png"
+     },
+     {
+      "id": "ember-c-red-edge-line",
+      "severity": "note",
+      "version": "c",
+      "tint": "ember",
+      "where": "Under the front bottom edge between the front feet (x 320-600, y 1040-1060), and the floor at the back right",
+      "what": "A thin, saturated red line (L* 43, a* 60; 4-8 px at full size, 2-3 px at 480) runs under the front edge, and a faint pink shadow streak runs back-right. It reads as red light coming through the panels, like the glowing red edges of the Mantle. A buyer may read it as a glow. It was there in b too, but the painted term blacked it out.",
+      "expected": "Keep it; it is physically plausible. Know that it is the one new colored element at the base.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/ember-feet-4x.png, .../critic-buyer/ember-basestrip-2x.png, .../critic-buyer/lowerhalf-480-1x.png"
+     },
+     {
+      "id": "c-360-must-follow",
+      "severity": "note",
+      "version": "c",
+      "tint": "both",
+      "where": "Tropos pages: the front still and the 360 turn",
+      "what": "The brief says the turn uses the a set. If only the fronts move to c, a buyer who starts the turn would see the speaker change: the Ember side near-black again, the Fog lining grey, and the black strip back under the Fog base. I did not see this: no turn frames were in my files.",
+      "expected": "Render the turn with the same model as the fronts, or keep both on the same version.",
+      "sure": "likely",
+      "evidence": "The brief, plus the a-to-c differences measured in this review"
+     },
+     {
+      "id": "row-mantle-ground",
+      "severity": "note",
+      "version": "row",
+      "tint": "ember",
+      "where": "The Mantle tile (older b39 render) in the row of four",
+      "what": "In every version the Mantle's ground is darker than the other three. Its left wall is L* 75.7, against 83.5-87.1 for the others, and the floor within 25 px of its base is 13.6 L* below open floor. It reads as a moodier corner of the row. Tropos, Hemisphere and Core match each other: backdrop top-right 92.9-93.3, open floor about 95-97.",
+      "expected": "The Mantle on the same ground when its deck is re-rendered.",
+      "sure": "certain",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/row300-ember-abc.png, .../critic-buyer/family-stretch-480.png, .../critic-buyer/family-480.png"
+     },
+     {
+      "id": "a-neutral-pool-vs-lamps",
+      "severity": "note",
+      "version": "a",
+      "tint": "ember",
+      "where": "Floor in front of and to the right of the cabinet",
+      "what": "a's painted pool is a neutral grey. Lit by the lamps alone, light through red acrylic tints the paper: in c there is a pink streak back-right and the floor at bottom center reads a* +2.1, close to the Core OFF's +2.7. a's floor stays at a* 0, so in the row a's Tropos is the only red product without that warm spill.",
+      "expected": "As c.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/ember-feet-4x.png. Ground patches at the 480 tile: floor bottom-center a* is -0.0 in a, 2.1 in b and c, 2.7 for the Core OFF."
+     },
+     {
+      "id": "c-lining-texture",
+      "severity": "note",
+      "version": "c",
+      "tint": "both",
+      "where": "The lit lining on the right side, at full size",
+      "what": "Once lit, the lining shows more fine texture. High-pass L* std goes from 1.07 to 2.32 (Ember side upper) and from 4.44 to 5.39 (Fog). At 4x it reads as an even felt grain, not blotches or fireflies. Isolated bright pixels in the body do not rise: Ember 589 to 626, Fog 2628 to 1861. It cannot be seen at 480. The floor shows no caustic speckle: its high-pass L* std is 0.26-0.39 in all versions.",
+      "expected": "Nothing needed.",
+      "sure": "likely",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/lining-texture-4x.png, .../critic-buyer/ember-upperfront-3x.png, .../critic-buyer/fog-upperfront-3x.png"
+     }
+    ],
+    "pick_ember": "c",
+    "pick_fog": "c",
+    "why": "Use c for all eight studio fronts, and render the 360 with the same model; this needs the owner's word, since a is approved and live.\n\nAt 480 x 600, c is the version where the speaker reads most like the real part. The clear Fog box stays clear down to the paper and stands on its four small feet; a and b put a near-black strip under it (L* 3-17) that reads as a black base. The white lining reads white in Fog and as lit red in Ember, instead of grey (Fog a, L* 57-65) or near-black (Ember a, L* 12-13). Only the lights shade the floor, the same way as on the lamps beside it.\n\nEmber stays deep in c. At the tile its red body goes from 26.6/58.1 (L*/C*) to 30.9/62.2: brighter and more saturated, level with the Hemisphere's red and darker than the Core's. The horn does not change at all.\n\nb is the worst mix: the speaker is lit physically but sits in a painted pool, which hides the feet and keeps Fog's black strip. a is the richest-looking Ember at 300 px, but it gets there by understating the light inside the cabinet.\n\nIn the 300 px row, all three versions read as one family on one ground: backdrop and open paper match within a few L* across Tropos, Hemisphere and Core. The Mantle is the odd tile in every version, with a darker left wall (75.7 vs 83.5-87.1). Only c makes the Tropos's ground the same way as the lamps. It also makes the Tropos the lightest-footed product in the row (0.6 L* of darkening around its base vs 9.5 for the Core), though it clearly still stands.\n\nWhat a buyer would notice if the site moved from a to c:\n- Ember: the cabinet glows a brighter, more saturated red, and its side shows the lining panels instead of black. Four small feet appear, the grey pool under it is gone, and a thin red line of light sits under the front edge.\n- Fog: the lining turns white, the black strip under the base disappears, the paper shows through the clear bottom, and the box stands on its feet.\n- The horn and driver look the same. In the 300 px row the change is slight.\n- On a 2x screen the 480 tile shows nearly the full 1000 px frame, so these full-size details are visible there too.\n\nAll crops are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/critic-buyer/.",
+    "horn_unchanged_explained": "This is correct, and expected. The horn is a thin shell standing in open air. What the camera sees through it is the paper behind, lit directly by the lights, plus the shell's own reflections. The shortcut used in a only affected light reaching diffuse surfaces behind acrylic, meaning the lining inside the cabinet, and the horn has nothing like that behind it. Caustics only show where they land on a diffuse surface (paper, lining), not on a glossy shell. The painted contact term is only on the floor.\n\nSo the horn's color has no reason to move, and it does not. My patch on the horn mouth reads 42.8/87.7, 42.5/87.2 and 42.5/87.3; the lane has 35.6/72, with the throat at 16.7/35, in all three.\n\nPixel by pixel, a to b changes only glossy highlights in the horn region: the sheen streaks, the rim, and the chrome of the compression driver seen through the throat (mean change 1.25 levels in Ember, 3.66 in Fog). That fits glossy filter 0 and clamp 0, not a tint change. b to c is identical (0.16 / 0.21). For a buyer, the top half of the speaker is the same picture in all three; only the cabinet and the floor change.",
+    "contact_in_c": "Yes, it stands; it does not float. At 480 the two front feet show as dark pads touching the paper at the front corners, and the bottom edge sits a few pixels above the paper on them. The lights cast a faint wedge of shadow back-right, which is pink in Ember because the light comes through red acrylic. In Ember c a thin, saturated red line (L* 43, a* 60) runs under the front edge between the feet. In Fog c the paper shows through the clear bottom.\n\nWhat c loses is the dark rounded pool of a and b. At the 480 tile, the floor within 25 px of the base is only 0.6 L* below open floor in Ember c, against 5.7 in a and 5.1 in b. Right of the foot reads 95.5, against 89.2 in a.\n\nNext to the lamps, which use the same model, it is the lightest-footed product in the row: 9.5 L* of darkening around the Core OFF's base and 13.6 around the Mantle's. That follows from its feet and see-through walls. In the 300 px row it reads as a clean, light contact, not as a cut-out.",
+    "measured": [
+     "Row mock (b42/row-ember-v2.png): four 600x750 tiles with 10 px gutters, each the full frame resized with LANCZOS (mean difference from the source 0.0-0.05 levels). My 300 px rows use full frames at 300x375, in home order: Tropos, Mantle, Hemisphere OFF, Core OFF.",
+     "Ember whole speaker at the 480 tile (red pixels, a* > 20), mean L*/C*: a 26.6/58.1, b 30.0/61.8, c 30.9/62.2. Share below L* 20: 0.42 / 0.25 / 0.23. For comparison, Hemisphere OFF 30.4/49.8 and Core OFF 38.0/59.3.",
+     "My Ember patches at full size, a/b/c. Horn mouth 42.8/87.7, 42.5/87.2, 42.5/87.3. Front top 35.9/75.3, 44.1/81.8, 44.3/82.0. Right side upper 13.3/39.3, 21.5/53.6, 22.0/54.5.",
+     "My Fog patches (L*), a/b/c. Front top 82.1, 91.9, 92.4. Side lining upper 64.7, 78.5, 79.7. Side lining lower 57.2, 70.0, 78.2.",
+     "Horn region pixel change: a to b, mean 1.25 levels (Ember) and 3.66 (Fog), only on glossy highlights (sheen streaks, rim, driver chrome). b to c: 0.16 / 0.21.",
+     "Fog base, column at x=470 (y 1020-1100). a: near-black band L* 6-7 for about 20 px, then 54 rising to 88. b: 3-14, then 61 rising to 93. c: bottom rail 40-22, then floor 92-97 directly under it.",
+     "Ember base, column at x=400. a and b: band L* 2-5. c: rail about 20, then a red line L* 43 / a* 60, then floor 95.",
+     "Floor within 25 px of the base at the 480 tile, darkening against open floor (median L*): Tropos Ember a 5.7, b 5.1, c 0.6; Core OFF 9.5; Mantle 13.6.",
+     "Floor patches (L*), a/b/c. Right of the foot: Ember 89.2, 89.7, 95.5; Fog 90.6, 92.5, 96.6. Behind-right: Ember 84.7, 85.6, 92.4; Fog 85.6, 89.1, 94.3. Far floor 95.8-96.3 in all.",
+     "Ground across the four products at the 480 tile. Backdrop top-right 92.9-93.5 in all. Left wall: Tropos 85.1-85.5, Hemisphere 83.5, Core 87.1, Mantle 75.7. Floor bottom-center a*: Tropos a -0.0, b and c +2.1, Core +2.7.",
+     "Noise. Floor high-pass L* std 0.26-0.39 in all versions (no caustic speckle). Isolated bright pixels in the body: Ember 589 / 617 / 626, Fog 2628 / 2159 / 1861 (no added fireflies). Lining fine texture: Ember 1.07 rising to 2.32, Fog 4.44 rising to 5.39; it reads as felt at 4x."
+    ]
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "fog-a-black-base",
+      "verdict": "confirmed",
+      "severity": "blocking",
+      "measurement": "Column x=470, full size (3 px mean): a is L* 6-7 from y 1044 to 1060, then 18 at 1062, then 55 at 1064 rising to 88 by y ~1098. c is 20-40 at y 1044-1054 (the bottom rail), then 94-97 from 1056. At x=400 a is 13/15/17 at y 1040-1044. Under the box at x=400, y 1000-1020, a is 57-67 and c is 96-97. It survives downsizing. In the 480 tile a has L* 5-7 over 9 px at x 470 and 16 px below L* 20 at x 520; at 300 px, 6 px below 20. c's darkest base pixels are 19-37, and only on the rail. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/fog-480-lower-2x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/fog-480-abc-1x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/fog-300-abc-1x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/fog-feet-4x.png",
+      "reasoning": "The numbers and the look both reproduce. At 480 x 600 (1x), the bottom compartment of the colorless box reads smoked grey and there is a solid black line along the base. Side by side with c it reads as a dark base. The line is still there at 300 px. The physics is wrong: the key comes from the front-left through a clear front panel, and the physical render (c) has bright paper right up to the edge and under the box. One correction: at x 470 about half of the 20 px near-black run is the cabinet's own bottom rail, which is dark even in c (20-40) and is made darker by the painted floor seen through it. The floor part is 6-8 px, followed by the grade. The front foot posts can be seen above the floor, but their bottoms merge into the black (row y 1024: 6-13 across the foot, where c shows the foot at 19-26 on paper at 96). 'Barely visible' is fair."
+     },
+     {
+      "id": "fog-b-black-base",
+      "verdict": "confirmed",
+      "severity": "blocking",
+      "measurement": "x=470: b is 11-18 on the rail (y 1044-1054), then 2/2/3 at y 1056-1060, 20 at 1062, then a grade to about 94. x=400: 11/15/18 at y 1040-1044. The 480 tile has a minimum of 1-2 at x 470 and 520 (a: 5-6). The lower compartment is brighter than in a: x 400, y 1026-1038 reads a 31-39 and b 41-47; patch x340-560, y985-1025 reads a 67.0, b 79.4, c 90.9. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/fog-480-lower-2x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/fog-base-full-1p5x.png",
+      "reasoning": "It reproduces. The strip is the same painted band as in a. Its core is darker (2-3 against 6-7), and it sits under a brighter interior, so at 480 the black base line is at least as hard as in a, as the finding says. The stated range '3-14 at x 470' is really 2-18 once the rail part is counted. That does not change the finding."
+     },
+     {
+      "id": "fog-a-grey-lining",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "The critic's own boxes reproduce exactly: side up (630-700, 560-700) is a 64.7, b 78.5, c 79.7; side low (630-700, 880-1000) is a 57.2, b 70.0, c 78.2. My grid on the batts alone (x 610-700, y 600-870): a runs from 70.9 at the top to 49.3 at the bottom, a 20 L* gradient; b runs 83.8 to 76.9; c 84.9 to 79.7. C* is about 2 in all three. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/sidepanel-x560-760-y420-1080-1x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/body-480-1x.png",
+      "reasoning": "At 1x, a's batts look like grey brushed-sheet panels with a smooth vertical sheen; b and c look like white felt in shade. At 480 the difference shows as grey against near-white, but a still reads as a lining and not as CG, so I keep 'fix'. Small correction: the critic's 'lower' box (y 880-1000) is mostly the lower compartment below the batts, not the batts themselves. My batt-only grid gives the same conclusion."
+     },
+     {
+      "id": "ember-a-black-lining",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "Critic's box (630-700, 560-700): a 13.3/39.3, b 21.5/53.6, c 22.0/54.5. My grid on the batts (x 610-700, y 600-870): a 15.7/43.7 falling to 7.6/29.5; b 24.9/59.9 to 22.4/55.8; c 25.4/60.7 to 23.5/57.7. Red pixels (a*>20, C*>25) below L* 20 at the 480 tile: a 41%, b 24%, c 22% (critic: 42%). Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/sidepanel-x560-760-y420-1080-1x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/body-480-1x.png",
+      "reasoning": "It reproduces. In a the side reads as a dark oxblood slab; in b and c the two batt panels read as lit red. The faint panel divider can still be seen in a, so 'no lining behind it' is a little strong. At 480 a reads as deep color, not as wrong or CG, so 'fix' is right. The fault is technical: a is darker than the physical model gives."
+     },
+     {
+      "id": "ember-a-feet-hidden",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "The finding has the place partly wrong. In c the left front foot is at about x 316-349, y 1020-1026, and the right front foot at about x 566-599, y 1082-1088; the finding's 'y 1080-1092' fits only the right foot. Rows through the feet: at y 1024, a reads 1-5 and b 1-8 across foot and floor, while c shows the foot at 9-13 with 19-27 on either side. At y 1086, a and b read 0-1 throughout, while c reads 2-10 for the foot against 21-31. x=470 in a: 2-3 from y 1044 to 1060, then 9, then a grade from 50 at 1064 to about 88 at 1108. In c, x 470, y 1044-1054 (the rail) reads 17-19. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/ember-feet-4x.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/ember-480-lower-2x.png",
+      "reasoning": "Even at 4x, a and b show only a dark lobe under each front corner; the foot cannot be told apart from the pool. In c both front feet are clear pucks. As with Fog, the '20 px of L* 2-5 under the front edge' includes about 11 px of the cabinet's own bottom rail; the floor part is 6-8 px, followed by a grade of about 45 px. At 480 nobody misses feet without a comparison, so 'fix' is right."
+     },
+     {
+      "id": "b-painted-pool-hybrid",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "measurement": "Floor stretched to L* 75-100: a and b have the same rounded dark pool, reaching in front of the footprint and to the right. c has only a soft cast shadow to the right (darkest 15 px mean: Ember 83.3, Fog 87.3, against open floor about 96) and dark points at the feet. Ember x=470, y 1056-1058: c has a red line at L* 34-42; b reads 1-3 there. b and c differ only in the painted term, so the term blacks the line out. The '5.1 L* (a 5.7)' figure did not reproduce with my rings, though the direction does. Full size, 3-25 px below the front edge against 60-90 px out: Ember a 24.7, b 23.4, c -1.6; Fog a 35.0, b 34.0, c -0.1. At the 300 tile, ring 2-8 px against 35-60 px: Ember a 3.5, b 3.2, c -1.7; Fog a 3.2, b 2.1, c 1.3. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/floor-stretch-75-100.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b55/verify-buyer/ember-frontedge-bc-3x.png",
+      "reasoning": "The shape, the hidden feet and the missing red line all reproduce. The size of the pool depends on how close to the base you measure: right at the front edge it is 23-35 L*, far more than the critic's 5.1. In Ember, b's pool alone reads as a natural soft contact shadow at 480, so 'fix'; the blocking consequence in Fog is already covered by fog-b-black-base."
+     }
+    ],
+    "pick_check": "I agree: c for Ember and c for Fog. Five things checked:\n\n1. Fog c is the only version where the colorless box reads clear at 480 and at 300. There is no black base band, the paper shows through the bottom, the lining reads as white felt, and the front feet are distinct.\n\n2. Ember c stays deep. Red body at 300: a 26.9/58.5, c 31.2/62.7 (critic: 26.6/58.1 to 30.9/62.2). That is level in L* with the Hemisphere (30.5/50.0) and darker than the Core (38.0/59.6). a's extra depth comes from the shortcut: 41% of its red pixels are below L* 20, against 22% in c.\n\n3. c has no faults of its own that I could find:\n   - No fireflies or grain from clamp 0: at most one isolated hot pixel per frame, and floor and backdrop noise is the same in a, b and c.\n   - The horn is unchanged (Ember 42.5-42.8/87.2-87.7; Fog 92.9/4.9).\n   - The red line under the front edge and a faint warm tint on the floor (a* 1.8-2.6 against 0.2 on open floor) are plausible light through red acrylic.\n   - The box still stands: front feet, plus a soft cast shadow to the right about 9-13 L* deep.\n\n4. The row claims reproduce in kind:\n   - Tropos, Hemisphere and Core walls and paper agree within about 2-3 L*.\n   - The Mantle's left wall is darker (79.0 against 86.4-88.4).\n   - The Tropos in c is the lightest-footed: about 0 L* of darkening at the base against about 10 for the Core.\n\n5. b is no worse than a on any single measure (its lining is fixed), but it is the inconsistent mix, so it is not a candidate.\n\nCaveats for the owner:\n- 'Four small feet appear' overstates it for Ember c: only the two front feet show. Fog c shows the two front feet and probably a third through the clear side.\n- 'c for all eight' rests on two tints. Each of the other six needs its own c render checked before it replaces a live front.\n- The 360 must move to c's model with the fronts, or it will disagree with them.\n- a is approved and live, so this needs the owner's word."
+   }
+  }
+ ]
+}
