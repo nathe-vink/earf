@@ -215,6 +215,13 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
                     excl(cp, [o_ for o_ in cut_obs if o_ is not co_] or [sweep])
                 else:                         # a lamp under two cutters: its copy now meets this one too
                     col_ = cp.light_linking.blocker_collection; col_.objects.unlink(co_)
+    if os.environ.get('HOUSE_FLOORCOPY_K'):
+        # HOUSE_FLOORCOPY_K 'fill:0.5,horn:1' (2026-11-21, the critics on the Core LIT: its brightest ground was the floor
+        # at the left, lit by the fill's sweep-only copy, brighter than the lamp's own pool): those copies' energy times K
+        for it_ in os.environ['HOUSE_FLOORCOPY_K'].split(','):
+            nm_, k_ = it_.split(':'); cp_ = bpy.data.objects.get('house-' + nm_ + '-floor')
+            if cp_ is not None:
+                cp_.data.energy *= float(k_); print('FLOORCOPY', cp_.name, k_)
     if os.environ.get('HOUSE_ROOM', '1') == '1':
         room(bpy, s)
     if os.environ.get('HOUSE_CARD'):
