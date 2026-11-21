@@ -1017,7 +1017,12 @@ def build(frame, samples, scale):
         bx0, bx1, by0, by1 = (float(v) for v in os.environ['BORDER'].split(','))
         sc.render.use_border = sc.render.use_crop_to_border = True
         sc.render.border_min_x, sc.render.border_max_x, sc.render.border_min_y, sc.render.border_max_y = bx0, bx1, by0, by1
-    sc.cycles.caustics_refractive = True; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 in ('dome', 'orb') else '20')) * 2.0 ** (-sc.view_settings.exposure)   # a radiance, in display terms   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
+    if os.environ.get('HOUSE_TEST_NOGLOSS') == '1':   # (2026-11-21, test only, the coordinator: outlined shapes on the lit glows)
+        # every studio prop (softbox faces and housings, flags, doors, cutters, cards) hidden from glossy and transmission
+        for o_ in [o for o in sc.objects if o.type == 'MESH' and o.name.startswith('house-')]:
+            o_.visible_glossy = o_.visible_transmission = False
+            print('NOGLOSS', o_.name)
+    sc.cycles.caustics_refractive = os.environ.get('REFR_CAUSTICS', '1') == '1'; sc.cycles.sample_clamp_indirect = float(os.environ.get('CLAMP', '0' if kind0 in ('dome', 'orb') else '20')) * 2.0 ** (-sc.view_settings.exposure)   # a radiance, in display terms   # round 3: the clamp cut the bore reflector's share (78 % out unclamped, 57 % clamped); sc.cycles.blur_glossy = 1.0
     # the corrected method (2026-11-16): Filter Glossy off (scene.render_settings sets 1.0, which darkened light through glass)
     sc.cycles.blur_glossy = 1.0 if os.environ.get('RIG_LEGACY') else float(os.environ.get('BLUR', '0'))
     # round 3 (the coordinator's photometry check): the bore's reflector sends light to the floor by reflection, a
