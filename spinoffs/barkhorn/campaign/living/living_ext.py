@@ -313,3 +313,38 @@ def shadow_ray_report(bpy, name, p, kit):
                 found.append((m.name, [f'{l.to_node.type}.{l.to_socket.name}' for l in n.outputs['Is Shadow Ray'].links]))
     print('SHADOW RAY LINKS LEFT:', len(found), found[:60])
     return []
+
+
+def softbox(bpy, name, p, kit):
+    """A real softbox (B1, 21 Nov): a diffuser face `size` [w, h] m glowing at `strength` (scene-linear radiance, the
+    engine panel's unit) and `color`, in a black box `depth` m deep behind it, at `position`, facing `target`. Every ray
+    visibility is left on (a mesh's defaults: camera, diffuse, glossy, transmission, shadow), so it is seen, lights and
+    casts shadows as one. (A Cycles AREA lamp of the same lighting reads about a tenth as bright seen head-on, so seen
+    through a clear horn it does not stand for a lit diffuser.)"""
+    import bmesh
+    from mathutils import Vector
+    w, h = p['size']; dpt = float(p.get('depth', 0.25))
+    def hexlin(s):
+        s = s.lstrip('#'); c = [int(s[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+        return tuple(x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4 for x in c)
+    em = bpy.data.materials.new(f'{name}-diffuser'); em.use_nodes = True; nt = em.node_tree
+    b = nt.nodes['Principled BSDF']; b.inputs['Base Color'].default_value = (0.9, 0.9, 0.9, 1); b.inputs['Roughness'].default_value = 0.9
+    b.inputs['Emission Color'].default_value = (*hexlin(p.get('color', '#FFFFFF')), 1); b.inputs['Emission Strength'].default_value = float(p['strength'])
+    bk = bpy.data.materials.new(f'{name}-body'); bk.use_nodes = True
+    bb = bk.node_tree.nodes['Principled BSDF']; bb.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); bb.inputs['Roughness'].default_value = 0.8
+    bm = bmesh.new()
+    # the face at local z 0 facing -z (aim() turns -z to the target), the body behind it to +z
+    v = [bm.verts.new(c) for c in ((-w / 2, -h / 2, 0), (w / 2, -h / 2, 0), (w / 2, h / 2, 0), (-w / 2, h / 2, 0),
+                                   (-w / 2, -h / 2, dpt), (w / 2, -h / 2, dpt), (w / 2, h / 2, dpt), (-w / 2, h / 2, dpt))]
+    faces = [((0, 3, 2, 1), 0), ((4, 5, 6, 7), 1), ((0, 1, 5, 4), 1), ((1, 2, 6, 5), 1), ((2, 3, 7, 6), 1), ((3, 0, 4, 7), 1)]
+    for idx, mi in faces:
+        f = bm.faces.new([v[i] for i in idx]); f.material_index = mi
+    bm.normal_update()
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free(); me.materials.append(em); me.materials.append(bk)
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    ob.location = Vector(p['position'])
+    ob.rotation_euler = (Vector(p['target']) - ob.location).to_track_quat('-Z', 'Y').to_euler()
+    bpy.context.view_layer.update()
+    zs = [(ob.matrix_world @ vv.co).z for vv in me.vertices]
+    print('SOFTBOX', name, 'face', w, 'x', h, 'strength', p['strength'], 'z', round(min(zs), 3), 'to', round(max(zs), 3))
+    return [ob]

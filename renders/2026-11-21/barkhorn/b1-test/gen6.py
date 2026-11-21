@@ -13,6 +13,7 @@
           The flag's top edge sits on the line to (8.25, 5.55, 1.78), just over the woofer (cone top z 1.73 on the
           front), so the cone and the sill are in its shadow (penumbra about 7 cm).
       t3  steep: a 14 cm head on the track at (8.25, 4.95, 3.35), 0.6 m in front of the bay, 14 deg, at the same aim.
+      t4, t5  no front head; the softbox a real one (a mesh diffuser in a body); track-bay1 times IRR (gen6.py t4 3).
     python3 gen6.py VARIANT [IRR]  ->  fixed6-VARIANT.json"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +26,15 @@ L.pop('ceiling-light', None); L.pop('track-front1', None)
 L['bay-softbox'] = {'type': 'area', 'shape': 'RECTANGLE', 'size_m': [1.4, 0.9], 'position': [8.05, 4.9, 3.0],
                     'target': [8.25, 5.6162, 2.19], 'power_w': 17.0, 'color': '#FFE2C0', 'camera': True}
 AIM = [8.25, 5.55, 1.88]
+if v.startswith('t4') or v.startswith('t5'):
+    # t4/t5: the softbox as a real one (a glowing diffuser in a black body, living_ext.softbox) at the same place,
+    # strength 6 (the live card's mean: 10 on its 0.25-1-0.25 ramp), and the steep bay head over the near speaker
+    # (track-bay1, planet_bar.py:136, 'the cone in its cabinet's shade') raised by `irr` times, no front head
+    L.pop('bay-softbox')
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
+                              'fn': 'softbox', 'size': [1.4, 0.9], 'depth': 0.2, 'position': [8.05, 4.9, 2.98],
+                              'target': [8.25, 5.6162, 2.19], 'strength': 6.0, 'color': '#FFE2C0'})
+    L['track-bay1']['irradiance'] = round(L['track-bay1']['irradiance'] * irr, 2)
 if v.startswith('t2'):
     L['track-front1'] = {'type': 'area', 'shape': 'DISK', 'size_m': [0.05, 0.05], 'position': [8.6, 3.9, 3.35], 'target': AIM,
                          'irradiance': irr, 'spread_deg': 14, 'color': '#FFE2C0'}
