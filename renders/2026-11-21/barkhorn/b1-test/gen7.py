@@ -6,7 +6,7 @@ the frame). fixed-7b (the quarter test with grids: the record wall stayed at 45 
 than the cone's, ratio 0.38): skirts only, and the ceiling-flush diffuser removed. Optionally `wall` scales the record-wall heads (a real dimmer).
     (fixed-7c, no skirts and the wall heads at 0.35: the ratio 0.35 without the ceiling diffuser, so that diffuser was
     what lit the batts from above; the record wall 42.3, the left wall 10.0)
-    python3 gen7.py [WALL] [--grid] [--noskirt] [--diffuser] [--strength S] [--out NAME]  ->  fixed7.json and fixed7q.json (the quarter test: 800 x 450, 96 samples)"""
+    python3 gen7.py [WALL] [--grid] [--noskirt] [--diffuser] [--diffuser-strength D] [--strength S] [--out NAME]  ->  fixed7.json and fixed7q.json (the quarter test: 800 x 450, 96 samples)"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 wall = float(sys.argv[1]) if len(sys.argv) > 1 and not sys.argv[1].startswith('--') else 1.0
@@ -24,6 +24,11 @@ for p in s['set']['props']:
 # not light, and it lit the record wall below it
 if '--diffuser' not in sys.argv:
     s['set']['props'] = [p for p in s['set']['props'] if not (p.get('fn') == 'softbox' and p['size'] == [1.4, 0.9])]
+# (fixed-7e) --diffuser-strength D: the ceiling diffuser at D (fixed-6: 6); fixed-7d's room passed, its ratio 0.50
+if '--diffuser-strength' in sys.argv:
+    for p in s['set']['props']:
+        if p.get('fn') == 'softbox' and p['size'] == [1.4, 0.9]:
+            p['strength'] = float(sys.argv[sys.argv.index('--diffuser-strength') + 1])
 # (fixed-7d) --strength S: the frontal softboxes at S (fixed-6: 40)
 if '--strength' in sys.argv:
     for p in s['set']['props']:
