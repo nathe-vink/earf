@@ -55,6 +55,11 @@ if v.startswith('mv') or v == 'full' or v == 'black':
         v_panel = 'w'                        # and w2's warm opal over the near niche's back, strength 2
         P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.64, 0.58], 'depth': 0.005,
                   'position': [8.25, 6.02, 2.22], 'target': [8.25, 4.0, 2.22], 'strength': 2.0, 'color': '#FFE2C0'})
+    if v == 'full':
+        # the same panel on the far bay, so the pair is one product (from this seat its back is behind the right upright)
+        P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.64, 0.58], 'depth': 0.005,
+                  'position': [5.55, 6.02, 2.22], 'target': [5.55, 4.0, 2.22], 'strength': 2.0, 'color': '#FFE2C0'})
+        s['render'].update(samples=512, adaptive=0.003)      # P5/P6: the far batts' blotches were undersampling
 if v.startswith('w'):
     # (a, wide) the opal panel across the whole near niche back above the cabinet (x 7.93-8.57, z 1.93-2.51), warm
     # (#FFE2C0, the bar's lamps) where a1/a3's cool #FFF4E6 read blue beside the horn; the horn's left half saw past a1
