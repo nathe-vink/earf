@@ -1,0 +1,303 @@
+{
+ "results": [
+  {
+   "part": "facts",
+   "found": {
+    "problems": [
+     {
+      "id": "poison-match-overstated",
+      "severity": "blocking",
+      "where": "msg-draft.md line 7 (message 1, Poison bullet)",
+      "what": "\"They match closely\" is false by the measure in the brief. The Poison pair (pendant 1x, Core 0.45) measures 3.3; my per-pixel median gives 2.7. Both are over the 'about 2' line. The next bullet calls Haze (4.4, my median 3.2) and Ice (4.7) 'not a match', so the message draws its line between 3.3 and 4.4, not at 2. By eye, at matched scale (final/facts/poison-off.png), the 0.45 ball is a slightly duller green than the shade (mean dC -8.0; median C* 41 against 48). The parenthetical then says the lighter alternative 'matches even more closely', which treats both as matches. Only the alternative (1.3; my median 1.5) is under the line. He has a 'must match' rule, so this hides the actual trade: depth against a match.",
+      "fix": "Poison: the Core deeper; the pendant stays. They come close but do not quite match, and they keep the speaker's deep green. (A lighter pendant with today's Core does match, but both lamps would sit lighter than the speaker's cabinet.)"
+     },
+     {
+      "id": "ember-match-at-line",
+      "severity": "fix",
+      "where": "msg-draft.md line 5 (Ember bullet)",
+      "what": "\"They match closely\" for a pair that measures 2.8, just over the 'about 2' line (my median: 2.0). The bullet uses the same words as Acid, which is at 2.0. The first check asked for 'just over the line' instead of 'matched'.",
+      "fix": "They nearly match, though the pendant now sits lighter than the speaker's cabinet."
+     },
+     {
+      "id": "lit-cross-lamp",
+      "severity": "fix",
+      "where": "msg-draft.md line 17 against line 19 (message 2)",
+      "what": "Line 17 tells him to compare each lamp only with its own today, because the lamps are not one exposure. I confirmed this. In checkset.sh, the pendant LIT is HOUSE_STUDIO 3.5 at EV -5.15 and the Core LIT is 0.714 at EV -2.85. In the audits the studio lights scale with HOUSE_STUDIO but the LED does not: Core fill goes 1.72 to 2.047 while led-red stays 2.978; pendant fill is 11.116, which is 3.5 x the OFF 3.176. Line 19 then compares pendant with Core. 'Glow alike today' (Ember 43.8 against 42.0, Poison 35.9 against 37.0) and 'today the Core is much brighter' (Smoke 14.4 against 30.0) are true only between these two pictures. By line 17's own account, in one room each pendant would glow brighter, so neither 'alike' nor 'Core much brighter' describes the lamps. All my LIT medians reproduce meas-lit-r3.",
+      "fix": "Add 'in these pictures' to those two sentences. Or state each lamp against its own today: the lighter pendants glow brighter than today (Ember, Acid, Ice, Haze); the deeper Cores glow dimmer (Acid a little, Poison, and Smoke much dimmer)."
+     },
+     {
+      "id": "acid-alternative-missing",
+      "severity": "fix",
+      "where": "msg-draft.md line 6 (Acid bullet)",
+      "what": "The brief's Acid alternative is missing: a 2.1x pendant with today's Core. It measures closer than the proposal (1.7, my median 1.6, against 2.0, my median 2.3). It leaves the Core and its base as they are: the base sits 4.8 from that pendant, against 8.1 for the proposal, and there is no darker olive base. So no Core re-render and no Core lumen re-measure for Acid. Its cost: a lighter pendant, 6.6 from the speaker's body against 2.4. The message gives Poison's alternative but not this cheaper and closer one.",
+      "fix": "Add one line: '(A lighter pendant with today's Core also matches and leaves the Core as it is, but it measures further from the speaker's body color.)'"
+     },
+     {
+      "id": "american-spelling",
+      "severity": "fix",
+      "where": "msg-draft.md line 6 'colour', line 9 'grey'",
+      "what": "His rule is American English. These are the only two British spellings I found in the message.",
+      "fix": "Change 'colour' to 'color' and 'grey' to 'gray' ('smoky gray')."
+     },
+     {
+      "id": "ember-lit-clip",
+      "severity": "note",
+      "where": "pours-lit.jpg, Ember 'pendant, proposed'; message 2",
+      "what": "In checkset/red/hemi-lit-L0.7.png, 3.0% of the shade mask has a channel of 250 or more. It sits in the upper glow (rows 542-614 of 1000), with a mean RGB of 251/71/66, and shows as a coral band on the sheet at full size (final/facts/ember-lit-top.png). Today's 1.8x clips 0.00%. The brief lists this, but the message does not. The site's lit Ember pendant pictures would carry it unless they are exposed differently.",
+      "fix": "Optional line in message 2: 'When lit, the top of the lighter Ember shade clips to coral at this exposure; the site pictures would need it handled.'"
+     },
+     {
+      "id": "dust-bold-columns",
+      "severity": "note",
+      "where": "msg-draft.md line 3; sheet headers 'pendant, proposed' / 'Core, proposed' over the Dust row",
+      "what": "The line 'then what I'd propose (the bold columns)' is not true for Dust. Its bold columns hold the cells labelled 'tried', and line 10 proposes keeping Dust. The sentence also describes the layout that the headers already show.",
+      "fix": "Drop the sentence, or add '(for Dust, what we tried)'."
+     },
+     {
+      "id": "poison-base",
+      "severity": "note",
+      "where": "pours-off.jpg, Poison 'Core, proposed'; msg-draft.md line 7",
+      "what": "At 0.45 the Poison Core's base turns a darker, duller green: my median L*/C* goes from 37.7/47.7 to 25.4/29.8, and the base's distance from the speaker's body goes from 6.4 to 8.9. It is visible at full size. The message notes the same kind of change for Acid's base but not for this one. It does sit slightly closer to the pendant (8.4 to 7.3).",
+      "fix": "Optional: add 'and its base turns a darker, duller green'."
+     },
+     {
+      "id": "poison-alt-horn",
+      "severity": "note",
+      "where": "msg-draft.md line 7, the parenthetical",
+      "what": "'Both lamps would sit lighter than the speaker' is only partly true. The 0.55x pendant and today's Core sit 11.7 and 11.2 from the speaker's cabinet (body), but on its horn green: 1.2 and 2.1 from the horn.",
+      "fix": "Write 'lighter than the speaker's cabinet', as the Ember bullet does."
+     }
+    ],
+    "verdict": "send after the fixes",
+    "summary": "Both sheets are right. The message needs one false claim fixed before it goes: it tells him the Poison pair \"match closely\", but it measures 3.3, over the \"about 2\" line.\n\n**The sheets**\n- Building them fresh from sheets.py gives byte-identical copies of pours-off.jpg and pours-lit.jpg.\n- All 70 cells use the frame sheets.py names. Every frame is 4:5, so nothing is cropped.\n- Every label matches its pour, checked against the brief and the 17 Nov record (#55).\n- Every OFF cell is an OFF frame and every LIT cell is a LIT frame.\n- Within each lamp's column the background reads the same: upper corners agree within 0.1 L* (OFF) and 0.3 L* (LIT).\n- The new Poison 0.45 frames (OFF 18:11, LIT 18:18) match the other frames in background and noise.\n- Every Core LIT base reads black (median L* 0.0 to 8.3).\n\n**The numbers**\nEvery number in the brief reproduces on my own code: 11.5 to 2.8, 15.4 to 2.0, 13.6 to 3.3, 14.0 to 4.7, 9.3 to 4.4, 15.4 to 5.9, Dust 8.2 / 8.7 / 8.0, the to-speaker figures, and all LIT medians and clips. The audits confirm the 2.3-stop LIT exposure difference.\n\n**The message**\n- **Blocking:** \"They match closely\" for Poison is false by that measure (3.3; my median 2.7). The next bullet calls Haze (4.4, median 3.2) and Ice (4.7) \"not a match\". Only the lighter Poison alternative (1.3) is under the line.\n- **Ember:** \"match closely\" at 2.8 (median 2.0) overstates it. \"Nearly match\" fits.\n- **Lit message:** it tells him to compare each lamp only with its own \"today\", then compares pendant with Core (\"glow alike today\", \"today the Core is much brighter\"). Those are true only between pictures 2.3 stops apart.\n- **Acid alternative missing:** pendant 2.1x with today's Core is closer (1.7) and leaves the Core and its base untouched, so no Core re-render. The message gives Poison's alternative but not this one.\n- **Spelling:** \"colour\" and \"grey\" break his American English rule.\n- **Notes (optional):** the 3% coral clip on the lit Ember pendant, the Dust \"bold columns\" line, Poison's duller base, and Poison's alternative sitting on the speaker's horn green.\n\nEverything else is true: Acid, Ice/Haze, Smoke, Dust, Fog, the costs line, and the rest of message 2.\n\nFiles are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/owner/final/facts/:\n- rebuild.py, re-pours-off.jpg, re-pours-lit.jpg\n- pairs.py, litcheck.py, coral.py, noise.py\n- poison-off.png, poison-lit.png, ember-off.png, ember-lit.png, ember-lit-top.png, smoke-off.png\n- part-off-a.png, part-off-b.png, part-lit-a.png, part-lit-b.png"
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "poison-match-overstated",
+      "verdict": "confirmed",
+      "reasoning": "My own code (own sRGB-to-Lab, CIEDE2000 checked against Sharma's test pairs, same fixed masks) gives the proposed pair (1x + 0.45) 3.3 by the brief's mean measure, 2.7 by median and 2.6 by a 10-90% trimmed mean. All three are over 2. The lighter alternative (0.55x + 0.3) gives 1.3, 1.5 and 1.4. At matched scale (facts-verify/poison-pairs.png) the 0.45 ball is close to the shade but a duller green: median C* 41.1 against 48.3. The alternative pair does look the same. The message calls Poison 'match closely' (3.3) and Haze/Ice 'not a match' (4.4/4.7), so the line it draws is not his. This bears directly on his 'must match' rule and hides the real trade: depth or a match. Blocking is right. One flaw in the proposed fix: 'they keep the speaker's deep green' is wrong for the Core. Today's Core is 11.2 from the speaker's body; at 0.45 it is 4.0, and duller (C* 38.6 against the body's 49.9).",
+      "better_fix": "Poison: the Core deeper; the pendant stays. They come close but do not quite match, and both stay deep. (A lighter pendant with today's Core does match, but both lamps would then sit lighter than the speaker's cabinet.)"
+     },
+     {
+      "id": "ember-match-at-line",
+      "verdict": "confirmed",
+      "reasoning": "I get mean 2.8, median 2.0 and trimmed 2.3 for 0.7x + 0.5. By eye at matched scale (facts-verify/ember-pair.png) the two read as nearly the same red, with the shade slightly richer (dC -5.8). So 'match closely' is not false to the eye, but the brief's declared measure puts it just over 'about 2', and 'nearly match' is true on every measure. Two refinements. The Core, unchanged, already sits lighter than the speaker's cabinet (ball L* 37.9 against the pendant's 35.3; 13.9 from the cab against 12.5), so after the change both sit lighter. Acid's 'match closely' has the same weakness: 2.0 mean, but median 2.3, which is further than Ember's 2.0.",
+      "better_fix": "Ember: 'They nearly match, and both now sit lighter than the speaker's cabinet.' Acid: drop 'closely' ('They match and sit near the speaker's body color...')."
+     },
+     {
+      "id": "lit-cross-lamp",
+      "verdict": "confirmed",
+      "reasoning": "checkset.sh: HLIT has HOUSE_STUDIO 3.5 and EV -5.15; CLIT has 0.714 and EV -2.85. The audits show the studio lights scaling and the LED not: house8 pendant LIT fill is 11.116, which is 3.5 x the OFF 3.176. The Core fill goes from 1.72 (house8) to 2.047 (house9) while led-red stays 2.978. The room terms are equal (0.0986 and 0.0990), so the pendant's own light is 2.3 stops lower. My glow medians reproduce meas-lit-r3 exactly, and the upper wall corners agree within about 0.2 L* down each column. Every cross-lamp sentence on line 19 is true between the pictures only. As an upper bound, at the Core's exposure today's Ember pendant would read about L* 86 against the Core's 42, Poison's 72 against 37, and Smoke's 36 against 30 today and 13 proposed. So 'glow alike today' and 'today the Core is much brighter' do not describe the lamps, and line 19 does exactly what line 17 tells him not to do. 'in these pictures' alone would leave that contradiction in place.",
+      "better_fix": "Cut line 19's comparison sentences and keep the black-base sentence. They say what the lit sheet plainly shows (his rule: remove, do not rewrite), and the cross-lamp ones hold only between pictures line 17 says not to compare. If a line must stay, make it per lamp: 'Against its own today, each lighter pendant glows brighter (Ice and Haze much brighter, and their glow turns a lighter blue and a pinker violet); each deeper Core glows dimmer: Acid a little, Poison more, Smoke much.' Also on line 17, change 'brighter still' to 'brighter than it looks here', because today's Poison, Ice, Haze and Smoke pendants look dimmer than their Cores in the pictures."
+     },
+     {
+      "id": "acid-alternative-missing",
+      "verdict": "confirmed",
+      "reasoning": "Line 6 has no alternative. The numbers reproduce. 2.1x + 1.5 is 1.7 (median 1.6) against the proposal's 2.0 (median 2.3). Base to pendant is 4.8 (median 5.3) against 8.1 (median 8.8). The 2.1x pendant is 6.6 from the speaker's body against 2.4. At matched scale (facts-verify/acid-pairs.png) both pairs read matched, and the alternative is a lighter, brighter yellow. It changes only the pendant, so it needs no Core re-render and no Core lumen re-measure. The first check asked for this alternative in one line. The Poison bullet gives its alternative, so leaving this one out makes Acid look like it has none. On wording: the first check found that by eye the 2.1x looks nearer the speaker's bright lemon front, though it measures further from the body. 'Further from the speaker's body color' is true but invites the same contradiction; 'lighter than built' is the plain cost in his deep-color terms.",
+      "better_fix": "(A lighter pendant with today's Core also matches and leaves the Core and its base as they are, but the pendant would be lighter than it was built.)"
+     },
+     {
+      "id": "american-spelling",
+      "verdict": "confirmed",
+      "reasoning": "I searched msg-draft.md for British forms (-our, grey, -ise/-isation, centre and the like). The only hits are 'colour' on line 6 and 'grey' on line 9. Separately, the dates use day-month order: '17 Nov' on line 3 and the seven '17 Nov mix' labels on each sheet. American usage is 'Nov 17'. That is optional, since the lane's earlier notes use '17 Nov'.",
+      "better_fix": "'colour' to 'color', 'grey' to 'gray'. Optional: '17 Nov' to 'Nov 17' in the message and the labels."
+     },
+     {
+      "id": "ember-lit-clip",
+      "verdict": "confirmed",
+      "reasoning": "In checkset/red/hemi-lit-L0.7.png, 3.02% of the shade mask has a channel of 250 or more. The clipped pixels sit in rows 542-614 of 1000, with mean RGB 251/71/66. Today's 1.8x clips 0.00%. On the sheet (facts-verify/ember-lit-cells-zoom.png, and the row at 1.5x) the top of the proposed glow reads coral against today's pure red. It is subtle at 1x and plain when enlarged. The message does not mention it.",
+      "better_fix": "Optional, message 2: 'The pale coral top on the lighter Ember shade is the picture clipping at this exposure; the site pictures would need it handled.'"
+     },
+     {
+      "id": "dust-bold-columns",
+      "verdict": "confirmed",
+      "reasoning": "The headers 'pendant, proposed' and 'Core, proposed' are bold, and over the Dust row they sit above cells labelled 'tried: lighter' and 'tried: no closer'. Line 10 proposes keeping Dust. The sentence also restates the layout that the headers already show.",
+      "better_fix": "Drop the sentence (under his rule a line next to a picture does not say what the picture shows)."
+     },
+     {
+      "id": "poison-base",
+      "verdict": "confirmed",
+      "reasoning": "Base medians go from L*/C* 37.7/47.7 to 25.4/29.8 (mean 37.7/46.4 to 26.0/28.2). That change is larger than Acid's base change, which the message does mention (L -8.4, C -8.2). It is plain at matched scale (facts-verify/poison-pairs.png), where the base reads a dark bottle green. Base to pendant goes from 8.4 to 7.3 (mean). One caveat: 'the base's distance from the speaker's body goes from 6.4 to 8.9' holds for the mean only. By median it goes from 14.4 to 5.0, closer, so do not cite it.",
+      "better_fix": "Optional: add 'and its base turns a darker, duller green' to the Poison bullet, with no to-speaker figure."
+     },
+     {
+      "id": "poison-alt-horn",
+      "verdict": "confirmed",
+      "reasoning": "The 0.55x pendant and today's 0.3 Core are 11.7 and 11.2 from the speaker's plain body, 17.5 and 16.9 from its cabinet, but 1.2 and 2.1 from its horn (horn L* 43.2; lamps 43.7 and 43.4). 'Lighter than the speaker' is true only of the cabinet.",
+      "better_fix": "'lighter than the speaker's cabinet' (already in the Poison wording above)."
+     }
+    ],
+    "missed": "1. Dust's sheet label contradicts what he will see. At matched scale and on the sheet, the 'tried' pair reads as one orange, while today's reads as an orange shade over a red ball (facts-verify/dust-pairs.png). The hue gap drops from 7.9 to 3.2 degrees. The overall measure is no closer only because the ball goes much lighter: the L* gap goes from 5.5 to 9.0, and the ball from 52.8 to 60.8. So 'tried: no closer' looks false to the eye. The first check required the message to state this visible trade, and it still does not. Fix: label the cells 'tried' (or 'tried: lighter'), and add to line 10: 'The lighter pair is closer in hue, but the ball comes out much lighter than the shade, so overall it is no closer.'\n2. Lit, the as-built Ice and Haze shades change color, not only brightness. Ice goes from deep blue to a lighter cyan-blue (h 289.6 to 252.9). Haze goes from violet to pink-magenta (h 321.7 to 339.7), now like its Core. This is the most visible lit change in the Haze row. Message 2 speaks only of brightness. Moot if line 19 is cut.\n3. The closing ask, 'yes or no', gives him no way to choose the Poison alternative the message offers (or Acid's, if it is added). Example: 'yes, no, or the lighter pendant for Poison'.\n4. Ember: the bullet implies only the pendant sits lighter than the cabinet, but the unchanged Core already sits lighter still. Both do. This is folded into the Ember fix.\nEverything else I checked holds. Both sheets rebuild byte-identical (md5 match). The Poison 0.45 frames predate the sheets (18:11/18:18 against 18:18). All OFF and LIT figures in the brief reproduce on my own code. Every Core LIT base reads near black (median L* 0.0-8.3). Ice/Haze 'no match' is true (best tried 4.5 and 3.9). Smoke 'black, like the pendant' holds by eye (median 2.5, mean 5.9). The Fog and costs lines are true. My files are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/owner/final/facts-verify/: v_off.py/.txt, v_lit.py/.txt, poison-pairs.png, ember-pair.png, acid-pairs.png, dust-pairs.png, smoke-pair.png, ember-lit-cells-zoom.png, sheet-off-*.png, sheet-lit-*.png.",
+    "overall": "Both sheets can go as built. Their labels and frames are right, and the rebuild is byte-identical. One sheet change is advised but not required: relabel Dust's 'tried: no closer', because by eye that pair looks closer. The message must not go as drafted. The Poison 'match closely' is false by every measure (3.3 mean, 2.7 median, 2.6 trimmed) and turns his 'must match' rule into a false premise. It can go after these fixes:\n- Poison reworded so the trade shows: they come close but do not quite match and stay deep, or a lighter pendant does match. Do not say 'keep the speaker's deep green'.\n- Ember changed to 'nearly match', and 'closely' dropped from Acid.\n- Line 19 cut, keeping only the black-base sentence, or made per lamp.\n- 'colour' and 'grey' changed to 'color' and 'gray'.\nStrongly advised: the one-line Acid alternative, worded as 'lighter than it was built', and one line explaining Dust's trade. The coral clip, Poison's base, the horn wording and the 'Nov 17' date order are optional notes."
+   }
+  },
+  {
+   "part": "owner",
+   "found": {
+    "verdict": "send after the fixes",
+    "summary": "Send after the fixes. They are all wording changes plus one sheet label. Nothing would make him decide wrongly. Four lines would make him doubt the sheet or overrate a match, and three passages break his rule against describing the picture.\n\n**What checks out**\n- I rebuilt both sheets from the current sheets.py into my folder, and they are pixel-identical to the ones being sent.\n- Every label matches its file and today's pours.\n- Lit rooms: the corner L* of the wall is 16.9-17.0 in every pendant cell and 15.8-15.9 in every Core cell. So each lamp's today and proposed share one light, as message 2 says.\n\n**What he would trip on**\n- **Ember and Poison match words:** both are called \"match closely\", but they measure 2.8 and 3.3, and the line is about 2. My medians are 2.0 and 2.7. Poison's other route, which the draft says matches \"even more closely\", is the one that is actually under the line (1.3). So the real choice for Poison (a match, or keeping the deep green) is hidden.\n- **Dust:** by eye the tried pair is closer: one orange, where today's ball reads red. The label says \"no closer\" and the message gives no reason.\n- **Ice and Haze:** they ask for a yes on two pairs that don't match. They don't say the Core dye test is being tried against these same pendants.\n- **Describing the picture:** three passages say what the sheets plainly show:\n  - the \"Each row shows\" sentence;\n  - Smoke's \"smoky grey to black\";\n  - message 2's whole \"What changes\" paragraph. It also compares pendant with Core across two exposures, right after telling him not to.\n- **Smaller:** \"light-ground picture\" sits beside dark lit pictures. \"colour\" and \"grey\" are British spellings.\n\n**Message 1 with the fixes (with pours-off.jpg; the Dust Core label becomes \"tried: lighter\")**\nLamp pours, turned off. On the new light ground, the pendant and the Core in the same tint no longer look alike when off: the 17 Nov mix was tuned on the old ground. I tried other pours to bring each pair back together.\n\n- Ember: the pendant lighter than it was built; the Core stays. They nearly match, but both now sit lighter than the speaker; today's pendant matches the speaker's panels.\n- Acid: the pendant back to the pour it was built with; the Core a little deeper, and its base turns a darker olive. They match closely and sit near the speaker's body color, though by eye the speaker's front is a brighter lemon than either lamp.\n- Poison: the Core deeper; the pendant stays. They come close, though not quite a match, and both sit near the speaker's deep green. (A lighter pendant with today's Core does match, but both lamps would sit well lighter than the speaker.)\n- Ice and Haze: the pendant back to the pour it was built with. Closer, but none of the pours we tried makes a match. A separate test of a re-balanced dye for the thick Core, tried against these pendants, may close more of the gap.\n- Smoke: the Core back to the pour it was built with.\n- Dust: no pour we tried makes it match. The pair we tried is closer in hue but further apart in lightness, and both lamps get lighter. I suggest keeping Dust as it is until the Core dye test is done; you'll see that on its own.\n- Fog isn't on the sheet: its fix is in the light, not the pour.\n\nIf yes, every changed tint means redoing the site's pictures that show it, the bar pictures included, and measuring the stated light output again. The site doesn't change until that's done. The lit sheet comes next.\n\n**Message 2 with the fixes (with pours-lit.jpg)**\nThe same lamps, lit. Each lamp has the same light for today and proposed, but the two lamps are not shot at one exposure, so compare each lamp only with its own \"today\"; in one room the pendant would glow brighter still. The black bases on the lit Cores are a lighting fault in these test pictures, not the pour; the fix is being tested.\n\nPlease answer yes or no for Ember, Acid, Poison, Ice, Haze and Smoke. Dust stays as it is for now.\n\n**Files** (all in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/owner/final/owner/)\n- pairs.txt and py/pairs.py: mean and median gaps, with the Core split into upper, middle, lower and base.\n- py/corners.py: the lit-room check.\n- Crops of each sheet row: off-row0-6.png and lit-row0-6.png.\n- Close-up crops: ember-lit-shade-today-1.0-0.7.png, ice-haze-lit.png, poison-ember-dust-off.png.\n- Rebuilt sheets: re-pours-off.jpg and re-pours-lit.jpg.",
+    "problems": [
+     {
+      "id": "poison-match-words",
+      "severity": "fix",
+      "where": "msg-draft.md, message 1, Poison line: \"They match closely and keep the speaker's deep green. (A lighter pendant with today's Core matches even more closely, but both lamps would sit lighter than the speaker.)\"",
+      "what": "The proposed pair measures 3.3 (my median 2.7), so it is over the about-2 line by both whole-ball measures. The ball's middle is 0.8 from the pendant, but the lower ball is 6.1. The other route, said to match \"even more closely\", is the one under the line (1.3; median 1.5). Under his rule that the two must match, the real choice is a match or the deep green. The draft gives the proposal both. By eye the proposed pair looks close, with the ball a shade duller, so he would not see this himself.",
+      "fix": "- Poison: the Core deeper; the pendant stays. They come close, though not quite a match, and both sit near the speaker's deep green. (A lighter pendant with today's Core does match, but both lamps would sit well lighter than the speaker.)"
+     },
+     {
+      "id": "ember-words-and-cost",
+      "severity": "fix",
+      "where": "msg-draft.md, message 1, Ember line: \"They match closely, though the pendant now sits lighter than the speaker's cabinet.\"",
+      "what": "The pair measures 2.8, just over the line. My median is 2.0, and the ball's upper and middle are 1.1-1.3 from the pendant, so by eye they match. \"Match closely\" claims more than the measure the line is set on. The cost is also given for the pendant alone. The Core already sits lighter than the speaker: 7.6 from its body and 11.5 from its panels. Today's pendant is 0.3 from the panels, a match. He gives up a pendant-to-speaker match to get a pendant-to-Core match, and the line shows only half of that.",
+      "fix": "- Ember: the pendant lighter than it was built; the Core stays. They nearly match, but both now sit lighter than the speaker; today's pendant matches the speaker's panels."
+     },
+     {
+      "id": "dust-eye-vs-label",
+      "severity": "fix",
+      "where": "pours-off.jpg and pours-lit.jpg, Dust row, the \"Core, proposed\" cell labelled \"tried: no closer\" (sheets.py ROWS, Dust); message 1, Dust line",
+      "what": "At full size the tried pair reads as one orange. Today the shade is orange-red and the ball red, so his eyes say the tried pair is closer. Measured, the hue gap does close (7.9 to 3.2). But the lightness gap opens (5.5 to 9.0) and both lamps get lighter (pendant L* 47.3 to 51.8, ball 52.8 to 60.8). Overall it goes from 8.2 to 8.7 (medians 8.0 to 8.2). The label says only \"no closer\", and the message gives no reason. It is also the only label that states a result rather than a pour. On the lit sheet it reads as a verdict on the glow.",
+      "fix": "Label: 'tried: no closer' becomes 'tried: lighter'. Line: \"- Dust: no pour we tried makes it match. The pair we tried is closer in hue but further apart in lightness, and both lamps get lighter. I suggest keeping Dust as it is until the Core dye test is done; you'll see that on its own.\""
+     },
+     {
+      "id": "ice-haze-why-now",
+      "severity": "fix",
+      "where": "msg-draft.md, message 1, Ice and Haze line, and the Dust line's \"(it may also help Ice and Haze)\"",
+      "what": "He is asked yes or no on two changes that, the line says, do not make a match. The Core dye test that \"may also help\" turns up three lines later, under Dust, so he may hold both until it is done. Missing: the test is being tried against these same pendants. The dye README's \"Pendant pick\" is Ice 3x and Haze 1x, and the held dye sheet uses the proposed pendants. So this pendant change is the first step of the same route. In round 2 the test moved Ice from 4.7 to 3.8 and Haze from 4.4 to 3.9.",
+      "fix": "- Ice and Haze: the pendant back to the pour it was built with. Closer, but none of the pours we tried makes a match. A separate test of a re-balanced dye for the thick Core, tried against these pendants, may close more of the gap. (Then cut \"(it may also help Ice and Haze)\" from the Dust line.)"
+     },
+     {
+      "id": "msg2-what-changes",
+      "severity": "fix",
+      "where": "msg-draft.md, message 2, the paragraph from \"What changes: each lighter pendant...\" to \"...where today the Core is much brighter.\"",
+      "what": "Every clause states what the lit sheet plainly shows, which breaks his 17 Nov rule (remove, do not rewrite). Each clause also compares pendant with Core, right after the line telling him to compare each lamp only with its own today. \"Ember and Poison, whose two lamps glow alike today\" is true only picture to picture. The rooms match (wall corners: pendant cells 16.9-17.0 L*, Core cells 15.8-15.9), but the pendant's own light is exposed 2.3 stops lower. The paragraph also points his eye at brightness, while the plainest changes on the sheet are the glow colors. Ice goes from royal blue to sky blue and Haze from violet to magenta, each now like its Core.",
+      "fix": "Delete the whole paragraph."
+     },
+     {
+      "id": "msg2-light-ground",
+      "severity": "fix",
+      "where": "msg-draft.md, message 2: \"Each lamp is lit as in its own new light-ground picture, the same for today and proposed.\"",
+      "what": "Beside lit pictures that show a dark-gray room, \"light-ground picture\" reads as a mistake, and he may wonder which picture is meant. All the comparison needs is that each lamp's two columns share one light; my corner measure confirms that.",
+      "fix": "Message 2 becomes: \"The same lamps, lit. Each lamp has the same light for today and proposed, but the two lamps are not shot at one exposure, so compare each lamp only with its own \"today\"; in one room the pendant would glow brighter still. The black bases on the lit Cores are a lighting fault in these test pictures, not the pour; the fix is being tested.\n\nPlease answer yes or no for Ember, Acid, Poison, Ice, Haze and Smoke. Dust stays as it is for now.\""
+     },
+     {
+      "id": "msg1-states-picture",
+      "severity": "fix",
+      "where": "msg-draft.md, message 1: \"Each row shows the speaker, today's pendant and Core, then what I'd propose (the bold columns).\" and the Smoke line's \", so it goes from smoky grey to black, like the pendant\"",
+      "what": "Both say what the sheet plainly shows. The column headers already read Tropos / today / proposed, with the proposed ones in bold, and the Smoke cells show the gray ball turning black. His rule is to remove such lines, not rewrite them. \"grey\" is also British.",
+      "fix": "Delete the first sentence. Smoke line: \"- Smoke: the Core back to the pour it was built with.\""
+     },
+     {
+      "id": "american-spelling",
+      "severity": "fix",
+      "where": "msg-draft.md, message 1, Acid line: \"the speaker's body colour\"",
+      "what": "His rule is American English, and \"colour\" is British (\"grey\" goes with msg1-states-picture). Optional: the draft mixes \"I tried\" with \"we tried\". \"17 Nov\" is British date order, but it is also on the sheet labels, so leave it unless the sheets are rebuilt.",
+      "fix": "\"the speaker's body color\""
+     },
+     {
+      "id": "acid-alternative",
+      "severity": "note",
+      "where": "msg-draft.md, message 1, Acid line",
+      "what": "Poison's other route is given, but Acid's is not. Acid's is pendant 2.1x with today's Core: 1.7. It leaves the Core and its base as they are, so no Core pictures or Core light figures to redo. The pendant sits 6.6 from the speaker's body, against 2.4 for the proposal. If the darker olive base puts him off, a no leaves Acid at 15.4.",
+      "fix": "Add at the end of the Acid line: \"(A lighter pendant with today's Core also matches and leaves the Core as it is, but sits further from the speaker's body color.)\""
+     },
+     {
+      "id": "as-built-wording",
+      "severity": "note",
+      "where": "Both sheets' labels \"as built\" and \"lighter than built\"; message 1's \"the pour it was built with\" (four times) and \"lighter than it was built\"",
+      "what": "Nothing has been built yet. He may read \"as built\" as a made product rather than the pour before the 17 Nov mix.",
+      "fix": "Labels: 'original' and 'lighter than original'. Message: \"back to its original pour\" and \"the pendant lighter than its original pour\"."
+     },
+     {
+      "id": "ember-lit-coral",
+      "severity": "note",
+      "where": "pours-lit.jpg, Ember row, \"pendant, proposed\"",
+      "what": "The pale coral band near the top of the lit shade is where the picture runs out of range. 3.02 % of the shade clips (mean RGB 251, 71, 66) in rows 542-614 of the shade's 478-751, which is exactly the coral band. For comparison, 1.0x clips 0.04 % and today's pendant 0. He may take the band for the plastic and say no to Ember for it.",
+      "fix": "Optional sentence in message 2, after the exposure sentence: \"The pale top of the lit Ember pendant is where the picture runs out of range.\""
+     },
+     {
+      "id": "fog-line",
+      "severity": "note",
+      "where": "msg-draft.md, message 1: \"Fog isn't on the sheet: its fix is in the light, not the pour.\"",
+      "what": "\"in the light\" can be read as the lamp's own light. The check set's README says \"light on the product\".",
+      "fix": "\"- Fog isn't on the sheet: its fix is in how the pictures light it, not the pour.\""
+     }
+    ]
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "poison-match-words",
+      "verdict": "confirmed",
+      "reasoning": "I re-measured it (owner-verify/pairs2.txt). The proposed pair is 3.3 by mean (median 2.7). Against the pendant, the ball's upper part is 2.0, the middle 0.8, the lower part 6.1 and the base 7.3. The other route is 1.3 (median 1.5). At full size (row-3-poison.png) the two read as one deep green, with the ball a little duller (C* 38.6 against 46.6), so he could not see by eye that it is over the line. The draft's 'match closely' and 'even more closely' hide the real choice. The fix's wording needs one correction. The other route's lamps are not just 'lighter than the speaker': they are the speaker's horn green. The pendant is 1.2 and the Core 2.1 from the horn, the flared top piece (tropos-poison-horn-cab.png). They are 11-12 from the body and about 17 from the cabinet. The proposal's lamps are 3.4 (pendant) and 4.8 (Core) from the cabinet.",
+      "better_fix": "- Poison: the Core deeper; the pendant stays. They come close, though not quite a match, and both sit near the green of the speaker's cabinet. (A lighter pendant with today's Core does match, but both lamps would be the lighter green of the speaker's horn, not its cabinet.)"
+     },
+     {
+      "id": "ember-words-and-cost",
+      "verdict": "confirmed",
+      "reasoning": "Measured: 2.8 by mean, median 2.0; against the pendant, the ball's upper part is 1.3 and the middle 1.1. At full size they read as one red. Today's Core is already 7.6 from the speaker's body, 11.5 from the 'panels' and 13.9 from the cabinet. Today's pendant is 4.2, 0.3 and 3.1. So the cost line does show only half of it. The fix's wording has two problems. First, 'panels' is a measuring region (the front top band plus the sides, measure.py). He cannot place it, and it is the only region where today's pendant is under 2. Second, 'both now sit lighter' says the Core moved, and it did not. 'Lighter than the speaker' is also untrue for the speaker's brighter parts: the proposed lamps are 4.0-4.7 from its front top band and 6.4-7.0 from its horn.",
+      "better_fix": "- Ember: the pendant lighter than its original pour; the Core stays. They nearly match, but both sit lighter than the speaker's cabinet, which today's pendant is close to."
+     },
+     {
+      "id": "dust-eye-vs-label",
+      "verdict": "confirmed",
+      "reasoning": "At full size (row-1-dust.png), today's shade is orange-red and the ball clearly red. The tried pair reads as one orange. Measured: the hue part of the gap goes 7.9 to 3.2, lightness 5.5 to 9.0, overall 8.2 to 8.7 (medians 8.0 to 8.2). The pendant's L* goes 47.3 to 51.8 and the ball's 52.8 to 60.8. The same 'tried: no closer' label sits under the lit Dust cells, where it reads as a verdict on the glow. It is the only label that states a result. The relabel is right. In the new line, 'both lamps get lighter' repeats what both labels now say, so it breaks his rule.",
+      "better_fix": "Label: 'tried: lighter'. Line: \"- Dust: no pour we tried makes it match. The pair we tried is closer in hue but further apart in lightness, so it measures no closer. I suggest keeping Dust as it is until the Core dye test is done; you'll see that on its own.\""
+     },
+     {
+      "id": "ice-haze-why-now",
+      "verdict": "confirmed",
+      "reasoning": "The dye README's 'Pendant pick' column has Ice 3x and Haze 1x, and the held dye sheet (sheets.py D) uses 'pendant 3x' and 'pendant 1x'. In dye.txt, round 2 takes Ice with the 3x pendant from 4.7 to 3.8 and Haze with the 1x pendant from 4.4 to 3.9. The README says each re-mixed Core is still 4-5.5 L* lighter. So 'may close more of the gap' is fair, and a yes now is the first step of the same route. Two small points. For Dust, the dye test pairs with the 2.1x tried pendant, not today's, so 'tried against these pendants' has to stay on the Ice/Haze line, as the fix has it. And the dye mention comes two bullets later, not three. Neither changes the fix."
+     },
+     {
+      "id": "msg2-what-changes",
+      "verdict": "confirmed",
+      "reasoning": "Every clause is visible on the lit sheet. It compares pendant with Core across two exposures, right after telling him not to. 'Glow alike today' is true only picture to picture (Ember 43.8 and 42.0, Poison 35.9 and 37.0). The same is true of the proposed Smoke pair (14.4 and 13.1). Wall corners: top left 16.9-17.0 in every pendant cell and 15.8-15.9 in every Core cell; top right 23.7-24.0 and 23.2-23.5. So each lamp keeps one light across its today and proposed. The glow colors are the plainest change. Ice's pendant hue goes 289.6 to 252.9 (Core 259.8), and Haze's 321.7 to 339.7 (Core 337.2). Both show at full size (row-4-ice.png, row-5-haze.png). Delete the paragraph and keep its black-bases sentence, as the fixed message 2 does."
+     },
+     {
+      "id": "msg2-light-ground",
+      "verdict": "confirmed",
+      "reasoning": "The lit cells show a dark gray room, so 'light-ground picture' reads as a mistake. The replacement has two problems of its own. 'Each lamp has the same light for today and proposed' can be read as the same light coming out of the lamp. The sheet shows the glow changing, and message 1 says the light output has to be measured again. And 'brighter still' assumes the pendant already glows brighter, but in today's Poison, Ice, Haze and Smoke cells it glows dimmer than its Core (35.9/37.0, 25.0/32.3, 14.4/19.5, 14.4/30.0).",
+      "better_fix": "\"The same lamps, lit. Each lamp's today and proposed are shot the same way, but the pendant and the Core are not shot at one exposure, so compare each lamp only with its own \"today\"; in one room each pendant would glow brighter beside its Core than it looks here. The black bases on the lit Cores are a lighting fault in these test pictures, not the pour; the fix is being tested.\" Then the yes/no line."
+     },
+     {
+      "id": "msg1-states-picture",
+      "verdict": "confirmed",
+      "reasoning": "The headers read 'Tropos | pendant, today | Core, today | pendant, proposed | Core, proposed', and sheets.py sets the two proposed headers in bold. So the 'Each row shows' sentence repeats the sheet. Smoke's gray ball turning black is plain in row-6-smoke.png. Under his rule ('remove, do not rewrite') the same applies to Acid's 'and its base turns a darker olive', which is plain in row-2-acid.png. The fixed message keeps that clause; it should go too. The Smoke line itself may also be wrong (see missed).",
+      "better_fix": "Delete the first sentence and Smoke's ', so it goes from smoky grey to black, like the pendant'. Also delete Acid's ', and its base turns a darker olive'."
+     },
+     {
+      "id": "american-spelling",
+      "verdict": "confirmed",
+      "reasoning": "'colour' is on the Acid line and 'grey' on the Smoke line. The draft mixes 'I tried', 'I'd' and 'I suggest' with 'we tried' (twice), and the fixed message 1 still does. On '17 Nov': the checker leaves it 'unless the sheets are rebuilt', but its own Dust label fix rebuilds them.",
+      "better_fix": "'color'. Choose 'I' or 'we' throughout. In the same rebuild as the Dust label, make the sheet labels 'Nov 17 mix' and message 1 'the Nov 17 mix'."
+     },
+     {
+      "id": "acid-alternative",
+      "verdict": "confirmed",
+      "reasoning": "Measured: pendant 2.1x with today's Core is 1.7 (median 1.6), and the base is 4.8 from the pendant, against 8.1 for the proposal. Poison's other route is given and Acid's is not. But the suggested sentence's singular 'sits' understates it. In the other route the Core is also further from the speaker's body than in the proposal: 7.6 against 1.9 (pendant 6.6 against 2.4). It is not on the sheet, as Poison's is not.",
+      "better_fix": "\"(A lighter pendant with today's Core also matches and leaves the Core as it is, but both lamps sit further from the speaker's body color.)\""
+     },
+     {
+      "id": "as-built-wording",
+      "verdict": "confirmed",
+      "reasoning": "Nothing has been made, so 'as built' is not literally true. 'Original' is plainer. Counting: 'the pour it was built with' appears three times (Acid, Ice and Haze, Smoke), plus 'lighter than it was built' once. A relabel to 'original' would carry over a likely factual error on Smoke's proposed Core (see missed), so check that before relabelling."
+     },
+     {
+      "id": "ember-lit-coral",
+      "verdict": "confirmed",
+      "reasoning": "Measured on hemi-lit-L0.7.png against the shade mask: 3.02 % of the shade's pixels have a channel at 250 or more, in rows 542-614 of the shade's 478-751, mean RGB 251, 71, 66. The 1.0x pendant clips 0.04 % (rows 552-588) and today's 0.00 %. The pale coral band at the top of the glow shows at full size (ember-lit-today-0.7-core.png) and in the sheet cell. The optional sentence is fair, because it says what the picture cannot show, not what it shows."
+     },
+     {
+      "id": "fog-line",
+      "verdict": "confirmed",
+      "reasoning": "The checkset README says 'its fix is light on the product, not a pour'. 'In the light' can be read as the lamp's own light. The checker's fixed message 1 still carries the old Fog line, so if the note is taken, apply it there.",
+      "better_fix": "\"- Fog isn't on the sheet: its fix is in how the pictures light it, not the pour.\""
+     }
+    ],
+    "missed": "1. Smoke's 'as built' may be false. Check it before sending. The sheet labels Smoke's proposed Core (0.5) 'as built', and the message says 'the Core back to the pour it was built with'. The coordinator's own record (coordinator/approved-renders.md) says otherwise. On 15 Nov both Smoke lamps were 'the speakers' gray dye at 0.3x' ('Smoke now 0.3x'). The Smoke pair note on 16 Nov reads 'Smoke: Hemisphere 0.3 > 1.2, Core 0.3 > 0.6'. On the Core's scale, where 0.5 is 1x, the Smoke Core before the pair was about 0.15 and today's is 0.3. So 0.5 is 1x, deeper than the Smoke Core has ever been, not a return. The brief's 'as built Smoke 0.5' (and pendant 1.0) conflicts with that record, and the first check called this change 'deeper'. I could not open the current lamp_site.py (only 10 Nov copies are here). Read TINT_LOAD and CORE_TINT_LOAD for 'black' with LOAD_BUILT=1 at r32-lamps-final. If they are 0.3, relabel the cell 'deeper' and write '- Smoke: the Core deeper; the pendant stays.' The 'original' relabel would carry the same error.\n2. Acid: 'They match closely' at exactly 2.0 (median 2.3; base 8.1 from the pendant). By the standard the checker applies to Ember, say 'They match'.\n3. Acid's ', and its base turns a darker olive' states what the sheet plainly shows, like Smoke's line, which the checker removed. Remove it.\n4. Poison: the other route's lamps match the speaker's horn green (1.2 and 2.1). The fix's 'well lighter than the speaker' hides that (wording in the verdicts).\n5. Ember: the fix's 'panels' is a measuring region he cannot place, and 'both now sit lighter' says the Core moved, which it did not (wording in the verdicts).\n6. Message 2: 'the same light' can be read as the same light output, and 'brighter still' is wrong for today's Poison, Ice, Haze and Smoke cells (wording in the verdicts).\n7. The Dust label forces a sheet rebuild anyway, so do 'Nov 17' in the same pass.\n8. Checked and fine: the sheets I rebuilt from the current sheets.py are byte-identical to pours-off.jpg and pours-lit.jpg, and the checker's figures reproduce. The checker's '(three lines later)' is two bullets and 'four times' is three; neither matters to him.\nFiles, all in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/owner/final/owner-verify/: pairs2.txt and py/pairs2.py (pairs with regions and the speaker's cabinet and horn), lit2.txt and py/lit2.py (Ember clipping and lit corners), py/corners2.py, row-0-ember.png to row-6-smoke.png (each row, off over lit, at full size), tropos-poison-horn-cab.png (the horn region in magenta, the cabinet in cyan), ember-lit-today-0.7-core.png, and the rebuilt re-pours-off.jpg and re-pours-lit.jpg.",
+    "overall": "Yes, they can go, after the confirmed fixes and the items in missed: Poison's other route as the speaker's horn green, Ember's 'cabinet' instead of 'panels', 'shot the same way' in message 2, Acid's 'match' and the base clause removed. Checking Smoke comes first. If lamp_site.py's built Smoke Core is about 0.15 rather than 0.5, the 'as built' label and 'back to the pour it was built with' are false, and both have to change to 'deeper' before he sees them. Then rebuild both sheets once (the Dust label, Smoke's label if wrong, optionally 'original' and 'Nov 17'), check each label against its file, and send message 1 with the OFF sheet, then message 2 with the LIT sheet. Every number on the sheets and in the checker's figures reproduces, and I found nothing else that would lead him to a wrong decision."
+   }
+  }
+ ]
+}
