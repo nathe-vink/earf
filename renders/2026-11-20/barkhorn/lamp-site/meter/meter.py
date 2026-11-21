@@ -3,6 +3,8 @@ corners: TL TR ML MR LL BR L*/a*/b* (patches 5 % in, 4 % from top/bottom, 6 % wi
 base: Core's base (mask base.png): left/right low, bottom band, lip top, the coordinator's boxes cL/cR, centre, share below L* 20
 share: the base's body share at 30/45/55/65 deg, row y 1650-1670 (full scale), half-width from the mask
 body MASK: lower/middle third and whole L*/C* of a body's mask (ball.png, shade.png)
+pair MASK: the LIT pair's two glow masks inside MASK (A: L*>18, C*>45, h 25-50; B: R>100 and L*>25),
+  each median and p10/p90 L*; R>=250 in the frame and in MASK; floor patches (Core frames: left, right, front)
 glow MASK: red-dominant pixels of a body's mask after a 3x3 median: median L*/C*, R>=250 share; walls TL/TR"""
 import sys, os, numpy as np
 from PIL import Image, ImageFilter
@@ -18,7 +20,7 @@ def LC(a):
     L, A, B = lab(a); return L, np.hypot(A, B)
 def nm(f): return '/'.join(f.split('/')[-2:]).ljust(34)
 mode = sys.argv[1]; args = sys.argv[2:]
-if mode in ('body', 'glow'): mk, args = args[0], args[1:]
+if mode in ('body', 'glow', 'pair'): mk, args = args[0], args[1:]
 for f in args:
     a = load(f, med=(mode == 'glow')); H, W = a.shape[:2]; L, C = LC(a); yy, xx = np.mgrid[:H, :W]
     if mode == 'corners':
@@ -48,6 +50,13 @@ for f in args:
         m = mask(mk, H, W); ys = np.nonzero(m)[0]; t0, t1 = ys.min(), ys.max(); hh = t1 - t0
         parts = {'lower third': m & (yy > t1 - hh / 3), 'middle third': m & (yy > t0 + hh / 3) & (yy <= t1 - hh / 3), 'whole': m}
         print(nm(f), '  '.join(f'{r} {np.median(L[q]):.1f}/{np.median(C[q]):.1f}' for r, q in parts.items()))
+    elif mode == 'pair':
+        L_, A_, B_ = lab(a); h_ = np.degrees(np.arctan2(B_, A_)) % 360; m = mask(mk, H, W); k = W / 1600
+        mA = m & (L_ > 18) & (C > 45) & (h_ >= 25) & (h_ <= 50); mB = m & (a[..., 0] > 100) & (L_ > 25)
+        q = lambda v: f'{np.median(v):.1f} ({np.percentile(v, 10):.1f}-{np.percentile(v, 90):.1f})'
+        fl = {'left floor': (120, 420, 1480, 1700), 'right floor': (1250, 1500, 1480, 1700), 'front': (550, 1050, 1820, 1960)}
+        fs = '  '.join(f'{n_} {np.median(L_[int(y0 * k):int(y1 * k), int(x0 * k):int(x1 * k)]):.1f}' for n_, (x0, x1, y0, y1) in fl.items())
+        print(nm(f), f'A {q(L_[mA])} n{mA.sum()}  B {q(L_[mB])} n{mB.sum()}  R>=250 frame {(a[..., 0] >= 250).sum()} px, mask {100 * (a[m][:, 0] >= 250).mean():.2f}%  R=255 {(a[..., 0] >= 255).sum()} px  floors {fs}')
     elif mode == 'glow':
         m = mask(mk, H, W); px = a[m]; g = (px[:, 0] > 30) & (px[:, 0] > 2 * px[:, 1] + 10)
         Lg, Cg = LC(px[g][None]); a0 = load(f); L0 = lab(a0)[0]
