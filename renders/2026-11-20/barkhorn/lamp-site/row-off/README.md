@@ -53,3 +53,36 @@ Report back:
 - anything that looks different from the Ember frame.
 
 The frames go to the lamps lane to check before they count.
+
+# Core OFF, the other seven tints (helper sessions, since 2026-11-21 10:00)
+
+These are evidence for the owner's pour question: every tint's Core OFF on the house ground at today's loadings (`CORE_TINT_LOAD`, `CORE_MIX` in `lamp_site.py`). The settings are exactly the Ember Core OFF of round 5 (`../house8/core-ember-off.png`, b588c50d, from `ember-r5b.sh`):
+
+- 128 spp, LIGHTS_OFF
+- HOUSE_S 0.19, CORE_DOCK 0
+- HOUSE_CUT2 fill,1.0, and the horn cutter flag
+- the floor ring (HOUSE_FLOORCARD … -1,1)
+- ROOM_TRANS on, BG 1.16
+- the sweep's contact term on, as in every OFF frame
+
+Setup is as above. Run:
+
+    renders/2026-11-20/barkhorn/lamp-site/row-off/core-off.sh TINT
+
+It writes `row-off/core-TINT-off.png` and `row-off/audit/core-TINT-off.txt`, then prints three meters:
+
+- the corners;
+- the ball (`body ball.png`);
+- the base (`base`).
+
+The frame takes about 25-30 min on 4 cores.
+
+Checks before committing:
+
+- **The audit:** every `out` line 0.0 %. CASTCHECK 0.0 for every entry except house-floorcard 30.09; the Ember Core OFF audit (`house8/audit/core-ember-off.txt`) shows the same.
+- **The corners:** the Ember Core OFF reads TL 82.3, TR 93.1, ML 88.5, MR 93.3, LL 92.8, BR 89.6 (not the pendant's; the Core's ground differs). Each corner should be within about 1 L*; report any bigger gap and don't commit. The lower corners sit near the ball's coloured shadow, so a dark tint may pull them slightly; say so if it does.
+- **The ball:** report its lower third, middle third and whole L*/C*. The Ember reads 41.3/56.2, 37.7/71.0 and 39.3/62.7.
+- **The base:** report the meter's line. The Ember reads centre 37.0/55.6, cL 31.7, cR 27.9, lip top 23.1, below L* 20 on 2.0 %. Tints differ; there is no target.
+- **The look:** view at half size. The base in its tint, its flanks not smoky; the straight edge across the ball's bottom is the base lip seen through the ball (physical, keep).
+
+Commit `row-off/core-TINT-off.png` and its audit as `Core TINT OFF (row-off, as Ember round 5)`. Report as for the pendant.
