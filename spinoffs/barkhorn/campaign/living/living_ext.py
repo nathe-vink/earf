@@ -117,6 +117,86 @@ def plain_sleeves(bpy, name, p, kit):
     return objs
 
 
+def water_glass(bpy, name, p, kit):
+    """A turned glass of water as light meets it (the coordinator's audit, 21 Nov: the water a hair inside the wall left an
+    air film that reflected totally inside the wall, the silvery funnel; and the water was glass at 1.5). Three surfaces
+    of revolution, each one interface with the ratio of its two sides:
+      glass | air    the outside, the base, the rim and the inside wall above the water        IOR 1.5
+      glass | water  the inside wall below the water line and the inside floor (no air between) IOR 1.5 / 1.33
+      water | air    the water's top, with a meniscus climbing `meniscus` m up the wall       IOR 1.33
+    `profile` is the glass's outer (r, z) profile (listening_bar's ROCKS form), `wall` its thickness, `base` the floor's,
+    `fill` the water's height at the middle; `position` the foot's centre. Each surface's normal points from the denser
+    side to the other, so Cycles takes its IOR as the ratio inside / outside."""
+    import bmesh, math
+    from mathutils import Vector
+    prof = [tuple(q) for q in p['profile'] if not (q[0] == 0 and q[1] > 0)]
+    t, base, fill = float(p.get('wall', 0.0035)), float(p.get('base', 0.016)), float(p['fill'])
+    men = float(p.get('meniscus', 0.0015)); seg = int(p.get('segments', 128))
+    top = prof[-1][1]
+    def r_out(z):
+        for (r0, z0), (r1, z1) in zip(prof, prof[1:]):
+            if z0 <= z <= z1 and z1 > z0:
+                return r0 + (r1 - r0) * (z - z0) / (z1 - z0)
+        return prof[-1][0]
+    r_in = lambda z: r_out(z) - t
+    zw = fill + men                                         # where the water meets the wall
+    # profiles, walked bottom-up / outward
+    outer = [(0.0, 0.0)] + [q for q in prof if q[0] > 0] + [(r_in(top), top)]
+    inner_dry = [(r_in(z), z) for z in (top, zw)]                       # down the inside wall to the water line
+    wet = [(r_in(zw), zw)] + [(r_in(z), z) for z in sorted({z for _, z in prof if base < z < zw}, reverse=True)] + \
+          [(r_in(base), base), (0.0, base)]
+    rw = r_in(zw); n_m = 8
+    # the water's top: flat to 4 meniscus-heights from the wall, then a quarter-cosine up to the wall
+    surf = [(0.0, fill)] + [((rw - 4 * men) + 4 * men * k / n_m, fill + men * (1 - math.cos(0.5 * math.pi * k / n_m)))
+                            for k in range(n_m + 1)]
+    def mat(nm, ior, col):
+        m = bpy.data.materials.new(nm); m.use_nodes = True
+        b = m.node_tree.nodes['Principled BSDF']
+        b.inputs['Base Color'].default_value = (*col, 1.0); b.inputs['Roughness'].default_value = 0.0
+        b.inputs['Transmission Weight'].default_value = 1.0; b.inputs['IOR'].default_value = ior
+        return m
+    g_air = mat(f'{name}-glass-air', 1.5, (0.97, 0.97, 0.96))
+    g_wat = mat(f'{name}-glass-water', 1.5 / 1.33, (1.0, 1.0, 1.0))
+    w_air = mat(f'{name}-water-air', 1.33, (0.96, 0.985, 0.985))
+    def revolve(nm, pr, m, out_dir):
+        bm = bmesh.new()
+        rings = []
+        for r, z in pr:
+            if r < 1e-6:
+                rings.append([bm.verts.new((0.0, 0.0, z))])
+            else:
+                rings.append([bm.verts.new((r * math.cos(2 * math.pi * k / seg), r * math.sin(2 * math.pi * k / seg), z)) for k in range(seg)])
+        for a, b_ in zip(rings, rings[1:]):
+            for k in range(seg):
+                k1 = (k + 1) % seg
+                if len(a) == 1:
+                    bm.faces.new((a[0], b_[k], b_[k1]))
+                elif len(b_) == 1:
+                    bm.faces.new((a[k], b_[0], a[k1]))
+                else:
+                    bm.faces.new((a[k], b_[k], b_[k1], a[k1]))
+        bm.normal_update()
+        f0 = max(bm.faces, key=lambda f: f.calc_area())                 # orient the strip by one face's test
+        c = f0.calc_center_median()
+        if f0.normal.dot(out_dir(c)) < 0:
+            for f in bm.faces:
+                f.normal_flip()
+        me = bpy.data.meshes.new(nm); bm.to_mesh(me); bm.free()
+        for poly in me.polygons:
+            poly.use_smooth = True
+        me.materials.append(m)
+        ob = bpy.data.objects.new(nm, me); bpy.context.scene.collection.objects.link(ob)
+        ob.location = Vector(p['position'])
+        return ob
+    radial = lambda c: Vector((c.x, c.y, 0.0)).normalized()
+    objs = [revolve(f'{name}-glass-outer', outer, g_air, lambda c: radial(c) if c.z > 0.002 else Vector((0, 0, -1))),
+            revolve(f'{name}-glass-inner-dry', inner_dry, g_air, lambda c: -radial(c)),           # into the empty glass
+            revolve(f'{name}-glass-wet', wet, g_wat, lambda c: -radial(c) if c.z > base + 1e-4 else Vector((0, 0, 1))),
+            revolve(f'{name}-water-top', surf, w_air, lambda c: Vector((0, 0, 1)))]
+    print('WATER GLASS:', [o.name for o in objs], 'fill', fill, 'meniscus', men, 'wet to', round(zw, 4))
+    return objs
+
+
 def soft_fabric(bpy, name, p, kit):
     """Upholstery that reads as cloth (the A critics, round 2: the sofa read as smooth rubber or clay, its outline
     faceted). For every mesh whose name starts with one of `prefixes`: a subdivision surface (`levels`, render and

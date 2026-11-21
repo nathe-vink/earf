@@ -259,8 +259,9 @@ def _side_table():
     RK = [[0, 0], [0.041, 0], [0.043, 0.006], [0.044, 0.092]]
     return [{'kind': 'kit', 'shape': 'asset', 'model': 'side_table_01', 'res': '2k', 'position': [x, y, 0.0], 'rotate': [0, 0, 0.0]},
             *_book(x + 0.1, y + 0.07, T + 0.0005, 14.0),
-            LB.lathe(LB.shell(RK, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#F8F8F6', 64),
-            LB.lathe(LB.contents(RK, WATER, 0.0035, 0.016), [x + 0.13, y - 0.1, T + 0.0005], 'glass', '#EEF3F4', 64)]
+            # (the coordinator's audit, 21 Nov: the water meets the glass with no air film, at 1.33; a meniscus)
+            {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'water_glass', 'profile': RK, 'wall': 0.0035, 'base': 0.016,
+             'fill': WATER, 'meniscus': 0.0015, 'segments': 128, 'position': [x + 0.13, y - 0.1, T + 0.0005]}]
 
 
 def _book(x, y, z, rz, w=0.155, d=0.235, h=0.028, cloth='#4F6253'):
@@ -322,7 +323,8 @@ def base(tint='ember', size=(2400, 1600)):
     # On: the opal shows, and the cabinets' fronts deepen, C* 38.7 to 50.0 in a region test)
     s['render'] = {**s['render'], 'caustics_refractive': True, 'caustics_reflective': True,
                    'samples': 128, 'adaptive': 0.01, 'denoise': True, 'clamp': 0, 'view': 'AgX', 'look': 'AgX - Base Contrast',
-                   'exposure': 5.5, 'white_balance_k': 5600, 'white_balance_tint': 0.0}
+                   'exposure': 5.5, 'white_balance_k': 5600, 'white_balance_tint': 0.0,
+                   'filter_glossy': 0.0}   # (the audit, 21 Nov: at the engine's 0.5, a caustic past a diffuse bounce saw the polished acrylic frosted)
     s.pop('finish', None)
     return s
 
