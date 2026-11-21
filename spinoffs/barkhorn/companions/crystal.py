@@ -712,7 +712,12 @@ def orb_parts(p=O):
                       'to the body. The mould is a one-time cost (setup). The whole base in colour: about $150-200 a lamp '
                       '[E] (the skin $30-50 at volume, the body $100-120, the liner $8-12, the electrode $10-15)']),
           Part('liner', liner, Machined('acrylic-opal-core', 'formed'), finish='liner', group='base', inside=True,
-               notes=['a 0.5 white opal liner under the skin, so the colour reads evenly and nothing inside shows'])]
+               notes=['a 0.5 white opal liner under the skin, so the colour reads evenly and nothing inside shows; '
+                      'IN OPTICAL CONTACT WITH THE SKIN (2026-11-21, the coordinator, from the owner\'s "smoke frosted" edges): '
+                      'bonded to the skin\'s inside with a clear polymerising acrylic cement (Acrifix 192 kind), no air left '
+                      'between them, or the white a coating on the skin\'s inside instead of a separate liner. A loose sleeve '
+                      'leaves an air gap at which the light the satin face bends steeply into the skin is totally reflected '
+                      'and absorbed in the colour: the base\'s flanks then read gray, not red (rendered 2026-11-21)'])]
          if skin is not None else []) + [
         Part('ring', ring, Machined('aluminium', 'lathe'), finish='anodised', group='base',
              notes=(['THE TOUCH ELECTRODE (2026-11-11): with the base in its own colour this ring sits behind the skin\'s lip '
