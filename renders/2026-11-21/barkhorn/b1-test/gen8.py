@@ -33,11 +33,11 @@ for p in P:
     if p.get('fn') == 'softbox' and p['size'] == [1.2, 0.9] and p['position'][0] < 7:
         if v == 'p3off':                       # one light off: the far softbox removed, to name the far horn's screen
             P.remove(p); break
-        if v.startswith('p34') or '--far-grid' in sys.argv or v in ('full', 'black', 'mv', 'mv2'):
+        if v.startswith('p34') or '--far-grid' in sys.argv or v in ('full', 'black', 'mv', 'mv2', 'mv3'):
             # an egg-crate grid (6 x 4 cells, 0.25 m deep: about +-20 deg) and a 0.6 m black top flag, so its light stays
             # on the far cabinet and off the far horn's mirror ray, the wall's top, the ceiling and the print
             p.update(grid=[6, 4], grid_depth=0.25, top_flag=0.6)
-        if v.startswith('p3m') or '--far-move' in sys.argv or v in ('full', 'black', 'mv', 'mv2'):
+        if v.startswith('p3m') or '--far-move' in sys.argv or v in ('full', 'black', 'mv', 'mv2', 'mv3'):
             # P3 by moving it (p34's top flag only took the screen from 28.7 to 17.1: the horn sits 13 deg above the
             # box's axis, the cabinet's top 8 deg): out of the far horn's mirror window (azimuth -33..33, elevation
             # 7-22 from the horn) to (7.5, 3.6, 2.95), azimuth 44 deg, still aimed at the far cabinet; every corner above
@@ -49,19 +49,22 @@ for p in P:
                 p['top_flag'] = 0.6
             else:
                 p.pop('top_flag', None)
-if v.startswith('mv') or v in ('full', 'black'):
+if v.startswith('mv') or v in ('full', 'black'):   # (mv, mv2, mv3)
     # the horn call (the coordinator, 20:08): the near Tropos 2 cm right and 5 cm deeper in its bay, the camera unchanged
     # (the horn's mouth then sees more of the niche's back: about 44 % against 33 %); the niche is 5.46-6.08 deep, the
     # felt's face at 6.03: the cabinet then spans y 5.55-5.98 (its amp plate the deepest part) and x 7.99-8.55
     for b in s['products']:
         for i in b.get('instances', []):
             if abs(i['position'][0] - 8.25) < 1e-6:
-                i['position'] = [8.27, round(i['position'][1] + 0.05, 4), i['position'][2]]
+                # (fixed-8c, 'mv3': 2 cm deeper, not 5: at 5 cm the cone's lower flank faced more of the cabinet's own
+                # lit interior, a pale crescent (lower half L* 34.4 against fixed-7's 16.4), with or without the panels)
+                dy = 0.02 if v.startswith('mv3') else 0.05
+                i['position'] = [8.27, round(i['position'][1] + dy, 4), i['position'][2]]
     if v != 'black':
         v_panel = 'w'                        # and w2's warm opal over the near niche's back, strength 2
         P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.64, 0.58], 'depth': 0.005,
                   'position': [8.25, 6.02, 2.22], 'target': [8.25, 4.0, 2.22], 'strength': 2.0, 'color': '#FFE2C0'})
-    if v == 'full' or v.startswith('mv2'):
+    if v == 'full' or v.startswith('mv2') or v.startswith('mv3'):
         # the same panel on the far bay, so the pair is one product (from this seat its back is behind the right upright)
         P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.64, 0.58], 'depth': 0.005,
                   'position': [5.55, 6.02, 2.22], 'target': [5.55, 4.0, 2.22], 'strength': 2.0, 'color': '#FFE2C0'})
