@@ -489,7 +489,7 @@ def build(frame, samples, scale):
                 lift_ = float(os.environ.get('BASE_LIFT', '0.2'))   # 0.2 the default since 2026-11-20 (the coordinator accepted it)
                 if lift_:
                     lo_ = [(r_, max(z_, lo_[0][1] + lift_)) for r_, z_ in lo_]
-                sk = acrylic(f'base-skin-{tint}', 0.55, tname, ld_)        # satin outside: a fine bead-blast, as rough glass
+                sk = acrylic(f'base-skin-{tint}', float(os.environ.get('BASE_ROUGH', '0.55')), tname, ld_)   # satin outside: a fine bead-blast, as rough glass (BASE_ROUGH: a test)
                 revolve(f'base-skin-{base}-{tint}', lo_, sk)
                 # BASE_CONTACT=1 (2026-11-21, a test for the owner's "smoke frosted" edges): the white liner in optical
                 # contact with the skin (cast on or bonded), its face at the skin's inner face, with no air gap between them.
