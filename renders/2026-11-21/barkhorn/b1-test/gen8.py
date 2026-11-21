@@ -31,6 +31,13 @@ for p in P:
             # an egg-crate grid (6 x 4 cells, 0.25 m deep: about +-20 deg) and a 0.6 m black top flag, so its light stays
             # on the far cabinet and off the far horn's mirror ray, the wall's top, the ceiling and the print
             p.update(grid=[6, 4], grid_depth=0.25, top_flag=0.6)
+        if v.startswith('p3m') or '--far-move' in sys.argv:
+            # P3 by moving it (p34's top flag only took the screen from 28.7 to 17.1: the horn sits 13 deg above the
+            # box's axis, the cabinet's top 8 deg): out of the far horn's mirror window (azimuth -33..33, elevation
+            # 7-22 from the horn) to (7.5, 3.6, 2.95), azimuth 44 deg, still aimed at the far cabinet; every corner above
+            # the frame, the body's top z 3.397. 20 % further from the cabinet, so strength 28. Skirt and grid kept.
+            p.update(position=[7.5, 3.6, 2.95], strength=28.0, grid=[6, 4], grid_depth=0.25)
+            p.pop('top_flag', None)
 if v.startswith('w'):
     # (a, wide) the opal panel across the whole near niche back above the cabinet (x 7.93-8.57, z 1.93-2.51), warm
     # (#FFE2C0, the bar's lamps) where a1/a3's cool #FFF4E6 read blue beside the horn; the horn's left half saw past a1
