@@ -22,6 +22,11 @@ if v.startswith('a'):
     # 6.03), centre z 2.26, facing the room, at strength X
     P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.6, 0.52], 'depth': 0.005,
               'position': [8.25, 6.02, 2.26], 'target': [8.25, 4.0, 2.26], 'strength': X, 'color': '#FFF4E6'})
+if v.startswith('w'):
+    # (a, wide) the opal panel across the whole near niche back above the cabinet (x 7.93-8.57, z 1.93-2.51), warm
+    # (#FFE2C0, the bar's lamps) where a1/a3's cool #FFF4E6 read blue beside the horn; the horn's left half saw past a1
+    P.append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [0.64, 0.58], 'depth': 0.005,
+              'position': [8.25, 6.02, 2.22], 'target': [8.25, 4.0, 2.22], 'strength': X, 'color': '#FFE2C0'})
 if v.startswith('b'):
     # (b) the near niche's back pale (an off-white plaster panel, 6 mm, over the felt behind and above the cabinet),
     # lit by a concealed LED strip under the niche's top lip (0.6 x 0.02 m, its face at z 2.505 just behind the
