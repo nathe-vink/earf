@@ -105,3 +105,44 @@
   | bell's top 5 % | yellow | 11.1 / C* 2.3: a dark polished horn, as ruled |
 
 - **At 800 px:** no hard skirt edge shows. Audit 0 / 0; shadow-ray links left: 0. `live-over-fixed7.png` shows the two at 800 px.
+
+## fixed-8 (the coordinator, 18:05 to 22:06; `gen8.py full`, `fixed8.json`)
+
+- **Step 1, the probe build** (`fixed8-probe.log`):
+  - every emitter's ray visibility is all on;
+  - shadow-ray links: 0;
+  - the shortcut is cut on 7 materials.
+- **The rig:**
+  - the near softbox is 2 cm lower;
+  - track-bar1 and track-horn1 are off;
+  - the diagnostics run last.
+- **P1, the near horn.**
+  - Crops a1 and a3 (an opal behind the horn), b160 and b400 (a pale back and an LED strip), and w1 and w2 (a warm opal over the whole back).
+  - The horn mouth shows the back (33 %), the left cheek (33 %), the ceiling (15 %) and the pod (18 %), so a back light lights only its share.
+  - The call: w2's warm #FFE2C0 opal at strength 2 on both niche backs, with the near Tropos moved 2 cm right and 2 cm deeper.
+  - At 5 cm deeper (`fixed8-5cm`) the cone's lower flank mirrored the cabinet's own lit interior: a crescent, lower half 34.4.
+  - Moving the near softbox did not cure it (`crop8-mv2`). 2 cm (`crop8-mv3`) did.
+- **P3:** the far softbox is the far horn's grey screen (`cropfar8-p3off`). It moved to (7.5, 3.6, 2.95), outside the horn's mirror window, at strength 28 (`cropfar8-p3m`).
+- **P4:** the far softbox keeps its skirt, an egg-crate grid (6 x 4, 0.25 m deep) and a 0.6 m top flag (`cropfar8-p34`).
+- **P5/P6** (`samp8-*`): the cone's green is real; the far batts' blotches were undersampling. The frame is at 512 spp, adaptive 0.003.
+- **Readings** (`meas.md`, `meas8m.md`, `measfar8.md`):
+
+  | | fixed-8 |
+  |---|---|
+  | horn mouth | 38.3 % lemon (fixed-7: 0.1 %) |
+  | cone | 13.8 (upper 1.9, lower 25.7) |
+  | cap | 2.1 |
+  | cone/batts | 0.71 (the mask method; fixed-7 0.35) |
+  | sill | 22.8 |
+  | P3 screen | 7.1 |
+  | far bay | 15.8 |
+  | record wall | 37.9 |
+  | wall top | 13.7 |
+  | ceiling | 3.9 |
+  | print | 15.5 |
+  | whole frame | 17.7 |
+
+  The diagnostics are clean, with 130 emitters all on. Audit 0 / 0.
+- **The owner's comparison:**
+  - `live-over-fixed8.png` at 800 px;
+  - `near-fixed8-vs-black-1to1.png`: the near speaker at 1:1 with the panel and as the honest black horn (`crop8-black`, the same 2 cm depth and 512 spp, no panels).
