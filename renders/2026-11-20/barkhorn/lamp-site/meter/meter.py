@@ -5,6 +5,8 @@ share: the base's body share at 30/45/55/65 deg, row y 1650-1670 (full scale), h
 body MASK: lower/middle third and whole L*/C* of a body's mask (ball.png, shade.png)
 pair MASK: the LIT pair's two glow masks inside MASK (A: L*>18, C*>45, h 25-50; B: R>100 and L*>25),
   each median and p10/p90 L*; the brightest channel >= 250 (R for Ember) in the frame and in MASK; floor patches (Core frames: left, right, front)
+glowy MASK: the coordinator's tint-agnostic glow (2026-11-21): inside MASK, pixels at or above half the mask's 95th-
+  percentile linear Y; their median L*/C*/h, and the share of MASK pixels with any channel >= 250
 glow MASK: red-dominant pixels of a body's mask after a 3x3 median: median L*/C*, R>=250 share; walls TL/TR"""
 import sys, os, numpy as np
 from PIL import Image, ImageFilter
@@ -20,7 +22,7 @@ def LC(a):
     L, A, B = lab(a); return L, np.hypot(A, B)
 def nm(f): return '/'.join(f.split('/')[-2:]).ljust(34)
 mode = sys.argv[1]; args = sys.argv[2:]
-if mode in ('body', 'glow', 'pair'): mk, args = args[0], args[1:]
+if mode in ('body', 'glow', 'pair', 'glowy'): mk, args = args[0], args[1:]
 for f in args:
     a = load(f, med=(mode == 'glow')); H, W = a.shape[:2]; L, C = LC(a); yy, xx = np.mgrid[:H, :W]
     if mode == 'corners':
@@ -50,6 +52,11 @@ for f in args:
         m = mask(mk, H, W); ys = np.nonzero(m)[0]; t0, t1 = ys.min(), ys.max(); hh = t1 - t0
         parts = {'lower third': m & (yy > t1 - hh / 3), 'middle third': m & (yy > t0 + hh / 3) & (yy <= t1 - hh / 3), 'whole': m}
         print(nm(f), '  '.join(f'{r} {np.median(L[q]):.1f}/{np.median(C[q]):.1f}' for r, q in parts.items()))
+    elif mode == 'glowy':
+        m = mask(mk, H, W); c_ = a / 255.0; li = np.where(c_ <= 0.04045, c_ / 12.92, ((c_ + 0.055) / 1.055) ** 2.4)
+        Y_ = 0.2126 * li[..., 0] + 0.7152 * li[..., 1] + 0.0722 * li[..., 2]; g = m & (Y_ >= 0.5 * np.percentile(Y_[m], 95))
+        L_, A_, B_ = lab(a[g][None])
+        print(nm(f), f'glow L {np.median(L_):.1f} C {np.median(np.hypot(A_, B_)):.1f} h {np.degrees(np.arctan2(np.median(B_), np.median(A_))) % 360:.1f} n{g.sum()}  clip {100 * (a[m].max(-1) >= 250).mean():.2f}% of mask')
     elif mode == 'pair':
         L_, A_, B_ = lab(a); h_ = np.degrees(np.arctan2(B_, A_)) % 360; m = mask(mk, H, W); k = W / 1600
         # (2026-11-21) any tint: A's hue window is 25-50 for Ember and, for the others, +-12.5 deg round the median hue of
