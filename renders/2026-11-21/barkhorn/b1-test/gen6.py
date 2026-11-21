@@ -14,6 +14,7 @@
           front), so the cone and the sill are in its shadow (penumbra about 7 cm).
       t3  steep: a 14 cm head on the track at (8.25, 4.95, 3.35), 0.6 m in front of the bay, 14 deg, at the same aim.
       t4, t5  no front head; the softbox a real one (a mesh diffuser in a body); track-bay1 times IRR (gen6.py t4 3).
+      t6, t7  a diffuser flush under the ceiling over the bay, and a frontal softbox at strength IRR (gen6.py t6 10).
     python3 gen6.py VARIANT [IRR]  ->  fixed6-VARIANT.json"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -47,5 +48,20 @@ elif v.startswith('t3'):
 s['title'] = f'B1 fixed-6 {v}: Planet EARF bar, the record wall from a seat at the bar (a test, not a final)'
 s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
                           'fn': 'shadow_ray_report'})                       # (prints what the cut left; changes nothing)
+if v.startswith('t6') or v.startswith('t7'):
+    # t6/t7: two real softboxes (living_ext.softbox: a glowing diffuser in a black body, every ray on, casting shadows)
+    #   ceiling-panel: a 1.4 x 0.9 m diffuser flush under the ceiling over the bay's front (z 3.36-3.40), facing
+    #     down, strength 6. The live horn card spanned z 3.04-3.58, more than half of it above the ceiling.
+    #   front-softbox: a 1.2 x 0.9 m softbox hung in front of the near bay at (8.6, 4.3, 3.0) (z 2.69-3.38, 668 px
+    #     above the frame), aimed at the cabinet (8.25, 5.6, 1.55), at strength `irr`. A large soft source
+    #     lights the white batts (albedo about 0.8) about 40 times as much as the cone's dark paper (#242220),
+    #     where a small head at a glossy angle made the cone's sheen outshine them.
+    #   No front head; track-bay1 as in the bar.
+    L.pop('bay-softbox')
+    E = 'spinoffs/barkhorn/campaign/living/living_ext.py'
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [1.4, 0.9], 'depth': 0.02,
+                              'position': [8.05, 4.9, 3.37], 'target': [8.05, 4.95, 0.0], 'strength': 6.0, 'color': '#FFE2C0'})
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': E, 'fn': 'softbox', 'size': [1.2, 0.9], 'depth': 0.1,
+                              'position': [8.6, 4.3, 3.0], 'target': [8.25, 5.6, 1.55], 'strength': irr, 'color': '#FFE2C0'})
 json.dump(s, open(os.path.join(HERE, f'fixed6-{v}.json'), 'w'), indent=1)
 print(v, s['title'], sorted(L))
