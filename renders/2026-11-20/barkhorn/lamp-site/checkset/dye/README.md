@@ -47,3 +47,18 @@ dE00 to the pick, with round 4 in brackets:
 - **Haze:** the 0.65 frame matches round 4 exactly although its green factor changed. Haze's green absorption is already saturated, so raising it shows nothing.
 - **Dust:** the hue and chroma now match, but it stays about 4 L* light at any pour. Its dye passes red almost whole, so multiplying the red absorption does nothing.
 - **Round 6:** Dust with a neutral absorption added to every channel (CORE_ABS_ADD, a touch of black in the mix).
+
+## Round 6 (21:15-21:26): Dust with a touch of black (CORE_ABS_ADD, 1/m on every channel)
+
+| Pour; R / G / B; black | L* / C* / h | dE00 |
+|---|---|---|
+| 2.6; 1.0 / 0.35 / 2.5; 8 | 56.0 / 68.1 / 49.1 | **2.0** |
+| 2.6; 1.0 / 0.35 / 2.5; 16 | 53.6 / 64.9 / 49.1 | **2.0** |
+
+The pick is 54.3 / 71.7 / 50.1. The black sets the lightness and holds the hue; it costs chroma (C* -3.6 at 8, -6.8 at 16).
+
+Picks after round 6, on these medians:
+
+- Dust: round 6 (black 8 or 16), dE00 2.0.
+- Ice: round 4 (1.72; 3.2 / 0.85 / 1.19), dE00 2.4.
+- Haze: round 5 (0.6; 0.89 / 2.2 / 1.09), dE00 2.1.
