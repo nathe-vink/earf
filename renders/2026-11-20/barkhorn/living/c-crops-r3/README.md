@@ -30,5 +30,5 @@ The glass crop's build was at 7e08871d9 for the Core, which is not in that crop.
 
 - **The base in v4** is deeper and less pink than in v3: both passes are now tinted. Its flanks hold the centre's hue
   (37 against 35), with no gray-brown band.
-- **The ball in v4** is lighter and deeper, 8 L* and 6 C* up. That comes from `filter_glossy` 0: the caustics through
-  its polished shell are no longer blurred.
+- **The ball in v4** is lighter and deeper, 8 L* and 6 C* up. The likely cause is `filter_glossy` 0: the caustics
+  through its polished shell are no longer blurred. That is not separated from the lamps commit's own changes here.
