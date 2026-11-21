@@ -94,8 +94,8 @@ KINDS = {
         ('rating-plate', 'rating plate', 'aluminum', '70 x 40 x 1', 'black anodized', 'laser-marked (model, serial, ratings, WEEE bin)', '±0.2'),
     ],
     'd-other': [
-        (('lining-bottom-', 'lining-top-', 'lining-left-', 'lining-right-', 'lining-back-'), 'lining batts', 'polyester batt, acoustic grade, about 30 kg/m3, recycled PET', '50 and 100', 'white', 'cut 10 oversize each way; each sewn into a black voile sleeve', '±5'),
-        ('lining-sleeves', 'lining sleeves (voile)', 'black polyester voile', '-', 'black', 'sewn to each batt\'s size, seams to the wall', '±5'),
+        (('lining-bottom-', 'lining-top-', 'lining-left-', 'lining-right-', 'lining-back-'), 'lining batts', 'polyester batt, acoustic grade, about 30 kg/m3, recycled PET', '50 and 100', 'white', 'cut 10 oversize each way; each sewn into a voile sleeve (white; black for Smoke)', '±5'),
+        ('lining-sleeves', 'lining sleeves (voile)', 'polyester voile', '-', 'white; black for Smoke', 'sewn to each batt\'s size, seams to the wall', '±5'),
         ('fd:plinth-light:2', 'the plinth\'s light (one a speaker)', '24 V COB LED strip, 4.8 W/m, 2700 K, CRI 90+, 2.1 m in four lengths joined by short jumpers at the corners (clear of the feet), in a 10 x 4 aluminum channel with a frosted diffuser; a 24 V 15 W UL Class 2 supply; a small dimmer board (EARF\'s design)', '-', '-', 'the strip cut and soldered to length in its channel; leads and a DC socket', '-'),
         ('mark-back', 'EARF on the back', 'laser etch into the back panel', '0.1 deep', 'etch filled in the speaker\'s color, deeper', 'frosted, 140 wide, from our vector file', '±0.2'),
         ('back-seal', 'back seal', 'EPDM cord 4 mm, 60 Shore A', '4', 'black', 'about 2.7 m a speaker, its ends vulcanized into a loop', 'length ±5'),
@@ -206,7 +206,7 @@ laser-marked. The drawings give every size. The quantities are small for now: on
 fifty."""),
     'd-other': ('other outside work', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on some smaller jobs for a loudspeaker we are prototyping. The cabinet is clear,
 tinted acrylic, so these parts are seen and have to be neat: acoustic polyester batts cut to size and each sewn into a
-black voile sleeve; a small LED light for the stepped plinth the speaker stands on; our wordmark laser-etched into the back panel and filled in
+voile sleeve (white; black for Smoke); a small LED light for the stepped plinth the speaker stands on; our wordmark laser-etched into the back panel and filled in
 the speaker's color; and a few seals (an EPDM cord loop with a vulcanized joint, a die-cut sponge gasket, small
 polyurethane sleeves). Please quote whichever of these you do."""),
     'e-laminated-horn': ('a laminated acrylic horn and its cabinet', """I'm writing from EARF, a new hi-fi and lighting maker in San Francisco, for a quote on the acrylic of a loudspeaker we are prototyping: the cabinet, and a horn laminated from
