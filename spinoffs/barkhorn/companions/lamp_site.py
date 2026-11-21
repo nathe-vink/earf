@@ -670,6 +670,19 @@ def build(frame, samples, scale):
             for o in objs:   # turn the dock's cable away from the camera, about the lamp's axis (the parts' origin)
                 o.rotation_euler[2] = math.radians(rot)
 
+    if os.environ.get('CORE_ABS'):
+        # CORE_ABS 'R,G,B' (2026-11-21, the coordinator: a test for the owner, no product changes): the Core's own dye
+        # balance, its absorption per channel times these factors (ball, base and the ball's cast colour alike), the
+        # same tint name and loading; the pendant untouched. A maker's re-mix of the thick part's dyes
+        _core0 = core; _abs0 = SC.absorption; _k = [float(v) for v in os.environ['CORE_ABS'].split(',')]
+        def core(*a, **kw):
+            SC.absorption = lambda t_, l_=1.0: [x * k for x, k in zip(_abs0(t_, l_), _k)]
+            print('CORE_ABS', _k)
+            try:
+                return _core0(*a, **kw)
+            finally:
+                SC.absorption = _abs0
+
     def section(c):
         """The cutaway (2026-11-12): every part of the lamp cut on the vertical plane y = c.y through its axis, the near
         half (y < c.y, the camera's side) removed. A closed CAD solid gets its cut faces filled (a true section cap, the
