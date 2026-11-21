@@ -15,3 +15,17 @@ Ember, frames 0, 6, 12 and 18 of the 24-frame turn, 1200 x 1080, made by `spinof
   - the turn's camera frames the horn and the cabinet's top, so no floor, shadow or reflection is in frame.
 - **Size:** at full size the driver's dome rings and screws are a touch crisper at 1200 than at 960 x 864. The site's
   667 x 600 slot asks 1334 px on a 2x screen, so 1200 comes closer.
+
+## The Ember turn, all 24 frames (2026-11-21)
+
+`turn-ember-00` to `turn-ember-23`, 1200 x 1080, 96 samples, made as above. `contact-ember-24.png` shows them in
+order, six to a row, frame 0 at the top left. (`contact-sheet.png` is the four-frame proof.)
+
+- **Time:** 10 to 13 minutes a frame.
+- **Audit:** hidden 0, equipment 0 on all 24 (each frame's `.equipment.txt`).
+- **The ground** (L*, the 60 x 54 px corner boxes):
+  - The top corners read 93.3 and 93.4 to 93.5 in every frame. They never move more than 0.06 L* from one frame to the next.
+  - The bottom right reads 94.6 to 94.9.
+  - The bottom left reads 90.5 to 90.6, except in frames 4, 5, 8, 9, 10, 15, 16, 17, 20 and 21. In those frames the
+    cabinet's corner reaches into the box as the speaker turns, not the ground.
+- **The loop:** frame 23 runs into frame 0 at the same 15-degree step as every other pair.
