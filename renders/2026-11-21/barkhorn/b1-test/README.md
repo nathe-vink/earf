@@ -58,3 +58,24 @@
   - The pillars read 3.7 / 14.1 against 3.9 / 15.2.
   - The deck and Mantle read 18.4 against 18.7.
   - The whole frame is about 16.5 against 17.0.
+
+## fixed-6 (the coordinator, 13:24 to 15:20): every light real (`gen6.py full 40`, `fixed6.json`)
+
+- **Crop tests t1-t10:** `crop6-t*.png`, with the pass tests in `meas6-crops.md`.
+  - The frontal softbox, a large soft source, makes the cone dark matte and lights the batts.
+  - Neither a real softbox where the horn card hung nor a hidden 40 W niche washer makes the bell yellow. The niche felt is about 1 % albedo, and the live card spanned z 3.04-3.58, more than half of it above the ceiling.
+- **The lights:**
+  - no horn card;
+  - house and house-left inside the room;
+  - a 1.4 x 0.9 m diffuser flush under the ceiling over the near bay, strength 6;
+  - a 1.2 x 0.9 m frontal softbox at strength 40 on each bay: near (8.6, 4.3, 3.0), far (6.1, 3.9, 2.98).
+  - Every one is a mesh in a black body (living_ext.softbox), with every ray visibility on, casting shadows, out of frame and under the 3.40 ceiling.
+- **Pass tests** (`meas6.md`):
+  - cone 12.0 and cap 6.0, against 22 / 24;
+  - cone/batts 0.15, passes;
+  - sill 26.9;
+  - the bell's top 5 % 18.1 / C* 6.4 / h 101: dark, not yellow;
+  - far bay 22.8 (57 % over 10), against live's 15.7.
+- **The room** (`meas.md`):
+  - The softboxes' spill lifts the record wall to 48.0, the dark left wall to 13.2 and the whole frame to 22.8 (live 14.8).
+  - Shadow-ray links left: 0. Audit 0 / 0.
