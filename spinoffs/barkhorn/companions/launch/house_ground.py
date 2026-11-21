@@ -267,7 +267,24 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         so_ = bpy.data.objects.new('house-bounce-spot', sd_); bpy.context.scene.collection.objects.link(so_)
         so_.location = (lx_, ly_, lz_)
         so_.rotation_euler = (Vector((cx_, cy_, az_)) - Vector((lx_, ly_, lz_))).to_track_quat('-Z', 'Y').to_euler()
-        print('BOUNCE', (cx_, cy_, w_, d_), (lx_, ly_, lz_), cone_, pw_)
+        if os.environ.get('HOUSE_BOUNCE_COLOR'):
+            # (2026-11-21, the critics on LIT-d: the spot read cooler than the house lights) its colour as an sRGB hex, the
+            # house lights' own, as a bi-colour LED or a quarter CTO would give
+            h_ = os.environ['HOUSE_BOUNCE_COLOR'].lstrip('#'); sd_.color = [((int(h_[i:i + 2], 16) / 255 + 0.055) / 1.055) ** 2.4 for i in (0, 2, 4)]
+        if os.environ.get('HOUSE_BOUNCE_CUT'):
+            # HOUSE_BOUNCE_CUT 'D0,D1,ZE,W' (the critics: its lower beam lit a column of floor to the frame's edge): a real flag
+            # under the snoot, a black card lying level at height ZE, from D0 to D1 m along the beam's ground direction from
+            # the spot, W wide; every ray visibility on, out of frame. Rays that would reach the floor short of the base cross
+            # ZE within the card and stop; its edge sets the cut
+            d0_, d1_, ze_, wc_ = [float(v) for v in os.environ['HOUSE_BOUNCE_CUT'].split(',')]
+            fd_ = Vector((cx_ - lx_, cy_ - ly_, 0.0)).normalized(); sd2_ = Vector((-fd_.y, fd_.x, 0.0))
+            P_ = Vector((lx_, ly_, ze_)); vs_ = [P_ + fd_ * d0_ - sd2_ * wc_ / 2, P_ + fd_ * d1_ - sd2_ * wc_ / 2, P_ + fd_ * d1_ + sd2_ * wc_ / 2, P_ + fd_ * d0_ + sd2_ * wc_ / 2]
+            mc_ = bpy.data.meshes.new('house-bounce-cut'); mc_.from_pydata([tuple(v) for v in vs_], [], [(0, 1, 2, 3)])
+            co2_ = bpy.data.objects.new('house-bounce-cut', mc_); bpy.context.scene.collection.objects.link(co2_)
+            mm_ = bpy.data.materials.new('house-bounce-cut'); mm_.use_nodes = True; bm2_ = mm_.node_tree.nodes['Principled BSDF']
+            bm2_.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); bm2_.inputs['Roughness'].default_value = 0.9; mc_.materials.append(mm_)
+            print('BOUNCE_CUT', [tuple(round(c, 4) for c in v) for v in vs_])
+        print('BOUNCE', (cx_, cy_, w_, d_), (lx_, ly_, lz_), cone_, pw_, 'colour', tuple(round(c, 3) for c in sd_.color), 'scale', tuple(so_.scale))
     if os.environ.get('HOUSE_KEY_PRODUCT') == '1':
         # (2026-11-21, the Core LIT: the key off lit the floor out, and the base with it) the key lights everything but
         # the ground: the sweep and the floor ring excluded from its receivers, so it lights the lamp and its base alone.
