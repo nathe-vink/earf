@@ -28,11 +28,12 @@ L['bay-softbox'] = {'type': 'area', 'shape': 'RECTANGLE', 'size_m': [1.4, 0.9], 
 AIM = [8.25, 5.55, 1.88]
 if v.startswith('t4') or v.startswith('t5'):
     # t4/t5: the softbox as a real one (a glowing diffuser in a black body, living_ext.softbox) at the same place,
+    # (z 2.70-3.38 with its 10 cm body: under the 3.40 ceiling; its nearest corner 33 px above the frame)
     # strength 6 (the live card's mean: 10 on its 0.25-1-0.25 ramp), and the steep bay head over the near speaker
     # (track-bay1, planet_bar.py:136, 'the cone in its cabinet's shade') raised by `irr` times, no front head
     L.pop('bay-softbox')
     s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/living/living_ext.py',
-                              'fn': 'softbox', 'size': [1.4, 0.9], 'depth': 0.2, 'position': [8.05, 4.9, 2.98],
+                              'fn': 'softbox', 'size': [1.4, 0.9], 'depth': 0.1, 'position': [8.05, 4.9, 3.0],
                               'target': [8.25, 5.6162, 2.19], 'strength': 6.0, 'color': '#FFE2C0'})
     L['track-bay1']['irradiance'] = round(L['track-bay1']['irradiance'] * irr, 2)
 if v.startswith('t2'):
