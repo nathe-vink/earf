@@ -1,0 +1,21 @@
+# Core dye-balance test (2026-11-21)
+
+This is a test for the owner, not a change to any product. `CORE_ABS=R,G,B` multiplies the Core's own per-channel dye absorption (ball, base and cast colour alike), at today's Core pour. The tint name is the same and the pendant is untouched: a maker re-mixing the thick part's dyes.
+
+All frames are Core OFF, half size, 128 spp, with the row-off settings. Values are the body's median L* / C* / h.
+
+| Tint | Today | Round 1 | Round 2 | Pendant pick |
+|---|---|---|---|---|
+| Dust | 54.2 / 79.0 / 37.6 | 1.0, 0.70, 1.48: 57.9 / 74.9 / 43.5 | 1.0, 0.61, 2.0: 59.8 / 73.1 / 46.7 | 2.1x: 54.3 / 71.7 / 50.1 |
+| Ice | 39.1 / 73.4 / 294.3 | 1.61, 0.88, 1.15: 41.9 / 64.2 / 289.4 | 2.5, 0.87, 1.19: 42.1 / 62.8 / 288.7 | 3x: 38.4 / 59.5 / 287.9 |
+| Haze | 26.3 / 79.8 / 306.0 | 0.89, 1.46, 1.08: 26.8 / 77.6 / 307.6 | 0.89, 2.5, 1.09: 26.8 / 77.3 / 307.7 | 1x: 22.7 / 75.8 / 308.2 |
+
+What each mix means physically:
+
+- **Dust:** less green absorption and more blue.
+- **Ice:** more red absorption and slightly less green.
+- **Haze:** more green absorption and slightly less red.
+
+After round 2 the hue is within about 1° for Ice and Haze, and 3.4° for Dust (12.5° before). Chroma is within 1.5-3.3. Each Core is now 4-5.5 L* lighter than its pick; a heavier Core pour (CORE_LOAD) would close that.
+
+The darkest channel of each tint (Dust's B, Ice's R, Haze's G) barely responds to its factor: the clear ball's neutral surface reflections set its floor.
