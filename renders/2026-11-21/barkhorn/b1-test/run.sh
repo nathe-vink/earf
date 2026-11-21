@@ -2,6 +2,7 @@
 # B1: live, then fixed, at 1600 x 900 with masks; each committed and pushed as it lands
 cd /home/user/earf
 F=renders/2026-11-21/barkhorn/b1-test
+export LAMPS_ROOT=/home/user/lamps-ecb1   # the 14 Nov frame recorded no lamps commit; live and fixed both at the current pin, ecb1650c24
 for v in live fixed; do
   [ -f $F/$v.equipment.txt ] && { echo "$v done before"; continue; }
   t0=$(date +%s)
