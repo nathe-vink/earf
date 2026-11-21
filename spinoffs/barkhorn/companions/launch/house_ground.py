@@ -81,6 +81,10 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         ob.data.energy *= k_st
         if solid and not sp.get('receivers') and ob.data.specular_factor > 0:
             softbox(bpy, ob, s)
+            if os.environ.get('HOUSE_LAMP_RAYVIS', '0') == '0':   # (the default since 2026-11-21: 1 the old double count)
+                # (2026-11-21, the coordinator's audit, a test) specular_factor 0 may not hide the lamp from glossy and
+                # transmission rays in Cycles; ray visibility does. The softbox's face then stands alone in reflections
+                ob.visible_glossy = ob.visible_transmission = False
         if sp.get('receivers'):
             # HOUSE_BG: the lamps that light the sweep alone, times one declared factor, so the paper behind a small
             # lamp reads as it does behind the speaker (whose own bounce lifts it); 1 is the recipe as it stands
@@ -331,14 +335,20 @@ def floor_card(bpy, p, lift=0.0):
     fs = [(n + i, n + (i + 1) % n, (i + 1) % n, i) for i in range(n)]       # wound so its face (+Z) looks up
     me = bpy.data.meshes.new('house-floorcard'); me.from_pydata(vs, [], fs)
     ob = bpy.data.objects.new('house-floorcard', me); bpy.context.scene.collection.objects.link(ob)
-    m = bpy.data.materials.new('house-floorcard'); m.use_nodes = True
-    bs = m.node_tree.nodes.get('Principled BSDF')
-    bs.inputs['Base Color'].default_value = (alb, alb, alb, 1.0); bs.inputs['Roughness'].default_value = 1.0
-    bs.inputs['Specular IOR Level'].default_value = 0.0
+    if alb < 0:
+        # ALB -1 (2026-11-21, the coordinator's audit): the sweep's own material (its warm white, roughness and contact
+        # darkening), so the base sees the floor as it is, not a brighter neutral card
+        m = bpy.data.materials['sweep'].copy(); m.name = 'house-floorcard'
+    else:
+        m = bpy.data.materials.new('house-floorcard'); m.use_nodes = True
+        bs = m.node_tree.nodes.get('Principled BSDF')
+        bs.inputs['Base Color'].default_value = (alb, alb, alb, 1.0); bs.inputs['Roughness'].default_value = 1.0
+        bs.inputs['Specular IOR Level'].default_value = 0.0
     # one-sided: its underside is clear, or the floor 1 mm below would see it in place of the room and change tone
-    nt = m.node_tree; out = nt.nodes.get('Material Output')
+    nt = m.node_tree; out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output)
+    sh_ = out.inputs['Surface'].links[0].from_socket
     gm = nt.nodes.new('ShaderNodeNewGeometry'); tr = nt.nodes.new('ShaderNodeBsdfTransparent'); mx = nt.nodes.new('ShaderNodeMixShader')
-    nt.links.new(gm.outputs['Backfacing'], mx.inputs[0]); nt.links.new(bs.outputs[0], mx.inputs[1]); nt.links.new(tr.outputs[0], mx.inputs[2])
+    nt.links.new(gm.outputs['Backfacing'], mx.inputs[0]); nt.links.new(sh_, mx.inputs[1]); nt.links.new(tr.outputs[0], mx.inputs[2])
     nt.links.new(mx.outputs[0], out.inputs['Surface'])
     me.materials.append(m)
     ob.visible_camera = ob.visible_glossy = ob.visible_shadow = ob.visible_volume_scatter = False

@@ -490,13 +490,52 @@ def build(frame, samples, scale):
                 if lift_:
                     lo_ = [(r_, max(z_, lo_[0][1] + lift_)) for r_, z_ in lo_]
                 sk = acrylic(f'base-skin-{tint}', float(os.environ.get('BASE_ROUGH', '0.55')), tname, ld_)   # satin outside: a fine bead-blast, as rough glass (BASE_ROUGH: a test)
-                revolve(f'base-skin-{base}-{tint}', lo_, sk)
+                if os.environ.get('BASE_FIX', '1') == '1' and os.environ.get('BASE_CONTACT', '1') == '1':
+                    # (2026-11-21, the coordinator's code audit, two points) THE SKIN 6 MM ALONG ITS NORMALS: the inner
+                    # boundary offset along the profile's normals, not along r alone (on the R12 bullnose an r-only offset
+                    # thinned the skin to nothing at the top), so the lip's inside is the CAD's R6, and the lip has its end
+                    # face; the skin one closed solid: the outside, the lip's end and the foot in acrylic, the inside the
+                    # white. BOTH PASSES TINTED: acrylic tints a ray only where it leaves through its own face from inside,
+                    # so a ray reaching the white was never tinted on its way in; the white's colour now carries
+                    # exp(-a x the ray's length) at the skin's loading, the inbound pass, and the outbound is the skin's own
+                    P_ = lo_[1:]                                          # the outside, from the foot up to the lip's top
+                    def nrm_(a_, b_):
+                        dr_, dz_ = b_[0] - a_[0], b_[1] - a_[1]; l_ = math.hypot(dr_, dz_)
+                        return (dz_ / l_, -dr_ / l_)                     # outward: the right of the walk
+                    segs_ = [nrm_(P_[i], P_[i + 1]) for i in range(len(P_) - 1)]
+                    inn_ = []
+                    for i, (r_, z_) in enumerate(P_):
+                        ns_ = [segs_[j] for j in (i - 1, i) if 0 <= j < len(segs_)]
+                        nr_, nz_ = sum(n[0] for n in ns_), sum(n[1] for n in ns_); l_ = math.hypot(nr_, nz_); nr_, nz_ = nr_ / l_, nz_ / l_
+                        d_ = 6.0 / max(nr_ * ns_[0][0] + nz_ * ns_[0][1], 0.5)    # a mitred corner keeps 6 to each face
+                        inn_.append((r_ - d_ * nr_, z_ - d_ * nz_))
+                    # the inner cone carried down to the foot's plane
+                    (r0_, z0_), (r1_, z1_) = inn_[0], inn_[1]
+                    zf_ = P_[0][1]; inn_[0] = (r0_ + (r1_ - r0_) * (zf_ - z0_) / (z1_ - z0_), zf_)
+                    # the acrylic: the foot's ring from the inner cone out, the outside, and the lip's end face down to the inner arc
+                    revolve(f'base-skin-{base}-{tint}', [inn_[0]] + P_ + [inn_[-1]], sk)
+                    a_ = SC.absorption(tname, ld_)
+                    lm_ = SC.principled(f'base-liner-{tint}', '#EDEDEA', 0.8); nt_ = lm_.node_tree; b_ = nt_.nodes['Principled BSDF']
+                    lp_ = nt_.nodes.new('ShaderNodeLightPath'); cc_ = nt_.nodes.new('ShaderNodeCombineColor')
+                    for ch_, nm_ in enumerate(('Red', 'Green', 'Blue')):
+                        m1_ = nt_.nodes.new('ShaderNodeMath'); m1_.operation = 'MULTIPLY'; m1_.inputs[1].default_value = -a_[ch_]
+                        nt_.links.new(lp_.outputs['Ray Length'], m1_.inputs[0])
+                        ex_ = nt_.nodes.new('ShaderNodeMath'); ex_.operation = 'EXPONENT'; nt_.links.new(m1_.outputs[0], ex_.inputs[0])
+                        nt_.links.new(ex_.outputs[0], cc_.inputs[nm_])
+                    mu_ = nt_.nodes.new('ShaderNodeMix'); mu_.data_type = 'RGBA'; mu_.blend_type = 'MULTIPLY'; mu_.inputs['Factor'].default_value = 1.0
+                    mu_.inputs['A'].default_value = tuple(b_.inputs['Base Color'].default_value)
+                    nt_.links.new(cc_.outputs[0], mu_.inputs['B']); nt_.links.new(mu_.outputs['Result'], b_.inputs['Base Color'])
+                    revolve(f'base-liner-{base}-{tint}', inn_, lm_)        # its face outward, into the skin
+                    print('BASEFIX inner', [(round(r, 2), round(z, 2)) for r, z in (inn_[0], inn_[1], inn_[-2], inn_[-1])])
+                else:
+                    revolve(f'base-skin-{base}-{tint}', lo_, sk)
                 # BASE_CONTACT=1 (2026-11-21, a test for the owner's "smoke frosted" edges): the white liner in optical
                 # contact with the skin (cast on or bonded), its face at the skin's inner face, with no air gap between them.
                 # The default since 2026-11-21 (the coordinator: contact is the design, as the CAD has it); 0 the old render's
                 # 0.4 mm air gap between the skin's smooth inner face and the liner
                 if os.environ.get('BASE_CONTACT', '1') == '1':
-                    revolve(f'base-liner-{base}-{tint}', lo_, SC.principled('base-liner', '#EDEDEA', 0.8), off=6.0)
+                    if os.environ.get('BASE_FIX', '1') != '1':   # (BASE_FIX=0: the r-only offset, the inbound pass untinted)
+                        revolve(f'base-liner-{base}-{tint}', lo_, SC.principled('base-liner', '#EDEDEA', 0.8), off=6.0)
                 else:
                     revolve(f'base-skin-in-{base}-{tint}', lo_, acrylic(f'base-skin-in-{tint}', 0.0, tname, ld_), flip=True, off=6.0)
                     revolve(f'base-liner-{base}-{tint}', lo_, SC.principled('base-liner', '#EDEDEA', 0.8), off=6.4)
