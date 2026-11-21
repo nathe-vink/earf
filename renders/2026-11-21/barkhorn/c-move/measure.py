@@ -34,8 +34,11 @@ def measure(p, ball, lower, centre):
     return {n: np.median(Lab[s].reshape(-1, 3), 0) for n, s in sel.items()}
 fmt = lambda v: f'{v[0]:.1f} / {np.hypot(v[1], v[2]):.1f} / {np.degrees(np.arctan2(v[2], v[1])):.0f}'
 st = measure(sys.argv[1], (822, 1045, 400), (700, 1180, 940, 1320), (760, 1500, 880, 1580))
-print('| | ' + ' | '.join(st) + ' |\n|---|---|---|---|')
-print('| studio (house7) | ' + ' | '.join(fmt(st[n]) for n in st) + ' |')
+# a frame NAME@DX was framed DX px (of 1600) left of c-full's (C full2's lens shift: 223 px, found from the ball's centroid)
+bb = lambda r: f"{de00(r['ball, whole disc'], r['base centre']):.1f}"
+print('| | ' + ' | '.join(st) + ' | ball to base, dE00 |\n|---|---|---|---|---|')
+print('| studio (house7) | ' + ' | '.join(fmt(st[n]) for n in st) + f' | {bb(st)} |')
 for p in sys.argv[2:]:
-    r = measure(p, (720, 1110, 170), (660, 1160, 780, 1230), (690, 1320, 750, 1380))
-    print(f'| {p.split("/")[-1]} | ' + ' | '.join(f'{fmt(r[n])}, dE {de00(st[n], r[n]):.1f}' for n in st) + ' |')
+    p, dx = (p.split('@')[0], float(p.split('@')[1])) if '@' in p else (p, 0.0)
+    r = measure(p, (720 - dx, 1110, 170), (660 - dx, 1160, 780 - dx, 1230), (690 - dx, 1320, 750 - dx, 1380))
+    print(f'| {p.split("/")[-1]} | ' + ' | '.join(f'{fmt(r[n])}, dE {de00(st[n], r[n]):.1f}' for n in st) + f' | {bb(r)} |')
