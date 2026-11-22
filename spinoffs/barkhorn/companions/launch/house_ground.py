@@ -245,6 +245,20 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         ou_ = nt_.nodes.new('ShaderNodeOutputWorld'); nt_.links.new(bg_.outputs[0], ou_.inputs['Surface'])
     if os.environ.get('HOUSE_FLOORCARD'):
         floor_card(bpy, [float(v) for v in os.environ['HOUSE_FLOORCARD'].split(',')], lift)
+    if os.environ.get('HOUSE_NEGFILL'):
+        # HOUSE_NEGFILL 'X,Y,W,H' (2026-11-22, the Fog Core: white and flat, its clear rim smudged): negative fill, two black
+        # cards standing on the floor at x = -X and +X (m at the house scale), centred at y = Y, W wide, H tall, facing the
+        # lamp, out of frame, every ray visibility on. They take the bright set's light off the ball's sides and give its clear
+        # rim a dark edge in reflection, as a photographer does for clear glass
+        nx_, ny_, nw_, nh_ = [float(v) for v in os.environ['HOUSE_NEGFILL'].split(',')]
+        mn_ = bpy.data.materials.new('house-negfill'); mn_.use_nodes = True; bn_ = mn_.node_tree.nodes['Principled BSDF']
+        bn_.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); bn_.inputs['Roughness'].default_value = 0.9
+        for sg_ in (-1, 1):
+            x_ = sg_ * nx_
+            vs_ = [(x_, ny_ - nw_ / 2, 0.0), (x_, ny_ + nw_ / 2, 0.0), (x_, ny_ + nw_ / 2, nh_), (x_, ny_ - nw_ / 2, nh_)]
+            me_ = bpy.data.meshes.new('house-negfill'); me_.from_pydata(vs_, [], [(0, 1, 2, 3)]); me_.materials.append(mn_)
+            ob_ = bpy.data.objects.new('house-negfill', me_); bpy.context.scene.collection.objects.link(ob_)
+        print('NEGFILL', nx_, ny_, nw_, nh_)
     if os.environ.get('HOUSE_BOUNCE'):
         # HOUSE_BOUNCE 'CX,CY,W,D,LX,LY,LZ,CONE,WATTS' (2026-11-21, the critics on the Core LIT: the base read black once the
         # key went off): a real white card lying on the floor in front of the lamp, out of frame (centre CX,CY, W x D, m at
