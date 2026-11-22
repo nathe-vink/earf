@@ -25,6 +25,6 @@ the ball's own pour).
     44.7 to 39.2 at the same pour) and Fog gains 3 %;
   - the pours: Dust's re-mix and denser pour −29 %, Poison −21 %, Acid −9 %, Ice −5 %, Haze −5 %, Ember none.
 - **Smoke's Core is 16.8 lm, half its 17 Nov 35.1.** Its pour is 0.5 on the ball, where the decided pair of 16 Nov
-  was 0.6× the chart loading (0.3 on the ball). If 19:09's "0.5" meant the chart unit, the ball should be 0.25 and
-  the Core about 31 lm. That is the owner's to confirm; the frames were rendered at 0.5.
+  was 0.6× the chart loading (0.3 on the ball). If 19:09's "0.5" meant the chart unit, the ball would be 0.25 and
+  the Core a little over 29.4 lm (its reading at 0.3; 0.25 not run). That is the owner's to confirm; the frames were rendered at 0.5.
 - Lux under the pendant was not re-measured: the opal sheet sets it (17 Nov: 336-347 lux at centre for every pour).
