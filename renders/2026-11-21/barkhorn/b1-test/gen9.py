@@ -1,0 +1,43 @@
+"""B1 fixed-9 crop tests (the coordinator, 22 Nov 00:29), from fixed8.json (the owner's choice pending: no full render).
+  python3 gen9.py NAME [--off ROLE ...] [--fix9]  ->  fixed9-NAME.json
+  --off ROLE: a light or fixture left out, to find what throws Q2's ceiling streak: far, near, diffuser, panels (the two
+    opal backs), heads (every engine lamp: the track heads, house, house-left, mantle-*), hemis (the Hemispheres' and
+    Cores' LEDs, as a set prop)
+  --fix9: the fixed-9 changes:
+    2. the far softbox 30 cm further back along its throw, horizontally (toward the seats), clear of the orange and red
+       pendants' cords; re-aimed at (5.55, 5.6, 1.55); skirt, grid and flag kept; strength 28 -> 31 (about 90 % at the
+       longer throw otherwise)
+    3. mantle-front raised 0.3 m and re-aimed at the same point (the camera sat in its beam)
+    4. track-bay1 10 cm toward the wall (clear of the ceiling diffuser)
+    5. 'camera': true on every shot lamp (all out of frame)"""
+import json, math, os, sys
+HERE = os.path.dirname(os.path.abspath(__file__))
+name = sys.argv[1]; offs = [sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == '--off']
+s = json.load(open(os.path.join(HERE, 'fixed8.json')))
+P = s['set']['props']; L = s['lights']
+def role(p):
+    if p.get('fn') != 'softbox':
+        return None
+    if p['size'] == [1.4, 0.9]: return 'diffuser'
+    if p['size'] == [0.64, 0.58]: return 'panels'
+    return 'far' if p['position'][0] < 8.0 else 'near'
+if '--fix9' in sys.argv:
+    for p in P:
+        if role(p) == 'far':
+            x, y, z = p['position']; tx, ty, _ = p['target']
+            d = math.hypot(x - tx, y - ty); ux, uy = (x - tx) / d, (y - ty) / d
+            p['position'] = [round(x + 0.30 * ux, 3), round(y + 0.30 * uy, 3), z]; p['strength'] = 31.0
+    m = L['mantle-front']; m['position'] = [m['position'][0], m['position'][1], round(m['position'][2] + 0.3, 3)]
+    b = L['track-bay1']; b['position'] = [b['position'][0], round(b['position'][1] + 0.10, 4), b['position'][2]]
+    for l in L.values():
+        l['camera'] = True
+for r in offs:
+    if r in ('far', 'near', 'diffuser', 'panels'):
+        P[:] = [p for p in P if role(p) != r]
+    elif r == 'heads':
+        s['lights'] = {}
+    elif r == 'hemis':
+        P[:] = [p for p in P if p.get('fn') != 'lamps']        # (the pendants and Cores: stage2_props.lamps)
+s['title'] = f'B1 fixed-9 test {name}: Planet EARF bar (a crop test, not a final)'
+json.dump(s, open(os.path.join(HERE, f'fixed9-{name}.json'), 'w'), indent=1)
+print(name, offs, [(role(p), p['position'], p['strength']) for p in P if p.get('fn') == 'softbox'], len(s['lights']))
