@@ -1,0 +1,16 @@
+hemisphere ember: ISPHERE dome-red total lm 348.8 above 119.9 below 228.9
+core ember: ISPHERE orb-red total lm 39.2 above 13.4 below 25.8 
+hemisphere dust: ISPHERE dome-orange total lm 376.1 above 137.5 below 238.6
+core dust: CORE_ABS orange [1.0, 0.35, 2.5] add 16.0 ISPHERE orb-orange total lm 33.0 above 13.5 below 19.5 
+hemisphere acid: ISPHERE dome-amber total lm 420.2 above 164.3 below 255.9
+core acid: ISPHERE orb-amber total lm 51.7 above 20.9 below 30.9 
+hemisphere poison: ISPHERE dome-green total lm 282.6 above 76.8 below 205.8
+core poison: ISPHERE orb-green total lm 25.6 above 7.0 below 18.7 
+hemisphere ice: ISPHERE dome-blue total lm 307.5 above 93.8 below 213.6
+core ice: CORE_ABS blue [3.2, 0.85, 1.19] add 0.0 ISPHERE orb-blue total lm 32.9 above 9.9 below 23.1 
+hemisphere haze: ISPHERE dome-violet total lm 280.8 above 76.9 below 204.0
+core haze: CORE_ABS violet [0.89, 2.5, 1.09] add 0.0 ISPHERE orb-violet total lm 26.5 above 6.8 below 19.8 
+hemisphere fog: ISPHERE dome-ice total lm 522.7 above 229.8 below 293.0
+core fog: ISPHERE orb-ice total lm 98.1 above 42.5 below 55.7 
+hemisphere smoke: ISPHERE dome-black total lm 260.7 above 64.0 below 196.8
+core smoke: ISPHERE orb-black total lm 16.8 above 4.9 below 11.8 
