@@ -36,6 +36,8 @@ for r in offs:
         P[:] = [p for p in P if role(p) != r]
     elif r == 'heads':
         s['lights'] = {}
+    elif r in ('track-bay0', 'track-bay1'):
+        s['lights'].pop(r)
     elif r in ('walls', 'bars', 'bays', 'horn0', 'mantles', 'houses'):
         pre = {'walls': ('track-wall',), 'bars': ('track-bar',), 'bays': ('track-bay',), 'horn0': ('track-horn',),
                'mantles': ('track-mantle', 'mantle-'), 'houses': ('house',)}[r]
