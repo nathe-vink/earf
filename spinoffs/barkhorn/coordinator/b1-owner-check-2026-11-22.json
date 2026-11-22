@@ -1,0 +1,168 @@
+{
+ "facts": {
+  "problems": [
+   {
+    "quote": "its gold horn comes from a hidden card that only shows in reflections",
+    "kind": "false",
+    "why": "In the site's picture the card could be seen through clear parts. Its spec in live.json has no 'transmission' key, and lights.py line 180 hides a card from transmission only when that key is false. The gold you see is the card seen through the clear horn. When the card was made reflection-only, the bell fell from L* 8.9 to 0.3, which is the black horn of the fixed-4 test (b62 README line 14; the earlier verified lights critics say 'seen through the clear horn and in reflections'). The fixed-8 lights critic's phrase 'reflection-only card' is loose, and its skeptic never checked that phrase. Side by side: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b68/factcheck/horn-live-f8-black-2x.png",
+    "fix": "its gold horn comes from a hidden glowing card seen through the clear horn (the camera can't see the card itself, and part of it hangs above the ceiling)"
+   },
+   {
+    "quote": "Two small flaws show only up close, a greenish smear on the woofer and a sparkly spot on the ceiling",
+    "kind": "false",
+    "why": "The ceiling spot is visible in the 'New' whole-picture tile on this sheet. It is a bright streak with specks, max L* 86 and 21 px over L* 50 at 869 px; the site picture's tile reads 21 at the same place. The photo skeptic measures L* 90 at 800 px and made it the first fix. Only the woofer smear is limited to close up: at whole-picture size it reads as a believable sheen. Zoom: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b68/factcheck/sheet-ceiling-spot-4x.png",
+    "fix": "Two small flaws: a greenish smear on the woofer, which shows only up close, and a sparkly spot on the ceiling, which also shows as a small bright streak in the whole picture"
+   },
+   {
+    "quote": "(the lemon part gets about an eighth wider and the dark top band thinner; the left fifth stays dark)",
+    "kind": "false",
+    "why": "The photo skeptic's figure is 35 px more lemon, which is 13 % of the horn's width (263 px). Today the lemon runs from about x 1138 to 1309, about 170 px, so 35 px makes the lemon part about a fifth wider, not an eighth. 'An eighth' is right only as a share of the whole horn. Lighting the far shelf's whole back would not change the far horn either, because from this seat the far horn shows only its shelf's left side (photo skeptic Q5; the earlier options check in b64).",
+    "fix": "(on the near speaker the lemon would cover about an eighth more of the horn's width and the dark band along its top would get thinner; its left fifth stays dark, and so does the far speaker's horn)"
+   },
+   {
+    "quote": "Three of the photo lights out of frame also sit where a real crew couldn't quite put them (one hangs through two lamp cords)",
+    "kind": "false",
+    "why": "The lights skeptic does list three, and 'hangs through two lamp cords' is right for the far softbox (the orange and red pendant cords). But only two of the three are photo lights. The third, track-bay1, is a ceiling track spot, a bar light, and it sits inside the outline of the ceiling light panel. The other two are not named, though the owner's rule is about exactly this.",
+    "fix": "Three of the lights out of frame also sit where a real crew couldn't quite put them (a photo light hangs through two lamp cords, a small light behind the seat would put the camera's shadow on the Mantle, and a ceiling spot sits inside the ceiling light panel)"
+   },
+   {
+    "quote": "none of that shows, and the next render moves them",
+    "kind": "missing",
+    "why": "The lights skeptic finds that clearing the cords means moving the far softbox about 30 cm (28.5 to 39 cm), not a hand's width. That leaves about 90 % of its light on the far shelf and turns its aim 4 to 5 degrees, so 'no change to the picture' is untested for that move. He asks that this be said plainly and checked on a test crop first.",
+    "fix": "none of that shows. A later render moves them; the far photo light has to move about a foot, which may change its light a little, so we'll test that on a small crop first"
+   },
+   {
+    "quote": "If you want the whole horn lemon, there are two honest ways",
+    "kind": "misleading",
+    "why": "The first way does not make the whole horn lemon: its own note says the left fifth stays dark, and the top band only gets thinner. Neither way has been rendered. Both are projections (the photo skeptic's Q3 and the b64 options check), and the earlier verified wording for the owner promised him a picture of each before he chooses.",
+    "fix": "If you want more of the horn lemon, there are two honest ways, and I'd show you a test picture of either before you choose"
+   },
+   {
+    "quote": "move the seat so the camera faces the speaker square on (a new framing)",
+    "kind": "misleading",
+    "why": "The earlier verified options check (b64) found that facing the speaker head-on from the bar's own seat line still leaves a dark top band of about 13 %. The gain comes as much from stepping about 0.6 m back as from the angle. At (8.45, 2.9, 1.55) the projection shows about 78 % of the horn's mouth lemon, and most of the rest is the dark driver. It has not been rendered.",
+    "fix": "move the seat back and almost straight in front of the speaker (a new framing, where nearly all of the horn would show lemon apart from its dark driver)"
+   },
+   {
+    "quote": "a later render can fix them",
+    "kind": "missing",
+    "why": "The woofer smear is just as strong in the version without the lit back: 1874 green-yellow pixels against 2040 in the same box, and the photo skeptic expects it in both. So it is no reason to pick 'without', and the owner can't tell that from the draft. No test render has confirmed what causes either flaw, so 'can fix' promises more than anyone has checked. Side by side: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b68/factcheck/woofer-f8-black-2x.png",
+    "fix": "the woofer smear is in both new versions, so it doesn't favor either one, and we'll work on both flaws in a later render"
+   },
+   {
+    "quote": "it shows as the pale grey strip beside and under the horn",
+    "kind": "unclear",
+    "why": "The sentence before says each shelf has a panel, so this reads as true for both shelves. Only the near panel shows (a thin strip right of the horn and a band under it, read cool grey, so 'pale grey' is fine). From this seat the far panel is wholly behind its shelf's side (lights critic L3; photo skeptic Q5). Under the owner's rule he should know that a light he can't see is there, and why.",
+    "fix": "on the near speaker it shows as the pale grey strip beside and under the horn, and the far one is hidden behind the side of its shelf"
+   },
+   {
+    "quote": "I'd use the new one with the lit shelf back.",
+    "kind": "missing",
+    "why": "The site also shows this picture as a 168 px thumbnail. At that size the new one shows a lemon horn with a black dot, while the earlier black-horn test (fixed-7) loses the horn entirely (photo critic Q3, confirmed; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b67/critic-photo-verify/sz-168-three-x3.png). The photo skeptic asked that the owner see this, labeled as a stand-in. Neither the sheet nor the message gives it, and it is the clearest reason for the recommendation.",
+    "fix": "I'd use the new one with the lit shelf back. Even in the small thumbnail on the site its horn still shows lemon; in our earlier black-horn test the horn disappears at that size."
+   }
+  ],
+  "verdict": "Send with the listed fixes. All five tiles on the sheet are the right pictures (pixel match, with the black crop in the same window), and most claims hold: the site picture must come down, the new horn is dark on its left and along its top, the far horn is dark, the version without the lit back looks like black glass, and about an hour is fair for a full render. But the draft gets wrong how the site's gold horn was faked, says the ceiling spot shows only up close although it is visible on this sheet, overstates what lighting the whole back would do, calls a bar ceiling spot a photo light, and leaves out the lights skeptic's warning that the far light must move about a foot and be tested first."
+ },
+ "reader": {
+  "problems": [
+   {
+    "quote": "If you want the whole horn lemon, there are two honest ways:",
+    "kind": "misleading",
+    "why": "Neither way is shown to make the whole horn lemon. The message itself says the first way leaves the left fifth dark, and no critic tested the head-on view. He would ask for something nobody can deliver.",
+    "fix": "If you want more of the horn lemon, there are two honest ways:"
+   },
+   {
+    "quote": "The new one looks like a real photo of a bar at night.",
+    "kind": "missing",
+    "why": "The top pair differs well beyond the speakers. The record wall is clearly brighter (L* about 29 to 37), and the green print and ceiling are lighter. Nothing says why, so under his light rule he will ask whether a light was added. It is real light bouncing off the glossy bar top, which the old picture's settings left out (b62 README: the wall went from 27.5 to 37.5 with only that change, and fixed-8 reads 37.2).",
+    "fix": "Add at the end of the paragraph that starts with this sentence: \"The record wall is brighter because the new picture includes the light that bounces off the shiny bar top; the old one left it out.\""
+   },
+   {
+    "quote": "Two small flaws show only up close, a greenish smear on the woofer and a sparkly spot on the ceiling; a later render can fix them.",
+    "kind": "false",
+    "why": "The ceiling spot also shows in the whole picture. The photo skeptic measured it nearly white at 800 px, with two or three specks, and called it the first fix, and it shows as a white fleck in the sheet's top 'New' picture. None of the close-ups includes the ceiling, so he needs to know where to look. 'A later render' next to 'the next render' also suggests two more renders.",
+    "fix": "Two small flaws show mostly up close: a greenish smear on the woofer and a sparkly spot on the ceiling above the hanging lamps; the next render can fix them."
+   },
+   {
+    "quote": "Three of the photo lights out of frame also sit where a real crew couldn't quite put them",
+    "kind": "misleading",
+    "why": "'Quite' softens a breach of his own rule. As placed, no crew could rig any of the three: a softbox hangs through two lamp cords, a ceiling spot sits inside the ceiling light panel, and a light behind the seat would throw the camera's shadow on the Mantle. Also, one of the three is a ceiling spot, which is a bar light, not a photo light.",
+    "fix": "Three of the lights outside the picture also sit where a real crew couldn't put them"
+   },
+   {
+    "quote": "the lemon part gets about an eighth wider",
+    "kind": "misleading",
+    "why": "The skeptic's figure is about 35 px more lemon, which is 13% of the horn's width. The lemon part covers about 71% of the width, so it would grow by about a fifth of itself, not an eighth. The draft puts the right number on the wrong base.",
+    "fix": "the lemon reaches about an eighth further across the horn"
+   },
+   {
+    "quote": "I'd use the new one with the lit shelf back.",
+    "kind": "unclear",
+    "why": "The reply words come before the last paragraph. That paragraph offers two more choices but gives no way to answer, so he finishes on an open option. He can't tell whether they replace 'new' or are later improvements.",
+    "fix": "Move the paragraph that begins \"If you want the whole horn lemon\" to just before \"I'd use the new one with the lit shelf back.\" so the message ends on the ask."
+   },
+   {
+    "quote": "(that needs a full render first, about an hour)",
+    "kind": "jargon",
+    "why": "'Full render' is a render term. He can't tell why 'without' needs one and 'new' does not. The plain fact is that only the close-up of the black-horn version exists.",
+    "fix": "(only the close-up of that one exists; the whole picture takes about an hour to make)"
+   },
+   {
+    "quote": "Top: the whole picture, the one on the site now beside the new one. Bottom: the near speaker at full size: now, new, and new without the lit shelf back.",
+    "kind": "sheet",
+    "why": "This repeats what the sheet's own labels already say ('The whole picture', 'On the site now', 'New', 'The near speaker, \u2026', and the three crop labels). His rule is to remove such lines, not rewrite them.",
+    "fix": "Delete both sentences; keep only the heading \"**The bar picture.**\""
+   },
+   {
+    "quote": "Without the lit back, the horn looks like black glass.",
+    "kind": "sheet",
+    "why": "This says what the third close-up plainly shows, and the ask already says \"without\" for the black horn.",
+    "fix": "Delete the sentence."
+   },
+   {
+    "quote": "its gold horn comes from a hidden card that only shows in reflections",
+    "kind": "unclear",
+    "why": "To anyone who knows photo shoots, a card outside the picture that shows in reflections sounds normal. The trick was that it lit nothing and poked through the ceiling. Its gold also came from seeing it through the clear horn, not only in reflections.",
+    "fix": "its gold horn comes from a hidden card that lights nothing and sits partly above the ceiling"
+   },
+   {
+    "quote": "and the far speaker's horn looks dark too.",
+    "kind": "missing",
+    "why": "He has just read that each shelf has a lit back, so he will ask why the far horn is not lemon. From this seat the far horn sees only its shelf's black side lining, and its lit back is hidden (photo skeptic, Q5).",
+    "fix": "and the far speaker's horn looks dark too, for the same reason."
+   },
+   {
+    "quote": "none of that shows, and the next render moves them.",
+    "kind": "missing",
+    "why": "The lights skeptic corrected the far light's move to about 30 cm, not a hand's width. He also said nobody has tested whether that changes the light, and that this should be said plainly. The draft leaves it out.",
+    "fix": "none of that shows. The next render moves them; the far one moves about a foot, so we'll check its light on a close-up first."
+   },
+   {
+    "quote": "or move the seat so the camera faces the speaker square on (a new framing).",
+    "kind": "unclear",
+    "why": "'Move the seat' can read as moving the armchair in the picture. 'Square on' is British. No critic tested this option.",
+    "fix": "or move the camera so it faces the speaker head-on (a different view)."
+   },
+   {
+    "quote": "the kind a real bar could fit; it shows as the pale grey strip",
+    "kind": "jargon",
+    "why": "'Fit' (meaning install) and 'grey' are British. He reads American English.",
+    "fix": "the kind a real bar could put in; it shows as the pale gray strip"
+   },
+   {
+    "quote": "The near speaker, full size",
+    "kind": "sheet",
+    "why": "On a phone or laptop the sheet is scaled down, so the crops are not full size, and 'full size' can read as life size. The message calls them 'up close'.",
+    "fix": "The near speaker, close up"
+   },
+   {
+    "quote": "b1-owner-sheet.jpg",
+    "kind": "sheet",
+    "why": "'b1' is an internal name, and he sees the file name when the sheet arrives. Earlier owner files have plain names (for example core-base-before-after-full-size.jpg).",
+    "fix": "Send it as bar-picture-now-and-new.jpg"
+   }
+  ],
+  "verdict": "Send with the listed fixes. The recommendation and the \"new\"/\"without\" ask are sound and match both critics, but the draft overstates three things (\"the whole horn lemon\", \"an eighth wider\", \"show only up close\"), softens the three placement slips (\"photo lights \u2026 couldn't quite\"), and never explains the brighter record wall he will notice first in the top pair. Cut the layout sentence and the black-glass sentence, add one line on the record wall, end on the ask, and relabel \"full size\" as \"close up\" on the sheet."
+ }
+}
