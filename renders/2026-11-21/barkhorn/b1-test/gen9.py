@@ -26,7 +26,7 @@ if '--fix9' in sys.argv:
         if role(p) == 'far':
             x, y, z = p['position']; tx, ty, _ = p['target']
             d = math.hypot(x - tx, y - ty); ux, uy = (x - tx) / d, (y - ty) / d
-            p['position'] = [round(x + 0.30 * ux, 3), round(y + 0.30 * uy, 3), z]; p['strength'] = 31.0
+            p['position'] = [round(x + 0.30 * ux, 3), round(y + 0.30 * uy, 3), round(z - 0.01, 3)]; p['strength'] = 31.0   # (1 cm lower: its body's top at 3.391, under the 3.40 ceiling; every corner above the frame; azimuth 44 deg from the far horn, as before)
     m = L['mantle-front']; m['position'] = [m['position'][0], m['position'][1], round(m['position'][2] + 0.3, 3)]
     b = L['track-bay1']; b['position'] = [b['position'][0], round(b['position'][1] + 0.10, 4), b['position'][2]]
     for l in L.values():
