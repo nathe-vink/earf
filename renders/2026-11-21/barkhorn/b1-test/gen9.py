@@ -26,7 +26,9 @@ if '--fix9' in sys.argv:
         if role(p) == 'far':
             x, y, z = p['position']; tx, ty, _ = p['target']
             d = math.hypot(x - tx, y - ty); ux, uy = (x - tx) / d, (y - ty) / d
-            p['position'] = [round(x + 0.30 * ux, 3), round(y + 0.30 * uy, 3), round(z - 0.01, 3)]; p['strength'] = 31.0   # (1 cm lower: its body's top at 3.391, under the 3.40 ceiling; every corner above the frame; azimuth 44 deg from the far horn, as before)
+            p['position'] = [round(x + 0.30 * ux, 3), round(y + 0.30 * uy, 3), round(z - 0.01, 3)]; p['strength'] = 31.0
+            if '--flag' in sys.argv:      # (the wall top +3.5 with the 0.6 m flag: try a longer one; all corners above the frame)
+                p['top_flag'] = float(sys.argv[sys.argv.index('--flag') + 1])   # (1 cm lower: its body's top at 3.391, under the 3.40 ceiling; every corner above the frame; azimuth 44 deg from the far horn, as before)
     m = L['mantle-front']; m['position'] = [m['position'][0], m['position'][1], round(m['position'][2] + 0.3, 3)]
     if '--bay1-orig' not in sys.argv:     # (Q1's check: --bay1-orig keeps it where fixed-8 had it)
         b = L['track-bay1']; b['position'] = [b['position'][0], round(b['position'][1] + 0.10, 4), b['position'][2]]
