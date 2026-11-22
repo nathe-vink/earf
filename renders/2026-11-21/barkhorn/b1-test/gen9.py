@@ -35,7 +35,7 @@ if '--fix9' in sys.argv:
     # 1. Q2: track-bay0 25 cm to the right along its track, the same aim (the streak's peak L* 87 -> 10.9 on the crop)
     # (x 5.8 cleared the streak but threw the horn's caustic into the frame's top-left corner, L* 99; --bay0-x tries
     # other places along the track)
-    bx = float(sys.argv[sys.argv.index('--bay0-x') + 1]) if '--bay0-x' in sys.argv else 5.8
+    bx = float(sys.argv[sys.argv.index('--bay0-x') + 1]) if '--bay0-x' in sys.argv else 6.05   # (5.8 threw the corner wedge; 5.3 the streak back; 6.05 clears both)
     if '--bay0-orig' not in sys.argv:
         L['track-bay0']['position'] = [bx, 4.4, 3.35]
 # Q2's fix candidates for track-bay0 (it throws the ceiling streak: off, the streak's peak L* 87 -> 8.6; its beam on the
@@ -51,7 +51,7 @@ if '--bay0-steep' in sys.argv:      # further toward the wall, steeper (its head
 if '--bay0-side' in sys.argv:       # 25 cm to the right along the track (103 px above the frame), the same aim
     # (x 5.8 cleared the streak but threw the horn's caustic into the frame's top-left corner, L* 99; --bay0-x tries
     # other places along the track)
-    bx = float(sys.argv[sys.argv.index('--bay0-x') + 1]) if '--bay0-x' in sys.argv else 5.8
+    bx = float(sys.argv[sys.argv.index('--bay0-x') + 1]) if '--bay0-x' in sys.argv else 6.05   # (5.8 threw the corner wedge; 5.3 the streak back; 6.05 clears both)
     if '--bay0-orig' not in sys.argv:
         L['track-bay0']['position'] = [bx, 4.4, 3.35]
 for r in offs:
