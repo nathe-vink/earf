@@ -31,6 +31,8 @@ if '--fix9' in sys.argv:
     b = L['track-bay1']; b['position'] = [b['position'][0], round(b['position'][1] + 0.10, 4), b['position'][2]]
     for l in L.values():
         l['camera'] = True
+    # 1. Q2: track-bay0 25 cm to the right along its track, the same aim (the streak's peak L* 87 -> 10.9 on the crop)
+    L['track-bay0']['position'] = [5.8, 4.4, 3.35]
 # Q2's fix candidates for track-bay0 (it throws the ceiling streak: off, the streak's peak L* 87 -> 8.6; its beam on the
 # far horn's glossy concave bell focuses into dots; aimed lower (81.9) or narrowed (82.9) it still covers the horn; a
 # barn door cutting the horn's rays would hang in the frame (y 40-85 px at y 4.7), or within 1.6 cm of the cabinet's
