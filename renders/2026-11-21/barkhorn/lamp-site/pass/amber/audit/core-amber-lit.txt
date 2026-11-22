@@ -1,0 +1,26 @@
+AUDIT house-orb-amber hidden ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front', 'house-floorcard'] no-shadow ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front', 'house-floorcard'] lights [('house-key', 'AREA', 0.0), ('house-fill', 'AREA', 2.047), ('house-kick', 'AREA', 0.502), ('house-horn', 'AREA', 3.023), ('house-bg-left', 'AREA', 2.197), ('house-bg-right', 'AREA', 0.85), ('house-wall_left', 'AREA', 6.125), ('house-bg-high', 'AREA', 1.395), ('house-horn-floor', 'AREA', 3.023), ('house-fill-floor', 'AREA', 2.047), ('house-bounce-spot', 'SPOT', 8.5), ('led-amber', 'AREA', 1.836)]
+HIDDENCAST house-orb-amber: 25 hidden, 2 in frame
+   out         0.0 %  area lamp (rectangle) house-key
+   out         0.0 %  hidden mesh house-key-face
+   out         0.0 %  hidden mesh house-key-housing
+   out         0.0 %  area lamp (rectangle) house-fill
+   out         0.0 %  hidden mesh house-fill-face
+   out         0.0 %  hidden mesh house-fill-housing
+   out         0.0 %  area lamp (rectangle) house-kick
+   out         0.0 %  hidden mesh house-kick-face
+   out         0.0 %  hidden mesh house-kick-housing
+   out         0.0 %  area lamp (rectangle) house-horn
+   out         0.0 %  hidden mesh house-horn-face
+   out         0.0 %  hidden mesh house-horn-housing
+   out         0.0 %  area lamp (rectangle) house-bg-left
+   out         0.0 %  area lamp (rectangle) house-bg-right
+   out         0.0 %  area lamp (rectangle) house-wall_left
+   out         0.0 %  area lamp (rectangle) house-bg-high
+   out         0.0 %  area lamp (rectangle) house-horn-floor
+   out         0.0 %  area lamp (rectangle) house-fill-floor
+   out         0.0 %  hidden mesh room-left
+   out         0.0 %  hidden mesh room-right
+   out         0.0 %  hidden mesh room-ceiling
+   out         0.0 %  hidden mesh room-front
+   out         0.0 %  spot lamp house-bounce-spot
+CASTCHECK house-orb-amber {'house-key': 0.0, 'house-key-face': 0.0, 'house-key-housing': 0.0, 'house-fill': 0.0, 'house-fill-face': 0.0, 'house-fill-housing': 0.0, 'house-kick': 0.0, 'house-kick-face': 0.0, 'house-kick-housing': 0.0, 'house-horn': 0.0, 'house-horn-face': 0.0, 'house-horn-housing': 0.0, 'house-bg-left': 0.0, 'house-bg-right': 0.0, 'house-wall_left': 0.0, 'house-bg-high': 0.0, 'house-horn-floor': 0.0, 'house-fill-floor': 0.0, 'room-left': 0.0, 'room-right': 0.0, 'room-back': 0.0, 'room-ceiling': 0.0, 'room-front': 0.0, 'house-floorcard': 30.09, 'house-bounce-spot': 0.0}
