@@ -31,11 +31,18 @@ if '--fix9' in sys.argv:
     b = L['track-bay1']; b['position'] = [b['position'][0], round(b['position'][1] + 0.10, 4), b['position'][2]]
     for l in L.values():
         l['camera'] = True
-# Q2's fix candidates for track-bay0 (it throws the ceiling streak: off, the streak's peak L* 87 -> 8.6)
+# Q2's fix candidates for track-bay0 (it throws the ceiling streak: off, the streak's peak L* 87 -> 8.6; its beam on the
+# far horn's glossy concave bell focuses into dots; aimed lower (81.9) or narrowed (82.9) it still covers the horn; a
+# barn door cutting the horn's rays would hang in the frame (y 40-85 px at y 4.7), or within 1.6 cm of the cabinet's
+# rays near the head)
 if '--bay0-low' in sys.argv:        # aimed lower, onto the cabinet, so its beam misses the horn's glossy top
     L['track-bay0']['target'] = [5.55, 5.6662, 1.8]
 if '--bay0-narrow' in sys.argv:     # a tighter beam (a narrower lens or snoot): 14 -> 10 deg, the same aim
     L['track-bay0']['spread_deg'] = 10
+if '--bay0-steep' in sys.argv:      # further toward the wall, steeper (its head 20 px above the frame's top at y 4.8)
+    L['track-bay0']['position'] = [5.55, 4.8, 3.35]
+if '--bay0-side' in sys.argv:       # 25 cm to the right along the track (103 px above the frame), the same aim
+    L['track-bay0']['position'] = [5.8, 4.4, 3.35]
 for r in offs:
     if r in ('far', 'near', 'diffuser', 'panels'):
         P[:] = [p for p in P if role(p) != r]
