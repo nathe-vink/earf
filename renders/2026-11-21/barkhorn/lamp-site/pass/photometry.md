@@ -27,4 +27,6 @@ the ball's own pour).
 - **Smoke's Core is 16.8 lm, half its 17 Nov 35.1.** Its pour is 0.5 on the ball, where the decided pair of 16 Nov
   was 0.6× the chart loading (0.3 on the ball). If 19:09's "0.5" meant the chart unit, the ball would be 0.25 and
   the Core a little over 29.4 lm (its reading at 0.3; 0.25 not run). That is the owner's to confirm; the frames were rendered at 0.5.
+  Settled by the coordinator, 22 Nov 02:44: the owner's yes (21 Nov 19:08) reads "Smoke Core 0.5, i.e. 1.0x of the
+  chart loading", the ball unit, the deeper pour he chose (checkset/black/core-off-L0.5.png). The frames are right.
 - Lux under the pendant was not re-measured: the opal sheet sets it (17 Nov: 336-347 lux at centre for every pour).
