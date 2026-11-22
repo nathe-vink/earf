@@ -36,6 +36,10 @@ for r in offs:
         P[:] = [p for p in P if role(p) != r]
     elif r == 'heads':
         s['lights'] = {}
+    elif r in ('walls', 'bars', 'bays', 'horn0', 'mantles', 'houses'):
+        pre = {'walls': ('track-wall',), 'bars': ('track-bar',), 'bays': ('track-bay',), 'horn0': ('track-horn',),
+               'mantles': ('track-mantle', 'mantle-'), 'houses': ('house',)}[r]
+        s['lights'] = {k: l for k, l in s['lights'].items() if not k.startswith(pre)}
     elif r == 'hemis':
         P[:] = [p for p in P if p.get('fn') != 'lamps']        # (the pendants and Cores: stage2_props.lamps)
 s['title'] = f'B1 fixed-9 test {name}: Planet EARF bar (a crop test, not a final)'
