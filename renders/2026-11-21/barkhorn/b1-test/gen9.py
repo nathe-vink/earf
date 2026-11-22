@@ -32,8 +32,11 @@ if '--fix9' in sys.argv:
     for l in L.values():
         l['camera'] = True
     # 1. Q2: track-bay0 25 cm to the right along its track, the same aim (the streak's peak L* 87 -> 10.9 on the crop)
+    # (x 5.8 cleared the streak but threw the horn's caustic into the frame's top-left corner, L* 99; --bay0-x tries
+    # other places along the track)
+    bx = float(sys.argv[sys.argv.index('--bay0-x') + 1]) if '--bay0-x' in sys.argv else 5.8
     if '--bay0-orig' not in sys.argv:
-        L['track-bay0']['position'] = [5.8, 4.4, 3.35]
+        L['track-bay0']['position'] = [bx, 4.4, 3.35]
 # Q2's fix candidates for track-bay0 (it throws the ceiling streak: off, the streak's peak L* 87 -> 8.6; its beam on the
 # far horn's glossy concave bell focuses into dots; aimed lower (81.9) or narrowed (82.9) it still covers the horn; a
 # barn door cutting the horn's rays would hang in the frame (y 40-85 px at y 4.7), or within 1.6 cm of the cabinet's
@@ -45,8 +48,11 @@ if '--bay0-narrow' in sys.argv:     # a tighter beam (a narrower lens or snoot):
 if '--bay0-steep' in sys.argv:      # further toward the wall, steeper (its head 20 px above the frame's top at y 4.8)
     L['track-bay0']['position'] = [5.55, 4.8, 3.35]
 if '--bay0-side' in sys.argv:       # 25 cm to the right along the track (103 px above the frame), the same aim
+    # (x 5.8 cleared the streak but threw the horn's caustic into the frame's top-left corner, L* 99; --bay0-x tries
+    # other places along the track)
+    bx = float(sys.argv[sys.argv.index('--bay0-x') + 1]) if '--bay0-x' in sys.argv else 5.8
     if '--bay0-orig' not in sys.argv:
-        L['track-bay0']['position'] = [5.8, 4.4, 3.35]
+        L['track-bay0']['position'] = [bx, 4.4, 3.35]
 for r in offs:
     if r in ('far', 'near', 'diffuser', 'panels'):
         P[:] = [p for p in P if role(p) != r]
