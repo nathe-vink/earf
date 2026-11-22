@@ -146,3 +146,17 @@
 - **The owner's comparison:**
   - `live-over-fixed8.png` at 800 px;
   - `near-fixed8-vs-black-1to1.png`: the near speaker at 1:1 with the panel and as the honest black horn (`crop8-black`, the same 2 cm depth and 512 spp, no panels).
+
+## fixed-9, crop tests only (the coordinator, 22 Nov 00:29 to 03:28; `gen9.py fix --fix9` -> `fixed9-fix.json`, held for the owner's answer)
+
+- **Q2, the ceiling streak:**
+  - One-light-off crops (`crop9q2-*`) name track-bay0. Its beam on the far horn's glossy concave bell focuses into dots.
+  - Aiming it lower or narrowing it still covered the horn, and a barn door would hang in the frame.
+  - Moved 25 cm along its track, it threw the caustic into the frame's top-left corner (`crop9k-*`). At x 6.05 (`crop9c-*`), the streak reads 7.2, the corner 57.0, and nothing is over L* 80.
+- **The far softbox:**
+  - It moved 30 cm back along its throw, clear of the pendants' cords, to (7.709, 3.385, 2.94), strength 31, with its skirt, grid and 0.6 m flag kept.
+  - Readings (`crop9-far2`, `measfar9.md`): P3 3.5, far bay 15.6, ceiling 4.5. The wall top reads 17.2 against fixed-8's 13.7.
+  - A 0.7 m flag changes nothing there (`crop9-far3`), so 0.6 m stays and the +3.5 is accepted.
+- **mantle-front:** +0.3 m (`crop9-mantle`). The Mantle's parts read L* 5.9 -> 5.8.
+- **track-bay1:** 10 cm toward the wall (`crop9-near`). The cone's lower-flank smear goes: lower half 25.7 -> 11.3, cone/batts 0.71 -> 0.17. With track-bay1 back in its old place it returns (`crop9-q1bay1`: 25.3), so track-bay1 is named as Q1's cause.
+- **camera true on the 14 shot lamps:** every crop's audit reads equipment 0, hidden 0.
