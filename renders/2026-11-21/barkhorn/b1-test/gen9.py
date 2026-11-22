@@ -31,6 +31,11 @@ if '--fix9' in sys.argv:
     b = L['track-bay1']; b['position'] = [b['position'][0], round(b['position'][1] + 0.10, 4), b['position'][2]]
     for l in L.values():
         l['camera'] = True
+# Q2's fix candidates for track-bay0 (it throws the ceiling streak: off, the streak's peak L* 87 -> 8.6)
+if '--bay0-low' in sys.argv:        # aimed lower, onto the cabinet, so its beam misses the horn's glossy top
+    L['track-bay0']['target'] = [5.55, 5.6662, 1.8]
+if '--bay0-narrow' in sys.argv:     # a tighter beam (a narrower lens or snoot): 14 -> 10 deg, the same aim
+    L['track-bay0']['spread_deg'] = 10
 for r in offs:
     if r in ('far', 'near', 'diffuser', 'panels'):
         P[:] = [p for p in P if role(p) != r]
