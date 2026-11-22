@@ -1,0 +1,175 @@
+blendasset: Mantle Strata Ember 81 parts match the manifest
+RECORD WALL took over 75 cells; removed ['records-faceout', 'records-sleeves']
+RECORD WALL other cell (0, 4) 0
+RECORD WALL other cell (2, 1) 1
+RECORD WALL other cell (3, 0) 2
+RECORD WALL other cell (3, 3) 3
+RECORD WALL other cell (8, 3) 4
+RECORD WALL other cell (10, 3) 5
+RECORD WALL other cell (10, 4) 6
+RECORD WALL other cell (16, 1) 7
+RECORD WALL plain records in cell (18, 1)
+RECORD WALL {"cells": 75, "full": 49, "part": 12, "flat": 6, "other": 8, "per_full": [65, 77.0, 86], "shares": {"lp": 0.697, "gate": 0.153, "thin": 0.106, "box": 0.044}, "records": 4454}
+REMOVED ['dj-knobs', 'dj-labels', 'dj-plinths', 'dj-records', 'screen-boxes', 'screen-frames', 'screen-panels']
+RESTYLED ['backbar-top', 'chairs-brass', 'counter-rail', 'counter-zinc', 'panel-fabric', 'spk-niche-felt']
+LAMPS lamp_site from /home/user/lamps-ecb1 ecb1650c2468c82a0723744be2e3594f39d7fb0e
+LAMPS placed 5 Hemisphere, 0 Core; 120 lamps, 5000 lm at the emitters
+LAMPS lamp_site from /home/user/lamps-ecb1 ecb1650c2468c82a0723744be2e3594f39d7fb0e
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+LAMPS placed 0 Hemisphere, 3 Core; 3 lamps, 600 lm at the emitters
+CORE cable removed: 3
+LAMPS hemi_scale 1.0 cords to 3.4
+WATER GLASS ice: top faces 1155 area 38.07 cm2
+WATER GLASS: ['prop17-kit-glass-outer', 'prop17-kit-glass-inner-dry', 'prop17-kit-glass-wet', 'prop17-kit-water-top', 'prop17-kit-ice0', 'prop17-kit-ice1'] ior 1.36 fill 0.045 meniscus 0.0015 wet to 0.0465
+WATER GLASS ice: top faces 1158 area 40.74 cm2
+WATER GLASS: ['prop18-kit-glass-outer', 'prop18-kit-glass-inner-dry', 'prop18-kit-glass-wet', 'prop18-kit-water-top', 'prop18-kit-ice0', 'prop18-kit-ice1'] ior 1.36 fill 0.03 meniscus 0.0015 wet to 0.0315
+NO GLASS SHADOWS: 7 materials: ['bark@cloud-amber', 'bark@cloud-amber.001', 'clear-cast@cloud-amber', 'horn-formed@cloud-amber', 'horn-lot@cloud-amber', 'horn-satin@cloud-amber', 'sink-smoke']
+SOFTBOX prop20-kit face 1.4 x 0.9 strength 6.0 z 3.363 to 3.397
+SOFTBOX prop21-kit face 1.2 x 0.9 strength 20.0 z 2.453 to 3.361
+SOFTBOX prop22-kit face 1.2 x 0.9 strength 31.0 z 2.407 to 3.391
+SOFTBOX prop23-kit face 0.64 x 0.58 strength 2.0 z 1.93 to 2.51
+SOFTBOX prop24-kit face 0.64 x 0.58 strength 2.0 z 1.93 to 2.51
+SHADOW RAY LINKS LEFT: 0 []
+EMITTERS: 130
+  EMITTER amp-plate-led-on#0 MESH all on
+  EMITTER amp-plate-led-on#1 MESH all on
+  EMITTER led-amber AREA all on
+  EMITTER led-amber-0 AREA all on
+  EMITTER led-amber-1 AREA all on
+  EMITTER led-amber-10 AREA all on
+  EMITTER led-amber-11 AREA all on
+  EMITTER led-amber-12 AREA all on
+  EMITTER led-amber-13 AREA all on
+  EMITTER led-amber-14 AREA all on
+  EMITTER led-amber-15 AREA all on
+  EMITTER led-amber-16 AREA all on
+  EMITTER led-amber-17 AREA all on
+  EMITTER led-amber-18 AREA all on
+  EMITTER led-amber-19 AREA all on
+  EMITTER led-amber-2 AREA all on
+  EMITTER led-amber-20 AREA all on
+  EMITTER led-amber-21 AREA all on
+  EMITTER led-amber-22 AREA all on
+  EMITTER led-amber-23 AREA all on
+  EMITTER led-amber-3 AREA all on
+  EMITTER led-amber-4 AREA all on
+  EMITTER led-amber-5 AREA all on
+  EMITTER led-amber-6 AREA all on
+  EMITTER led-amber-7 AREA all on
+  EMITTER led-amber-8 AREA all on
+  EMITTER led-amber-9 AREA all on
+  EMITTER led-orange AREA all on
+  EMITTER led-orange-0 AREA all on
+  EMITTER led-orange-0.001 AREA all on
+  EMITTER led-orange-1 AREA all on
+  EMITTER led-orange-1.001 AREA all on
+  EMITTER led-orange-10 AREA all on
+  EMITTER led-orange-10.001 AREA all on
+  EMITTER led-orange-11 AREA all on
+  EMITTER led-orange-11.001 AREA all on
+  EMITTER led-orange-12 AREA all on
+  EMITTER led-orange-12.001 AREA all on
+  EMITTER led-orange-13 AREA all on
+  EMITTER led-orange-13.001 AREA all on
+  EMITTER led-orange-14 AREA all on
+  EMITTER led-orange-14.001 AREA all on
+  EMITTER led-orange-15 AREA all on
+  EMITTER led-orange-15.001 AREA all on
+  EMITTER led-orange-16 AREA all on
+  EMITTER led-orange-16.001 AREA all on
+  EMITTER led-orange-17 AREA all on
+  EMITTER led-orange-17.001 AREA all on
+  EMITTER led-orange-18 AREA all on
+  EMITTER led-orange-18.001 AREA all on
+  EMITTER led-orange-19 AREA all on
+  EMITTER led-orange-19.001 AREA all on
+  EMITTER led-orange-2 AREA all on
+  EMITTER led-orange-2.001 AREA all on
+  EMITTER led-orange-20 AREA all on
+  EMITTER led-orange-20.001 AREA all on
+  EMITTER led-orange-21 AREA all on
+  EMITTER led-orange-21.001 AREA all on
+  EMITTER led-orange-22 AREA all on
+  EMITTER led-orange-22.001 AREA all on
+  EMITTER led-orange-23 AREA all on
+  EMITTER led-orange-23.001 AREA all on
+  EMITTER led-orange-3 AREA all on
+  EMITTER led-orange-3.001 AREA all on
+  EMITTER led-orange-4 AREA all on
+  EMITTER led-orange-4.001 AREA all on
+  EMITTER led-orange-5 AREA all on
+  EMITTER led-orange-5.001 AREA all on
+  EMITTER led-orange-6 AREA all on
+  EMITTER led-orange-6.001 AREA all on
+  EMITTER led-orange-7 AREA all on
+  EMITTER led-orange-7.001 AREA all on
+  EMITTER led-orange-8 AREA all on
+  EMITTER led-orange-8.001 AREA all on
+  EMITTER led-orange-9 AREA all on
+  EMITTER led-orange-9.001 AREA all on
+  EMITTER led-red AREA all on
+  EMITTER led-red-0 AREA all on
+  EMITTER led-red-0.001 AREA all on
+  EMITTER led-red-1 AREA all on
+  EMITTER led-red-1.001 AREA all on
+  EMITTER led-red-10 AREA all on
+  EMITTER led-red-10.001 AREA all on
+  EMITTER led-red-11 AREA all on
+  EMITTER led-red-11.001 AREA all on
+  EMITTER led-red-12 AREA all on
+  EMITTER led-red-12.001 AREA all on
+  EMITTER led-red-13 AREA all on
+  EMITTER led-red-13.001 AREA all on
+  EMITTER led-red-14 AREA all on
+  EMITTER led-red-14.001 AREA all on
+  EMITTER led-red-15 AREA all on
+  EMITTER led-red-15.001 AREA all on
+  EMITTER led-red-16 AREA all on
+  EMITTER led-red-16.001 AREA all on
+  EMITTER led-red-17 AREA all on
+  EMITTER led-red-17.001 AREA all on
+  EMITTER led-red-18 AREA all on
+  EMITTER led-red-18.001 AREA all on
+  EMITTER led-red-19 AREA all on
+  EMITTER led-red-19.001 AREA all on
+  EMITTER led-red-2 AREA all on
+  EMITTER led-red-2.001 AREA all on
+  EMITTER led-red-20 AREA all on
+  EMITTER led-red-20.001 AREA all on
+  EMITTER led-red-21 AREA all on
+  EMITTER led-red-21.001 AREA all on
+  EMITTER led-red-22 AREA all on
+  EMITTER led-red-22.001 AREA all on
+  EMITTER led-red-23 AREA all on
+  EMITTER led-red-23.001 AREA all on
+  EMITTER led-red-3 AREA all on
+  EMITTER led-red-3.001 AREA all on
+  EMITTER led-red-4 AREA all on
+  EMITTER led-red-4.001 AREA all on
+  EMITTER led-red-5 AREA all on
+  EMITTER led-red-5.001 AREA all on
+  EMITTER led-red-6 AREA all on
+  EMITTER led-red-6.001 AREA all on
+  EMITTER led-red-7 AREA all on
+  EMITTER led-red-7.001 AREA all on
+  EMITTER led-red-8 AREA all on
+  EMITTER led-red-8.001 AREA all on
+  EMITTER led-red-9 AREA all on
+  EMITTER led-red-9.001 AREA all on
+  EMITTER prop20-kit MESH all on
+  EMITTER prop21-kit MESH all on
+  EMITTER prop22-kit MESH all on
+  EMITTER prop23-kit MESH all on
+  EMITTER prop24-kit MESH all on
+01:32.503  cycles           | WARNING CUEW initialization failed: Error opening the library
+27:12.988  render           | Saved: '/home/user/earf/renders/2026-11-21/barkhorn/b1-test/crop9-near.png'
+/home/user/earf/studio/engine/render.py:478: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+27:25.665  render           | Saved: '/home/user/earf/renders/2026-11-21/barkhorn/b1-test/crop9-near.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:529: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+27:27.609  render           | Saved: '/home/user/earf/renders/2026-11-21/barkhorn/b1-test/crop9-near.swatch.png'
+renders/2026-11-21/barkhorn/b1-test/crop9-near.png  {'build': 92.2, 'render': 1540.5}  samples 512
