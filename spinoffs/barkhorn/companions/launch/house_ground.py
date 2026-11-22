@@ -332,6 +332,21 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
     cam = json.loads(json.dumps(R['camera']))
     for k in ('position', 'target', 'focus'):
         cam[k] = _mul(cam[k], s); cam[k][2] += lift
+    if os.environ.get('HOUSE_CAMCARD'):
+        # HOUSE_CAMCARD 'BACK,SIDE,W,H' (2026-11-22, the Fog Core's rim): two real black cards behind and beside the camera,
+        # BACK m behind it along its level view, SIDE m to each side, W x H, centred at the lens height, facing the lamp;
+        # out of frame, every ray visibility on, no linking. A clear ball shows them as dark shapes in its reflection
+        bk_, sd3_, cw_, ch_ = [float(v) for v in os.environ['HOUSE_CAMCARD'].split(',')]
+        C_ = Vector(cam['position']); T_ = Vector(cam['target']); f_ = Vector((T_.x - C_.x, T_.y - C_.y, 0.0)).normalized()
+        r_ = Vector((f_.y, -f_.x, 0.0)); up_ = Vector((0.0, 0.0, 1.0))
+        mc3_ = bpy.data.materials.new('house-camcard'); mc3_.use_nodes = True; b3_ = mc3_.node_tree.nodes['Principled BSDF']
+        b3_.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); b3_.inputs['Roughness'].default_value = 0.9
+        for sg_ in (-1, 1):
+            P3_ = C_ - f_ * bk_ + r_ * sg_ * sd3_
+            vs_ = [tuple(P3_ + r_ * a * cw_ / 2 + up_ * b * ch_ / 2) for a, b in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+            me3_ = bpy.data.meshes.new('house-camcard'); me3_.from_pydata(vs_, [], [(0, 1, 2, 3)]); me3_.materials.append(mc3_)
+            ob3_ = bpy.data.objects.new('house-camcard', me3_); bpy.context.scene.collection.objects.link(ob3_)
+        print('CAMCARD', bk_, sd3_, cw_, ch_, 'camera', tuple(round(c, 3) for c in C_))
     return cam, R, made
 
 

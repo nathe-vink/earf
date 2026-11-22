@@ -15,3 +15,14 @@ The final off check found Fog's Core white and flat (L* 95.8 against the pendant
 - **The key:** it barely touches the ball, and moves the floor.
 - **Negative fill:** black cards darken the ball only where they are close enough to show in frame or to shadow the floor.
 - **Why:** the Fog Core is a clear ball over a white opal, lit from every side by a white set.
+
+## Camera-side cards (2026-11-22 00:53)
+
+Two black cards behind and beside the camera: `HOUSE_CAMCARD=0.05,0.15,0.25,0.35`, 5 cm behind, 15 cm to each side, 25 × 35 cm. Out of frame, every ray visibility on; the audit shows 0 outs.
+
+| Frame | Ball whole | Rim band median (p10-p90) | Lip top | Corners |
+|---|---|---|---|---|
+| today | 95.7 | 92.8 (77.5-95.8) | 91.2 | - |
+| camera cards | 95.6 | 92.8 (77.5-95.8) | 91.1 | within 0.1 of today's |
+
+No change at 800 px, so the cards were not adopted. Fog's pass frames go as rendered (the coordinator's option (a), 00:44).
