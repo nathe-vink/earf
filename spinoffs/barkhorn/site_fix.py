@@ -1627,3 +1627,33 @@ def finish_12(web):
             open(f, 'w').write(t); s = t
         for line in MOOD:
             assert line not in s and json.dumps(line)[1:-1] not in s, ('finish_12: a mood line in', f, line)
+
+
+# --- C5 (the coordinator 24 Nov 04:05, the owner: "9 just 'Make first contact'"): every product page's Ask
+# button reads the one label, the second button and the phone bar too; the price line beside it goes.
+# The address line with Copy address stays under it; the header's Contact and the home's Write to us stay.
+ASK_LABEL = 'Make first contact'
+def finish_13(web):
+    import glob
+    old_ask = {'Ask about a pair', 'Ask about Hemisphere', 'Ask about Core', 'Ask about Mantle', 'Ask about it'}
+    n_pages = 0
+    for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
+        t = open(f, encoding='utf-8').read()
+        if 'p-ask' not in t:
+            assert not any(a in t for a in old_ask), ('finish_13: an Ask label outside a product page', f)
+            continue
+        n_pages += 1
+        o = t
+        for a in old_ask:
+            t = t.replace(f'"{a}"', f'"{ASK_LABEL}"').replace(f"'{a}'", f"'{ASK_LABEL}'")
+        t = t.replace("a.textContent = ASK[P.id] || 'Ask';", f"a.textContent = ASK[P.id] || '{ASK_LABEL}';")
+        k = t.count('p-ask" href="mailto:hello@earf.world">Ask</a>')
+        assert k == 3, ('finish_13: the three Ask buttons', f, k)
+        t = t.replace('p-ask" href="mailto:hello@earf.world">Ask</a>', f'p-ask" href="mailto:hello@earf.world">{ASK_LABEL}</a>')
+        for old in ('        <p class="price">Price on request. <span id="p-unit"></span></p>\n',
+                    "  document.getElementById('p-unit').innerHTML = P.unit;\n"):
+            assert t.count(old) == 1, ('finish_13', f, old)
+            t = t.replace(old, '')
+        assert not any(a in t for a in old_ask) and 'Price on request' not in t and 'p-unit' not in t, ('finish_13: left', f)
+        open(f, 'w', encoding='utf-8').write(t)
+    assert n_pages >= 32, ('finish_13: product pages', n_pages)
