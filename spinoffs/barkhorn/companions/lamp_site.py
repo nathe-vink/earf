@@ -947,6 +947,37 @@ def build(frame, samples, scale):
         hlift = float(os.environ.get('HOUSE_LIFT', '0'))
         hst = float(os.environ['HOUSE_STUDIO']) if os.environ.get('HOUSE_STUDIO') else None
         hcam, HR, hlights = HG.build(bpy, hs, hdim, hlift, hst)
+        if os.environ.get('HOUSE_GEL'):
+            # HOUSE_GEL 'R,G,B' or 'K0:K1' (2026-11-24, round 2's item 4b): the studio re-gelled, every house lamp, softbox face
+            # and the sky times one colour (linear; K0:K1 the blackbody ratio K1/K0, luminance held), so the ground reads as
+            # before under a changed camera white balance. The product's own LEDs are untouched
+            g_ = os.environ['HOUSE_GEL']
+            if ':' in g_:
+                k0_, k1_ = (float(v) for v in g_.split(':')); b0_, b1_ = blackbody(k0_), blackbody(k1_)
+                gel_ = [b1_[i] / b0_[i] for i in range(3)]
+            else:
+                gel_ = [float(v) for v in g_.split(',')]
+            gl_ = lum(gel_); gel_ = [v / gl_ for v in gel_]
+            for o_ in bpy.context.scene.objects:
+                if o_.type == 'LIGHT' and o_.name.startswith('house-'):
+                    o_.data.color = [o_.data.color[i] * gel_[i] for i in range(3)]
+            for m_ in bpy.data.materials:
+                if m_.name.startswith('house-') and m_.name.endswith('-face') and m_.node_tree:
+                    for n_ in m_.node_tree.nodes:
+                        if n_.type == 'EMISSION':
+                            c_ = n_.inputs['Color'].default_value; n_.inputs['Color'].default_value = (c_[0] * gel_[0], c_[1] * gel_[1], c_[2] * gel_[2], 1)
+            if bpy.context.scene.world and bpy.context.scene.world.node_tree:
+                nt_ = bpy.context.scene.world.node_tree
+                for bg_ in [n_ for n_ in nt_.nodes if n_.type == 'BACKGROUND']:
+                    mx_ = nt_.nodes.new('ShaderNodeMix'); mx_.data_type = 'RGBA'; mx_.blend_type = 'MULTIPLY'
+                    mx_.inputs['Factor'].default_value = 1.0; mx_.inputs[7].default_value = (*gel_, 1)
+                    src_ = bg_.inputs['Color'].links[0].from_socket if bg_.inputs['Color'].links else None
+                    if src_ is not None:
+                        nt_.links.new(src_, mx_.inputs[6])
+                    else:
+                        mx_.inputs[6].default_value = bg_.inputs['Color'].default_value
+                    nt_.links.new(mx_.outputs[2], bg_.inputs['Color'])
+            print('HOUSE_GEL', [round(v, 4) for v in gel_])
         key = fill = kick = None
         if kind0 == 'dome':
             # hung on its cord (the CAD's 600 drop, the cord running out of the frame's top), the shade's middle where
