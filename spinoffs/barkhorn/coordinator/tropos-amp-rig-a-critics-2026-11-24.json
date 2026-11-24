@@ -1,0 +1,273 @@
+{
+ "run": "wf_0159a469-710",
+ "subject": "Tropos amp plates, rig A (S4b amp rig: real bounce card and strip, flag 1 out of the cove, back-top off, -0.2 EV), all eight, r33-speaker-horn fbbfe58006",
+ "agents": {
+  "critic:physics-and-faults": {
+   "findings": [
+    {
+     "id": "amp-strip-shadow-off-see-through-in-front-of-key",
+     "severity": "blocking",
+     "tints": "all eight (one rig)",
+     "claim": "The front strip is only partly a real light. S4b's real_bounces_and_panels turned on its diffuse, specular and camera rays. The engine's panel builder still makes it cast no shadow and gives it a see-through back. That matters here because the strip stands in front of about a third of the key, as seen from the plate and the back sheet. In the render the key reaches the plate through the back of a strip softbox, which a real studio cannot do. A real strip in that place would cut about 35% of the key. Every other S4b item checks out.",
+     "evidence": "Code, origin/r33-speaker-horn fbbfe58006 (studio/ and campaign/ unchanged since the shots' commit cd0ea42ded):\n- Every ampA-<tint>.json has front-strip {type panel, 0.4 x 2.0 m, orbit az -25 el 22 dist 3.0, strength 4.0, ramp z 0.2-1.8 m from 0 to 1, diffuse 1.0, specular 1.0, camera true}, set by light_c.real_bounces_and_panels (light_c.py:152-172; :170 L.update(diffuse=1.0, specular=1.0, camera=True)).\n- studio/engine/lights.py panel(): :165-167 'one-sided: the back face is transparent' (Backfacing -> Transparent BSDF); :179 ob.visible_shadow = False, unconditional; the docstring at :101 says 'it casts no shadow'.\n- So the strip lights diffuse surfaces (:183), reflects, is seen by the camera and is shadowed by the product, but its own body casts no shadow and its back is see-through. That is two of the brief's exclusions: shadow-off and one-sided.\n- The house already has a fully real emitter: living_ext.py softbox() :327-331 (every ray on, black box behind the face).\n\nGeometry (engine placement redone in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/rig/geom.py; this camera model reproduces the earlier critic's 1,125 px for the untrimmed flag 1):\n- Strip centre (-1.18, -2.52, 1.77), corners z 0.85-2.69. Key 1.2 x 1.2 m, centre (-1.78, -3.07, 3.42).\n- From the plate centre, rebuilt from parts_2d as (0.115, -0.170, 0.510), 34.6% of the key's face is behind the strip. From 13 points on the plate, back sheet, corner bosses, side panels and lining it is 30-40% (occl.py, occl_all.py).\n- The line from the plate to the key's centre crosses the strip 0.81 m up its 1.0 m half-height and 0.16 m off its axis (half-width 0.2).\n- The only other lamp-path occluder is flag 1, in front of 1.6-7.4% of bg-right. That lamp lights only the sweep, and flag 1 is a real card.\n- Picture: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/rig/views/key-behind-strip-from-plate.png\n\nSize (estimate, UNVERIFIED for rig A):\n- The lane's quarter-size Acid pair fix-acid-F1 (key 4) and lt-acid-keyhalf (key 2) share one rig, back-top on. Halving the key moves the plate face 46.1 to 43.3 L* and the surround 79.7 to 78.5 (keyshare.py).\n- A solid strip cutting about 35% of the key would take roughly 2 L* off the plate face and about 1 off the surround, more with back-top off.\n\nWhy the audits pass it: flags_crossing_set (render.py:397-454) tests only cards against set surfaces and lamp faces. buildable (light_c.py:114-149) trims only cards, and only against area lamps. Nothing tests a lamp standing in another lamp's light.\n\nFix (any one), then re-render the eight:\n- build the strip as living_ext.softbox;\n- give this panel visible_shadow on and an opaque dark back;\n- move it clear of the key's sight line;\n- or take it out (real_bounces_and_panels(strip='out'))."
+    },
+    {
+     "id": "amp-frames-clean",
+     "severity": "note",
+     "tints": "Acid, Dust, Ember, Fog, Haze, Ice, Poison, Smoke: each clean",
+     "claim": "No render faults in any of the eight. There are no fireflies, specks, smears or banding. Clipping is single-channel and at most 1.7% of the frame (Dust). Per frame: Acid, Dust, Ember, Fog, Haze, Ice, Poison and Smoke are all clean.",
+     "evidence": "Scripts and data are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/rig/ (specks.py/.json, plate_chroma.py, levels.py, pinned.py, smear.py/.json). Crops are in .../b97/rig/views/.\n\nFireflies and specks:\n- Small-blob response (G1-G4 of L*) above 5 L* at a 9x9 extremum: 1,731-5,107 candidates per frame (23,342 in all), 1,589 with no FA123 counterpart within 2 px.\n- The 24 strongest are all geometry that FA123 and the first light C also show: the bolt glint at (6,1052), lining-block corners at (1212,1515) and (588,1167), rib edges (views/speck-candidates.png, FA123 | C | A at x4).\n- Isolated pixels (more than 6 L* beyond all 8 neighbours): 1,117 across the eight. All sit on the plate's print, ink, labels or holes, and every one has an FA123 counterpart.\n- Plate face, eroded 3 px: Acid has 2 px at (1093,163-164), |D| 2.6, at the plate edge; the other seven have none. Plate-face |D| p99 is 7.81 against FA123's 7.66-7.75.\n- Chroma outliers with no FA123 counterpart (Acid 201, Dust 190, Ice 86, Haze 80, Ember 24, Poison 4, Smoke 4, Fog 2 px) are runs along lit edges at y 8-50 (views/chroma-specks-x3.png).\n\nSmears:\n- 46-107 tiles of 50 px per frame keep under 35% of FA123's or C's 1-3 px detail. The worst are at x400 y250-450, x1400 y1450, x1550 y200 and Smoke x0 y1250-1550.\n- They are acrylic edges that back-top lit in FA123 and the first C and are dimmer in A, with the detail intact (views/smear-*.png).\n\nBanding: 0 empty 8-bit levels between p1 and p99 in R, G and B, in all eight.\n\nClipping (any channel >= 251):\n- A: Acid 0.15%, Dust 1.69%, Ice 0.69%, Fog 0.01%, Ember/Haze/Poison/Smoke 0.00%. FA123 0.0-9.5%; first C 0.4-43.3%.\n- One channel only: R in Dust and Acid, B in Ice.\n- In Dust it sits on the lit floor patch at x490-600 y1250-1450, a band at y1130-1160 and the top band at x520-1160 y0-90 (views/pinned-dust-420-1050.png, pinned-dust-520-0.png).\n- The green 'on' LED is at 251 (112 px) and 255 (19 px) around x959-1016 y234-263 in all eight, as in FA123.\n- Pixels with every channel <= 1: 0.08-0.13% (FA123 0.02-0.03%).\n\nBorders: edge rows and columns behave as FA123's (the finish). The site crop cuts them off anyway: frame x163-1437, y3-1595 at scale 0.785, matched on plate-amber.webp."
+    },
+    {
+     "id": "amp-flat-panels-bandpass",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Band-pass energy at 2-14 px on the big flat panels is below FA123's in all eight. It is below the first light C's wherever C was not blown to white. The soft clouds left on the lining blocks are not denoiser blotches: they are the batting material's designed clouds, and they hardly change at 256 spp. What A loses against FA123 is the lining's fibre relief, which FA123's raking back light showed.",
+     "evidence": "L* RMS, FA123 / first C / A.\n\n(1) The coordinator's left-panel window x40-640 y100-1500, computed as amp-test/blotch.py does:\n- Acid 6.54/5.89/5.31\n- Dust 4.72/4.37/3.97\n- Ember 2.92/3.08/1.97\n- Fog 7.40/6.18/6.33\n- Haze 2.91/3.40/1.90\n- Ice 4.22/4.20/3.69\n- Poison 3.46/3.48/2.34\n- Smoke 3.45/3.97/2.28\n\n(2) Flat panels by mask (meas.py's selection: panels shrunk 15 px, the 60% with the least 8-px gradient), float:\n- Acid 3.73/2.32/3.01\n- Dust 2.65/2.02/2.24\n- Ember 1.21/1.40/0.98\n- Fog 4.34/1.82/3.56\n- Haze 1.16/1.42/0.93\n- Ice 2.26/2.01/1.97\n- Poison 1.06/1.63/1.02\n- Smoke 0.85/1.25/0.61\n- C's Acid, Dust, Fog and Ice panels were 19-100% pinned, or at L* 85-97, so flat white. That is why C reads lower there.\n- Data: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/rig/blotch.json\n\n(3) Inside the lining blocks' faces (left x170-350 y150-1450, right x1345-1470 y150-1400, bottom x560-1150 y1470-1590; mottle.json, boxes.json):\n- With contrast x3, A shows soft clouds 10-90 px across. They are far calmer than C's blotches. Left-block cubic-detrended residual, C to A: Ember 1.20 to 0.61, Poison 1.37 to 0.72, Smoke 2.01 to 0.68, Haze 0.95 to 0.59.\n- Views: views/blocks-all-tints-F-C-A-stretch3-x2.png, ember-leftcol-stretch3-x3-detail.png, fog-leftblock-s3-x3.png, ice-rightblock-s3-x3.png, bandpass-ember-F-C-A.png.\n\nNot sample noise (spp.py):\n- The lane's Ember crops at 128 and 256 spp (amp-test/full/crop-ember-128/256, frame x0-720 y80-1520) give 0.61 and 0.57 in the left block, with the same pattern (r = 0.96; 0.93 in the earlier critic's box x210-390 y1020-1380).\n- Pure noise would fall about 29% and correlate about 0.71.\n- It is the batting's cloud: materials.py:95-101, cloud 0.09 over 3 cm (about 90 px here); _batting :1605-1615.\n- The noise residue is about 0.3 L* RMS."
+    },
+    {
+     "id": "amp-reflections-and-through-acrylic",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "No card or lamp is in frame, and none is mirrored by the flat back sheet or the plate. Nothing lies in the view beyond the acrylic. The real bounce card is a near miss at the frame's left edge, and its floor shadow shows faintly in the back sheet's reflection. Both are physical for a real card. Reflections in curved parts and internal reflections are UNVERIFIED.",
+     "evidence": "mirror.py and geom.py, in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/rig/.\n\nThe back-sheet plane:\n- Fitted to the four corner bosses: normal azimuth 33.9 deg, vertical. This agrees with the lane's probe of the plate at 56 deg.\n- Mirrored camera rays run az 42-68 deg and el -28.2 to -4.5 deg, landing on open floor 0.1-7 m out (x 0.22-8.65, y -7.00 to -0.08).\n\nNone of 6,400 sampled pixels mirrors a card or lamp. Nearest angles:\n- bounce 0: 2.3 deg, at the frame's left edge, pixel about (10,530); 5.7 deg inside the site crop\n- front-strip 65 deg, key 71 deg, scrim 72 deg, bg-right 68 deg, flag 1 80 deg\n\nThe card's floor shadow: 0.7% of sampled pixels mirror floor that lies in the real bounce card's key shadow (x0-1020, y440-660). It is physical and faint.\n\nThrough the acrylic: every card and lamp is outside the frustum, and there is no depth of field.\n\nCurved screws, bolts, connectors and rings, and internal or total reflections in the 20 mm sheets: UNVERIFIED, since that needs probe.py's mirror map in Blender, which is not here. The speck scan found no straight card edge."
+    },
+    {
+     "id": "amp-audit-blind-spots",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Equipment 0 and hidden 0 hold when recounted from the masks, but here that proves little. The product fills every mask pixel, so nothing seen through the acrylic can register. The audit also does not count a camera-visible panel. Geometry shows nothing is in frame.",
+     "evidence": "masks.py:\n- All eight masks: 0 px at id 255 and 0 px at ids 247-254. The hidden lamps are bg-left 254, bg-right 253, scrim 252 and key 251; back-top is absent.\n- Product ids 1-110 cover 2,560,000 of 2,560,000 px ('back' 81.0%, plate face 15.5%, max id 91).\n- The eight masks are identical (sha e44495ec40f516df). They are pixel-identical to the first light-C and FA123 masks (checked on Acid and Smoke).\n\nCoverage gap in render.py:490-504:\n- The audit counts flag*/bounce* as equipment, and camera-off meshes plus AREA lamps as hidden.\n- The front strip is now camera:true, so in frame it would read id 0, like the sweep.\n\nProjection (geom.py), distance outside the frame:\n- flag 1: 1,150 px right\n- bg-left: 1,771 px (2,343 Euclidean)\n- bg-right: 3,349 px (4,476)\n- scrim: 3,727 px above\n- key, front strip and bounce 0: wholly behind the camera\n- back-top, if it were built: 1,236 px"
+    },
+    {
+     "id": "amp-flag1-camera-off",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Flag 1 is now clear of the cove, but it is still invisible to the camera. A real black card in S4b has every ray on. It emits nothing and changes no pixel.",
+     "evidence": "- ampA set.flags[1] = {center_m [1.35,2.1,1.2716], size_m [0.3,2.2567], normal [-0.45,-0.89,0], glossy true}. There is no camera key, so visible_camera is False (sets.py:178). Every other ray is at the mesh default (on); it is a black satin card.\n- Trimmed by light_c.buildable (FLOOR_GAP 0.005, light_c.py:47, :129-136). Its foot is at z 0.1433 m.\n- At the card's back corner (y 2.168) it clears the sweep's 24-chord mesh (sets.py:94-98, 0.1409) by 2.4 mm and the true arc (0.1383) by 5.0 mm.\n- It is 1,150 px outside the frame, 82 deg from any mirrored ray, and there is no depth of field."
+    },
+    {
+     "id": "amp-world-camera-swap-dormant",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "The world's camera-ray swap is present: camera rays see grey #808080, all other rays the 0.6 gradient sky. It is dormant: no camera ray reaches the world, so it changes no pixel.",
+     "evidence": "- sky {gradient, strength 0.6, visible false}, so lights.py:412-419 mixes the backgrounds on Light Path 'Is Camera Ray'.\n- The product covers every mask pixel. Every camera ray points 4.5 to 28.2 deg below horizontal (the vertical back-sheet mirror keeps elevation).\n- No transparent-BSDF surface is in view to carry the camera flag onward: the acrylic shortcut is cut (6), the cards are two-sided, and the strip's see-through back is behind the camera.\n- The other Light Path uses are the acrylic 'Is Shadow Ray' switch, cut (materials.py:1230-1240), and the polariser (materials.py:1910-1921), which is unused here."
+    },
+    {
+     "id": "amp-path-depth",
+     "severity": "note",
+     "tints": "all eight; Smoke most",
+     "claim": "Rig A keeps the stills' shallow path depth, so light inside the stacked 20 mm acrylic is cut off sooner than in the turns. Whether this adds to Smoke's near-black cabinet is UNVERIFIED.",
+     "evidence": "- render.py:268-272 with bounces 16 gives 16 total / 6 diffuse / 8 glossy / 8 transmission, against the turns' 32/6/16/32.\n- Lane readings: Smoke surround 25.0 to 15.0 L*.\n- Settling it needs a render at 32 transmission bounces (no Blender here)."
+    }
+   ],
+   "checked": [
+    "Every local ampA-<tint>.png and amp-<tint>.png, sheet-ampA.png and ampA-readings.md equals its git blob on origin/r33-speaker-horn (git hash-object).",
+    "The eight helper commits 'Light model C (S4b): ampA-<tint>' all have parent cd0ea42ded, the commit that added the eight shot files. studio/ and spinoffs/barkhorn/campaign/ are unchanged from cd0ea42ded to fbbfe58006. In all eight, ampA-<tint>.json equals .shot.json.",
+    "One rig for all eight: across tints only products[0..1].instances[0].flavour and the title differ. The rest hashes to dd995490dc70edb5 (diffshots.py). The block-level flavour reads 'cloud-orange' in all eight, but each log builds the right tint's materials (e.g. bark@cloud-amber, bark@eucalyptus-y2k-green, bark@birch-fog-clear).",
+    "Changes from the first light-C amp (diffrig.py) are exactly these: back-top.off true; front-strip diffuse 0 to 1 and camera true; exposure 0 to -0.2; bounces[0] reflect_only replaced by one_sided false, camera true, glossy true; flag 1 centre z 1.2 to 1.2716 and height 2.4 to 2.2567. Against FA123, light C's keys are also there (caustics, clamp 4 to 0, filter_glossy 0, contact 0/0, the two props).",
+    "Light C holds in all eight. Caustics refractive and reflective on (render.py:285-286). Clamp 0 (sample_clamp_indirect :281; direct is not set, so Blender's default). filter_glossy 0 (:282). Contact 0/0. OIDN on albedo and normal, 128 spp, adaptive 0.01, 1600 x 1600.",
+    "Every log reads 'NO GLASS SHADOWS: 6 materials' (bark, bark.001, clear-cast, horn-formed, horn-lot, horn-satin @tint) and 'SHADOW RAY LINKS LEFT: 0 []'. Every report.json carries notes cut 6 and count 0, with flags_crossing_set, applied, pending, sets and glints empty. Render times are 1,136-3,468 s.",
+    "Exposure is -0.2 in all eight, with Khronos PBR Neutral, white balance 5900/7.0 and finish 235 to 238 (gain 1.0128, contrast 0.1, clarity 0.03, sharpen 0.12).",
+    "Back-top is off: render.py:205 skips it, and the mask legend's hidden lamps are only bg-left, bg-right, scrim and key.",
+    "Bounce 0 is a real card. sets._card sets camera on (:178) and glossy on (:179); there is no reflect_only branch (:180-183) and no Backfacing to Transparent (:184-194), so it is two-sided with diffuse, shadow, transmission and volume rays on. It is white satin #F2F2F2, z 0.103-1.097, entirely behind the camera, and 0% of any lamp's face as seen from the product is behind it.",
+    "Light linking: only bg-left and bg-right have receivers ['sweep'] (render.py:207-221), the owner's sweep-only lamps at specular 0, which makes them diffuse-only (lights.py lamp_shares :266-296). There are no flag-type lights, no shadow_on_set and no glints.",
+    "No holdout, shadow catcher or other trick is left. Hidden parts are skipped, not hidden (product.py:429). The sweep casts shadows (sets.py:132-133 not triggered). The Light Path uses are only the cut acrylic switch, the unused polariser and the world swap.",
+    "Every lamp and card clears the paper: bounce 0 by 103 mm, the strip by 850 mm, bg-right by 816 mm, flag 1 by 2.4 mm. None crosses another (engine flags_crossing_set empty; my quad tests).",
+    "The eight cloud model builds have different hashes per helper, the same per tint as the earlier round. Masks and parts_2d (boxes, centres, depths) are identical across the eight.",
+    "Site crop re-derived: plate-amber.webp is the FA123 Acid frame at 0.785 offset (128,2), which shows frame x163-1437 y3-1595.",
+    "The lane's readings in my lens confirmed: equipment 0, hidden 0, cut 6, links 0, no flag crossing; pinned >= 251 under 2% (maximum Dust 1.69%); flat-panel blotch below FA123 in all eight (at 2-14 px as well as the lane's 3-12 px).",
+    "Scripts, data and crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/rig/ (geom.py, occl.py, occl_all.py, mirror.py, masks.py, diffshots.py, diffrig.py, blotch.py, boxes.py, mottle.py, spp.py, specks.py, plate_chroma.py, levels.py, pinned.py, smear.py, keyshare.py, views/). There are no full-size copies of frames."
+   ],
+   "verdict": "Go live after fixes. Re-render the eight with the front strip as a real body (shadow on and an opaque back, e.g. living_ext.softbox), or move it out of the key's path; it now stands in front of about 35% of the key with a see-through, shadow-off body. Everything else in rig A checks out, and all eight frames are clean: no fireflies, specks, smears or banding, and clipping at most 1.7%."
+  },
+  "critic:owner-eye": {
+   "findings": [
+    {
+     "id": "inside-front-lit-not-from-within",
+     "severity": "note",
+     "tints": "all eight (Smoke explained below)",
+     "claim": "In rig A the cabinet's inside looks like tinted acrylic lit from the front. It no longer looks lit from within. The lining just behind the back panel is the brightest thing in the box, and the space deeper inside, around the plate box, falls off into shade. In FA123 the deep inside was as bright as the lining or brighter in every tint. That backlit glow is gone. The first light-C amp's failures are fixed: the lining is back down and no longer clips.",
+     "evidence": "Mean luminance Y, deep inside (box x210-320, y150-1050 at the site cut) divided by the near lining slab (box x20-130): rig A 0.32 / 0.27 / 0.30 / 0.25 / 0.25 / 0.33 / 0.32 in Ember / Dust / Acid / Poison / Ice / Haze / Fog. Live FA123: 2.13 / 1.48 / 1.40 / 2.53 / 1.55 / 2.21 / 1.01. First light C: 0.51-0.94.\n\nSmoke: A 2.16 (live 3.52). Its near slabs are almost black (L* 13), and the lit floor shows at the bottom of the frame; the deep inside still averages only L* 16.3.\n\nWhere the light comes from in ampA-*.json: back-top is off, so every direct lamp is on the camera side or overhead (key at azimuth -30 deg, front-strip at -25 deg, bounce card at y -2.2, scrim overhead). bg-left and bg-right reach the box only by bouncing off the paper.\n\nFirst light C to rig A, lining slab L*: Acid 94.3 -> 81.8, Ice 71.9 -> 61.7, Dust 73.7 -> 65.2, Fog 97.4 -> 92.7. Share of the slab at 251 or more: Dust 100% -> 0%, Ice 72.5% -> 0%.\n\nFiles: b97/owners-eye/depth.txt, meas3.txt. Views: b97/owners-eye/page-<tint>.jpg (live | first C | A at 470 x 588)."
+    },
+    {
+     "id": "colour-deeper-and-on-the-set-hue",
+     "severity": "note",
+     "tints": "Ember, Dust, Acid, Poison, Haze deeper; Ice slightly less; Fog and Smoke neutral",
+     "claim": "The colour is deeper than FA123 in five of the six coloured tints, and every coloured tint now sits on the light-C front's hue. Ice loses a little saturation and moves from royal blue to azure, the same blue as its front. No tint is washed out: almost nothing clips, and the lining slabs do not clip at all. The deep inside goes dark: olive in Acid, brown in Dust. It reads as shade, as the fronts' darks do.",
+     "evidence": "Surround at the site cut, C* / saturation, live -> A:\n- Ember 28.1/0.73 -> 38.4/0.86\n- Dust 40.8/0.68 -> 45.0/0.72\n- Acid 43.1/0.61 -> 48.4/0.66\n- Poison 21.2/0.61 -> 32.4/0.78\n- Haze 48.6/0.88 -> 58.2/0.94\n- Ice 35.1/0.66 -> 32.7/0.63\n\nHue, live -> A (light-C front in brackets): Ember 28.3 -> 31.9 (35.8), Dust 45.6 -> 55.4 (52.7), Acid 102.5 -> 103.1 (101.4), Poison 143.9 -> 142.1 (138.1), Ice 279.9 -> 271.2 (274.1), Haze 304.2 -> 308.1 (309.1).\n\nFull-frame check: my numbers match the lane's readings exactly (e.g. Ember 23.1/40.1, Haze 21.9/60.9, Smoke 15.0).\n\nShare of the frame with a channel at 251 or more, A (FA123): Dust 1.69% (9.52), Ice 0.69% (7.83), Acid 0.15% (6.18), the rest 0.01% or less. It all sits on the top-edge band and on the lit floor at lower left; the lining slabs have 0%.\n\nDeep inside: Acid L* 38.5 / C* 34.7 (olive), Dust 29.1 / 33.1 (brown).\n\nFiles: b97/owners-eye/meas1.txt, faults.txt, pinned-A-dust.png, pinned-A-ice.png."
+    },
+    {
+     "id": "ice-and-dust-the-weakest-show-the-owner",
+     "severity": "note",
+     "tints": "Ice, Dust",
+     "claim": "Show the owner Ice and Dust. They are the two tints farthest from their fronts and the two that change most against FA123. Ice's lining reads lighter and more azure than the front, and Dust's lighter and more tangerine. Both are still much closer to their fronts than FA123 was. One exposure for all eight cannot pull them back without sinking Ember, Haze and Smoke. Ice is the weakest tint, as it is in the turns.",
+     "evidence": "Lining slab L* / C* / hue against the light-C front's front panel (the lining seen through a lit face):\n- Ice: A 61.7 / 40.8 / 264.5; front 53.8 / 42.5 / 271.2; dE00 7.8. FA123 39.1 / 41.1 / 279.2, dE00 14.9.\n- Dust: A 65.2 / 61.9 / 61.3; front 58.5 / 57.9 / 52.8; dE00 8.1. FA123 dE00 15.0.\n\nSlab saturation: Ice 0.55 (front panel 0.62, FA123 0.73).\n\nFiles: b97/owners-eye/lining-vs-front.txt. Views: b97/owners-eye/leftpatch-ice.png, leftpanel-dust.png, page-ice.jpg, page-dust.jpg."
+    },
+    {
+     "id": "plate-reads-black-anodized-print-crisper",
+     "severity": "note",
+     "tints": "all eight (the plate is the same in every tint)",
+     "claim": "At L* 20 the plate reads as a real black anodized plate. It is not a flat crushed black: it keeps FA123's sheen from top to bottom, only lower. The print, the Hypex and FA123 marks, the connector labels and the ncore logo are more legible than live at page size and at 2x. Connectors, rings, gold pins and RCA colours all hold.",
+     "evidence": "Plate face (eroded mask): L* 19.9-20.3 in all eight, p1-p99 14.6-23.5.\n\nSheen, top to bottom: A 17.1 -> 23.2, FA123 29.9 -> 38.5. The luminance ratio is the same, 1.66 against 1.67.\n\nPrint minus face (Dust): 70.2 against 58.5.\n\nStroke contrast at page size, 470 px wide, FA123 -> A (p97 minus p30 L*):\n- hypex 53.5 -> 64.2\n- FA123 mark 62.3 -> 78.4\n- caution text 47.0 -> 57.9\n- connector labels 68.3 -> 72.4\n- ncore 63.8 -> 74.0\n- rating text 35.0 -> 43.7\nThe same gain holds at 940 px, and in Smoke.\n\nSteps against the face (Dust): housings 8.5, -11.5 (FA123 -16.1; the luminance ratio is still about 3x), rings +11.1, gold +14.7, rca-red +19.7, rca-orange +38.8, rca-white +70.5.\n\nThe silver rating sticker reads 78.6 against 96.2: it now mirrors a darker room.\n\nFiles: b97/owners-eye/meas4a.txt, legib.py output, plate-face-stretch-dust.png, crop-dust-conn.png, crop-dust-marks.png, crop-dust-lower.png, page1x-plate-dust.png, page1x-plate-smoke.png."
+    },
+    {
+     "id": "black-screws-crush",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Only the black parts lose detail. The plate's screw heads, the module and the cabinet's back screws go almost to pure black, and the Phillips crosses that show in FA123 barely show at 1:1. At page size the screws are dots in both versions. The plate face is also slightly blue-black.",
+     "evidence": "Pixels below L* 3, A (FA123):\n- plate screws 91.3% (27.5%), spread inside the screw head 2.8 against 6.7 L*\n- back screws 70.8% (10.2%)\n- module 94.2% (63.7%)\n\nPlate face b*: -2.6 to -3.1 in all eight (FA123 -1.3 to -2.5).\n\nFiles: b97/owners-eye/zoom4-dust-dark-details.png (4x), topband.png, crop-dust-corner.png, plate-tint.txt."
+    },
+    {
+     "id": "flatter-panels-read-as-real",
+     "severity": "note",
+     "tints": "all eight; the lost rims show most in Ember, Haze, Poison, Smoke",
+     "claim": "Rig A's lining slabs are flatter than FA123's but read as evenly front-lit lining behind tinted acrylic, not flat CG. They are as even as the lining in the light-C fronts and show no blotch. Elsewhere in the frame the gradients stay: the right slab ramps from top to bottom, and the deep inside brightens toward the lit floor. What goes is FA123's bright glowing rims in the dark tints, so those frames have less sparkle.",
+     "evidence": "Low-pass L* spread (p95-p5) over the left slab: A 2.4-4.7 (Smoke 11.8); FA123 5.5-8.6 (Smoke 13.7); the light-C fronts' side-panel lining 2.7-12.2.\n\nBlotch, 3-12 px band-pass RMS on the same slab: A 0.16-0.28, FA123 0.19-0.60. A is lower in six tints; Ember and Poison are +0.03 and +0.08 L*, which is invisible.\n\nGradients that stay: right slab ramps 12.9-38.8 L* top to bottom; the deep inside is 7.4-10.3x brighter at the bottom than the top (Smoke 13.2).\n\nBrightest surround (p99.5 L*), live -> A: Ember 67.3 -> 45.7, Haze 66.5 -> 44.6, Poison 88.1 -> 54.9, Smoke 92.0 -> 64.0.\n\nFiles: b97/owners-eye/meas3.txt, surround-range.txt. Views: leftpanel-dust.png, leftpanel-ice.png, rightpanel-ice.png, half-A-fog.jpg, half-A-acid.jpg, half-A-haze.jpg."
+    },
+    {
+     "id": "smoke-reads-smoked-not-a-black-hole",
+     "severity": "note",
+     "tints": "Smoke",
+     "claim": "Smoke reads as smoked black acrylic, not a black hole. It is now as dark as the light-C front's Smoke cabinet, which leaves FA123's lighter grey as the outlier. The slab edges, the woofer's ring and the lit floor stay visible at page size, and the plate reads lighter than its smoked surround, as it should. It does have more featureless area than the fronts. The site's WebP encode loses a little more of the faint inner detail, so check Smoke on the built page.",
+     "evidence": "Surround mean L*: A 14.6; light-C front Smoke panels 14.7, horn-back 15.9, turn 20 19.4; live FA123 24.8.\n\nA surround p5 / p50 / p95 = 4.1 / 13.5 / 28.4. Share below L* 10: A 35.0%, front 60.0%, horn-back 73.4%.\n\nPlate 20 against slabs 13.0 and deep inside 16.3.\n\nShare of 24-px cells with L* spread under 0.5: A 55.5%, FA123 41.6%, front 36.5%. After WebP q82: 59.1%; the encode error in the darks has p99 |dL*| 1.6.\n\nFiles: b97/owners-eye/smoke.txt, half-A-smoke.jpg, half-FA-smoke.jpg, page-smoke.jpg, smoke-dark-stretch-png-vs-webp.png."
+    },
+    {
+     "id": "amps-now-sit-with-the-light-c-set",
+     "severity": "note",
+     "tints": "all eight (Fog equal)",
+     "claim": "Rig A belongs to the light-C set; FA123 does not. In every tint the amp's lining matches the colour of the lining in the light-C front far more closely than FA123's did. The whole cabinet colour is closer to the front and to the horn-back in seven of eight tints and closer to turn 20 in six. Every coloured hue is within 4 degrees of its front. The same studio feel comes from front light in place of a backlit glow, and it holds at thumbnail size.",
+     "evidence": "Lining slab against the light-C front's front panel, dE00 A / FA123:\n- Ember 1.8 / 12.9\n- Dust 8.1 / 15.0\n- Acid 3.9 / 14.9\n- Poison 4.8 / 15.5\n- Ice 7.8 / 14.9\n- Haze 3.1 / 8.3\n- Fog 4.0 / 10.6\n- Smoke 1.9 / 3.1\n\nWhole surround against the front's panels, FA123 -> A: Ember 6.9 -> 4.0, Dust 7.7 -> 6.6, Acid 6.6 -> 6.1, Poison 7.4 -> 3.5, Ice 4.7 -> 3.2, Haze 4.4 -> 2.0, Smoke 7.1 -> 1.6, Fog 11.2 -> 11.5.\n\nAgainst the horn-back: A is closer in seven (Fog 4.3 -> 4.6). Against turn 20: closer in six (Haze 4.9 -> 6.1, Fog 14.3 -> 14.6).\n\nHue gap to the front: A -3.9 / +2.8 / +1.7 / +4.0 / -2.9 / -1.1 degrees; FA123 -7.3 / -6.8 / +1.2 / +5.8 / +5.6 / -5.0.\n\nFiles: b97/owners-eye/set-de.txt, lining-vs-front.txt, meas2.txt. Views: set-ember-dust-acid-poison.jpg, set-ice-haze-fog-smoke.jpg, thumbs.png (168 x 210 cut)."
+    },
+    {
+     "id": "amp-white-balance-cooler-than-set",
+     "severity": "note",
+     "tints": "Fog, Smoke (the neutral tints show it)",
+     "claim": "The amp keeps its own white balance and paper, so Fog and Smoke read about 2 b* cooler than their warm fronts. FA123 does the same, so this is not new, and the per-shot-type rule allows it. It is unlikely to show at page size.",
+     "evidence": "ampA-*.json: white balance 5900 K, tint 7.0, sweep #F3F1EE. The fronts, turns and horn-backs use 5600 K, tint 3.0, #F7F0E8.\n\nFog amp b*: A -0.31 against the set's +1.63 to +2.21 (live -0.26).\n\nSmoke amp b*: A -0.74 against +0.91 to +1.62 (live -0.24).\n\nFiles: b97/owners-eye/meas1.json, meas2.json."
+    },
+    {
+     "id": "nothing-stray-one-rig",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Nothing in the eight frames reads fake, stray or wrong. There are no studio objects in frame, no fireflies or blotches and no flag crossings, and one rig and one exposure serve all eight tints. One leftover is in the rig file, not the pictures: flag 1 is still hidden from the camera. It stands out of frame, so it changes no pixel; for S4b parity it could take camera: true.",
+     "evidence": "Audits, read with git show at fbbfe58006, all eight:\n- equipment 0, hidden 0\n- no_glass_shadows.cut 6, shadow_ray_links_left.count 0\n- flags_crossing_set []\n- logs: no crossing lines\n- the local ampA and front PNGs match the branch blobs (git hash-object)\n\nThe shot JSONs differ only in flavour and title. Exposure is -0.2 in all eight; bounces[0] is one_sided false with camera and glossy on; front-strip has diffuse 1.0 and camera true; back-top is off; flag 1 is trimmed (centre z 1.2716, height 2.2567, bottom edge z 0.143).\n\nFlag 1 has no camera key, so sets.py:178 leaves it camera-hidden.\n\nIsolated bright pixels on the surround: 12-37 per frame (Fog 418; FA123 Fog 1,379).\n\nFiles: b97/owners-eye/faults.txt, b97/owners-eye/meta/."
+    },
+    {
+     "id": "push-must-repoint-the-plate-cut",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "For the site lane: the build still points the plate pictures at FA123. The push must point them at the rig-A frames and re-cut the eight plate pictures and their thumbnails. Whether the current build matches the gate tree I read is UNVERIFIED.",
+     "evidence": "Gate tree6 site_v2.py:925-927: AMP_SRC and AMP_TINTS point at renders/2026-11-13/barkhorn/fa123/macro-amp-*.png.\n\nThe cut is at site_v2.py:1262-1264: crop (160, 0, 1440, 1600), LANCZOS to 1000 x 1250, WebP q82, and a 168 x 210 thumbnail.\n\nThe live pages read img/rc/plate-<color>.webp and the matching -th.webp."
+    }
+   ],
+   "checked": [
+    "Coordinator file read: coordinator/tropos-light-c-s4b-turns-stills-critics-2026-11-24.json, the amp findings of the stills-and-amp and owner-set lenses",
+    "Rig A: all eight ampA-<tint>.json and .shot.json read with git show; diffed across tints and against amp-<tint>.json (first light C)",
+    "All eight .report.json, .equipment.txt and .log read (audits). Local ampA and front PNGs match the blobs at fbbfe58006",
+    "Site cut taken from site_v2.py (crop 160-1440, LANCZOS 1000 x 1250). Live, first light C and rig A viewed at page size (470 x 588) for all eight: b97/owners-eye/page-<tint>.jpg",
+    "Surround and region L*, C*, hue and saturation at the site cut and the full frame, for live webp, FA123 master, first light C and rig A. Reproduces the lane's full-frame readings: meas1.txt",
+    "Cabinet colour in the light-C fronts, horn-backs and turn 20 by each frame's own mask; dE00 and hue gap against the amp surround and the lining slab: meas2.txt, set-de.txt, lining-vs-front.txt, set-*.jpg",
+    "Lit from within: luminance of the deep inside against the near lining, and bottom against top: depth.txt",
+    "Plate: face distribution, top-to-bottom sheen, each part's step against the face, how much of the black parts crushes, the face's colour cast, 1:1 and 4x crops, and the legibility of six marks at 470 and 940 px: meas4a.txt, plate-tint.txt, crop-dust-*.png, zoom4-dust-dark-details.png, page1x-plate-*.png",
+    "Panel flatness, blotch and clipping per region, against FA123, first light C and the lining in the light-C fronts: meas3.txt, leftpanel-*.png, rightpanel-*.png, leftpatch-*.png",
+    "Smoke: darkness and local detail against the front and horn-back Smoke, and the site's WebP q82 encode simulated: smoke.txt, smoke-dark-stretch-png-vs-webp.png",
+    "Faults: isolated outliers, clipped-pixel maps, top band and lower-left at 1:1: faults.txt, pinned-A-*.png, topband.png, lowerleft-dust-ice.png",
+    "Gallery thumbnails at 168 x 210, live against A: thumbs.png",
+    "Engine read for card and panel visibility: sets.py:161-205, lights.py panel()",
+    "UNVERIFIED: whether the current site build still matches gate tree6's site_v2.py; the rig-A share of light from the paper-only lamps (the lane's light-alone test predates rig A)"
+   ],
+   "verdict": "go live (with the fronts, turns and horn-backs), once the owner has seen A beside FA123: the inside now reads front-lit, the colour is deeper and on the set's hue (lining dE00 to the light-C fronts 1.8-8.1 against FA123's 3.1-15.5), the plate reads as black anodized with crisper print, and Smoke matches its front; show him Ice and Dust reading lighter than their fronts and the black screws going to black."
+  },
+  "skeptic:owner-eye": {
+   "verdicts": [
+    {
+     "id": "inside-front-lit-not-from-within",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "I reproduced it with my own boxes at the site cut (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/skeptic-owners-eye/py/m4.py).\n- Deep inside divided by near slab, mean Y: A 0.32/0.27/0.30/0.25/0.25/0.33/0.32 (Smoke 2.16); live 2.13/1.48/1.40/2.53/1.55/2.21/1.01 (Smoke 3.52); first C 0.51-0.94.\n- Slab L*, first C to A: Acid 94.3->81.8, Ice 71.9->61.7, Dust 73.7->65.2, Fog 97.4->92.7.\n- Slab share at 251 or more: Dust 100->0 %, Ice 72.0->0 %.\n- Rig, from ampA-dust.json: back-top has off:true; bg-left and bg-right have receivers ['sweep'].\n\nTwo caveats:\n- The overhead scrim still lights the cabinet's top through the clear top panel. That pins a band at y<120 in Dust (19.7k px; .../c-dust-topband-FA-A-Amag.png). On average that band is dimmer than the slab, so it is not a lit-from-within cue.\n- Part of the deep-inside fall-off may come from the amp's short path depth rather than from shade. See missed; UNVERIFIED."
+    },
+    {
+     "id": "colour-deeper-and-on-the-set-hue",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "I reproduced it at the site cut (py/m5.py) and on the full frame (py/m1.py, which matches the lane's table exactly).\n\nSurround C*/saturation, live -> A:\n- Ember 28.0/0.73 -> 38.3/0.86\n- Dust 40.6/0.68 -> 44.6/0.72\n- Acid 43.3/0.61 -> 48.4/0.66\n- Poison 21.5/0.62 -> 32.4/0.78\n- Haze 48.5/0.88 -> 58.2/0.94\n- Ice 34.8/0.66 -> 32.3/0.63\n\nHues agree with the reviewer's within 0.4 degrees. Share at 251 or more: Dust 1.69 %, Ice 0.69 %, Acid 0.15 %.\n\nOne overstatement: 'every coloured tint now sits on the front's hue' holds for the whole surround. It does not hold for the lining slab, which is +8.5 degrees in Dust (61.3 against 52.8) and -6.7 degrees in Ice (264.5 against 271.2), per the reviewer's own lining file, reproduced in py/m6.py."
+    },
+    {
+     "id": "ice-and-dust-the-weakest-show-the-owner",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced exactly (py/m6.py, front-panel mask of front-<tint>):\n- Ice: slab 61.7/40.8/264.5 against front panel 53.8/42.1/271.2, dE00 7.8 (live 14.9).\n- Dust: 65.2/61.9/61.3 against 58.5/57.6/52.8, dE00 8.1 (live 15.0).\n\nA note that tells the owner to look is the right call; no one-exposure fix exists.\n\nThe owner should also hear one thing more: Ice is the only coloured tint where A is shallower than live (surround C* 35.0->32.7, saturation 0.66->0.63). That cuts against his deep-colour rule.\n\nIn the simulated site thumbnails, Ice and Dust are the two that read pastel: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/skeptic-owners-eye/v-thumbs-live-vs-A.png."
+    },
+    {
+     "id": "plate-reads-black-anodized-print-crisper",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "- Plate face mean L*: A 20.1-20.6, FA123 35.2-36.4 (py/m1.py).\n- Top-to-bottom sheen ratio: 1.66 against 1.67 (checked from the L* values).\n- The micro-texture holds relative to brightness: high-pass relative-Y std 0.0227 against 0.0209 (py/m2.py).\n- At 1:1 it reads as satin anodized aluminium, and the connectors hold (.../c-dust-plate-top-FA-A.png, c-dust-plate-low-FA-A.png).\n- The site's WebP q82 does not hurt the darker plate. My encode of FA123 through site_v2's cut gives the live files exactly (mean difference 0.000). On A, the step at 8-px block edges on the plate face is 0.097 L*, against 0.122 for FA123 (py/m3.py).\n\nThe finding stands, but it leaves out the plate's 15 L* drop against the brief. See missed."
+    },
+    {
+     "id": "black-screws-crush",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced exactly. Pixels below L* 3, Dust, A (FA123):\n- plate screws 91.3 % (27.5 %)\n- back screws 70.8 % (10.2 %)\n- module 94.2 % (63.7 %)\n\nHousings, median L*: 21.2 -> 8.2.\n\nOnly 1-2.6 % of these pixels sit at exactly 0 (Smoke's and Ember's module about 15 %), so it is deep shade, not a hard clip. At page size the screws are dots in both versions. Note is right."
+    },
+    {
+     "id": "flatter-panels-read-as-real",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "At page size, A's slabs read as evenly front-lit lining (.../v-grid1-live-A-front.jpg, v-grid2-live-A-front.jpg).\n\nMy own measures on the left slab (py/m8.py):\n- Trend over 40 px and up, p95-p5: A 2.7-4.5, FA123 8.7-16.2. So A is flatter, as claimed.\n- Mottle at 12-40 px: lower in Dust, Acid, Ice and Fog; about equal in Ember and Haze; higher in Poison (0.31->0.46 L* RMS) and Smoke (0.17->0.33). Both stay below visibility at page size.\n\nCaveat: part of the 'lower blotch' at 3-12 px is the lining's own texture going away, not a cleaner render. See missed."
+    },
+    {
+     "id": "smoke-reads-smoked-not-a-black-hole",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "- Surround at the site cut: L* 14.6 (live 24.9). Near slab 13.0; plate 20.\n- Slab edges, the woofer's ring and the lit floor still show at page size (.../v-grid2-live-A-front.jpg, v-smoke-full-FA-A.jpg).\n- The WebP simulation method the reviewer used is sound: my identical pipeline reproduces the live files.\n\nNote is right."
+    },
+    {
+     "id": "amps-now-sit-with-the-light-c-set",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "The lining colour matches are reproduced exactly (py/m6.py). dE00 to the front panel, A against live:\n- Ember 1.8 / 12.9\n- Dust 8.1 / 15.0\n- Acid 3.9 / 14.9\n- Poison 4.8 / 15.5\n- Ice 7.8 / 14.9\n- Haze 3.1 / 8.3\n- Fog 4.0 / 10.6\n- Smoke 1.9 / 3.1\n\n'Belongs to the set' leaves out the render differences. The amp's finish has no grain, contrast 0.1 and sharpen 0.12; the fronts and turns have grain 1.5, contrast 0.2 and sharpen 0.3. Path depth is 16/8/8 against 32/16/32. The rule allows this per shot type, and FA123 was the same, so it is not worse than live.\n\nThe whole-surround dE00 against the front, the horn-back and turn 20: not re-derived (UNVERIFIED), but consistent with my slab numbers."
+    },
+    {
+     "id": "amp-white-balance-cooler-than-set",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed in the JSONs with git show:\n- ampA: 5900 K, tint 7.0, sweep #F3F1EE.\n- front, turn 20 and horn-back: 5600 K, tint 3.0, #F7F0E8.\n\nPlate face b*: A -2.4 to -3.1, FA123 -1.2 to -2.6. Unchanged from FA123 in kind. Note is right."
+    },
+    {
+     "id": "nothing-stray-one-rig",
+     "stands": false,
+     "severity_ok": false,
+     "reason": "Most of the evidence checks out:\n- py/jdiff.py: first C -> A changes only back-top off, strip diffuse and camera, a real two-sided card, the flag 1 trim, the exposure and the title. Across tints only flavour and title differ, and .shot.json equals .json.\n- The 8 PNGs equal their git blobs.\n- Flag 1 bottom z 0.1433; the reports read flags_crossing_set [].\n- Nothing in the pixels reads fake.\n\nBut 'one leftover ... flag 1' is wrong, and it hides a bigger one. The front-strip is still not a real object:\n- lights.py:179 sets ob.visible_shadow = False for every panel.\n- lights.py:165-177 makes its back face transparent.\n- light_c.real_bounces_and_panels (light_c.py:152-172) only switches on diffuse, specular and camera.\n- light_c.buildable (light_c.py:114-121) checks cards against area lamps only.\n\nThe strip also stands in the key's beam (missed, item 1). That breaks 'every object casts shadows / real lights only', so this should be should-fix, not a note.\n\nAlso, equipment 0 and hidden 0 cannot see through the back panel, which covers every pixel of the mask (as the physics-audit noted). The real proof of a clean frame is the geometry."
+    },
+    {
+     "id": "push-must-repoint-the-plate-cut",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed in gate tree6:\n- site_v2.py:925-927 sets AMP_SRC (the Dust plate.webp) and AMP_TINTS to fa123/macro-amp-*.png.\n- site_v2.py:1257-1265 crops (160,0,1440,1600), applies LANCZOS to 1000x1250, encodes WebP q82, and makes a 168x210 thumbnail at q80.\n- My encode of FA123 through that code matches the live plate-<color>.webp (mean abs difference 0.000).\n\nWhether the current build still matches tree6 is UNVERIFIED, as the reviewer says."
+    }
+   ],
+   "missed": [
+    "SHOULD-FIX (real lights only / every object casts shadows; makes the rig impossible to build). The front-strip is still not a real object, and it stands in the key's beam.\n\nThe engine:\n- lights.py:179 hard-codes visible_shadow False for panels.\n- lights.py:165-177 gives the panel a transparent back.\n- light_c.real_bounces_and_panels (light_c.py:152-172) only sets diffuse 1.0, specular 1.0 and camera true.\n\nThe geometry (render.py orbit about the report centre):\n- key: 1.2 m square at (-1.78, -3.07, 3.42)\n- strip: 0.4 x 2.0 m at (-1.18, -2.52, 1.77), both aimed at (0, 0, 0.6)\n- From the plate's centre, 36 % of the key's area is hidden behind the strip. Over the camera-facing back panel it is 35 % of key rays (31.7-38.4 % by height).\n- The rays cross the strip at z 2.11-2.69 m, where its ramp is at full.\n- Script: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/skeptic-owners-eye/py/strip.py\n\nSo the render passes the key's light-sampled rays straight through a softbox. A real studio with this rig would lose about a third of the key on the plate and lining. The fronts' rig has no panel lights; this is the only one left in the light-C set.\n\nWhy no check caught it: light_c.buildable (light_c.py:114-121) tests cards against area lamps only, never a lamp standing in another lamp's beam.\n\nFix: drop the strip (real_bounces_and_panels already takes strip='out'), or shorten or move it below the key's beam, then re-render one tint. The size of the pixel change is UNVERIFIED.",
+    "SHOW THE OWNER: the plate, the subject, is the biggest change against live, and it is not on the reviewer's show list.\n- Plate face 35.2-36.4 -> 20.1-20.6 L*, -15.1 to -15.8 (lane table; my py/m1.py). That is more than twice the first amps' +6.5 miss, in the other direction.\n- The owner-set lens wanted the test to name FA123's plate (about 35.5) as the target.\n- stills-and-amp called a plate at L* 19-22 'black' (its -1.2 EV case) and suggested about 28-29.\n- In Ember, Haze and Poison the plate used to stand 7.9-9.7 L* lighter than its surround. It now sits 1.8-6.6 darker: Ember 20.1/23.1, Haze 20.1/21.9, Poison 20.2/26.8. Only hue separates it now, though it still reads in the thumbnails (.../v-thumbs-live-vs-A.png).\n\nIt does read as real anodized aluminium (texture and sheen hold; WebP no worse). But the owner should judge the plate itself beside live at 1:1 and at page size: .../c-dust-plate-top-FA-A.png, c-dust-plate-low-FA-A.png.",
+    "UNVERIFIED path depth. Rig A renders at bounces 16, glossy 8 and transmission 8 (render.py:268-272 defaults); the fronts and turns use 32/16/32.\n\nWith back-top off, all the light inside now comes through 20 mm acrylic, and render.py:269-270 warns that short paths render the edges of thick acrylic black. So part of the deep-inside fall-off the reviewer reads as shade (ratio 0.25-0.33), and the dimmer acrylic rims, may be truncation rather than physics.\n\nI saw no black edges at 1:1 (.../c-dust-topleft-FA-C1-A.png). One low-resolution Acid or Ice frame at 32/16/32 would settle it.",
+    "MINOR (1:1 only). The reviewer's 'lower blotch' partly measures lost lining texture, not only a cleaner render.\n- On the left slab, 1-3 px L* RMS falls from 0.263 to 0.146 in Fog and from 0.203 to 0.154 in Acid; 3-12 px falls from 0.740 to 0.368 in Fog and from 0.533 to 0.325 in Acid (py/m7.py).\n- At 2x, Fog's felt-like lining texture becomes smooth with soft mottling: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/skeptic-owners-eye/c-fog-slab-texture-2x-FA-C1-A.png.\n- Likely causes: frontal light and the tone curve's shoulder at L* 92. It does not show at page size."
+   ]
+  },
+  "skeptic:physics-and-faults": {
+   "verdicts": [
+    {
+     "id": "amp-strip-shadow-off-see-through-in-front-of-key",
+     "stands": true,
+     "severity_ok": false,
+     "reason": "The code and the geometry check out. The mechanism is only half right, and blocking is too high.\n\nCode (origin/r33-speaker-horn):\n- studio/engine/lights.py:101 says 'it casts no shadow'. Lines 165-167 send Backfacing to a Transparent BSDF. Line 179 sets visible_shadow = False with no condition. Line 183 sets the diffuse and glossy visibility.\n- light_c.real_bounces_and_panels only does L.update(diffuse=1.0, specular=1.0, camera=True).\n- The eight ampA shots differ only in the tint (skeptic-physics/diffshot.py).\n\nGeometry, rebuilt on my own (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/skeptic-physics/geom.py, centre taken from report.json):\n- Key centre (-1.775,-3.068,3.418). Strip centre (-1.178,-2.518,1.771), corners z 0.850-2.693. Plate centre (0.115,-0.170,0.510).\n- From the plate centre the strip covers 35.9% of the key's area and 43.4% of its irradiance on the plate face.\n- Over five plate-face points it covers 32.8-38.8% of the area and 39.6-47.0% of the irradiance.\n- The line from the plate to the key's centre meets the strip 0.806 m up its axis and 0.158 m off it.\n\nWhere the mechanism is right: light that arrives on shadow rays.\n- The plate face sits outside the acrylic. Mask id 12 (amp-plate-plate) is the first surface hit on 397,763 px (15.5%).\n- So the key reaches the plate face, and the studio floor, on shadow rays that pass through the strip.\n\nWhere it is wrong: the inside of the cabinet. That covers the lining and whatever the back-sheet, boss and side-panel points look onto.\n- With the shortcut cut, light 'crosses the acrylic only by refracting' (living_ext.no_glass_shadows). The acrylic is polished: bark roughness 0.05 in all eight flavours (barkhorn-cloud.json).\n- The key's light inside therefore travels on refracted rays. Light sampling gets almost no weight on such a narrow lobe.\n- The strip's front face is pure Emission and every ray type except shadow rays sees it, so it already stops those rays. The render already shades the key behind the strip in there.\n- The see-through back faces away from the product. No path that matters crosses it.\n\nSize. This is a model estimate, UNVERIFIED by a render (size.py, size2.py):\n- The key's direct diffuse on the plate face is 0.0112 scene-linear, of which 43.5% would be hidden.\n- The key-lit floor in the plate's satin gloss gives 0.0163, of which 28.7% would be hidden.\n- Together that is 11% of the plate face's 0.085, so about -2.7 L* on the plate face in every tint. The reviewer's 'about 2' is close.\n- The surround changes only through the back sheet's reflection of the floor: -0.2 L* (Fog) to -1.3 L* (Smoke). The lining does not change.\n- Cross-check: the key's whole share of the plate face is 0.039 from fix-acid-F1 against lt-acid-keyhalf, and 0.038 from alone-acid-key. The modelled paths (0.0275) fit inside it.\n\nSeverity: should-fix at most, not blocking.\n- The strip meets the coordinator's own 17:38 definition of a real light (real_bounces_and_panels: 'lighting and reflecting and seen by the camera').\n- Cycles lamps have no body either; lights.py calls its own lamps see-through.\n- Two rigs that 'as written cannot be built' were recorded as notes and went live: the S4b fronts (lamps through cards) and the horn-backs (softboxes through each other).\n- No shape, edge or artefact shows in the frames. A real studio gets this picture by moving the strip off the key's line.\n- Fix it in the next amp render; it is not a reason to hold A."
+    }
+   ],
+   "missed": [
+    "Where the missing shadow acts, and what a fix must clear. Script: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b97/skeptic-physics/floor.py. Numbers from size.py and size2.py, a model estimate UNVERIFIED by a render.\n- The strip's missing shadow matters only on the plate face and on the studio floor in front of the product.\n- Inside the cabinet the strip's front already stops the key, so one frame carries two rigs. The strip is solid for the lining and absent for the plate face and the floor.\n- On the floor, the strip hides more than 5% of the key over x -1.5 to 3.0 m and y -3.0 to 1.0 m.\n- That covers 28.7% of the key-lit floor the plate's satin gloss mirrors (20.7% at its mirror point, 1.61,-1.15,0).\n- It also covers 3,216 of 5,173 floor points the back sheet mirrors into frame.\n- So the reviewer's 'move it clear of the key's sight line' must clear those floor patches too, not only the line from the plate.\n- A real strip body would take about 2.7 L* off the plate face in all eight and 0.2-1.3 L* off the surround. The largest surround drops are Smoke, Haze and Ember.\n- In Smoke the plate-to-cabinet step would roughly halve: 2.8 to 1.4 in my measure (L* of mean luminance, plate face against back-sheet pixels).\n- The strip is the only mesh emitter in the light-C set. The fronts, turns and horn-backs use area lamps only, so this half-solid behaviour exists only in the amps.",
+    "The lane's per-lamp test renders do not add up. These are amp-test/alone-acid-*, at 400 px, 48 spp, denoised.\n- My conversion back to linear light (an inverse of the finish and of PBR Neutral) holds to 1% on the exposure-only pair g-acid-bt0.0-ev-0.2 and -0.8.\n- On that basis alone-acid-all is 34% above the sum of the seven single-lamp renders on the plate face, and 9% above it on the back.\n- Back-top alone gives the plate 0.051, against 0.110 by difference (fix-acid-F1 minus grid/A-acid at 0 EV).\n- So any lamp-share argument built on the alone renders is unreliable. Scripts: superpose.py, lintest.py.\n- This does not touch the full-size A frames. On rig A Ember, the 128 and 256 spp crops agree within 0.3%: back 0.0780 against 0.0778, plate 0.0687 against 0.0685.\n- It also does not touch the key share the reviewer used (F1 against keyhalf, 0.039), which agrees with alone-acid-key (0.038)."
+   ]
+  }
+ }
+}
