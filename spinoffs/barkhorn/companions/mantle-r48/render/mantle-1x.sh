@@ -2,6 +2,7 @@
 # Mantle at the speakers' dye, 1x (the owner, 2026-11-24, "Speakers dye"): the deck polished top and underside, satin outer
 # edge, nothing white; the physical light model on the house ground; then the emitter and hidden-mesh audits.
 #   LOAD=1 render/mantle-1x.sh VIEW TINT OUTDIR [SCALE SAMPLES]     VIEW: three-quarter | cover | top
+# COVER overrides the lid (default: as approved 2026-11-16; `solid` is the speakers' dye at 1x over 3 mm).
 # LOAD is the deck's dye as a share of the speakers' cabinets' loading: 1 (the default) or 0.1, whichever the owner picks.
 # Run from anywhere in the repo, on the system Python (python3.11 with bpy). Full size is SCALE 1 (1600 x 2000), 128 samples.
 set -u
@@ -11,7 +12,7 @@ mkdir -p "$out"; out=$(cd "$out" && pwd)
 declare -A CV=([ember]=solid [poison]=solid [haze]=solid [fog]=solid [dust]=solid-strong:2.25 [acid]=solid-strong:2.45 [ice]=solid-strong:3.05 [smoke]=solid-strong:4.30)
 case $view in
   three-quarter) A="$(cat $R/house.args)"; n=mantle-house-$c;;
-  cover)         A="$(cat $R/house.args) --cover ${CV[$c]} --cover-bounces 128"; n=mantle-house-$c-cover;;
+  cover)         A="$(cat $R/house.args) --cover ${COVER:-${CV[$c]}} --cover-bounces 128"; n=mantle-house-$c-cover${COVER:+-$COVER};;
   top)           A="$(cat $R/house-nocam.args) --house-cam 0 89.5 1.37 70 --house-aim 0 0 0.1"; n=mantle-house-$c-top;;
   *) echo "unknown view $view"; exit 2;;
 esac

@@ -226,6 +226,10 @@ def cover(kind=None):
     col = (cs.links[0].from_node.inputs['B'].default_value if cs.is_linked else cs.default_value)[:3]
     if kind == 'clear':
         k = 0.0                                         # water-clear: the Fresnel loss only
+    # (2026-11-24) the lid keeps its own loading whatever the deck's: --deck-load scales the deck's dye, and the lid reads
+    # its dye from the deck's material, so it is scaled back here
+    dl_ = float(sys.argv[sys.argv.index('--deck-load') + 1]) if '--deck-load' in sys.argv else 1.0
+    k = k / dl_ if dl_ > 0 else k
     T = [math.exp(-k * dens * (1 - c) * 0.003) for c in col]
     m = bpy.data.materials.new('cover-' + kind.replace(':', '-')); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     out = nt.nodes.new('ShaderNodeOutputMaterial'); mix = nt.nodes.new('ShaderNodeMixShader')
