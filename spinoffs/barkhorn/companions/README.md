@@ -374,7 +374,7 @@ They are built as fab-kit products (`crystal.py`, `dome_pendant.py`, `orb_table.
 **Dome, the pendant, with covers that swap by hand.**
 - **The cover:** the tinted dome, 200 across. A brass collar is bonded into its crown, with three L-slots in it.
 - **The catch:** three pins on the fixture's brass hub make a quarter-turn bayonet (30°). To take the cover off, lift
-  it 5 mm, turn it and lower it. To fit one, push it up, turn it until the spring plunger clicks into its dimple, and
+  it 7.5 to 8.5 mm (measured on the CAD, 2026-11-24; was written as 5), turn it and lower it. To fit one, push it up, turn it until the spring plunger clicks into its dimple, and
   let go. The cover's weight holds each pin up in a notch at the end of its slot, so a knock can't turn it off. That
   is more secure than a magnet over a bar, and it needs no tools.
 - **What stays up:** the COB (2700 K, 22 mm up a 46 mm bore, a cut-off of about 46°), the hub, the cord and the driver

@@ -2,11 +2,11 @@ LAMP_MOVE key at [-0.2167, -0.2582, 0.6448] aim [-0.25, 0.0, 0.45] W 1.131
 LAMP_MOVE wall_left at [-1.2, 0.1, 1.35] aim [-1.6, 1.1, 1.09] W 8.194
 LAMPK house-wall_left 1.2
 LAMPK house-key 1.08
-ROOM_FIT 11.36 -4.5 6.07 9.68
+ROOM_FIT 11.36 -7.71 6.07 9.68
 HOUSE_CAM [0.693, -1.442, 0.405, 0.0, 0.0, 0.405, 200.0]
 HEMI_TOP today meshes out-dome-pendant: clamp crown gland
 AUDIT house-dome-red hidden ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] no-shadow ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] lights [('house-key', 'AREA', 1.222), ('house-fill', 'AREA', 3.176), ('house-kick', 'AREA', 0.78), ('house-horn', 'AREA', 4.691), ('house-bg-left', 'AREA', 3.41), ('house-bg-right', 'AREA', 1.319), ('house-wall_left', 'AREA', 11.406), ('house-bg-high', 'AREA', 2.165), ('house-wall-ll', 'AREA', 0.572), ('led-red-0', 'AREA', 0.0), ('led-red-1', 'AREA', 0.0), ('led-red-2', 'AREA', 0.0), ('led-red-3', 'AREA', 0.0), ('led-red-4', 'AREA', 0.0), ('led-red-5', 'AREA', 0.0), ('led-red-6', 'AREA', 0.0), ('led-red-7', 'AREA', 0.0), ('led-red-8', 'AREA', 0.0), ('led-red-9', 'AREA', 0.0), ('led-red-10', 'AREA', 0.0), ('led-red-11', 'AREA', 0.0), ('led-red-12', 'AREA', 0.0), ('led-red-13', 'AREA', 0.0), ('led-red-14', 'AREA', 0.0), ('led-red-15', 'AREA', 0.0), ('led-red-16', 'AREA', 0.0), ('led-red-17', 'AREA', 0.0), ('led-red-18', 'AREA', 0.0), ('led-red-19', 'AREA', 0.0), ('led-red-20', 'AREA', 0.0), ('led-red-21', 'AREA', 0.0), ('led-red-22', 'AREA', 0.0), ('led-red-23', 'AREA', 0.0)]
-HIDDENCAST house-dome-red: 22 hidden, 2 in frame
+HIDDENCAST house-dome-red: 22 hidden, 1 in frame
    out         0.0 %  area lamp (rectangle) house-key
    out         0.0 %  hidden mesh house-key-face
    out         0.0 %  hidden mesh house-key-housing
@@ -28,7 +28,7 @@ HIDDENCAST house-dome-red: 22 hidden, 2 in frame
    out         0.0 %  hidden mesh room-right
    IN FRAME  100.0 %  hidden mesh room-back
    out         0.0 %  hidden mesh room-ceiling
-   IN FRAME  100.0 %  hidden mesh room-front
+   out         0.0 %  hidden mesh room-front
 RAYVIS MESH sweep camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
 RAYVIS LIGHT house-key camera=0 diffuse=1 glossy=0 transmission=0 volume_scatter=1 shadow=1
 RAYVIS MESH house-key-face camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
@@ -103,4 +103,4 @@ RAYVIS LIGHT led-red-20 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatte
 RAYVIS LIGHT led-red-21 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
 RAYVIS LIGHT led-red-22 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
 RAYVIS LIGHT led-red-23 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
-CASTCHECK house-dome-red {'house-key': 0.0, 'house-key-face': 0.0, 'house-key-housing': 0.0, 'house-fill': 0.0, 'house-fill-face': 0.0, 'house-fill-housing': 0.0, 'house-kick': 0.0, 'house-kick-face': 0.0, 'house-kick-housing': 0.0, 'house-horn': 0.0, 'house-horn-face': 0.0, 'house-horn-housing': 0.0, 'house-bg-left': 0.0, 'house-bg-right': 0.0, 'house-wall_left': 0.0, 'house-bg-high': 0.0, 'house-wall-ll': 0.0, 'room-left': 0.0, 'room-right': 0.0, 'room-back': 0.0, 'room-ceiling': 0.0, 'room-front': 100.0}
+CASTCHECK house-dome-red {'house-key': 0.0, 'house-key-face': 0.0, 'house-key-housing': 0.0, 'house-fill': 0.0, 'house-fill-face': 0.0, 'house-fill-housing': 0.0, 'house-kick': 0.0, 'house-kick-face': 0.0, 'house-kick-housing': 0.0, 'house-horn': 0.0, 'house-horn-face': 0.0, 'house-horn-housing': 0.0, 'house-bg-left': 0.0, 'house-bg-right': 0.0, 'house-wall_left': 0.0, 'house-bg-high': 0.0, 'house-wall-ll': 0.0, 'room-left': 0.0, 'room-right': 0.0, 'room-back': 0.0, 'room-ceiling': 0.0, 'room-front': 0.0}

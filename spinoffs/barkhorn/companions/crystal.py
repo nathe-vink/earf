@@ -5,7 +5,7 @@ within the acrylic as in round 32c (study.py): tint, frost, tint; nothing white 
 
 Dome, the pendant. A tinted dome 200 across is a cover that comes off by hand. A black anodised collar is bonded into its crown,
 and three L-slots in the collar take three pins on the fixture's black anodised hub: a quarter-turn bayonet (30 degrees here).
-Lifted 5 mm, turned and lowered, the cover hangs with each pin up in a notch at the end of its slot, so its own weight
+Lifted 7.5 to 8.5 mm (measured on the CAD, 2026-11-24; was written as 5), turned and lowered, the cover hangs with each pin up in a notch at the end of its slot, so its own weight
 locks it. It can't turn out unless it is first pushed up, and a spring plunger in the hub clicks into a dimple in the
 collar as a detent. The COB (2700 K, recessed 22 up a 46 bore: a cut-off about 46 deg from the vertical), the hub, the
 cord and the driver in the canopy stay on the fixture, so a cover is never a live part and the listing (UL 1598) covers
@@ -201,7 +201,9 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
 # collar's lip Ø96 x 3, the crown Ø80 x 11.5, the gland Ø40 x 14 (steps 12 at the band, then 8, 16, 40).
 # The rules the redraw keeps: (1) every fixture part from the collar's top to 9.5 above it (the lift, 8.5, and 1) stays
 # inside the collar's Ø82 bore, so the crown's first tier is Ø80 (as today); (2) the clamp ring is Ø104 (the M96 thread);
-# so the steps are 24, and (3) the band on the shade joins the rhythm, its rim Ø128 (was Ø116; flange_r 58 to 64);
+# so the steps are 24; (3) the band on the shade (Ø116, as today) TAPERED, 5 thick at the clamp ring to a 1.0 land at its
+# rim, so it reads as the foot of the stack, not a step (the coordinator, 05:49: taper, don't widen; its face on the
+# acrylic and the silicone are today's, and it bends 0.24 um under 0.5 MPa against today's 0.11);
 # (4) the collar rises flush with the clamp ring's top (0.5 proud, for the squeeze), its slots' entries with it, so there
 # is no recess and the clamp ring is plain M96 its full height, nothing for it to bottom on but the gasket;
 # (5) the white under the hub split so the shade comes off (WHITE_SPLIT); (6) a cord grip modeled under the gland (GRIP).
@@ -209,8 +211,8 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
 # B: four tiers, 8.5 each: the clamp ring Ø104, the crown in two, Ø80 and Ø56, the gland Ø32.
 # Each entry (diameter, z0, z1) in the cover's frame; 'top' the collar's top, the clamp ring's 0.5 under it.
 TOP_TIERS = {
-    'A': dict(top=103.33, clamp=104.0, band_r=64.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0)),
-    'B': dict(top=100.5, clamp=104.0, band_r=64.0, crown=[(80.0, 100.5, 109.0), (56.0, 109.0, 117.5)], gland=(32.0, 117.5, 126.0)),
+    'A': dict(top=103.33, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0)),
+    'B': dict(top=100.5, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 109.0), (56.0, 109.0, 117.5)], gland=(32.0, 117.5, 126.0)),
 }
 # The cord grip (modeled since the redraw): an M12 x 1.5 nylon cord grip for a 3 to 6.5 cord, its 8 of thread in the crown
 # (104.5 to 112.5), its hex (17 across corners, 4 tall) and dome (Ø18, 7 tall) in a Ø22 pocket under the gland's 1.5 lid
@@ -285,7 +287,17 @@ def cover_parts(p=N):
         # bore the M96 thread its full height (no shoulder: it bottoms on nothing but the silicone), its top edge eased 1.0;
         # its band on the shade out to the tier's rim (Ø128)
         ring_ = eased(tt_['clamp'], 92.0, cz1 - 0.5, 1.0, bottom=False) - cyl('z', (0, 0), co, 80, 110)
-        clamp = (_sphere_band(R + 6.0, R + 1.0, co / 2, fr) - cyl('z', (0, 0), co, 80, 110)) + ring_
+        band_ = _sphere_band(R + 6.0, R + 1.0, co / 2, fr) - cyl('z', (0, 0), co, 80, 110)
+        if tt_.get('taper'):
+            # the taper: everything above the line from the band's outer edge at the clamp ring's foot (r 52, on R+6) to
+            # the land at its rim (r = fr, on R+1+land) cut away, as a turned cone
+            from build123d import Polyline, make_face, revolve, Axis, Plane
+            r0_, r1_ = tt_['clamp'] / 2, fr
+            z0_ = math.sqrt((R + 6.0) ** 2 - r0_ ** 2); z1_ = math.sqrt((R + 1.0 + tt_['taper']) ** 2 - r1_ ** 2)
+            sl_ = (z1_ - z0_) / (r1_ - r0_); r2_ = r1_ + 4.0
+            prof_ = make_face(Polyline((r0_, 0, z0_), (r2_, 0, z0_ + sl_ * (r2_ - r0_)), (r2_, 0, z0_ + 40), (r0_, 0, z0_ + 40), close=True))
+            band_ = band_ - revolve(prof_, Axis.Z)
+        clamp = band_ + ring_
     note_formed = ('drape-formed from cast sheet over an aluminium mould, trimmed and polished; the prototypes are formed on '
                    'the production moulds')
     if p.get('build') == 'v3':
@@ -898,7 +910,7 @@ NOTES_DOME = [
     'the canopy and the UL 1598 path stay. Without a lens until a stock side-emitting ring optic with an IES file is '
     'named. Heat test needed: the hub about 6 K warmer than today (estimate). The notes below describe the COB build.',
     'Hemisphere (the Dome until round 35; Hemisphere North in rounds 35 to 37): the shade hangs mouth down. Its shades '
-    'swap by hand: lift the shade 5 mm, turn it 30 degrees and lower it off. To fit one, line up the three slots, push '
+    'swap by hand: lift the shade 7.5 to 8.5 mm, turn it 30 degrees and lower it off. To fit one, line up the three slots, push '
     'up, turn until the plunger clicks, and let go: its weight holds each pin up in its notch, so a knock cannot turn '
     'it off. No tools, and the shade is never live (the COB, the hub and the driver stay up).',
     'The shade is clamped, not hung on a glue joint: the collar\'s flange sits under the crown inside, a ring screws down '

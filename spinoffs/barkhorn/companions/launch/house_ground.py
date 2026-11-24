@@ -598,6 +598,8 @@ def room(bpy, s, fit=False):
                 pts_ += [m_ @ Vector((a_ * w_, b_ * h_, 0)) for a_ in (-1, 1) for b_ in (-1, 1)]
             elif o_.type == 'LIGHT':
                 pts_.append(o_.location.copy())
+        if os.environ.get('HOUSE_CAM'):              # a camera placed outside the room: the room round it too
+            pts_.append(Vector([float(x_) for x_ in os.environ['HOUSE_CAM'].split(',')[:3]]))
         if pts_:
             X = max(X, max(abs(p_.x) for p_ in pts_) / s + 0.5); Yf = min(Yf, min(p_.y for p_ in pts_) / s - 0.5)
             Yb = max(Yb, max(p_.y for p_ in pts_) / s + 0.5); Z = max(Z, max(p_.z for p_ in pts_) / s + 0.5)
