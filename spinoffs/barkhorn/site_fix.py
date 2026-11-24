@@ -1539,10 +1539,16 @@ def fix_12(p, web):
   .hs-hero .hero-photo { aspect-ratio: auto !important; height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) }
   .hs-hero .hero-photo img { object-position: 50% 35% }
 }
-/* C6d (11): a square window: the row on the picture, as wide as the picture (C5's look) */
-@media (aspect-ratio: 1/1) { .hero-names { align-self: center; width: min(100%, calc((100svh - 384px) * 0.8)) } }
-@media (aspect-ratio: 1/1) and (max-width: 559px) { .hero-names { width: min(100%, calc((100svh - 356px) * 0.8)) } }
-@media (aspect-ratio: 1/1) and (max-width: 359px) { .hero-names { width: min(100%, calc((100svh - 416px) * 0.8)) } }
+/* C6e-1: a square window: the row under the picture (no name over a product), the picture as large as live's (C5's 330 and 290) */
+@media (aspect-ratio: 1/1) and (min-width: 560px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100svh - 330px) * 0.8)) !important } }
+@media (aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100svh - 290px) * 0.8)) !important } }
+/* below 560 a square keeps the line and buttons on the first screen with C5's compact one-line row, not the phone's 2 x 2 grid */
+@media (aspect-ratio: 1/1) and (max-width: 559px) {
+  .hero-names { display: block; font-size: 14px; padding: 4px 8px 0 }
+  .hero-names .hn { display: inline } .hero-names .hn > span { display: inline; margin-inline: 3px }
+  .hero-names a { display: inline-block; min-height: 0; padding: 11px 0 }
+  .hs-hero .hero-more { padding-top: 12px }
+}
 /* C6d (9): in a landscape window the headline's column is the middle third: below ~650 px wide the headline shrinks to fit it */
 @media (min-aspect-ratio: 1001/1000) { .hs-hero .hero-title h1 { font-size: min(clamp(28px, 3.3vw, 52px), 4.3vw) !important } }
 /* C6d (10): a small landscape window keeps C5's one line at the picture's foot */
@@ -1553,14 +1559,14 @@ def fix_12(p, web):
   .hero-names { position: static; order: 2; background: none; color: #1C1A18; text-shadow: none; padding: 6px 16px 0; pointer-events: auto; margin-top: 0 }
   .hs-hero .hero-title { order: 0 } .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 3 }
 }
-@media (max-aspect-ratio: 1/1) and (max-width: 559px) {
+@media (max-aspect-ratio: 999/1000) and (max-width: 559px) {   /* the phone grid upright; a square (below 560 no window lies between 999/1000 and 1) keeps the one-line row */
   .hero-names { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; padding: 4px 16px 0; font-size: 15px }
   .hs-hero .hero-more { padding-top: 12px }
   .hero-names .hn { display: contents } .hero-names .hn > span { display: none }
   .hero-names a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 4px; text-align: center }
 }
-/* C6d (17): the stacked landscape layout and squares, after the portrait rules (a square matches both) */
-@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (min-height: 641px), (aspect-ratio: 1/1) {
+/* C6d (17), C6e-1: the stacked landscape layout, after the portrait rules; a square is not landscape (it takes the portrait rules) */
+@media (min-aspect-ratio: 1001/1000) and (max-width: 960px) and (min-height: 641px) {
   .hero-names { position: relative; bottom: auto; order: 1; height: 0; padding: 0 16px; background: none; color: #F4F1EC; text-shadow: 0 1px 2px rgb(0 0 0 / .6); display: flex; flex-wrap: wrap;
     justify-content: center; align-content: flex-end; translate: 0 -6px; margin-top: 0; pointer-events: none }
   .hero-names a { display: inline-block; min-height: 0; padding: 11px 0 }
