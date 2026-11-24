@@ -1,0 +1,12 @@
+NO GLASS SHADOWS: 6 materials: ['bark@cloud-blue', 'bark@cloud-blue.001', 'clear-cast@cloud-blue', 'horn-formed@cloud-blue', 'horn-lot@cloud-blue', 'horn-satin@cloud-blue']
+00:25.907  cycles           | WARNING CUEW initialization failed: Error opening the library
+15:53.886  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c/s4/front-ice-s4b.png'
+/home/user/earf/studio/engine/render.py:478: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+16:02.233  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c/s4/front-ice-s4b.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:529: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+16:03.664  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c/s4/front-ice-s4b.swatch.png'
+finish: white 236 -> 236 (gain 1.0), contrast 0.2, clarity 0.05, sharpen 0.3 at 0.7 px
+renders/2026-11-24/barkhorn/light-c/s4/front-ice-s4b.png  {'build': 25.6, 'render': 928.0}  samples 96
