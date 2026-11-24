@@ -35,7 +35,8 @@ case $N in
 esac
 [ -s $D/audit/$N.txt ] || { env $E ${FL:+"$FL"} AUDIT=1 MASK=$S/m.png python3.11 lamp_site.py $f --scale $SC > $S/$N.aud 2>&1 && \
     grep -E "^AUDIT|HIDDENCAST|CASTCHECK|^   (IN FRAME|in|out|practical) |^RAYVIS|^LINK|KEY_AIM|KEYFLAG_REAL|CUT_REAL|ROOM_FIT" $S/$N.aud > $D/audit/$N.txt; }
-grep -o "CASTCHECK.*" $D/audit/$N.txt | tr ',' '\n' | grep -v " 0.0" | sed "s/^/$N castcheck NOT ZERO: /" || echo "$N castcheck all 0.0"
+nz_=$(grep -o "CASTCHECK.*" $D/audit/$N.txt | tr ',' '\n' | grep -v " 0.0" || true)
+[ -n "$nz_" ] && echo "$nz_" | sed "s/^/$N castcheck NOT ZERO: /" || echo "$N castcheck all 0.0"   # (the Smoke helper's catch: sed's status hid the echo)
 if [ ! -s $D/$N.png ]; then
   t0=$(date +%s)
   env $E ${FL:+"$FL"} ${B:+BORDER=$B} EXR=0 DENOISE=1 LAMP_OUT=$S/$N-raw.png python3.11 lamp_site.py $f --samples $SP --scale $SC > $S/$N.log 2>&1

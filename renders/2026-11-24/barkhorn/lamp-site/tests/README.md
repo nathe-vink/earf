@@ -39,3 +39,24 @@ hb1-3 and hc carry HOUSE_ROOM_FIT and wall_left lifted, so their audits can read
 - The same holds for every tint: Fog's 2700 K reads h 70.5 C 51 (a flat 2700 K emitter under the house WB: h 73 C 47).
 - A fix is a camera choice, not a lamp one: the LIT frames at the 15 Nov rows' 4000 K (or per lamp) white balance, the
   studio's own light corrected to stay neutral on the paper. That changes every LIT frame; not tested here.
+
+## Results (Ember; half scale unless noted; corners L*, shade/ball "whole" L*/C*)
+
+| Test | CASTCHECK | TL | TR | ML | MR | LL | BR | Product |
+|---|---|---|---|---|---|---|---|---|
+| h0 pass as rendered | key flag 18.7, wall_left 5.45 | 83.9 | 93.1 | 84.0 | 92.4 | 96.5 | 88.3 | shade 37.4/67.1 |
+| hc wall_left lifted, room fitted | key flag 18.7 (kept on purpose) | 79.9 | 92.8 | 78.9 | 90.9 | 96.5 | 87.8 | shade 36.9/66.2 |
+| hb1 key aim +0.5 up-left, no flag | all 0.0 | 79.9 | 92.9 | 78.9 | 95.9 | 96.5 | 86.7 | shade 36.4/66.9 |
+| hb2 key aim +1.0 up-left, no flag | all 0.0 | 85.4 | 92.7 | 85.2 | 88.6 | 96.5 | 83.5 | shade 35.0/65.8 |
+| hb3 real flag 0.12 m off the key | all 0.0 | 79.9 | 92.9 | 78.7 | 91.2 | 96.4 | 94.9 | shade 37.1/66.5; the flag shows as a dark notch in the shade's upper-left highlight |
+| d0 Core OFF as now | floorcard 30.09 | 82.3 | 93.1 | 88.5 | 93.3 | 92.8 | 89.6 | base 154/32/29, L* 33.9 C* 58.2; floor left 96.2, front 89.2 |
+| d1 no ring | all 0.0 | 81.6 | 93.0 | 88.4 | 93.2 | 92.8 | 89.5 | base 143/24/22, L* 30.6 C* 56.8; floor as d0 |
+| d2 no ring, real cutters | all 0.0 | 81.5 | 93.0 | 88.4 | 93.2 | 85.2 | 86.4 | base 96/8/7, L* 18.7 C* 45.0; floor front 82.5; the horn cutter cuts the ball's top highlight |
+
+hb1-3 carry hc's wall_left lift and room, so their TL/ML are hc's. hb1-3, d0-2 rendered by the Smoke helper (1fed05ae).
+
+(e), full scale, 512 spp, crops beside the pass's own C and D (softboxes unseen):
+- e1 pendant: thin outlines of the softboxes on the glow (a rectangle low on it, arcs higher), at about the grain's
+  amplitude per pixel, plain in a high-pass; none in pass C.
+- e2 Core: the softbox's reflection is a visible pale panel on the ball's glow, and three softbox outlines read as seams
+  in a high-pass; none in pass D.
