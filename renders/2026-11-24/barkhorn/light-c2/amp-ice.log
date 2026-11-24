@@ -1,0 +1,13 @@
+NO GLASS SHADOWS: 6 materials: ['bark@cloud-blue', 'bark@cloud-blue.001', 'clear-cast@cloud-blue', 'horn-formed@cloud-blue', 'horn-lot@cloud-blue', 'horn-satin@cloud-blue']
+SHADOW RAY LINKS LEFT: 0 []
+00:26.793  cycles           | WARNING CUEW initialization failed: Error opening the library
+55:45.436  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/amp-ice.png'
+/home/user/earf/studio/engine/render.py:480: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+55:51.165  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/amp-ice.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:531: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+55:53.168  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/amp-ice.swatch.png'
+finish: white 235 -> 238 (gain 1.0128), contrast 0.1, clarity 0.03, sharpen 0.12 at 0.7 px
+renders/2026-11-24/barkhorn/light-c2/amp-ice.png  {'build': 26.4, 'render': 3318.6}  samples 128
