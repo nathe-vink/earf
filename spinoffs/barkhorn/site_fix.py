@@ -361,7 +361,7 @@ def names_row(pic):
     order = list(dict.fromkeys(r for r, _ in BAR_NAMES[pic]))
     items = sorted(BAR_NAMES[pic], key=lambda rk: (order.index(rk[0]), KEYS.index(rk[1])))
     links = [f'<a href="#{r}-{NAMES[k]}">{PNAME[r]} in {CNAME[k]}</a>' for r, k in items]
-    return links[0] + ''.join(f' <span class="hn"><span aria-hidden="true">&middot;</span> {a}</span>' for a in links[1:])
+    return links[0] + ''.join(f'<span class="hn"><span aria-hidden="true">&middot;</span>{a}</span>' for a in links[1:])
 
 
 def finish_1b(web):
@@ -1516,7 +1516,11 @@ def fix_12(p, web):
 @media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 356px) * 0.8)) !important; width: min(100%, calc((100svh - 356px) * 0.8)) !important } }
 @media (max-aspect-ratio: 1/1) and (max-width: 359px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 416px) * 0.8)) !important; width: min(100%, calc((100svh - 416px) * 0.8)) !important } }
 @media (max-aspect-ratio: 1/1) and (min-width: 560px) {
-  .hs-hero .hero-pic > .hero-photo, .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, calc((100vh - 384px) * 0.8)) !important; width: min(100%, calc((100svh - 384px) * 0.8)) !important }
+  .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 384px) * 0.8)) !important; width: min(100%, calc((100svh - 384px) * 0.8)) !important }
+  /* C6d (8, 9): the headline's and the line's column at least 560 px (or the window less its margins): the headline is never
+     clipped and the line keeps to two lines with the buttons side by side */
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100% - 32px, max(calc((100vh - 384px) * 0.8), 560px)) !important;
+    width: min(100% - 32px, max(calc((100svh - 384px) * 0.8), 560px)) !important; box-sizing: border-box }
 }
 /* C5 (10), C6 (1, 2), C6c (3, 4, 8): the hero's names row. Wide, and the stacked landscape layout (to 960, over 640 tall): on the
    picture's bottom edge, on a dark veil, as in C5; the wide picture is capped at the window less the header (cropped a little
@@ -1530,24 +1534,39 @@ def fix_12(p, web):
 .hero-names a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px }
 .hero-names .hn { white-space: nowrap }
 .hero-names .hn > span { margin-inline: 6px; opacity: .8 }
+.hero-names .hn.lead > span[aria-hidden] { visibility: hidden }      /* C6d (3): no line of the hero's row starts with a dot (marked by LEAD_DOTS_JS) */
 @media (min-aspect-ratio: 1001/1000) and (min-height: 600px) {
-  .hs-hero .hero-photo { aspect-ratio: auto !important; height: clamp(calc(56.25vw * .88), calc(100vh - var(--header) - 2px), 56.25vw);
-    height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) }
+  .hs-hero .hero-photo { aspect-ratio: auto !important; height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) }
   .hs-hero .hero-photo img { object-position: 50% 35% }
 }
-@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (min-height: 641px), (aspect-ratio: 1/1) {
-  .hero-names { position: relative; bottom: auto; order: 1; margin-top: -90px }
-  .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 2 }
-}
-@media (max-aspect-ratio: 999/1000) {
+/* C6d (11): a square window: the row on the picture, as wide as the picture (C5's look) */
+@media (aspect-ratio: 1/1) { .hero-names { align-self: center; width: min(100%, calc((100svh - 384px) * 0.8)) } }
+@media (aspect-ratio: 1/1) and (max-width: 559px) { .hero-names { width: min(100%, calc((100svh - 356px) * 0.8)) } }
+@media (aspect-ratio: 1/1) and (max-width: 359px) { .hero-names { width: min(100%, calc((100svh - 416px) * 0.8)) } }
+/* C6d (9): in a landscape window the headline's column is the middle third: below ~650 px wide the headline shrinks to fit it */
+@media (min-aspect-ratio: 1001/1000) { .hs-hero .hero-title h1 { font-size: min(clamp(28px, 3.3vw, 52px), 4.3vw) !important } }
+/* C6d (10): a small landscape window keeps C5's one line at the picture's foot */
+@media (min-aspect-ratio: 1001/1000) and (max-width: 560px) { .hero-names { font-size: 14px; padding: 36px 8px 4px } .hero-names .hn > span { margin-inline: 3px } }
+/* below 500 wide it would take two lines over the Cores and the Mantle: there it sits under the picture, in ink */
+@media (min-aspect-ratio: 1001/1000) and (max-width: 499px) { .hero-names { position: static; background: none; color: #1C1A18; text-shadow: none; padding: 4px 8px 0 } }
+@media (max-aspect-ratio: 1/1) {
   .hero-names { position: static; order: 2; background: none; color: #1C1A18; text-shadow: none; padding: 6px 16px 0; pointer-events: auto; margin-top: 0 }
   .hs-hero .hero-title { order: 0 } .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 3 }
 }
-@media (max-aspect-ratio: 999/1000) and (max-width: 559px) {
+@media (max-aspect-ratio: 1/1) and (max-width: 559px) {
   .hero-names { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; padding: 4px 16px 0; font-size: 15px }
   .hs-hero .hero-more { padding-top: 12px }
   .hero-names .hn { display: contents } .hero-names .hn > span { display: none }
   .hero-names a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 4px; text-align: center }
+}
+/* C6d (17): the stacked landscape layout and squares, after the portrait rules (a square matches both) */
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (min-height: 641px), (aspect-ratio: 1/1) {
+  .hero-names { position: relative; bottom: auto; order: 1; height: 0; padding: 0 16px; background: none; color: #F4F1EC; text-shadow: 0 1px 2px rgb(0 0 0 / .6); display: flex; flex-wrap: wrap;
+    justify-content: center; align-content: flex-end; translate: 0 -6px; margin-top: 0; pointer-events: none }
+  .hero-names a { display: inline-block; min-height: 0; padding: 11px 0 }
+  .hero-names .hn { display: inline } .hero-names .hn > span { display: inline }
+  .hero-names::before { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 110px; background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%); z-index: -1; pointer-events: none }
+  .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 2 }
 }
 """)
 
@@ -1613,8 +1632,11 @@ def fix_14(p, web):
     anchor = "const nr = NAMEROWS[(s.src || '').split('/').pop()]; if (nr) { e.innerHTML = nr; e.hidden = false; }"
     _sub_any(p, anchor, "const nr = NAMEROWS[(s.src || '').split('/').pop()];\n"
              "    { const r = document.getElementById('namerow'), self = `#${P.route}-${c.name.toLowerCase()}`; r.innerHTML = nr || ''; r.hidden = !nr;\n"
-             "      r.querySelectorAll('a').forEach(a => { if (a.getAttribute('href') === self) { const b = document.createElement('span'); b.className = 'self'; b.textContent = a.textContent; a.replaceWith(b); } }); }\n"
+             "      r.querySelectorAll('a').forEach(a => { if (a.getAttribute('href') === self) { const b = document.createElement('span'); b.className = 'self'; b.textContent = a.textContent; a.replaceWith(b); } });\n"
+             "      if (nr && !r.querySelector('a')) { r.innerHTML = ''; r.hidden = true; }      // C6d (18): only the page's own name: no row (its picture says it)\n"
+             "      }\n"
              "    if (nr) { }")
+    _sub_any(p, "    if (nr) { }\n    else if (s.shown && !e.textContent)", "    if (!nr && s.shown && !e.textContent)")
     # C6c (7): an ask under the sticky header is not on screen: the bar's watch starts below the header
     _sub_any(p, "bar.classList.toggle('off', seen.size > 0); });",
              "bar.classList.toggle('off', seen.size > 0); }, { rootMargin: `-${(document.querySelector('header.top') || {}).offsetHeight || 0}px 0px 0px 0px` });")
@@ -1622,17 +1644,24 @@ def fix_14(p, web):
     # its thumbnails or the color dots lie in its strip, so on arrival it covers none of them
     _sub_any(p, "document.getElementById('p-copy').addEventListener('click', () => {",
              "{ const bar = document.querySelector('#pdp .ask-bar'), mq = matchMedia('(min-width: 701px) and (max-width: 860px), (min-width: 701px) and (max-height: 500px)');\n"
-             "  const check = () => { if (!mq.matches || document.getElementById('pdp').hidden) { bar.classList.remove('wait'); return; }\n"
-             "    const top = innerHeight - bar.offsetHeight - 4;\n"
-             "    bar.classList.toggle('wait', [...document.querySelectorAll('#pdp .gallery .nav, #pdp .gallery .count, #thumbs, #swatches')].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.bottom > top && q.top < innerHeight; })); };\n"
+             "  const ph = matchMedia('(max-width: 700px)');      // C6d: a phone's bar waits for the gallery's controls (not the dots, as on C5)\n"
+             "  const check = () => { if (!(mq.matches || ph.matches) || document.getElementById('pdp').hidden) { bar.classList.remove('wait'); return; }\n"
+             "    const top = innerHeight - bar.offsetHeight - 4, R = s => { const e = document.querySelector(s); return e ? e.getBoundingClientRect() : null; };\n"
+             "    const over = [...document.querySelectorAll(ph.matches ? '#pdp .gallery .nav, #pdp .gallery .count, #thumbs' : '#pdp .gallery .nav, #pdp .gallery .count, #thumbs, #namerow, #swatches')].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.bottom > top && q.top < innerHeight; });\n"
+             "    // C6d (7): from 701, once the dots reach the bar's strip it stays back until the inline ask is on screen (then it is off)\n"
+             "    // (once it waits, it keeps waiting while the dots are close below, so it does not come up for a moment in between)\n"
+             "    const dots = R('#swatches'), ask = R('#p-enquire'); const between = !ph.matches && dots && ask && ask.top >= innerHeight && (dots.top < innerHeight || (bar.classList.contains('wait') && dots.top < innerHeight + 160));\n"
+             "    bar.classList.toggle('wait', over || between); };\n"
              "  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); addEventListener('hashchange', () => setTimeout(check, 60));\n"
+             "  new ResizeObserver(check).observe(document.querySelector('#pdp .gallery'));      // C6d (6): after every view change\n"
              "  addEventListener('load', check); setTimeout(check, 0); setTimeout(check, 400);\n"
              "  // focus never behind the bar: keyboard focus only (a tap or a click must land where it was aimed), on a product page\n"
              "  // shown, with the bar drawn and up, and only by the element's real overlap with it\n"
              "  let keyed = false; document.addEventListener('keydown', () => { keyed = true; }, true); document.addEventListener('pointerdown', () => { keyed = false; }, true);\n"
              "  document.addEventListener('focusin', e => { const a = e.target; if (!keyed || !a.getBoundingClientRect || bar.contains(a) || document.getElementById('pdp').hidden || !document.getElementById('pdp').contains(a)) return;\n"
              "    const bs = getComputedStyle(bar), b = bar.getBoundingClientRect(); if (bs.display === 'none' || bs.visibility === 'hidden' || b.height < 1 || b.top >= innerHeight || bar.classList.contains('off') || bar.classList.contains('wait')) return;\n"
-             "    const r = a.getBoundingClientRect(); if (r.height > 0 && r.bottom > b.top && r.top < b.bottom) scrollBy(0, r.bottom - b.top + 8); }); }\n"
+             "    if (a.matches('main, section, article, [tabindex=\"-1\"]')) return;      // C6d (13): a skip link's target is not a control\n"
+             "    const r = a.getBoundingClientRect(); if (r.height > 0 && r.height < innerHeight / 2 && r.bottom > b.top && r.top < b.bottom) scrollBy(0, r.bottom - b.top + 8); }); }\n"
              "document.getElementById('p-copy').addEventListener('click', () => {")
     p.css("""
 /* C6c (1, 6): the names row under the thumbnail strip: wrapped, each name 44 px tall, the dots kept with the name after */
@@ -1641,7 +1670,14 @@ def fix_14(p, web):
 .namerow a, .namerow .self, .lt-room .names a { display: inline-block !important; padding-block: 11px !important }
 .namerow .self { color: var(--ink) }
 .namerow .hn, .lt-room .names .hn { white-space: nowrap }
-.namerow .hn > span[aria-hidden], .lt-room .names .hn > span[aria-hidden] { margin-inline: 6px; color: var(--muted) }
+/* C6d (3, 4): each dot an 18 px box on its name's left; the row is shifted left by one box and clipped at its own edge, so a
+   dot that would open a line falls outside; no line starts or ends on one. The row's width is live's (it sizes /lighting's column) */
+.namerow, .lt-room .names { display: flex !important; flex-wrap: wrap; align-items: center; margin-left: -18px !important; clip-path: inset(-6px -6px -6px 18px) }
+.namerow > :first-child, .lt-room .names > :first-child { margin-left: 18px }
+.namerow .hn > span[aria-hidden], .lt-room .names .hn > span[aria-hidden] { display: inline-block; width: 18px; text-align: center; color: var(--muted) }
+/* /lighting: the row no longer sizes the picture's column; the column keeps live's width, the one-line row's 591 px */
+.lt-room .names { contain: inline-size }
+@media (min-width: 861px) { .lt-room { width: 591px; max-width: 100% } }
 .lt-room .names { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; height: auto !important; line-height: 22px !important }
 /* C6 (10): the family chips fit at every width: four to a row from 480, three from 363 (widest chip 104 px, 331 px a row),
    two below that; never wider than the column, so the page never pans sideways */
@@ -1661,8 +1697,24 @@ def fix_14(p, web):
   html { scroll-padding-bottom: 84px }
   .ask-bar { transition: transform .2s ease } .ask-bar.off, .ask-bar.wait { transform: translateY(110%); visibility: hidden }
 }
-@media (min-width: 701px) and (max-width: 860px) and (min-height: 501px) { :root { --cap: calc(100svh - 390px) } }   /* C5's 222, the bar's 72, the thumbnails and their gap 88, 8 to spare */
+@media (max-width: 700px) { .ask-bar.wait { transform: translateY(110%); visibility: hidden } }
+@media (min-width: 701px) and (max-width: 860px) and (orientation: portrait) { :root { --cap: calc(100svh - 390px) } }   /* C6d (5): portrait only */   /* C5's 222, the bar's 72, the thumbnails and their gap 88, 8 to spare */
 """)
+
+
+LEAD_DOTS_JS = """<script>(function () {   // C6d (3): no line of the hero's names row starts with a dot: a dot that would open a line is hidden (kept in place, so the lines stay)
+  const rows = () => document.querySelectorAll('.hero-names');
+  const fix = row => { if (!row.getClientRects().length) return;
+    for (let k = 0; k < 5; k++) { let changed = false, prev = null;
+      for (const el of row.children) { const name = el.matches('.hn') ? el.querySelector('a, .self') : el; if (!name || !name.getClientRects().length) continue;
+        const r = name.getBoundingClientRect(), cy = (r.top + r.bottom) / 2;
+        if (el.matches('.hn')) { const lead = prev !== null && cy > prev + 4; if (el.classList.contains('lead') !== lead) { el.classList.toggle('lead', lead); changed = true; } }
+        prev = cy; }
+      if (!changed) break; } };
+  window.leadDots = r => r ? fix(r) : rows().forEach(fix);
+  const ro = new ResizeObserver(es => es.forEach(e => fix(e.target))); rows().forEach(r => ro.observe(r));
+  if (document.fonts) document.fonts.ready.then(() => leadDots()); addEventListener('load', () => leadDots());
+})();</script>"""
 
 
 DEAD_SEL = re.compile(r'\.hs-(?:pt|dot|label|w|t)(?![\w-])|(?<![\w-])\.price(?![\w-])')
@@ -1758,7 +1810,8 @@ def finish_14(web):
              ("c => c.hab_cap || `${c.name}. ${c.line}`", "c => c.hab_cap || ''"),
              ("\n  document.getElementById('c-line').textContent = c.line;", ''),
              ('"line":"",', ''), (',"line":""}', '}')]
-    after = [('   /* the unit wraps whole */', '')]       # a comment the price rules leave behind
+    after = [('   /* the unit wraps whole */', ''),       # a comment the price rules leave behind
+             ('0&ndash;10 V', '0&ndash;&#8288;10 V')]     # C6d: the range never breaks after its dash
     pages = 0
     for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
         s = open(f, encoding='utf-8').read(); t = s
@@ -1767,6 +1820,9 @@ def finish_14(web):
         t = re.sub(r'(<style[^>]*>)(.*?)(</style>)', lambda m: m.group(1) + _strip_css(m.group(2)) + m.group(3), t, flags=re.S)
         for a, b in after:
             t = t.replace(a, b)
+        if 'class="hero-names"' in t:
+            assert t.count('</body>') == 1, ('finish_14: body', f)
+            t = t.replace('</body>', LEAD_DOTS_JS + '\n</body>')
         t = re.sub(r'(<style[^>]*>)(.*?)(</style>)', lambda m: m.group(1) + _svh_fallback(m.group(2)) + m.group(3), t, flags=re.S)
         for bad in ('hs-pt', 'hs-dot', 'hs-label', 'unit:', '"line":""', 'c.line', '.price', 'closer-cap', "getElementById('light-line')"):
             assert bad not in t, ('finish_14: left', bad, f)
