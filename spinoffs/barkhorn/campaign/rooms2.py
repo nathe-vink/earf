@@ -41,7 +41,7 @@ def room(tint, wall='#E6E0D5', props=(), floor=None):
     """living_room's base with its props replaced (the pair and Mantle as there; Mantle dropped where not wanted)."""
     s = LR.base(tint, SIZE)
     s['set']['wall'] = {'color': wall}
-    keep = [{'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_portal', 'windows': ['wall-back']}]
+    keep = [{'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_portal', 'windows': ['wall-back', 'wall-left', 'wall-right']}]
     s['set']['props'] = [floor or LR._floor()] + list(props) + keep + \
         [{'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_glass_shadows'}]
     s['render'].update(PROOF)

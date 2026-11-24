@@ -183,6 +183,8 @@ def material(bpy, kind, color, opts=None):
             _set(b, 'Coat Weight', 0.5); _set(b, 'Coat Roughness', 0.02)
     elif kind == 'gloss':
         _set(b, 'Roughness', 0.05); _set(b, 'Coat Weight', 0.7); _set(b, 'Coat Roughness', 0.03)
+    elif kind == 'plain':                                 # a bare Principled surface: colour and roughness only
+        pass
     elif kind == 'glow':
         _set(b, 'Roughness', 0.9); _set(b, 'Emission Color', M.hex_lin(color)); _set(b, 'Emission Strength', o.get('emit', 8.0))
     else:
