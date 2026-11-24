@@ -22,8 +22,10 @@ as the 95 disc did (a 0.5 hairline between them).
 1. Every fixture part from the collar's top to 9.5 above it (the 8.5 lift and 1) sits inside the collar's 82 bore, so
    the crown's first tier is 80 across, as today.
 2. The clamp ring is 104 across (it screws on the collar's M96 thread). So the even step is 24 mm.
-3. The band the clamp ring presses onto the shade joins that rhythm: its rim 128 across (was 116). The collar's flange
-   inside and both silicone rings grow with it.
+3. The band the clamp ring presses onto the shade stays 116 across, as today, but tapered: 5 thick at the clamp ring
+   to a 1.0 land at its rim, so it reads as the stack's foot, not one more step (the coordinator: taper, don't widen).
+   Its face on the acrylic and both silicone rings are today's; under 0.5 MPa on the silicone it bends 0.24 um
+   (today 0.11), the same 2.2 MPa peak stress at its root.
 4. The collar rises flush with the clamp ring's top (0.5 proud, for the squeeze), its slots' entries with it: no recess,
    and the clamp ring is plain M96 its full height, with nothing to bottom on but the silicone. Thread engaged: the clamp ring's
    height, 10.8 (three tiers) and 8.0 (four), less the thread's run-out, with about 4 of thread below it for its travel.
@@ -44,5 +46,5 @@ as the 95 disc did (a 0.5 hairline between them).
 Both come off by solids: hanging, lifted 7.5 and 8.5, turned, lowered past the pins and on down past the carrier
 (140 below): no overlap anywhere; the control (lowered 3 without the turn) is held by the pins, as it must be.
 
-The band is not as tall as a tier: seen from the side it is a slope from the clamp ring's foot down to its rim (about 8)
-and the rim's edge (about 6). It now steps 24 like the rest, so it reads as the stack's foot rather than an odd step.
+The sheet: top-sheet-v2.jpg (one level camera 1.6 m off, 200 mm lens, for all three, and a 2x crop of each top;
+the collar in the cap's satin black metal; each audit names its top and camera).
