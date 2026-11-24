@@ -1426,7 +1426,8 @@ TOUCHING_DOME = [('pins', 'ring'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'l
                  # and the slip washer stay listed (squeezed, and drawn on the spherical seats)
                  ('slip-washer', 'gaskets'), ('slip-washer', 'clamp')]
 # the builds without the v6 fixings (dome_pendant_v2.py, Hemisphere South): their pins in Ø2.5 taps and the round-43 cable
-TOUCHING_DOME_LEGACY = TOUCHING_DOME + [('suspension', 'gland'), ('suspension', 'canopy'), ('suspension', 'cord'), ('pins', 'hub')]
+TOUCHING_DOME_LEGACY = TOUCHING_DOME + [('suspension', 'gland'), ('suspension', 'canopy'), ('suspension', 'cord'), ('pins', 'hub'),
+                                       ('suspension', 'canopy-grip')]   # v8: the round-43 cable through the canopy's new grip
 TOUCHING_ORB = [('grommet', 'shell'), ('grommet', 'core'), ('window', 'base'), ('seat', 'base'), ('ring', 'base'), ('led', 'board'),
                 ('chassis', 'base'), ('ballast', 'chassis'), ('ballast', 'base'), ('cable', 'base'), ('board', 'chassis'),
                 ('foot-ring', 'base'), ('cells', 'holder'), ('hatch', 'base'), ('usb', 'base'), ('cable', 'hatch'),

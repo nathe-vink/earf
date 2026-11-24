@@ -99,10 +99,10 @@
   "pins": [
    -40.0,
    -45.0,
-   91.0,
-   40.0,
-   24.2,
-   95.0
+   90.0,
+   40.5,
+   25.1,
+   96.0
   ],
   "carrier": [
    -28.0,
@@ -177,36 +177,36 @@
    116.7
   ],
   "grippers": [
-   -17.9,
-   -50.4,
+   -18.4,
+   -52.4,
    733.0,
-   17.9,
-   50.4,
+   18.4,
+   52.4,
    753.1
   ],
   "gripper-nuts": [
-   -20.6,
-   -53.2,
+   -21.2,
+   -55.1,
    742.1,
-   20.6,
-   53.2,
+   21.2,
+   55.1,
    750.1
   ],
   "gripper-brackets": [
-   -27.0,
-   -60.7,
+   -50.0,
+   -66.3,
    740.5,
-   27.0,
-   60.7,
+   50.0,
+   66.3,
    774.4
   ],
-  "bracket-rivets": [
-   -23.1,
-   -58.1,
-   772.0,
-   23.1,
-   58.1,
-   776.8
+  "bracket-studs": [
+   -44.9,
+   -61.3,
+   769.8,
+   44.9,
+   61.3,
+   776.0
   ],
   "canopy-screws": [
    -73.0,
@@ -230,14 +230,14 @@
    125.6,
    3.0,
    24.2,
-   729.0
+   737.4
   ],
   "suspension": [
-   -12.7,
-   -45.2,
+   -13.2,
+   -47.2,
    62.4,
-   12.7,
-   45.2,
+   13.2,
+   47.2,
    765.1
   ],
   "canopy": [
@@ -259,10 +259,50 @@
   "enclosure": [
    -52.7,
    -42.8,
-   736.4,
+   735.4,
    52.7,
    42.8,
+   770.4
+  ],
+  "plate-standoffs": [
+   -38.7,
+   -34.4,
+   770.4,
+   38.7,
+   34.4,
    774.4
+  ],
+  "enclosure-screws": [
+   -38.7,
+   -34.4,
+   767.0,
+   38.7,
+   34.4,
+   773.9
+  ],
+  "bushings": [
+   -13.0,
+   -13.0,
+   734.2,
+   13.0,
+   13.0,
+   771.2
+  ],
+  "canopy-grip": [
+   -8.8,
+   -8.8,
+   723.0,
+   8.8,
+   8.8,
+   733.0
+  ],
+  "ground-screw": [
+   -58.1,
+   -18.5,
+   765.4,
+   -50.1,
+   -10.5,
+   776.0
   ]
  },
  "finishes": {
@@ -291,13 +331,18 @@
   "grippers": "steel",
   "gripper-nuts": "steel",
   "gripper-brackets": "steel",
-  "bracket-rivets": "steel",
+  "bracket-studs": "steel",
   "canopy-screws": "anodised",
   "box-screws": "steel",
   "cord": "cord",
   "suspension": "stainless",
   "canopy": "anodised",
   "strap": "steel",
-  "enclosure": "steel"
+  "enclosure": "steel",
+  "plate-standoffs": "steel",
+  "enclosure-screws": "steel",
+  "bushings": "trim",
+  "canopy-grip": "anodised",
+  "ground-screw": "steel"
  }
 }

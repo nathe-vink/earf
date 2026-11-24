@@ -83,10 +83,10 @@
   "pins": [
    -40.0,
    -45.0,
-   91.0,
-   40.0,
-   24.2,
-   95.0
+   90.0,
+   40.5,
+   25.1,
+   96.0
   ],
   "carrier": [
    -28.0,
@@ -161,36 +161,36 @@
    114.0
   ],
   "grippers": [
-   -52.0,
+   -54.0,
    -6.0,
    733.0,
-   52.0,
+   54.0,
    6.0,
    753.1
   ],
   "gripper-nuts": [
-   -54.9,
+   -56.9,
    -8.0,
    742.1,
-   54.9,
+   56.9,
    8.0,
    750.1
   ],
   "gripper-brackets": [
-   -59.6,
-   -12.0,
+   -59.0,
+   -36.0,
    740.5,
-   59.6,
-   12.0,
+   59.0,
+   36.0,
    774.4
   ],
-  "bracket-rivets": [
-   -58.4,
-   -9.0,
-   772.0,
-   58.4,
-   9.0,
-   776.8
+  "bracket-studs": [
+   -55.5,
+   -32.3,
+   769.8,
+   55.5,
+   32.3,
+   776.0
   ],
   "canopy-screws": [
    -4.0,
@@ -214,13 +214,13 @@
    125.6,
    3.0,
    24.2,
-   729.0
+   737.4
   ],
   "suspension": [
-   -46.8,
+   -48.8,
    -2.6,
    62.4,
-   46.8,
+   48.8,
    2.6,
    765.1
   ],
@@ -243,10 +243,50 @@
   "enclosure": [
    -32.0,
    -46.0,
-   736.4,
+   735.4,
    32.0,
    46.0,
+   770.4
+  ],
+  "plate-standoffs": [
+   -27.5,
+   -33.5,
+   770.4,
+   27.5,
+   33.5,
    774.4
+  ],
+  "enclosure-screws": [
+   -27.5,
+   -33.5,
+   767.0,
+   27.5,
+   33.5,
+   773.9
+  ],
+  "bushings": [
+   -13.0,
+   -13.0,
+   734.2,
+   13.0,
+   13.0,
+   771.2
+  ],
+  "canopy-grip": [
+   -8.8,
+   -8.8,
+   723.0,
+   8.8,
+   8.8,
+   733.0
+  ],
+  "ground-screw": [
+   -4.0,
+   52.0,
+   765.4,
+   4.0,
+   60.0,
+   776.0
   ],
   "plunger": [
    -2.5,
@@ -281,7 +321,7 @@
   "grippers": "steel",
   "gripper-nuts": "steel",
   "gripper-brackets": "steel",
-  "bracket-rivets": "steel",
+  "bracket-studs": "steel",
   "canopy-screws": "anodised",
   "box-screws": "steel",
   "cord": "cord",
@@ -289,6 +329,11 @@
   "canopy": "anodised",
   "strap": "steel",
   "enclosure": "steel",
+  "plate-standoffs": "steel",
+  "enclosure-screws": "steel",
+  "bushings": "trim",
+  "canopy-grip": "anodised",
+  "ground-screw": "steel",
   "plunger": "steel"
  }
 }
