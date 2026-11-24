@@ -12,7 +12,10 @@ def load(t):
 
 
 def change(s):
-    """The proposed real change; filled in from the light-alone test."""
+    """The real change: back-top off (the light that puts the most into the surround, 40 % of it at quarter size). No real
+    change tried held the plate while the surround fell: side and top cards, a snooted spot on the plate and a panel at
+    the plate's mirror each moved plate and surround together (README.md here)."""
+    s['lights']['back-top']['off'] = True
     return s
 
 
