@@ -93,6 +93,17 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         if 'aim0' in sp:                      # the key's power as before the re-aim (its irradiance at the old aim point)
             a0_ = Vector(sp['aim0'])          # (already lifted with the product)
             ob.data.energy = Lt.area_power(sp, (a0_ - ob.location).length)
+        mv_ = dict((it_.split(':')[0], [float(v_) for v_ in it_.split(':')[1].split(',')]) for it_ in filter(None, os.environ.get('HOUSE_MOVE', '').split(';')))
+        am_ = dict((it_.split(':')[0], [float(v_) for v_ in it_.split(':')[1].split(',')]) for it_ in filter(None, os.environ.get('HOUSE_AIM', '').split(';')))
+        if name in mv_ or name in am_:
+            # HOUSE_MOVE / HOUSE_AIM 'name:DX,DY,DZ;...' (2026-11-24, round 2 of the critics' tests): any house lamp moved, or its
+            # aim point moved, by that much (m, full scale, times s); its irradiance at its old aim point held (its power
+            # follows the new distance). Real changes on a real stand; the lamp stays where the camera cannot see it
+            t0_ = Vector(sp['target']) if 'target' in sp else (cen_rx if sp.get('receivers') else pcentre).copy()
+            ob.location = ob.location + Vector(mv_.get(name, (0, 0, 0))) * s
+            Lt.aim(ob, t0_ + Vector(am_.get(name, (0, 0, 0))) * s)
+            ob.data.energy = Lt.area_power(sp, (t0_ - ob.location).length)
+            print('LAMP_MOVE', name, 'at', [round(v, 4) for v in ob.location], 'aim', [round(v, 4) for v in t0_ + Vector(am_.get(name, (0, 0, 0))) * s], 'W', round(ob.data.energy, 3))
         ob.data.energy *= k_st
         if solid and not sp.get('receivers') and ob.data.specular_factor > 0:
             softbox(bpy, ob, s)

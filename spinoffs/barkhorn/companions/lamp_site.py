@@ -1085,6 +1085,13 @@ def build(frame, samples, scale):
     vs.white_balance_tint = 0.0
     if house:
         vs.white_balance_temperature = HR['render']['white_balance_k']; vs.white_balance_tint = HR['render']['white_balance_tint']
+        if os.environ.get('HOUSE_WB'):
+            # HOUSE_WB 'K[,TINT]' (2026-11-24, the critics on Smoke's lit colour): the camera's white balance for this frame;
+            # the house ground's tint kept unless given
+            wb_ = os.environ['HOUSE_WB'].split(','); vs.white_balance_temperature = float(wb_[0])
+            if len(wb_) > 1:
+                vs.white_balance_tint = float(wb_[1])
+            print('HOUSE_WB', vs.white_balance_temperature, vs.white_balance_tint)
         sc.cycles.sample_clamp_indirect = 0.0        # no clamp on the lamp's light (the clamp scales with exposure here)
         # Cycles' light tree OFF on the house ground (2026-11-20): with the sweep's light-linked lamps it was biased here.
         # Core's LED switched on, at any output (20 lm or 200), lifted the paper behind it by 10 levels, and the OFF
