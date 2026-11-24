@@ -282,6 +282,21 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         ou_ = nt_.nodes.new('ShaderNodeOutputWorld'); nt_.links.new(bg_.outputs[0], ou_.inputs['Surface'])
     if os.environ.get('HOUSE_FLOORCARD'):
         floor_card(bpy, [float(v) for v in os.environ['HOUSE_FLOORCARD'].split(',')], lift)
+    for i_, c_ in enumerate(filter(None, os.environ.get('HOUSE_REALFLAG', '').split(';'))):
+        # HOUSE_REALFLAG 'CX,CY,CZ,W,H,NX,NY,NZ;...' (2026-11-24, round 2: the Core's front floor without cutters): a real
+        # black flag on a stand, centre (m at the house scale), W x H, facing N; every ray visibility on, no linking.
+        # It must stand out of frame (the audit's CASTCHECK) and out of the product's reflections (looked at)
+        cx_, cy_, cz_, fw_, fh_, nx_, ny_, nz_ = [float(v) for v in c_.split(',')]
+        n_ = Vector((nx_, ny_, nz_)).normalized(); up_ = Vector((0, 0, 1)) if abs(n_.z) < 0.99 else Vector((0, 1, 0))
+        sd_ = up_.cross(n_).normalized(); up_ = n_.cross(sd_).normalized(); C_ = Vector((cx_, cy_, cz_))
+        vs_ = [tuple(C_ + sd_ * a * fw_ / 2 + up_ * b * fh_ / 2) for a, b in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+        mf_ = bpy.data.materials.new('house-realflag'); mf_.use_nodes = True; bf_ = mf_.node_tree.nodes['Principled BSDF']
+        bf_.inputs['Base Color'].default_value = (0.01, 0.01, 0.01, 1); bf_.inputs['Roughness'].default_value = 0.9
+        mr_ = bpy.data.meshes.new(f'house-realflag{i_}'); mr_.from_pydata(vs_, [], [(0, 1, 2, 3)]); mr_.materials.append(mf_)
+        of_ = bpy.data.objects.new(f'house-realflag{i_}', mr_); bpy.context.scene.collection.objects.link(of_)
+        if os.environ.get('AUDIT'):           # (for the audit only: hidden from the camera, so CASTCHECK measures it in frame)
+            of_.visible_camera = False
+        print('REALFLAG', i_, [tuple(round(c, 4) for c in v) for v in vs_])
     if os.environ.get('HOUSE_NEGFILL'):
         # HOUSE_NEGFILL 'X,Y,W,H' (2026-11-22, the Fog Core: white and flat, its clear rim smudged): negative fill, two black
         # cards standing on the floor at x = -X and +X (m at the house scale), centred at y = Y, W wide, H tall, facing the
