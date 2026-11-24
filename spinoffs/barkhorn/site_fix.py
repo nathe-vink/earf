@@ -1482,10 +1482,13 @@ def fix_12(p, web):
     # (10) the hero: no dots; one names row inside its bottom edge, each name a link to that product in that tint
     p.rest, n = re.subn(r'<a class="hs-pt[^"]*" href="#[a-z]+-[a-z]+" style="[^"]*"><span class="hs-dot" aria-hidden="true"></span><span class="hs-label">[^<]*</span></a>', '', p.rest)
     assert n == 8, ('fix_12: hero dots', n)
-    names = '<nav class="hero-names" aria-label="In the picture">' + ' <span aria-hidden="true">&middot;</span> '.join(
-        f'<a href="#{r}-{t}">{label}</a>' for r, t, label in HERO_NAMES) + '</nav>'
+    # C6 (2): each separator kept with the name after it, so no line ends on a dot; the row sits after the picture, not in it,
+    # so it can lie on the picture's bottom edge (wide) or under the picture (portrait, phones, the stacked tablet layout)
+    first, *more = HERO_NAMES
+    names = ('<nav class="hero-names" aria-label="In the picture">' + f'<a href="#{first[0]}-{first[1]}">{first[2]}</a>'
+             + ''.join(f' <span class="hn"><span aria-hidden="true">&middot;</span> <a href="#{r}-{tt}">{label}</a></span>' for r, tt, label in more) + '</nav>')
     p.sub('</script></div>\n      <script>if (document.documentElement.dataset.home) heroIn()</script>',
-          '</script>' + names + '</div>\n      <script>if (document.documentElement.dataset.home) heroIn()</script>')
+          '</script></div>' + names + '\n      <script>if (document.documentElement.dataset.home) heroIn()</script>')
     # (11) the eight mood lines out, everywhere; the plain facts beside them stay
     for line in MOOD:
         esc = json.dumps(line)[1:-1]
@@ -1502,15 +1505,31 @@ def fix_12(p, web):
     for line in MOOD:
         assert line not in p.head and line not in p.rest, ('fix_12: a mood line left', line)
     p.css("""
-/* C5 (10): the hero's names row, inside its bottom edge, on a dark veil so it reads on the picture */
-.hs-hero .hero-photo { position: relative }
-.hero-names { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 44px 16px 14px; text-align: center; color: #F4F1EC;
-  font: 500 15px/1.5 var(--sans); background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%); text-shadow: 0 1px 2px rgb(0 0 0 / .6) }
-.hero-names a { color: #F4F1EC; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; display: inline-block; padding-block: 8px }
-.hero-names a:hover { color: #fff; text-decoration-thickness: 2px }
-.hero-names a:focus-visible { outline: 2px solid #F4F1EC; outline-offset: 2px }
-.hero-names span { margin-inline: 6px; opacity: .8 }
-@media (max-width: 560px) { .hero-names { font-size: 14px; padding: 36px 10px 8px } .hero-names span { margin-inline: 3px } }
+/* C5 (10), C6 (1, 2): the hero's names row. Wide: on the picture's bottom edge, on a dark veil; the picture is capped at the
+   window less the header (cropped a little top and bottom, every product whole) so the row is on the first screen.
+   Stacked layouts (portrait, phones, the 701-960 tablet layout): under the picture in ink; on phones a 2 x 2 grid. Taps 44 px. */
+.hs-hero .hero-photo, .hs-hero .hero-pic { position: relative }
+.hero-names { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 40px 16px 6px; text-align: center; color: #F4F1EC;
+  font: 500 15px/22px var(--sans); background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%); text-shadow: 0 1px 2px rgb(0 0 0 / .6); pointer-events: none }
+.hero-names a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; display: inline-block; padding-block: 11px; pointer-events: auto }
+.hero-names a:hover { text-decoration-thickness: 2px }
+.hero-names a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px }
+.hero-names .hn { white-space: nowrap }
+.hero-names .hn > span { margin-inline: 6px; opacity: .8 }
+@media (min-aspect-ratio: 1/1) and (min-height: 600px) {
+  .hs-hero .hero-photo { aspect-ratio: auto !important; height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) }
+  .hs-hero .hero-photo img { object-position: 50% 35% }
+}
+@media (max-aspect-ratio: 1/1), (max-width: 960px) and (min-height: 641px) {
+  .hero-names { position: static; order: 2; background: none; color: #1C1A18; text-shadow: none; padding: 4px 16px 0; pointer-events: auto }
+  .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 3 }
+}
+@media (max-aspect-ratio: 1/1) { .hs-hero .hero-title { order: 0 } }
+@media (max-width: 560px) {
+  .hero-names { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; padding: 8px 16px 0; font-size: 15px }
+  .hero-names .hn { display: contents } .hero-names .hn > span { display: none }
+  .hero-names a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 4px; text-align: center }
+}
 """)
 
 
@@ -1561,3 +1580,113 @@ def finish_13(web):
         assert not any(a in t for a in old_ask) and 'Price on request' not in t and 'p-unit' not in t, ('finish_13: left', f)
         open(f, 'w', encoding='utf-8').write(t)
     assert n_pages >= 32, ('finish_13: product pages', n_pages)
+
+
+# --- Push C6 (the coordinator 24 Nov 05:58; each item passed a reviewer and a skeptic)
+def fix_14(p, web):
+    # (5) a size wraps between its figures: "17.6 x 14.1 x 3.9 in (448 x 358 x 100 mm)" was one unbreakable run past a phone's edge;
+    # each figure still keeps its unit, and "x" stays with the figure before it
+    _sub_any(p, "  .replace(/(\\d) x (\\d)/g, '$1\\u00a0x\\u00a0$2');\n", "  .replace(/(\\d) x (\\d)/g, '$1\\u00a0x $2');\n")
+    # (4) the wrapped names row would push the page down when its picture comes up: the caption keeps the height of the
+    # tallest names row among this product's pictures in this tint, measured in an unseen copy at the caption's own width
+    anchor = "const nr = NAMEROWS[(s.src || '').split('/').pop()]; if (nr) { e.innerHTML = nr; e.hidden = false; }"
+    _sub_any(p, anchor, "{ const rows = Object.values(P.views(c.k) || {}).map(x => NAMEROWS[((x && x.src) || '').split('/').pop()]).filter(Boolean); let h = 0;\n"
+             "      if (rows.length) { const m = e.cloneNode(false); m.removeAttribute('id'); m.removeAttribute('aria-live'); m.hidden = false; m.setAttribute('aria-hidden', 'true');\n"
+             "        m.style.cssText = `position:absolute;visibility:hidden;left:0;top:0;min-height:0;width:${e.getBoundingClientRect().width}px`; e.parentNode.appendChild(m);\n"
+             "        rows.forEach(r => { m.innerHTML = r; h = Math.max(h, m.getBoundingClientRect().height); }); m.remove(); }\n"
+             "      if (h) e.style.setProperty('min-height', `${Math.ceil(h)}px`, 'important'); else e.style.removeProperty('min-height'); }\n    " + anchor)
+    p.css("""
+/* C6 (4): the names row under a picture wraps, every name whole and tappable; beside the arrows on a wide screen,
+   under the strip on a phone, so the counter and the arrows never sit on it */
+.gallery .cap { height: auto !important; min-height: 44px; line-height: 24px !important; padding-block: 10px; white-space: normal !important; overflow: visible !important }
+@media (max-width: 700px) { .gallery .cap { margin-top: 0 !important; padding: 6px 0 0 !important; min-height: 0 } }
+/* C6 (10): the family chips fit at every width: four to a row from 480, three from 363 (widest chip 104 px, 331 px a row),
+   two below that; never wider than the column, so the page never pans sideways */
+@media (max-width: 479px) { #family .tint-pick { grid-template-columns: repeat(3, max-content) !important } }
+@media (max-width: 362px) { #family .tint-pick { grid-template-columns: repeat(2, max-content) !important } }
+#family .tint-pick { max-width: 100% }
+/* C6 (5): a long value wraps rather than widen the page */
+#pdp dd, #pdp .rows td, #pdp .rows dd { overflow-wrap: break-word; min-width: 0 }
+/* C6 (6): the fixed ask bar also on a phone held sideways and on a portrait tablet (701-860), where no ask is on the first screen */
+@media (min-width: 701px) and (max-height: 500px), (min-width: 701px) and (max-width: 860px) and (orientation: portrait) {
+  .ask-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: var(--page); border-top: 1px solid var(--rule); justify-content: center }
+  .ask-bar .cta-btn { flex: 0 1 420px; justify-content: center }
+  body:has(#pdp:not([hidden])) { padding-bottom: 72px }
+  .ask-bar { transition: transform .2s ease } .ask-bar.off { transform: translateY(110%); visibility: hidden }
+}
+""")
+
+
+DEAD_SEL = re.compile(r'\.hs-(?:pt|dot|label|w|t)(?![\w-])|(?<![\w-])\.price(?![\w-])')
+
+
+def _strip_css(css):
+    """Drop every rule whose selectors are all dead (the hero dots, the price line); then any @media left empty."""
+    out, i, n = [], 0, len(css)
+    while i < n:
+        j = css.find('{', i)
+        if j < 0:
+            out.append(css[i:]); break
+        head = css[i:j]
+        if re.sub(r'/\*.*?\*/', '', head, flags=re.S).strip().startswith('@'):
+            d, k = 1, j + 1
+            while d:
+                d += {'{': 1, '}': -1}.get(css[k], 0); k += 1
+            inner = _strip_css(css[j + 1:k - 1])
+            if '@media' in head and not re.search(r'\{', inner):
+                out.append(head[:len(head) - len(head.lstrip())])      # the block and the comment over it go
+            else:
+                out.append(head + '{' + inner + '}')
+            i = k; continue
+        k = css.index('}', j) + 1
+        lead = head[:len(head) - len(head.lstrip())]
+        sel = head.strip()
+        sel_wo_comments = re.sub(r'/\*.*?\*/', '', sel, flags=re.S).strip()
+        parts = [s.strip() for s in sel_wo_comments.split(',') if s.strip()]
+        if parts and all(DEAD_SEL.search(s) for s in parts):
+            comments = re.findall(r'/\*.*?\*/', sel, flags=re.S)
+            out.append(lead)                    # its comment goes with it
+        else:
+            keep = [s for s in parts if not DEAD_SEL.search(s)] if parts else None
+            if parts and len(keep) != len(parts):
+                pre = sel[:len(sel) - len(sel_wo_comments)] if sel.endswith(sel_wo_comments) else ''
+                out.append(lead + pre + ', '.join(keep) + ' ' + css[j:k])
+            else:
+                out.append(css[i:k])
+        i = k
+    return ''.join(out)
+
+
+def finish_14(web):
+    """C6 (7) the dead code out, none of it visible; (9) the home's twitter card matches its og."""
+    import glob, sys
+    hot = sys.modules['site_v2'].HOTSPOT_JS
+    swaps = [(hot + '\n', ''),
+             (" unit: 'Each pair is made to order.',", ''), (" unit: 'Made to order.',", ''),
+             ("lineEl = document.getElementById('light-line'), ", ''), ("lineEl.textContent = c.line; ", ''),
+             ("\n    document.getElementById('closer-cap').innerHTML = `<b>${c.name}</b> ${c.line}`;", ''),
+             ("c => c.hab_cap || `${c.name}. ${c.line}`", "c => c.hab_cap || ''"),
+             ("\n  document.getElementById('c-line').textContent = c.line;", ''),
+             ('"line":"",', ''), (',"line":""}', '}')]
+    after = [('   /* the unit wraps whole */', '')]       # a comment the price rules leave behind
+    pages = 0
+    for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True):
+        s = open(f, encoding='utf-8').read(); t = s
+        for a, b in swaps:
+            t = t.replace(a, b)
+        t = re.sub(r'(<style[^>]*>)(.*?)(</style>)', lambda m: m.group(1) + _strip_css(m.group(2)) + m.group(3), t, flags=re.S)
+        for a, b in after:
+            t = t.replace(a, b)
+        for bad in ('hs-pt', 'hs-dot', 'hs-label', 'unit:', '"line":""', 'c.line', '.price', 'closer-cap', "getElementById('light-line')"):
+            assert bad not in t, ('finish_14: left', bad, f)
+        if t != s:
+            open(f, 'w', encoding='utf-8').write(t); pages += 1
+    assert pages >= 40, ('finish_14: pages', pages)
+    f = os.path.join(web.SITE, 'index.html'); t = open(f, encoding='utf-8').read()
+    og = {k: re.search(rf'<meta property="og:{k}" content="([^"]*)">', t).group(1) for k in ('title', 'description', 'image')}
+    assert 'name="twitter:title"' not in t
+    tw = ''.join(f'\n<meta name="twitter:{k}" content="{v}">' for k, v in og.items())
+    assert t.count('<meta name="twitter:card" content="summary_large_image">') == 1
+    t = t.replace('<meta name="twitter:card" content="summary_large_image">', '<meta name="twitter:card" content="summary_large_image">' + tw)
+    open(f, 'w', encoding='utf-8').write(t)
