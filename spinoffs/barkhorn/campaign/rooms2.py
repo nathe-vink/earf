@@ -86,7 +86,7 @@ def r90(tint='ember'):
     s = room(tint, wall='#E9E1CF', props=props)
     s['products'] = [b for b in s['products'] if 'asset_blend' not in b]          # no Mantle in this room
     s['title'] = f'Living room, 1990s: the pair either side of the CRT ({tint})'
-    s['camera'] = {'position': [0.35, -3.1, 1.35], 'target': [0.0, 1.6, 0.95], 'lens_mm': 30.0, 'level': True, 'fstop': 8.0,
+    s['camera'] = {'position': [0.35, -2.2, 1.55], 'target': [0.0, 1.6, 0.95], 'lens_mm': 26.0, 'level': True, 'fstop': 8.0,
                    'focus': [0.0, 1.3, 0.9]}
     return s
 
@@ -143,7 +143,7 @@ def cozy(tint='ember'):
         asset('side_table_01', x, y),
         *LR._book(x + 0.12, y + 0.10, T + 0.0005, 18.0, cloth='#6B3A2C'),
         *LR._book(x + 0.13, y + 0.11, T + 0.0285, 6.0, cloth='#2F3D4C'),
-        asset('ArmChair_01', x + 0.85, y - 0.35, -150.0),
+        asset('ArmChair_01', x + 0.85, y - 0.35, 30.0),
         {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fold', 'x': x + 0.95, 'y': y - 0.15, 'z': 0.48,
          'rz': 30.0, 'w': 0.5, 'legs': [0.4, 0.32, 0.25], 'rr': 0.02, 't': 0.012, 'color': '#8C4A2E'},
         asset('potted_plant_02', x - 0.35, y - 0.9),
