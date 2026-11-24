@@ -31,7 +31,10 @@ def real_flags(s):
     (made real, taken out) as flag indices; a flag taken out keeps its slot (`off`), so later indices hold."""
     real, out = [], []
     for i, f in enumerate(s['set'].get('flags', [])):
-        if not f or f.get('off') or not f.get('reflect_only'):
+        if not f or f.get('off'):
+            continue
+        if not f.get('reflect_only'):
+            f.setdefault('camera', True)                                  # a real card, as every other (S4b parity)
             continue
         if f.get('normal', (0, 0, 0))[2] < -0.5:
             f['off'] = True; out.append(i)
@@ -167,7 +170,7 @@ def real_bounces_and_panels(s, bounce='real', strip='real'):
             if strip == 'out':
                 L['off'] = True
             else:
-                L.update(diffuse=1.0, specular=1.0, camera=True)
+                L.update(diffuse=1.0, specular=1.0, camera=True, body=True)   # a real softbox: a body, a shadow
             out.append((n, strip))
     return out
 

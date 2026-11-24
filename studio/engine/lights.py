@@ -173,10 +173,28 @@ def panel(bpy, name, spec, centre):
         add = nt.nodes.new('ShaderNodeAddShader'); tr2 = nt.nodes.new('ShaderNodeBsdfTransparent')
         nt.links.new(em.outputs['Emission'], add.inputs[0]); nt.links.new(tr2.outputs['BSDF'], add.inputs[1])
         front = add.outputs['Shader']
-    nt.links.new(front, mix.inputs[1]); nt.links.new(tr.outputs['BSDF'], mix.inputs[2])
+    if spec.get('body'):
+        # a real softbox (the amp critics, 24 Nov): the back face is the box's black cloth, not glass, and the panel
+        # stands in the light: it casts shadows, and a black box `body_depth` m deep sits behind the face
+        blk = nt.nodes.new('ShaderNodeBsdfDiffuse'); blk.inputs['Color'].default_value = (0.004, 0.004, 0.004, 1)
+        nt.links.new(front, mix.inputs[1]); nt.links.new(blk.outputs['BSDF'], mix.inputs[2])
+    else:
+        nt.links.new(front, mix.inputs[1]); nt.links.new(tr.outputs['BSDF'], mix.inputs[2])
     nt.links.new(mix.outputs['Shader'], out.inputs['Surface'])
     me.materials.append(m)
-    ob.visible_camera = bool(spec.get('camera', False)); ob.visible_shadow = False
+    ob.visible_camera = bool(spec.get('camera', False)); ob.visible_shadow = bool(spec.get('body', False))
+    if spec.get('body'):
+        dp = float(spec.get('body_depth', 0.12)); e = 0.002          # the box's sides and back, just behind the face
+        bv = [(-w / 2, -h / 2, e), (-w / 2, h / 2, e), (w / 2, h / 2, e), (w / 2, -h / 2, e),
+              (-w / 2, -h / 2, dp), (-w / 2, h / 2, dp), (w / 2, h / 2, dp), (w / 2, -h / 2, dp)]
+        bf = [(4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)]
+        bm_ = bpy.data.meshes.new(name + '-body'); bm_.from_pydata(bv, [], bf); bm_.update()
+        bo = bpy.data.objects.new(name + '-body', bm_); bpy.context.scene.collection.objects.link(bo)
+        bmat = bpy.data.materials.new(name + '-body'); bmat.use_nodes = True
+        bsdf = bmat.node_tree.nodes['Principled BSDF']; bsdf.inputs['Base Color'].default_value = (0.004, 0.004, 0.004, 1)
+        bsdf.inputs['Roughness'].default_value = 0.9
+        bm_.materials.append(bmat)
+        bo.parent = ob; bo['engine_light_body'] = True
     if spec.get('transmission') is False:       # not seen through clear parts, as an area lamp's flag (no shot set it before 21 Nov)
         ob.visible_transmission = False
     d, s = _share(spec.get('diffuse', True)), _share(spec.get('specular', True))
