@@ -135,6 +135,10 @@ def now_side(tint='ember'):
 
 # ---- (c) the Core's cozy corner -----------------------------------------------------------------------------------
 CORNER = (-2.0, 1.2)          # the side table's centre, in the room's back-left corner
+CHAIR = (-0.95, 1.05)         # the lounge chair, turned 35 deg toward the room
+THROW = (-0.48, 1.25, 0.6)    # hung over the chair's arm (the chair has no ottoman)
+LAMP, LAMP_H, LAMP_D = (-1.45, 1.62), 1.55, 0.30
+SKY_K, EXPOSURE, LAMP_LM = 0.45, 1.3, 2000
 def cozy(tint='ember'):
     x, y = CORNER
     T = 0.5507                # side_table_01's top
@@ -143,9 +147,13 @@ def cozy(tint='ember'):
         asset('side_table_01', x, y),
         *LR._book(x + 0.12, y + 0.10, T + 0.0005, 18.0, cloth='#6B3A2C'),
         *LR._book(x + 0.13, y + 0.11, T + 0.0285, 6.0, cloth='#2F3D4C'),
-        asset('ArmChair_01', x + 0.85, y - 0.35, 30.0),
-        {'kind': 'kit', 'shape': 'ext', 'path': LIFE, 'fn': 'fold', 'x': x + 0.95, 'y': y - 0.15, 'z': 0.48,
-         'rz': 30.0, 'w': 0.5, 'legs': [0.4, 0.32, 0.25], 'rr': 0.02, 't': 0.012, 'color': '#8C4A2E'},
+        # a deep lounge chair to read in; a knit throw hung over its arm, on the room's side
+        asset('mid_century_lounge_chair', *CHAIR, 35.0),
+        {'kind': 'kit', 'shape': 'drape', 'orient': 'hang', 'size': [0.5, 0.42], 'folds': 3, 'amplitude': 0.025, 'noise': 0.4,
+         'seed': 5, 'position': list(THROW), 'rotate': [0, 0, -55.0], 'material': 'wool', 'color': '#B9A68A'},
+        # the room's light: a floor lamp between the table and the chair, its bulb in the lights below
+        {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'floor_lamp', 'x': LAMP[0], 'y': LAMP[1], 'height': LAMP_H,
+         'radius': 0.21, 'drum': LAMP_D},
         asset('potted_plant_02', x - 0.35, y - 0.9),
         {'kind': 'books', 'position': [x + 0.25, y + 0.45], 'z': 0.0, 'colors': ['#5C3A2A', '#C2B49A', '#3B4A3E', '#8E2F2A'], 'seed': 2},
         {'kind': 'frame', 'position': [x + 0.6, LR.BACK - 0.012], 'z': 1.5, 'size': [0.45, 0.6],
@@ -155,10 +163,16 @@ def cozy(tint='ember'):
     ]
     s = room(tint, wall='#E3D8C6', props=props)
     s['products'] = []                                                   # no speakers in the Core's corner
-    s['sky'] = {**LR.SKY, 'strength': 0.04}                              # dusk at the window
-    s['render'].update(exposure=7.5)
+    # blue hour at the window: a sky with no sun in it, a little light (the coordinator, 04:58: never bright day)
+    s['sky'] = {'kind': 'gradient', 'zenith': '#1F2D52', 'horizon': '#5C6F9C', 'ground': '#1C2029', 'strength': SKY_K}
+    # the floor lamp's bulb: LAMP_LM warm white at the lamp lane's scale (0.0065 W a lumen), every ray on
+    s['lights'] = {'floor-lamp-bulb': {'type': 'point', 'position': [LAMP[0], LAMP[1], LAMP_H - LAMP_D / 2],
+                                       'power_w': round(LAMP_LM * 0.0065, 2), 'color': 2700, 'radius_m': 0.03}}
+    # Khronos PBR Neutral, not AgX: AgX takes the Core's lit globe to white, Neutral keeps its Ember red (one camera
+    # rendering for the frame; the light is unchanged)
+    s['render'].update(exposure=EXPOSURE, view='Khronos PBR Neutral', look='None')
     s['title'] = f'The Core\'s corner by evening: lit on a side table by the armchair ({tint})'
-    s['camera'] = {'position': [x + 1.9, y - 2.3, 1.15], 'target': [x + 0.2, y, 0.6], 'lens_mm': 40.0, 'level': True, 'fstop': 4.0,
+    s['camera'] = {'position': [x + 2.35, y - 3.1, 1.3], 'target': [x + 0.6, y, 0.75], 'lens_mm': 32.0, 'level': True, 'fstop': 4.0,
                    'focus': [x, y, T + 0.15]}
     return s
 

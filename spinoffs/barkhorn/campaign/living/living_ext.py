@@ -400,3 +400,44 @@ def emitter_report(bpy, name, p, kit):
     for r in sorted(rows):
         print('  EMITTER', *r)
     return []
+
+
+def floor_lamp(bpy, name, p, kit):
+    """A plain floor lamp, in frame (the coordinator, 24 Nov 04:58: the Core's corner gets a second honest source): a
+    weighted disc base, a pole, an open linen drum shade (the kit's tissue, so it glows and spills up and down). The bulb
+    is a point lamp in the shot's lights at the shade's centre, every ray on (the shot names it). Placed at (`x`, `y`);
+    `height` to the shade's top, shade `radius` and `drum` height; prints what it built."""
+    import bmesh, math
+    x, y = p['x'], p['y']
+    H, R, D = p.get('height', 1.55), p.get('radius', 0.21), p.get('drum', 0.30)
+    metal = kit.material(bpy, 'plain', p.get('metal', '#2B2724'), {'roughness': 0.35})
+    shade = kit.material(bpy, 'tissue', p.get('shade', '#E9DFCB'))
+    out = []
+
+    def solid(nm, r0, r1, z0, z1, mat, caps=True, seg=64):
+        bm = bmesh.new()
+        if caps:
+            g = bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=seg, radius1=r0, radius2=r1, depth=z1 - z0)
+            bmesh.ops.translate(bm, vec=(0, 0, (z0 + z1) / 2), verts=g['verts'])
+        else:                                              # an open drum: the side only, solidified below
+            a = [bm.verts.new((r0 * math.cos(2 * math.pi * i / seg), r0 * math.sin(2 * math.pi * i / seg), z0)) for i in range(seg)]
+            b = [bm.verts.new((r1 * math.cos(2 * math.pi * i / seg), r1 * math.sin(2 * math.pi * i / seg), z1)) for i in range(seg)]
+            for i in range(seg):
+                j = (i + 1) % seg
+                bm.faces.new((a[i], a[j], b[j], b[i]))
+        me = bpy.data.meshes.new(nm); bm.to_mesh(me); bm.free()
+        for poly in me.polygons:
+            poly.use_smooth = True
+        me.materials.append(mat)
+        ob = bpy.data.objects.new(nm, me); bpy.context.scene.collection.objects.link(ob)
+        ob.location = (x, y, 0.0)
+        if not caps:
+            so = ob.modifiers.new('thick', 'SOLIDIFY'); so.thickness = 0.002; so.offset = 0.0
+        out.append(ob)
+
+    solid(f'{name}-base', 0.15, 0.14, 0.0, 0.022, metal)
+    solid(f'{name}-pole', 0.011, 0.011, 0.022, H - D / 2, metal, seg=24)
+    solid(f'{name}-socket', 0.018, 0.018, H - D / 2 - 0.04, H - D / 2 + 0.03, metal, seg=24)
+    solid(f'{name}-shade', R, R * 0.92, H - D, H, shade, caps=False)
+    print('FLOOR LAMP', name, 'at', (round(x, 3), round(y, 3)), 'shade', R, 'x', D, 'top', H)
+    return out
