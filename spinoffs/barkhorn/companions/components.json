@@ -322,7 +322,7 @@
  "dome-pins": {
   "kind": "hardware",
   "maker": "any",
-  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye on the collar's bore above z 76 (clear of the white lip, which rises to 75 in the lift), rated well over 10 x the 1.1 kg shade (review, 2026-11-01)",
+  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye turned on the collar's bore at z 68, above the lip (v5; hemi-tether), rated well over 10 x the 1.1 kg shade (review, 2026-11-01)",
   "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -723,8 +723,8 @@
  "hemi-suspension": {
   "kind": "hardware",
   "maker": "Griplock Systems or Gripple (to choose)",
-  "model": "PROPOSAL 2026-11-24 (check 3 and its addendum): TWO 1.5 mm black-coated stainless suspension cables, cut to the drop, symmetric about the lamp's axis (r 14, opposite), so it hangs level; each ends in a swaged M4 x 0.7 threaded stud (e.g. Lexco's M4 threaded plug: to confirm the fitting for 1.5 mm cable and pull-test the assembly, as Lexco advises) screwed 8 into the hub, and in an adjustable gripper in the canopy, set to equal length when hung (1 mm of difference tilts the lamp about 2 deg). The fixture (about 1.6 kg) hangs from them; the cord carries current only. Rated well over the fixture (Griplock's 1.5 mm kits about 30 to 45 kg; to confirm)",
-  "usd": 20.0,
+  "model": "PROPOSAL 2026-11-24 (v5): TWO nVent CADDY Speed Link SLK15L2SE250 (1.5 mm wire, 2 m, a 1/4 in threaded stud end, 44 lb rated each at a 5:1 static safety factor, cULus; electrogalvanized steel, so a black coating or sleeve to confirm), symmetric about the lamp's axis at r 17.5; each stud end screwed into the hub (1/4-20 tapped 13, its body in a Ø10 bore, Loctite 243), the cables up through the crown to the canopy's two grippers 35 apart either side of its cord grip. LEVELLING: the lamp hung, a level across the rim, the two lengths set equal to about ±0.25 mm at the grippers (1 mm out tilts it about 1.6 deg), the cord left slack. The stud's length and body size are not on nVent's sheet: drawn as assumed, to confirm on the part; pull-test the assembly. The cord carries current only",
+  "usd": 24.0,
   "estimate": true,
   "supplier": "lighting-hardware distributors",
   "price_date": "2026-10-31"
@@ -777,7 +777,7 @@
  "hemi-canopy-strap": {
   "kind": "hardware",
   "maker": "any (a lighting supplier)",
-  "model": "Zinc-plated steel crossbar, 1.6 mm, screwed to the 4 in junction box; the cord grip, the suspension gripper and the canopy's screws anchor in it, and the driver and the 120 V splices sit in a closed steel enclosure on it. The black cast-acrylic canopy is a decorative cover only (black acrylic can't enclose 120 V splices) (review, 2026-11-01). No change to how the canopy looks",
+  "model": "Zinc-plated steel crossbar, 1.6 mm, screwed to the 4 in junction box; the cord grip, the suspension gripper and the canopy's screws anchor in it, and the driver and the 120 V splices sit in a closed steel enclosure on it. The black cast-acrylic canopy is a decorative cover only (black acrylic can't enclose 120 V splices) (review, 2026-11-01). No change to how the canopy looks | PROPOSAL 2026-11-24 (v5): it carries the cord grip and the two suspension grippers, 35 apart either side of it",
   "usd": 6.0,
   "estimate": true,
   "supplier": "a lighting supplier",
@@ -795,7 +795,7 @@
  "hemi-tether": {
   "kind": "hardware",
   "maker": "any",
-  "model": "Review 2026-11-01: the shade's secondary retention, a 1 mm stainless wire-rope tether (7x7), crimped loops, from an eye screwed into the hub to an eye on the collar, slack in use; rated well over 10 x the 1.1 kg shade",
+  "model": "Review 2026-11-01: the shade's secondary retention, a 1 mm stainless wire-rope tether (7x7), crimped loops, from an eye screwed into the hub to an eye on the collar, slack in use; rated well over 10 x the 1.1 kg shade | PROPOSAL 2026-11-24 (v5): an M3 stainless eye screw radially into the hub at z 81 (90 deg), a 1 mm stainless tether with a snap hook to the eye turned on the collar's bore at z 68; unhooked in a swap once the shade is turned and lowered a hand's width",
   "usd": 4.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -924,8 +924,17 @@
  "hemi-crown-screws": {
   "kind": "hardware",
   "maker": "any",
-  "model": "PROPOSAL 2026-11-24: three M3 x 8 countersunk (ISO 10642) stainless screws, the crown to the hub's neck",
+  "model": "PROPOSAL 2026-11-24 (v5): three M2.5 x 8 countersunk (ISO 10642) stainless screws, the crown to the hub's neck, at 90, 210 and 330 deg, r 9.25",
   "usd": 0.5,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-11-24"
+ },
+ "hemi-cap-key": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "PROPOSAL 2026-11-24 (v5): the cap's key and hold-down: a Ø2 x 5 stainless dowel pin (ISO 2338) pressed 3 into the crown's top, 2 into the cap; a Ø2 x 2 N42 neodymium magnet bonded in the crown's top under a Ø2 x 0.5 steel disc bonded in the cap",
+  "usd": 0.6,
   "estimate": true,
   "supplier": "any",
   "price_date": "2026-11-24"

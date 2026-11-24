@@ -364,6 +364,8 @@ def build(frame, samples, scale):
             tdir_ = f'out-dome-pendant-top{tp_}' if tp_ else 'out-dome-pendant'
             loaded_ = ['clamp', 'crown', 'gland', 'hub', 'collar', 'white-disc', 'ring'] + (['gasket-out'] if os.environ.get('GASKETS', '0') == '1' else []) + \
                 (['suspension'] if os.path.exists(os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'suspension.stl')) else [])
+            print('LIGHTSET', 'HOUSE_DOME', os.environ.get('HOUSE_DOME', '-'), '| HOUSE_ROOM', os.environ.get('HOUSE_ROOM', '1'),
+                  '| HOUSE_WB', os.environ.get('HOUSE_WB', 'house'), '| STUDIO_OFF', os.environ.get('STUDIO_OFF', '-'))
             print('HEMI_TOP', tp_ or 'today', 'meshes', tdir_ + ': ' + ' '.join(loaded_), '| HEMI_COLLAR_CAP', os.environ.get('HEMI_COLLAR_CAP', '0'),
                   '| BORDER', os.environ.get('BORDER', 'none'))
             for nm in ('clamp', 'crown', 'gland', 'hub'):
@@ -372,7 +374,9 @@ def build(frame, samples, scale):
             # the collar: its flange face inside the shade white (below z 80 in the shade's frame), the rest black
             cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
             mx = nt.nodes.new('ShaderNodeMixShader'); tc = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ')
-            lt = nt.nodes.new('ShaderNodeMath'); lt.operation = 'LESS_THAN'; lt.inputs[1].default_value = 0.080
+            # (v5, check 4 (1)) the STL import puts its 0.001 scale on the object, so Object z is in mm (56.5 to 100): 80, not 0.080
+            # (since 2026-11-10 the test was never true: every collar face meant white rendered black)
+            lt = nt.nodes.new('ShaderNodeMath'); lt.operation = 'LESS_THAN'; lt.inputs[1].default_value = 80.0
             nt.links.new(tc.outputs['Object'], sx.inputs[0]); nt.links.new(sx.outputs['Z'], lt.inputs[0])
             if os.environ.get('HEMI_COLLAR_CAP') == '1':
                 # (check 3, 2026-11-24) white only where it is painted: the faces below z 80 that face down (the flange's face

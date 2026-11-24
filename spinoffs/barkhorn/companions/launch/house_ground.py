@@ -577,6 +577,9 @@ def room(bpy, s, fit=False):
         me = bpy.data.meshes.new(nm); me.from_pydata([tuple(c * s for c in v) for v in verts], [], [(0, 1, 2, 3)])
         o = bpy.data.objects.new(nm, me); bpy.context.scene.collection.objects.link(o)
         o.visible_camera = o.visible_diffuse = o.visible_shadow = o.visible_volume_scatter = False
+        # (v5) the back wall stands wholly behind the paper: seen by the camera it changes no pixel, and nothing hidden
+        # from the camera stands in frame (the house rule, to the letter)
+        o.visible_camera = nm == 'room-back'
         o.visible_glossy = True; o.visible_transmission = os.environ.get('HOUSE_ROOM_TRANS', '0') == '1'   # (1: also seen through glass, 2026-11-21 test)
         m = bpy.data.materials.new(nm); m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
         b.inputs['Base Color'].default_value = (col, col, col * 0.97, 1); b.inputs['Roughness'].default_value = 1.0
