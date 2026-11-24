@@ -147,10 +147,50 @@
   "enclosure": [
    -32.0,
    -46.0,
-   736.4,
+   735.4,
    32.0,
    46.0,
+   770.4
+  ],
+  "plate-standoffs": [
+   -27.5,
+   -33.5,
+   770.4,
+   27.5,
+   33.5,
    774.4
+  ],
+  "enclosure-screws": [
+   -27.5,
+   -33.5,
+   767.0,
+   27.5,
+   33.5,
+   773.9
+  ],
+  "bushings": [
+   -13.0,
+   -13.0,
+   734.2,
+   13.0,
+   13.0,
+   771.2
+  ],
+  "canopy-grip": [
+   -8.8,
+   -8.8,
+   723.0,
+   8.8,
+   8.8,
+   733.0
+  ],
+  "ground-screw": [
+   -4.0,
+   52.0,
+   765.4,
+   4.0,
+   60.0,
+   776.0
   ]
  },
  "finishes": {
@@ -172,6 +212,11 @@
   "suspension": "anodised",
   "canopy": "anodised",
   "strap": "steel",
-  "enclosure": "steel"
+  "enclosure": "steel",
+  "plate-standoffs": "steel",
+  "enclosure-screws": "steel",
+  "bushings": "trim",
+  "canopy-grip": "anodised",
+  "ground-screw": "steel"
  }
 }

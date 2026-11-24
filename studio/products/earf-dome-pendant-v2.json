@@ -57,7 +57,7 @@
  },
  "assign": [
   {
-   "match": "collar|clamp|hub|pins|reflector|crown|gland|suspension|canopy",
+   "match": "collar|clamp|hub|pins|reflector|crown|gland|suspension|canopy|canopy-grip",
    "material": "anodised"
   },
   {
@@ -81,11 +81,11 @@
    "material": "silicone"
   },
   {
-   "match": "strap|enclosure",
+   "match": "strap|enclosure|plate-standoffs|enclosure-screws|ground-screw",
    "material": "steel"
   },
   {
-   "match": "ring",
+   "match": "ring|bushings",
    "material": "trim"
   }
  ],

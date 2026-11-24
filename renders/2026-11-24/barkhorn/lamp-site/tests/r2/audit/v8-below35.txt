@@ -1,0 +1,62 @@
+LAMP_MOVE key at [-0.2167, -0.2582, 0.6448] aim [-0.25, 0.0, 0.45] W 1.131
+LAMP_MOVE wall_left at [-1.2, 0.1, 1.35] aim [-1.6, 1.1, 1.09] W 8.194
+LAMPK house-wall_left 1.2
+LAMPK house-key 1.08
+HOUSE_CAM [0.0, -0.172, 0.06, 0.0, 0.0, 0.37, 50.0, 1.0]
+LIGHTSET HOUSE_DOME 1.0 | HOUSE_ROOM 0 | HOUSE_WB 6500,10 | STUDIO_OFF house-key,house-key-face,house-key-housing,house-fill,house-fill-face,house-fill-housing,house-kick,house-kick-face,house-kick-housing,house-horn,house-horn-face,house-horn-housing,house-bg-left,house-bg-right,house-wall_left,house-bg-high,house-wall-ll
+HEMI_TOP today meshes out-dome-pendant: clamp crown gland hub collar white-disc ring gasket-out suspension | HEMI_COLLAR_CAP 1 | BORDER none
+HEMI_LOCK none | HEMI_ROT 0
+HOUSE_WB 6500.0 10.0
+HOUSE_CAM free (0.0, -0.1720000058412552, 0.05999999865889549) (0.0, 0.0, 0.3700000047683716)
+AUDIT house-dome-red hidden [] no-shadow [] lights [('led-red-0', 'AREA', 0.0), ('led-red-1', 'AREA', 0.0), ('led-red-2', 'AREA', 0.0), ('led-red-3', 'AREA', 0.0), ('led-red-4', 'AREA', 0.0), ('led-red-5', 'AREA', 0.0), ('led-red-6', 'AREA', 0.0), ('led-red-7', 'AREA', 0.0), ('led-red-8', 'AREA', 0.0), ('led-red-9', 'AREA', 0.0), ('led-red-10', 'AREA', 0.0), ('led-red-11', 'AREA', 0.0), ('led-red-12', 'AREA', 0.0), ('led-red-13', 'AREA', 0.0), ('led-red-14', 'AREA', 0.0), ('led-red-15', 'AREA', 0.0), ('led-red-16', 'AREA', 0.0), ('led-red-17', 'AREA', 0.0), ('led-red-18', 'AREA', 0.0), ('led-red-19', 'AREA', 0.0), ('led-red-20', 'AREA', 0.0), ('led-red-21', 'AREA', 0.0), ('led-red-22', 'AREA', 0.0), ('led-red-23', 'AREA', 0.0)]
+HIDDENCAST house-dome-red: 0 hidden, 0 in frame
+RAYVIS MESH sweep camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH tint-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH tint-in-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH clear-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH clear-in-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH clear-edge-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH opal-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH opal-in-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH opal-edge-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH tint-edge-red camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH rim camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH clamp camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH crown camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH gland camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH hub camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH collar camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH white-disc camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH ring camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH pins camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH gasket-out camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH suspension camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cord-v6 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH carrier camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH stem camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH board camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-0 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-1 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-2 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-3 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-4 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-5 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-6 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-7 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-8 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-9 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-10 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-11 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-12 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-13 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-14 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-15 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-16 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-17 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-18 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-19 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-20 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-21 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-22 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-red-23 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+CASTCHECK house-dome-red {}
