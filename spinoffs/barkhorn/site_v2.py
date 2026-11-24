@@ -835,6 +835,7 @@ def apply(web, head, rest):
         site_fix.fix_10(p, web)
         site_fix.fix_11(p, web)
         site_fix.fix_12(p, web)
+        site_fix.fix_14(p, web)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
@@ -2176,8 +2177,18 @@ def rc_home(p, web):
 # per color (fa0c3a65: satin black hardware, polished bevels); the lamps lit, per tint, and in rows (r32-lamps-final 17a9da5e;
 # Core's base in its own color fee3b161; Hemisphere direct, from under, in a group cd703d56)
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
-TROPOS_BAR = 'renders/2026-11-21/barkhorn/b1-test/fixed8.png'   # Tropos in Acid at the bar: fixed-8 (r33-speaker-horn 31ca39748d; the owner 2026-11-24)
-TROPOS_BAR_ALT = 'Tropos in Acid in the bar\\u2019s bay, a wall of records around it, Hemispheres and Cores over the counter.'
+TROPOS_BAR_GIT = ('2802834a71', 'renders/2026-11-21/barkhorn/b1-test/fixed9.png')   # Tropos in Acid at the bar: fixed-9 (r33-speaker-horn; the coordinator 24 Nov 06:04)
+
+
+def _tropos_bar_src():
+    """fixed-9 read from git (r33-speaker-horn), not carried in this tree: written to a temp file for the build."""
+    import os, subprocess, tempfile
+    sha, path = TROPOS_BAR_GIT
+    data = subprocess.run(['git', 'show', f'{sha}:{path}'], cwd=os.path.dirname(os.path.abspath(__file__)), check=True, capture_output=True).stdout
+    f = os.path.join(tempfile.gettempdir(), 'earf-tropos-bar-fixed9.png')
+    open(f, 'wb').write(data)
+    return f
+TROPOS_BAR_ALT = 'Two Tropos in Acid in bays in a wall of records. Five Hemispheres in Ember, Dust and Acid hang over the counter. Three Cores in Ember, Dust and Acid and Mantle in Ember sit on the counter.'   # the coordinator 24 Nov 05:58, exactly
 MANTLE_COVER = {k: f'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{n}-cover.png' for k, n in   # as each passes (r48-mantle-design 5637cfe9);
                 (('red', 'ember'), ('green', 'poison'), ('violet', 'haze'), ('ice', 'fog'))}                 # a tint without one shows no cover view
 MANTLE_COVER.update({k: f'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{n}-cover-strong.png' for k, n in   # the strong sheet, the owner's pick
@@ -2235,7 +2246,10 @@ def rc_products(p, web):
             D['tt']['colours'][k]['views']['cover'], _ = views(MANTLE_COVER[k], f'mantle-{n}-cover', 1600)
     # Tropos in Acid at the bar, the new record wall (r33-speaker-horn 04c6fb4c), after the front
     acid = next(c for c in D['clouds'] if c['k'] == 'amber')
-    acid['views']['bar'], _ = views(TROPOS_BAR, 'tropos-bar', 1600, 90, 90)   # quality 90: the wall bands at 82
+    TROPOS_BAR = _tropos_bar_src()
+    acid['views']['bar'], _ = views(TROPOS_BAR, 'tropos-bar', 1600)   # C6 (8): the full size grained like the lamps; the thumbnail at q80 like the rest
+    import site_fix
+    site_fix._grain_save(Image.open(os.path.join(web.ROOT, TROPOS_BAR)).convert('RGB').resize((1600, 900), Image.LANCZOS), os.path.join(web.IMG, 'rc', 'tropos-bar.webp'))
     # the lamps: each lit in its tint, the eight in a row, Hemisphere from below (Ember)
     rows = {}
     room = [(views(src, name, 1600)[0], alt, tints) for src, name, alt, tints in ROOM]
@@ -2683,6 +2697,7 @@ def rc_finish(web):
     site_fix.finish_10(web)
     site_fix.finish_12(web)
     site_fix.finish_13(web)
+    site_fix.finish_14(web)
 
 
 BANNED_RC = r'seven colors|Ember to Fog|Smoke as current|still to come|on hold|polished black' if EIGHT else r'eight colors|to Smoke|Smoke as current'
