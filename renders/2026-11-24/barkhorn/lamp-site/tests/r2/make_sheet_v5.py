@@ -36,7 +36,7 @@ FOOT = [
 ]
 BELOW = [
     ('v5-below', 'From below: 0.29 m under the rim, 3 cm off the axis, 40 mm lens'),
-    ('v5-below35', 'From below, 35 deg off the axis, 50 mm lens'),
+    ('v5-below35', 'From below, 35 deg off the axis, 50 mm lens (its foot cropped)'),
 ]
 BELOW_NOTE = [
     'One picture serves all three tops: the lip, the disc and the carrier are the same in each.',
@@ -60,7 +60,10 @@ CH = crop[0].size[1]
 G = 20
 SW = 3 * W + 2 * G
 BW = (SW - G) // 2
-bel = [fit(load(b), BW) for b, _ in BELOW]
+# the 35 deg view's bottom 7 % is cropped: the floor's edge stood in it
+bel = [load(b) for b, _ in BELOW]
+bel[1] = bel[1].crop((0, 0, bel[1].size[0], int(bel[1].size[1] * 0.93)))
+bel = [fit(im, BW) for im in bel]
 BH = max(b.size[1] for b in bel)
 TH = 52 + 32 * max(len(l) for _, _, l in COLS) + 16
 FT = 16 + 32 * len(FOOT)
