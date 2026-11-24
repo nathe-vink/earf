@@ -213,13 +213,17 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
 # A: three tiers, 11.33 each: the clamp ring Ø104, the crown Ø80, the gland Ø56.
 # B: four tiers, 8.5 each: the clamp ring Ø104, the crown in two, Ø80 and Ø56, the gland Ø32.
 # Each entry (diameter, z0, z1) in the cover's frame; 'top' the collar's top, the clamp ring's 0.5 under it.
+# v8 (the coordinator, 21:32 UTC): A's positive lock (Ganter GN 617, GRIP['lock']) is an option until the owner answers
+# (his pictures: tests/r2/lock-sheet.jpg). LOCK_ON = False drops it cleanly: A then has the M5 detent like today's top and
+# B, its cables at 0/180 and the cap's key and magnet at 90/270; nothing else is redrawn. The env HEMI_LOCK_ON overrides.
+import os as _os
+LOCK_ON = _os.environ.get('HEMI_LOCK_ON', '1') == '1'
 TOP_TIERS = {
     'today': dict(top=None, crown=[(80.0, 100.5, 112.0)], gland=(40.0, 112.0, 126.0)),   # today's top, with check 3's fixings
-    'A': dict(top=103.33, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0), lock=True,
-              # v7: A's cables turned to the lock's line (105/285 deg), so its off-axis mass (about 30 g at r 60) lies along
-              # them, where the levelling takes it up (across them it would tip the lamp about 1.1 deg for good); the cap's
-              # key and magnet turned clear of them
-              cables=(105.0, 285.0), key=(15.5, 15.0, 2.0), magnet=(15.5, 195.0, 2.0)),
+    'A': dict(top=103.33, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0),
+              # v7: with the lock, A's cables turned to the lock's line (105/285 deg), so its off-axis mass lies along them,
+              # where the levelling takes it up; the cap's key and magnet turned clear of them. v8: all of it under LOCK_ON
+              **(dict(lock=True, cables=(105.0, 285.0), key=(15.5, 15.0, 2.0), magnet=(15.5, 195.0, 2.0)) if LOCK_ON else {})),
     'B': dict(top=100.5, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 109.0), (56.0, 109.0, 117.5)], gland=(32.0, 117.5, 126.0),
               cable_r=17.6, key=None, magnet=(14.0, 270.0, 1.5)),     # v7: B's cables at r 17.6 (1.2 of the Ø40 neck round each hole, 0.8 clear of the cap)
 }

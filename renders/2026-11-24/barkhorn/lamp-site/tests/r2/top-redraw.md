@@ -360,3 +360,10 @@ detent.
   - fixings_check: zero clashes over all three tops, with the new parts in (standoffs, screws, bushings, the canopy's grip,
     the grounding screw).
   - top_check: every top comes off; the keyed shade refuses the wrong turn; A's lock is clear at the seat and blocks.
+- THE LOCK AS AN OPTION (the coordinator, 21:32 UTC). One switch, LOCK_ON in crystal.py (or HEMI_LOCK_ON=0 in the
+  environment), drops the lock cleanly. With it off:
+  - A has the M5 detent like today's top and B;
+  - A's cables return to 0/180 and the cap's key and magnet to 90/270;
+  - nothing else is redrawn.
+  Checked off as well as on: fixings_check is clean; A comes off, the control holds, and the keyed shade refuses the wrong
+  turn. The committed packages are built with the lock on; with it off, rebuild with HEMI_LOCK_ON=0.
