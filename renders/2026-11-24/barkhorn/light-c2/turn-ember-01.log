@@ -1,0 +1,13 @@
+NO GLASS SHADOWS: 6 materials: ['bark@cloud-red', 'bark@cloud-red.001', 'clear-cast@cloud-red', 'horn-formed@cloud-red', 'horn-lot@cloud-red', 'horn-satin@cloud-red']
+SHADOW RAY LINKS LEFT: 0 []
+00:29.919  cycles           | WARNING CUEW initialization failed: Error opening the library
+10:33.043  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-ember-01.png'
+/home/user/earf/studio/engine/render.py:480: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+10:38.525  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-ember-01.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:531: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+10:39.667  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-ember-01.swatch.png'
+finish: white 236 -> 236 (gain 1.0), contrast 0.2, clarity 0.05, sharpen 0.3 at 0.7 px
+renders/2026-11-24/barkhorn/light-c2/turn-ember-01.png  {'build': 29.5, 'render': 603.1}  samples 96
