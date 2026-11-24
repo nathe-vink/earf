@@ -1,0 +1,13 @@
+NO GLASS SHADOWS: 6 materials: ['bark@cloud-amber', 'bark@cloud-amber.001', 'clear-cast@cloud-amber', 'horn-formed@cloud-amber', 'horn-lot@cloud-amber', 'horn-satin@cloud-amber']
+SHADOW RAY LINKS LEFT: 0 []
+00:25.882  cycles           | WARNING CUEW initialization failed: Error opening the library
+09:59.949  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-acid-18.png'
+/home/user/earf/studio/engine/render.py:480: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+10:04.440  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-acid-18.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:531: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+10:05.445  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-acid-18.swatch.png'
+finish: white 236 -> 236 (gain 1.0), contrast 0.2, clarity 0.05, sharpen 0.3 at 0.7 px
+renders/2026-11-24/barkhorn/light-c2/turn-acid-18.png  {'build': 25.6, 'render': 574.1}  samples 96
