@@ -2,7 +2,11 @@
 smallest real change that brings that surround back to about FA123's L* with the plate's L* held.
     python3 gen.py alone            -> alone-acid-<light>.json: Acid with one light on (and `sky` alone), quarter size
     python3 gen.py change TINT...   -> change-<tint>.json, half size (800 x 800): the proposed change (CHANGE below)
-    python3 gen.py expo TINT EV...  -> expo-<tint>-<ev>.json, half size: light C as rendered, exposure only"""
+    python3 gen.py expo TINT EV...  -> expo-<tint>-<ev>.json, half size: light C as rendered, exposure only
+    python3 gen.py v2 TINT...       -> (the coordinator, 17:38) half size, on the S4b-fixed amp rig (light_c's
+                                       real_bounces_and_panels + buildable: the bounce card and the front strip real,
+                                       flag 1 out of the cove): v2bt-<tint> back-top at half irradiance, exposure -0.1
+                                       (the plate face near FA123's 35.5 on Acid); v2ev-<tint> exposure -0.75 only"""
 import copy, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); SRC = os.path.dirname(HERE)
 
@@ -37,6 +41,14 @@ if __name__ == '__main__':
         for t in sys.argv[2:]:
             s = change(load(t)); s['size'] = [800, 800]
             json.dump(s, open(os.path.join(HERE, f'change-{t}.json'), 'w'), indent=1)
+    elif what == 'v2':
+        sys.path.insert(0, os.path.join(HERE, '..', '..', '..', '..', '..', 'spinoffs', 'barkhorn', 'campaign'))
+        import light_c
+        for t in sys.argv[2:]:
+            for name, bt, ev in (('v2bt', 0.5, -0.1), ('v2ev', 1.0, -0.75)):
+                s = load(t); light_c.real_bounces_and_panels(s); light_c.buildable(s)
+                s['lights']['back-top']['irradiance'] *= bt; s['render']['exposure'] = ev; s['size'] = [800, 800]
+                json.dump(s, open(os.path.join(HERE, f'{name}-{t}.json'), 'w'), indent=1)
     elif what == 'expo':
         t = sys.argv[2]
         for ev in sys.argv[3:]:

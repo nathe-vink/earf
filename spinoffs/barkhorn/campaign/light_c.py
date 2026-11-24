@@ -126,10 +126,14 @@ def buildable(s, centre=(0.0, -0.009, 0.6475)):           # the Tropos's bounds 
             name = f'{kind[:-1]}{i}'
             c, side, up, hw, hh = _card_frame(f)
             before = (list(f['center_m']), list(f['size_m']))
-            if abs(up[2]) > 0.5:                                         # standing: off the floor, trimmed from its foot
+            if abs(up[2]) > 0.5:                                         # standing: off the floor (and the cove's
+                R = st.get('radius', 1.0)                                    # curve under its foot), trimmed from its foot
+                def floor_z(y):
+                    return 0.0 if curve_y is None or y <= curve_y else R - max(R * R - (y - curve_y) ** 2, 0.0) ** 0.5
+                foot = max(floor_z(c[1] + sg * side[1] * hw) for sg in (-1, 1)) + FLOOR_GAP
                 lo = c[2] - hh * abs(up[2])
-                if lo < FLOOR_GAP:
-                    top = c[2] + hh * abs(up[2]); hh = (top - FLOOR_GAP) / 2 / abs(up[2]); c[2] = (top + FLOOR_GAP) / 2
+                if lo < foot:
+                    top = c[2] + hh * abs(up[2]); hh = (top - foot) / 2 / abs(up[2]); c[2] = (top + foot) / 2
             elif curve_y is not None:                                    # lying: off the curve, trimmed at its back
                 ext = [c[1] + sg * (abs(side[1]) * hw + abs(up[1]) * hh) for sg in (-1, 1)]
                 if ext[1] > curve_y - 0.01 and abs(up[1]) > 0.9:
@@ -145,6 +149,29 @@ def buildable(s, centre=(0.0, -0.009, 0.6475)):           # the Tropos's bounds 
     return out
 
 
+def real_bounces_and_panels(s, bounce='real', strip='real'):
+    """S4b for the rest of a rig (the coordinator, 24 Nov 17:38; the amp rig): a reflect-only bounce card (one-sided,
+    no shadow, no diffuse) becomes a real two-sided white card, or comes out (`bounce` 'real' or 'out'); a panel that
+    only reflects or hides from the camera (diffuse 0, camera off) becomes a real light, lighting and reflecting and
+    seen by the camera, or comes out (`strip`). Returns what changed."""
+    out = []
+    for i, f in enumerate(s['set'].get('bounces', [])):
+        if f and not f.get('off') and f.get('reflect_only'):
+            if bounce == 'out':
+                f['off'] = True
+            else:
+                f.pop('reflect_only'); f.update(one_sided=False, camera=True, glossy=True)
+            out.append((f'bounce{i}', bounce))
+    for n, L in (s.get('lights') or {}).items():
+        if L and not L.get('off') and L.get('type') == 'panel' and (not L.get('camera') or L.get('diffuse', True) in (0, 0.0, False)):
+            if strip == 'out':
+                L['off'] = True
+            else:
+                L.update(diffuse=1.0, specular=1.0, camera=True)
+            out.append((n, strip))
+    return out
+
+
 def model_c(s, title):
     s = copy.deepcopy(s)
     s['render'].update(caustics_refractive=True, caustics_reflective=True, filter_glossy=0.0, clamp=0)
@@ -152,6 +179,7 @@ def model_c(s, title):
                                              {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'shadow_ray_report'}])
     s['set']['contact'] = {**(s['set'].get('contact') or {}), 'strength': 0.0, 'core_strength': 0.0}
     real_flags(s)
+    real_bounces_and_panels(s)
     buildable(s)
     s['title'] = title
     return s
