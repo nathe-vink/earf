@@ -408,6 +408,10 @@ def build(frame, samples, scale):
                 # (check 3) the outer ring only (the inner one, 0.0 off the opal, drew the two rows of dots)
                 gp_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'gasket-out.stl')
                 part(tdir_, 'gasket-out' if os.path.exists(gp_) else 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
+            lk_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'lock.stl')
+            if os.path.exists(lk_):
+                # v7: A's lock (Ganter GN 617), its knob black, at the back of the clamp ring
+                part(tdir_, 'lock', cap, c); print('HEMI_LOCK', tdir_)
             if 'suspension' in loaded_:
                 # v6 (the v5 check's (5)): the two cables bare 1/16 in stainless, their sleeves copper (hidden in the hub)
                 part(tdir_, 'suspension', SC.principled('cable', '#8E9093', 0.32, 1.0), c)

@@ -322,7 +322,7 @@
  "dome-pins": {
   "kind": "hardware",
   "maker": "any",
-  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to the collar through the tether (v6; hemi-tether) (review, 2026-11-01)",
+  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention (v7): on top A, a positive lock (hemi-lock), in place of the 2026-11-01 tether. The pins in M3 holes 7.5 deep for their 6.0 of thread",
   "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -331,7 +331,7 @@
  "dome-plunger": {
   "kind": "hardware",
   "maker": "Kipp or Misumi",
-  "model": "A stainless ball spring plunger M5, light force (about 10 N), threaded into the hub: the bayonet's detent, clicking into a dimple in the collar",
+  "model": "A stainless ball spring plunger M5 x 12, light force (about 10 N): the bayonet's detent on today's top and B (v7: threaded through the PEEK ring at 90 deg, z 93, its ball clicking into a dimple in the collar's bore); top A has the lock (hemi-lock) instead",
   "usd": 4.5,
   "estimate": true,
   "supplier": "Misumi",
@@ -723,7 +723,7 @@
  "hemi-suspension": {
   "kind": "hardware",
   "maker": "Cable Grippers Inc. (cable, grippers) and Nicopress (stop sleeves)",
-  "model": "PROPOSAL 2026-11-24 (v7, the v5 and v6 checks): TWO 1/16 in (1.59) 7x7 stainless cables (Cable Grippers Inc. bulk cable, fuse cut), symmetric about the axis at r 16 (today's top, A) or r 17.6 (B). The hub end: a Nicopress 871-1-C copper stop sleeve swaged on with the 51-C-887 tool (Nicopress: a stop sleeve gives about 50 % of the cable's rated break, typical, about 1.07 kN on 1/16 7x7; about Ø5.2 x 5.6 before swaging, which lengthens it), bearing up under a Ø5.6 x 8 counterbore in the hub's bottom face; the cable up a Ø2.4 hole through the hub and the crown (and the cap's lid in today's top and A). The canopy end: a Cable Grippers MGR-M10-MM gripper on each (hemi-gripper), at r 48, the cables splayed to it. Rated as a system by Cable Grippers' independent tests: MGR on 1/16 in stainless 7x7, 312 lb minimum break, 50 lb a cable at their 5:1 (the lamp 1.6 to 1.7 kg, about 3.7 lb, on two). PROOF: each cable assembly loaded to 90 N (5 x the whole lamp) for 1 min before fitting. LEVELLING: the canopy hanging on the cables below its plate, loosen each gripper's safety nut, push the plunger and slide until a 200 mm level across the rim reads level to 1 deg (its two sides within 3.5 mm below the ceiling; 1 mm of cable is about 1.3 deg, 4.5 mm across the rim), tighten the safety nuts, set the cord's 2 mm of slack, push the canopy up and fix its set screws. The cord carries current only",
+  "model": "PROPOSAL 2026-11-24 (v7, the v5 and v6 checks): TWO 1/16 in (1.59) 7x7 stainless cables (Cable Grippers Inc. bulk cable, fuse cut), symmetric about the axis at r 16 (today's top, A) or r 17.6 (B), at 0/180 deg (A: 105/285, the lock's line, so its off-axis mass lies along them). The hub end: a Nicopress 871-1-C copper stop sleeve swaged on with the 51-C-887 tool (Nicopress: a stop sleeve gives about 50 % of the cable's rated break, typical, about 1.07 kN on 1/16 7x7; about Ø5.2 x 5.6 before swaging, which lengthens it), bearing up under a Ø5.6 x 8 counterbore in the hub's bottom face; the cable up a Ø2.4 hole through the hub and the crown (and the cap's lid in today's top and A). The canopy end: a Cable Grippers MGR-M10-MM gripper on each (hemi-gripper), at r 48, the cables splayed to it. Rated as a system by Cable Grippers' independent tests: MGR on 1/16 in stainless 7x7, 312 lb minimum break, 50 lb a cable at their 5:1 (the lamp 1.6 to 1.7 kg, about 3.7 lb, on two). PROOF: each cable assembly loaded to 90 N (5 x the whole lamp) for 1 min before fitting. LEVELLING: the canopy hanging on the cables below its plate, loosen each gripper's safety nut, push the plunger and slide until a 200 mm level across the rim reads level to 1 deg (its two sides within 3.5 mm below the ceiling; 1 mm of cable is about 1.3 deg, 4.5 mm across the rim), tighten the safety nuts, set the cord's 2 mm of slack, push the canopy up and fix its set screws. The cord carries current only",
   "usd": 14.0,
   "estimate": true,
   "supplier": "Cable Grippers Inc. (Las Vegas) and a Nicopress distributor",
@@ -791,15 +791,6 @@
   "estimate": true,
   "supplier": "Digi-Key or Mouser",
   "price_date": "2026-11-01"
- },
- "hemi-tether": {
-  "kind": "hardware",
-  "maker": "any",
-  "model": "PENDING (v7, the v6 check's (1) and (2)): the shade's secondary retention is being redesigned (the v6 tether blocked the swap and its parts were not rated for the drop); this row is replaced when it is decided. Was: Review 2026-11-01: the shade's secondary retention, slack in use | PROPOSAL 2026-11-24 (v6, the v5 check's (4)): 1.5 mm 7x7 stainless rope (about 2.2 kN minimum break, a seller's figure), 125 between its two screws, crimped loops (Nicopress oval sleeves): an M4 x 6 stainless button screw radially into the hub (z 80, 90 deg) clamps the hub's eye; a 4 x 40 stainless snap hook (DIN 5299 C; sellers list 1.9 to 5.8 kN breaking: the lowest taken) clipped to it; the rope round the lip's top to an M3 x 6 stainless button screw through the collar's wall (z 70, 270 deg). It lets the shade be turned and lowered 100 before it goes taut. A drop of the shade onto it (the bayonet failed) peaks at about 1.3 kN in a stiff elastic estimate (it ignores the rope's own give): under the rope's 2.2 and the snap's 1.9, once",
-  "usd": 6.0,
-  "estimate": true,
-  "supplier": "McMaster-Carr or alike",
-  "price_date": "2026-11-24"
  },
  "hemi-driver-box": {
   "kind": "hardware",
@@ -1011,5 +1002,15 @@
   "estimate": true,
   "supplier": "with the box",
   "price_date": "2026-11-24"
+ },
+ "hemi-lock": {
+  "kind": "hardware",
+  "maker": "Ganter (Elesa-Ganter; JW Winco in the US)",
+  "model": "PROPOSAL 2026-11-24 (v7, the coordinator's decision: a positive lock in place of the 2026-11-01 tether): GN 617-5-M10X1-AK indexing plunger, without rest position (it cannot be left pulled), with lock nut: a Ø5 H7 pin, M10 x 1, a Ø21 knob, about 45 overall, a 5 stroke, spring about 7 N initial and 17 N at the end (JW Winco's table; confirm on Ganter's sheet). On top A only: threaded radially into the collar's wall at 105 deg, z 96.5, through the clamp ring, its pin into a Ø5.1 hole in the PEEK ring: with the knob released the shade cannot be lifted, turned or lowered. Today's 5 and B's 8 tall clamp rings cannot take its M10",
+  "usd": 18.0,
+  "estimate": true,
+  "supplier": "JW Winco or a Ganter distributor",
+  "price_date": "2026-11-24",
+  "url": "https://www.jwwinco.com/en-us/products/3.1-Indexing-locking-blocking-with-pins-and-ball-shaped-elements/Indexing-plungers/GN-617-Steel-Indexing-Plunger-Non-Lock-Out"
  }
 }

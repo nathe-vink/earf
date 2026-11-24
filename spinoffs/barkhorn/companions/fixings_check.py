@@ -13,7 +13,7 @@ import crystal as C
 
 FIX = {'crown', 'gland', 'grip', 'crown-screws', 'cap-key', 'suspension', 'tether', 'hub', 'grippers', 'gripper-brackets',
        'cord', 'canopy', 'strap', 'enclosure', 'slip-washer', 'collar', 'pins', 'plunger', 'ring', 'gripper-nuts',
-       'bracket-rivets', 'canopy-screws', 'box-screws', 'white-paint', 'driver'}
+       'bracket-rivets', 'canopy-screws', 'box-screws', 'white-paint', 'driver', 'lock', 'clamp'}
 
 
 THREADS = {}

@@ -10,7 +10,7 @@ sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..', '..', '..'
 import crystal as C
 from build123d import Pos, Rot
 
-COVER = ('shell', 'liner', 'skin', 'rim', 'collar', 'clamp', 'gaskets')
+COVER = ('shell', 'liner', 'skin', 'rim', 'collar', 'clamp', 'gaskets', 'lock-pulled')   # v7: A's lock, its knob pulled
 FIXT = ('hub', 'ring', 'pins', 'crown', 'gland', 'grip', 'white-disc', 'carrier', 'board', 'stem')
 CONF = {'today-as-built': dict(C.V3, white_split=False), 'today': dict(C.V3),
         'A': dict(C.V3, top='A', white_split=True), 'B': dict(C.V3, top='B', white_split=True)}
@@ -27,6 +27,11 @@ def overl(a, b):
 def check(name):
     p = CONF[name]
     P = {q.name: q.solid for q in C.north_parts(p) if q.solid is not None}
+    if 'lock' in P:
+        # v7 (the coordinator's decision, (6)): the swap is made with the lock's knob pulled, its pin drawn back 5 along its axis
+        import math
+        a_ = math.radians(C.GRIP['lock']['angle']); st_ = C.GRIP['lock']['stroke']
+        P['lock-pulled'] = Pos(st_ * math.cos(a_), st_ * math.sin(a_), 0) * P['lock']
     top = (C.TOP_TIERS[p['top']]['top'] if p.get('top') else p['collar'][3])
     # lowered from the drawn pose until the pins (z 91 to 95, lifted 8.5 to 82.5 to 86.5) clear the collar's top: top - 91
     # (check 3: A 12.33, B 9.5 from the drawn pose; from where it hangs, 0.5 lower, 11.83 and 9.0), then 0.5 more
@@ -59,6 +64,11 @@ def check(name):
     # the control: lowered 3 without the turn, the pins must hold it (else the check sees nothing)
     v = sum(overl(Pos(0, 0, -3.0) * P['collar'], P[f]) for f in ('pins',))
     print(f'  control, lowered 3 unturned: collar x pins {v:.0f} mm3 ({"held, as it must be" if v > 1 else "NOT HELD: the check is blind"})')
+    if 'lock' in P:
+        # v7: the knob released, the pin in the PEEK ring's hole: a lift of 1 and a turn of 2 deg must both hit it
+        lv = overl(Pos(0, 0, 1.0) * P['lock'], P['ring']); tv = overl(Rot(0, 0, 2.0) * P['lock'], P['ring'])
+        print(f'  the lock released: lifted 1, lock x PEEK ring {lv:.1f} mm3; turned 2 deg, {tv:.1f} mm3 '
+              f'({"blocked, as it must be" if lv > 0 and tv > 0 else "NOT BLOCKED"})')
 
 
 if __name__ == '__main__':

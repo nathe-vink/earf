@@ -196,15 +196,41 @@ its stud ends. The cables' own weight above the lamp hangs from the grippers. Th
 
 ## 8. v7 (the v6 check, items 1 to 14)
 
-- (1), (2) THE TETHER blocked the swap: its snap, on the lip in the 10 mm gap under the PEEK ring, let the shade rise only
-  about 6.0 of the 7.5 to 8.0 the pins need. Its parts were not rated for the drop either (the 1.5 mm rope breaks at 1.26
-  to 1.37 kN; the 4 x 40 snap is rated 500 N static by its maker). The suggested move, an anchor under the hub's bottom
-  face, would hang the snap and rope in the ring board's light, which faces up from the mouth, and so throw a shadow on the
-  lit shade's top. So the retention waits on a decision, put to the coordinator at 17:58 UTC: (a) that anchor, shadow and
-  all; (b) a positive lock in place of the tether (an indexing plunger with a maker's rating instead of the M5 detent: the
-  shade cannot turn off without pulling its knob), my recommendation; (c) a permanent rope (not removable without a tool).
-  The v6 tether stays drawn until then; its BOM row is marked PENDING, and the "rated well over 10 x" claims are gone
-  from the pins' and tether's rows.
+- (1), (2) THE SECONDARY RETENTION.
+  - Why the tether went: it blocked the swap. Its snap, on the lip under the PEEK ring, let the shade rise only about 6.0 of
+    the 7.5 to 8.0 needed. Its parts weren't rated for a drop: the rope breaks at 1.26 to 1.37 kN, and the snap's maker
+    rates it 500 N static.
+  - The alternative anchor, under the hub, would hang it in the ring board's light.
+  - So the coordinator decided (17:39 UTC) on a positive lock in place of the tether. The tether is gone: its parts,
+    screws, BOM row and texts.
+  - THE LOCK: Ganter GN 617-5-M10X1-AK, an indexing plunger with no rest position, so it cannot be left pulled. JW Winco's
+    table gives a Ø5 H7 pin, M10 x 1, a Ø21 knob, about 45 overall, a 5 stroke and a spring of about 7 N rising to 17 N.
+  - Where it sits: threaded radially into the collar's wall at 105 deg, z 96.5, through a Ø10.5 hole in A's clamp ring.
+    The hole is drilled through the collar's M10 hole once the ring is screwed down to its shoulder. The lock nut sits on a
+    Ø20 spot face.
+  - What it blocks: its pin enters a Ø5.1 hole in the PEEK ring, to r 36.3, so with the knob released the shade cannot be
+    lifted, turned or lowered. top_check: lifted 1, 20 mm3 into the ring; turned 2 deg, 28 mm3.
+  - Swapping: pull the knob, lift, turn, lower. Pulled, its tip stands at r 41.3, clear of the land (r 40.8) and the crown
+    (r 40). top_check runs the whole swap with it pulled: A comes off.
+  - Fitting: pull it, lift, turn, let go. It springs into its hole as the shade settles home. The PEEK ring's top outer
+    edge is led in 1.2 x 45, so a pin let go early rides down onto the land.
+  - Reach: the knob stands at the back of the top (r 66 to 81), opposite the level views' camera, where the crown hides it.
+    A hand reaches it over the shade from behind; the section drawing shows the path.
+  - Light path: none of the lock is in it, and none of it shows from below.
+  - Balance: the lock (about 30 g at r 60) moves A's centre of mass 1.2 off the axis. Across the two cables' line it would
+    tip the lamp about 1.1 deg, and the levelling could not take it up. So A's cables are turned to 105/285 deg, the lock's
+    line: the offset now lies along them (0.00 across), and the levelling takes it up (about 0.9 mm of cable). The canopy's
+    grippers, brackets and enclosure turn with them, and the cap's key and magnet move to 15/195 deg, clear of the cables.
+    In the level views, A's two cables now stand nearly one behind the other.
+  - ONLY A TAKES IT. Its M10 needs a clamp ring at least 10.5 tall, and today's is 5 and B's 8. The collar under them is
+    covered by the acrylic. Today's top and B keep the bayonet with an M5 ball detent and have no positive lock. That is
+    open, if either is picked.
+  - (7) THE SHADE UNDER GRAVITY ALONE, the lock never engaged: it hangs on its three pins, each seated against its notch's
+    top (z 95.5 in the collar's frame) by the shade's weight. To leave, the shade must be lifted 8.0 to 9.0 against its
+    weight into the turn passage (82.5 to 87.5), turned 30 deg and lowered; nothing moves it the other way. top_check's
+    control: lowered 3 unturned, the pins hold it (99 mm3 into the collar). The pins are Ø4 stainless shoulders: about 4 kN
+    each in shear, against 11 N. The lock adds a block against a release by hand (cleaning, a half-finished swap), which
+    the J-slot alone does not stop.
 - (3) THE CANOPY. The strap is now a round mounting plate, 1.6 steel, Ø140, with a rim turned down 12, screwed to the 4 in
   box by its two 8-32 screws at y -+44.45 (drawn).
   - The driver's enclosure hangs on four 6 mm standoffs below the plate, so the screws' heads sit in the gap. It goes on
@@ -244,9 +270,8 @@ its stud ends. The cables' own weight above the lamp hangs from the grippers. Th
   - The sheet says "between".
   - The squeeze reads "each 1.3 free" next to the shims, "the outer gasket drawn at 0.75 under the slip washer", and 38 %
     at the thickest stack.
-- (9) THE DETENT is drawn: an M5 x 12 ball spring plunger through the PEEK ring at 90 deg, z 93, its end in a Ø5.4
-  clearance in the hub, its ball tip in a Ø2.6 dimple in the collar's bore. It is clear of the pins' taps (30/150/270), the
-  tether's screw (z 80) and the rope (on the lip).
+- (9) THE DETENT (today's top and B; A has the lock) is drawn: an M5 x 12 ball spring plunger through the PEEK ring at 90 deg, z 93, its end in a Ø5.4
+  clearance in the hub, its ball tip in a Ø2.6 dimple in the collar's bore. It is clear of the pins' taps (30/150/270).
 - (10) The pins' M3 holes are 7.5 deep for 6.0 of thread, so each pin seats on its shoulder.
 - (11) THREAD CALLOUTS (size, drill, depth) are in the notes of the hub, ring, collar, crown, canopy, plate and brackets,
   and so on the drawings' notes.
@@ -254,7 +279,13 @@ its stud ends. The cables' own weight above the lamp hangs from the grippers. Th
 - (13) Pass v2's re-render list: pass2/RERENDER.md. It covers the frame kinds hemisphere() draws, every Hemisphere
   picture committed in the window, and the photometry files. The CAD's render export now draws the cables stainless and
   the paint white.
-- (14) The sheet waits on (1). B's header gains its cables beside the cap, its magnet-only cap and its Ø56 handle.
-- Zero clashes: fixings_check.py over all three tops, with the plunger, ring, nuts, rivets, screws and paint added.
+- (14) The sheet says which top has the lock. B's header gains its cables beside the cap, its magnet-only cap and its Ø56 handle.
+- Zero clashes: fixings_check.py over all three tops, with the lock, plunger, ring, clamp, nuts, rivets, screws and paint added.
 - The notes not acted on (no action unless cheap): the crown's 0.61 land by each countersink, B's magnet pocket 0.45 to
   0.56 from the cap's edge, and B's cap unkeyed. They are as they were, and the last is now stated as B's choice.
+
+## 9. v7 weights
+
+From the v7 solids, the cables inside the lamp included: today 1608 g at z 65.9, A 1717 g at z 68.8 (1.2 off the axis
+along its cables: the lock), B 1586 g at z 65.4. The tether is gone; A carries the lock, and today's top and B the
+detent.

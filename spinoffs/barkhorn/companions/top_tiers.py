@@ -10,7 +10,7 @@ sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..', '..', '..'
 import crystal as C
 from build123d import export_stl, Sphere
 
-NAMES = ('clamp', 'crown', 'gland', 'collar', 'white-disc', 'grip', 'gaskets', 'hub', 'ring', 'suspension', 'crown-screws', 'cord')
+NAMES = ('clamp', 'crown', 'gland', 'collar', 'white-disc', 'grip', 'gaskets', 'hub', 'ring', 'suspension', 'crown-screws', 'cord', 'lock')
 for top in (None, 'A', 'B'):
     p = dict(C.V3, top=top) if top else dict(C.V3)
     parts = C.north_parts(p)
