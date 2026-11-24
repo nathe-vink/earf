@@ -195,16 +195,30 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
          crown=(80.0, 100.5, 112.0),             # round 41: the low top, the heat sink: OD, z0, z1 (the fins of rounds
                                                  # 35 to 39 were 80 across from 110 to 146, 16 x 1.8: in git at 950a7eaf)
          cap=(40.0, 14.0), drop=600.0, canopy=(150.0, 50.0))
-# PROPOSAL (2026-11-24, the owner's question on the top's tiers; the coordinator's two ways): the visible stack from the
-# clamp ring's foot (92) to the gland's top (126), 34 tall, in even tiers with even steps in diameter. Today's: the clamp
-# Ø104 x 5, the collar's lip Ø96 x 3, the crown Ø80 x 11.5, the gland Ø40 x 14 (steps +40, +16, +8; heights 14, 11.5, 3, 5).
-# A: three tiers, about 11.3 each: the clamp ring Ø104, the crown Ø76, the gland Ø48 (steps 28).
-# B: four tiers, 8.5 each: the clamp ring Ø104, the crown in two, Ø84 and Ø64, the gland Ø44 (steps 20).
-# Each entry (diameter, z0, z1) in the cover's frame; the clamp's (diameter, top).
+# PROPOSAL, redrawn (2026-11-24, after the critics' check of the first draw, which locked the shade on: its crown sat over
+# the collar's wall, so the shade could not rise the 7.5 to 8.5 the bayonet needs). The visible stack from the clamp ring's
+# foot (92) to the gland's top (126), 34 tall, in even tiers with even steps in diameter. Today's: the clamp Ø104 x 5, the
+# collar's lip Ø96 x 3, the crown Ø80 x 11.5, the gland Ø40 x 14 (steps 12 at the band, then 8, 16, 40).
+# The rules the redraw keeps: (1) every fixture part from the collar's top to 9.5 above it (the lift, 8.5, and 1) stays
+# inside the collar's Ø82 bore, so the crown's first tier is Ø80 (as today); (2) the clamp ring is Ø104 (the M96 thread);
+# so the steps are 24, and (3) the band on the shade joins the rhythm, its rim Ø128 (was Ø116; flange_r 58 to 64);
+# (4) the collar rises flush with the clamp ring's top (0.5 proud, for the squeeze), its slots' entries with it, so there
+# is no recess and the clamp ring is plain M96 its full height, nothing for it to bottom on but the gasket;
+# (5) the white under the hub split so the shade comes off (WHITE_SPLIT); (6) a cord grip modeled under the gland (GRIP).
+# A: three tiers, 11.33 each: the clamp ring Ø104, the crown Ø80, the gland Ø56.
+# B: four tiers, 8.5 each: the clamp ring Ø104, the crown in two, Ø80 and Ø56, the gland Ø32.
+# Each entry (diameter, z0, z1) in the cover's frame; 'top' the collar's top, the clamp ring's 0.5 under it.
 TOP_TIERS = {
-    'A': dict(clamp=(104.0, 103.33), crown=[(76.0, 103.33, 114.67)], gland=(48.0, 114.67, 126.0)),
-    'B': dict(clamp=(104.0, 100.5), crown=[(84.0, 100.5, 109.0), (64.0, 109.0, 117.5)], gland=(44.0, 117.5, 126.0)),
+    'A': dict(top=103.33, clamp=104.0, band_r=64.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0)),
+    'B': dict(top=100.5, clamp=104.0, band_r=64.0, crown=[(80.0, 100.5, 109.0), (56.0, 109.0, 117.5)], gland=(32.0, 117.5, 126.0)),
 }
+# The cord grip (modeled since the redraw): an M12 x 1.5 nylon cord grip for a 3 to 6.5 cord, its 8 of thread in the crown
+# (104.5 to 112.5), its hex (17 across corners, 4 tall) and dome (Ø18, 7 tall) in a Ø22 pocket under the gland's 1.5 lid
+GRIP = dict(thread=(12.0, 104.5, 112.5), hex=(17.0, 4.0), dome=(18.0, 7.0), pocket=22.0, lid=1.5)
+# The white under the hub (2026-11-24): since 2026-11-11 a Ø95 disc on the fixture, which the collar's r 41 bore cannot
+# pass, so the shade could not be lowered off (4.0 free, 9.0 needed). Split: a Ø62 disc on the fixture (the hub's own
+# Ø, it passes the bore) and a white ring on the cover, Ø95 x Ø63, under the collar's foot; together they hide the slots
+WHITE_SPLIT = dict(disc=62.0, ring=(95.0, 63.0, 63.0, 64.0))
 D = N                                            # the old name (dome_pendant.py, Planet's kit piece)
 
 DOME_LIGHT = (0.0, 0.0, 81.5)                    # the COB's face, just under it (was 74: the old hub)
@@ -232,6 +246,9 @@ def cover_parts(p=N):
     R, r_si, r_l, r_k, r_ki = _radii(p)
     co, ci, cz0, cz1 = p['collar']
     fr = p['flange_r']
+    tt_ = TOP_TIERS.get(p.get('top'))
+    if tt_:
+        cz1 = tt_['top']; fr = tt_['band_r']
     hole = cyl('z', (0, 0), co + 0.4, 0, R + 5)
     shell = ball(R, p['shell'], (0, 0, 0), cut_below=0) - hole
     liner = ball(r_l, p['liner'], (0, 0, 0), cut_below=4) - hole
@@ -263,14 +280,11 @@ def cover_parts(p=N):
     gasket_out = _sphere_band(R + 1.0, R, co / 2 + 0.2, fr)
     clamp = _sphere_band(R + 6.0, R + 1.0, co / 2, fr) + (cyl('z', (0, 0), co + 8, 92.0, 97.0) - cyl('z', (0, 0), co, 91, 98))
     clamp = clamp - cyl('z', (0, 0), co, 80, 110)
-    tt_ = TOP_TIERS.get(p.get('top'))
     if tt_:
-        # PROPOSAL (2026-11-24, the owner: "make the tiers more even in height and diameter difference"): the clamp ring is
-        # the first tier: Ø104 from 92 up to the tier's top, its thread on the collar's M96 x 1.5 now over the collar's whole
-        # outer end (92 to 100: 8 of thread, was 5), and above the collar a 92 bore (the pins' tips at r 45 pass, the
-        # collar's top and the PEEK ring sit below it, out of the side view); its top edge eased 1.0
-        zt_ = tt_['clamp'][1]
-        ring_ = eased(co + 8, 92.0, zt_, 1.0, bottom=False) - cyl('z', (0, 0), co, 91, 100.0) - cyl('z', (0, 0), 92.0, 99.9, zt_ + 1)
+        # PROPOSAL (2026-11-24, redrawn): the clamp ring is the first tier, Ø104 from 92 to 0.5 under the collar's top, its
+        # bore the M96 thread its full height (no shoulder: it bottoms on nothing but the silicone), its top edge eased 1.0;
+        # its band on the shade out to the tier's rim (Ø128)
+        ring_ = eased(tt_['clamp'], 92.0, cz1 - 0.5, 1.0, bottom=False) - cyl('z', (0, 0), co, 80, 110)
         clamp = (_sphere_band(R + 6.0, R + 1.0, co / 2, fr) - cyl('z', (0, 0), co, 80, 110)) + ring_
     note_formed = ('drape-formed from cast sheet over an aluminium mould, trimmed and polished; the prototypes are formed on '
                    'the production moulds')
@@ -335,7 +349,13 @@ def cover_parts(p=N):
                     'silicone\'s preload and a nylon-tipped set screw through the ring into the collar']),
         Part('gaskets', gasket_in + gasket_out, Bought('hemi-gaskets'), finish='silicone', group='cover'),
         Part('vent', None, Bought('hemi-vent')),
-    ]
+    ] + ([
+        Part('white-ring', cyl('z', (0, 0), WHITE_SPLIT['ring'][0], WHITE_SPLIT['ring'][2], WHITE_SPLIT['ring'][3]) -
+             cyl('z', (0, 0), WHITE_SPLIT['ring'][1], WHITE_SPLIT['ring'][2] - 1, WHITE_SPLIT['ring'][3] + 1),
+             Machined('aluminium', 'laser'), finish='white', group='cover',
+             notes=['PROPOSAL 2026-11-24 (the shade was trapped by the fixture\'s Ø95 disc): a white Ø95 x Ø63 x 1 ring '
+                    'bonded under the collar\'s foot (white powder coat), so it comes off with the shade; with the '
+                    'fixture\'s Ø62 disc it hides the slots from below as the Ø95 disc did'])] if p.get('white_split') else [])
 
 
 def north_parts(p=N):
@@ -397,7 +417,7 @@ def north_parts(p=N):
         # to the hub; a heat pipe inside it is optional at about 2.5 W of heat)
         stem = cyl('z', (0, 0), sod, ct_ - bt_ - 0.2, z0 + 24.5) - cyl('z', (0, 0), sid, ct_ - bt_ - 1, z0 + 26)
         # the crown's inside white: a white Ø80 disc, 1 thick, under the hub (and the collar's flange face painted white)
-        wdisc = cyl('z', (0, 0), p['white_disc'], z0 - 1.0, z0) - cyl('z', (0, 0), sod + 0.4, z0 - 2, z0 + 1)
+        wdisc = cyl('z', (0, 0), WHITE_SPLIT['disc'] if p.get('white_split') else p['white_disc'], z0 - 1.0, z0) - cyl('z', (0, 0), sod + 0.4, z0 - 2, z0 + 1)
     # 2026-11-11 (the bar: the cap reads as turned parts): the crown and the gland with eased 1.0 edges, so each terrace
     # catches a soft highlight
     crown = eased(sd, sz0, sz1, 1.0) - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
@@ -405,20 +425,24 @@ def north_parts(p=N):
     z_cord = sz1 + ch
     tt_ = TOP_TIERS.get(p.get('top'))
     if tt_:
-        # PROPOSAL (2026-11-24): the crown's tiers and the gland as TOP_TIERS draws them, each eased 1.0; the crown still
-        # sits on the hub at 100.5 on its thermal pad (a hidden Ø84 skirt under the clamp ring's top when its first tier is
-        # narrower, so the PEEK ring stays covered), the gland's top and the cord grip where they were (126)
+        # PROPOSAL (2026-11-24, redrawn): the crown's tiers and the gland as TOP_TIERS draws them, each eased 1.0, the
+        # crown on the hub at 100.5 on its thermal pad as today, its first tier Ø80 inside the collar's Ø82 bore, so the
+        # shade rises past it. The cord grip (GRIP) threads into the crown, its hex and dome in a pocket under the
+        # gland's lid; the wires come up the Ø10 bore and through the grip with the cord
         crown = None
         for d_, a_, b_ in tt_['crown']:
             t_ = eased(d_, a_, b_, 1.0)
             crown = t_ if crown is None else crown + t_
-        d0_, z0_ = tt_['crown'][0][:2]
-        if z0_ > sz0:                         # down to the hub inside the clamp ring, the skirt 1.0 under its top
-            crown = crown + cyl('z', (0, 0), d0_, sz0, z0_ + 1.0) + cyl('z', (0, 0), 84.0, sz0, z0_ - 1.0)
-        top_ = tt_['crown'][-1][2]
-        crown = crown - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, top_ + 1)
         gd_, g0_, g1_ = tt_['gland']
-        gland = eased(gd_, g0_, g1_, 1.0) - cyl('z', (0, 0), 8, g0_ - 1, g1_ + 1)
+        td_, t0_, t1_ = GRIP['thread']; pk_ = GRIP['pocket']; lid_ = GRIP['lid']
+        crown = (crown - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, t0_ + 0.1)
+                 - cyl('z', (0, 0), td_, t0_, t1_ + 0.1) - cyl('z', (0, 0), pk_, t1_, g1_))
+        gland = eased(gd_, g0_, g1_, 1.0) - cyl('z', (0, 0), pk_, g0_ - 1, g1_ - lid_) - cyl('z', (0, 0), 8, g0_ - 1, g1_ + 1)
+        hx_, hh_ = GRIP['hex']; dd_, dh_ = GRIP['dome']
+        from build123d import RegularPolygon, extrude, Pos
+        hexs_ = Pos(0, 0, t1_) * extrude(RegularPolygon(hx_ / 2, 6), hh_)
+        grip = (cyl('z', (0, 0), td_, t0_, t1_) + hexs_ + eased(dd_, t1_ + hh_, t1_ + hh_ + dh_, 2.0, bottom=False)
+                - cyl('z', (0, 0), 6.5, t0_ - 1, g1_ + 1))
         z_cord = g1_
     cord = cyl('z', (0, 0), 6, z_cord, z_cord + p['drop'])
     zc = z_cord + p['drop']
@@ -474,6 +498,10 @@ def north_parts(p=N):
              notes=['the cap, 40 x 14: 6061, turned, edges eased 1.0, SATIN black anodised (2026-11-11; was polished) (round 32f\'s was black acrylic: here it '
                     'runs at the hub\'s 49 to 52 C), over the listed cord grip (the strain relief, tested with the '
                     'fixture\'s weight), on two M3 into the crown; part of the heat sink']),
+    ] + ([Part('grip', grip, Bought('hemi-cord-grip'), finish='cord', group='fixture', inside=True,
+               notes=['PROPOSAL 2026-11-24 (modeled with the even tiers): an M12 x 1.5 nylon cord grip, listed, for a 3 to '
+                      '6.5 cord, threaded 8 into the crown, its hex and dome in the gland\'s pocket; the size to confirm '
+                      'on the chosen part\'s sheet'])] if tt_ else []) + [
         Part('cord', cord, Bought('hemi-cord'), finish='cord', group='fixture'),
         Part('suspension', susp, Bought('hemi-suspension'), finish='anodised', group='fixture', option='suspension'),
         Part('canopy', canopy, Machined('aluminium', 'lathe'), finish='anodised', group='canopy',

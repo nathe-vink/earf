@@ -388,6 +388,14 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
     cam = json.loads(json.dumps(R['camera']))
     for k in ('position', 'target', 'focus'):
         cam[k] = _mul(cam[k], s); cam[k][2] += lift
+    if os.environ.get('HOUSE_CAM'):
+        # HOUSE_CAM 'X,Y,Z,TX,TY,TZ,LENS' (2026-11-24, the critics on the top's sheet: a close view from above opened the
+        # tiers' grooves and enlarged the lower ones): the camera placed and aimed absolutely (m at the house scale, the
+        # lift included), LENS mm, no shift, focused on its target
+        v_ = [float(x_) for x_ in os.environ['HOUSE_CAM'].split(',')]
+        cam['position'], cam['target'], cam['focus'] = v_[0:3], v_[3:6], v_[3:6]
+        cam['lens_mm'] = v_[6]; cam['shift_x'] = cam['shift_y'] = 0.0
+        print('HOUSE_CAM', v_)
     if os.environ.get('HOUSE_CAMCARD'):
         # HOUSE_CAMCARD 'BACK,SIDE,W,H' (2026-11-22, the Fog Core's rim): two real black cards behind and beside the camera,
         # BACK m behind it along its level view, SIDE m to each side, W x H, centred at the lens height, facing the lamp;

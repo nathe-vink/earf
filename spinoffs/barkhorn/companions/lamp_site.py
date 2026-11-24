@@ -358,10 +358,13 @@ def build(frame, samples, scale):
                 me = bpy.data.meshes.new(f'tint-edge-{tint}'); bm.to_mesh(me); bm.free(); me.materials.append(acrylic(f'tint-edge-{tint}', 0.0, tname, lt_))
                 te = bpy.data.objects.new(f'tint-edge-{tint}', me); bpy.context.scene.collection.objects.link(te); te.location = c
             part('out-dome-pendant', 'rim', acrylic(f'rim-{tint}', 0.0, tname, 0.5), c)   # (polished, chamfered: the bar)
+            # HEMI_TOP A or B (2026-11-24, PROPOSALS redrawn after the critics, crystal.py TOP_TIERS): the even-tier top's
+            # clamp, crown, gland, collar and the split white (top_tiers.py's meshes); the audit names the top
+            tp_ = os.environ.get('HEMI_TOP')
+            tdir_ = f'out-dome-pendant-top{tp_}' if tp_ else 'out-dome-pendant'
+            print('HEMI_TOP', tp_ or 'today', 'meshes', tdir_ + ': clamp crown gland' + (' collar white-disc white-ring' if tp_ else ''))
             for nm in ('clamp', 'crown', 'gland', 'hub'):
-                # HEMI_TOP A or B (2026-11-24, PROPOSALS, crystal.py TOP_TIERS): the even-tier top's clamp, crown and gland
-                tp_ = os.environ.get('HEMI_TOP')
-                part(f'out-dome-pendant-top{tp_}' if tp_ and nm != 'hub' else 'out-dome-pendant', nm, cap, c)
+                part(tdir_ if nm != 'hub' else 'out-dome-pendant', nm, cap, c)
             white = SC.principled('crown-white', '#EEEEEA', 0.55)
             # the collar: its flange face inside the shade white (below z 80 in the shade's frame), the rest black
             cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
@@ -370,10 +373,17 @@ def build(frame, samples, scale):
             nt.links.new(tc.outputs['Object'], sx.inputs[0]); nt.links.new(sx.outputs['Z'], lt.inputs[0]); nt.links.new(lt.outputs[0], mx.inputs[0])
             b1 = nt.nodes.new('ShaderNodeBsdfPrincipled'); b1.inputs['Base Color'].default_value = (0.012, 0.012, 0.013, 1); b1.inputs['Roughness'].default_value = 0.45
             b2 = nt.nodes.new('ShaderNodeBsdfPrincipled'); b2.inputs['Base Color'].default_value = (0.85, 0.85, 0.82, 1); b2.inputs['Roughness'].default_value = 0.55
+            if os.environ.get('HEMI_COLLAR_CAP') == '1':
+                # (2026-11-24, the critics: the CAD calls the collar black anodised aluminium like the cap's parts, so its
+                # seen top in the cap's own metallic satin black, not a dielectric black that read as a grey ring)
+                b1.inputs['Base Color'].default_value = (0.0080, 0.0080, 0.0091, 1); b1.inputs['Metallic'].default_value = 1.0
+                b1.inputs['Roughness'].default_value = 0.38
             nt.links.new(b1.outputs[0], mx.inputs[1]); nt.links.new(b2.outputs[0], mx.inputs[2])
             nt.links.new(mx.outputs[0], nt.nodes['Material Output'].inputs['Surface'])
-            part('out-dome-pendant', 'collar', cm, c)
-            part('out-dome-pendant', 'white-disc', white, c)
+            part(tdir_, 'collar', cm, c)
+            part(tdir_, 'white-disc', white, c)
+            if tp_:
+                part(tdir_, 'white-ring', white, c)
             part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), c)
             part('out-dome-pendant', 'pins', steel, c)
             if os.environ.get('GASKETS', '0') == '1':

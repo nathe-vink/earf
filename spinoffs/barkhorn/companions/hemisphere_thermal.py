@@ -170,8 +170,10 @@ def table():
 # PEEK break to the collar as before. Comparisons between the three tops are the point; every input an estimate.
 TOPS = {
     'today: crown Ø80 x 11.5, gland Ø40 x 14': [(80.0, 11.5), (40.0, 14.0)],
-    'A, three even tiers: crown Ø76 x 11.3, gland Ø48 x 11.3': [(76.0, 11.33), (48.0, 11.33)],
-    'B, four even tiers: crown Ø84 x 8.5 and Ø64 x 8.5, gland Ø44 x 8.5': [(84.0, 8.5), (64.0, 8.5), (44.0, 8.5)],
+    # (redrawn 2026-11-24 after the critics: the crown's first tier Ø80 inside the collar's bore; A's crown shows 11.33 above
+    # the raised collar, its 2.8 below inside the bore counted as nothing)
+    'A, three even tiers: crown Ø80 x 11.3 (seen), gland Ø56 x 11.3': [(80.0, 11.33), (56.0, 11.33)],
+    'B, four even tiers: crown Ø80 x 8.5 and Ø56 x 8.5, gland Ø32 x 8.5': [(80.0, 8.5), (56.0, 8.5), (32.0, 8.5)],
 }
 RING = (5.9, 1000.0)
 
