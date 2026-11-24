@@ -1,6 +1,6 @@
 """S4 readings: each light-C front against its S4 frame (the five reflect-only flags as real cards), by region, from
 the front's own mask (same geometry). L* and C* (sRGB to Lab), and the share of pixels that moved more than 2 L*.
-    python3 meas.py TINT...      (run here)"""
+    python3 meas.py [--suffix s4b] TINT...      (run here; default s4)"""
 import json, os, sys, numpy as np
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__)); SRC = os.path.dirname(HERE)
@@ -11,12 +11,16 @@ def lab(a):
     return np.stack([116 * f[..., 1] - 16, 500 * (f[..., 0] - f[..., 1]), 200 * (f[..., 1] - f[..., 2])], -1)
 REGIONS = {'front panel (batts behind)': ['front-panel'], 'right side': ['right'], 'left side': ['left'], 'top': ['top'],
            'base (bottom, feet)': ['bottom', 'feet-base', 'feet-stem'], 'horn': ['waveguide']}
-rows = ['| tint | region | px | L* now | L* S4 | dL* | C* now | C* S4 | moved > 2 L* |', '|---|---|---|---|---|---|---|---|---|']
-for t in sys.argv[1:]:
+rows = [f'| tint | region | px | L* now | L* {suf} | dL* | C* now | C* {suf} | moved > 2 L* |' if False else '| tint | region | px | L* now | L* new | dL* | C* now | C* new | moved > 2 L* |', '|---|---|---|---|---|---|---|---|---|']
+args = sys.argv[1:]
+suf = 's4'
+if args[:1] == ['--suffix']:
+    suf, args = args[1], args[2:]
+for t in args:
     m = {int(k): v for k, v in json.load(open(os.path.join(SRC, f'front-{t}.mask.json'))).items()}
     ids = np.asarray(Image.open(os.path.join(SRC, f'front-{t}.mask.png')).convert('RGB'))[..., 0].astype(int)
     a = lab(np.asarray(Image.open(os.path.join(SRC, f'front-{t}.png')).convert('RGB')).astype(float))
-    b = lab(np.asarray(Image.open(os.path.join(HERE, f'front-{t}-s4.png')).convert('RGB')).astype(float))
+    b = lab(np.asarray(Image.open(os.path.join(HERE, f'front-{t}-{suf}.png')).convert('RGB')).astype(float))
     reg = {k: np.isin(ids, [i for i, n in m.items() if n in v]) for k, v in REGIONS.items()}
     # the paper: no part in the mask; the floor under and round the base (rows 1000-1250), and the backdrop above
     paper = ~np.isin(ids, list(m))
