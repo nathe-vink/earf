@@ -1,0 +1,1158 @@
+{
+ "results": [
+  {
+   "lens": "light",
+   "found": {
+    "findings": [
+     {
+      "id": "pendant-hidden-flag-in-frame",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit"
+      ],
+      "severity": "block",
+      "what": "A black card (house-key-flag) stands in front of the pendant's left half (cap, cord and the left of the shade) in all 14 pendant frames. It is hidden from the camera, from reflections, from view through the acrylic and from bounce light. It casts a shadow only for a paper-only copy of the key (house-key-floor, light linking). So it darkens the paper's lower right but not the lamp, even though about 98 % of the key's rays to the shade pass through it. A real card there would cover half the lamp in the picture and cut off its key light. It is the first of HIDDENCAST's '3 in frame', and the house rule (approved-renders.md line 4118) says a picture with anything hidden in frame is pulled at once.",
+      "evidence": "CASTCHECK 'house-key-flag': 18.71 in all 14 pendant audits, e.g. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b71/pass/red/audit/hemisphere-red-off.txt (all parsed in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/audits-parsed.txt). Code on r32-lamps-final 1633cc60e4: house_ground.py key_flag() turns camera visibility off (unless KF_CAM=1). The cutter block turns off glossy, transmission, diffuse and volume rays, removes the flag from every other lamp's shadows, and splits the key into house-key (everything but the paper) and house-key-floor (paper only, shaded by the flag). pass.sh HOFF and HLIT carry HOUSE_KEYFLAG=0,60,25,60,2. My numpy rebuild of the rig lands on the shade and ball (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/check-camera-model.jpg). It gives 18.71 % in frame, the same as CASTCHECK, at x 0-1152, y 496-1600; cyan in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/hemisphere-red-off-hidden-in-frame.jpg and hemisphere-red-lit-hidden-in-frame.jpg. 98 % of key-to-shade rays cross it (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/facts.txt). Its effect is small: by a direct-light estimate the key gives 1.2 % of the paper's light with the flag and 1.8 % without; without it, the bottom-right sixth of the frame would be about 5 % brighter (up to 11 %) (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/shares.txt). The third 'in frame' object, room-back, is fully behind the paper (CASTCHECK 0.0, my cast 0.00 %) and is harmless.",
+      "fix": "Remove HOUSE_KEYFLAG, so the key lights paper and lamp alike with no copy and no linking, then re-match the bottom-right corner (88.3). Or replace it with a real cutter just under the key, out of frame and unlinked, whose edge clears the shade (about 40 degrees below the key) and cuts only steeper rays. Re-render the 14 pendant frames (about 30-40 min OFF and 65-80 min LIT each, one helper per tint)."
+     },
+     {
+      "id": "pendant-hidden-lamp-in-frame",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit"
+      ],
+      "severity": "block",
+      "what": "The paper lamp house-wall_left (2.0 x 1.0 m at the set's 0.2 scale, aimed at the paper's upper left, lighting only the paper) stands in the top-left corner of all 14 pendant frames, hidden from the camera. It is a light hanging in the picture and the second of the '3 in frame'. The pendant's 0.25 m lift raised the camera, but only bg-left was raised with it. In the Core frames (no lift) it is out of frame.",
+      "evidence": "CASTCHECK 'house-wall_left': 5.45 in all 14 pendant audits and 0.0 in the Core audits. My cast: 5.45 % at x 0-708, y 0-252 (magenta in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/hemisphere-red-off-hidden-in-frame.jpg). pass.sh HOFF and HLIT: HOUSE_LIFT=0.25 HOUSE_LIFT_RX=bg-left. In my rebuild, raising wall_left with its aim by 0.10 m or more puts it at 0.00 % in frame.",
+      "fix": "Set HOUSE_LIFT_RX=bg-left,wall_left (or use hiddencast_bpy.slide_out), check the TL and ML corners, and render with the key-flag fix."
+     },
+     {
+      "id": "core-hidden-floor-ring",
+      "frames": [
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "block",
+      "what": "A hidden copy of the floor covers 30 % of all 14 Core frames. It is house-floorcard: a ring from 7.55 cm to 2.5 m round the base, 0.5 mm above the paper, in the paper's own material. The camera does not see it and it casts no shadow. It is not reflection-only, though, which is how it was described when it was accepted: bounce rays, reflections and the view through the acrylic all see it. It gets the horn's and fill's light without the two floor cutters' shade and has no painted contact term. So the Core is lit by, reflects, and shows through its glass a floor brighter than the floor in the picture. In direct light it is 1.7 to 2.0 times as bright in front of the lamp (toward the camera), 1.5 times at its right, 1.2 to 1.3 times at its left and 1.1 to 1.25 times behind it. It is the first of the Core's '2 in frame'; the other, room-back, is behind the paper and harmless.",
+      "evidence": "CASTCHECK 'house-floorcard': 30.09 in all 14 Core audits; my cast is 29.6 % (green in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/core-red-off-hidden-in-frame.jpg and core-red-lit-hidden-in-frame.jpg). house_ground.py floor_card() turns off camera, shadow and volume rays. Glossy is turned on by the fifth value of pass.sh's HOUSE_FLOORCARD=0.0755,2.5,0.0005,-1,1, and diffuse and transmission stay on. The ring is added to the paper lamps' receivers and has contact 0. Ring against visible floor: section 6 of /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/facts.txt. It was accepted at 00:37 on 21 Nov as 'a reflection-only floor ring' (coordinator/approved-renders.md line 3988). In the seven frames nothing reads as wrong at 1:1 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/core-off-base-floor-4tints.jpg). Without a render I could not separate its share of the light on the base's lower flanks. Fog's near-clear ball, still rendering on this rig, would show this ring through the ball.",
+      "fix": "Run a quarter-size Core OFF A/B: as is, without HOUSE_FLOORCARD, and without the ring with the cutters unlinked. Then pick a real setup: either the base sees the real floor (no ring, no linking), or the front floor is shaded by real, unlinked cutters (see core-cutters-shade-floor-only). Show the owner the choice."
+     },
+     {
+      "id": "core-cutters-shade-floor-only",
+      "frames": [
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "fix",
+      "what": "Two black cutters hang over the Core's front floor: the horn cutter and HOUSE_CUT2's second cutter, 9 cm above the lens and out of frame. They shade only the paper-only copies of the horn and the fill. Reflections, the view through the acrylic and bounce light all pass through them. Real cards there would also shade the ball, about a third of the horn's light and a sixth of the fill's, and would show as dark shapes in its mirror. The audit does not list them at all, because the camera can see them.",
+      "evidence": "pass.sh COFF and CLIT: HOUSE_FLAGS='horn cutter', HOUSE_CUT2=fill,1.0. house_ground.py cutter block: glossy, transmission, diffuse and volume off; floor copies house-horn-floor and house-fill-floor; HOUSE_FACE_UNCUT. From section 5 of /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/facts.txt: 32-36 % of the horn's rays to the ball cross the horn cutter and 20-21 % cross the second one; 14-17 % of the fill's rays cross the horn cutter. In the ball's mirror the two would cover 3.0 % and 1.8 % of the ball. Both are 0 % in frame; plan view in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/studio-plan-core.png.",
+      "fix": "Decide this with the floor ring: either real, unlinked cutters (they then shade the ball and show in its reflection), or no cutters and a brighter front floor."
+     },
+     {
+      "id": "light-linking-ground",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit",
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "fix",
+      "what": "Light linking shapes the ground in all 28 frames, against the owner's no-linking rule. These lamps light only the paper: bg-left, bg-right, wall_left and bg-high in every frame, wall-ll in the pendant OFF, and the copies house-key-floor (pendant) and house-horn-floor and house-fill-floor (Core). Meanwhile house-key (pendant) and house-horn and house-fill (Core) light everything except the paper. By a direct-light estimate the paper-only lamps give about 72 % of the light on the paper in the pendant OFF and 83 % in the Core OFF. The linking also keeps light off the lamps: bg-left, bg-right and bg-high face them, and unlinked bg-left alone would put 0.26-0.42 W/m2 on the lamp's left, back and top. For comparison, the fill gives about 1.1 W/m2 on its front and 0.93 on its top. These paper lamps are also hidden from reflection rays.",
+      "evidence": "house_ground.py build() calls Lt.link_receivers for the 'receivers' lamps and for HOUSE_WALL_LL. The cutter block sets the excl() blocker and receiver collections, and floor_card() adds the ring to the paper lamps' receivers. The audit light lists show the copies (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/audits-parsed.txt). Shares are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/shares.txt: pendant OFF bg-left 31.4, wall_left 24.8, bg-high 8.4, bg-right 5.9, key-floor 1.2 and wall-ll 0.5 %; Core OFF bg-left 31.2, wall_left 15.2, horn-floor 14.3, fill-floor 12.5, bg-high 5.3 and bg-right 4.7 %. The coordinator kept the Tropos ground's 'nine sweep-linked lamps' (approved-renders.md line 3645). I found no record that the owner was told in these words.",
+      "fix": "Tell the owner plainly now that the shared ground, the Tropos fronts' included, is lit with linked lamps and invisible flags. A linking-free ground is a studio-wide change: real lamps that light whatever they reach and real flags out of frame, then re-match the ground for every product."
+     },
+     {
+      "id": "fill-behind-horn-softbox",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit",
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "fix",
+      "what": "Seen from the lamp, the fill softbox stands behind the horn softbox. 83-86 % of the fill's rays to the lamp and 59-69 % of its rays to the paper in frame pass through the horn's housing. In reflections the housing hides the fill, so only a sliver of it shows. Its light still passes straight through, because the softbox faces and housings ('no-shadow') cast no shadow and bounce rays cannot see them. A real fill cannot stand there. With housings that cast shadow, a direct-light estimate puts the paper about 8.5 % darker on average in the pendant frames (up to 18 %) and about 13 % darker in the Core frames (up to 38-43 % on the front floor). The other housings cut 4-18 % of the fill's and horn's light to the paper.",
+      "evidence": "house_ground.py softbox() says the face and housing are 'seen only by glossy rays, casting no shadow, so a nearer box hides a farther one and the light on the set is unchanged'. In house-ground.json the horn is 2.5 x 1.6 m at (0.9, -2.3, 2.2) and the fill is 2 x 2 m on a 4.0 m orbit at 15/40 degrees, about (0.79, -2.96, 3.13), behind it. See section 4 of /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/facts.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/shares.txt, and the plan views studio-plan-pendant.png and studio-plan-core.png in the same folder. In my mirror check of the outer shell, the fill shows on about 230 sample pixels against 3,200-4,200 each for key, kick and horn.",
+      "fix": "In the next house-ground revision, move the fill out from behind the horn (to the side or lower), or let the housings cast shadow, and re-match the ground. This is the Tropos recipe too, so it belongs with the linking fix."
+     },
+     {
+      "id": "studio-visibility-split",
+      "frames": [
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "fix",
+      "what": "Not every emitter has every ray visibility on. In all 28 frames, key, fill, kick, horn and their floor copies are hidden from reflection and transmission rays, and the four paper lamps are hidden from reflection rays. Each softbox's reflection is a separate glowing face that only reflections and the view through glass can see and that lights nothing: a specular-only emitter. In the 14 OFF frames the face plus the lamp carry the same light as one softbox, so they are a fair stand-in (note). In the 14 LIT frames the faces are switched off too (HOUSE_SOFTBOX_SEEN=0). The studio then leaves no reflection on any shell, cap or base and sends no light through any acrylic; the lamps get studio light only from the paper and the room walls. A real studio can do that only with flags, and the flags would cast shadows that the render does not have.",
+      "evidence": "house_ground.py: HOUSE_LAMP_RAYVIS defaults to 0, which turns off visible_glossy and visible_transmission on every softboxed lamp. softbox() turns off camera, diffuse, shadow and volume rays on the faces and housings. pass.sh sets HOUSE_SOFTBOX_SEEN=0 in HLIT and CLIT only. In lights.py, lamp_shares() turns house-ground.json's specular 0.0 into visible_glossy off for bg-left, bg-right, wall_left and bg-high. The audit prints no lamp's visibility.",
+      "fix": "Tell the owner that the LIT frames have no studio reflection because of a switch. Test HOUSE_SOFTBOX_SEEN=1 with DENOISE_PASSES=RGB on a LIT crop; the RGB guides cured the seams only in a test with the softboxes unseen (09:34 on 21 Nov). If the crop is clean, render LIT with the faces seen; if not, use real flags and accept their shadows."
+     },
+     {
+      "id": "audit-cannot-show-it",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit",
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "fix",
+      "what": "The audit files cannot show what HIDDENCAST counts. pass.sh keeps only rows matching '  (in|out) ', but hiddencast_bpy.report() tags in-frame rows 'IN FRAME'. So every audit says '3 in frame' or '2 in frame' and lists none of them. The AUDIT line shows only meshes hidden from the camera and lamp powers. It shows no lamp's ray visibility and no linking, and the Core's cutters (visible to the camera, invisible to everything else) appear nowhere.",
+      "evidence": "pass.sh line 27; hiddencast_bpy.py report(). Examples: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b71/pass/red/audit/hemisphere-red-lit.txt says '23 hidden, 3 in frame' and lists 20 rows; core-red-lit.txt says '25 hidden, 2 in frame' and lists 23 rows. No audit file contains 'IN FRAME'.",
+      "fix": "Change the grep to -E '  (IN FRAME|in|out|practical) '. Extend AUDIT to print every object's and lamp's ray visibility flags and every receiver and blocker collection with its states. Do this before the re-render."
+     },
+     {
+      "id": "room-reflection-only-and-lamps-through-it",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit",
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "note",
+      "what": "The studio room's five walls show only in reflections and through the acrylic. They bounce no light onto the paper, where diffuse rays see a dim sky gradient instead, and they block no light. The lamps' insides do see the room through the acrylic. Two paper lamps poke through the room in every frame: wall_left has 39.5 % of its face above the ceiling and 12.7 % beyond the left wall, and bg-high has 66.7 % above the ceiling. Their light reaches the paper through the ceiling. Nothing in the picture shows this, because both lamps light only the paper and are hidden from reflections, but neither could stand where it is.",
+      "evidence": "house_ground.py room(): camera, diffuse, shadow and volume rays off; glossy on; transmission on (HOUSE_ROOM_TRANS=1 in pass.sh). With HOUSE_ROOM_BIG the room is 19 x 10.5 x 6 m full size, so the ceiling sits at 1.2 m at the pendant's 0.2 scale and 1.14 m at the Core's 0.19. See section 3 of /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/facts.txt and the side views in studio-plan-pendant.png and studio-plan-core.png in that folder.",
+      "fix": "Raise the room's ceiling to about 8 m full size and move the side walls out to about 11 m from the center, or lower the two lamps and move them inside. Then check the shells, because the walls' reflections change slightly."
+     },
+     {
+      "id": "painted-contact-shadow-still-on",
+      "frames": [
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off"
+      ],
+      "severity": "note",
+      "what": "The paper's painted contact shadow (an ambient-occlusion darkening in the paper's material, not a light) is still on in the 7 Core OFF frames and off in all 14 LIT frames. The Core's OFF and LIT floors are therefore shaded two ways. It is also on in the pendant OFF frames but reaches nothing there: its reach is 8 cm and the pendant hangs about 0.3 m clear. This is the open L7 item tied to the owner's choice of light model C.",
+      "evidence": "pass.sh sets HOUSE_SWEEP_AO=0 only in HLIT and CLIT. materials.py _contact(): strength 1.7 over 0.4 x s and a 2.2 core term over 0.012 x s. approved-renders.md line 4016 (08:52 on 21 Nov) puts the darkening at the base at about 10 L*, partly painted.",
+      "fix": "Follow the owner's C decision. If he picks C, re-render the 7 Core OFF frames with HOUSE_SWEEP_AO=0."
+     },
+     {
+      "id": "rule-a-holds",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit",
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "note",
+      "what": "Rule (a) holds. Within each group every tint has the same studio lamps at the same powers, and the same world, exposure and spot. Only the lamps' own LEDs and pours differ. The LEDs give the same light in every tint: 1000 lm from the pendant's 24 and 200 lm from the Core's one, each at its tint's approved color temperature. Their Blender powers, recomputed from the code's blackbody, match the audits to three decimals.",
+      "evidence": "The light lists are identical across tints in every group (pendant OFF 10 lamps, Core OFF 10, pendant LIT 9, Core LIT 11): /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/audits-parsed.txt. LED W, pendant/Core: red 0.621/2.978 at 2200 K; orange, amber, blue and black 0.383/1.836 at 4000 K; green 0.521/2.5 at 2700 K; violet 0.477/2.292 at 3000 K. Each gives 1000/200 lm. The paper corners agree across tints within 0.10 L* (OFF) and 0.33 L* (LIT): /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/corners.txt.",
+      "fix": "None."
+     },
+     {
+      "id": "lit-g-spot-real-and-soft",
+      "frames": [
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "note",
+      "what": "The LIT-g spot, its bottom flag and its top barn-door leaf are real and can be placed, in all 7 Core LIT frames. The spot is a 6 mm emitter 3 cm off the floor, 16 cm below and 8 cm in front of the lens. It is out of frame, has every ray visibility on and is not linked. Both cards are ordinary black cards, also out of frame. In every tint the pool's edges are soft, the ball shows no speck and the floor shows no lit column.",
+      "evidence": "house_ground.py HOUSE_BOUNCE, HOUSE_BOUNCE_CUT and HOUSE_BOUNCE_TOP make no visibility changes, and they run after the linking code. HIDDENCAST reports 'spot lamp house-bounce-spot out 0.0 %', and my cast puts both cards at 0 %. The pool on the base, rows 1580-1700, has 10-90 % edge widths (left/right) of red 200/198 px, orange 193/187, amber 196/191, green 203/213, blue 181/182, violet 204/202 and Smoke 120/120 (near-black base). The steepest normalized slope is 0.06-0.08 per 10 px: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/spot_check.txt. At LIT-f's speck position (819, 1161), no pixel rises more than 12 levels above the local median in any tint, apart from scattered 1-px blue grain in Poison. On the front floor, rows 1850-1990, center minus sides is -0.23 to +0.37 L*: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/floor_col.txt. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/core-lit-base-floor-7.jpg and core-lit-base-floor-7-lifted.jpg.",
+      "fix": "None."
+     },
+     {
+      "id": "no-shadow-ray-shortcut-in-materials",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit",
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "note",
+      "what": "These frames use no shadow-ray shortcut: no material switches on the 'Is Shadow Ray' path. The acrylic is a glass BSDF tinted by ray length, so light through it is traced, not faked. Two pass-through faces remain, and both treat every ray the same way: the opal's outer face (a transparent BSDF) and the Core's window over the LED (a clear filter).",
+      "evidence": "lamp_site.py uses thin_shadow only with RIG_LEGACY, HEMI_ENGINE other than ring, CORE_DESIGN=A or WINDOW=thin, and pass.sh sets none of them. scene.py acrylic_material() is a glass BSDF with color exp(-a x Ray Length) on backfacing hits.",
+      "fix": "None."
+     }
+    ],
+    "frames_pass": [],
+    "recommendation": "Do not put the 28 frames live until the three hidden objects standing in frame are gone. Pendant (14 frames): remove the key flag or replace it with a real cutter at the key, and lift wall_left out of frame. That is one re-render of A and C, about 12 helper-hours, or about 1.5 h with seven helpers. Core (14 frames): run a quarter-size A/B without the hidden floor ring and with unlinked cutters, then decide with the owner. Fix the audit's grep and visibility printout before re-rendering. Tell the owner now, in plain words, three things about the shared house ground: it is lit with linked lamps, the fill shines through the horn softbox, and the LIT frames have their studio reflections switched off. These belong to a studio-wide revision, not to this pass. The lamps' own light, rule (a), the LIT-g spot and the materials pass.",
+    "owner_points": "The lamps' own light is honest: every color's LED gives the same light, the studio is the same for every color, and the new small spot under the lit Core is a real, soft, out-of-frame light with real flags. The studio around the lamps is not a real studio, though. Most of the light on the paper comes from lamps set to light only the paper, one softbox shines through another, and the lit pictures have the studio's reflections switched off. Three invisible things also stand inside the pictures: a black card in front of the pendant, a light in the pendant's top-left corner, and a hidden second floor under the Core that the Core sees instead of the real one. None of these shows as an object and the fixes change the pictures only a little, but by our own rule nothing hidden may stand in a picture."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "pendant-hidden-flag-in-frame",
+      "verdict": "partly",
+      "severity": "block",
+      "reasoning": "The core of this finding holds. The card is in all 14 pendant audits (CASTCHECK house-key-flag 18.71, identical across tints in my parse of all 28 audits). My own camera and geometry rebuild puts it on 18.73 % of the frame at x 0-1148, y 500-1596, covering the cap, the cord and the left of the shade (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/pendant-red-off-flag-and-wall_left-projected.jpg). It stands on the key's side, 12 mm from the collar and 20 mm from the shade, and 97.6 % of key rays to the shade cross it. Its visibility and linking are as stated (house_ground.py key_flag() and the cutter block; pass.sh HOFF and HLIT). Two parts are wrong. (1) Its effect is not small. The lamps lane added it to darken the bottom-right corner. Its own record has that corner at 95.7-96.6 before the flag (approved-renders.md, 20 Nov 19:56 entry) and 88.3 after it (ember-tests2.sh lines 26-29; README corner BR 88.3), so about 8 L*. The critic's +5 % (max 11 %) comes from irr.py, which treats the 50-degree key as a hard cone at a plain lamp's radiance. Cycles keeps a spread lamp's power, so the key is about 15.6x brighter on its axis; the house noted the same normalization for the Mantle's edge lamps on 21 Nov at 04:05. The key's axis lands on the paper just right of the bottom-right corner (pixel about 1694, 1890). With that model, my direct-light estimate for the BR patch is x1.78 without the flag; a hard cone gives x1.075 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part2.txt). (2) The second fix cannot work. Seen from the key, the bottom-right paper is 38-42 degrees down at bearings 17-23, and the lamp spans 31-55 degrees down at bearings 23-57 (facts-part1.txt). A cutter that cuts only steeper rays therefore misses the corner's light. Smoothed 1-L* contours show the darkening is soft, with no edge, so 'flags cut soft' holds (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/crops/hemisphere-red-off-paper-contours.jpg). It stays a block under the 9 Nov rule ('a picture with anything hidden in frame is pulled at once', the 9 Nov 23:10 entry, about line 4121, not 4118) and under the owner's no-linking rule. The coordinator passed this value at 09:34 on 21 Nov, saying 'the README's all 0.0 too strict'."
+     },
+     {
+      "id": "pendant-hidden-lamp-in-frame",
+      "verdict": "confirmed",
+      "severity": "block",
+      "reasoning": "CASTCHECK house-wall_left is 5.45 in all 14 pendant audits and 0.0 in all 14 Core audits. My rebuild gives 5.50 % at x 0-704, y 0-248, in front of the paper (magenta in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/pendant-red-off-flag-and-wall_left-projected.jpg). Only bg-left is lifted (pass.sh HOUSE_LIFT_RX=bg-left; house_ground.py lifts lamps with receivers only when named). Lifting wall_left with its aim leaves 2.61 % in frame at 0.05 m and clears it at 0.10 m. One addition to the fix: 40 % of wall_left's face is already above the studio ceiling, and lifting it puts more there (50 % at 0.10 m, 65 % at 0.25 m; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part2.txt). Make the change together with the room fix, then re-check TL 83.9 and ML 84.0."
+     },
+     {
+      "id": "core-hidden-floor-ring",
+      "verdict": "confirmed",
+      "severity": "block",
+      "reasoning": "The code is as stated. floor_card() turns off camera, shadow and volume rays only, the fifth value of HOUSE_FLOORCARD turns glossy on, and diffuse and transmission stay on. The split horn and fill exclude only the sweep and have the cutters excluded as blockers, so the ring gets them unshaded. ALB -1 makes it the sweep's material with contact 0. CASTCHECK house-floorcard is 30.09 in all 14 Core audits. My own direct-light estimate (OFF powers, Cycles spread model for the key) puts the ring over the visible floor at 1.50, 1.98 and 2.38x at 0.09, 0.16 and 0.30 m in front, 1.36-1.59x at the right, 1.15-1.18x at the left and 1.04-1.12x behind (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part2.txt). That is close to the critic's figures. The critic missed that this is the acrylic audit's L5. Its skeptic confirmed L5 on 21 Nov and warned that 'the ALB -1 test at ecb1650c24 would fix the card's colour, not its lighting' (coordinator/acrylic-light-audit-2026-11-21.json). The record nevertheless logs 'L1-L3 and L5 fixed in round 5' (21 Nov 04:05). The same audit found that the ring runs past the sweep's front (0.95 m) and sides (1.71 m), so the Core also sees floor where the studio has none. At 1:1 nothing in the frames reads wrong (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/crops/core-off-foot-and-floor-7-half.jpg). It stays a block under the 9 Nov in-frame rule and the no-linking rule."
+     },
+     {
+      "id": "core-cutters-shade-floor-only",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "reasoning": "The code is as stated. sets._card makes the horn cutter and cutter2 visible to the camera. The cutter block turns off glossy, transmission, diffuse and volume rays and leaves the floor copies (house-horn-floor shaded by the horn cutter only, house-fill-floor by cutter2 only) as the only lamps they shade. The AUDIT line lists only camera-hidden and no-shadow meshes, so the cutters appear nowhere. My geometry puts the horn cutter at z 0.279 m, x -0.093 to 0.382, y -0.482 to -0.244, over the lens and 8.9 cm above it, out of frame. Weighted by light rather than counted by ray, about 50 % of the horn's light on the ball would cross the horn cutter and 27 % would cross the second cutter, and 29 % of the fill's light would cross the horn cutter (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part1.txt). That is more than the critic's 32-36, 20-21 and 14-17 %. Severity fix is right, because this is one decision with the ring."
+     },
+     {
+      "id": "light-linking-ground",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "reasoning": "The linking is as stated: link_receivers on every lamp with receivers and on HOUSE_WALL_LL, the floor copies, the ring added to their receivers, and lamp_shares turning specular 0 into glossy off. The shares need correcting, because the critic's model leaves out the spread gain of the key (50 degrees) and wall-ll (30 degrees, 43.6x on axis). With the gain, the paper-only lamps give about 76 % of the paper's direct light in the pendant OFF (key-floor 5.5 %, wall-ll 7.0 %; wall-ll alone gives about 63 % at the lower-left corner patch). In the Core OFF they give about 65 %, not 83 %, because the unlinked key carries about 26 % there (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part2.txt). HOUSE_BG=1.16 also scales these lamps up to stand in for a speaker's own bounce. The live Tropos fronts were made on this ground: 'nine sweep-linked lamps stay' (line 3645) and 'background lamps linked to the sweep' (9 Nov 21:40 lights audit, about line 4126). I also found no owner-facing mention of linking in the record."
+     },
+     {
+      "id": "fill-behind-horn-softbox",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "reasoning": "My geometry agrees. Seen from the lamp, the fill and horn centres are 8.1-8.2 degrees apart, with the fill 0.76-0.80 m away and the horn 0.56-0.60 m away. 82 % of the fill's rays to the lamp and 62-67 % of its rays to the paper in frame cross the horn's housing (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part1.txt). No housings collide. One wording fix: a fill can stand there, but the horn softbox would block most of its light. On the lamp itself the extra light is small, because the housing already hides the fill's face from glossy and transmission rays. The excess falls on the paper and the lamp's few diffuse parts. It belongs to the studio-wide revision, as the critic says."
+     },
+     {
+      "id": "studio-visibility-split",
+      "verdict": "partly",
+      "severity": "fix",
+      "reasoning": "The code is as stated: HOUSE_LAMP_RAYVIS defaults to 0, softbox() faces and housings are seen only by glossy and transmission rays, pass.sh sets HOUSE_SOFTBOX_SEEN=0 in HLIT and CLIT only, and lamp_shares hides the paper lamps from glossy rays. Three corrections. (1) In the OFF frames the faces do light things. They are the only studio light that passes through the acrylic, for example onto the pendant's opal and the Core's liner, so 'lights nothing' holds only for LIT. (2) The OFF split is a fair stand-in for fill, kick and horn but not for the key: its face ignores the key's 50-degree spread (see the missed finding key-face-ignores-spread). (3) The loss in LIT is visible. In the OFF frames the softboxes show on 1.5-5 % of each body mask (shade or ball). At the pass's LIT studio level (0.106 of OFF in picture terms for both lamps), those reflections would add a median 28-45 levels on pixels that read mostly 20-60 per channel in LIT (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part1.txt; compare /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/crops/pendant-off-7-shade.jpg with /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/crops/pendant-lit-7-shade.jpg, and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/crops/core-off-7-body.jpg with /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/crops/core-lit-7-body.jpg). The lit Core also gets the LIT-g spot and the dim sky. The proposed test (HOUSE_SOFTBOX_SEEN=1 with RGB guides) is right: the 09:34 seam cure was shown only with the softboxes unseen."
+     },
+     {
+      "id": "audit-cannot-show-it",
+      "verdict": "partly",
+      "severity": "fix",
+      "reasoning": "The grep bug is real. pass.sh line 27 keeps '  (in|out) ', which drops report()'s 'IN FRAME' and 'practical' rows. None of the 28 audits contains 'IN FRAME', and they list 21, 20, 22 and 23 rows against 24, 23, 24 and 25 hidden (my parse, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part1.txt). But the same files carry the CASTCHECK line, which names all three in-frame objects with their shares (5.45, 18.71, 30.09), and the README's checks quote those numbers. The audits did show them, and they were passed on purpose. The rest holds: the AUDIT line prints no ray visibility, no linking and nothing about the Core's cutters. Fix this before the re-render."
+     },
+     {
+      "id": "room-reflection-only-and-lamps-through-it",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "room() turns off camera, diffuse, shadow and volume rays, keeps glossy on, and turns transmission on with HOUSE_ROOM_TRANS=1. HOUSE_ROOM_BIG puts the ceiling at 1.2 m (pendant) and 1.14 m (Core). My geometry: wall_left has 40.1 % of its face above the ceiling and 12.6 % beyond the left wall, and bg-high has 68.2 % above the ceiling; the Core figures are within 0.4 of these (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part1.txt). Nothing shows in the pictures."
+     },
+     {
+      "id": "painted-contact-shadow-still-on",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "COFF and HOFF leave HOUSE_SWEEP_AO at its default of 1, and HLIT and CLIT set it to 0. _contact() is as stated, and the ring has no contact term. The pendant's rim is 0.306 m up, against an 8 cm reach. In the 7 Core OFF frames the floor straight below the foot reads L* 70.5-73.6 at 3 px and 84.1-86.4 at 60 px (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part1.txt). This is the open L7 item, which follows the owner's C decision."
+     },
+     {
+      "id": "rule-a-holds",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "My parse of all 28 audits agrees. In each group every studio lamp has one power across the seven tints, and the hidden list, the no-shadow list and CASTCHECK are identical across tints. HOUSE_EV and HOUSE_STUDIO come from one pass.sh, unchanged since 22:13 on 21 Nov, before the first frame. The scratch frames and audits match the branch. The LED powers fit lumens x WLM / luminance: 1,000 lm in 24 LEDs for the pendant and 200 lm for the Core. One correction: the critic measured only the four upper corners. With all six, the spread across tints is 0.16 for the pendant OFF, 0.34 for the pendant LIT, 0.76 for the Core OFF and 3.96 L* for the Core LIT (LL 13.1-17.1, BR 17.0-20.5). The Core's lower corners carry each lamp's own colored light, as rule (a) expects (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part1.txt)."
+     },
+     {
+      "id": "lit-g-spot-real-and-soft",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "The recipe is as stated: house_ground.py makes the spot and both cards with no visibility changes, after the linking code. One nit: the spot itself is camera-hidden. Blender 5 makes new lamps camera-hidden, and the audit counts the spot among the 25 hidden, 'out 0.0 %'. That is harmless out of frame, but 'every ray visibility on' holds for every ray except the camera. The cards are about 16 cm below the lens, about 58 degrees below level, far out of frame. At a x4 linear lift the seven bases show a soft pool, no edge and no lit floor column (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/crops/core-lit-base-and-floor-7-half-lifted4.jpg). At (819, 1161) no channel rises more than 10 above the window's median in six tints; Poison has 6 px at +13-14 (facts-part1.txt). The owner has not yet answered on LIT-g."
+     },
+     {
+      "id": "no-shadow-ray-shortcut-in-materials",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "In lamp_site.py the ring engine builds the shells with plain acrylic_material and no thin_shadow. Core B's ball uses thin_shadow only with RIG_LEGACY, the window only with WINDOW=thin, and Core A only with CORE_DESIGN=A; pass.sh sets none of these. scene.py's acrylic_material is a glass BSDF tinted exp(-a x Ray Length) on back faces. The 'Is Shadow Ray' path in materials.py (_clear_resin) and the 'Is Camera Ray' path (polarise) are not reached by these frames. The Core's liner also tints by Ray Length on both passes, the same way for every ray type."
+     }
+    ],
+    "missed": [
+     {
+      "id": "key-face-ignores-spread",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off"
+      ],
+      "severity": "note",
+      "what": "The key's softbox face does not carry the key's 50-degree spread. Cycles keeps a spread lamp's power, so near its axis the key lamp is many times brighter than a plain lamp of the same watts. The face alone supplies the key's reflection and its light through the acrylic, and it is built at a plain lamp's radiance. In the 14 OFF frames the key therefore lights the paper, through its floor copy, several times harder than it shows in or shines through the shells. A gridded softbox would also look dark from more than 25 degrees off its axis, where the face still glows.",
+      "evidence": "house-ground.json: key spread_deg 50. house_ground.py softbox(): rad = L.energy * L.specular_factor / (math.pi * w * h), with no spread term. Cycles' spread factor (tan h - tan a)/(tan h - h) is 15.6x on axis, 6.6x at 15 degrees and 0 at 25 degrees, and the shade's centre is 13.9 degrees off the key's axis (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part2.txt). The house noted the same normalization for the Mantle's edge lamps (approved-renders.md, 21 Nov 04:05). The lane's record shows how strong the key is on the paper: its floor copy alone held the pendant's bottom-right corner at about 96 until the flag cut it to 88.3.",
+      "fix": "In the studio revision, either give the key a plain 180-degree spread and re-match the ground, or give its face the same angular falloff, so that the key's reflection, its light through the acrylic and its light on the paper agree."
+     },
+     {
+      "id": "record-says-L5-fixed",
+      "frames": [
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "note",
+      "what": "The coordinator's record says the hidden floor ring's fault was fixed, and it was not. The 21 Nov acrylic audit confirmed L5: the ring is lit without the cutters' shade, so the Core sees a brighter floor than the one in frame. The record logs 'L1-L3 and L5 fixed in round 5 (ecb1650c24)', but round 5 changed only the ring's colour and dropped its painted term. The ring still gets the horn and fill unshaded.",
+      "evidence": "approved-renders.md, 21 Nov 04:05 entry. coordinator/acrylic-light-audit-2026-11-21.json, the L5 corrected claim: 'The ALB -1 test at ecb1650c24 would fix the card's colour, not its lighting.' pass.sh COFF and CLIT: HOUSE_FLOORCARD=0.0755,2.5,0.0005,-1,1. My ring-to-floor estimate: 1.5-2.4x in front (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/light-skeptic/facts-part2.txt).",
+      "fix": "Correct the record so that L5's lighting half is open, and treat the Core A/B as the L5 fix."
+     },
+     {
+      "id": "in-frame-check-relaxed",
+      "frames": [
+       "hemisphere-red-off",
+       "hemisphere-orange-off",
+       "hemisphere-amber-off",
+       "hemisphere-green-off",
+       "hemisphere-blue-off",
+       "hemisphere-violet-off",
+       "hemisphere-black-off",
+       "hemisphere-red-lit",
+       "hemisphere-orange-lit",
+       "hemisphere-amber-lit",
+       "hemisphere-green-lit",
+       "hemisphere-blue-lit",
+       "hemisphere-violet-lit",
+       "hemisphere-black-lit",
+       "core-red-off",
+       "core-orange-off",
+       "core-amber-off",
+       "core-green-off",
+       "core-blue-off",
+       "core-violet-off",
+       "core-black-off",
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "fix",
+      "what": "The pass's own checks are set up to pass the three hidden objects in frame. The README asks for CASTCHECK 'as in the Ember audits' (pendant: house-wall_left 5.45 and house-key-flag 18.71; Core: house-floorcard 30.09). That follows the coordinator's 21 Nov 09:34 entry, which called 'all 0.0' 'too strict'. This goes against the 9 Nov rule ('a picture with anything hidden in frame is pulled at once') and the record's header rule ('nothing hidden from the camera standing in frame'). I found no record that the owner agreed to the change.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b71/pass/README.md, 'Checks before committing'. approved-renders.md: the 21 Nov 09:34 entry, the 21 Nov 10:38 entry ('every audit identical to the Ember Core's (house-floorcard 30.09)'), the 9 Nov 23:10 entry (about line 4121) and line 5.",
+      "fix": "Before the re-render, restore the check that every hidden object is at 0.0 % in frame by CASTCHECK. Tell the owner that these 28 frames were passed with three hidden objects in frame."
+     },
+     {
+      "id": "core-lit-awaits-lit-g",
+      "frames": [
+       "core-red-lit",
+       "core-orange-lit",
+       "core-amber-lit",
+       "core-green-lit",
+       "core-blue-lit",
+       "core-violet-lit",
+       "core-black-lit"
+      ],
+      "severity": "note",
+      "what": "The seven Core LIT frames use the LIT-g recipe, and the owner has not answered on it. He was shown LIT-c beside LIT-g at 23:43 on 21 Nov, and the record has no reply as of 02:35. The critic's recommendation and owner points present the spot as settled.",
+      "evidence": "pass.sh CLIT ('LIT-g (ember-r6-core-g.sh)'), gated behind RUN_D=1. approved-renders.md: the 21 Nov 23:43 entry and the D entries from 01:08 to 02:33 on 22 Nov. The task brief: 'he has not answered yet'.",
+      "fix": "Hold the seven Core LIT frames until he picks LIT-c or LIT-g, and say so in the owner message."
+     }
+    ],
+    "recommendation_check": "The critic is right to hold all 28 frames and right about the three hidden objects. The pendant plan needs a test before the re-render, and four points are missing.\n\n(1) The key flag is what darkens the pendant's bottom-right corner. The lane's own record has that corner going from about 96 to 88.3 when the flag went in (approved-renders.md, 20 Nov 19:56 entry; ember-tests2.sh lines 26-29). Removing the flag with nothing real in its place brings back about 8 L* there and breaks the one-ground match. The critic's 'real cutter that cuts only steeper rays' cannot replace it: seen from the key, the corner's paper is 38-42 degrees down, the same as the shade, just to its left. Test a real option on a quarter frame first. One option is to re-aim the key so its beam's centre, which now lands just right of the bottom-right corner, moves off the paper in frame. The other is a real flag on the key's edge with every ray visibility on, accepting a soft cut on the shade's left.\n\n(2) Lifting wall_left clears the frame at 0.10 m, but it puts 50-65 % of the lamp above the studio ceiling, so do it together with the room fix.\n\n(3) The seven Core LIT frames also wait for the owner's answer on LIT-g. The record's 'L5 fixed in round 5' (21 Nov 04:05) must be corrected before the Core A/B, because only the ring's colour changed.\n\n(4) The pass README's check, 'CASTCHECK as in the Ember audits: 5.45, 18.71, 30.09', must go back to 0.0 for every hidden object, as the 9 Nov rule says. The coordinator relaxed it at 09:34 on 21 Nov, and I found no record that the owner agreed.\n\nThe rest of the recommendation stands. Fix the audit's grep and print ray visibility and linking before re-rendering. Tell the owner about the linked ground, which the live Tropos fronts share, about the fill behind the horn, and about the LIT reflections being switched off; at the LIT studio level those reflections would add about 30-45 levels on 1.5-5 % of each lamp body. The time estimate (about 11-12 helper-hours for the pendant's A and C) holds once the test is done. Two of the critic's numbers should not be passed on: the flag's effect is not 'small', and the Core's paper-only share is nearer 65 % than 83 % once the key's spread is counted. 'The lamps' own light, rule (a), the LIT-g spot and the materials pass' holds, apart from the owner's pending LIT-g answer.",
+    "owner_points_corrected": "The lamps' own light is honest. Every color's LED puts out the same light: 1,000 lumens in the pendant and 200 in the Core, each at the warmth chosen for that color. The studio lights and the camera exposure are the same for every color. The small spot that lights the lit Core's base is a real, soft light below the camera with real black cards on it. You have not answered on that recipe yet, so the seven lit Core pictures wait for your answer.\n\nThe studio around the lamps is not a real studio. Most of the light on the paper, about three quarters behind the pendant and two thirds behind the Core, comes from lamps set to light only the paper. One softbox stands behind another and shines through it. In the lit pictures the studio's reflections are switched off, where a real camera would see faint softbox reflections on the shells. The Tropos pictures already on the site were made in this same studio.\n\nThree hidden things also stand inside these pictures: a black card just in front of the pendant's left side, a lamp in the pendant's top-left corner, and a hidden second floor around the Core. The Core is lit by that hidden floor and reflects it in place of the real one. None of them shows as an object, but they do change the pictures. The card is what darkens the paper at the pendant's lower right, from about 96 to 88 on the lightness scale. In front of the Core, the hidden floor is up to about twice as bright as the floor you see. By our own rule nothing hidden may stand in a picture, so these 28 should not go live as they are. Fixing them will change the pictures: the pendant's lower right needs a real way to stay dark, and the Core's base may come out darker without the hidden floor. We will show you both before anything goes live."
+   }
+  },
+  {
+   "lens": "off",
+   "found": {
+    "findings": [
+     {
+      "id": "poison-core-base-grey-edges",
+      "frames": [
+       "green/core-green-off.png"
+      ],
+      "severity": "fix",
+      "what": "The Poison Core's satin base goes grey along both flanks and across its rounded shoulder. At page size (600 to 1200 px) the base reads as a dusty grey-green at its edges, the 'smoke frosted' look the owner asked about on the Ember base on 21 Nov. The other six bases keep their color right up to a thin edge. The cause is the deeper 0.45 pour: the base face is dark and dull (L* 28.7, C* 28.5), and it gets the same satin sheen every tint gets. In linear light the sheen's grey part is the same in all seven tints (0.175 to 0.195 at the outline, 0.065 to 0.072 at 15 to 25 px in), so the sheen drowns the dull green over a much wider band. That is physically consistent, not a render fault. The approved check-set frame has the same band, but the owner saw it only as a 240 px cell on the final sheet, where it does not show.",
+      "evidence": "Grey core, measured as the width from the outline where C* stays under 15 (the metric that signed off the Ember base in core-off-r5final), rows 1560-1690: Poison 29-54 px on the left and 22-54 px on the right. Other tints: Ember 2-16, Dust 0-8, Acid 3-17, Ice 0-9, Haze 1-15. Ember round 2 (scratchpad b42, before the base fix) measured 8-63. Poison at the 17 Nov pour of 0.3 (row-off) measured 8-25. Base pixels with C* under 20 (my mask, rows 1480-1790): Poison 12.9 %, Ember now 2.0 %, Ember round 2 8.8 %. The r5final critics measured 10.6 % on round 3, the frame he complained about, using their own mask. On the lane's flank boxes, Poison's C* is 21.7 on the left and 13.0 on the right against 27.7 at the centre, ratios 0.78 and 0.47 (Ember 0.90 and 0.68). Profile inward from the left outline, rows 1540-1650: 8-15 px in, L* 38.8 / C* 6.0; 15-25 px in, 34.3 / 7.7; 25-40 px in, 29.1 / 11.1. Ember at the same depths has C* 20.1, 25.7 and 33.5. Shoulder sheen at y 1524-1530: Poison 46 / 20, Ember 52 / 46. The approved reference checkset/green/core-off-L0.45.png carries the same band: 13-29 and 11-27 px at 800 px, against 15-28 and 11-27 for the pass frame scaled to 800. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/poison-core-600.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/poison-base-1200scale.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/poison-flank-2x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/base-3x-L-foot.png. Numbers: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/graycore.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/graycore2.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/flankprof.txt",
+      "fix": "Before this frame goes live, show the owner the Poison Core at page size beside the Ember Core (poison-core-600.png and poison-base-1200scale.png). Say plainly that this is where his 'smoke frosted' question can come back, and let him choose one of three options. (1) Keep it. This is what this dark satin pour does in a white studio. (2) Test real black cards on both sides of the Core, just out of frame, so the flanks reflect black instead of the cream sweep. This is honest light, but it changes the Core studio and also darkens the ball's light rim. All seven Core OFF frames would then need re-rendering to keep one studio, about 25-30 min each, so test it first on half-size crops of Poison and Ember. (3) Switch to the lighter Poison route he was offered (pendant 0.55x with Core 0.3). The measurements show it cuts the band to 8-25 px, but the green is lighter. Do not retouch or grade the edges."
+     },
+     {
+      "id": "pairs-same-off-ice-largest",
+      "frames": [
+       "red/hemisphere-red-off.png",
+       "red/core-red-off.png",
+       "orange/hemisphere-orange-off.png",
+       "orange/core-orange-off.png",
+       "amber/hemisphere-amber-off.png",
+       "amber/core-amber-off.png",
+       "green/hemisphere-green-off.png",
+       "green/core-green-off.png",
+       "blue/hemisphere-blue-off.png",
+       "blue/core-blue-off.png",
+       "violet/hemisphere-violet-off.png",
+       "violet/core-violet-off.png",
+       "black/hemisphere-black-off.png",
+       "black/core-black-off.png"
+      ],
+      "severity": "note",
+      "what": "His condition holds: each pendant and Core read as one color and one material switched off. Both show the same studio reflections in the same places (three softboxes and the flagged key strip), the same layered rims, lighter thin rims where the backdrop shows through, and deeper color in the thicker lower band of the shade. Ice is the pair with the largest remaining step: the ball is a richer, slightly more violet blue than the more azure pendant. This was already disclosed to the owner on 21 Nov ('Ice's Core a touch richer and more violet'). Every Core base is a darker, duller shade of its ball, as already disclosed.",
+      "evidence": "Region medians with reflections removed. Each entry gives the shade, then the upper ball, then dE00 and the OKLab hue step. Ember 37.5/73.4 vs 38.2/74.5, 1.8, +1.7 deg. Dust 54.3/76.1 vs 53.8/73.6, 0.9, +0.6. Acid 67.4/68.3 vs 66.9/65.6, 1.3, -2.0. Poison 29.6/45.7 vs 29.6/44.0, 0.6, +0.8. Ice 38.4/60.4 vs 37.9/70.6, 3.1, +2.6. Haze 22.7/82.3 vs 24.8/88.3, 2.0, -2.1. Smoke 3.2/1.2 vs 4.0/1.9, 1.1. The lower half of each ball is lighter and duller where it reflects the floor (Smoke L* 15.4), as already called. On flat 1:1 patches placed edge to edge, the dE00 values are Ember 1.9, Dust 2.3, Acid 2.8, Poison 2.7, Ice 4.5, Haze 1.9 and Smoke 1.2. Ice's pendant patch is 40.3/60.4 at OKLab h 256.8; its ball patch is 38.0/73.2 at h 260.7. Haze's OKLab step is -1 to -5 deg depending on the patch; by eye at 800 px it is the same violet. Files: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/swatches-pair-1to1.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/pair800-ice.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/row-off-14-280.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/reflections-1to1.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/regions.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/swatches.txt",
+      "fix": "None. If he raises Ice, the final-off check already found that the 3.2/0.75/1.19 mix matches the pendant's hue but is about 5 L* lighter at pour 1.72."
+     },
+     {
+      "id": "off-row-equals-approved-and-ground-clean",
+      "frames": [
+       "red/hemisphere-red-off.png",
+       "red/core-red-off.png",
+       "orange/hemisphere-orange-off.png",
+       "orange/core-orange-off.png",
+       "amber/hemisphere-amber-off.png",
+       "amber/core-amber-off.png",
+       "green/hemisphere-green-off.png",
+       "green/core-green-off.png",
+       "blue/hemisphere-blue-off.png",
+       "blue/core-blue-off.png",
+       "violet/hemisphere-violet-off.png",
+       "violet/core-violet-off.png",
+       "black/hemisphere-black-off.png",
+       "black/core-black-off.png"
+      ],
+      "severity": "note",
+      "what": "All 14 OFF frames are the renders the owner approved, in one studio per lamp type, with a clean ground. I found no fireflies, no visible noise, no banding in the PNGs, no seams or rings in the sweep, and nothing in frame that does not belong.",
+      "evidence": "Against the README's reference table, body medians on the meter masks agree within 0.3 L*/C*, and hue agrees within 0.1 deg on the six tinted pairs. The Ember Core is identical to house8 (mean difference 0.01 level, max 7). The Poison and Smoke pendants match row-off (mean 0.17-0.18). Every cell of the final OFF sheet the owner saw matches the new frame within 0.74-1.18 grey levels. Haze's Core cell matches round 2 (1.12), not the round-5 pick (2.66). Corners: every pendant is within 0.1 L* of Ember. On the Cores the top four corners are within 0.1, and the lower two move with the ball's colored light (Acid +0.5/+0.6; Ice and Haze bluer b*), as expected. The pendant and Core grounds differ by design (ML 84.0 vs 88.5), as on the sheet. Ground outside the lamp: each pendant differs from Ember by a mean of 0.17-0.28 levels, with only 0.11-0.13 % of pixels over 2 levels. The Cores differ only on the floor around the base, from their colored light, and the walls are identical. There are 0 isolated pixels brighter or darker than all 8 neighbors by 20 levels. Fine grain is 0.37 L* on the walls and 0.23-0.60 on the bodies, the same in every tint. Files: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/cmp_ref.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/sheetcheck.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/corners.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/ground-diff-core-x8.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/ground-diff-pendant-x8.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/ground-stretch.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/noise.txt",
+      "fix": "None."
+     },
+     {
+      "id": "off-clip-share-is-near-clip",
+      "frames": [
+       "red/hemisphere-red-off.png",
+       "orange/hemisphere-orange-off.png",
+       "blue/hemisphere-blue-off.png",
+       "violet/hemisphere-violet-off.png",
+       "amber/hemisphere-amber-off.png",
+       "red/core-red-off.png",
+       "orange/core-orange-off.png",
+       "blue/core-blue-off.png",
+       "violet/core-violet-off.png"
+      ],
+      "severity": "note",
+      "what": "The pass's OFF 'clip share' (Dust 10.9 %, Ice 4.5 %, Ember 4.1 %, Haze 3.3 %, Acid 1.6 %) counts pixels with any channel at 250 or above. Very few pixels actually reach 255, and none is blown white. No OFF frame needs to be named as clipping.",
+      "evidence": "Pixels at exactly 255 on the lamp. Pendants: Dust 339 (0.08 % of the shade mask), Ice 160, Ember 134, Haze 125; Acid, Poison and Smoke 0. Cores: Ice 78, Dust 63, Haze 44, Ember 34, the rest 0. It is always one channel (R for Ember and Dust, B for Ice and Haze). No pixel in any of the 14 frames has all three channels at 255. The reflections keep their gradient in the other channels. Files: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/clip_ff.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/clipmap.txt ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/reflections-1to1.png",
+      "fix": "None. Report true 255 counts next to the 250-and-above share, so these frames are not mistaken for clipping."
+     },
+     {
+      "id": "webp-export-banding-risk",
+      "frames": [
+       "red/hemisphere-red-off.png",
+       "red/core-red-off.png"
+      ],
+      "severity": "note",
+      "what": "The PNGs have no banding, because about one level of render grain dithers the cream sweep. A lossy export to the site's 1200 x 1500 can smooth that grain away and leave one-level steps across the left wall. This is a risk for the export, not a defect I observed on the site. I could not find the encoder settings for the site's product images (img/rc) in the repo.",
+      "evidence": "In the PNG wall, the longest run of equal values along a row is 5-6 px. In my test export (1200 px, WebP quality 80, method 6), it is 48-52 px, with block-shaped one-level contours on the wall (shown contrast-stretched). File: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/wall-banding-stretch.png",
+      "fix": "When the site lane encodes these frames, check the left wall and floor of one pendant and one Core at 1200 px on a good screen. If steps show, encode at a higher quality or with sharp YUV, and do not denoise or smooth before encoding."
+     },
+     {
+      "id": "pendant-cap-tick",
+      "frames": [
+       "red/hemisphere-red-off.png",
+       "orange/hemisphere-orange-off.png",
+       "amber/hemisphere-amber-off.png",
+       "green/hemisphere-green-off.png",
+       "blue/hemisphere-blue-off.png",
+       "violet/hemisphere-violet-off.png",
+       "black/hemisphere-black-off.png"
+      ],
+      "severity": "note",
+      "what": "A small dark vertical mark hangs from the cap's lower edge into the dark band beneath it, on the lamp's axis. It appears in every pendant and in the approved references. It is invisible at 800 px and smaller.",
+      "evidence": "The mark is 3-4 px wide and about 14 px tall, at x 821-824, y 998-1012. It reads L* about 2 against 6-9 around it (Ember row 1002: RGB 26/0/0 against 33/11/10 and 34/15/10 at 4 px either side). Files: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/pendant-tick-6x.png ; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-row/shade-2x-cap-junction.png",
+      "fix": "Ask the lamps lane whether this is a CAD feature, such as a set-screw slot in the cap; if so, keep it. If it is a mesh fault, fix it in the next pendant render. It is not worth a re-render on its own."
+     }
+    ],
+    "frames_pass": [
+     "red/hemisphere-red-off.png",
+     "red/core-red-off.png",
+     "orange/hemisphere-orange-off.png",
+     "orange/core-orange-off.png",
+     "amber/hemisphere-amber-off.png",
+     "amber/core-amber-off.png",
+     "green/hemisphere-green-off.png",
+     "blue/hemisphere-blue-off.png",
+     "blue/core-blue-off.png",
+     "violet/hemisphere-violet-off.png",
+     "violet/core-violet-off.png",
+     "black/hemisphere-black-off.png",
+     "black/core-black-off.png"
+    ],
+    "recommendation": "13 of the 14 OFF frames can replace the site pictures as they are. They are the approved renders, every pair reads as one color, and the ground, noise and highlights are clean. The Poison Core OFF (green/core-green-off.png) also matches what was approved. Before it goes live, show the owner its base at page size beside the Ember Core, because its flanks and shoulder go grey in the way he called 'smoke frosted'. Let him choose: keep it, test black cards beside the Core (a change to the Core studio, so all seven Core OFFs would be re-rendered), or switch to the lighter Poison pour. Separately, have the site lane check the WebP export of the cream sweep for banding.",
+    "owner_points": "The 14 switched-off pictures are exactly the renders you approved on the final OFF sheet. Each lamp type has one studio, with clean backgrounds and no blown highlights, and each pendant and Core still look like the same color. Ice's Core is the slightly richer blue you were already told about. One thing to see before it goes live: at page size, the Poison Core's dark green base turns grey along its edges, the 'smoke frosted' look you asked about on the Ember base. It comes from the deeper Poison pour you chose, not from a render fault, so the choice is yours: keep it, test black cards beside the lamp, or take the lighter Poison."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "poison-core-base-grey-edges",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "reasoning": "Confirmed. A few numbers and two parts of the fix need correcting.\n\nMy own measurement (outline = the meter base mask, starting 1 px in; 5x5-median C*; rows 1560-1690): Poison's band under C* 15 is 21-49 px wide on the left and 13-49 px on the right. The other tints: Ember 0-9, Dust 0-2, Acid 0-9, Ice 0-3, Haze 0-7. Measured against each base's own face (C* under half the face's), Poison is 12-48 px and the other tinted bases are 0-26. The critic's widths come out 5-9 px larger than mine (a different outline search), but the ranking is the same.\n\nOn the swatches that signed off the Ember fix (linear means, L*/C*), Poison is as gray in absolute C* as round 3, the frame he asked 'smoke frosted?' about (taken from the round-3 panel in b52):\n- foot corners: Poison 24.3/9.6 and 19.0/9.3; round 3 31.9/8.7 and 20.4/8.7;\n- flanks 15-35 px in: Poison 33.1/8.7 and 25.6/8.3; round 3 45.2/7.0 and 30.2/6.2.\nOn one mask, 12.9 % of Poison's base pixels are under C* 20; round 3 had 11.2 % and Ember now has 2.0 %. The lane's own right-flank box (cR) reads C* 13.0, under the C* 20 floor of the coordinator's 21 Nov 03:22 go test (cL 21.7).\n\nHow it differs from round 3:\n- Poison keeps 29-34 % of its face chroma at the flanks and corners. Round 3 kept 9-13 %; the other tints now keep 49-70 %.\n- There are no dark smudged foot corners.\n- The gray leans olive (h 138-140 against the face's 146).\n\nThe cause holds in linear light. The neutral sheen (min channel) is the same in all seven tints: 0.165-0.184 at 1-4 px and 0.065-0.072 at 15-25 px in. At 15-25 px in, Poison's green excess is about 0.02; Ember's red excess is 0.16. The same sheen therefore swamps the weak green. This fits a satin finish in a bright white studio, and the r5final critics predicted it for darker pours.\n\nThe approved checkset/green/core-off-L0.45.png has the same band (17-51 / 15-48 px at full scale; 13.2 % of pixels under C* 20). The 21 Nov final-off check already called this base 'grey-green', but the owner was told only that the bases look darker.\n\nIn the 240 px sheet cell the lighter flanks are faint, not absent. At 600 px they read as a dusty gray-green edge on both flanks and on the shoulder (shoulder 43.4/22.5 against the face's 28.7/28.6).\n\nCorrections to the fix:\n- Option 3 is not a Core-only change. The lighter route also takes the pendant to 0.55x, so all four Poison frames change, plus Poison's lumen figures and any picture that shows the Poison pendant.\n- Option 2: the outermost pixels of the flank reflect the sweep straight behind the lamp. Cards out of frame at the sides should darken the band from a few px to about 50 px in, but may leave a hairline. Test it first, as the critic says.\n- 'No retouching' stands.\n\nFiles:\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/base-1to1-r3-vs-pass.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/base-600page-r3-vs-pass.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/base-3x-Lfoot-r3-ember-poison-haze-smoke.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/base-3x-Rfoot-r3-ember-poison-haze-smoke.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/sheet-cells-ember-poison-2x.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/core-600-poison-ember-haze-acid.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/band-base.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/base-swatches.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/flank-linear.txt"
+     },
+     {
+      "id": "pairs-same-off-ice-largest",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Confirmed. At 480 px each pair reads as one color and one glossy material.\n\nMy medians (brightest 10 % of each region dropped), shade against the upper ball, as dE00 / OKLab hue step: Ember 1.3/+1.4, Dust 1.1/+0.5, Acid 1.5/-2.1, Poison 1.0/+0.7, Ice 2.9/+2.7, Haze 2.3/-1.3, Smoke 2.2.\n\nIce is the largest step on the upper ball and the most visible by eye: an azure shade (C* 60) against a violet-blue ball (C* 68). Over the whole ball the tinted pairs bunch at 1.8-2.6 (Haze 2.6, Ice 2.5, Ember 2.4). On the lower ball, Haze (4.0) and Ember (3.1) exceed Ice; that is the floor reflection, which was already called.\n\nTwo corrections:\n- Poison's ball is also a touch duller than the pendant's vivid lower band. The owner was told this on 21 Nov, along with Ice.\n- 'Every Core base is a darker, duller shade of its ball' does not hold for Smoke. Its satin base face (L* 17.4) is lighter than the gloss-black ball (upper 6.6, whole 11.2): charcoal satin beside gloss black.\n\nFiles:\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/pairs.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/pairs-480-ice-poison-haze-ember.png"
+     },
+     {
+      "id": "off-row-equals-approved-and-ground-clean",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Confirmed. The frames match what was approved:\n- On the six tinted pairs, body medians on the meter masks are within 0.26 L*, 0.13 C* and 0.15 degrees of hue of the README references.\n- The Ember Core equals house8 (mean difference 0.01, max 7).\n- The Poison and Smoke pendants match row-off (mean 0.18/0.17, max 18/17).\n- Every cell of the final sheet matches its pass frame within 0.74-1.18 levels.\n- All 14 audits have every 'out' line at 0.0 %, and CASTCHECK reads 5.45/18.71 on the pendants and 30.09 on the Cores.\n\nThe ground is clean:\n- Corners are within 0.1 L* of Ember, except the Cores' bottom two (+0.2 to +0.6).\n- No pixel sits 20 levels above or below all eight neighbors.\n- Wall grain is 1.18 levels (pendants) and 1.14 (Cores) in every tint.\n- Silhouettes agree within 1-2 px.\n- The sweep has no seam (largest smoothed row-to-row step 0.38 level).\n\nOne correction. The Cores' floor differs from Ember's across most of the visible floor, not only around the base: 23-82 % of floor pixels below y 1250 (outside the lamp) differ by more than 2 levels. The front-center floor reads b* +4.3 for Ember, -2.1 Ice, -0.9 Haze, +3.0 Smoke and +6.7 Acid. That is honest colored light and the README expects it, but in a row of Core tiles the bottom of each tile carries its own tint's cast.\n\nAlso, the README says no Poison Core reference exists at 0.45 'with today's dye'. Yet checkset/green/core-off-L0.45.png matches the pass frame (31.1/34.3/h140.2 against 140.3) and the sheet cell, so in practice it is the approved frame.\n\nFiles:\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/ref-compare.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/sheetcheck.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/corners.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/fireflies.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/ground-vs-ember.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/grain.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/tick-and-silhouettes.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/core-ground-diff-vs-ember-x25.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/core-floor-600.png"
+     },
+     {
+      "id": "off-clip-share-is-near-clip",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Confirmed. Pixels at exactly 255 on the lamp masks, always in one channel (R for Ember and Dust, B for Ice and Haze):\n- Pendants: Dust 339, Ice 160, Ember 134, Haze 125; Acid, Poison and Smoke 0.\n- Cores: Ice 78, Dust 59, Haze 44, Ember 33 (63 and 34 counting the whole frame).\n\nNo pixel in any of the 14 frames has all three channels at 255. On the whitest lamp pixel, the lowest channel is 224-247.\n\nThe pixels at 250 and above sit inside the three softbox reflections. The max-channel histogram piles up at 249-252: on the Dust pendant, 9,957 / 14,713 / 15,606 / 11,213 pixels at 249-252, against 339 at 255. That is the finishing step's soft highlight roll-off, not a hard cut. The README's 'over 1 % is a clipping tint' rule is written for the pendant LIT frames.\n\nFiles:\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/clip-off.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/clipmap-orange-pendant.png"
+     },
+     {
+      "id": "webp-export-banding-risk",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Confirmed as a risk. I resized the Ember pendant to 1200x1500 and measured runs of equal values (median / max):\n- PNG wall: 5/9 px.\n- WebP q80 m6: 22/40 px on the wall and 210/270 px on the floor, with blocky one-level contours when stretched.\n- WebP q95: keeps a grain texture (floor 68/212).\nThe Core behaves the same way. The site's current WebPs (the older dark studio) already show median runs of 15-21 px, so today's encoder does smooth the grain.\n\nThe steps are one level (about 0.3-0.4 L*), so this is something to check, not a defect.\n\nCorrection to the fix: sharp YUV helps color edges, not banding. The remedy is quality around 95, or keeping the grain.\n\nFiles:\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/webp-test.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/wall-webp-stretch-ember-pendant.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/floor-webp-stretch-ember-pendant.png"
+     },
+     {
+      "id": "pendant-cap-tick",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Confirmed. The mark sits at x 820-824 (not 821-824) and y 998-1011 (to 1018 on Acid), the same in all seven pendants. At y 1004 the axis reads L* 0.7-7.9 against 4.0-10.7 beside it, tinted by each shade.\n\nIt is not the cord: the mark is 4-5 px wide and the cord is 28-29 px. It is not a full-height seam either: the axis column is clean down the shade, apart from single rows at the reflections and the rim.\n\nThe round-2 critics already listed 'a small tick on the collar' on 20 Nov, so it has been seen and left as it is. Ask the lamps lane once. It is invisible at 800 px.\n\nFiles:\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/pendant-tick-6x-lifted.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/tick-and-silhouettes.txt"
+     }
+    ],
+    "missed": [
+     {
+      "id": "smoke-core-base-grey-satin-edge",
+      "frames": [
+       "black/core-black-off.png"
+      ],
+      "severity": "note",
+      "what": "The Smoke Core's satin black base has the same gray grazing sheen along its flanks and shoulder as Poison's. On black it reads as charcoal satin, and the base is lighter than the gloss-black ball. The critic's 'the other six bases keep their color' leaves Smoke out. The r5final critics asked for Smoke's corner crops before the owner sees it: 'a darker pour (Smoke) will show a grayer rim by the same physics'.",
+      "evidence": "Linear-mean swatches, L*/C*:\n- face 17.4/2.2;\n- flanks 15-35 px in: 30.4/1.9 (left) and 23.0/1.3 (right);\n- foot corners: 21.2/1.7 and 15.9/1.2;\n- shoulder (y 1524-1530): 35.9/2.1.\nBall L*: upper 6.6, whole 11.2, lower 15.6. Lane meter: 80 % of base pixels under L* 20. The neutral sheen (linear min channel) 15-25 px in is 0.065, the same as every tint.\n\nFiles:\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/core-600-smoke-poison-acid-dust.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/base-3x-Lfoot-r3-ember-poison-haze-smoke.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/base-3x-Rfoot-r3-ember-poison-haze-smoke.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/core-base-1200-4tints.png\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/base-swatches.txt\n/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/off-skeptic/flank-linear.txt",
+      "fix": "No re-render. Put the Smoke Core in the same page-size picture as the Poison question. If he chooses black cards for the Core studio, Smoke's edges change with them."
+     }
+    ],
+    "recommendation_check": "Mostly holds. I re-measured everything:\n- All 14 OFF frames are the approved renders: within 0.26 L*, 0.13 C* and 0.15 degrees of the references, the Ember Core identical to house8, and every final-sheet cell within 0.74-1.18 levels.\n- The audits are clean, the walls are identical, there are no fireflies, and nothing is blown to white.\n\nFive changes:\n\n1. Show the Smoke Core in the same page-size picture as the Poison question. Its black satin base carries the same gray grazing sheen.\n\n2. Order of the push. If black cards (option 2) stay on the menu, all seven Core OFF frames would be re-rendered. Pushing the six other Core OFFs now could mean replacing live pictures twice, against his rule to lock the pictures before rebuilding the site. Push the seven pendant OFFs now. Ask the Poison question together with the still-open LIT-c/LIT-g question, and push the seven Core OFFs as one batch after both answers.\n\n3. Option 3 means redoing Poison, not adjusting the Core. The lighter route also moves the pendant to 0.55x, so these change:\n- the Poison pendant OFF and LIT;\n- the Core OFF and LIT;\n- Poison's lumen figures;\n- any picture that shows the Poison pendant.\n\n4. The WebP note stands, but sharp YUV does not cure banding. Ask for quality around 95 or for the grain to be kept, then check the wall and floor at 1200 px.\n\n5. Keep pass/ice/ out of this swap. Fog's pendant OFF is already there and its Core is not, and a lone Fog pendant would break his 'same off' condition.\n\nThe cap tick stays a question for the lamps lane; it was already noted on 20 Nov.",
+    "owner_points_corrected": "The 14 switched-off pictures are the same renders you approved on the final off sheet. Each one matches its cell to about one gray level. Each lamp type has one studio, the backgrounds are clean, and no highlight is blown to white. Each pendant still reads as the same color as its Core. As you were told, Ice's Core is a slightly richer, more violet blue, and Poison's ball is a touch duller than its pendant.\n\nOne thing to look at before the Poison Core goes up. At page size, its dark green base turns a dusty gray-green along both sides and across its rounded top edge. It is the same kind of gray edge you asked about on the Ember base, in a narrower band. This time it is real, not a render fault. The satin finish reflects the white studio by the same amount on every color, and this deep green has less color underneath to show through. You saw this frame only as a small thumbnail, where it barely shows.\n\nYour choices:\n1. Keep it as it is.\n2. We test black cards just out of frame beside the Core, the way a photographer darkens edges, to see how much of the gray they remove. If you like the result, all seven Core pictures are re-rendered that way so they still match (about half an hour each), and you see them again.\n3. Switch Poison to the lighter pair you were offered. Both the pendant and the Core get lighter. The gray edge shrinks to close to what the other colors show, but you lose the deep green.\n\nThe Smoke Core's black base has the same gray satin edge. On black it looks like satin black, but please look at it in the same picture."
+   }
+  },
+  {
+   "lens": "lit",
+   "found": {
+    "findings": [
+     {
+      "id": "LR1-ball-mark-flags",
+      "frames": [
+       "core-green-lit.png",
+       "core-blue-lit.png"
+      ],
+      "severity": "fix",
+      "what": "On the lit Cores, the LIT-g spot's two black cards (the top cut and the flag) reflect in the polished ball just below its centre, at the spot where LIT-f's pink speck was. The reflection is a small mark like an equals sign: two dark bars about 35 px wide, one above the other, with a thin light line between them. On Poison it is plain at 1:1, at 1200 px and at 800 px; I saw it at 800 px before I went looking for it. On Ice it is faint at 1200 px. On Ember, Dust, Acid, Haze and Smoke it is below notice, and it is in LIT-g itself, where the red glow hides it. It is an honest reflection of real flags, but on a flat green glow it reads as a mark on the ball, as LIT-f's speck read as a fleck.",
+      "evidence": "Full-size box x 800-840, y 1155-1192 (the LIT-f glint was at 819, 1161): upper dark bar y 1156-1168, light line y 1170-1172, lower dark bar y 1174-1192 (m13b_out.txt). I took row means over x 805-835 and compared them with the same rows at x 760-790 and 850-880 (m2_out.txt). Poison: G is 4.8 levels below a glow of 81 (L* -1.97). Ice: B is 4.6 below 113 (L* -1.53). Ember L* -0.57/+0.90, Dust -0.86, Acid -0.73, Haze -0.35, Smoke -0.44. LIT-g (b63/core-ember-lit-g.png): R +5.2/-1.9 (L* +1.15/-0.47). The mark is absent in LIT-c. It is in LIT-f with the lamp face between the bars (G 57 at 819,1161), and in LIT-g and all seven pass Cores without the face (G 5 at 819,1161 on Ember): see ballmark_G_stretch_c_f_g_pass.png. The shapes match the CLIT rig in pass.sh. HOUSE_BOUNCE_TOP is a black card lying level at z 33.5 mm, 1-10 cm out, 6 cm wide. Below it, HOUSE_BOUNCE_CUT is a black card at z 26.2 mm, 1-6 cm out, 5 cm wide (house_ground.py lines 289-313). The light line is the 7 mm gap between the cards. Crops are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-row/: ball_800_1x.png (800 px; Poison, Ice, Ember, Smoke), ballmark_1200_x2.png, ballmark_100_x3.png, core_speckzone_x4.png and core_speckzone_x4_stretch.png (all seven).",
+      "fix": "The mark cannot be moved off the ball's face. It sits where a light about 22 degrees below the camera reflects, and the base needs the light there. What can change is how much of the rig the ball sees. Trim both cards to the beam: the 18-degree cone is about 3.2 cm wide at the top card's far end and 1.9 cm at the flag's, so about 3.5 and 2.5 cm wide instead of 6 and 5. Or replace both cards with one slim black snoot extension. Either roughly halves the mark. Re-render all seven Core LITs together so the recipe stays one, judge Poison at 800 and 1200 px, and check that the base pool, lip glow and floor match the current frames. If there is no re-render, show the owner the mark as the reflection of the flags."
+     },
+     {
+      "id": "LR2-smoke-reads-unlit",
+      "frames": [
+       "hemisphere-black-lit.png",
+       "core-black-lit.png"
+      ],
+      "severity": "note",
+      "what": "Smoke lit is honest under rule (a), but it is so dim that it can read as switched off at 1200 and 800 px. Both lamps glow darker than the wall right beside them; even the brightest 1 % of each glow is darker than that wall. The only signs that the lamps are on are a muddy khaki color inside the shade and the ball, and the thin amber ring at the Core's seat. This is not new: the check-set frames the owner approved look the same. But the site's current Smoke pictures show a bright gray glow, so the change will be noticed. Haze's Core is the next dimmest (1.17 times its wall), but its strong magenta reads as lit.",
+      "evidence": "m7_out.txt, glow (pixels at or above half the mask's p95 luminance) against the wall beside the lamp. Pendant: median L* 14.4 (Y 0.018) against 20.9 (Y 0.032), ratio 0.56, brightest 1 % L* 19.8. Core: 13.4 (Y 0.016) against 20.5 (Y 0.031), ratio 0.52, brightest 1 % L* 17.2. The other tints run from 1.17 (Haze Core) to 13.4 (Acid pendant). Against the approved frames: pendant dE00 0.11 vs checkset/black/hemi-lit-L1.2.png, Core 1.19 vs core-lit-L0.5.png (m1_out.txt). Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-row/smoke_haze_1200.png (Smoke pendant, Smoke Core and Haze Core at the 1200 px frame size) and pair800-black.png.",
+      "fix": "No render fix fits inside rule (a). Name it to the owner together with Smoke's black base. The only lever that keeps one exposure per lamp type is a darker studio for every lit frame of that lamp type, which changes the whole lit row. I do not recommend that now."
+     },
+     {
+      "id": "LR3-dust-pair-lit",
+      "frames": [
+       "hemisphere-orange-lit.png",
+       "core-orange-lit.png"
+      ],
+      "severity": "note",
+      "what": "Dust's pendant and Core lit are both orange, but they are the least alike pair. The pendant glows orange; the Core glows a darker amber-brown, about 7 degrees yellower and duller. This is physical, not a render fault. The Core's re-mixed dye cuts its green absorption to 0.35 of the pendant dye's, so more green gets through the thick ball and the light turns yellower. The 2.6 pour with its touch of black makes it darker. The owner has not seen this Core lit: the Dust Core on the lit sheet was the lighter 0.8 pour with the old dye. Acid's Core has the same hue as its pendant and is only darker (mustard against lemon).",
+      "evidence": "m1_out.txt, glow medians. Pendant: 60.3/75.3/h 57.6 (sRGB 231,112,17). Core: 43.9/58.0/h 64.5 (157,86,0). dE00 17.5, the largest of the seven (Acid 14.4 with hue -1.3, Ember 11.1, Ice 6.9, Poison 5.2, Haze 3.5, Smoke 0.8). The sheet's Dust Core (checkset/orange/core-lit-L0.8.png) was 52.0/65.1/60.9, dE00 8.6 from the pass Core. The audit logs CORE_ABS orange [1.0, 0.35, 2.5] + 16. Crops in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-row/: family_swatches.png (each glow's median as a flat swatch), dust_pair_800.png, pair800-orange.png.",
+      "fix": "Leave the pictures as they are. Show the owner the Dust pair lit before it goes live, with one line: the Core mix that matches its pendant when off makes it glow a browner orange when on."
+     },
+     {
+      "id": "LR4-poison-base-near-black",
+      "frames": [
+       "core-green-lit.png"
+      ],
+      "severity": "note",
+      "what": "Under LIT-g, Poison's base reads almost black at page size. Green shows only in a band down the middle of the cone, and the sides are neutral black. It is physically consistent: relative to how light each base is when off, Poison's base gives back the same share of the spot's light as Ember's. Rule (a) keeps it. It is the second-darkest base, after Smoke's. Haze's base fails the same L* test but reads as deep indigo by eye, because L* undercounts blue.",
+      "evidence": "m5_out.txt. Base box median (0,14,1) = L* 2.9, C* 6.8, h 146; centre band 4.7/9.7/147; OFF box 25.8/31.3/144.5. Share of the box below L* 2.5 at 480 px: Poison 0.41, Ember 0.10, Ice 0.20, Haze 0.62, Smoke 1.00, Dust and Acid 0.00. LIT-c Poison (checkset/green/core-lit-L0.45.png): 1.00 (m5b_out.txt). Flanks: L*/C* 0.6/1.0 and 0.7/1.3 (m5c_out.txt). Lit/OFF luminance: Poison 0.0032/0.0468 = 0.069, Ember 0.0056/0.0801 = 0.071. Crops in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-row/: base_480_off_lit.png (all seven at 480 px, OFF above LIT), base100_poison_haze_smoke.png.",
+      "fix": "No change under rule (a). When the owner answers on LIT-g, show him Poison's lit base beside Smoke's, so the two darkest bases are named to him rather than found by him."
+     },
+     {
+      "id": "LR5-led-colors-and-smoke-hue",
+      "frames": [
+       "hemisphere-red-lit.png",
+       "hemisphere-orange-lit.png",
+       "hemisphere-amber-lit.png",
+       "hemisphere-green-lit.png",
+       "hemisphere-blue-lit.png",
+       "hemisphere-violet-lit.png",
+       "hemisphere-black-lit.png",
+       "core-black-lit.png"
+      ],
+      "severity": "note",
+      "what": "The brief judges the glows against 3000 K LEDs, but only Haze uses 3000 K. The code and the site's own copy give each tint its own LED: 2200 K for Ember, 2700 K for Poison, 3000 K for Haze, and 4000 K for Dust, Acid, Ice and Smoke. Every tint has the same lumens per lamp type, and the house camera is balanced to 5600 K. I modeled each glow as its LED shining once through the dye on file. That predicts the measured pendant hues within 0.2 to 4.3 degrees for six tints, so Ice's teal-blue, Haze's magenta and the rest are what the physics gives, and the Haze call already made holds. Smoke is the exception. Its glow is olive-khaki, about three times more colorful and 9 degrees yellower than its almost neutral dye on file predicts.",
+      "evidence": "The code copy is /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/honest-light/src/spinoffs_barkhorn_companions_lamp_site.py. The LED colors are set at lines 53-57 (LED_CCT). LED power is lumens divided by the color's luminance: line 389 (pendant) and lines 664-666 (Core). The audit powers match: pendant 0.621/0.521/0.477/0.383 W per LED at 2200/2700/3000/4000 K (41.7 lm each); Core 2.978/2.5/2.292/1.836 W (200 lm). House white balance is 5600 K, tint 3 (house-ground.json). The site copy in the 20 Nov snapshot (gate/tree3/spinoffs/barkhorn/site/core/smoke.html) reads: '2200 K in Ember; 2700 K in Poison and Fog; 3000 K in Haze; 4000 K in Dust, Acid, Ice and Smoke'. Model against measured hue (m12_out.txt, scripts/m12_hue_model.py): Ember 40.6/36.7, Dust 58.2/57.6, Acid 91.8/92.0, Poison 136.0/136.2, Ice 257.1/252.8, Haze 342.6/339.7. Smoke: model C* 4.8 h 75.7 against measured C* 13.9 h 84.5. The 10 Nov dye copy gives Smoke split 1.03/1.00/0.97, which would pass slightly more blue, not less. The check set the owner saw has the same olive (h 84.3).",
+      "fix": "Leave the pictures as they are. Correct the 3000 K premise in later briefs. Ask the lamps lane to confirm Smoke's current dye split in launch/tints-trucast.json or name what warms its glow, so the warm color is known to be the dye and not a stray light path."
+     },
+     {
+      "id": "LR6-ember-core-lip-clip",
+      "frames": [
+       "core-red-lit.png"
+      ],
+      "severity": "note",
+      "what": "Ember's Core also clips, at the lip under the ball: a thin pink-white line and the band just under it. The area is small, it reads as the hottest edge of the glow, and the passed LIT-g frame has it too. But rule (a) says a clipping tint is named, and so far only the pendant's clip has been.",
+      "evidence": "402 px have a channel at 250 or more, 16 of them at 255, all in x 770-896, y 1469-1496. The line at y 1472 averages R 250, G 59, B 59 over x 780-880. LIT-g has 472 px (21 at 255) in the same place (m3_out_T18.txt and the lip profile). The coordinator's 0.05 % counts only the ball mask, which ends at y 1475. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-row/ember_core_lip_x4.png and ember_core_lip_clipmap_x4.png (cyan marks 250 or more).",
+      "fix": "Leave the picture as it is. Name this clip together with the pendant's."
+     },
+     {
+      "id": "LR7-clean-checks",
+      "frames": [
+       "all 14 lit frames"
+      ],
+      "severity": "note",
+      "what": "Checks I made in the lit row that came out clean, for the skeptic to re-run.",
+      "evidence": "Pendant LITs against the approved check-set frames at 800 x 1000: glow dE00 0.02-0.19, corners within 0.1 L*, shade mean |dRGB| 0.9-1.6 levels (m1_out.txt). Core glows against the sheet's Core LIT where the pour is unchanged: Ember 0.20, Poison 0.64, Acid 1.20, Smoke 1.19. Dust 8.6, Ice 4.1 and Haze 2.9 are the new dye mixes. The pass Ember Core reproduces LIT-g (mean |d| 0.31 levels). The top four corners match across tints within 0.3 L* on each lamp type (m9_out.txt). Fireflies: none. A 7x7-median scan (m3_out_T18.txt) finds only edges that repeat at the same pixels in all seven tints: the cap's step corners and the shade's shoulder near (585, 1008) and (1061, 1009) (pend_points_x4.png). Banding: none. The finish adds 1.26-1.32 levels of grain on the wall, and wall columns stay within 0.9 level of their trend (m4_out.txt). Base faces and floors: no specks; the largest departure from the 7x7 median is 3-7 levels on bases and 8-13 on floors (m10_out.txt). The spot's pool has the same soft ramp on every base: 10-50 % rise 80-95 px, 10-90 % 175-203 px (LIT-g 79-85 and 203-216), half points near x 612-645 and 990-1027 (m11_out.txt). The floor has no column or ring: the largest 8 px column step is 0.17-0.32 L* (m6_out.txt), and each floor pool takes its own glow's color. No flat disc: in the bright tints each Core glow falls 14-16 L* from its upper middle to its bottom and darkens 1-4 L* in the last 5 % of the radius. Its hue deepens at the edge as Beer-Lambert predicts (Ice 242 to 255, Dust 67 to 62, Haze 343 to 338). The pendant glows fall smoothly from under the cap to the rim (Ember 57 to 30, Acid 79 to 42 L*) (m8_out.txt, m8b_out.txt). The lit base flanks keep their hue, with no gray, spray-painted edges: gray share 0.0-0.1 % (m5c_out.txt). LIT-f's pink speck at (819, 1161) is gone in all seven. All files are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-row/, with scripts in its scripts/ folder.",
+      "fix": "None."
+     }
+    ],
+    "frames_pass": [
+     "hemisphere-red-lit.png",
+     "hemisphere-orange-lit.png",
+     "hemisphere-amber-lit.png",
+     "hemisphere-green-lit.png",
+     "hemisphere-blue-lit.png",
+     "hemisphere-violet-lit.png",
+     "hemisphere-black-lit.png",
+     "core-red-lit.png",
+     "core-orange-lit.png",
+     "core-amber-lit.png",
+     "core-violet-lit.png",
+     "core-black-lit.png"
+    ],
+    "recommendation": "Pass the seven pendant LITs: each is the approved check-set frame (glow dE00 0.02-0.19, corners within 0.1 L*). Pass five Core LITs (Ember, Dust, Acid, Haze, Smoke) on the LIT-g recipe: glow, base pool, floor, grain and clipping are clean at 1:1. Before the Poison and Ice Cores go live, or soon after, deal with the LIT-g flags' reflection on the ball, a dark equals-sign mark just below the centre that is plain on Poison at 800 px. Either trim the cards and re-render all seven Cores together, or show the owner the mark as the flags' reflection. Four things need no re-render, only naming to the owner: Smoke lit is darker than the wall; Poison's lit base reads near-black (show it with Smoke's); the Dust pair lit uses a new dye he has never seen lit; Ember's Core clips at the lip, alongside the pendant's named clip. The brief's 3000 K premise holds only for Haze; the lit hues fit each tint's own LED.",
+    "owner_points": "The seven lit pendants are exactly the pictures you approved on the pour sheet. The lit Cores now show their bases in color, lit by one small studio light. In the polished ball that light's black flags show as a faint mark, and on the green Core it is a small dark equals sign just below the middle, visible at normal size. It should be redone or accepted knowingly. Smoke lit is honest but very dim: both lamps glow darker than the wall behind them and can look switched off. The Dust Core glows amber-brown next to its orange pendant because of its new dye mix, which you have not yet seen lit."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "LR1-ball-mark-flags",
+      "verdict": "partly",
+      "severity": "fix",
+      "reasoning": "The mark is real and sits where the critic says. I measured each bar against the ball beside it (x 760-790 and 850-880, y 1150-1195). Poison: upper bar dL* -1.11 (dE00 1.41), lower bar dL* -1.64 (dE00 1.58). Ice: -0.43 (0.54) and -1.14 (0.96). The other five tints are 0.3-0.8 dE00, which is the grain level. The contrast stays the same at 1200 and 800 px (Poison -1.09/-1.62 and -1.10/-1.62); only the size shrinks. So it is plain at 1:1 and at 1200 px, and at 800 px it is a faint smudge you can find if you look at the ball. It is absent in LIT-c and faint in LIT-g's Ember (G -1/+1/-1 levels).\n\nThe cause is only half right. I ray-traced the Core camera using the honest-light rig rebuild (ball centre z 0.107 m, R 80 mm). The trace puts the spot's mirror point at x 819-822, y 1156-1158, where LIT-f's speck was. In that trace the top card's upper face lands exactly on the upper bar (x 799-841, y 1156-1168). The flag (HOUSE_BOUNCE_CUT) never shows: its mirror image (x 805-836, y 1160-1166) falls entirely inside the top card's. The lower bar (x 799-840, y 1174-1190) is the floor under the two cards, 1-10 cm out, which the cards shade. The ball sees it through the 2.6-3.4 cm of space under their far ends. The light line is the floor between the spot and the cards' near edge, not the 7 mm slot between the cards. As seen from the ball, the spot is about 19 degrees below the camera (camera +9.0, spot -9.8 degrees elevation), not 22.\n\nNarrowing the cards still works, because a narrower card also shades a narrower strip of floor. But the gain is about a third, not half. With cards 3.8 cm and 2.5 cm wide (the beam is 3.2 cm and 1.9 cm wide at the cards' far ends, plus 0.6 cm for the 3 mm emitter), the card's image narrows from 43 to 27 px and the shaded floor from 42 to 27 px. Giving the top card a floor-toned top face (black underneath) would remove the upper bar; the floor shadow would stay.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-skeptic/ballmark_trace_overlay_x4.png (traced outlines on Poison and Ice), mark_c_f_g_pass_stretch_x4.png, green_ball_1x.png, green_ball_at1200.png, green_ball_at800.png, poison_pair_800.png; numbers in s3_out.txt, s3c_out.txt and s4_out.txt in the same folder."
+     },
+     {
+      "id": "LR2-smoke-reads-unlit",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Reproduced with my own masks. Pendant: glow L* 14.4 (brightest 1 % L* 19.8) against 20.9 for the wall beside it, a luminance ratio of 0.56. Core: 13.4 (brightest 1 % 17.2) against 20.0, ratio 0.54. The next dimmest is Haze's Core at 1.21. The site's current Smoke lamps glow a light neutral gray (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-skeptic/smoke_800_pass_vs_site.png). At 400-800 px the pendant still reads as a dim warm light inside smoked glass. The Core reads more like a dark bronze ball; only the amber seat line says it is on. The owner approved these exact frames on the pour sheet (pendant glow dE00 0.11, Core 1.20 from them), so this is something to name to him, not a fix. Numbers: s4_out.txt (b)."
+     },
+     {
+      "id": "LR3-dust-pair-lit",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Reproduced. Pendant glow 60.3/75.3/h 57.6, Core 43.9/58.0/h 64.5, pair dE00 17.51, hue +6.9 degrees, the largest gap of the seven pairs (Acid 14.42, Ember 11.09, Ice 6.94, Poison 5.19, Haze 3.53, Smoke 0.76). The sheet's Dust Core (checkset/orange/core-lit-L0.8.png) is 52.0/65.0/60.9, dE00 8.60 from the pass Core. The audit logs CORE_ABS orange [1.0, 0.35, 2.5] add 16. sheets.py confirms the owner's lit sheet used the 0.8 pour with the old dye. One gap: the Ice and Haze Cores also use re-mixed dyes he has seen only off (LS-M2). Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-skeptic/pairs_dust_acid_ice_400.png and remixed_cores_seen_vs_now_vs_pendant_400.png; numbers in s1_out.txt."
+     },
+     {
+      "id": "LR4-poison-base-near-black",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Reproduced. Base box median RGB (0,14,1) = L* 2.9, C* 6.8, h 146; OFF 25.8/31.3/144. Lit/OFF luminance is 0.068 against Ember's 0.070. Share of the box below L* 2.5 at 480 px: Poison 0.41, Haze 0.62, Ice 0.20, Ember 0.10, Smoke 1.00, Dust and Acid 0.00. Every colored base gives back 6-7 % of its OFF luminance (Dust 0.064, Acid 0.062, Ice 0.068, Haze 0.061), so the result is consistent and rule (a) keeps it. One correction: by L*, Haze's base (2.0) is darker than Poison's (2.9). Poison only reads darker because it shows almost no color (C* 6.8 against Haze's 26.0). Smoke's base returns only 0.021 of its OFF luminance, because its OFF look is surface sheen, not body color. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-skeptic/core_bases_lit_1x_grid.png and core_bases_lit_lifted6x_grid.png (no gray, spray-painted flanks in any tint); numbers in s4_out.txt (c)."
+     },
+     {
+      "id": "LR5-led-colors-and-smoke-hue",
+      "verdict": "partly",
+      "severity": "note",
+      "reasoning": "The LED facts hold. In the code copy, LED_CCT (lines 53-57) gives 2200 K to Ember, 2700 K to Poison and Fog, 3000 K to Haze, and 4000 K to Dust, Acid, Ice and Smoke. The audits' per-LED powers follow that split at equal lumens: pendant 0.621/0.521/0.477/0.383 W, Core 2.978/2.5/2.292/1.836 W. The house lights are identical across tints within each lamp type. The site copy (gate/tree3/spinoffs/barkhorn/site/core/smoke.html) says the same. So the brief's 3000 K premise is wrong for six tints. The Smoke part is weaker than stated. The critic's model passes the LED through three color channels only, and it also misses Haze's chroma by about 40 % (37.5 against 53.3) and Ember's by 11. So Smoke's 13.9 against 4.8 is a lead, not proof of a stray warm light path. The only dye file on hand is the 10 Nov copy (split 1.03/1.00/0.97). The owner already approved this olive in the check set (h 84.3). Keep the question to the lamps lane, at low priority."
+     },
+     {
+      "id": "LR6-ember-core-lip-clip",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Reproduced: 402 px with a channel at 250 or more, 16 of them at 255, all in x 770-896, y 1469-1496. Row 1472 averages (250, 59, 59) over x 780-880. It is not new: LIT-g has 472 (21 at 255), and LIT-c, the Ember Core lit the owner approved on the pour sheet (house9), has 510 (30 at 255). Dust's Core has 6 px at 250 or more on the same lip (x 812-820, y 1473-1474), which is negligible. The Ember pendant's near-clipped upper glow is 14,223 px at 250 or more (3.2 % of the shade mask, 38 at 255); it reads as smooth red, not a blown patch, so the earlier call holds. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-skeptic/ember_core_lip_x4.png, ember_core_lip_clipmap_x4.png and ember_pend_upperglow_clipmap_1x.png; numbers in s4_out.txt (d)."
+     },
+     {
+      "id": "LR7-clean-checks",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "I re-ran the checks with my own code. Pendant LITs against the approved check-set frames at 800 x 1000: glow dE00 0.02-0.19, corners within 0.08 L*, and the smoothed L* difference has p1/p99 within 0.5 with no local structure (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-skeptic/pend_vs_approved_Ldiff_x40.png). Core glows against the sheet at unchanged pours: Ember 0.20, Poison 0.64, Acid 1.20, Smoke 1.20. The pass Ember Core differs from LIT-g by a mean |d| of 0.31 levels.\n\nSpeck scan against a 7x7 median (isolated departures over 18 levels, s2_out.txt): only fixed geometry, a cap-step glint at (627, 855) in four tints and a dark point at (1055, 867) in two, plus grain at the edge of Ember's glow. No trace of the spot's face at the old speck place (largest excess +2 to +8 levels, which is grain). Grain runs 1.2-1.7 levels per channel in every glow. The glows fall from top to bottom by 15-18 L* down the centre of the ball (consistent with an upward LED), and the floors take each glow's hue.\n\nOne small correction: across tints, the top four corners span up to 0.33 L*, not 'within 0.3'. Also checked and below notice: a faint dark arc across every ball at about y 1130 (the reflection of the room's horizon, 0.3 L* or less; it was stronger in LIT-c, -0.55 to -0.65), and 8-bit contour rings on the walls that appear only after heavy smoothing (0.5 L* or less, hidden by grain): ball_mid_highpass_GRrB.png, wall_midband_x60_core.png."
+     }
+    ],
+    "missed": [
+     {
+      "id": "LS-M1-core-lit-awaits-owner",
+      "frames": [
+       "core-red-lit.png",
+       "core-orange-lit.png",
+       "core-amber-lit.png",
+       "core-green-lit.png",
+       "core-blue-lit.png",
+       "core-violet-lit.png",
+       "core-black-lit.png"
+      ],
+      "severity": "block",
+      "what": "All seven Core LITs use LIT-g, and the owner has not chosen LIT-g. He saw it on Ember only. The critic passes five of them anyway. In the other tints, LIT-g shows things he has not seen: Poison's base stays nearly black, Smoke's is black, Acid's base reads olive, Poison's ball carries the mark, and the three re-mixed Cores glow differently. If he picks LIT-c, none of these frames can be used.",
+      "evidence": "Brief: LIT-c beside LIT-g was sent as /home/user/earmilk-site/spinoffs/barkhorn/coordinator/core-ember-lit-c-g-2026-11-21.jpg (Ember only), and he has not answered. Lit base box medians: Poison L* 2.9/C* 6.8 (41 % below L* 2.5 at 480 px), Smoke 0.3/0.0, Acid 13.1/19.0/h 97 (olive), Haze 2.0/26.0 (s4_out.txt). LIT-c Cores exist at full size only for Ember (house9). At these pours they exist at half size in the check set for Acid (L2.0), Poison (L0.45) and Smoke (L0.5), and not at all for the new Dust, Ice and Haze dyes. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-skeptic/core_bases_lit_1x_grid.png.",
+      "fix": "Keep all seven Core LITs off the site until he answers. Ask him with all seven tints, not Ember alone, and say how Poison's and Smoke's bases look and what the mark on the green ball is. While waiting, render the Poison Core alone with the narrower cards so he can see the mark reduced. If he picks LIT-g, re-render all seven with the same cards. If he picks LIT-c, all seven need new full-size LIT-c renders."
+     },
+     {
+      "id": "LS-M2-ice-haze-new-dye-lit",
+      "frames": [
+       "core-blue-lit.png",
+       "core-violet-lit.png"
+      ],
+      "severity": "note",
+      "what": "Dust is not the only Core lit on a dye the owner has seen only off. The Ice and Haze Cores also use re-mixed dyes, and their lit glows moved from what his lit sheet showed. Both moved toward their pendants, so these are small changes in the right direction, but they are still unseen.",
+      "evidence": "Glow medians L*/C*/h. Ice: sheet (checkset/blue/core-lit-L1.5.png, old dye) 32.3/28.2/259.8, pass 34.4/26.1/248.0, a 12 degree move toward teal, dE00 4.08; Ice pendant h 252.7. Haze: sheet (checkset/violet/core-lit-L0.5.png) 19.5/45.6/337.2, pass 22.4/50.3/340.5, lighter and more colorful, dE00 2.89; Haze pendant h 339.8. sheets.py shows the dye sheet (b61/owner/dye-off.jpg) was off only. Numbers in s1_out.txt; crop /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/lit-skeptic/remixed_cores_seen_vs_now_vs_pendant_400.png (columns: what he saw, the pass Core, the pass pendant).",
+      "fix": "No re-render. Show the three re-mixed Cores lit together (Dust, Ice and Haze), with one line each, when the owner sees the Core LITs."
+     }
+    ],
+    "recommendation_check": "Partly right.\n\nPendants: I agree. Pass the seven pendant LITs. Each matches its approved check-set frame (glow dE00 0.02-0.19, corners within 0.08 L*, no local differences), and Ember's pendant clip is already named.\n\nCores: the critic's plan cannot stand as written.\n- None of the seven Core LITs can pass for the site yet. All seven are on LIT-g, and the owner has not chosen LIT-g; he saw it on Ember only (block, LS-M1).\n- \"Pass five now and fix two later\" does not hold together. Any card change means re-rendering all seven Cores to keep one recipe. The real choice is to keep today's cards for all seven and name the mark, or change the cards and re-render all seven.\n- The mark is real and worth fixing: plain on Poison, faint on Ice. But its lower bar is the cards' shadow on the floor, and the flag is not in it at all. Narrowing the cards to about 3.8 cm and 2.5 cm (the beam plus the 3 mm emitter) narrows both bars by about a third (43 to 27 px), not by half. A floor-toned top face on the top card would remove the upper bar.\n- A sensible order: render the Poison Core alone with the narrower cards while waiting, show the owner LIT-c against LIT-g in all seven tints, then re-render all seven if he picks LIT-g.\n\nNaming list:\n- Add the Ice and Haze Cores' new dyes, which he has not seen lit. Both changes are small and move toward their pendants (LS-M2).\n- Ember's Core lip clip is not new. The LIT-c frame he approved has it too (510 px at 250 or more).\n- Smoke's dim glow and dark bases, Poison's dark base and the Dust pair stand as notes.\n\nKeep the correction to the brief: the LEDs are 2200-4000 K by tint, and only Haze is 3000 K. Treat Smoke's olive as a low-priority question for the lamps lane, not a finding.",
+    "owner_points_corrected": "- The seven lit pendants are the same pictures you approved on the pour sheet.\n- The seven lit Cores use the new small front light you were shown on Ember. They will not go up until you choose between it and the old light. Please look at all seven: with the new light, Poison's base still looks nearly black and Smoke's base is black.\n- On the green Core's shiny ball, the new light's black card and the shadow it casts on the floor reflect as a small dark mark just below the middle, like an equals sign. It is a real reflection, but it can look like a flaw. It is plain at full size and faint at small sizes, and very faint on the blue Core. Narrower cards and a re-render would make it about a third narrower, or you can accept it as it is.\n- The Dust, Ice and Haze Cores use the new dye mixes you approved for matching when off, and you have not seen them lit. The Dust Core now glows a darker, browner orange than its pendant. Ice and Haze changed only a little, and both are now closer to their pendants.\n- Smoke lit is true to its dark pour but very dim. Both lamps glow darker than the wall beside them, so they can look switched off.\n- Only the red lamps reach the top of the camera's range: the top of the pendant's glow, and the thin line where the Core's ball meets its base. That line was in the earlier Core picture too."
+   }
+  },
+  {
+   "lens": "owner",
+   "found": {
+    "findings": [
+     {
+      "id": "S1-smoke-lit-reads-off",
+      "frames": [
+       "black/hemisphere-black-lit.png",
+       "black/core-black-lit.png"
+      ],
+      "severity": "fix",
+      "what": "Switched on, Smoke looks switched off at every site size. The glow is a dim olive-brown (median RGB 44/34/15 on the pendant, 42/33/13 on the Core) and it is darker than the studio wall beside it. At 240 px the pendant's glow is L* 13.9 against a wall of 21.0 (-7.0), and the Core's is 14.5 against 19.5 (-5.1). The site's current Smoke pictures glow grey-white about 43 L* above their wall (pendant 54.6 against 11.0, RGB 125/131/134; Core 55.1 against 11.7). That makes this the biggest change in the set and the first frame the owner and a shopper will question ('is it on?'). The picture is honest. The pendant pour is unchanged at 1.2x, so its change comes entirely from rule (a)'s shared exposure. The Core's pour went from 0.3 to 0.5 ('deeper', approved). Both frames match the check-set cells in pours-lit.jpg's approved column to within 0.1 L* (hemi-lit-L1.2: 13.9 against wall 21.0; core-lit-L0.5: 14.5). At 760 px the pendant reads as a real smoked shade over a dim warm lamp, so realism is fine. The problem is readability and appeal at tile size.",
+      "evidence": "Numbers: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/contrast240.txt (glow box x560-1040 y1150-1380 pendant, x640-1000 y900-1220 Core, against walls at the same height, measured at 240 px, new and site) and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/measures-extra.txt (median RGB). Looks: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/thumb240-hemisphere-all.png and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/thumb240-core-all.png (rows: new OFF, new LIT, site now; Smoke is the last column), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/p800/smoke-pend-lit-vs-site-760.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/s520-hemisphere-black.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/s520-core-black.png. Check-set Core pours lit, disc against wall at 240 px: 0.3 gives 31.2/19.5 (+11.7), 0.45 gives -1.6, 0.5 gives -4.9, 0.6 gives -10.3 (b61 checkset/black/core-lit-L*.png). Approved cells: b61/owner/sheets.py, Smoke row.",
+      "fix": "No re-render (rule (a) and an approved pour). Before it goes live: (1) on the site, lead with the OFF picture in every grid, tile and thumbnail, and make it the first picture on each lamp page, so Smoke LIT is only ever the second picture. That was the coordinator's own pick on 20 Nov (approved-renders.md line 3812). (2) Show the owner this pair beside the site's current Smoke at page size, and name it the way Ember's clip is named: Smoke is a dim lamp shown at the same exposure as the others. If he wants Smoke to read as on, the only honest lever is the pour (at the live Core pour of 0.3 the ball glows above the wall). That also makes it less black when off. That is his call, not ours."
+     },
+     {
+      "id": "W1-webp82-bands-dark-walls",
+      "frames": [
+       "all 14 *-lit.png as site WebP exports (the PNG masters are clean)"
+      ],
+      "severity": "fix",
+      "what": "At WebP quality 82 (the site lane's default for the habitat pictures, approved-renders.md lines 2169-2171), the dark studio walls of the LIT pictures lose their grain and break into 16 px blocks and vertical stripes. At 1200 x 1500 the stripes show at 1:1 on the left wall of the Haze pendant LIT and the Smoke Core LIT with no lift at all, and they are obvious with a lift. At 92 the grain survives and the walls stay smooth. On the wall (x100-500, y100-500 at 1200 px), the difference between neighboring pixels is 1.11-1.12 levels in the PNG and 0.05-0.08 at 82. The share of 8 x 8 blocks with no texture (std < 0.3) is 0 % in the PNG, 47-50 % at 82 and 24-32 % at 92. LIT files at 1200 come out at 10-16 KB at 82 and 34-51 KB at 92. The site's current lamp files are 50-80 KB, and re-encoding their pixels reaches that size only near 92 (48-70 KB; at 82 it gives 13-16 KB). So the live lamp files may already use a higher setting. Check the setting; do not assume it.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/webp/haze-pend-lit-wall-png-82-92.png (top row 1:1 with no lift, bottom row lifted), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/webp/raw-core-black-png-q82.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/webp/wall-stretch-png-82-92.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/webp/stretch-core-black.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/webp/off-floor-stretch-png-82-92.png (OFF floor shadow: blocks only when stretched), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/webp/sizes.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/webp/blockiness.txt; decoded q82 frames in the same folder (*-q82.png). Encoder: libwebp through PIL, method 6.",
+      "fix": "Export the 14 LIT pictures and their 800 x 1000 tiles at WebP 92, as was done for the dark Smoke habitat ('90 and up keep the grain'). Exporting all 28 at 92 is simplest. Check: under a gamma lift, the left wall of hemisphere-violet-lit and core-black-lit should show grain, not stripes. A 1200 x 1500 LIT file under about 25 KB was encoded too low."
+     },
+     {
+      "id": "D1-dust-core-lit-unseen",
+      "frames": [
+       "orange/core-orange-lit.png"
+      ],
+      "severity": "fix",
+      "what": "The owner has not seen the Dust Core switched on at its final pour, and it looks different from the cell he saw. The 'proposed' Dust Core in pours-lit.jpg was checkset/orange/core-lit-L0.8.png (today's dye at 0.8). The pass uses the re-mixed dye with a touch of black at 2.6, which was shown to him switched off only (the final OFF sheet, 'no decision needed', approved-renders.md line 4064). Dust was not among the six pours he said yes to at 19:08 (line 4054). Lit, the new ball is darker and browner: disc L* 43.4, C* 57.3, h 65.3 (RGB 154/85/0), against 52.0, 64.7, 61.4 (189/100/15) in the cell he saw. Beside its own pendant switched on (225/112/16, h 58) it reads as amber-brown next to orange in the 240 px row. Ice's Core also moved (h 246.6 against the 258.9 he saw, toward teal), but that brings it closer to its pendant (h 251), so it needs no word. The Haze, Acid, Poison, Smoke and Ember balls match what he saw within 3 L*.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/shown/core-lit-shown-vs-pass-dust-ice.png (as shown | pass | its pendant) and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/shown/README.txt (disc r < 0.9 x 351 px about (822,1067)); the source of the approved cells: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/owner/sheets.py; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/thumb240-core-all.png against /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/thumb240-hemisphere-all.png (column 2, row 2).",
+      "fix": "No re-render: the black is what makes Dust match when off, which was his condition. Before it goes live, show him the Dust Core switched on beside the cell he approved and beside its pendant, with one line: the touch of black that makes the Dust Core match when off makes it a darker, browner orange when on."
+     },
+     {
+      "id": "F1-one-family-on-the-site",
+      "frames": [
+       "all 28, in the site's context"
+      ],
+      "severity": "note",
+      "what": "The 28 are one family. Camera and lamp are identical in every tint: the cord sits at x 808-836 in all 14 pendant frames, and the Core ball's edges at x 410-1231/1232 in all 7 OFF frames. The ground matches within 0.3 L* at every corner in every group; only the Core LIT lower corners move with each lamp's own light (LL 13.1-17.1, BR 17.0-20.5). On the site, though, they would sit beside pictures from the old studio and the old pours: Fog's current pair, and on the lamp pages From below, In a group, All eight (line 689), By day, the 16 color-switcher cells and the bar pictures. All of those use the 17 Nov mix (pendants Ember 1.8x, Acid 5x, Ice 6x, Haze 1.8x; line 3021), where the new pendants are 0.7x, 3x, 3x and 1x. For example, the new Ice pendant glows 11/104/143 against the live 76/151/232, and the check set puts Ice's lit hue at 290 at 6x against 253 at 3x. The new framing is also larger and lower (pendant shade x 0.21-0.82, y 0.48-0.75 of the frame, against 0.21-0.79 and 0.44-0.63 on the site).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/lit-row-with-fog-old-200.png (the seven new LIT frames with the site's current Fog in the row); /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/s520-hemisphere-blue.png; the pass README pour table; approved-renders.md lines 689, 3021, 3068-3072; the message promise in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b61/owner/msg-final.md.",
+      "fix": "Confirms the plan: swap all eight tints together once Fog's four pass, and keep the promise the owner was given ('every changed tint means redoing the site's pictures that show it, the bar pictures included ... The site doesn't change until that's done'). Then no page shows two pours of one tint."
+     },
+     {
+      "id": "B1-poison-haze-lit-base-near-black",
+      "frames": [
+       "green/core-green-lit.png",
+       "violet/core-violet-lit.png"
+      ],
+      "severity": "note",
+      "what": "At page size, LIT-g shows the base in its pour color for Ember, Dust, Acid and Ice, but not for Poison or Haze. At 480 px, the share of the base box (x520-1110, y1530-1740) under L* 2.5 is 0.41 for Poison (median RGB 0/14/1, L* 2.9, C* 6.5) and 0.62 for Haze (10/0/41, L* 2.1). Ember is 0.10 (44/1/1), Dust 0.00, Acid 0.00 and Ice 0.20, while LIT-c's Ember was 0.97. Poison's lit base reads black-green under a green ball, and Haze's reads very dark indigo. It is the same light on darker pours: the lit-to-off base luminance ratio is 0.069 for Poison, 0.061 for Haze and 0.071 for Ember. So rule (a) holds.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/litbase/core-lit-480-all.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/measures-extra.txt (section 2).",
+      "fix": "Nothing to change in the pictures. When the owner gets the LIT-g answer, name Poison and Haze alongside Smoke's base, so 'shows the base as its pour color' is not taken to hold for every tint."
+     },
+     {
+      "id": "H1-ice-lit-petrol",
+      "frames": [
+       "blue/hemisphere-blue-lit.png",
+       "blue/core-blue-lit.png"
+      ],
+      "severity": "note",
+      "what": "Switched on, Ice reads petrol (teal-blue), the least vivid colored glow, while switched off it is royal blue. Pendant glow is 11/104/143 (L* 41.1, C* 30.1, h 251, exactly the 3x check-set frame) against an OFF body of 1/92/192 (h 288). The Core disc is 0/87/117, with R at 0-1 in 84 % of it. The site now shows sky blue (76/151/232). At 240 px Ice's chroma is 30 (pendant) and 26 (Core), against 52-87 for Ember, Dust, Acid and Haze. It still stands 16-20 L* above the wall, and at 800 px it reads cerulean. Haze's magenta shift is the call already made and is confirmed (lit 337/339 against off 309/308).",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/contrast240.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/meas1.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/s520-hemisphere-blue.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/p800/core-blue-lit-800.png.",
+      "fix": "None. Have a one-line answer ready for 'why is Ice teal when it's on?': the 3000 K LEDs through the blue dye let through mostly blue-green. The check set measured h 253 at this pour, and he approved it in pours-lit.jpg."
+     },
+     {
+      "id": "G1-core-lit-ball-reads-flat",
+      "frames": [
+       "core-*-lit.png (all seven)"
+      ],
+      "severity": "note",
+      "what": "At 1200 px the lit Core reads as an evenly lit opal globe inside a dark glass ball. It has no highlight anywhere, and the coordinator noted 'its ball reads flat' on 20 Nov (line 3812). Part of the flatness is the sRGB gamut: in the colored discs, one channel sits at 0-1 in most of the disc (Ember B 65 %, Dust B 76 %, Acid B 64 %, Poison R 86 %, Ice R 84 %, Haze G 88 %), so the shading has to live in the remaining channels. There is real shading: Ember's disc runs from L* 45.5 at the top to 34.6 at the bottom, and from 42.1 at the center to 37.6 at the edge. At 240 px it reads as a glowing disc in a dark ring, which is clear. The owner has seen this look on every lit sheet.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/disc.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/measures-extra.txt (section 1), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/p1200/core-red.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/p1200/core-orange.png.",
+      "fix": "None for going live (no highlight on one lamp only, per round 6). Optional later: a wide-gamut (Display P3) version of the LIT frames would show more of the glow's shading on P3 screens without touching the light. It needs the renders' linear output; pass.sh runs with EXR=0."
+     },
+     {
+      "id": "R1-core-off-base-rim",
+      "frames": [
+       "green/core-green-off.png",
+       "violet/core-violet-off.png",
+       "and the other five core-*-off.png"
+      ],
+      "severity": "note",
+      "what": "On every Core OFF, the outer rim of the base loses most of its color; this is the satin sheen at grazing angles. Rows 1560-1690, outer 3-20 px against the center, L*/C*: Poison 36.8/6.5 against 29.5/27.6; Haze 36.6/26.7 against 27.3/71.0; Ember 40.7/21.8 against 37.1/54.4; Acid 49.7/21.2 against 60.3/51.1. Poison's outer ~27 px are almost neutral (C* 4-9). At 480 px it reads as satin. At 960-1200 the left flank of Poison shows a grey 'frosted' edge, and Haze a pale lavender one. That is the spot the owner once called 'smoke frosted on some edges'.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/base/core-off-960-4.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/base/leftflank-1200x2.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/base/core-off-480-4.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/measures-extra.txt (section 3; mask = meter base.png, its edge checked against the silhouette).",
+      "fix": "Nothing is needed to go live. If he zooms in on Poison and asks, this is the r5 satin rim; it is the OFF lane's call."
+     },
+     {
+      "id": "M1-mark-on-lit-ball",
+      "frames": [
+       "green/core-green-lit.png",
+       "blue/core-blue-lit.png"
+      ],
+      "severity": "note",
+      "what": "There is a small dark mark on the lower center of the lit ball, where LIT-f's glint used to be. It is most likely the spot's top cut seen mirrored in the ball. Poison: -1.6 L* at (812,1188), 334 px below -1 L*. Ice: -1.9 L* at (813,1179), 124 px. The other tints are under 1 L* and under 35 px. It is faint at 1200 1:1 and invisible at 480.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/ballmark/core-lit-centre-x3.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-eye/ballmark/core-lit-centre-1200.png.",
+      "fix": "None. It is a real reflection of a real flag; only worth knowing if he zooms in."
+     }
+    ],
+    "frames_pass": [
+     "red/hemisphere-red-off.png",
+     "red/core-red-off.png",
+     "orange/hemisphere-orange-off.png",
+     "orange/core-orange-off.png",
+     "amber/hemisphere-amber-off.png",
+     "amber/core-amber-off.png",
+     "green/hemisphere-green-off.png",
+     "green/core-green-off.png",
+     "blue/hemisphere-blue-off.png",
+     "blue/core-blue-off.png",
+     "violet/hemisphere-violet-off.png",
+     "violet/core-violet-off.png",
+     "black/hemisphere-black-off.png",
+     "black/core-black-off.png",
+     "red/hemisphere-red-lit.png (PNG master; needs the WebP 92 export, W1)",
+     "orange/hemisphere-orange-lit.png (PNG master; W1)",
+     "amber/hemisphere-amber-lit.png (PNG master; W1)",
+     "green/hemisphere-green-lit.png (PNG master; W1)",
+     "blue/hemisphere-blue-lit.png (PNG master; W1)",
+     "violet/hemisphere-violet-lit.png (PNG master; W1)",
+     "red/core-red-lit.png (PNG master; W1)",
+     "amber/core-amber-lit.png (PNG master; W1)",
+     "green/core-green-lit.png (PNG master; W1)",
+     "blue/core-blue-lit.png (PNG master; W1)",
+     "violet/core-violet-lit.png (PNG master; W1)"
+    ],
+    "recommendation": "Go live with all 28 and re-render nothing, on four conditions.\n\n1. Export the LIT pictures at WebP 92, not 82 (W1).\n2. Lead with the OFF picture in every grid, tile and thumbnail, and as the first picture on each lamp page.\n3. Before the swap, show the owner the Smoke lit pair beside the site's current Smoke (S1) and the Dust Core lit beside the cell he approved (D1). Name Smoke, and the near-black Poison and Haze lit bases, under rule (a), the way Ember's clip is named.\n4. Swap all eight tints at once, after Fog's four pass, together with the derived pictures at the old pours, as he was promised (F1).\n\n**Single most important problem:** Smoke switched on reads as switched off at every site size. Its glow is 5-7 L* darker than the wall at 240 px, where the site's current Smoke sits about 43 L* above it. That is honest under rule (a) and an approved pour, so the answer is OFF-first ordering and telling him, not a new light.\n\n**Answers to the lens questions:**\n- **Real photos?** Every OFF frame reads as a real studio photo of glossy cast acrylic at 1200, 800 and 240. They are the best lamp pictures on file; the Ember OFF is far better than the dark-ground OFF on the site now. Every LIT frame reads as a real lamp in a dim studio. The only soft spot is the lit Core ball, which looks a little flat at 1200 (G1, known).\n- **More true than the site?** Yes. The site's lit glows are washed-out pastels: Ember pendant 252/143/132 at C* 47, against the new 240/46/36 at C* 87. The new ones keep each dye's depth at one exposure per lamp type.\n- **Readable and attractive small?** Ember, Dust and Acid are strong (+22 to +49 L* over the wall). Poison and Ice read clearly (+11 to +20), with Ice petrol rather than royal blue. Haze reads by its magenta (+4 to +6 L*). Smoke does not.\n- **One family?** Yes: identical camera and lamp position in every tint, and the ground within 0.3 L* at every corner.\n\n**Calls already made, confirmed:**\n- Ember's pendant clips (R \u2265 250 in 3.2 % of the shade mask).\n- Smoke's lit Core base is black (100 % of the base box under L* 2.5 at 480).\n- Haze's lit hue is 337-339 against 308-309 off.",
+    "owner_points": "The switched-off pictures are the best lamp pictures we have: every color reads as real glossy acrylic, and all 28 share one studio, one angle and one size. Switched on, the colors are deeper and truer than the pale glows on the site now, and six of the seven still read well as small tiles. The one you will notice is Smoke. Switched on, it is a dim brown glow, darker than the wall behind it, so as a small tile it looks switched off. That is honestly what a near-black shade gives at the same exposure as the other colors, so we would keep it and show the switched-off picture first everywhere. Also, you have not yet seen the Dust Core switched on: the touch of black that makes it match when off makes it a darker, browner orange when it is on."
+   },
+   "verified": {
+    "verdicts": [
+     {
+      "id": "S1-smoke-lit-reads-off",
+      "verdict": "partly",
+      "severity": "note",
+      "reasoning": "The numbers reproduce exactly. At 240 px the pendant glow is L* 13.9 against a wall of 21.0 (-7.0), and the Core's is 14.5 against 19.5 (-5.1). Against the wall right beside the lamp it is -6 to -8.5. The site's Smoke is about 54.5 against 11.0. The approved check-set cells match: hemi-lit-L1.2 is 13.9 against 21.0 and core-lit-L0.5 is 14.6 against 19.5. The Core pours give +11.7 at 0.3, -1.6 at 0.45 and -10.3 at 0.6.\n\nFour corrections:\n(1) 'At every site size' is too strong. At 600 px I see a warm glow inside a smoked shade, and the critic says the same at 760 px. Only at about 240 px can it pass for off.\n(2) Leading with the OFF picture is not a new condition. It was decided on 20 Nov at 15:13: 'the house-ground picture of each lamp is the OFF frame (tile and picture 1)' (approved-renders.md line 3890). He was told that his off-or-lit choice for the row was withdrawn. Line 3812 was only the coordinator's earlier pick.\n(3) He has already seen this dimness at tile size and said yes. The Smoke row of pours-lit.jpg shows the 1.2x pendant in both columns and the 0.5 Core as 'deeper'. What he has not seen is the pair beside the site's gray-white Smoke.\n(4) 'Its change comes entirely from rule (a)'s shared exposure' is wrong. The color changed too, from neutral gray (125/131/134, C* 2.7) to warm olive-brown (44/34/15, C* 14, h 83). Exposure cannot do that; see the missed finding X1.\n\nOn the fix: the pour lever needs both lamps, because the 1.2x pendant is also 7 L* under the wall. Lighter Smoke pours would also undo his 'same off' condition. The buyer critic on the pour check set (B6) found the Core at 0.3 'looks like see-through slate-grey glass next to a gloss-black pendant'.\n\nAs a picture problem it is honest and approved, and the OFF-first order already handles it, so it is a note.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/s1-contrast240.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/s1-checkset-smoke.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/smoke-240-row.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/smoke-pend-600.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/pours-lit-row-smoke.png"
+     },
+     {
+      "id": "W1-webp82-bands-dark-walls",
+      "verdict": "partly",
+      "severity": "note",
+      "reasoning": "The effect at quality 82 is real and reproduces. On the left wall at 1200 x 1500:\n- q82: 44-50 % of 8 x 8 blocks are flat (0 % in the PNG), the neighbor difference is 0.06-0.07 (PNG 1.11-1.12), and files are 10-16 KB.\n- q92: 21-30 % flat, files 35-51 KB.\nUnder a 0.55 gamma lift, q82 shows clear vertical stripes.\n\nThe premise is wrong for the lamps:\n- All 17 live lamp WebPs carry VP8 base quantizer 12 (segments 12/12/10-11/8-9).\n- libwebp gives quantizer 12 at quality 90. Quality 82 gives 24 and quality 92 gives 10. The site's decoded Haze pendant re-encoded at 90 gives the same 12/12/10/8 pattern.\n- So the live lamp pictures were exported at 90. Quality 82 is the habitats' setting (line 2170).\n\nAt 90 the vertical-stripe energy on the wall equals the PNG's: 0.272-0.350 against 0.276-0.343, where q82 is 0.324-0.405. This is the RMS of the 64-row column means after a 33 px high-pass. Flat blocks are 36-40 %.\n\nUnder the lift, both 90 and 92 still show faint stripes. 'At 92 the grain survives' is too strong: the neighbor difference is 0.15-0.20 against the PNG's 1.11. The critic's '<25 KB means too low' check would also flag a correct q90 Smoke Core LIT (24.6 KB).\n\nFix: keep the lamps at their live setting (90) or at 92, never 82. Check the quantizer in the file header (12 or lower), not the file size.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/webp/site-quantizers.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/webp/blockiness-82-90-92.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/webp/stripes-82-90-92-95.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/webp/hemisphere-violet-wall-png-82-90-92-gamma.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/webp/core-black-wall-png-82-90-92-gamma.png"
+     },
+     {
+      "id": "D1-dust-core-lit-unseen",
+      "verdict": "confirmed",
+      "severity": "fix",
+      "reasoning": "Reproduced. The pass Dust disc is 154/85/0 (L* 43.4, C* 57.3, h 64.6). The 0.8 cell he saw is 189/100/15 (52.0/64.7/61.0), dE76 12.1 apart. At 240 px the Core reads amber-brown beside its orange pendant.\n\nThree additions:\n(1) That cell was labeled 'tried: lighter', and he was told 'Dust stays as it is for now ... you'll see that on its own' (msg-final.md). The Dust he has in mind is today's: the 1.5 Core at 186/68/1, h 50, which is dE76 21.7 from the pass.\n(2) The Dust pendant changed too, from today's 3.0 (229/89/10, h 51) to 2.1 (231/112/17, h 58). He saw 2.1 only as 'tried'. Today's lit pair matched in hue (h 51 and 50); the new pair does not (h 58 and 65, C* 75 and 57).\n(3) The Ice and Haze Cores are also on new dyes that were never rendered lit before the pass; checkset/dye/ holds OFF frames only. Ice is dE76 6.5 from what he saw (h 259.5 to 247.8). That puts it on the other side of its pendant's 253.5, about as far off, not closer as the critic says. Haze is dE76 5.9. Both are small.\n\nFix: show him the Dust pair switched on at its final pours beside today's Dust pair, with one line. Ice and Haze need half a line at most.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/d1-discs.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/d1-pendants.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/dust-lit-today-tried-pass-240.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/pours-lit-row-dust.png"
+     },
+     {
+      "id": "F1-one-family-on-the-site",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Reproduced:\n- The cord sits at x 808-836 in all 14 pendant frames.\n- The Core OFF ball edges are at x 409 and 1233-1234 on row 1080 in all 7 frames.\n- The pendant OFF and LIT corners, and the Core LIT upper corners, agree within 0.34 L*.\n\nOne correction: the Core OFF lower corners spread 0.5-0.8 L* (LL 92.8-93.3, BR 89.4-90.2), not 0.3. They move with each lamp's color, as the pass README expects.\n\nThe site's Ice pendant glows 76/151/232. The check set's Ice is h 290 at 6x against 253.5 at 3x.\n\nThe conclusion stands: swap all eight tints at once, together with the derived pictures.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/f1-family.txt"
+     },
+     {
+      "id": "B1-poison-haze-lit-base-near-black",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Reproduced exactly at 480 px. The share of the base box under L* 2.5 is:\n- Ember 0.10, Dust 0.00, Acid 0.00, Ice 0.20\n- Poison 0.41 (0/14/1), Haze 0.62 (10/0/41), Smoke 1.00\nBy eye, Poison's base reads black-green and Haze's very dark indigo.\n\nMy lit-to-off ratio (mean luminance over the base mask) is 0.07-0.11 for the six colored tints. The numbers differ from the critic's, but the conclusion is the same: it is the same light on darker pours.\n\nOne addition. His 18:48 message said 'The black bases on the lit Cores are a lighting fault in these test pictures, not the pour; the fix is being tested'. The 23:43 line said the light shows the base 'as the same deep red'. Three of the seven bases stay near-black, so the naming the critic asks for matters.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/b1-litbase.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/core-lit-480-lower.png"
+     },
+     {
+      "id": "H1-ice-lit-petrol",
+      "verdict": "partly",
+      "severity": "note",
+      "reasoning": "The numbers reproduce:\n- The pendant glows 9/106/149 (L* 41.9, C* 31.7, h 253.5), the same as the 3x check-set frame.\n- The OFF shell is 3/87/183, h 289.\n- R is at 0-1 in 84.4 % of the Core disc.\n\nThe ready answer is wrong for Ice. The log records Ice's LED as 4000 K (the owner's decision of 11 Nov, approved-renders.md line 235). 3000 K is Haze's LED.\n\nWhat the check set shows is the pour: Ice glows at h 290 at 6x and h 253.5 at 3x. My measure on hemi-lit-L6.0 gives 0/55/133, h 290.2.\n\nA correct line for him: 'The lighter pour lets more blue-green light through, so Ice glows teal-blue when on; it is royal blue when off.'"
+     },
+     {
+      "id": "G1-core-lit-ball-reads-flat",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "The upper shell ring of the lit ball is L* 2-9, with no peak in any 15-degree sector (checked on Ember, Dust and Ice), so there is no highlight. The disc has real shading, as the critic says. At 800 px it reads as a lit opal globe inside a dark glass shell. Nothing is needed for going live.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/core-lit-800-ball.png"
+     },
+     {
+      "id": "R1-core-off-base-rim",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Reproduced within 0.4. Outer rim L*/C* against the center:\n- Poison 36.5/6.7 against 29.9/27.0\n- Haze 36.4/27.3 against 27.6/70.6\n- Ember 40.5/22.3 against 37.4/54.0\n- Acid 49.7/21.6 against 60.4/50.7\n\nAt 1200 px 1:1, Poison's left flank shows a gray-green satin sheen and Smoke's a gray one. It reads as satin, not paint. This round's OFF skeptic confirmed the same edge as an owner question (line 4088).\n\nThe r5 verdict that the 'smoke-frosted' edge is gone was made on Ember only. Poison and Smoke are where he would see it, so keep the answer ready.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/r1-baserim.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/core-off-base-1200.png"
+     },
+     {
+      "id": "M1-mark-on-lit-ball",
+      "verdict": "confirmed",
+      "severity": "note",
+      "reasoning": "Reproduced:\n- Poison: -1.6 L*, with 264 px below -1.\n- Ice: -1.6 L*, with 94 px below -1.\n- The other tints: 10 px or fewer.\n\nAt 1200 px with 2x zoom it is a small dark double bar on the lower center of the ball. At 1:1 it is barely visible.\n\nEvidence: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/m1-mark.txt, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/ballmark-1200x2.png"
+     }
+    ],
+    "missed": [
+     {
+      "id": "X1-smoke-light-now-warm",
+      "frames": [
+       "black/hemisphere-black-lit.png",
+       "black/core-black-lit.png"
+      ],
+      "severity": "fix",
+      "what": "Switched on, Smoke's light is now a warm olive-brown, but the owner chose a neutral light for Smoke.\n\nWhat he decided:\n- On 11 Nov he picked Smoke 'with a 4000 K LED', shown at the lit pictures' 4000 K camera white balance (approved-renders.md lines 67-68 and 235).\n- On 15 Nov he turned down a warmer Smoke light: 'SMOKE LAMP AT 2700 K: REFUSED (\"It looks light yellow\"). Smoke keeps a neutral LED' (line 2338).\n\nWhat the pictures show:\n- The site's Smoke glows neutral gray: 125/131/134, C* 2.7.\n- The new pendant glows 44/34/15 (C* 14.2, h 83) and the new Core 46/35/15 (C* 15.0, h 82).\n- That is as warm as the refused 2700 K proof (C* 12.2-18.1, h 74-75), only much darker.\n- At the site's lightness, with the same chromaticity, the new light would be 155/126/75, a khaki tan.\n\nIt is not the pour. At the same Core pour (0.3), the old rig rendered Smoke's light 136/138/140 (C* 1.4). The new studio renders it 87/71/50 (C* 15.6, h 77).\n\nThese files do not show which LED or camera white balance the pass used. The critic saw 'a dim warm lamp' at 760 px but did not connect it to his decision.",
+      "evidence": "Numbers: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/x1-smoke-light-color.txt (with the log's sRGB values from lines 2229-2231 and 2597-2598).\nLooks: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/smoke-light-color-swatches.png (the site's Smoke, the new glow, the new glow at the site's lightness, the refused 2700 K proof) and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/smoke-glow-patches.png.\nThe owner's words: /home/user/earmilk-site/spinoffs/barkhorn/coordinator/approved-renders.md lines 67-68, 235, 2195-2207 and 2338.",
+      "fix": "Before going live:\n1. The lamps lane states which LED Smoke has and which camera white balance the house LIT recipe uses. pass.sh sets neither, so lamp_site.py's defaults decide.\n2. Show the owner the Smoke pair switched on beside the site's Smoke, with one line: 'Switched on, Smoke now shows a dim, warm brown light, not the neutral gray you chose; it is shot at the same exposure as the other colors.'\n3. If he wants it neutral again, there are two honest ways: the LED, or one camera white balance for every tint's LIT pictures (never Smoke alone). Either way the LIT frames have to be re-rendered, because the pass kept no linear masters (EXR=0).\n\nIt is his call. Nothing is re-rendered without his word."
+     },
+     {
+      "id": "X2-core-lit-waits-for-lit-g",
+      "frames": [
+       "red/core-red-lit.png",
+       "orange/core-orange-lit.png",
+       "amber/core-amber-lit.png",
+       "green/core-green-lit.png",
+       "blue/core-blue-lit.png",
+       "violet/core-violet-lit.png",
+       "black/core-black-lit.png"
+      ],
+      "severity": "fix",
+      "what": "All seven Core LIT pictures use LIT-g, the one small front spotlight (pass.sh group D). The owner saw LIT-c beside LIT-g at 23:43 and has not answered. The 23:43 message told him 'the light now goes into every colour's lit Core picture'.\n\nThe critic's recommendation ('go live with all 28 ... on four conditions') leaves this out, although its B1 fix mentions 'when the owner gets the LIT-g answer'.\n\nIf he prefers LIT-c, the seven Core LIT frames have to be re-rendered. The glow is the same either way (the Ember disc is 197/5/1 against LIT-c's 199/5/1, dE76 0.6), so only the bases would change.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b71/pass/pass.sh (CLIT, '# LIT-g (ember-r6-core-g.sh)'); /home/user/earmilk-site/spinoffs/barkhorn/coordinator/core-ember-lit-c-g-2026-11-21.jpg; approved-renders.md lines 4070-4081; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/d1-discs.txt (Ember against LIT-c, dE76 0.6).",
+      "fix": "Add a condition: the Core LIT pictures go live only after his OK on LIT-g. Ask in the same message that names the near-black Poison, Haze and Smoke bases (B1). The coordinator's own sequence already puts the owner between this critic round and the site (line 4065: 'the critic round on the set, the owner, the site')."
+     },
+     {
+      "id": "X3-haze-core-at-wall-lightness",
+      "frames": [
+       "violet/core-violet-lit.png"
+      ],
+      "severity": "note",
+      "what": "At 240 px, Haze's Core glow is only 2.1 to 3.1 L* above the wall right beside the ball (x 300-380 and x 1260-1340, at the same height). The critic's +4.0 used the darker walls at the frame edges. The ball reads by its magenta color (C* 50), not its brightness. After Smoke, it is the weakest of the seven at tile size. The Haze pendant is +5.8 to +7.5.",
+      "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/s1-contrast240.txt (last block), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b72/owner-skeptic/lit-vs-site-320-b.png",
+      "fix": "None to the picture (rule (a) and an approved pour). In the owner points, do not count Haze among the tints that read clearly as switched on by brightness."
+     }
+    ],
+    "recommendation_check": "Mostly right: three of the four conditions need correcting, and one condition is missing.\n\n- **No re-render from this lens:** agreed, unless the owner objects to LIT-g (X2) or to Smoke's warm light (X1). In that case the LIT frames are re-rendered, since there are no linear masters (EXR=0).\n- **Condition 1 (WebP 92, not 82):** smaller than stated. All 17 live lamp WebPs were encoded at quality 90 (VP8 base quantizer 12); 82 is the habitats' setting. At 90 the wall's vertical-stripe energy matches the PNG. Keep the lamps at 90 or 92 and check the quantizer in the header, not the file size. This is a note, not a gate.\n- **Condition 2 (OFF first everywhere):** already decided on 20 Nov at 15:13 (approved-renders.md line 3890). It is a check on the site build, not a new condition.\n- **Condition 3 (show him Smoke and Dust):** keep it, and widen it.\n  - Smoke: he has already seen it this dim on the lit pour sheet and said yes. What is new to him is the color: a warm brown, against the neutral Smoke light he chose and his 15 Nov 'It looks light yellow' (X1).\n  - Dust: show the pair switched on at its final pours beside today's pair, because both lamps changed.\n  - Name the near-black Poison, Haze and Smoke bases.\n- **Missing condition:** the seven Core LIT pictures wait for his answer on LIT-g (X2).\n- **Condition 4 (swap all eight after Fog, with the derived pictures):** agreed.\n\n**Single most important problem:** as a picture, Smoke LIT is the weakest at tile size, but it is honest, approved and already handled by the OFF-first order. The most important open item is his sign-off on three things he has not seen or answered:\n- the LIT-g light on all seven Core LIT pictures;\n- Dust switched on at its final pours;\n- Smoke's light now rendering warm.\n\n**Lens answers:**\n- 'Ember, Dust and Acid +22 to +49' and 'Poison and Ice +11 to +20' reproduce.\n- 'Haze reads by its magenta (+4 to +6 L*)' is generous for the Core. Against the wall beside the ball it is +2.1 to +3.1 (X3).\n- 'Within 0.3 L* at every corner' holds, except the Core OFF lower corners, which spread 0.5-0.8.\n- The calls already made reproduce: the Ember clip is 3.2 % of the shade mask, the Smoke Core base is 1.00 near-black at 480, and Haze lit is h 339-340 against 307 off.",
+    "owner_points_corrected": "All 28 look like real studio photos. Switched off, every color reads as glossy tinted acrylic, and each lamp sits in the same spot in the same studio in every color. Switched on, the colors are deeper than the pale glows on the site now. Each lamp is shot at one exposure for all its colors, so the darker colors glow dimmer, as they would in a room. Ember, Dust, Acid, Poison and Ice clearly read as switched on, even as small tiles. Haze reads by its magenta color more than its brightness. Switched on, Ice glows teal-blue and Haze magenta, as on the lit pour sheet you saw.\n\nThree things to look at before these go on the site:\n\n1. Smoke switched on. It is a dim glow, darker than the wall behind it, so as a small tile it can look switched off. You saw it this dim on the lit pour sheet. As already decided, the switched-off picture comes first everywhere. What is new is the color: a warm brown, not the neutral gray light you chose for Smoke. On Nov 15 you turned down a warmer Smoke light because it looked light yellow. We are checking why it looks warm, and nothing will be changed without your word.\n\n2. Dust switched on, which you have not seen at its final pours. Both Dust lamps changed: the pendant is a lighter pour, and the Core has the new dye with a touch of black. Switched off, they match. Switched on, the pendant glows orange and the Core a darker, browner orange.\n\n3. The small front light on the switched-on Core, which you saw last night in Ember. It is in all seven switched-on Core pictures, and they wait for your OK on it. With it, the base shows its color in Ember, Dust, Acid and Ice. In Poison, Haze and Smoke the base stays nearly black, because those pours are darker.\n\nThe site changes only when Fog is done too: all eight colors at once, together with the other site pictures that still show the old pours."
+   }
+  }
+ ]
+}
