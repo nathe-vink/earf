@@ -836,6 +836,7 @@ def apply(web, head, rest):
         site_fix.fix_9(p, web)
         site_fix.fix_10(p, web)
         site_fix.fix_11(p, web)
+        site_fix.fix_12(p, web)
         rc_clean(p)
         p.banned = BANNED_RC
     return p.done()
@@ -2682,6 +2683,7 @@ def rc_finish(web):
     site_fix.finish_4(web)
     site_fix.finish_5(web)
     site_fix.finish_10(web)
+    site_fix.finish_12(web)
 
 
 BANNED_RC = r'seven colors|Ember to Fog|Smoke as current|still to come|on hold|polished black' if EIGHT else r'eight colors|to Smoke|Smoke as current'
