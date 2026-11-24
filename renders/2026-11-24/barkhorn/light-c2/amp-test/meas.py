@@ -14,7 +14,10 @@ def blotch(Lc, mask, scale):
     if not er.any():
         return float('nan')
     G = g(Lc, 8 * scale); gy, gx = np.gradient(G); gr = np.abs(gx) + np.abs(gy)
-    flat = er & (gr < np.percentile(gr[er], 60))
+    cut = np.percentile(gr[er], 60)
+    flat = er & (gr < cut)
+    if not flat.any():                                     # a near-black panel: its gradients tie at the cut
+        flat = er & (gr <= cut)
     d = (g(Lc, 3 * scale) - g(Lc, 12 * scale))[flat]
     return np.sqrt((d ** 2).mean())
 
