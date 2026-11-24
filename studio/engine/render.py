@@ -344,6 +344,8 @@ def main():
               'samples': int(cy.samples), 'size': [scene.render.resolution_x, scene.render.resolution_y],
               'applied': applied, 'pending': pending, 'sets': a.sets, 'glints': glint_log, 'sun_aim': sun_aim,
               'flags_crossing_set': flag_cross, 'model_hash': model_hash}
+    if scene.get('engine_notes'):                          # what a set's kit_ext recorded about the frame (a proof)
+        report['notes'] = json.loads(scene['engine_notes'])
     tside = Path(a.shot).with_suffix('.tune.json')
     if tside.exists():
         report['tuning'] = json.loads(tside.read_text())

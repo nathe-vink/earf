@@ -1,7 +1,8 @@
 """Light model C for the Tropos fronts and the horn 360 (the owner, 24 Nov 04:02: "5. C"; the coordinator's 21 Nov 08:34
 recommendation, critics unanimous on the S1 test, renders/2026-11-21/barkhorn/s1-test/ c): one physical light model.
   - refractive and reflective caustics on, clamp 0, filter_glossy 0;
-  - the acrylics' shadow-ray shortcut cut (living_ext.no_glass_shadows, last in the set);
+  - the acrylics' shadow-ray shortcut cut (living_ext.no_glass_shadows, last in the set), then shadow_ray_report: both
+    write their counts into the frame's .report.json (`notes`), so each frame carries its own proof;
   - the sweep's painted contact term off (contact strength and core_strength 0): every shadow is cast by the lights;
   - S4b (the coordinator, 24 Nov 09:21): no reflect-only flags. A reflect-only flag (no shadow, no diffuse, unseen by
     transmission, one-sided) becomes a real black card: every ray on, two-sided, casting shadows, out of frame; an
@@ -42,7 +43,8 @@ def real_flags(s):
 def model_c(s, title):
     s = copy.deepcopy(s)
     s['render'].update(caustics_refractive=True, caustics_reflective=True, filter_glossy=0.0, clamp=0)
-    s['set'].setdefault('props', []).append({'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_glass_shadows'})
+    s['set'].setdefault('props', []).extend([{'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'no_glass_shadows'},
+                                             {'kind': 'kit', 'shape': 'ext', 'path': EXT, 'fn': 'shadow_ray_report'}])
     s['set']['contact'] = {**(s['set'].get('contact') or {}), 'strength': 0.0, 'core_strength': 0.0}
     real_flags(s)
     s['title'] = title

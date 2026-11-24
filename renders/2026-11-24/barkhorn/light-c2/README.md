@@ -14,7 +14,8 @@ within 0.25 L* by region (`../light-c/s4/convergence.md`), so the samples stay a
 | `horn-back-<tint>` | 8 | 1200 x 900, 128 | `renders/2026-11-13/barkhorn/fa123/horn-back-<tint>.shot.json` (no reflect-only flags) |
 | `amp-<tint>` | 8 | 1600 x 1600, 128 | `renders/2026-11-13/barkhorn/fa123/macro-amp-<tint>.shot.json` (no reflect-only flags) |
 
-216 frames. The real cards on the turns were checked against all 24 turn cameras (masks at quarter size): equipment 0.
+216 frames. The real cards on the turns are checked against all 24 turn cameras (masks at quarter size, one sample).
+Quick audits of horn-back-fog and amp-fog (fifth size): equipment 0, hidden 0, NO GLASS SHADOWS 6.
 
 ## Setup (a helper's container)
 
@@ -22,5 +23,7 @@ within 0.25 L* by region (`../light-c/s4/convergence.md`), so the samples stay a
    `../light-c/README.md`.
 2. `bash renders/2026-11-24/barkhorn/light-c2/run.sh NAME ...`, e.g. `turn-ember-00 ... turn-ember-23 horn-back-ember
    amp-ember`, in chunks under 2 hours as a tracked background task. It is resumable.
-3. Check each frame: `.equipment.txt` reads equipment 0 and hidden 0; `NAME.log` has `NO GLASS SHADOWS: 6 materials`
-   (fronts and turns; the stills' count is their own).
+3. Check each frame: `.equipment.txt` reads equipment 0 and hidden 0; `NAME.report.json` carries `notes`:
+   `no_glass_shadows.cut` 6 and `shadow_ray_links_left.count` 0 (the same lines are in `NAME.log`).
+4. Helpers work on their own branch, `r33-lightc2-<tint>`, from r33-speaker-horn: their tint's 24 turn frames,
+   `horn-back-<tint>` and `amp-<tint>` (26 frames). The fronts are rendered on r33-speaker-horn.

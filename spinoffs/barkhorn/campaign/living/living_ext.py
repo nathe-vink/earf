@@ -72,6 +72,13 @@ def no_portal(bpy, name, p, kit):
     return []
 
 
+def _note(bpy, key, value):
+    """Record `value` under `key` in the scene's engine_notes, which render.py writes into the frame's .report.json."""
+    import json
+    sc = bpy.context.scene
+    d = json.loads(sc.get('engine_notes', '{}')); d[key] = value; sc['engine_notes'] = json.dumps(d)
+
+
 def no_glass_shadows(bpy, name, p, kit):
     """One light model for the frame (the coordinator, 20 Nov 19:45): with refractive caustics on, the acrylics' glass-
     shadow shortcut (a Light Path 'Is Shadow Ray' switching the surface to a transparent BSDF, so direct light crosses the
@@ -99,6 +106,7 @@ def no_glass_shadows(bpy, name, p, kit):
                 mx.inputs['Fac'].default_value = 0.0 if transparent_on_b else 1.0     # keep the other input, the surface
                 cut.append(m.name)
     print('NO GLASS SHADOWS:', len(cut), 'materials:', sorted(set(cut))[:40])
+    _note(bpy, 'no_glass_shadows', {'cut': len(cut), 'materials': sorted(set(cut))})
     return []
 
 
@@ -312,6 +320,7 @@ def shadow_ray_report(bpy, name, p, kit):
             if n.type == 'LIGHT_PATH' and n.outputs['Is Shadow Ray'].links:
                 found.append((m.name, [f'{l.to_node.type}.{l.to_socket.name}' for l in n.outputs['Is Shadow Ray'].links]))
     print('SHADOW RAY LINKS LEFT:', len(found), found[:60])
+    _note(bpy, 'shadow_ray_links_left', {'count': len(found), 'materials': [f[0] for f in found]})
     return []
 
 
