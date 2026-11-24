@@ -1,0 +1,321 @@
+{
+ "workflow": "wf_d9dbd9fd-228",
+ "checked": "r32-lamps-final 1f08b08875 (top-sheet-v3.jpg, crystal.py, meshes)",
+ "date": "2026-11-24",
+ "result": [
+  {
+   "lens": "engineering",
+   "crit": {
+    "findings": [
+     {
+      "id": "B1-cap-cannot-screw-on-over-cable",
+      "severity": "blocking",
+      "claim": "A and B cannot be assembled as drawn. The cap screws onto the crown's M26 x 1 spigot, which takes 4 turns over the 4 mm spigot. But the suspension cable passes through a Ø2 hole in the cap's lid and a Ø1.8 hole in the crown's floor, both off-centre at r 9.5. Turning the cap on would wind the cable round the grip inside the Ø21 pocket. Fitting the cable after the cap is impossible too. Its swaged ferrule sits under the crown's floor, in a counterbore in the hub, so it must be in place before the crown goes on. The assembly order in the note leaves the cable out.",
+      "evidence": "crystal.py at origin/r32-lamps-final 1f08b08875:\n- :488 the Ø26 x 4 spigot.\n- :489-490 the floor's Ø1.8 hole at (cable_r, 0).\n- :491-492 the hub's Ø4.5 counterbore at r 9.5, open at the neck's top (z 102.5).\n- :493 the cap: a Ø26 thread bore and a Ø2 lid hole at (cable_r, 0).\n- :499 the ferrule, Ø4 x 3, z 99.5-102.5.\n- :507 the cable.\n- :225-226 GRIP (cable_r 9.5, spigot (26, 4)).\nMeshes (out-dome-pendant-topA/B/render/*.glb): floor hole edges at x 8.6/10.4, lid hole at x 8.5/10.5, counterbore x 7.25/11.75 from z 99.5 to 102.5. build123d 0.13.0 on the tip CAD gives cable to crown 0.000 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-build/out/brep-grip.txt). The assembly order at top-redraw.md:36-39 never mentions the cable."
+     },
+     {
+      "id": "B2-grip-cannot-be-tightened",
+      "severity": "blocking",
+      "claim": "The grip cannot be tightened once the cable is in, and the cable has to go in first (B1). The note says to use a thin-wall 15 mm socket down the pocket. But the cable runs up the same pocket, 0.10 mm from the drawn hex's corners, so no socket fits over the hex. The grip, which now clamps the crown to the hub and carries the fixture (S1), could be at most finger-tight. The real Lapp part is worse. Its hex is 16 mm across the flats and turned to Ø17.6, so it already touches the cable, and a 16 mm socket is wider than the Ø21 pocket.",
+      "evidence": "- crystal.py:225: hex 17.3 across the corners, i.e. 15 across the flats.\n- crystal.py:497: the grip. The pocket is Ø21.\n- Grip mesh: the hex corners are at 0/60/120/180/240/300 deg, r 8.65. One points straight at the cable (x 9.5, r 8.75-10.25).\n- build123d (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-build/py/brep_grip.py, output out/brep-grip.txt):\n  - drawn grip to cable: 0.100 mm;\n  - thin-wall 15 socket (OD 20.5) on the drawn hex: overlaps the cable by 53 mm3;\n  - real 53112005 envelope: overlaps the cable by 0.36 mm3;\n  - 16 socket (OD 22): overlaps the crown by 512 mm3 (A) and 608 mm3 (B).\n- The socket ODs are typical values, UNVERIFIED for every brand."
+     },
+     {
+      "id": "B3-today-default-cable-holds-nothing",
+      "severity": "blocking",
+      "claim": "In today's main build, nothing ties the hub to the cable that is now the default suspension. The fixture is meant to hang from the steel cable. But for today's top the cable is still drawn as a Ø5 fitting standing on the cap's top. The cap's 'two M3 into the crown' are not drawn. The crown only sits on the hub's neck. So the hub, shade and carrier are tied to nothing that the cable or the cap holds. The note's rule 8 (a ferrule in the neck) is true of A and B only. Round 2 flagged this gap (the skeptic's missed load-path item); it is now the default. The main BOM also contradicts itself: the cord row says the cord grips hold the fixture, the suspension row says the cable does.",
+      "evidence": "- crystal.py:505: today's cable at x 5.5, starting at the cap's top.\n- crystal.py:563: the cap note says 'on two M3 into the crown'.\n- crystal.py:572: the suspension is no longer an option.\n- crystal.py:594: V3.\n- Main GLB (out-dome-pendant/render/earf-dome-pendant.glb): the suspension runs z 126-726, x 3-8. My vertex scan finds no holes in the hub's neck (r 5.1-19.9, z > 99) or inside the cap. The crown's Ø40.2 bore just slides over the Ø40 neck.\n- out-dome-pendant/bom.csv:20 (cord): 'a listed cord grip in the cap and one in the canopy, the pair tested to hold the fixture'.\n- bom.csv:21 (suspension): 'a fixed end in the cap ... The fixture hangs from it'.\n- top-redraw.md:40-42 (rule 8) describes only A and B."
+     },
+     {
+      "id": "S1-cable-load-goes-through-grip",
+      "severity": "should-fix",
+      "claim": "In A and B the cable's load still goes through the cord grip, not into the hub. The ferrule's counterbore is open at the top, so a pull on the cable presses the ferrule up against the crown's 1 mm floor. That floor is held to the hub only by the grip. So the whole fixture hangs on the grip's 5 mm of M12 x 1.5 in the hub. It is not 'cord strain only', and 'the fixture hangs from the hub' is true only through the grip.\nStrength is ample: by my estimate about 25-30 kN to strip the thread, against about 16 N (64 N at four times). But the joint is not sound as a suspension anchor:\n- A cable gland is not a structural fastener.\n- The crown has nothing keying it to the hub.\n- Unscrewing the cap turns the crown in the direction that loosens the grip.\n- The notes' thermal pad under the crown would sit in the clamped joint and let it relax.\nSuggest anchoring the ferrule in the hub itself and keying the crown.",
+      "evidence": "- crystal.py:491-492: the counterbore runs from z 99.5 to 102.6, and the neck is cut at 102.5.\n- crystal.py:499: the ferrule's top at 102.5, the floor's underside. The floor is z 102.5-103.5 (:489-490).\n- build123d: cable to crown 0.000.\n- Lapp's sheet DB53112005EN p.1 lists the gland under 'UL File Nr. E79903 (Prüfung nach UL514B)'.\n- Stripping estimate (my arithmetic, handbook formula): shear area about 149 mm2 for 5 mm, at 186-207 MPa."
+     },
+     {
+      "id": "S2-lapp-53112005-is-not-the-drawn-part",
+      "severity": "should-fix",
+      "claim": "The named grip, Lapp 53112005, is not the part drawn.\n- Thread: the real part has 12 mm (the drawing has 6). It would need about 11 mm of thread in the hub, which is tapped only 5 mm.\n- Hex: 16 across the flats, 17.6 across the corners (the drawing has 15).\n- Cord range: 3.5-7 (the drawing has 2.5-6.5).\nIts height fits: 32.5 overall less 12 of thread leaves 20.5 over the seat, and the drawing allows 21. The standard SKINTOP MS-M, 53112000 (6.5 thread, 26.5 overall, 16 across the flats), may be the intended part. I saw its figures only in a search snippet, not its datasheet (UNVERIFIED). Either part is 16 across the flats.",
+      "evidence": "- DigiKey listing (fetched): 'CABLE GLAND 3.5-7MM M12 BRASS', series SKINTOP MS-M-XL, thread length 12.00 mm.\n- Lapp datasheet DB53112005EN v13, valid from 10.09.2026 (opened; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-build/dl/lapp53112005/DB53112005EN.pdf, and .txt): row 'M12x1,5 16 17,6 32,5 12 3,5-7 9x2 53112005'.\n- The drawn values are at crystal.py:225 and :565-567, components.json 'hemi-cord-grip', and out-dome-pendant-topA/B/bom.csv:20.\n- build123d: the real part's envelope overlaps the drawn hub by 207 mm3."
+     },
+     {
+      "id": "S3-fixed-height-squeeze-not-in-cad-or-bom",
+      "severity": "should-fix",
+      "claim": "With the clamp ring screwed down to the shoulder, the squeeze is set by the acrylic's thickness at the crown. The parts and process for that are not in the build documents, and real sheet won't hold the tolerance.\n- The note assumes four silicone rings of 1.3 or 1.5, two of them shims in the 1 mm air gaps. The CAD draws two rings, and every BOM lists 'Two moulded silicone rings (Shore 40, black, 1 mm)'. Built from the BOM, the ring seats with zero squeeze, or 2 mm of play if the air gaps close.\n- The table's arithmetic reproduces exactly. Its premise does not: cast sheet held to ±10 % or ±5 %. ISO 7823-1 allows ±(0.4 + 0.1 t) on cast sheet, i.e. ±0.7 on 3 mm and ±1.0 on 6 mm (±17 to 23 %), before forming. On that, four 1.3 rings range from 23 % loose (1.2 mm of play) to 69 % squeeze in the worst case, -4 to 50 % RSS.\n- So per-shade measurement and ring selection (the note's fallback) has to become a BOM and process item.\n- The clamp's own note still says 'to a torque the shade maker sets' and 'two silicone rings'.\n- No slip washer is drawn under the turning band.",
+      "evidence": "- top-redraw.md:44-57.\n- crystal.py:313-314 (two rings), :400 (gaskets), :395-399 (clamp note).\n- bom.csv:8 in out-dome-pendant, -topA and -topB.\n- My /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-build/py/squeeze.py:\n  - at ±10 %, 1.3 rings: 23 % nominal, 9-37 RSS, 0-46 worst (matches the note);\n  - at the ISO tolerance, 1.3 rings: -4 to 50 RSS, -23 to 69 worst;\n  - at the ISO tolerance, 1.5 rings: 10 to 57 RSS, -7 to 73 worst.\n- I confirmed the ISO 7823-1:2003 formula by web search; the standard's text was not opened."
+     },
+     {
+      "id": "S4-thread-relief-too-small",
+      "severity": "should-fix",
+      "claim": "The thread relief is not a usable run-out. The groove is 1.2 long at Ø94.5. That is shorter than one pitch of M96 x 1.5, and its floor sits above the thread's root (about Ø94.16). So the collar's thread cannot be cut fully up to the shoulder, and the last turn will be incomplete. The ring's thread has no lead-in chamfer, so the ring may jam before its face reaches the shoulder, which defeats the fixed height. A standard undercut for a 1.5 pitch is about 2.5-3.5 pitches long and cut below the root. These figures are from a DIN 76 excerpt and memory (UNVERIFIED in detail).",
+      "evidence": "- crystal.py:298: groove from r 47.25 to 48 at z 92-93.2.\n- crystal.py:388: 'M96 x 1.5'.\n- Collar meshes (A and B): (47.24, 92.00)-(47.24, 93.20).\n- Clamp meshes: the bore is r 47.99 with a square edge from z 92 up to 102.83 (A) and 100.00 (B).\n- The external thread's minor diameter is 96 - 1.22687 x 1.5 = 94.16."
+     },
+     {
+      "id": "S5-south-slots-cut-the-white-lip",
+      "severity": "should-fix",
+      "claim": "South's bayonet entries are still cut into the collar after the white lip is added. They open the collar's foot from r 39 to 45.5 at 60, 180 and 300 deg. Seen from below, the new white ring has three dark 5 x 6.5 mm notches leading up into the slots. The bonded ring it replaced covered them (round-2 M12), and hiding the slots from below is the split's stated purpose. South is dropped, so its slots can stop above the lip or go.",
+      "evidence": "- crystal.py:288-290: the lip, added first.\n- crystal.py:309-312: South's slots, z 63 to 76.5, r 39 to 45.5, cut afterwards.\n- Meridian sections of the main and A collar meshes:\n  - at 60/180/300 deg the foot face at z 64 stops at r 45.5 and starts again at r 39.0;\n  - at 45 deg it runs unbroken from r 33.49 to 47.99."
+     },
+     {
+      "id": "N1-my-sweep-level",
+      "severity": "note",
+      "claim": "My own sweep of the committed meshes, separate from top_check.py, finds that today, A and B all come off.\n- Lift: from the seated pose to 9.0, in 0.1 steps.\n- Turn: 30 deg in 0.25 deg steps, at lifts 8.0 to 9.0.\n- Lowering: to -140, past the disc and the carrier.\nThe narrowest level gaps are the same in all three:\n- collar bore to PEEK land: 0.20;\n- collar to crown: 1.00 at the 9.0 lift;\n- white lip to hub: 1.50, and to the disc: 1.50;\n- lip to carrier: 4.50.\nThe pins touch only at the designed stops: the seated notch top, and the slot floor at the 9.0 lift. In between they clear by 0.25 vertically at lifts 8.25 and 8.75, by 0.445 at 8.5, and by 0.5 sideways in the entries and notches. Exact distances from build123d on the lane's CAD agree within 0.005.",
+      "evidence": "- Scripts: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-build/py/ sweep.py, run_sweep.py and pins_detail.py.\n- Outputs in out/:\n  - log-{today,A,B}-none.txt: mesh minima 0.195, 0.996, 1.498, 1.498 (faceting about 0.005);\n  - log-pins-*.txt;\n  - brep-spot-*.txt: ring 0.200, hub 1.500, disc 1.500, crown 1.000, pins 0.000 at the stops, 0.500 while lowering."
+     },
+     {
+      "id": "N2-tilt-on-the-land",
+      "severity": "note",
+      "claim": "At a 2 deg tilt everything clears. At the most tilt the land allows near the end of the lowering, the lip can touch the disc in today and B.\n- How much the land allows: 1.86-1.88 deg at full engagement in all three. As the lip passes the disc the engagement is short, and it allows 2.78 deg (today), 2.71 (B) and 2.07-2.11 (A).\n- At 2 deg: lip to hub and disc ≥ 0.358; pins ≥ 0.24 in the entries and notches.\n- At the land's maximum: the crown keeps 0.53 (today), 0.42 (A) and 0.56 (B) at the 9.0 lift. The lip reaches the disc's edge in today (0.003) and B (0.034), but not in A (≥ 0.31).\n- Not modelled: the disc floats 0.2 on its stem, and there is powder coat on both. So a light white-on-white rub is likely if the shade is lowered tilted. The chamfers make it a rub, not a catch.\n- The note's '1.0 to 1.3' of sideways movement at the lip understates the end of the lowering, which reaches about 1.5.\n- The turn tolerates 0.5 deg of tilt but binds at 1 deg (-0.28 mid-window). Pushing straight up to the stop levels the shade.",
+      "evidence": "- Scripts: py/run_tilt.py and tilt_exact.py (bisection to the land's contact).\n- Outputs: out/tilt-*.json and log-tilt-exact-*.txt.\n- build123d spot checks (out/brep-spot-*.txt):\n  - today, lowered 4.75, 2.78 deg: ring 0.000, disc 0.003;\n  - today at 2 deg: disc 0.359;\n  - B, lowered 5.0, 2.71 deg: disc 0.034;\n  - A, lowered 5.0, 2.07 deg: disc 0.327.\n- The disc's Ø16.4 hole on the Ø16 stem is at crystal.py:466."
+     },
+     {
+      "id": "N3-top_check-verified",
+      "severity": "note",
+      "claim": "I ran top_check.py and it passes, as claimed. Today, A and B 'come off'. Today as built (white_split False) is blocked by the white disc from -5.5 to -30. The controls hold. Its method gaps remain: turns at 0 and 30 deg only, 2 mm lowering steps, a 1 mm3 threshold, no tilt. The note's 'Lowered to come off 12.8 / 10.0' is unchanged. It should read 12.33 / 9.5 from the drawn pose, or 11.8 / 9.0 from where the shade hangs.",
+      "evidence": "- My run used build123d 0.13.0 in a venv in my lens folder, on the tip's sources.\n- Output: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-build/out/top_check-run.txt.\n- top_check.py:31-37 and :48; top-redraw.md:67."
+     },
+     {
+      "id": "N4-claims-confirmed",
+      "severity": "note",
+      "claim": "Claims I could confirm:\n- The split is V3's default, in the regenerated main meshes and the BOM.\n- The lip (bore Ø65, 1 x 45), the lead-ins on the land, the collar's top and the disc, the shoulder (Ø100, 86-92), the spigot and the 0.5 collar step are drawn as stated.\n- The lift of 8.0-9.0 from where it hangs is in the docs.\n- The weights match the BOM.\n- B's cap wall over its thread is about 2.4.\n- The cable and ferrule are clear of everything that moves: they sit at z ≥ 99.5 inside r 11.5, at least 21 mm above the lip's travel (z 64-75) and 36 mm inside the clamp ring.\nStale text: the A and B BOMs still say the cable has 'a fixed end in the cap'. The tether is still not modelled; since the lip now rises to z 75, the tether's eye on the hub must sit above about z 76.",
+      "evidence": "- crystal.py: :594, :288-292, :297-298, :430, :466-468, :488-493; :8 and :968; README.md:377.\n- Main GLB: white disc r ≤ 31.0; collar lip r 32.5. bom.csv:17: 72 x 72 x 11.\n- BOM masses:\n  - collar 231/257/243 g and clamp 65/63/54 g (today/A/B), so the shade changes by +24 g (A) and +1 g (B);\n  - crown 142/176/153 g, cap 45/63/9 g, hub 322/316/316 g, so the fixture changes by +46 g (A) and -31 g (B).\n- Suspension meshes: z 99.5-726, x 7.5-11.5.\n- out-dome-pendant-topA/B/bom.csv:22 ('a fixed end in the cap')."
+     }
+    ],
+    "round2_status": [
+     "M1 (trap still the default): FIXED. crystal.py:594 sets white_split=True in V3. The main meshes have the Ø62 disc (r ≤ 31.0) and the lip (r 32.5); bom.csv:17 lists the white disc at 72 x 72 x 11. top_check.py, run here, says today, A and B come off and today as built does not. My sweep and BRep checks agree.",
+     "M2 (white ring gap tight): MOSTLY FIXED. The lip is now turned on the collar (no bond), bore Ø65, with a 1x45 lead-in (crystal.py:288-290); the disc is eased 0.5 (:466-468). Level gap 1.500. What remains: at the land's maximum tilt late in the lowering, the lip reaches the disc in today (0.003) and B (0.034); A keeps ≥ 0.31, and all three keep ≥ 0.358 at 2 deg.",
+     "M3 (clamp thread end): PARTLY. A and B now have a shoulder, a relief groove and a relieved band bore (crystal.py:297-298, :321-322), so the ring seats on the collar. But the groove (1.2 x Ø94.5) is shorter than one pitch and sits above the thread's root, and the ring has no lead-in chamfer (S4). Today's build is unchanged: no shoulder, thread end not drawn.",
+     "M4 (grip a real part): PARTLY. A real part is named and its height fits (20.5 ≤ 21). But Lapp's datasheet gives a 12 mm thread, 16 across the flats and a 3.5-7 cord range, against the drawn 6 / 15 / 2.5-6.5. Its thread would need about 11 mm of thread in the hub, which is tapped only 5 mm (S2).",
+     "M5 (grip assembly, cap fixing): NOT FIXED, and blocking. The cap now screws on (M26 x 1, crystal.py:488/:493). But the cable passes off-centre through the cap's lid and the crown's floor, so the cap cannot be turned on (B1). The socket cannot reach the grip's hex past the cable (B2).",
+     "M6 (path verified): CONFIRMED again with my own sweep at 0.1 mm and 0.25 deg steps, plus BRep checks. Land 0.20, crown 1.00, lip to hub and disc 1.50, lip to carrier 4.50. The pins touch only at the designed stops.",
+     "M7 (top_check method): PARTLY. The poses now start from the seated position, with lifts of 8.0 and 9.0 (top_check.py:31-37). It still tests turns at 0 and 30 deg only, in 2 mm steps, with a 1 mm3 threshold. top-redraw.md:67 still says 12.8 / 10.0.",
+     "M8 (band stiffness): unchanged (note). Its 0.5 MPa load case no longer applies: with the ring seated on the shoulder, the pressure is whatever the stack's squeeze makes (UNVERIFIED).",
+     "M9 (heat): not in my lens; not rechecked.",
+     "M10 (air gaps at the crown): NOT FIXED in the build documents. The note's silicone shims (top-redraw.md:47) are neither drawn (crystal.py:313-314) nor in any BOM, which all list two 1 mm rings at bom.csv:8 (S3).",
+     "M11 (tether and suspension): PARTLY. In A and B the cable is anchored under the crown's floor, but that loads the grip (S1) and blocks assembly (B1, B2). Today's default cable is tied to nothing that holds the hub (B3). The tether is still not modelled.",
+     "M12 (stock and BOM): FIXED. A and B now have BOMs, A's cap stock is 66 x 66 x 21, and the white ring is part of the collar. New problem: South's slots now cut three open notches through the lip (S5).",
+     "M13 (doc slips): FIXED (crystal.py:288; the white-disc, crown and cap notes). New stale text: the clamp note (:395-399) still says 'torque' and 'two rings', and the A/B BOMs still give the cable 'a fixed end in the cap'.",
+     "Skeptic, grip height could undo the even tiers: FIXED (20.5 ≤ 21).",
+     "Skeptic, the 0.5 collar step was not controlled: FIXED by the shoulder, but the squeeze now depends on the acrylic stack. Real cast-sheet tolerance needs the rings chosen per shade (S3).",
+     "Skeptic, no lead-ins: FIXED. The land, the collar's top inner edge, the lip and the disc all have them.",
+     "Skeptic, lift quoted from the drawn pose: FIXED. The docs now give 8.0-9.0 from where it hangs (crystal.py:8, :968; README:377).",
+     "Skeptic, split ring touching the hot hub in use: FIXED. The gap is 1.5; the hanging shade sits on its pins, and the lip keeps ≥ 0.54 even at the land's maximum tilt at full engagement.",
+     "Skeptic, load path: PARTLY. In A and B the grip now goes into the hub, but the cable's load still passes through the grip's thread (S1). Today's build is unchanged (B3).",
+     "Skeptic, fixture-side weight: FIXED. The note's +47 / -31 g matches the BOM masses.",
+     "Skeptic, pick reason's thread lengths: FIXED. The note now gives 10.8 / 8.0."
+    ],
+    "verdict": "Not ready. The shade release now works: the split is the main build's default, and the shade comes off in all three tops (top_check, my sweep and the exact BRep checks agree). But A and B cannot be put together as drawn, because the screw-on cap and the grip's socket both collide with the off-centre suspension cable, the grip named is not the part drawn, and today's default cable is tied to nothing that holds the hub. These need redrawing before the owner is told A or B can be built."
+   },
+   "verdicts": {
+    "verdicts": [
+     {
+      "id": "B1-cap-cannot-screw-on-over-cable",
+      "stands": true,
+      "reason": "Confirmed on my own build of the tip's sources (build123d 0.13.0 in my own venv). Output: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/geo.txt.\n- The crown has no material in a Ø1.7 rod at (9.5, 0) through the floor, z 102.4-103.6.\n- The cap has no material in a Ø1.9 rod at (9.5, 0) through the lid, and has material at (-9.5, 0).\n- The hub tops out at z 102.5 with nothing over the Ø4.5 counterbore. The floor sits straight on the ferrule (crystal.py:488-494, :499, :507).\n- The cap's Ø26 bore runs 4 mm onto the M26 x 1 spigot (:488, :493), so it takes 4 turns.\nThe lid hole is off the axis, and the grip and cord fill the axis. So turning the cap winds the cable round the grip; there is no way round this. With a free top end, the cap goes on only with the cable as a 4-turn helix round the grip and cap nut, not as drawn. The lid hole's final angle is not clocked either.\nThe Ø4 ferrule cannot pass the floor's Ø1.8 hole, so the cable has to go in before the crown. The order at top-redraw.md:36-39 has no cable step. Blocking is fair."
+     },
+     {
+      "id": "B2-grip-cannot-be-tightened",
+      "stands": true,
+      "reason": "Confirmed (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/geo.txt):\n- The exact grip-to-suspension distance is 0.100.\n- The hex's corners are at 0/60/.../300 deg, one pointing at the cable.\n- A socket tube of ID 17.6 over the drawn hex overlaps the cable by 10.8 / 25.1 / 34.0 mm3 at walls of 0.5 / 1.0 / 1.5. It touches nothing else, crown or cap. So the cable alone stops any socket, whatever its brand OD.\nThe build order puts the cable in first: the cable before the crown, the grip through the crown's floor. An open-end or flare-nut spanner cannot get into a Ø21 pocket.\nI downloaded Lapp's sheet myself from DigiKey's link (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/dl-lapp/DB53112005EN.pdf; same md5 as the reviewer's copy). It gives SW 16 and ØA 17.6, and its drawing shows ØA across the hex corners. So the real hex sweeps r 8.8, past the cable's r 8.75 (0.087 mm3 in my check)."
+     },
+     {
+      "id": "B3-today-default-cable-holds-nothing",
+      "stands": true,
+      "reason": "Confirmed from the code:\n- crystal.py:505: today's cable is at x 5.5, starting at z 126 with a Ø5 x 9 fitting on the cap's top.\n- :472: the cap has only its Ø8 bore. The 'two M3' of :563 are not drawn.\n- :471: the crown's Ø40.2 bore just slides on the Ø40 neck. Nothing joins the crown to the hub.\nThis round made the cable the default:\n- git diff a78e069a7f..1f08b08875 removes option='suspension' from the Part (:572).\n- It moves the row into the main BOM: out-dome-pendant/bom.csv:21 says 'a fixed end in the cap ... The fixture hangs from it'.\n- Next to it, :20 still says the two cord grips are 'tested to hold the fixture'.\nThe crown-to-hub gap itself is older: it is round 2's skeptic load-path item. So 'blocking' applies to the main build's documents, not to a new piece of geometry. The claim itself is true."
+     },
+     {
+      "id": "S1-cable-load-goes-through-grip",
+      "stands": true,
+      "reason": "Confirmed (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/geo.txt):\n- The hub's top is at 102.5, with no hub material over the counterbore at z 102.45-102.7.\n- The crown's floor material lies directly over the ferrule.\nSo the cable pulls the ferrule into the floor, and only the grip's hex holds the floor down. The lamp hangs on the grip's 5 mm of M12 x 1.5 in the 6061. The tens-of-kN strength estimate against about 16 N is plausible.\nThe loosening direction is right for right-hand threads, and a pad in the clamped joint would relax it.\nMinor: 'cord strain only' is not a phrase in the docs. top-redraw.md:34 and crystal.py:220 say 'the fixture hangs from the hub'. The point stands all the same. Also, the cable itself becomes the crown's only key (see missed)."
+     },
+     {
+      "id": "S2-lapp-53112005-is-not-the-drawn-part",
+      "stands": true,
+      "reason": "Confirmed by my own download of Lapp's sheet DB53112005EN v13. Row M12x1,5: SW 16, ØA 17.6, C max 32.5, D 12 (the thread), cord 3.5-7. The drawing labels D as the thread and ØA across the corners.\nDigiKey's own page (I fetched it) lists SKINTOP MS-M-XL, 'Thread Length 12.00mm' and 3.5-7 mm, and gives no flats or height. So the lane's 6 / 15 / 21 / 2.5-6.5 'from DigiKey's listing' are not on DigiKey either. They appear in top-redraw.md:31-32, crystal.py:217-219 and :566-567, topA/B bom.csv:20 and components.json hemi-cord-grip.\nThe reviewer's 207 mm3 is exactly the unused 6 mm of thread inside r 5-6 (11π x 6).\nS2 understates the result: as tapped, the part stands 6 mm proud and the cap cannot go on (see missed). The 53112000 alternative is UNVERIFIED."
+     },
+     {
+      "id": "S3-fixed-height-squeeze-not-in-cad-or-bom",
+      "stands": true,
+      "reason": "Confirmed:\n- The CAD draws two rings (crystal.py:313-314).\n- bom.csv:8 in all three builds lists 'Two moulded silicone rings ... 1 mm'.\n- The four rings and shims are only in top-redraw.md:46-47.\nThe flange-to-band gap is 16.0 = 1+3+1+6+1+3+1 on V3's radii. So the BOM's rings give zero squeeze, or about 2 mm of play if the formed layers close their air gaps.\nI recomputed the table: nominal 23/33 %, ±10 % RSS 9-37 and worst 0-46. At the ISO tolerance, 1.3 rings give -4 to 50 RSS and -23 to 69 worst; 1.5 rings give 10 to 57 and -7 to 73. All as stated.\nISO 7823-1's ±(0.4 + 0.1 t): a search summary and Acrylite's table (3 mm ±0.7) agree. I did not open the standard's text either.\nThe clamp note at :395-399 still says 'torque' and 'two silicone rings'.\nAn added consequence: at zero squeeze or with play, the shade sits loose on its collar. The 30 deg turn, made by gripping the acrylic, then depends on friction from the user's push. UNVERIFIED whether it slips."
+     },
+     {
+      "id": "S4-thread-relief-too-small",
+      "stands": true,
+      "reason": "Confirmed (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/geo.txt):\n- At z 92.6 the collar has no material at r 47.6 and 47.3, and has material at r 47.2. So the groove is z 92-93.2 with its floor at r 47.25 (crystal.py:298).\n- An external M96 x 1.5 has its root at d3 = 96 - 1.22687 x 1.5 = 94.16, r 47.08. So the groove is 0.17 shallower than the thread, and 1.2 long, less than one pitch.\n- The clamp has material at r 48.05-48.6 at z 92.1: a square bore edge with no chamfer.\nA 60 deg tool at full depth is about 0.19 + 2 x 0.92 x tan 30 = 1.25 wide at the major diameter. So it cannot finish inside 1.2 without hitting the shoulder, and the last turn is left incomplete just where the ring's full thread must pass to seat.\nThe DIN 76 table values are UNVERIFIED: my search could not open Table 1."
+     },
+     {
+      "id": "S5-south-slots-cut-the-white-lip",
+      "stands": true,
+      "reason": "Confirmed in today, A and B (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/geo.txt). At z 64.3-65.7 the collar has no material at r 39.5-45 on the 60/180/300 deg rays, and is solid on the 0/45/90 deg rays.\nThe code order bears this out: the lip is added at crystal.py:286-290, then South's entries (z 63-76.5, r 39-45.5) are cut at :308-312.\nThis contradicts top-redraw.md:14-15 ('one white face'). It is cosmetic only; it stops nothing working."
+     },
+     {
+      "id": "N1-my-sweep-level",
+      "stands": true,
+      "reason": "Confirmed as a note.\n- My own run of top_check.py on the tip's sources (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/top_check.txt): today, A and B come off; the controls hold.\n- My exact BRep checks (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/spot-A.txt, and spot-today.txt and spot-B.txt in the same folder) give:\n  - land 0.200; lip to hub 1.500; lip to disc 1.500 (from a 5.0 drop);\n  - crown 1.000 at the 9.0 lift;\n  - lip to carrier about 4.6 at a 60 drop (4.5 radial);\n  - pins 0.5 sideways while lowering and 0.455 mid-window.\nNit: at the 8.0 lift the pins also reach 0.000 on the turn passage's ceiling. That is the window's other edge, not only the two stops named."
+     },
+     {
+      "id": "N2-tilt-on-the-land",
+      "stands": true,
+      "reason": "Stands as a note, but I could not reproduce the exact numbers. My symmetric-pivot bisection (spot.py in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/) gives:\n- maximum tilt while hanging: 1.79 / 1.97 / 1.80 deg (today / A / B);\n- late in the lowering: 2.52-2.58 deg (today), 2.41-2.47 (B) and 1.91 (A);\n- the lip's gap to the disc at those tilts: 0.13-0.16, 0.18-0.21 and 0.42;\n- at 2 deg: 0.37 or more.\nThe direction matches the reviewer's: today and B are tightest, A clears, and the note's '1.0 to 1.3' is understated (about 1.35 used). But I do not get the contact the reviewer reports (0.003 / 0.034). That is UNVERIFIED."
+     },
+     {
+      "id": "N3-top_check-verified",
+      "stands": true,
+      "reason": "Confirmed. My run of top_check.py with my own venv (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/top_check.txt) shows:\n- today as built blocked by the white disc from -5.5 to -30;\n- today, A and B come off;\n- the controls held.\ntop_check.py:31 takes the pins' bottom as z 90.5, but the pins span z 91-95 (crystal.py:185, :190). So the collar's top must drop 103.33 - 91 = 12.33 (A) and 100.5 - 91 = 9.5 (B) from the drawn pose, or 11.83 and 9.0 from where it hangs. top-redraw.md:67 still says 12.8 / 10.0; round 2's M7 said the same."
+     },
+     {
+      "id": "N4-claims-confirmed",
+      "stands": true,
+      "reason": "Confirmed. My masses (solids x density, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/com.txt) match the BOM to within 1 g:\n- collar + clamp: 295.4 / 320.5 / 296.4 g, so +25.1 and +1.0 a shade;\n- crown + cap + hub: 509.1 / 555.9 / 478.5 g, so +46.8 and -30.6 at the fixture.\nSo the note's +25 / +47 / -31 are right; the reviewer's +24 / +46 come from rounded BOM masses.\nAlso confirmed:\n- topA/B bom.csv:22 still say 'a fixed end in the cap' (stale);\n- the lift of 8.0-9.0 from where it hangs is at crystal.py:8 and :968 and README:377;\n- the tether is still unmodelled (:530).\nI did not check the 'about 2.4' cap wall."
+     }
+    ],
+    "missed": [
+     "THE DEFAULT SUSPENSION CANNOT HOLD THE LAMP LEVEL. Not reported here, and not in round 2 either.\n- Where the cable leaves: off the axis. In A and B it leaves at r 9.5 through the cap's lid (crystal.py:226, :494, :507). Today it leaves at x 5.5 from a fitting on the cap's top (:505). The cord and the centre of mass are both on the axis (:501).\n- The mass: from the tip's solids (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/eng-skeptic/out/com.txt, masses within 1 g of bom.csv), the hanging mass is 1578 / 1671 / 1569 g (today / A / B), with its centre of mass on the axis at z 65.3 / 68.2 / 65.3.\n- The tilt: hung from the cable alone, the lamp tilts until that point is under the cable's exit. With a limp cable that is 9.3 deg (A), 8.9 (B) and 4.5-5.2 (today).\n- With the cable's own stiffness (my estimates, UNVERIFIED): EI of 400-5000 N mm2, a range for a 1.5 mm 7x7, gives 7.2-8.7 deg (A), 6.9-8.3 (B) and 3.6-4.2 (today). Even a solid 1.5 mm steel rod would give 4.6-4.8 deg (A, B) and 2.5 (today).\n- What it looks like: the 200 mm rim sits 16-30 mm higher on one side in A and B, and 9-15 mm today.\n- The claim it breaks: with the cord on the same line as the centre of mass, a level lamp needs the cord to carry nearly all the weight. So 'the fixture hangs from it; the cord beside it carries the 26 V only' cannot be true. That text is in bom.csv:21, topA/B bom.csv:22, crystal.py:503-504 and :570-572, and top-redraw.md:40.\n- The pictures hide it. lamp-site-meshes/out-dome-pendant/stl has no suspension.stl, and lamp_site.py:391 and :431 load only the cord. So top-sheet-v3.jpg shows one strand and a level lamp.\n- The fix: put the cable on the axis with the cord off it, or use symmetric cables.",
+     "AS NAMED, THE GRIP STOPS THE CAP GOING ON AND DOES NOT CLAMP THE CROWN. S2 gives the numbers but not this result.\n- Lapp's part has 12 mm of thread (D) and is 32.5 mm overall.\n- The hub is tapped only from z 97.5 to 102.6 (crystal.py:491). Below that is the Ø10 wire bore (:427), smaller than the root of an M12 x 1.5 (about 10.2). So the thread can go in only 6 mm: the 5 of tapping plus the 1 mm floor.\n- The body's face then stops at about z 109.5, 6 mm above the floor, so nothing clamps the crown.\n- Its top stands at about z 130.0, 5 mm into the cap's lid, whose underside is at z 125 (:493). The cap cannot seat.\nThe fix is easy (tap 12 deep), but the part as drawn and listed does not fit.",
+     "THE CAP NUT CANNOT BE TIGHTENED EITHER. The note's order needs 'its dome nut tightened' (top-redraw.md:38-39), in the same Ø21 pocket, with the cable 0.10 from the drawn grip. Lapp's drawing shows a second hex on the cap nut; its size is not listed separately. B2 covers only the body's hex, but the cord's strain relief depends on the cap nut.",
+     "THE CABLE BECOMES THE CROWN'S ONLY KEY. The floor's Ø1.8 hole sits straight over the hub's Ø4.5 counterbore, both at r 9.5 (crystal.py:490-492), and the ferrule's top bears on the floor. The joint allows about 0.4 mm of play (0.25 at the ferrule, 0.15 in the hole), which is about 2.4 deg at r 9.5. Past that, any turn of the crown on the neck side-loads and kinks the cable right at the swage's exit. That can happen when the grip's hex drags the floor as it is tightened, or from the cap's torque going on or off. That termination now carries the lamp. S1 says the crown is not keyed but not that the cable becomes the key.",
+     "THE PINS' BOM TEXT DOES NOT MATCH THE CAD. This is older than this round (since 367709bf89) and outside its diff, but it is on the bayonet.\n- The BOM (bom.csv:12 in all three builds; components.json dome-pins) buys 'M3 thread with a Ø4 × 10.5 shoulder'.\n- The CAD's pin has a 4.2 shoulder and 15.8 of thread (crystal.py:190, :436, :527-528). It passes through Ø3 holes in the PEEK, which the note calls Ø3.2 clearance holes (:525).\n- A 10.5 shoulder seated on the land would reach r 51.3, past the slots' r 45.5 and the collar's OD at r 48.\nA shade could not be fitted with pins bought from the BOM.",
+     "THE ANCHOR THAT NOW CARRIES THE LAMP IS NOT A NAMED PART (UNVERIFIED). The drawn ferrule is Ø4 x 3, in a Ø4.5 x 3.1 counterbore (crystal.py:492, :499). One distributor listing gives a 1/16 in stop sleeve as 1/4 in (6.4 mm) long, about twice that depth. The suspension rows in the BOMs still describe Griplock/Gripple's 'fixed end in the cap'. The termination needs a named, rated part that fits the counterbore."
+    ]
+   }
+  },
+  {
+   "lens": "sheet",
+   "crit": {
+    "findings": [
+     {
+      "id": "S1-suspension-cable-not-drawn",
+      "severity": "should-fix",
+      "claim": "None of the three pictures shows the steel suspension cable that commit 92dc7c25f5 made standard in every build, so each top on the sheet looks cleaner than what would be built. In A and B, a 1.5 mm black cable comes out of the cap's lid 9.5 mm from the cord's axis and runs up beside the cord. In today's build, a Ø5 x 9 ferrule sits on the cap against the cord, with the cable above it.",
+      "evidence": "On origin/r32-lamps-final, crystal.py:570-572 has Part('suspension') with no option and the comment 'hangs from the steel cable by default'. Line 505 puts today's cable at r 5.5 from the cap's top (z 126), with a Ø5 x 9 ferrule from z 126 to 135. Lines 506-507 put A's and B's at r 9.5, from z 99.5 up and out through the lid. The commit moved the cable from bom.md's Options into the main list: out-dome-pendant/bom.csv:21 ('1.5 mm black-coated stainless'). lamp-site-meshes/out-dome-pendant-topA and -topB/stl/suspension.stl span x 7.0-12.0 and z 99.5-726. top_tiers.py:20-22 writes it only for A and B, so today has none. lamp_site.py:361-394 loads clamp, crown, gland, hub, collar, white-disc, ring, pins, gaskets, cord, carrier, stem and board, but never suspension, and no audit/v3-*.txt has a suspension line. Using HOUSE_CAM (audit line 6; right vector 0.901, 0.433) and the CAD's azimuth, A's and B's cable would stand 8.6 mm from the cord's axis. On the sheet's crops that is a 7 px line 42 px from the cord's centre; in the 1x frames, 24 px. It would be hidden only when within about 23 deg of the line through the cord. Today's ferrule would widen the cord on one side for 9 mm above the cap (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/sheet-owner/work/below.py). UNVERIFIED: which side it falls on, since I did not read SC.stl's import orientation. Fix: draw it, or add a line: 'Not drawn: the 1.5 mm black steel cable beside the cord, standard on all three.'"
+     },
+     {
+      "id": "S2-no-view-from-below",
+      "severity": "should-fix",
+      "claim": "The sheet shows only the side, but the release fix changes only the view from below, and in the same way for all three. The note's 'one white face with a 1.5 dark ring' is true straight up only. The lip's underside sits 5 mm above the disc's, so from a seated angle the black ring between them opens to about 3 to 4.5 mm on the near side. Round 2's ring opened to about 2 mm.",
+      "evidence": "The note says it at top-redraw.md:14-15. white-disc.stl (all three) is r <= 31.0 at z 59-60, its bottom edge eased 0.5 (crystal.py:466-468). In collar.stl the bore is r 32.5 and the lip runs z 64-66, with a 1 x 45 lead-in from r 33.5 at z 64 to r 32.5 at z 65 (crystal.py:286-290). Between them is the hub's black wall, r 31 from z 60 up. The dark band is 1.5 cos a + 5 sin a: 1.5 mm straight up, 2.7 at 15 deg, 3.8 at 30 and 4.5 at 42-43 deg, the steepest view of the disc's edge past the mouth. Round 2's ring gave 0.5, 1.3, 1.9 and 2.4 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/sheet-owner/work/below.py). The Ø95 disc of 2026-11-11 existed to make the underside look finished (crystal.py:593 'hides the collar's slots from below'; :453). No render from below exists on the branch: 1f08b08875 adds only the level views. These figures are geometry only; how the ring reads in a render is UNVERIFIED."
+     },
+     {
+      "id": "S3-no-pick",
+      "severity": "should-fix",
+      "claim": "The sheet still does not say which top the reviewers recommend; both round-2 reviewers picked A. If a pick line is added, round 2's reason for it no longer holds: with the silicone ring now drawn, A's sloped foot is as tall as its tiers.",
+      "evidence": "coordinator/hemisphere-top-v2-critics-2026-11-24.json: results[0].pick is 'A' and results[1].pick is 'A (three even tiers)...'. results[0].pick_reason says 'its sloped foot (46 px) is shorter than a tier'. The foot now runs from the outer silicone ring's foot (r 58, z 81.46 on R 100: crystal.py:314; gaskets.stl) to the cone's top (r 52, z 92.37). That is 10.9 mm, against A's 11.33 mm tiers (0.96 of a tier) and B's 8.5 mm (1.28). At the crops' 4.94 px/mm, the foot is 54 px and a tier 56 px. A plain line could read: 'Reviewers' pick: A, three even tiers, each 24 mm narrower than the one below; its top looks about 11 % heavier from the side (cap 56 across, not 40).' The 11 % is round 2's OE11 figure, which I did not re-measure."
+     },
+     {
+      "id": "S4-gasket-dots",
+      "severity": "note",
+      "claim": "Turning GASKETS on brought back the render fault that had kept it off: faint rows of dark dots across the red shade just under the top, in all three crops. The real lamp has none, because the inner silicone ring sits behind the opal. The light notch it was turned on to fill is gone.",
+      "evidence": "lamp_site.py:387-390 says of the gaskets: 'their faceted STL pierced the smooth shell and drew two rows of dots'. The dots sit at rows ~390-415 of v3-*-x2.png, which map to z ~64-71: the inner ring's band against the opal's inner face (crystal.py:313, r_ki 86). /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/sheet-owner/work/dots.py finds 109-117 local minima deeper than 8 levels (mean 18-23) in rows 370-440 of each v3 x2 render. Round 2's lvl renders, with GASKETS off, have 26-35 (mean 13). On the sheet they are faint, about 12 levels deep, at sheet rows ~1617-1645. The outer ring now reads dark grey under the foot's ends (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/sheet-owner/tiles/band-left-end-lvl-vs-v3.png). Fix: load only the outer ring, or move the inner one 0.05 mm off the opal."
+     },
+     {
+      "id": "S5-plain-lines-partial",
+      "severity": "note",
+      "claim": "Both plain lines are true, but line 2 suggests today's shades stay as they are. In fact the release fix already changes every shade's collar in all three, because the white lip is turned on it. A and B also change the hole in all three acrylic layers and both silicone rings. 'A white ring under the shade' is now the collar's own lip, which sits inside the shade under the light. Separately, the note says a shade of one top does not fit another's fixture, and the meshes do not bear that out.",
+      "evidence": "V3 has white_split=True (crystal.py:594). Today's lamp-site collar.stl now has bore r 32.5 (the lip) and white-disc.stl r 31.0; both changed in 92dc7c25f5, and the today audit names that folder (v3-today.txt:7). crystal.py:273 cuts a Ø100.4 crown hole for A and B, against Ø96.4 today. Lines 313-314 start both silicone rings at r 50.2 for A and B, against 48.2 today (gaskets.stl). top-redraw.md:73 says 'so a shade of one top does not fit another's fixture'. In /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/sheet-owner/work/cross.py, every shade passes every fixture from +9 to -140 with the same 0.18 mm smallest radial gap (the PEEK land); the pins and slots are identical in all three. This is a radial-envelope check, not a 3D sweep, so it is UNVERIFIED beyond that. Mixing shades and fixtures would only mismatch the look, so that sentence should not reach the owner."
+     },
+     {
+      "id": "S6-ring-heights-include-rim",
+      "severity": "note",
+      "claim": "For A and B, 'clamp ring 104 mm across x 11.3 tall' and 'x 8.5 tall' include the collar's 0.5 mm rim above the ring. The ring itself is 10.8 and 8.0, as the note says. Today's column lists the ring and the collar lip separately.",
+      "evidence": "crystal.py:321 draws the ring up to cz1 - 0.5. clamp.stl tops out at z 102.83 (A) and 100.00 (B); collar.stl at 103.33 and 100.50. top-redraw.md:28 says '10.8 long (A), 8.0 (B)'. The visible tier is 11.33 and 8.5, so 'even' still holds. Plainer wording: 'clamp ring 104 across x 10.8, the collar 0.5 above it'."
+     },
+     {
+      "id": "S7-audit-record",
+      "severity": "note",
+      "claim": "The audits name their top and mesh folder, and the pixels confirm the switches were set, but the record has gaps. 'grip' is listed although it is never loaded. 'gaskets' is listed whatever GASKETS is set to. HEMI_COLLAR_CAP, the x2 border and the sample count are not recorded, and the render commands are not committed.",
+      "evidence": "Line 7 of audit/v3-*.txt is a fixed string printed at lamp_site.py:365. Lines 366-394 have no part() call for grip or suspension, and no audit has a grip RAYVIS line. GASKETS shows only as RAYVIS line 78. Each x2 audit is byte-identical to its 1x audit (md5 925c4de0, 99fed823, d0198bf4). In r2.sh, the audit run (:28) passes no BORDER and the grep (:29) has no HEMI_COLLAR_CAP; r2.sh is unchanged since 41c3d4a7e6. git grep finds no command for the v3-* renders. The pixels: in v3-today-x2.png the collar lip reads (0.98, 2.03, 5.65) sRGB against the clamp ring's (1.00, 2.02, 5.75), so the collar was in the cap's metal."
+     },
+     {
+      "id": "S8-numbers-and-fairness-hold",
+      "severity": "note",
+      "claim": "Every number on the sheet matches TOP_TIERS, the meshes and the renders, and the comparison is fair.",
+      "evidence": "CAD, today: ring Ø104 at z 92-97, collar lip Ø96 at 97-100, crown Ø80 at 100.5-112, cap Ø40 at 112-126 (crystal.py:181-197, :315), foot ring Ø116 (clamp.stl r 58.0). A: ring 92-102.83 plus the collar's rim to 103.33, crown Ø80 seen from 103.33 to 114.67, cap Ø56 at 114.67-126. B: tiers 8.5 tall at Ø104, 80, 56 and 32 (TOP_TIERS :213-216). Every step is 24 across, 12 per side. Silhouettes (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/sheet-owner/work/scale.py): every tier's width gives 5.53-5.55 px/mm in the x2 renders, 2.74-2.77 in the 1x renders and 4.92-4.95 on the sheet's crops, so crops over frames is 4.944/2.761 = 1.79 ('1.8x'). HOUSE_CAM puts the camera 1.600 m away with a 200 mm lens. The sheet's panels are the v3 renders: where v3 and round 2's renders differ, the sheet is within 3 levels of v3 and 26 of round 2 (work/v3vslvl.py). The backgrounds of today, A and B agree within 0.1 levels, and they differ only in the top and the shade under it. Each x2 render matches its 1x frame at offset (380, 176) within 1.15-1.23 levels (work/fair.py). The three audits differ only in line 7. In all six audits, CASTCHECK has 22 entries, all 0.0, covering the 13 hidden meshes and 9 house lamps, and the 24 LEDs are at 0.0 W."
+     },
+     {
+      "id": "S9-costs-not-on-sheet",
+      "severity": "note",
+      "claim": "What each top costs is in the note but not on the sheet. A adds 25 g to each shade and 47 g at the fixture; B adds about 1 g and saves 31 g. A and B also need the crown's acrylic sheet held to about ±5 %, or a shim chosen for each shade, to keep the silicone's squeeze.",
+      "evidence": "top-redraw.md:68-70 gives the weights and :49-57 the squeeze table. I reproduced the weights from mesh volumes at 2.70 g/cm3 (today/A/B, cm3): collar 85.49/95.20/89.86, clamp 23.91/23.45/19.89, crown 52.61/65.30/56.68, cap 16.83/23.45/3.40, hub 119.03/117.05/117.05. The grip is 3.88 cm3, 33 g of brass. I did not check the squeeze table (UNVERIFIED; engineering lens)."
+     }
+    ],
+    "round2_status": [
+     "OE1, today's band unlabelled: FIXED in substance. Today now names five parts, including 'foot ring 116 mm across'; A and B say 'foot ring, sloped'. Today's steps (12, 8, 16, 40) are still not printed (minor).",
+     "OE2, the note's 'band's 24': FIXED. top-redraw.md:64 reads '24 across (12 per side)', and crystal.py no longer mentions Ø128.",
+     "OE3, B's foot as tall as a tier: not a sheet error, and the design is unchanged. With the silicone drawn, the foot is 10.9 mm in all three, so A's foot (0.96 of a tier) no longer reads as shorter (S3).",
+     "OE4, 'steps of 24 mm': FIXED. The sheet says 'steps of 24 mm across (12 per side)'.",
+     "OE5, clamp ring heights include the 0.5 rim: NOT FIXED (note). The sheet still says 11.3 and 8.5; the ring is 10.83 and 8.0 (clamp.stl z max 102.83 and 100.00) (S6).",
+     "OE6, crop scale wording: FIXED. The caption reads 'the top, 1.8x', and I measured 4.944/2.761 = 1.79.",
+     "OE7, audit gaps: PARTLY. Today's HEMI_TOP line now names hub, collar, white-disc, ring and gaskets. Still open: each x2 audit is byte-identical to its 1x audit (md5 925c4de0, 99fed823, d0198bf4), HEMI_COLLAR_CAP is not printed (r2.sh:29), and the commands are not committed. New: 'grip' is listed but never loaded (S7).",
+     "OE8, fair by pixels: STILL HOLDS for v3. Backgrounds agree within 0.1 levels, and each x2 render matches its 1x frame at (380, 176) within 1.15-1.23 levels.",
+     "OE9, no render faults: PARTLY. The light notch under the foot's ends is gone because the outer silicone is drawn, but GASKETS=1 brought back the rows of dots, at x2 rows ~390-415 (S4).",
+     "OE10, level-view wording: unchanged ('one level camera 1.6 m off, 200 mm lens'); note only.",
+     "OE11, A's heavier top: not on the sheet (note); it belongs in a pick line (S3).",
+     "OE12, today's hairline: unchanged and real. It is the 0.5 mm gap over the Ø40 neck, at sheet rows 1476-1478 of today's crop.",
+     "OE13, the sheet says nothing about coming off or a pick: PARTLY. Footer line 1 now says all three use the fixed release; there is still no pick (S3).",
+     "Round-1 jargon item: PARTLY. 'band tapered' became 'foot ring'; 'clamp ring', 'collar lip' and 'crown' are still unexplained.",
+     "Round-1 A recess and B arc: still not checkable in this view, because the camera sits at shade z ~99, below the collars' tops. The CAD keeps the collar 0.5 above the ring.",
+     "Round-1 pick not addressed: NOT FIXED (S3).",
+     "Round 2 missed, today's trapped shade not on the sheet: FIXED. V3 has white_split=True (crystal.py:594), today's meshes carry the split (white-disc r 31.0, collar bore r 32.5), and footer line 1 says so. Round 2 missed, the look from below: NOT FIXED, and off-axis it is wider than the note says: 3.8 mm at 30 deg, against 1.9 for round 2's ring (S2).",
+     "Round 2 missed, the pick counting today and A by different rules: the sheet now names the foot ring in all three columns. Any pick text must count A's sloped foot as a band (S3).",
+     "Round 2 missed, outer silicone not drawn: FIXED. Every v3 audit has the RAYVIS gaskets line (line 78), and the notch is gone. Side effect: the dots (S4).",
+     "Round 2 missed, A and B change parts on every shade: FIXED by footer line 2, but incomplete. The fix already changes every collar, and A and B also change the acrylic's crown hole (Ø100.4) and both silicone rings (S5).",
+     "Round 2 missed, the sheet's today against the live site (HEMI_COLLAR_CAP): PARTLY. The footer states the collar's metal, and pass2.sh:23 now sets HEMI_COLLAR_CAP=1. Whether the live frames have been re-rendered is UNVERIFIED.",
+     "Round 2 missed (engineering verifier), the sheet never says today's shade can't come off: FIXED (now moot). The main build carries the split and the sheet says all three use it."
+    ],
+    "verdict": "Ready after small fixes: every number, the 1.8x scale and the fairness check out, and both plain lines are true.\nBefore he sees it: show the cable or say it isn't drawn, add a view from below (or a line on the dark ring) and the reviewers' pick (A, with a new reason), and drop the inner silicone ring that draws the dots."
+   },
+   "verdicts": {
+    "verdicts": [
+     {
+      "id": "S1-suspension-cable-not-drawn",
+      "stands": true,
+      "reason": "Confirmed independently. lamp_site.py:361-394 (origin/r32-lamps-final) calls part() only for clamp, crown, gland, hub, collar, white-disc, ring, pins, gaskets (when GASKETS=1), cord, carrier, stem and board. part() (:210-215) loads only the STL it is named, so the suspension is never loaded. crystal.py:505-507 and :570-572 make the cable the default in all three tops. bom.csv:21 moved it out of the options in 92dc7c25f5. In topA/topB, suspension.stl spans x 7.00-12.00 and z 99.50-726.00 (my reader). Today's lamp-site folder has no suspension.stl (top_tiers.py:20-22). The reviewer's UNVERIFIED side can be settled, and it does not change the outcome. strata/scene.py:321-322 imports STL with Blender's default axes and part() only moves it, so CAD +x is world +x. With HOUSE_CAM's right vector (0.901, 0.433), A's and B's cable falls 8.56 mm right of the cord's axis: 42 px on the crops, 24 px in the frames (8.56 mm left if the import were mirrored). The cable hides behind the cord only within 23.2 deg of the line of sight, and the camera is 64 deg away from it. Today's cable falls 4.96 mm right, and its Ø5 ferrule widens the right side of the cord to 7.5 mm for 9 mm above the cap. Caveat on the fix: as drawn, the cable cannot be fitted in A or B and has no anchor in today's cap (missed #1). A line saying 'not drawn' is safer than drawing it."
+     },
+     {
+      "id": "S2-no-view-from-below",
+      "stands": true,
+      "reason": "I reproduced the geometry from the committed meshes (sheet-skeptic/py/below.py). The lip's bore is r 33.29 at z 64.2, 32.89 at 64.6 and 32.50 at 65.5, and the collar's bore is r 41.0 above z 66. The disc is r 30.70 at z 59.2 and 31.00 at 59.8. The hub's wall is r 31.0 from z 60.5 up. The dark band on the near side is 1.5 cos a + 5 sin a: 1.50 / 2.74 / 3.80 / 4.48 mm at 0 / 15 / 30 / 42.5 deg, against 0.50 / 1.26 / 1.93 / 2.40 for round 2's ring. 42.5 deg = atan(55/60) is the steepest view of the disc's edge past the mouth. 1f08b08875 adds only the level views. The finding understates the problem in two ways. Even straight up, it is not 'one white face': South's three slot mouths show (missed #2). And a render from below with today's shader would also mislead: lamp_site.py:369-375 paints every collar face below z 80 white, including the slot walls and the lip's bore, while the real collar is black anodised and only 'painted white beneath'."
+     },
+     {
+      "id": "S3-no-pick",
+      "stands": true,
+      "reason": "Confirmed. In coordinator/hemisphere-top-v2-critics-2026-11-24.json, results[0].pick is 'A' and results[1].pick is 'A (three even tiers)...'. results[0].pick_reason says the foot '(46 px) is shorter than a tier'. Neither the sheet nor top-redraw.md has a pick. The foot runs from the silicone's foot at z 81.46 (sqrt(100²-58²)) to the cone's top at 92.37 (sqrt(106²-52²)): 10.91 mm, which is 0.96 of A's 11.33 tiers and 1.28 of B's 8.5. In v3-A-x2.png the foot spans rows 277-336 (60 rows) against 61 rows for the ring tier (rows 216-276) (sheet-skeptic/py/profile.py). results[1]'s build reasons for A are also gone: B's Ø32 cap being too thin for M3 heads, and B's hex sitting below the crown. Both caps now screw onto spigots and both grips sit in Ø21 pockets (crystal.py:225-226, 486-494). Any pick should also wait for missed #1, which blocks A and B alike."
+     },
+     {
+      "id": "S4-gasket-dots",
+      "stands": true,
+      "reason": "Confirmed. lamp_site.py:387-390 records this very fault, and line 78 of every v3 audit shows the gaskets were loaded. The inner ring is the sphere band R 85-86 (crystal.py:313), which sits on the renderer's opal-in sphere at R 86 (lamp_site.py:336), at z 63.5-71.2. My own count (sheet-skeptic/py/dots.py: red channel at least 8 below its 7x7 median and lowest in its 3x3, rows 370-439) gives 124 / 154 / 135 dots in v3 today / A / B, mean depth 15-21. Round 2's lvl renders give 52 / 62 / 46, mean depth about 9.5. The v3 dots cluster in rows 391-392, 397 and 410-412; the lvl ones only at the frame's bottom edge. A contrast-stretched pair (sheet-skeptic/tiles/dots-A-v3-vs-lvl.png) shows two rows of dots in v3 only. On the sheet (crops placed at y 1270, scale 0.891) they fall at rows about 1618-1640, 10-15 levels deep. The light notch is indeed filled: v3-A-x2 rows 331-336 are 644 px wide, against 628-636 px in lvl-A-x2."
+     },
+     {
+      "id": "S5-plain-lines-partial",
+      "stands": true,
+      "reason": "Confirmed. In 92dc7c25f5, today's lamp-site collar.stl and white-disc.stl changed (lip bore r 32.5, disc r 31.0), and bom.csv:6 took the collar from 221 to 231 g. So the release fix changes every shade's collar in all three tops. crystal.py:273 cuts a Ø100.4 crown hole for A and B against Ø96.4 today. crystal.py:313-314 start both silicone rings at r 50.2 against 48.2 (gaskets.stl z max 87.64 against 88.76). My own radial-envelope check (sheet-skeptic/py/cross.py) finds the same 0.176 mm smallest gap for all nine shade/fixture pairs, from +9 to -140. The slots and pins come from pin_z, notch and turn, which TOP_TIERS does not change (crystal.py:302-312). So top-redraw.md:73-74 is wrong as a statement about fit. One slip in the claim: the lip is not 'under the light'. V3's light is the LED ring at the mouth (z 4.9, facing up; lamp_site.py:401), and the lip sits at z 64-66 around the hub's foot, about 60 mm above it."
+     },
+     {
+      "id": "S6-ring-heights-include-rim",
+      "stands": true,
+      "reason": "Confirmed. crystal.py:321 draws the ring up to cz1 - 0.5. clamp.stl tops out at z 102.83 (A) and 100.00 (B); collar.stl at 103.33 and 100.50. top-redraw.md:28 gives the ring as '10.8 long (A), 8.0 (B)'. The sheet's 11.3 and 8.5 are the ring plus the collar's 0.5 rim, which shows as the 3-row Ø96 ledge at rows 216-218 of v3-A-x2.png."
+     },
+     {
+      "id": "S7-audit-record",
+      "stands": true,
+      "reason": "Confirmed. lamp_site.py:365 prints a fixed list that includes 'gaskets', plus ' grip' for A and B, and :366-394 never call part() for grip or suspension. Each x2 audit is byte-identical to its 1x audit (md5 925c4de0, 99fed823, d0198bf4). r2.sh:28 runs the audit without BORDER, :29 does not grep HEMI_COLLAR_CAP, and r2.sh last changed in 41c3d4a7e6. git grep finds no command for the v3 renders. The pixel check is weak evidence that the collar switch was set: in round 2's lvl-today-x2 the lip also matches its ring."
+     },
+     {
+      "id": "S8-numbers-and-fairness-hold",
+      "stands": true,
+      "reason": "Confirmed, with S6's caveat. Every label matches crystal.py:181-197, :213-216, :315 and :321 and the meshes. My silhouettes give 5.54 px/mm in the x2 renders (Ø96 531.7 px, Ø104 576.5, Ø116 643.4). The frames sit 1:1 at sheet y 220 and the crops at y 1270 at 800x392 (mean difference 0.93-0.95), so the crops are 1.786x. Each x2 render sits in its 1x frame at row 380, column 176, within 1.15-1.23 levels. Where v3 and lvl differ, the sheet is 1.7-1.9 levels from v3 and 21-22 from lvl. Background patches agree within 0.03 levels. The audits differ only in line 7, CASTCHECK has 22 entries all 0.0, and the 24 LEDs are at 0.0. 'Fair' covers camera and light only; it says nothing about the cable that is not drawn (S1)."
+     },
+     {
+      "id": "S9-costs-not-on-sheet",
+      "stands": true,
+      "reason": "Confirmed. My own mesh volumes at 2.70 g/cm3 give A +25.0 g per shade and +46.8 g at the fixture, and B +0.9 g and -30.6 g. The grip is 3.88 cm3, or 33.0 g at 8.5 g/cm3. These figures and the squeeze requirement are in top-redraw.md:49-57 and :68-70, not on the sheet. I did not check the squeeze table either (UNVERIFIED)."
+     }
+    ],
+    "missed": [
+     "BLOCKING for A and B: as drawn, the cord grip, the default cable and the screw-on cap cannot be put together. So the sheet shows two tops that cannot be built, and both S1's 'draw it' and S3's pick would mislead the owner. Evidence: crystal.py:486-499 and :506-507; the topA/topB meshes; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/sheet-skeptic/py/pocket-out.txt and hub-out.txt.\n- The cable's Ø4 ferrule sits in a Ø4.5 counterbore in the hub's neck (r 7.25-11.75, z 99.5-102.5), under the crown's 1 mm floor. The floor's cable hole is only Ø1.8 (r 8.6-10.4), so the cable must be threaded before the crown goes on.\n- In the pocket, the cable (r 8.75-10.25) sits 0.10 mm outside the corners of the grip's hex (r 8.65, z 103.5-108.5) and 0.25 mm inside the pocket wall (r 10.5). The 'thin-wall 15 socket down the pocket' (crystal.py:223; top-redraw.md:38) has nowhere to go, so the grip cannot be tightened.\n- The cap's Ø26 bore screws onto the crown's Ø26 spigot (M26 x 1, 4 mm, about 4 turns). The same cable also runs through a Ø2.0 hole in the cap's lid at r 9.5 (r 8.5-10.5, z 125-126), so the cap cannot turn.\n- The stated assembly order leaves the cable out (crystal.py:222-224; top-redraw.md:36-39). top_check.py:13-14 has no suspension in FIXT and moves only the shade, so 'passes' covers none of this.\n- A's BOM still says the cable has 'a fixed end in the cap' (out-dome-pendant-topA/bom.csv:22), which contradicts the CAD.\n- Today has no working arrangement either. Its default cable starts on top of the solid cap (crystal.py:505; today's gland.stl is solid from r 4 to 20 at z 113-125.5), with the ferrule above it, so the cable holds nothing. Its grip is still only 'a listed cord grip in the cap' (crystal.py:563; bom.csv:20).\nSo no top on the sheet has a hanging arrangement that works, and the verdict 'ready after small fixes' does not hold. Redrawing it (a cap that does not turn, or the cable anchored under the lid, with the cable clear of the socket) may change the caps, and B's Ø32 cap has the least room.",
+     "The look from below gets worse in all three tops, and neither the sheet, the note nor S2 says so. South was dropped on 2026-10-25 (crystal.py:30-31), but its L-slot entries are still cut into every Hemisphere collar (crystal.py:308-312). They now cut through the new white lip and the collar's foot. In collar.stl (today, A and B), material is missing from r 39.0 to 45.5 at azimuths 60, 180 and 300 for z 64.2-65.5, and the slots are open up to z 76.5 (sheet-skeptic/py/below-out.txt). My straight-up z-buffer (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b84/sheet-skeptic/py/upview.py and tiles/upview-today-v3.png) shows three dark notches, each about 5 x 6.5 mm, in the white ring. Round 2's bonded ring (z 63-64, r 31.5-47.5, unbroken: white-ring.stl in 92dc7c25f5^) and the Ø95 disc of 2026-11-11 hid them. So top-redraw.md:14-15 ('one white face with a 1.5 dark ring') and the collar's note at crystal.py:389-390 ('the white ring that hides the slots from below') are false, and the sheet's 'a white ring under the shade' hides the problem. A render from below would not show it either: lamp_site.py:369-375 paints every collar face below z 80 white, slot walls included. The simplest fix is to stop cutting South's slots in North's collar."
+    ]
+   }
+  }
+ ]
+}
