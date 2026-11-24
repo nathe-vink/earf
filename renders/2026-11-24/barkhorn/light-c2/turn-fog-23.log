@@ -1,0 +1,13 @@
+NO GLASS SHADOWS: 6 materials: ['bark@birch-fog-clear', 'bark@birch-fog-clear.001', 'clear-cast@birch-fog-clear', 'horn-formed@birch-fog-clear', 'horn-lot@birch-fog-clear', 'horn-satin@birch-fog-clear']
+SHADOW RAY LINKS LEFT: 0 []
+00:19.930  cycles           | WARNING CUEW initialization failed: Error opening the library
+09:57.286  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-fog-23.png'
+/home/user/earf/studio/engine/render.py:480: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+10:00.879  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-fog-23.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:531: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+10:01.750  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-fog-23.swatch.png'
+finish: white 236 -> 236 (gain 1.0), contrast 0.2, clarity 0.05, sharpen 0.3 at 0.7 px
+renders/2026-11-24/barkhorn/light-c2/turn-fog-23.png  {'build': 19.7, 'render': 577.4}  samples 96
