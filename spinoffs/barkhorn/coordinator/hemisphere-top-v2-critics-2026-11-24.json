@@ -1,0 +1,415 @@
+{
+ "workflow": "wf_e192e89f-008",
+ "subject": "Hemisphere top redraw (r32 a78e069a7f; CAD f23f611ce2): today, A \u00d8104/80/56, B \u00d8104/80/56/32",
+ "results": [
+  {
+   "findings": [
+    {
+     "id": "OE1-today-band-unlabelled",
+     "severity": "should-fix",
+     "claim": "Today's labels leave out today's foot band, even though it shows as the widest step in today's crop. So the labels list four parts while the picture shows five. A and B only say 'band tapered', with no size and no word for what the band is. From the sheet alone he cannot tell that the band is the thing that changed. Today's diameter steps are also not printed next to A's and B's '24'.",
+     "evidence": "top-sheet-v2.jpg (a78e069a7f), label rows 57-175: Today lists clamp ring / collar lip / crown / cap only. Measured in the sheet's today crop (rows 1240-1632, 4.96 px/mm; script /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b82/owners-eye/work/sheetedges.py): band 46 px tall (31 px vertical face about 115 across, plus a 15 px bevel), clamp ring 25, collar lip 14, crown 55, cap 68 px. Mesh spinoffs/barkhorn/companions/lamp-site-meshes/out-dome-pendant/stl/clamp.stl: \u00d8116 straight from z 82.69 to 88.7, then a slope to \u00d8104 at z 92.4 (crystal.py:283). In A and B the same band (out-dome-pendant-topA/topB clamp.stl) is \u00d8116 only from z 82.69 to 83.9, then a cone; on the sheet that is a 40 px slope plus an 8 px land, so it reads as a foot (skirt), not a step. Suggested fix: one plain line per column. Today: 'foot ring on the shade, 116 across, a 6 mm step'. A and B: 'same ring, now a slope'. Add today's steps across (12, 8, 16, 40)."
+    },
+    {
+     "id": "OE2-note-band-steps-24-stale",
+     "severity": "should-fix",
+     "claim": "The note's table still says the band steps 24 like the tiers. With the band back at 116 across, it steps 12 across (6 each side). This line is left over from the dropped \u00d8128 band, and crystal.py has the same stale comment. If it is quoted to the owner, it is false.",
+     "evidence": "renders/2026-11-24/barkhorn/lamp-site/tests/r2/top-redraw.md line 41: '(and the band's 24 below)' / '(and the band's 24)'. The line is unchanged from 4e8c246e22 (its line 39), which was written when line 25 said 'its rim 128 across'. Commit a78e069a7f rewrote item 3 (now line 25, 'stays 116 across') but not the table. crystal.py:214-215 have band_r=58.0. Meshes topA/topB clamp.stl max \u00d8116.00. Measured band-to-ring run in the 2x renders: 33.4 px each side = 6.0 mm. crystal.py:288 comment still says 'its band on the shade out to the tier's rim (\u00d8128)'."
+    },
+    {
+     "id": "OE3-B-foot-as-tall-as-a-tier",
+     "severity": "note",
+     "claim": "In B the sloped foot is as tall as each tier, so the picture shows five bands of about equal height. In A the foot is clearly shorter than the tiers and reads as the foot of the stack.",
+     "evidence": "2x renders lvl-A-x2.png and lvl-B-x2.png (5.556 px/mm; owners-eye/work/edges.py): the foot is rows 279-330 = 52 rows (9.4 mm) in both. A's tiers are 63-64 rows (11.3-11.5 mm); B's are 47-48 rows (8.5-8.6 mm). On the sheet's crops: A tiers 56 px against a 46 px foot; B tiers 42 px against a 46 px foot. A's steps (11.3 up, 12 out each side) make a staircase of about 43 deg, which the 55 deg foot cone continues. B's steps (8.5 up, 12 out) are flatter, so the foot breaks the rhythm."
+    },
+    {
+     "id": "OE4-steps-24-is-across",
+     "severity": "note",
+     "claim": "'steps of 24 mm' is correct as the drop in diameter, but each visible ledge is 12 mm per side. He may read 24 as the width of the ledge.",
+     "evidence": "Per-side runs measured on the sheet's crops: A 58.5 and 59.5 px; B 60, 59.5 and 59 px. At 4.96 px/mm that is 12.0 mm each side. TOP_TIERS gives 104/80/56 and 104/80/56/32 (crystal.py:214-215). Plainer wording: 'each tier 24 mm narrower than the one below'."
+    },
+    {
+     "id": "OE5-collar-lip-not-flush",
+     "severity": "note",
+     "claim": "The 'clamp ring' heights for A (11.3) and B (8.5) include the collar's 0.5 mm lip; the ring alone is 10.8 and 8.0. The lip shows as a hairline ledge at the ring's top, so it is not flush. This is true to the CAD and harmless: it reads as a fine line, not a tier.",
+     "evidence": "crystal.py:289 draws the ring up to cz1 - 0.5. Meshes: topA clamp.stl z max 102.83 with collar 103.33; topB 100.00 with collar 100.50. On the sheet's crops the lip is a 2-3 px ledge, 96 across, at rows 193-194 (A) and 207-209 (B), about 20 px in from the ring's edge on each side. In the 2x renders it is 3 rows at \u00d895.7. top-redraw.md line 29 calls it both 'flush' and '0.5 proud'."
+    },
+    {
+     "id": "OE6-crop-scale-wording",
+     "severity": "note",
+     "claim": "The bottom row says '2x (the same view, full scale)', but it shows the tops at 1.79x the frames above. 'Full scale' can also be read as life size, which they are not on a laptop.",
+     "evidence": "The crop row is lvl-*-x2.png (896 x 440) scaled down to 800 x 392 (registration mean error 0.93 levels; owners-eye/work/match.py). That gives 4.96 px/mm, against 2.78 px/mm in the frames above. Plainer wording: 'the top, enlarged, same camera'."
+    },
+    {
+     "id": "OE7-audits-pass-with-gaps",
+     "severity": "note",
+     "claim": "All six audits pass the house rule, and today, A and B differ only where they should. The remaining gaps are in the record-keeping, not in the pictures.",
+     "evidence": "renders/2026-11-24/barkhorn/lamp-site/tests/r2/audit/lvl-*.txt: CASTCHECK has 22 entries, all 0.0 (line 106 for today, 107 for A/B). LINK lines cover only house-bg-left, bg-right, wall_left, bg-high and wall-ll, all to 'sweep' (lines 46-54). The 13 shadow=0 objects are the hidden studio meshes. No hidden mesh has camera=1. All 24 LEDs are at 0.0 W. A/B differ from today only in line 7 (HEMI_TOP) and the added white-ring RAYVIS line; line 6 (HOUSE_CAM) is identical. Gaps: (1) 'IN FRAME 100.0 % room-back' (line 29) comes from HIDDENCAST, which ignores occlusion (hiddencast_bpy.py:7); p6.txt read 63.5 % before ROOM_FIT moved from -4.5 to -7.71. (2) Each x2 audit is byte-identical to its 1x audit (md5 75781379..., b3627d1c..., 62b8ff12...) and records no border or scale. (3) HEMI_COLLAR_CAP is not printed. (4) Today's HEMI_TOP line names only 'clamp crown gland', although the collar and white disc also load from that folder (lamp_site.py:365, 383-384). (5) The commands for the lvl renders (switches, scale, border, samples) are not committed, so the sample count is UNVERIFIED."
+    },
+    {
+     "id": "OE8-comparison-fair-by-pixels",
+     "severity": "note",
+     "claim": "The comparison is fair: same camera, light, exposure and backdrop for all three. The crops are the same camera rendered at twice the resolution.",
+     "evidence": "owners-eye/work/fair.py: six background patches in lvl-today/A/B.png match within 0.1 levels. Pixels that differ by more than 12 levels all fall within y 423-791, x 237-604 (the top). Everywhere else the mean difference is 0.16 levels, and the shade differs only by noise. owners-eye/work/x2check.py: each x2 render, averaged over 2x2 pixels, matches its 1x frame at offset (176, 380) within 1.1 levels. HOUSE_CAM [0.693, -1.442, 0.405 aimed at 0, 0, 0.405, 200 mm] puts the camera 1.600 m away and level (house_ground.py:391-398, 615-625). Measured scale is 2.778 px/mm, which is what a 36 mm sensor and 200 mm lens give at 1.6 m. The meshes give all three tops the same height: clamp-ring foot at z 92, cap top at z 126."
+    },
+    {
+     "id": "OE9-no-render-faults-collar-matches",
+     "severity": "note",
+     "claim": "Nothing reads fake at the sheet's size. There are no fireflies, seams or banding. The collar now matches the other black parts.",
+     "evidence": "owners-eye/work/faults.py: the only pixels that stand out from their neighbours are on tier edges and where the cord meets the cap. Background noise is 1.2 levels, and the shade's red gradient has no missing values. The sheet is a quality-90 JPEG. owners-eye/work/tiercolor.py, today's 2x render, centre zone: collar lip (1.0, 2.1, 5.9) against clamp ring (1.0, 2.0, 5.8) sRGB. In round 1's top0-x2.png the collar was about 38-40 in brightness. lamp_site.py:376-381 gives the collar the cap's colour, metal and roughness (cap defined at :229) but not its fine bump, which does not show at this size. The black parts render at 0-9 sRGB and read by their outline and 1 mm eased edges, the same in all three. The thin tick on the shade's axis just under the top is the cord's reflection, the same in all three."
+    },
+    {
+     "id": "OE10-level-view",
+     "severity": "note",
+     "claim": "The level, far view is a fair way to compare heights and step widths. It matches what a standing adult sees of a pendant hung at eye height over a table. It hides the tops of the steps. The sheet says how it was taken, but not in his words.",
+     "evidence": "The camera sits at about z 99 mm on the shade (the frame's centre row is 2x-crop row 240, inside the clamp ring's rows 219-278), 1.6 m away. Perspective depends only on camera position, so the 200 mm lens just crops and does not enlarge the lower tiers, which was round 1's complaint (house_ground.py:392-394). The tops of the steps show only from above, as in the site's own frame (p6.png) and in the first sheet (top-sheet.jpg). The footer (rows 1643-1665) says 'one level camera 1.6 m off, 200 mm lens, the same for all three'. Plainer wording: 'seen level with the top from 1.6 m, as when standing by the table'."
+    },
+    {
+     "id": "OE11-A-heavier-top",
+     "severity": "note",
+     "claim": "Seen from the side, A's top looks about 12 % heavier than today's. B keeps today's visual weight.",
+     "evidence": "Black side-silhouette area of the top in the 2x renders (rows 89-330): today 3368 mm\u00b2, A 3757 mm\u00b2, B 3341 mm\u00b2. A's cap is 56 across, against today's 40 (crystal.py:214, :197)."
+    },
+    {
+     "id": "OE12-today-hairline-is-real",
+     "severity": "note",
+     "claim": "Today's crown shows a thin light line under it. The line is real: it is a 0.5 mm gap. In A and B that gap sits inside the collar, so the line disappears.",
+     "evidence": "crystal.py:195 starts the crown at 100.5; :182 puts the collar's top at 100; :508 says '0.5 clear of the PEEK ring and the collar'. In the 2x render, rows 231-234 are dark only across the \u00d840 neck; on the sheet's crop this is rows 206-208. In A and B the collar's top (103.33, 100.5) is at or above the crown's foot, so the gap is hidden."
+    },
+    {
+     "id": "OE13-sheet-silent-on-buildable-and-pick",
+     "severity": "note",
+     "claim": "The sheet does not say that A and B still let the shade come off by hand, and it carries no pick. His first rule is about what is technically possible.",
+     "evidence": "No such line on top-sheet-v2.jpg. The come-off check is only in top-redraw.md lines 46-47. Round 1's owner-eye result (results[1] F10 in spinoffs/barkhorn/coordinator/hemisphere-top-critics-2026-11-24.json) asked for a single pick. I did not check the come-off result myself (UNVERIFIED; that is the engineering lens)."
+    }
+   ],
+   "first_round_fixed": [
+    "\u00d8 shown as a missing-glyph box: FIXED. The labels now say 'mm across' and use no \u00d8; at 1:1 the glyphs render cleanly (top-sheet-v2.jpg rows 15-175).",
+    "Labels too small (4-5 px on a laptop): FIXED. Label lines are 23 px of ink (rows 57-79) and titles 29 px on the 2440 px sheet, about 13-14 px when the sheet is fitted to a 1440 px screen.",
+    "No units, and jargon: PARTLY. Units are added ('mm across', 'tall'), and 'gland' became 'cap'. 'Clamp ring', 'collar lip', 'crown' and 'band tapered' are still unexplained.",
+    "Bottom row had no label: FIXED. It now reads 'the top, 2x (the same view, full scale)' (rows 1205-1227). But the row is 1.79x the frames above, not 2x, and 'full scale' is unclear.",
+    "\u00d8116 band read as an extra, unlabelled step: PARTLY. In A and B it is now a slope (40 px slope plus 8 px land on the sheet; topA/topB clamp.stl are \u00d8116 only up to z 83.9) and reads as a foot. Today's label still leaves out today's band (31 px straight face plus a 15 px bevel). In B the foot is as tall as a tier (46 px against 42).",
+    "A shown with its recess / dark gap ring: FIXED. There is no recess. The top of A's clamp ring shows only the 0.5 collar lip (sheet crop rows 193-194; collar 103.33 against ring 102.83 in the meshes), with no dark crescent.",
+    "B's thin dark arc at the crown's foot: FIXED. B's clamp top shows only the 2-3 px collar lip (rows 207-209).",
+    "Bottom row was 2.27x, and today reused p6: PARTLY. Today is now a new render from the same camera (backgrounds match within 0.1 levels; owners-eye/work/fair.py). The crop row is now 1.79x (896 to 800 px resize) and is still labelled 2x.",
+    "View close and from above: FIXED. HOUSE_CAM line 6 puts the camera level at z 0.405, 1.600 m away, 200 mm lens. The measured 2.778 px/mm matches 1.6 m (house_ground.py:618).",
+    "Audits identical to another frame's and not naming the top: MOSTLY FIXED. Lines 6-7 now name the camera and the top, and A/B differ from today only in line 7 and the white-ring RAYVIS line. Each x2 audit is still byte-identical to its 1x audit (no border or scale line), HEMI_COLLAR_CAP is not printed, and the render commands are not committed.",
+    "Collar in a different black: FIXED. Today's collar lip measures (1.0, 2.1, 5.9) against the clamp ring's (1.0, 2.0, 5.8) sRGB, where round 1's top0-x2.png had the collar at about 38-40 brightness. lamp_site.py:376-381 copies the cap's material (:229), minus its fine bump.",
+    "Nothing reads fake; black faces nearly flat: UNCHANGED and not a fault. The faces are 0-9 sRGB in all three and read by outline and edge highlights.",
+    "Pick conflict (one pick on the sheet): NOT ADDRESSED. There is no pick on the sheet or in top-redraw.md."
+   ],
+   "pick": "A",
+   "pick_reason": "In the picture, A answers both halves of his question: fewer tiers, and even ones. It shows three tiers where today shows five steps (foot band, clamp ring, collar lip, crown and cap: 46, 25, 14, 55 and 68 px on the sheet's crop). Each of A's tiers is 56 px tall (11.3 mm), each step is 12 mm per side, and its sloped foot (46 px) is shorter than a tier, so it reads as the foot. B's four tiers are just as even (42 px, 8.5 mm, 12 mm per side), but its foot is as tall as a tier, so the eye counts five bands, the same as today. The cost of A is a top about 12 % heavier from the side (cap 56 across against 40); B keeps today's weight and is the fallback if he prefers finer steps. Both are rendered fairly and neither reads fake.",
+   "owner_summary": "The new sheet is a fair side-by-side: the same camera, light and backdrop for all three, and the sizes printed match the drawings. A answers both halves of your question: three tiers instead of the five steps you see on today's top, all the same height, each 24 mm narrower than the one below. B's four tiers are just as even, but its sloped foot is as tall as a tier, so it still reads as five; I'd pick A, knowing its top looks a little heavier (the cap is 56 mm across instead of 40)."
+  },
+  {
+   "findings": [
+    {
+     "id": "M1-trap-still-default",
+     "severity": "blocking",
+     "claim": "The lamp as committed still cannot have its shade taken off by hand. The fix (a \u00d862 disc on the fixture plus a \u00d895/\u00d863 white ring on the shade) is drawn and it works, but it is a switch that is off by default. The main build (V3), its meshes and its BOM still carry the \u00d895 disc that traps the shade. Whichever top is chosen, the split has to be switched on in the main build, and PARTICULARS' 'Swap by hand, no tools' is untrue until it is.",
+     "evidence": "crystal.py at origin/r32-lamps-final (CAD f23f611ce2): V3 is defined at lines 536-539 with white_disc=95.0 and no white_split. Line 432 builds the \u00d895 disc unless white_split is set. The white ring exists only if white_split is set (lines 365-370). top-redraw.md line 5 says 'WHITE_SPLIT (off by default)'. lamp-site-meshes/out-dome-pendant/stl/white-disc.stl measures r 8.2-47.5 at z 59-60 (my survey.py), and out-dome-pendant/bom.csv still lists the \u00d895 disc (105 x 105 stock). My own sweep (b82/make/sweep.py, output sweep-out.txt) gives: today: the collar meets the white disc at 4.05 mm of lowering, but the pins leave the collar only after 9.0 (collar top 100; pins z 91-95 in pins.stl). With the split, today comes off with no contact. PARTICULARS.md line 28 still says 'Swap by hand, no tools'."
+    },
+    {
+     "id": "M2-ring-gap-tight",
+     "severity": "should-fix",
+     "claim": "The new white ring passes the \u00d862 hub and disc with only 0.5 mm all round, and that is too tight for a shade moved by hand. The PEEK centering land lets the shade tilt about 1.7-2.3\u00b0. About 31-33 mm below the land, that tilt moves the ring roughly 1.0-1.3 mm sideways, so its edge can land on the disc's edge when a shade is lowered off or pushed on. Powder coat on both edges and a hand-placed ring with nothing to locate it make the gap smaller still. The ring is bonded on and sticks 9.5 mm inward from the bond line, so a knock loads the bond in peel. Suggested fixes: turn the ring as part of the collar, with a chamfered, concentric lip, or open the gap to about 1-1.5 mm, which makes a wider dark ring under the hub.",
+     "evidence": "From the meshes: white-ring.stl r 31.5-47.5, z 63-64. white-disc.stl (A/B) r 8.2-31.0, z 59-60. hub.stl r 31.0. ring.stl (PEEK) r 40.8, z 86-100. Collar bore r 41.0, so 0.4 mm of diametral play. sweep-out.txt: white-ring past hub 0.50 and past white-disc 0.50 (nominal). The ring passes the disc while the shade is 3-5 mm below hanging. At that point the bore engages the land over about 10 mm (today), 13.3 (A) and 10.5 (B). Tilt is about 0.4/L, so 1.7-2.3\u00b0. The bond is on the collar's foot, r 41-47.5 less the three South slot mouths (crystal.py lines 276-280), with no spigot. The note is at crystal.py lines 365-370 ('bonded ... white powder coat'). The tilt figure is my estimate, not a CAD result."
+    },
+    {
+     "id": "M3-clamp-thread-end",
+     "severity": "should-fix",
+     "claim": "The shoulder that used to bottom is gone, and the clamp ring now meets nothing but the silicone. The claim of 'about 4 [mm] of thread below it for travel' does not fit the drawn clamp, though. Its \u00d896 thread bore runs through the band down to z 88.87, not only from the ring's foot at 92. Only about 0.1 mm (to the gasket) to 1.3 mm (to the shell) of collar lies between the clamp's lowest thread and the acrylic's crown hole. The end of the collar's thread is not drawn. If the thread runs out at the gasket, the clamp jams after about 0.1 mm, before it squeezes the silicone. The drawing needs an undercut on the collar at about z 86.5-88.8, or a relieved bore in the band so that only the ring is threaded (then about 3 mm of travel to the gasket). Threads are not modelled.",
+     "evidence": "clamp.stl (A, B): bore r 47.99 from z 88.87 to 102.83 (A) and 100.00 (B), with no lip (my prof.py sections). Collar tops are 103.33 and 100.50. gaskets.stl top is at 88.757. The shell's outer face at the hole (r 48.2, crystal.py line 254) is at z 87.62. The lane's wording is in top-redraw.md lines 29-31 and in the brief. The ring and band are cut by the same \u00d896 cylinder (crystal.py lines 289-290). How far the clamp must travel is itself unknown (see M10)."
+    },
+    {
+     "id": "M4-grip-real-part",
+     "severity": "should-fix",
+     "claim": "The cord grip fits as drawn, but it is a generic shape, not a real part. The drawn grip has 8 mm of thread and a hex 4 mm and dome 7 mm tall, so 11 mm above its seat. It sits in a \u00d822 pocket (not \u00d820) with 2.5 mm round the hex corners, 2.0 mm round the dome and 1.0 mm under the 1.5 mm lid. No part is named. Many nylon M12x1.5 dome glands I know of stand roughly 15-20 mm above their seat (UNVERIFIED). The grip cannot sit any lower, because its thread already starts 0.5 mm above the hub's neck. A taller real part would therefore raise the cap and break the even tiers. The cord's size is also not given: the model's \u00d86 cord sits near the top of the 3-6.5 range (UNVERIFIED for a braided 18/2 SVT).",
+     "evidence": "GRIP is at crystal.py line 219. The build is at lines 449-458 and the Part note at lines 513-516 ('the size to confirm on the chosen part's sheet'). grip.stl is identical in A and B (same md5): z 104.5-123.5, r \u2264 6.0 for the thread, 8.5 at the hex corners (7.36 at the flats), 9.0 at the dome. crown.stl: thread hole r 6.0 from z 104.5 to 112.5, pocket r 11.0 above it. gland.stl: pocket r 11.0 up to z 124.5, lid to 126. hub.stl top (the neck) is at z 104.0. The cord is cyl 6 at crystal.py line 459."
+    },
+    {
+     "id": "M5-grip-assembly-gland-fixing",
+     "severity": "should-fix",
+     "claim": "The grip cannot be tightened with the cap on. It has to be screwed in and clamped on the cord first, then the cap slides down the cord. Even with the cap off the hex is hard to reach. In B it sits 1.0 mm below the crown's top, inside the \u00d822 pocket. In A only 1.8 mm of it stands above the crown, under the \u00d818 dome. No open spanner fits, only a thin-wall 15 mm socket (outside \u00d8 \u2264 22) with the dome nut taken off. How the cap is held on is not drawn for A or B (today's note says two M3 screws into the crown). B's \u00d832 cap has a 5 mm wall over its \u00d822 pocket, too narrow for M3 heads (\u00d85.5), so B needs M2.5 or another fixing. A has room.",
+     "evidence": "From the meshes: B crown top at z 117.5 and hex at 112.5-116.5. A crown top at 114.67. Dome at 116.5-123.5. gland.stl: B r 11.0-16.0; A r 11.0-28.0. Today's gland note is at crystal.py lines 509-512 ('40 x 14 ... on two M3 into the crown'), unchanged for A and B. No screw holes are modelled."
+    },
+    {
+     "id": "M6-path-verified",
+     "severity": "note",
+     "claim": "My own check, from the committed meshes and independent of top_check.py, confirms the lane. With the split, today, A and B all lift 8.5, turn 30\u00b0 and lower off with no contact anywhere on the way. Today as built does not come off. The turn was swept every 0.25\u00b0, which top_check.py does not do (it tests only 0\u00b0 and 30\u00b0). The narrowest gaps on the way: collar bore to PEEK land 0.20 (unchanged), white ring to hub and disc 0.50, collar to crown 1.01, clamp to pins 2.99.",
+     "evidence": "b82/make/sweep.py and sweep-out.txt: meridian sections (dr 0.01, dz 0.05) of every cover part against every fixture part, the cover swept continuously from +8.5 to -140. The acrylic was drawn from the V3 radii in crystal.py lines 181 and 229-234, because the shells are not among the meshes. b82/make/pins3d.py and pins3d-out.txt: collar and pins unrolled at 7 radii from r 41.05 to 45.03, sections every 0.25\u00b0. Results: the lift clear, the turn clear at lifts 7.5/7.6/8.0/8.4/8.5, the lowering clear, and also clear with the pins grown 0.25 mm. The control (lowered 3 mm without the turn) touches, so the check does see contact. Crown r \u2264 40.0 in A and B. Pins leave the collar after 9.0 (today), 12.33 (A) and 9.5 (B)."
+    },
+    {
+     "id": "M7-top_check-method",
+     "severity": "note",
+     "claim": "top_check.py's own method has gaps, though its conclusion holds. It tests the turn only at 30\u00b0, lowers in 2 mm steps and then jumps to -30, -60, -100 and -140, ignores overlaps under 1 mm\u00b3, uses nominal sizes and does not allow for tilt. It also takes the pins' bottom as z 90.5, so the note's 'lowered to come off' figures of 12.8 and 10.0 should be 12.3 and 9.5 (today 9.0, as the note itself says).",
+     "evidence": "top_check.py line 31 (out_ = top - 90.5 + 0.5), lines 32-36 (the poses) and line 48 (v > 1.0). pins.stl z min is 91.000. top-redraw.md line 12 (9.0 for today) and line 43 (12.8 / 10.0)."
+    },
+    {
+     "id": "M8-band-plausible",
+     "severity": "note",
+     "claim": "The tapered band's strength figures are plausible and make no practical difference. A simple beam model gives the lane's numbers exactly: 0.113 \u00b5m for today's 5 mm band, 0.240 \u00b5m tapered from 5 to 1, and a 2.16 MPa peak at the root. Measured along the sphere (a 7.2 mm overhang) they become 0.23/0.50 \u00b5m and 3.1 MPa, still far below 6061's yield and far below the silicone's squeeze. The 1.0 mm land and the 54.7\u00b0 cone are plain lathe work. The face on the silicone is unchanged. The 0.5 MPa load case implies about 1.6 kN of preload, and nothing says the maker's torque delivers that (pre-existing).",
+     "evidence": "My calculation: cantilever from r 52 to 58 under 0.5 MPa, E 69 GPa. clamp.stl (A/B): the r 58 face runs z 82.69-83.90 (today 82.69-88.72), and the cone starts at r 52, z 92.37. Taper code is at crystal.py lines 291-299. The comment at lines 204-206 and top-redraw.md lines 27-28 give the claim. The gasket annulus is r 48.2-58 (gaskets.stl)."
+    },
+    {
+     "id": "M9-heat",
+     "severity": "note",
+     "claim": "The heat numbers reproduce exactly but do not separate the options. In a 35 C room the hub runs 50.6 (today), 50.3 (A) and 50.2 (B). B shows the coolest even though it has the least surface (9,513 mm\u00b2, against today's 9,676 and A's 9,867). That is because the formula starts each 8.5 mm tier as a fresh cooling surface. Counting the stack's sides as one surface puts B at or below A. Everything is within about 0.5 K and every input is an estimate. No LED or board temperature is computed (UNVERIFIED).",
+     "evidence": "My run of hemisphere_thermal.py table_tiers (lines 171-213; TOPS at lines 171-177; tiers_G at lines 181-192). Areas and the one-surface variant are my own arithmetic on the same model (G at dT 15: 0.1389 / 0.1439 / 0.1454, and as one side 0.1325 / 0.1373 / 0.1355 W/K). The estimate caveat is at lines 165-170."
+    },
+    {
+     "id": "M10-airgaps-preexisting",
+     "severity": "note",
+     "claim": "This one predates the redraw and is unchanged by it. The clamp squeezes the shade through two 1 mm air gaps between the three acrylic layers at the crown. The silicone rings are only outside the shell and inside the skin. So 'the acrylic clamped between two silicone rings' depends on the layers bending about 2 mm together, or on spacers that are not drawn. This also decides how much clamp travel M3 must allow.",
+     "evidence": "crystal.py line 181 (gap=1.0) and _radii (lines 229-234): shell 97-100, liner 90-96, skin 86-89. gasket_in and gasket_out are at lines 281-282. bom.csv lists the gaskets as two rings, outside and inside only. README.md line 1116 says 'The three layers keep 1 mm air gaps ... sealed at the crown by the gaskets'."
+    },
+    {
+     "id": "M11-unmodelled-tether-suspension",
+     "severity": "note",
+     "claim": "Parts the redraw affects but does not model. (1) The safety tether, from an eye in the hub to an eye on the collar: with the split, the ring hugs the hub (0.5 mm) and rises to z 72.5 when the shade is lifted. The hub's eye must therefore sit between about z 73.5 and the PEEK ring at 86, and the tether must not pass through the ring's hole (UNVERIFIED). (2) The suspension option's 'fixed end in the cap' has nothing to anchor to in A or B's hollow cap: a 1.5 mm lid with the grip's dome 1 mm below it. It was not resolved in today's solid cap either.",
+     "evidence": "Tether and plunger have no solid: crystal.py line 486 Part('tether', None) and line 528 plunger. bom.csv pins/tether rows: 'from an eye screwed into the hub to an eye on the collar'. Suspension geometry at crystal.py line 463 (fitting \u00d85 at x 5.5 on the cap's top). bom.csv suspension row: 'a fixed end in the cap'."
+    },
+    {
+     "id": "M12-stock-bom-shade",
+     "severity": "note",
+     "claim": "Every new part can be turned, laser-cut or bought, but A and B have no BOM, cutlist or cost. A's \u00d856 cap is wider than the \u00d850 cap stock listed. Every shade's metal changes. A: collar +3.33 mm, clamp ring 10.8 mm tall, +33 g a shade. B: +0.5 mm, 8.0 mm, +9 g. Both add the tapered band and a bonded white ring to every shade. South and the other products are untouched, and all render changes sit behind switches. The ring does close South's slot mouths (South is dropped). B's crown and A's cap keep the small 1 mm inside-corner grooves from the eased edges (first round F9).",
+     "evidence": "top_tiers.py lines 12-22 write only STLs. out-dome-pendant/bom.csv is today's (gland stock 50 x 50 x 24). Mesh volumes at 2.70 g/cm\u00b3 (survey.py): collar 81.85/88.13/82.79, clamp 23.91/26.05/22.49, white-ring 3.97 cm\u00b3. git grep finds TOP_TIERS, WHITE_SPLIT and GRIP only in crystal.py (lines 251, 365-370, 432, 438-458), top_check.py and top_tiers.py. South builds through south_cover_parts (line 1015). Render switches HEMI_TOP, HEMI_COLLAR_CAP, HOUSE_CAM and HOUSE_UNLINK default off (lamp_site.py lines 361-386; house_ground.py diff 584df3391e..branch). Grooves: B crown r 27.3 at z 109.05; A gland r 27.24 at 114.7."
+    },
+    {
+     "id": "M13-doc-slips",
+     "severity": "note",
+     "claim": "Small text slips. crystal.py line 288 still says the band reaches 'the tier's rim (\u00d8128)'; the code makes it \u00d8116. The white-disc part note (line 499) still says \u00d895 when the split is on, and the crown and cap notes (lines 506 and 510) still describe today's 11.5 and 40 x 14 for A and B, so a BOM generated from A or B would carry wrong text. From straight below, the split shows the 0.5 mm hairline the note describes, and the slots stay hidden. But the disc sits 3 mm below the ring, so seen from the side the line opens to about 1.9 mm at 30\u00b0 and 2.3 mm at 42\u00b0 (the steepest view the mouth allows), showing the black hub. This is cosmetic.",
+     "evidence": "crystal.py lines 288, 499, 506 and 510. White-ring.stl bottom is at z 63 and white-disc.stl top at z 60. The opening is my arithmetic: 0.5 cos \u03b1 + 3 sin \u03b1, with the mouth limit from the skin's r 86 at z 0."
+    }
+   ],
+   "first_round_fixed": [
+    "F1 (A and B locked the shade on: a \u00d884 crown part over the collar): FIXED. In A and B, crown.stl is r \u2264 40.00 everywhere and TOP_TIERS has a \u00d880 first tier (crystal.py lines 214-215). My sweep finds collar to crown at least 1.01 mm along the whole path, and my 3D bayonet sweep is clear (sweep-out.txt, pins3d-out.txt).",
+    "F2 (A's offered \u00d890 skirt could not work): FIXED, the skirt is gone. A's crown is a single \u00d880 tier from z 100.5 to 114.67 (crystal.py line 214; crown.stl).",
+    "F3 (the \u00d8116 band reads as a separate tier): PARTLY. The band is tapered to a 1.0 land. clamp.stl's r 58 face is now 1.2 tall (z 82.69-83.90) instead of 6.0 (to 88.72), with a cone from r 52 at z 92.37. It is still \u00d8116 and still visible, and whether it reads as a tier is the photo lens's call.",
+    "F4 (the clamp ring's shoulder bottomed on the collar before squeezing the silicone): FIXED. clamp.stl in A and B has a plain \u00d896 bore from z 88.87 to 102.83/100.00, with no \u00d892 lip, and the collar tops are at 103.33/100.50. Still open is where the collar's thread ends and whether it has a relief, which sets the real travel (M3).",
+    "F5 (cord grip not modelled): FIXED in A and B (grip.stl and pockets in crown.stl and gland.stl), but still UNVERIFIED against a real part, with a size risk (M4) and an assembly-order constraint (M5). Today's cap still has no grip modelled.",
+    "F7 (B's groove between the \u00d884 tier and the clamp lip): CHANGED. There is no lip now. The joint is the collar's top 0.5 proud of the ring, plus a 1 mm annular gap between the crown (r 40) and the bore (r 41).",
+    "F8 (heat): numbers REPRODUCE (50.6 / 50.3 / 50.2 C at 35 C) and still do not decide between the options. B's lead is a model artifact (M9).",
+    "F9 (stock, B's fragile 0.5 lip, inside-corner groove, weight): the lip is GONE. The inside-corner grooves REMAIN (B crown at z 109.05, A cap at z 114.7). A's \u00d856 cap now exceeds the listed \u00d850 cap stock, and A and B have no BOM (M12).",
+    "F10 (every shade's ring changes; South untouched): still TRUE and now larger. A and B change the collar and clamp ring and add a bonded white ring to every shade. South is untouched (M12).",
+    "Skeptic's trap (today's \u00d895 disc stops the shade being lowered off): fix DRAWN and VERIFIED (today with the split comes off in my sweep) but NOT APPLIED. The main build still has the \u00d895 disc, so today's shade still cannot come off (M1).",
+    "Lift text slip (5 mm): FIXED. crystal.py line 8 and the swap text now say 7.5 to 8.5 (diff 584df3391e..origin/r32-lamps-final)."
+   ],
+   "pick": "A (three even tiers), with the white split switched on for whichever top ships",
+   "pick_reason": "In my own sweep all three tops come off once the split is on: today, A and B all lift, turn and lower off with no contact. So mechanics do not rule any of them out, and today's top changes the fewest parts. Of the two even tops, A is easier to build. Its \u00d856 cap leaves room to fix the cap and to fit a spanner on the grip, it has more clamp thread (about 14 mm against 11), and its hex shows above the crown. B's \u00d832 cap has a 5 mm wall, too thin for M3 screw heads, and its grip hex is sunk below the crown's top. Heat does not separate them. What blocks both is the same: the trap fix must go into the main build.",
+   "owner_summary": "I checked both new tops myself: the shade lifts, turns and comes off cleanly on both, and the cord grip fits as drawn. But the lamp as it is drawn today still can't have its shade taken off, because of the white disc under the light. The fix (a smaller disc plus a white ring on the shade) is drawn and works, but it isn't switched on yet. Before building, a few details need settling: the new white ring clears the hub by only half a millimetre, no real cord-grip part has been chosen and it may be taller than the drawing, and where the collar's thread ends isn't drawn."
+  },
+  {
+   "verdicts": [
+    {
+     "id": "OE1-today-band-unlabelled",
+     "stands": true,
+     "reason": "Confirmed. The today labels (top-sheet-v2.jpg rows 56-175) name four parts. Profiling today's crop (sheet cols 0-799, rows 1240-1632, 4.96 px/mm; b82/skeptic-photo/prof2.py) finds five widths: \u00d840 69 px, \u00d880 ~57, \u00d896 14-15, \u00d8104 24, then a 17 px slope and a 30 px face at \u00d8116.1 (rows 1488-1534). out-dome-pendant/stl/clamp.stl stays \u00d8116 to z ~88.7 and reaches \u00d8104 at ~92.4. topA/topB clamp.stl are \u00d8116 only to z ~83.9, then a cone. crystal.py:201 already lists today's steps (12, 8, 16, 40). A and B say only 'band tapered'."
+    },
+    {
+     "id": "OE2-note-band-steps-24-stale",
+     "stands": true,
+     "reason": "Confirmed. top-redraw.md:41 at a78e069a7f still reads 'the band's 24'. The same line was :39 in 4e8c246e22, written when :25 said 'its rim 128 across (was 116)'. a78e069a7f rewrote :25 but not the table. topA/topB clamp.stl max out at \u00d8116.00 over a \u00d8104 ring, a 12 step. crystal.py:288 still says '(\u00d8128)'."
+    },
+    {
+     "id": "OE3-B-foot-as-tall-as-a-tier",
+     "stands": true,
+     "reason": "Stands for the pictures, with a caveat. In both clamp.stl files the foot (land plus cone) runs z 82.69-92.37, 9.7 mm. On the sheet A's tiers are ~56 px against a 46 px foot (rows 1489-1534), and B's ~42 px against 46. B's foot is actually 1.14x a tier. Caveat: the outer silicone ring is not rendered (lamp_site.py:389, GASKETS default 0), but its black edge sits flush under the \u00d8116 land (gaskets.stl r 57.9-58.0 at z 81.5-82.6). So the built foot is ~10.9 mm, 0.96 of A's 11.33 tier. 'In A the foot is clearly shorter' is true of the render only. What sets A's foot apart is its slope (55 deg cone), not its height."
+    },
+    {
+     "id": "OE4-steps-24-is-across",
+     "stands": true,
+     "reason": "Confirmed but low value. Per-side runs on the sheet are 59-60 px (12.0 mm at 4.96 px/mm) in A and B, and TOP_TIERS is 104/80/56(/32) (crystal.py:214-215). He himself asked about 'diameter difference', so '24 mm' is already his measure. The plainer wording does no harm."
+    },
+    {
+     "id": "OE5-collar-lip-not-flush",
+     "stands": true,
+     "reason": "Confirmed. crystal.py:289 stops the ring at cz1-0.5. topA clamp.stl tops out at 102.83 against a collar at 103.33; topB at 100.00 against 100.50. The lip shows as a 3-row \u00d896 ledge in lvl-A-x2.png (rows 216-218). On the sheet it is 3 px tall and 476-477 px (96 mm) wide: A rows 1432-1434, B rows 1446-1448. top-redraw.md:29 says both 'flush' and '0.5 proud'."
+    },
+    {
+     "id": "OE6-crop-scale-wording",
+     "stands": true,
+     "reason": "Confirmed by registration (b82/skeptic-photo/sheetreg.py). Each top frame is lvl-*.png placed 1:1 at sheet row 190 (mean error 0.93 levels). Each crop is lvl-*-x2.png (896x440) resized to 800x392, placed at row 1240 (error 0.94-0.96). That gives 4.96 px/mm against 2.78 above: 1.79x, and downsampled, so 'full scale' is wrong either way you read it."
+    },
+    {
+     "id": "OE7-audits-pass-with-gaps",
+     "stands": true,
+     "reason": "Confirmed:\n- CASTCHECK has 22 entries, all 0.0 (lvl-today.txt:106, lvl-A/B.txt:107).\n- 13 shadow=0 lines, all hidden studio meshes.\n- LINK lines 46-54 go to the sweep only; all 24 LEDs are at 0.0.\n- The diffs touch only line 7 and the white-ring RAYVIS line.\n- Each x2 audit is byte-identical to its 1x audit (md5 75781379 / b3627d1c / 62b8ff12). r2.sh:28-29 explains why: the audit runs without BORDER, and its grep omits HEMI_COLLAR_CAP.\n- git grep finds no committed lvl-* command.\nNit on gap (1): the 100 % room-back comes from the level camera, not from ROOM_FIT. The first lvl-today.txt (4e8c246e22) already read 100.0 % at ROOM_FIT -4.5, and room-front read 100 % until f23f611ce2."
+    },
+    {
+     "id": "OE8-comparison-fair-by-pixels",
+     "stands": true,
+     "reason": "Confirmed (fair2.py, fair3.py, x2reg.py in b82/skeptic-photo/). Background patches are identical to within 0.1 level. Pixels more than 12 levels apart sit in rows 420-559 (the top), plus about 10 px at the rim (rows 780-791, at most 18 levels), so 'the top' is slightly loose. The red shade differs by 0.57 on average. Each x2 render matches its 1x frame at offset (176, 380) within 1.1 levels, and the 1x centre row falls on x2 row 240. The camera is 1.600 m away and level (audit line 6). All three mesh stacks run from z 92 to z 126."
+    },
+    {
+     "id": "OE9-no-render-faults-collar-matches",
+     "stands": true,
+     "reason": "Confirmed for what the frames show (faults2.py, tiercol.py). No pixel in the six renders stands more than 20 levels beyond all 8 neighbours. Background noise is ~0.9 level. The sheet's luminance table equals libjpeg quality 90. Today's lip reads (1.1, 2.1, 5.9) against the ring's (1.0, 2.0, 5.9). Caveats:\n- The level view cannot show the collar's top face, which is the face that read grey from above in round 1 (top0-x2.png rows 185-200, about 33-40).\n- The missing silicone leaves a light notch under the band's rim ends (lvl-A-x2.png row 331, x 126-132, 199-227 levels). It is only visible zoomed."
+    },
+    {
+     "id": "OE10-level-view",
+     "stands": true,
+     "reason": "Confirmed. The rim sits at 0.2 x 0.56 - 0.056 + 0.25 = 0.306 m (lamp_site.py:997; r2.sh:19 HOUSE_S/HOUSE_LIFT; launch/house-ground.json tropos_centre). The camera at 0.405 (audit line 6) is therefore at shade z 99. The 1x centre row maps to x2 row 240, inside A's ring (rows ~219-277). The perspective point is right, and the footer is at rows 1640-1669."
+    },
+    {
+     "id": "OE11-A-heavier-top",
+     "stands": true,
+     "reason": "Confirmed from the meshes. Integrating 2*rmax(z) over the clamp, collar, crown, gland and hub from z 82.7 to 126 gives 3370 / 3747 / 3339 mm2 for today / A / B. That is A +11 %, B -1 %. The cap is \u00d856 in A against \u00d840 today (crystal.py:214, :197)."
+    },
+    {
+     "id": "OE12-today-hairline-is-real",
+     "stands": true,
+     "reason": "Confirmed. crystal.py:182 puts the collar top at 100, :195 starts the crown at 100.5, and :508 says '0.5 clear'. In lvl-today-x2.png row 231, between the crown and the lip, the dark width is 222 px (\u00d840, the neck); on the sheet it is row 1447 at 198 px. A's collar top (103.33) is above the crown's foot, and B's (100.5) is level with it."
+    },
+    {
+     "id": "OE13-sheet-silent-on-buildable-and-pick",
+     "stands": true,
+     "reason": "Confirmed. Neither the sheet's text (rows 9-175) nor its footer (rows 1640-1669) mentions coming off; that is only in top-redraw.md:46-47. results[1] F10 asked for a single pick. Understated, though: the sheet also never says that today's shade, as pictured, cannot come off (see missed)."
+    },
+    {
+     "id": "FRF-labels (glyph, size, units, bottom-row label)",
+     "stands": true,
+     "reason": "Confirmed. At 1:1 the label glyphs are clean and there is no \u00d8 (crop of rows 0-186). Label ink is 24 px and titles about 31. The jargon is as stated. The crop caption sits at rows 1200-1231, with OE6's scale error."
+    },
+    {
+     "id": "FRF-band-partly",
+     "stands": true,
+     "reason": "Partly fixed, as stated. In A and B the foot is a 39-40 px cone plus a 7 px land (rows 1489-1534), and today's band is still unlabelled. Add the unrendered silicone (OE3 caveat)."
+    },
+    {
+     "id": "FRF-A-recess-FIXED",
+     "stands": false,
+     "reason": "The pictures cannot show this. The level camera sits at shade z 99, below A's ring top (102.83, topA/clamp.stl), so a recess could not appear whatever the CAD holds, and 'no dark crescent' proves nothing. The CAD does remove the 3.33 mm recess (collar 103.33 vs ring 102.83). Still left in the CAD:\n- a 1 mm open gap round the crown's foot (crown r 40 in the collar's r 41 bore), about 3.8 mm deep down to the PEEK ring;\n- three 5 mm bayonet slot mouths open at the collar's top (topA/collar.stl section at z 103.13 shows points beyond r 44.5 at 0/120/240 deg).\nToday has the same kind of shadow line. Read as: gone from the CAD as a recess, not checkable in this view, a thin line remains."
+    },
+    {
+     "id": "FRF-B-arc-FIXED",
+     "stands": false,
+     "reason": "Same objection. The camera is below B's ring top (100.00), so rows 207-209 cannot show an arc. In the CAD the 4 mm channel is gone. A 1 mm gap 0.5 mm deep is left (crown r 40, bore r 41, PEEK ring top at z 100), plus the three open slot mouths (topB/collar.stl). Narrowed, not fixed."
+    },
+    {
+     "id": "FRF-today-rerendered-crop-scale",
+     "stands": true,
+     "reason": "Confirmed. Today is a new render with backgrounds identical to A and B (fair2.py), and the crops are 1.79x (OE6)."
+    },
+    {
+     "id": "FRF-view-level",
+     "stands": true,
+     "reason": "Confirmed. Audit line 6 places the camera level at 1.600 m. At 800 px wide, 2.778 px/mm is what a 36 mm sensor and a 200 mm lens give at that distance."
+    },
+    {
+     "id": "FRF-audits-mostly-fixed",
+     "stands": true,
+     "reason": "Confirmed, with OE7's nit."
+    },
+    {
+     "id": "FRF-collar-black",
+     "stands": true,
+     "reason": "Holds for the side face. The lip matches the ring, with the cap material's blue cast. Caveats:\n- The switch is not recorded anywhere (lamp_site.py:376; r2.sh:29's grep omits it).\n- Much of the round-1 grey came from the camera: it was the lip seen from above, which the level view cannot show."
+    },
+    {
+     "id": "FRF-nothing-fake",
+     "stands": true,
+     "reason": "Stands as a judgment. Faces read 0-9 sRGB in all three, and column means across the ring vary only 0.4-3.8 (tiercol.py). It misses one small unreal detail: the light notch where the black silicone should be (OE9 caveat)."
+    },
+    {
+     "id": "FRF-pick-not-addressed",
+     "stands": true,
+     "reason": "Confirmed. There is no pick on the sheet or in top-redraw.md."
+    }
+   ],
+   "missed": [
+    "Today's trapped shade is missing from the sheet and from the reviewer's owner summary.\n- The 'Today' column is today as built: lamp_site.py:364 and :384 load out-dome-pendant/stl/white-disc.stl (\u00d895.00, z 59-60), and lvl-today.txt has no white-ring line. That shade cannot be lowered off (top-redraw.md:10-14).\n- Every choice, keeping today's top included, needs the white split (top-redraw.md:16-18; crystal.py:220-223): a ring bonded under every shade's collar plus a smaller disc. By his first rule this comes before any tier question.\n- Round 1 flagged the same omission (hemisphere-top-critics-2026-11-24.json results[2].missed[0]).\n- The split's look from below is never shown, and the geometry says it is more than the note's '0.5 hairline'. The \u00d862 disc (z 59-60) and the ring's \u00d863 hole (z 63-64; mesh radii 31.00 and 31.49) sit 3 mm apart round the hub's black wall (hub.stl r 31.00 from z 60; cap material, lamp_site.py:366-367). A seated viewer 30 deg off the axis would see a dark crescent about 0.5cos30 + 3sin30 = 1.9 mm wide on the near side. This is geometry only; no render from below exists (UNVERIFIED).",
+    "The pick and the owner summary count today and A by different rules. 'Three tiers instead of the five steps you see on today's top' counts today's \u00d8116 band as a step but not A's. Yet A's foot is the same \u00d8116 band on the shade (topA/clamp.stl), and just as tall on the sheet: A rows 1489-1534 (46 px), today rows 1488-1534 (47 px). Only its shape changed, from a 6 mm wall plus slope to a 55 deg cone. Counted the same way, A shows four dark bands and today and B five. With the silicone drawn (next item), A's foot is about as tall as its tiers, so even the reviewer's own 'as tall as a tier' rule would count it. Plain words: 'three even tiers over the shade's foot ring, now sloped'.",
+    "The outer silicone ring is not drawn in any of the three (lamp_site.py:389-392, GASKETS default 0), though its black edge sits flush under the \u00d8116 land (out-dome-pendant/stl/gaskets.stl r 57.9-58.0 at z 81.5-82.6). So every picture shows the foot 1.2 mm shorter than built, with a light notch under its ends instead of black (lvl-A-x2.png row 331, x 126-132, 199-227 levels). As built the foot runs z 81.46-92.37, about 10.9 mm: 0.96 of A's 11.33 tiers and 1.28x B's 8.5. That undercuts OE3 and the pick's 'A's foot is clearly shorter than a tier'. It is also a small not-real detail under his 'bad job at looking real' rule.",
+    "A and B change parts that belong to every shade, not only the fixture's top. Both the collar and the clamp ring are shade parts (group 'cover', crystal.py:353-357; top_check.py:13):\n- the collar's top rises from 100.00 to 103.33 (A) or 100.50 (B) (crystal.py:252-253);\n- the clamp ring's \u00d8104 part grows from 5 tall (z 92-97) to 10.8 or 8.0 (crystal.py:285-300).\nThe tops of collar.stl and clamp.stl in out-dome-pendant, -topA and -topB confirm this. Every tint's shade would need a new collar and ring. Neither the sheet nor the owner summary says so.",
+    "Lower priority: the sheet's 'today' will not match the site he knows. HEMI_COLLAR_CAP is off by default (lamp_site.py:376), so the live frames still show the collar lip as a grey ring. In p6.png rows 443-450 (x 330-470) it reads about 30-45, against 0-5 for the crown and clamp. The CAD has no grey ring: crystal.py:353-354 calls the collar black anodised, satin. Either say so on the sheet or re-render the site's frames with the switch on."
+   ]
+  },
+  {
+   "verdicts": [
+    {
+     "id": "M1-trap-still-default",
+     "stands": true,
+     "reason": "I confirmed this independently. In crystal.py at origin/r32-lamps-final (a78e069a7f), V3 is at lines 536-539 with white_disc=95.0 and no white_split. Line 432 uses the \u00d862 disc only when white_split is set, and the white-ring Part exists only then (lines 364-370). dome_pendant.py line 14 builds C.dome_parts(), which is north_parts(V3) (crystal.py 542-543). My own STL reader gives lamp-site-meshes/out-dome-pendant/stl/white-disc.stl r 8.20-47.50 at z 59-60 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b82/skeptic-eng/survey-out.txt). out-dome-pendant/bom.csv line 17 still lists white-disc 105 x 105 x 11; its last commit is 5fa6ef9464, from before the redraw. My envelope sweep (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b82/skeptic-eng/sweep2d-out.txt) shows today as built first overlapping collar x white-disc at dz -4.05. My separate 3D bayonet check (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b82/skeptic-eng/pins3d-out.txt) has the pins leaving the collar only at -9.00. Today with the split has no overlap from +8.5 to -140. PARTICULARS.md line 28 still says 'Swap by hand, no tools', and crystal.py 913 tells the user to 'lower it off'. Blocking for any build, whichever top is chosen."
+    },
+    {
+     "id": "M2-ring-gap-tight",
+     "stands": true,
+     "reason": "I reproduced the geometry from the meshes: white-ring r 31.49-47.50 at z 63-64, disc r \u226431.00 at z 59-60, hub r 31.00, ring.stl r 40.80 at z 86-100, collar bore r 40.98-40.99. My sweep's smallest gaps are 0.491 for ring to hub and 0.491 for ring to disc. While the ring passes the disc (lowered 3-5), the bore engages the land over 9-11 mm (today), 12.3-14 (A) and 9.5-11.5 (B). A 0.4/L tilt over a 31-33 mm lever gives 1.0-1.3 mm, as the reviewer says. That is an estimate, not a CAD result. One refinement: lowering off, the disc's edge is flush with the hub's side (both r 31.00), so the ring rubs rather than catches, unless the disc sits proud. It can: its \u00d816.4 hole floats 0.2 on the \u00d816 stem, and the disc is powder coated. Pushing on, the ring's top face can land on the disc's underside. The bond annulus is r 41-47.5 less South's mouths (lines 276-280), with no spigot (368-370). Should-fix is fair."
+    },
+    {
+     "id": "M3-clamp-thread-end",
+     "stands": true,
+     "reason": "The meshes confirm it. The clamp bore r 47.985 runs from z 88.876 to 102.826 (A) and to 99.976 (B). The gasket's top at r 48.19 is z 88.73, and the shell's outer face at r 48.2 is z 87.62. Ring and band share the one \u00d896 cut (lines 289-290). So 'about 4 of thread below it for its travel' (top-redraw.md 29-31) does not match a drawn clamp whose bore already reaches 88.87. The jam is real only if the collar's thread stops at the gasket. A thread cut on down into the acrylic hole, toward the flange near z 70-75, would leave ample travel. Correction to the framing: this is not new. today/clamp.stl has the identical bore, from 88.876 to 96.976, so today's thread end is just as undrawn. It is a documentation gap that the new sentence exposes, not a regression, and I would rate it a note."
+    },
+    {
+     "id": "M4-grip-real-part",
+     "stands": true,
+     "reason": "I confirmed all the geometry. GRIP is at line 219. grip.stl is identical in A and B (md5 abe42a7c...): z 104.5-123.5, r 3.25-9.0. The crown thread is r 6.00 from 104.5 to 112.5 with the pocket r 11.0 above it. The gland pocket is r 11.0 up to 124.5, under a lid to 126. hub.stl tops out at 104.0, so the grip cannot sit lower. The UNVERIFIED height is if anything understated. [Lapp SKINTOP ST-M XL M12x1.5 datasheet](https://contentmedia.lappcdn.com/e/lapp/2DtG-83JJp-8idm_aj9Dkw~~/DB53010000EN.pdf): C 37.5 overall with D 15 thread, so 22.5 above the seat, SW 15. [Rittal SZ 2411.601](https://www.rittal.com/lt-en/products/deep/2411601) (M12x1.5, 3-6.5 mm): thread 8, height 22, SW 15; the page does not say whether 22 includes the thread. The drawn grip is 11 tall (4 + 7) in a 12 mm pocket, so a standard part would add up to about 10 mm to both tops. On the cord, retailer listings put braided 18/2 SVT at about 6.35-6.5 mm ([example](https://grandbrass.com/18/2-svt-b-metallic-platinum-nylon-fabric-cloth-covered-pendant-and-table-lamp-wire)), at the very top of 3-6.5. That is not datasheet-verified."
+    },
+    {
+     "id": "M5-grip-assembly-gland-fixing",
+     "stands": true,
+     "reason": "My slices confirm it. B's crown top is 117.5 against the hex at 112.5-116.5; A's crown top is 114.67. B's gland is r 11-16 and A's r 11-28. Neither gland nor crown has any hole: the circle at mid-wall radius is material all round in A and B. The gland note at 509-512 still says 'on two M3 into the crown'. M3 heads (about \u00d85.5) do not sit cleanly on B's 5 mm wall, while A's 17 mm wall has room. Assembly order follows from the geometry: grip body, then cord, then dome, then the cap slid down the cord. The thin-wall-socket detail is plausible but UNVERIFIED."
+    },
+    {
+     "id": "M6-path-verified",
+     "stands": true,
+     "reason": "I reproduced this with my own code and the committed STLs, not the reviewer's scripts. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b82/skeptic-eng/sweep2d.py takes per-z radial envelopes (a union of 144 rays, the acrylic from V3's radii) and moves dz from +8.5 to -140 in 0.05 steps. It finds no overlap for today-with-split, A or B, and today as built blocked from -4.05. /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b82/skeptic-eng/pins3d.py unrolls the collar and pins meshes on circles r 41.02-44.99 in 0.05 rows and sweeps the turn every 0.25\u00b0. The lift is clear, the turn is clear at 7.5-8.5, and the lowering is clear. The pins leave at -9.00, -12.35 and -9.50. Both controls overlap: lowered 3 unturned, and turned without the lift. Smallest gaps: collar to PEEK 0.176 (mesh facets; 0.2 nominal), ring to hub and disc 0.491, collar to crown 0.98, clamp to pins 2.95. Caveats: the window is exactly 1.0 mm, since the turn is blocked at 7.45 and 8.55. The reviewer's 'grown 0.25' test was run only at lift 8.0 (make/pins3d-out.txt)."
+    },
+    {
+     "id": "M7-top_check-method",
+     "stands": true,
+     "reason": "top_check.py line 31 (top - 90.5 + 0.5), lines 32-36 (poses at 0 and 30 deg, 2 mm steps, then -30/-60/-100/-140) and line 48 (v > 1.0) read as quoted. pins.stl z min is 91.000 by my reader. My 3D check gives 12.35 and 9.50 (12.33 and 9.5 nominal). The table at top-redraw.md line 43 (12.8 / 10.0) is therefore 0.5 high and contradicts the note's own line 12 (9.0)."
+    },
+    {
+     "id": "M8-band-plausible",
+     "stands": true,
+     "reason": "I reproduced the numbers with a cantilever of L 6, q 0.5 MPa, E 69 GPa. Uniform 5 mm: 0.113 \u00b5m. Taper 5 to 1: 0.240 \u00b5m. Peak stress 2.16 MPa, which stays at the root even with the taper. At L 7.2: 0.234 / 0.498 \u00b5m and 3.11 MPa. The cone runs from (52, 92.369) to (58, 83.905), which is 54.67\u00b0. In A/B the clamp's r 58 face ends about 83.9, against 88.72 today. The gasket annulus r 48.2-58 projects to 3,270 mm\u00b2, so 0.5 MPa needs 1,635 N. The clamp note (357-361) says only 'to a torque the shade maker sets'."
+    },
+    {
+     "id": "M9-heat",
+     "stands": true,
+     "reason": "I ran hemisphere_thermal.table_tiers from origin/r32-lamps-final (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b82/skeptic-eng/heat-out.txt). The hub at 35 C comes out 50.6 / 50.3 / 50.2 C. My area sums are 9,676 / 9,867 / 9,513 mm\u00b2. G at dT 15 is 0.1389 / 0.1439 / 0.1454 W/K. Taking all sides at one stack height gives 0.1325 / 0.1373 / 0.1355, which puts B below A. The citations hold: caveat 165-170, TOPS 171-177, tiers_G 181-192, table 206-213."
+    },
+    {
+     "id": "M10-airgaps-preexisting",
+     "stands": true,
+     "reason": "Line 181 has gap=1.0, and _radii (229-234) gives V3 shell 97-100, liner 90-96 and skin 86-89. gasket_in is R85-86 and gasket_out R100-101 (281-282). bom.csv line 8 lists the two rings, outside and inside only. README.md line 1116 says the layers keep 1 mm air gaps 'because formed parts don't nest perfectly' and are 'sealed at the crown by the gaskets'. This predates the redraw and is unchanged by it. It also has a visual consequence for the flush collar that the reviewer did not draw; see missed."
+    },
+    {
+     "id": "M11-unmodelled-tether-suspension",
+     "stands": true,
+     "reason": "The citations hold: line 486 (tether None), 528 (plunger None), 463 (the \u00d85 fitting at x 5.5 on the cap), and bom.csv rows 13 and 27. At the 8.5 lift the ring moves from 63-64 to 71.5-72.5, so the hub's eye must sit above it. The detent is not at risk: it is in the PEEK ring, above the ring's travel ('It carries the three pins and the detent', 479-481). The A/B lid is 1.5 mm over an r 11 pocket (my slices), so the suspension's fixed end has little to anchor in. Valid notes."
+    },
+    {
+     "id": "M12-stock-bom-shade",
+     "stands": true,
+     "reason": "My volumes: collar 81.85 / 88.13 / 82.79, clamp 23.91 / 26.05 / 22.49, white ring 3.97 cm\u00b3. That is +33.5 g (A) and +9.4 g (B) a shade (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b82/skeptic-eng/mass-out.txt). top_tiers.py 12-22 writes only STLs. bom.csv line 19 lists gland stock 50 x 50 x 24, too small for A's \u00d856. HEMI_TOP and HEMI_COLLAR_CAP (lamp_site.py 361-386) and HOUSE_CAM and HOUSE_UNLINK (house_ground.py diff) all default off. south_cover_parts is at line 1015. Two small imprecisions. TOP_TIERS also appears in comments at hemisphere_thermal.py 165 and lamp_site.py 361. A's groove (gland r 27.24 at 114.7) is the joint between two separate parts, the same as today's gland on its crown (r 19.2 at 112.02). Only B's groove (crown r 27.44 at 109.1) sits inside one turned part."
+    },
+    {
+     "id": "M13-doc-slips",
+     "stands": true,
+     "reason": "Line 288 still says \u00d8128 while band_r 58 gives \u00d8116. Line 499 still says \u00d895, line 506 '11.5' and line 510 '40 x 14' for A and B. The ring's bottom (63) is 3 mm above the disc's top (60). The opening is 0.5 cos \u03b1 + 3 sin \u03b1: 1.93 mm at 30\u00b0 and 2.37 at 42\u00b0. The 42\u00b0 limit is atan((86 - 31)/61), the steepest line through the mouth. Cosmetic, as stated."
+    },
+    {
+     "id": "first_round_fixed",
+     "stands": true,
+     "reason": "I checked each claim against the meshes and source. F1: the crown is r \u226439.999 in A and B. F2: A's crown is a single tier from 100.5 to 114.67. F3: the band's r 58 face is about 1.2 tall and \u00d8116 is kept. F4: clamp r min is 47.985 along its whole height, with no r 46 lip. F5: grip and pockets exist in A and B, while today's crown and gland are still solid (r 5 and r 4 bores). F7: no lip. F8: heat reproduced. F9: the grooves remain, A's cap exceeds \u00d850 stock, and A/B have no BOM. F10 holds. The trap fix is drawn but not applied (M1). The lift text is fixed at crystal.py 8 and 913 and README 377. The list leaves out first-round F6 and F11, both fixed in substance. F6: the new labels say 'mm across' and use no \u00d8. F11: the lvl audits are three different blobs (752a1c23b8, 097e6b3ca2, 86c726489a) and each prints HEMI_TOP and HOUSE_CAM. Each x2 audit is byte-identical to its whole frame's."
+    }
+   ],
+   "missed": [
+    "Grip height could undo the even tiers. The drawn grip stands 11 mm above its seat (crystal.py 219), in a 12 mm pocket (112.5-124.5), and it cannot drop because the hub's neck tops out at 104.0. Standard M12x1.5 polyamide glands stand about 22 mm: Lapp's SKINTOP ST-M XL datasheet (DB53010000EN) gives 37.5 overall less a 15 thread, and Rittal SZ 2411.601 lists height 22 with an 8 thread. Fitting one would add up to about 10 mm to A's and B's tops, so they would no longer be even. M4 leaves this as UNVERIFIED '15-20', and the owner summary says only 'may be taller'. A named low-profile grip should be settled before the owner chooses between A and B.",
+    "The 'collar flush, 0.5 proud' look in A and B, and the clamp tier's height, are not controlled. The collar is located by its flange under the skin; the clamp ring sits on the shell through the outer gasket. So the ring's height on the collar follows the whole acrylic stack at the crown: skin 3, gap 1, liner 6, gap 1, shell 3, plus two 1 mm silicone rings (crystal.py 181, 229-234, 281-283). README 1116 says those gaps exist 'because formed parts don't nest perfectly'. At the band's roughly 32\u00b0 slope, each mm of stack moves the ring about 1.2 mm. If the clamp closes the two air gaps (M10), the ring drops about 2.4 mm and the collar stands about 3 mm proud, recreating today's 'collar lip' step that the redraw removes. The stack needs a datum and a tolerance before the sheet's even heights can be promised.",
+    "Fitting a shade by hand: a pre-existing problem, now with a second tight entry. Neither the PEEK land (ring.stl is r 40.80 already at z 86.03) nor the collar's top inner edge (r 40.99) has a lead-in. The shade must be centred within 0.2 mm, overhead and blind, before the bore slides on, and nothing else guides it at that point: the split ring is still 9-12 mm below the disc. The split ring (r 31.49) and the disc and hub (r 31.00) are square-edged too. A 1 x 45 lead-in on the land and on the ring's bore would fix it.",
+    "The sheet never tells the owner that 'Today' as drawn cannot shed its shade. lvl-today.txt prints 'HEMI_TOP today meshes out-dome-pendant: clamp crown gland', which is the \u00d895-disc build, and the caption mentions only camera and finish. Every option, today included, needs the split, and one plain line on the sheet should say so.",
+    "The lift numbers are from the CAD pose, which sits 0.5 mm above where the shade really hangs. The notch is open to z 95.5 (collar.stl at r 43 closes between 95.47 and 95.53), the pins' tops are at 95.0 (pins.stl), and the shade's weight seats the notch on the pins (crystal.py 8-9). From where it actually hangs, the lift is 8.0-9.0 mm, not the 7.5-8.5 in crystal.py 8 and 913 and README 377. The free drop before the trap is 3.5, not 4.0. The turn window has no margin beyond its 1.0 mm (my pins3d.py run is blocked at CAD lifts 7.45 and 8.55). Harmless at the hard stop, but the user-facing text is 0.5 off.",
+    "In use, not only on the way off: the split ring hangs 0.5 mm (0.49 in the meshes) from the hot hub. The land allows 0.2 of radial play, nothing locates the bonded ring, and powder coat narrows the gap further. Contact with the hub while hanging or turning is plausible. That would bypass the PEEK thermal break ('so the cover touches the fixture only through it', crystal.py 479-481) and centre the shade from two places at once. Another argument for M2's wider gap or a turned, concentric lip.",
+    "Load path: in A and B the cord grip threads into the crown (crystal.py 449-451), so the fixture (about 1.6 kg, bom.csv line 27) hangs from the crown. Nothing fixes the crown to the hub. The crown's \u00d840.2 bore slides over the \u00d840 neck 'on a thermal pad' (435, 450, 475-477, 505-508), and no thread or hole appears in either mesh. This was equally open for today's cap-mounted grip.",
+    "Fixture-side weight, missing from M12: A's crown and cap add 15.4 cm\u00b3 (about +42 g), and B's remove 13.3 cm\u00b3 (about -36 g). Volumes: crown 52.6 / 64.9 / 56.2, gland 16.8 / 24.0 / 4.1, disc 6.9 / 2.8 cm\u00b3 (mass-out.txt in my scratch folder). Counting the shade side as well, A adds about 75 g and B saves about 26 g, on a fixture already over the cord's 2.5 lb (crystal.py 461-463).",
+    "The pick reason's 'more clamp thread (about 14 against 11)' counts the band's bore from 88.87 as thread, which is exactly the point M3 says is undrawn. Counting only the ring, the lane's own basis (top-redraw.md 30-31), it is 10.8 against 8.0. M3's thread-end gap is also pre-existing: today/clamp.stl has the same \u00d896 bore down to z 88.876."
+   ]
+  }
+ ]
+}
