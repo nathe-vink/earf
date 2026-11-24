@@ -232,7 +232,7 @@ def main():
     # the copy space that the critic took for a stray object); the report and the card name it
     flag_cross = _flags_crossing_set(bpy, sh, part_of)
     for c in flag_cross:
-        print(f"flag {c['flag']} crosses the set ({c['set']})")
+        print(f"flag {c['flag']} crosses " + (f"the set ({c['set']})" if 'set' in c else f"the lamp {c['lamp']}"))
     gl = sh.get('glints') or []
     names = list(gl.keys()) if isinstance(gl, dict) else [str(i) for i in range(len(gl))]
     gl = list(gl.values()) if isinstance(gl, dict) else list(gl)
@@ -394,7 +394,11 @@ def main():
 
 
 def _flags_crossing_set(bpy, sh, part_of):
-    """The flags (`lights.NAME` of type flag) whose face meets a surface of the set: [{flag, set}]."""
+    """The flags whose face meets a surface of the set or a lamp's emitting face: [{flag, set}] or [{flag, lamp}]. Both
+    kinds of flag: `lights.NAME` of type flag, and the set's cards (`set.flags[i]` as flagI, `set.bounces[i]` as
+    bounceI; the S4b critics, 24 Nov: the old audit read only the first kind, and a card the horn lamp passed through
+    went unreported). A lamp is its area light's rectangle or disc, or a mesh emitter's own faces."""
+    import math
     from mathutils import Vector
     from mathutils.bvhtree import BVHTree
     def world(o):
@@ -404,22 +408,48 @@ def _flags_crossing_set(bpy, sh, part_of):
     def box(vs):
         return (Vector((min(v.x for v in vs), min(v.y for v in vs), min(v.z for v in vs))),
                 Vector((max(v.x for v in vs), max(v.y for v in vs), max(v.z for v in vs))))
+    def apart(a, b):
+        return any(a[1][k] < b[0][k] - 1e-4 or a[0][k] > b[1][k] + 1e-4 for k in range(3))
+    def lamp_face(o):
+        L = o.data; M = o.matrix_world
+        if L.shape in ('DISK', 'ELLIPSE'):
+            rx, ry = L.size / 2, (L.size_y if L.shape == 'ELLIPSE' else L.size) / 2
+            loc = [(rx * math.cos(2 * math.pi * i / 24), ry * math.sin(2 * math.pi * i / 24)) for i in range(24)]
+            vs = [M @ Vector((0, 0, 0))] + [M @ Vector((x, y, 0)) for x, y in loc]
+            return vs, BVHTree.FromPolygons(vs, [(0, i + 1, (i + 1) % 24 + 1) for i in range(24)])
+        hx, hy = L.size / 2, (L.size_y if L.shape == 'RECTANGLE' else L.size) / 2
+        vs = [M @ Vector((x, y, 0)) for x, y in ((-hx, -hy), (hx, -hy), (hx, hy), (-hx, hy))]
+        return vs, BVHTree.FromPolygons(vs, [(0, 1, 2, 3)])
     bpy.context.view_layer.update()                  # the lamps were just placed: their matrices are stale until then
+    cards = {f'flag{i}' for i, f in enumerate((sh.get('set') or {}).get('flags', [])) if f and not f.get('off')}
+    cards |= {f'bounce{i}' for i, f in enumerate((sh.get('set') or {}).get('bounces', [])) if f and not f.get('off')}
+    flags = [n for n, f in (sh.get('lights') or {}).items() if f and not f.get('off') and f.get('type') == 'flag'] + sorted(cards)
+    flag_names = set(flags)
     set_objs = [o for o in bpy.context.scene.objects if o.type == 'MESH' and o.name not in part_of and not o.get('engine_light')
-                and not o.hide_render and o.visible_camera]
+                and not o.hide_render and o.visible_camera and o.name not in flag_names]
+    lamps = []
+    for o in bpy.context.scene.objects:
+        if o.hide_render or o.name in flag_names:
+            continue
+        if o.type == 'LIGHT' and o.data.type == 'AREA' and o.data.energy > 0:
+            lamps.append((o.name, lamp_face(o)))
+        elif o.type == 'MESH' and o.get('engine_light'):
+            lamps.append((o.name, world(o)))
     out = []
-    for fname, fspec in (sh.get('lights') or {}).items():
+    for fname in flags:
         fo = bpy.data.objects.get(fname)
-        if not fspec or fspec.get('off') or fspec.get('type') != 'flag' or fo is None or fo.type != 'MESH':
+        if fo is None or fo.type != 'MESH':
             continue
         fv, fb = world(fo)
-        flo, fhi = box(fv)
+        fbox = box(fv)
         for o in set_objs:
-            olo, ohi = box([o.matrix_world @ Vector(c) for c in o.bound_box])
-            if any(fhi[k] < olo[k] - 1e-4 or flo[k] > ohi[k] + 1e-4 for k in range(3)):
+            if apart(fbox, box([o.matrix_world @ Vector(c) for c in o.bound_box])):
                 continue
             if fb.overlap(world(o)[1]):
                 out.append({'flag': fname, 'set': o.name})
+        for ln, (lv, lb) in lamps:
+            if not apart(fbox, box(lv)) and fb.overlap(lb):
+                out.append({'flag': fname, 'lamp': ln})
     return out
 
 
