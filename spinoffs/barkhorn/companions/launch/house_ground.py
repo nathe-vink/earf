@@ -124,7 +124,9 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
             # HOUSE_BG: the lamps that light the sweep alone, times one declared factor, so the paper behind a small
             # lamp reads as it does behind the speaker (whose own bounce lifts it); 1 is the recipe as it stands
             ob.data.energy *= float(os.environ.get('HOUSE_BG', '1'))
-        if sp.get('receivers'):
+        if sp.get('receivers') and os.environ.get('HOUSE_UNLINK') != '1':
+            # (HOUSE_UNLINK 1, 2026-11-24, the owner's reference: every paper-only lamp lights everything it reaches,
+            # same place and power)
             Lt.link_receivers(bpy, ob, [sweep])
         made.append(ob)
     if os.environ.get('HOUSE_WALL_LL'):
@@ -135,7 +137,9 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
                'target': [-2.0 * s, 1.25 * s, 0.0], 'spread_deg': float(os.environ.get('HOUSE_WALL_LL_SPREAD', '180')), 'irradiance': float(os.environ['HOUSE_WALL_LL']),
                'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']}
         wo = Lt.area(bpy, 'house-wall-ll', wsp, pcentre); wo.data.energy *= k_st * float(os.environ.get('HOUSE_BG', '1'))
-        Lt.link_receivers(bpy, wo, [sweep]); made.append(wo)
+        if os.environ.get('HOUSE_UNLINK') != '1':
+            Lt.link_receivers(bpy, wo, [sweep])
+        made.append(wo)
     hf_ = os.environ.get('HOUSE_FLAGS', '0')     # '1' all of them, or names ('horn cutter')
     door_ = None
     if os.environ.get('HOUSE_DOOR'):
