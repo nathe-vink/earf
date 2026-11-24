@@ -1,0 +1,12 @@
+NO GLASS SHADOWS: 6 materials: ['bark@cloud-orange', 'bark@cloud-orange.001', 'clear-cast@cloud-orange', 'horn-formed@cloud-orange', 'horn-lot@cloud-orange', 'horn-satin@cloud-orange']
+00:25.182  cycles           | WARNING CUEW initialization failed: Error opening the library
+17:42.975  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c/front-dust.png'
+/home/user/earf/studio/engine/render.py:478: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+17:50.027  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c/front-dust.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:529: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+17:51.340  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c/front-dust.swatch.png'
+finish: white 236 -> 236 (gain 1.0), contrast 0.2, clarity 0.05, sharpen 0.3 at 0.7 px
+renders/2026-11-24/barkhorn/light-c/front-dust.png  {'build': 24.9, 'render': 1037.8}  samples 96
