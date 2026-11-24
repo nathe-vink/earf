@@ -14,5 +14,8 @@ for n in "$@"; do
   echo "$n exit $rc $(( ($(date +%s)-t0)/60 )) min $(grep -m1 'equipment in frame' /tmp/lightc-$n.log) $(grep -o 'NO GLASS SHADOWS: [0-9]* materials' /tmp/lightc-$n.log)"
   rm -f "${O:?}"/*.raw.png
   [ $rc -eq 0 ] || continue
-  git add $O/$n.* && git commit -q -m "Light model C: $n" && git push -q -u origin "$B"
+  git add $O/$n.* && git commit -q -m "Light model C: $n
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01CsZ9sPVytkpnrfV4BgTgfB" && git push -q -u origin "$B"
 done
