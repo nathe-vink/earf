@@ -723,7 +723,7 @@
  "hemi-suspension": {
   "kind": "hardware",
   "maker": "Cable Grippers Inc. (cable, grippers) and Nicopress (stop sleeves)",
-  "model": "PROPOSAL 2026-11-24 (v7, the v5 and v6 checks): TWO 1/16 in (1.59) 7x7 stainless cables (Cable Grippers Inc. bulk cable, fuse cut), symmetric about the axis at r 16 (today's top, A) or r 17.6 (B), at 0/180 deg (A: 105/285, the lock's line, so its off-axis mass lies along them). The hub end: a Nicopress 871-1-C copper stop sleeve swaged on with the 51-C-887 tool (Nicopress: a stop sleeve gives about 50 % of the cable's rated break, typical, about 1.07 kN on 1/16 7x7; about Ø5.2 x 5.6 before swaging, which lengthens it), bearing up under a Ø5.6 x 8 counterbore in the hub's bottom face; the cable up a Ø2.4 hole through the hub and the crown (and the cap's lid in today's top and A). The canopy end: a Cable Grippers MGR-M10-MM gripper on each (hemi-gripper), at r 48, the cables splayed to it. Rated as a system by Cable Grippers' independent tests: MGR on 1/16 in stainless 7x7, 312 lb minimum break, 50 lb a cable at their 5:1 (the lamp 1.6 to 1.7 kg, about 3.7 lb, on two). PROOF: each cable assembly loaded to 90 N (5 x the whole lamp) for 1 min before fitting. LEVELLING: the canopy hanging on the cables below its plate, loosen each gripper's safety nut, push the plunger and slide until a 200 mm level across the rim reads level to 1 deg (its two sides within 3.5 mm below the ceiling; 1 mm of cable is about 1.3 deg, 4.5 mm across the rim), tighten the safety nuts, set the cord's 2 mm of slack, push the canopy up and fix its set screws. The cord carries current only",
+  "model": "PROPOSAL 2026-11-24 (v8): TWO 1/16 in 7x7 stainless cables, each on a Nicopress 871-1-C stop sleeve in the hub (about 1.07 kN, Nicopress's 50 %), up through the hub, crown and cap to a Cable Grippers MGR-M10-MM in the canopy (312 lb minimum break, 50 lb a cable). Proof: 90 N for 1 min each. At r 16 (A, today) or 17.6 (B), 0/180 deg (A: 105/285, the lock's line), splayed to the grippers at r 48. LEVELLING: see the gripper row and NOTES",
   "usd": 14.0,
   "estimate": true,
   "supplier": "Cable Grippers Inc. (Las Vegas) and a Nicopress distributor",
@@ -777,7 +777,7 @@
  "hemi-canopy-strap": {
   "kind": "hardware",
   "maker": "any (a lighting supplier)",
-  "model": "Zinc-plated steel mounting for the 4 in junction box (review, 2026-11-01) | PROPOSAL 2026-11-24 (v7): a round mounting plate, 1.6 steel, Ø140 with a rim turned down 12 (two M4 clinch nuts in it for the canopy's set screws), screwed to the box by its two 8-32 screws at y -+44.45; the gripper brackets riveted under it, the driver's steel enclosure on four 6 standoffs below it (fitted after the plate is screwed up, the screws' heads in the gap). It carries the load; the canopy is a cover",
+  "model": "Zinc-plated steel mounting for the 4 in junction box (review, 2026-11-01) | PROPOSAL 2026-11-24 (v8): a round mounting plate, 1.6 steel, Ø140, its rim turned down 12 (two M4 clinch nuts for the canopy's set screws); screwed to the box by its two 8-32 screws; a Ø22 opening in its centre for the supply; the gripper brackets on PEM studs under it, the driver's enclosure on four PEM standoffs, the green grounding screw at y +56. It carries the load; the canopy is a cover",
   "usd": 6.0,
   "estimate": true,
   "supplier": "a lighting supplier",
@@ -933,7 +933,7 @@
  "hemi-gripper": {
   "kind": "hardware",
   "maker": "Cable Grippers Inc.",
-  "model": "PROPOSAL 2026-11-24 (v7): MGR-M10-MM mini gripper for 1/16 in cable, bottom exit, M10 thread (their chart: 0.675 in long without the plunger, Ø0.47 in body, 7/16 in mounting hole), with its knurled safety nut; mounted plunger down, threaded up through its bracket's foot and held by an M10 nylon-insert nut. To adjust: loosen the safety nut, push the plunger, slide; tighten the safety nut when level. Two a lamp: the price is the pair ($7 each, an estimate)",
+  "model": "PROPOSAL 2026-11-24 (v8): MGR-M10-MM mini gripper for 1/16 in cable (their chart: 0.675 in without the plunger, Ø0.47 in body, M10), with its knurled safety nut; plunger down, threaded up through its bracket's foot and held by an M10 nylon-insert nut. LEVELLING: with the canopy hanging on the cables below its plate, loosen each safety nut, push the plunger and slide the cable; read the rim's two sides against a laser line (or measure each from the table below), never by resting a level on the lamp; level to 1 deg (the sides within 3.5 mm); tighten the safety nuts; push the canopy up, fix its set screws; then loosen the canopy grip's dome nut from below, feed the cord until it bows about 2 cm, and tighten it. The price is the pair ($7 each)",
   "usd": 14.0,
   "estimate": true,
   "supplier": "Cable Grippers Inc.",
@@ -970,19 +970,10 @@
  "hemi-gripper-bracket": {
   "kind": "hardware",
   "maker": "a sheet-metal shop (to make)",
-  "model": "PROPOSAL 2026-11-24 (v7): two U brackets, 1.6 zinc-plated steel: a 24 x 24 foot with a Ø10.5 hole for the gripper, two legs across the cables' line (the nut open to a spanner from the sides) and two inward flanges riveted under the mounting plate by four Ø3.2 blind rivets each",
+  "model": "PROPOSAL 2026-11-24 (v8): two U brackets, 1.6 zinc-plated steel, along the cables' line: a 22 x 45 foot with a Ø10.5 hole for the gripper (its M10 nylon-insert nut on top, a 16 open-end spanner from the outside), legs 42 apart, flanges turned out under the plate, each on two PEM FH-M3 studs with nuts (hemi-bracket-studs)",
   "usd": 6.0,
   "estimate": true,
   "supplier": "a sheet-metal shop",
-  "price_date": "2026-11-24"
- },
- "hemi-bracket-rivets": {
-  "kind": "hardware",
-  "maker": "any",
-  "model": "v7: eight Ø3.2 x 6 steel blind rivets (dome head): the gripper brackets to the mounting plate",
-  "usd": 0.5,
-  "estimate": true,
-  "supplier": "any",
   "price_date": "2026-11-24"
  },
  "hemi-canopy-setscrews": {
@@ -1006,11 +997,65 @@
  "hemi-lock": {
   "kind": "hardware",
   "maker": "Ganter (Elesa-Ganter; JW Winco in the US)",
-  "model": "PROPOSAL 2026-11-24 (v7, the coordinator's decision: a positive lock in place of the 2026-11-01 tether): GN 617-5-M10X1-AK indexing plunger, without rest position (it cannot be left pulled), with lock nut: a Ø5 H7 pin, M10 x 1, a Ø21 knob, about 45 overall, a 5 stroke, spring about 7 N initial and 17 N at the end (JW Winco's table; confirm on Ganter's sheet). On top A only: threaded radially into the collar's wall at 105 deg, z 96.5, through the clamp ring, its pin into a Ø5.1 hole in the PEEK ring: with the knob released the shade cannot be lifted, turned or lowered. Today's 5 and B's 8 tall clamp rings cannot take its M10",
+  "model": "PROPOSAL 2026-11-24 (v8; the owner decides whether A carries it): one per shade. Ganter GN 617-5-M10X1-AK indexing plunger, without rest position, with lock nut (JW Winco's table: Ø5 H7 pin, M10 x 1, Ø21 knob, about 45 overall, 5 stroke, spring 7 to 17 N). On top A: threaded into the collar's wall at 105 deg, z 96.5 as drawn (96.0 seated), through a Ø10.5 hole in the clamp ring and a Ø20 spot face; its pin into a Ø6.4 hole in the PEEK ring. MACHINING: the clamp ring's thread start is clocked to the collar's, so screwed down to its shoulder it lands at one angle, and both holes are machined before anodising. FITTING: screwed in until its end stands 0.2 behind the bore (a depth gauge; 0.4 further and it touches the land), then the lock nut, with a 17 mm crowfoot (the shade is 1.3 below its corner). Each spare shade carries its own",
   "usd": 18.0,
   "estimate": true,
   "supplier": "JW Winco or a Ganter distributor",
   "price_date": "2026-11-24",
   "url": "https://www.jwwinco.com/en-us/products/3.1-Indexing-locking-blocking-with-pins-and-ball-shaped-elements/Indexing-plungers/GN-617-Steel-Indexing-Plunger-Non-Lock-Out"
+ },
+ "hemi-bracket-studs": {
+  "kind": "hardware",
+  "maker": "PEM (Penn Engineering)",
+  "model": "v8: eight PEM FH-M3-6 flush-head self-clinching studs pressed into the mounting plate, and eight M3 nylon-insert nuts under the brackets' flanges (the brackets come off without drilling)",
+  "usd": 3.0,
+  "supplier": "a PEM distributor",
+  "estimate": true,
+  "price_date": "2026-11-24"
+ },
+ "hemi-plate-standoffs": {
+  "kind": "hardware",
+  "maker": "PEM (Penn Engineering)",
+  "model": "v8: four PEM SO-M4 self-clinching standoffs, Ø7 x 4, pressed into the mounting plate: the driver's enclosure hangs on them",
+  "usd": 2.0,
+  "supplier": "a PEM distributor",
+  "estimate": true,
+  "price_date": "2026-11-24"
+ },
+ "hemi-enclosure-screws": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "v8: four M4 x 6 serrated-flange pan screws, zinc-plated, from inside the enclosure's top into the plate's standoffs (they bond the enclosure to the plate)",
+  "usd": 0.5,
+  "supplier": "any",
+  "estimate": true,
+  "price_date": "2026-11-24"
+ },
+ "hemi-bushings": {
+  "kind": "hardware",
+  "maker": "Heyco (to choose; listed)",
+  "model": "v8: a listed snap bushing for the supply in the enclosure's top (7/8 in, Ø22 hole) and a listed strain-relief bushing for the Class 2 cord in its floor (Ø14 hole, cord Ø6)",
+  "usd": 1.5,
+  "supplier": "a Heyco distributor",
+  "estimate": true,
+  "price_date": "2026-11-24"
+ },
+ "hemi-canopy-grip": {
+  "kind": "hardware",
+  "maker": "Lapp (SKINTOP family)",
+  "model": "v8: the canopy's cord grip, Lapp 53112005 (M12 x 1.5, cord 3.5 to 7), its body through the canopy's 3 floor, its dome nut under it, black",
+  "usd": 4.0,
+  "supplier": "a Lapp distributor",
+  "estimate": true,
+  "price_date": "2026-11-24"
+ },
+ "hemi-ground-screw": {
+  "kind": "hardware",
+  "maker": "any (listed)",
+  "model": "v8: a green hex-washer-head 10-32 grounding screw (UL 467) tapped into the mounting plate at y +56, for the equipment grounding conductor (NEC 410.44); the plate bonds the enclosure (serrated screws into its standoffs) and the canopy (cup-point set screws into the rim)",
+  "usd": 0.5,
+  "supplier": "any",
+  "estimate": true,
+  "price_date": "2026-11-24"
  }
 }

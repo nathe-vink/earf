@@ -65,10 +65,18 @@ def check(name):
     v = sum(overl(Pos(0, 0, -3.0) * P['collar'], P[f]) for f in ('pins',))
     print(f'  control, lowered 3 unturned: collar x pins {v:.0f} mm3 ({"held, as it must be" if v > 1 else "NOT HELD: the check is blind"})')
     if 'lock' in P:
-        # v7: the knob released, the pin in the PEEK ring's hole: a lift of 1 and a turn of 2 deg must both hit it
-        lv = overl(Pos(0, 0, 1.0) * P['lock'], P['ring']); tv = overl(Rot(0, 0, 2.0) * P['lock'], P['ring'])
-        print(f'  the lock released: lifted 1, lock x PEEK ring {lv:.1f} mm3; turned 2 deg, {tv:.1f} mm3 '
-              f'({"blocked, as it must be" if lv > 0 and tv > 0 else "NOT BLOCKED"})')
+        # v8 (the v7 check's (2)): the knob released at the SEAT (0.5 under the drawn pose): its pin clear in its Ø6.4 hole;
+        # a lift of 1.5 from the seat and a turn of 4 deg must both hit the ring
+        sv = overl(Pos(0, 0, -0.5) * P['lock'], P['ring'])
+        lv = overl(Pos(0, 0, -0.5 + 1.5) * P['lock'], P['ring']); tv = overl(Pos(0, 0, -0.5) * (Rot(0, 0, 4.0) * P['lock']), P['ring'])
+        print(f'  the lock released at the seat: in its hole {sv:.2f} mm3 ({"clear" if sv == 0 else "JAMMED"}); lifted 1.5, '
+              f'{lv:.1f} mm3; turned 4 deg, {tv:.1f} mm3 ({"blocked, as it must be" if lv > 0 and tv > 0 else "NOT BLOCKED"})')
+    # v8 (the v7 check's (1)): keyed, it fits one way only: turned 120 or 240 deg and pushed up its entries, the Ø5 pin meets a
+    # 5 wide slot
+    for k in (120, 240):
+        # (up the entries the shade is turned 30, as in the turned poses above; the wrong way is 30 + 120 or 30 + 240)
+        kv = max(overl(Pos(0, 0, dz) * (Rot(0, 0, 30 + k) * P['collar']), P['pins']) for dz in (-6.0, -3.0, 0.0, 4.0))
+        print(f'  turned {k} deg (the wrong way), up its entries: collar x pins {kv:.0f} mm3 ({"refused, as it must be" if kv > 1 else "FITS: NOT KEYED"})')
 
 
 if __name__ == '__main__':

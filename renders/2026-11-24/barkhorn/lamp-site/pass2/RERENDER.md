@@ -20,6 +20,27 @@ stainless. The studio product files are written from the CAD's finishes when eac
 
 Also re-render the other lane's bar frames made through lamp_site.py's hemisphere(); that lane lists them.
 
+## v8 additions (the v7 check's (9))
+
+What pass v2 renders: the top the owner picks (HEMI_TOP=A, or unset for today's top, or B) on the v8 hanging (two 1/16 in
+stainless cables on stop sleeves, the cord 2 mm long, the canopy out of frame), HEMI_COLLAR_CAP=1, the collar's white on
+its painted faces. If the owner keeps A's lock, it is in the meshes (out-dome-pendant-topA/stl/lock.stl) and in frame
+where its angle shows it (HEMI_LOCK=0 leaves it out).
+
+The other lane's frames made through hemisphere() (that lane re-renders them):
+- a50e8da167: bar-hero, bar-backbar and its portrait, bar-pendants
+- main 862cd845e4: tropos-bar
+
+The live site files (each with its -800, -th and -under variants where it has them): hemisphere-<tint> for every tint,
+hemisphere-cluster, hemisphere-<tint>-direct, hemisphere-<tint>-under, and the cutaway.
+
+The cutaway 'How it lights' has three sources, all re-rendered:
+- renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-cutaway.png (with -phone)
+- renders/2026-11-12/barkhorn/lamp-site/legible/hemisphere-ember-cutaway.png (with -phone), the live one
+- lamp_site.py's 'cutaway' frame, which draws them
+
+The photometry IS rerun (isphere.py), after the re-render, from the same painted faces.
+
 ## The photometry made through it: rerun with isphere.py
 
 - renders/2026-11-10/barkhorn/lamp-site/final/photometry.txt (the published figures)

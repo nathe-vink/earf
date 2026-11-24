@@ -212,6 +212,9 @@ def build(frame, samples, scale):
         path = os.path.join(HERE, 'lamp-site-meshes', folder, 'stl', name + '.stl')
         ob = SC.stl(path if os.path.exists(path) else os.path.join(HERE, folder, 'stl', name + '.stl'), mat, name)
         ob.location = (ob.location[0] + at[0], ob.location[1] + at[1], ob.location[2] + at[2])
+        if os.environ.get('HEMI_ROT'):
+            # v7, for the owner's lock pictures: every part turned about its own (the lamp's) axis by HEMI_ROT deg
+            ob.rotation_euler[2] += math.radians(float(os.environ['HEMI_ROT']))
         return ob
 
     black_acrylic = SC.principled('black-acrylic', '#0A0A0B', 0.04)
@@ -409,9 +412,11 @@ def build(frame, samples, scale):
                 gp_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'gasket-out.stl')
                 part(tdir_, 'gasket-out' if os.path.exists(gp_) else 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
             lk_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'lock.stl')
-            if os.path.exists(lk_):
+            if os.path.exists(lk_) and os.environ.get('HEMI_LOCK', '1') == '1':
                 # v7: A's lock (Ganter GN 617), its knob black, at the back of the clamp ring
-                part(tdir_, 'lock', cap, c); print('HEMI_LOCK', tdir_)
+                part(tdir_, 'lock', cap, c); print('HEMI_LOCK', tdir_, '| HEMI_ROT', os.environ.get('HEMI_ROT', '0'))
+            else:
+                print('HEMI_LOCK none | HEMI_ROT', os.environ.get('HEMI_ROT', '0'))
             if 'suspension' in loaded_:
                 # v6 (the v5 check's (5)): the two cables bare 1/16 in stainless, their sleeves copper (hidden in the hub)
                 part(tdir_, 'suspension', SC.principled('cable', '#8E9093', 0.32, 1.0), c)
