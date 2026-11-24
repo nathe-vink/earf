@@ -1196,6 +1196,16 @@ def build(frame, samples, scale):
         sys.path.insert(0, os.path.join(HERE, 'launch'))
         from hiddencast_bpy import hiddencast, report
         print(report(frame, hiddencast(sc)))
+        # (2026-11-24, the critics on the pass: a hidden flag, a hidden lamp and a hidden floor ring stood in frame unseen
+        # by the audit's grep) every mesh's and lamp's ray visibilities, and every light-linking collection with its states
+        for o_ in sc.objects:
+            if o_.type in ('MESH', 'LIGHT'):
+                print('RAYVIS', o_.type, o_.name, ' '.join(f'{k}={int(getattr(o_, "visible_" + k))}' for k in
+                      ('camera', 'diffuse', 'glossy', 'transmission', 'volume_scatter', 'shadow')))
+            for kind_ in ('receiver_collection', 'blocker_collection'):
+                c_ = getattr(o_.light_linking, kind_, None) if hasattr(o_, 'light_linking') else None
+                if c_ is not None:
+                    print('LINK', o_.name, kind_.split('_')[0], [(m_.name, cm_.light_linking.link_state) for m_, cm_ in zip(c_.objects, c_.collection_objects)])
         if os.environ.get('MASK'):                    # the cast check with Blender's own camera, rendered
             from hiddencast_bpy import mask_check
             print('CASTCHECK', frame, {k: round(v * 100, 2) for k, v in mask_check(sc, os.environ['MASK']).items()})

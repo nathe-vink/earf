@@ -81,9 +81,18 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
                 if not sp.get('receivers') or lift_rx or name in rx_.split(','):
                     sp[k][2] += lift
         sp['size_m'] = _mul(sp['size_m'], s)
+        if name == 'key' and os.environ.get('HOUSE_KEY_AIM'):
+            # HOUSE_KEY_AIM 'DX,DY,DZ' (2026-11-24, the critics: no hidden flag on the key): the key's aim point moved by
+            # that much (m, full scale, times s), so its beam's centre falls off the paper in frame; the lamp stays put
+            sp['aim0'] = list(sp['target'])
+            sp['target'] = [t_ + float(d_) * s for t_, d_ in zip(sp['target'], os.environ['HOUSE_KEY_AIM'].split(','))]
+            print('KEY_AIM', [round(v, 4) for v in sp['target']])
         if 'power_w' in sp:
             sp['power_w'] *= s * s
         ob = Lt.area(bpy, 'house-' + name, sp, cen_rx if sp.get('receivers') else pcentre)
+        if 'aim0' in sp:                      # the key's power as before the re-aim (its irradiance at the old aim point)
+            a0_ = Vector(sp['aim0'])          # (already lifted with the product)
+            ob.data.energy = Lt.area_power(sp, (a0_ - ob.location).length)
         ob.data.energy *= k_st
         if solid and not sp.get('receivers') and ob.data.specular_factor > 0:
             softbox(bpy, ob, s)
@@ -122,6 +131,13 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         door_ = barn_door(bpy, bpy.data.objects['house-key'], float(os.environ['HOUSE_DOOR']), s)
     if os.environ.get('HOUSE_KEYFLAG'):
         door_ = key_flag(bpy, bpy.data.objects['house-key'], [float(v) for v in os.environ['HOUSE_KEYFLAG'].split(',')], s)
+        if os.environ.get('HOUSE_KEYFLAG_REAL') == '1':
+            # (2026-11-24, the critics) a real flag: every ray visibility on, no linking; it shades whatever the key lights
+            # behind it, product included. Placed by its R (5th value) near the key, so the camera does not see it
+            for k_ in ('camera', 'diffuse', 'glossy', 'transmission', 'volume_scatter', 'shadow'):
+                setattr(door_, 'visible_' + k_, True)
+            print('KEYFLAG_REAL', [tuple(round(c, 4) for c in v.co) for v in door_.data.vertices])
+            door_ = None
     if hf_ != '0' or door_ is not None:
         # (2026-11-20, the critics: the Tropos ground darkens toward the bottom right, 84-87 at the bottom edge; the
         # lamps' stayed at 96) the Tropos set's flags that cast shadows, scaled: the card right of the product, the floor
@@ -158,13 +174,23 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
         # itself lighting everything but the sweep, and a copy of it lighting the sweep alone through its cutter (the
         # speaker lane's split_set_shadow, light linking); the cutters are then not seen in reflections either
         cuts = {}
-        for i, f in enumerate(fl):
+        real_ = os.environ.get('HOUSE_CUT_REAL') == '1'
+        # HOUSE_CUT_REAL 1 (2026-11-24, the critics): the cutters as real cards, every ray visibility on, no linking at all:
+        # each shades every lamp behind it, product included, as a flag on a stand does
+        for i, f in enumerate([] if real_ else fl):
             if f.get('name') == 'horn cutter':
                 cuts[f'flag{i}'] = os.environ.get('HOUSE_CUT_SCOPE', 'horn').split(',')
             elif f.get('name', '').startswith('cutter2-'):
                 cuts[f'flag{i}'] = [f['name'][len('cutter2-'):]]
         if door_ is not None:
             cuts[door_.name] = ['key']
+        if real_:
+            for i, f in enumerate(fl):
+                o_ = bpy.data.objects.get(f'flag{i}')
+                if o_ is not None:
+                    for k_ in ('camera', 'diffuse', 'glossy', 'transmission', 'volume_scatter', 'shadow'):
+                        setattr(o_, 'visible_' + k_, True)
+                    print('CUT_REAL', o_.name, f.get('name'))
         lamps_ = [o for o in bpy.context.scene.objects if o.type == 'LIGHT' and o.name.startswith('house-')]
         floor_ = os.environ.get('HOUSE_CUT_FLOOR', '1') == '1'
         def excl(L_, obs):
@@ -230,7 +256,7 @@ def build(bpy, s, dim=1.0, lift=0.0, studio=None):
             if cp_ is not None:
                 cp_.data.energy *= float(k_); print('FLOORCOPY', cp_.name, k_)
     if os.environ.get('HOUSE_ROOM', '1') == '1':
-        room(bpy, s)
+        room(bpy, s, fit=os.environ.get('HOUSE_ROOM_FIT') == '1')
     if os.environ.get('HOUSE_CARD'):
         for i_, c_ in enumerate(os.environ['HOUSE_CARD'].split(';')):      # several cards: 'X,Y,...;X,Y,...'
             card(bpy, [float(v) for v in c_.split(',')], lift, i_)
@@ -504,7 +530,7 @@ def floor_card(bpy, p, lift=0.0):
     return ob
 
 
-def room(bpy, s):
+def room(bpy, s, fit=False):
     """The studio's walls and ceiling, seen only in reflections (the coordinator, 2026-11-20: surfaces facing away from
     the lights read pure black; a satin black part in a white studio is charcoal). White walls left, right and behind the
     sweep's top, a white ceiling, a mid-grey wall behind the camera; lit by the studio's lamps, they light nothing on the
@@ -523,6 +549,21 @@ def room(bpy, s):
         # (2026-11-21, the coordinator's audit, a test) the room round the whole sweep (18 m wide, its backdrop at 5.5 m):
         # the sides outside it, the back behind it, the ceiling above it, so a grazing reflection meets the backdrop
         X, Yf, Yb, Z = 9.5, -4.5, 6.0, 6.0
+    if fit:
+        # HOUSE_ROOM_FIT 1 (2026-11-24, the critics: a lamp poking through the room's ceiling or walls): the room grown round
+        # every lamp and card (each corner of its area, lifted lamps included) with 0.5 m (full scale) to spare
+        pts_ = []
+        for o_ in bpy.context.scene.objects:
+            if o_.type == 'LIGHT' and o_.data.type == 'AREA':
+                w_, h_ = o_.data.size / 2, (o_.data.size_y if o_.data.shape in ('RECTANGLE', 'ELLIPSE') else o_.data.size) / 2
+                m_ = o_.matrix_basis
+                pts_ += [m_ @ Vector((a_ * w_, b_ * h_, 0)) for a_ in (-1, 1) for b_ in (-1, 1)]
+            elif o_.type == 'LIGHT':
+                pts_.append(o_.location.copy())
+        if pts_:
+            X = max(X, max(abs(p_.x) for p_ in pts_) / s + 0.5); Yf = min(Yf, min(p_.y for p_ in pts_) / s - 0.5)
+            Yb = max(Yb, max(p_.y for p_ in pts_) / s + 0.5); Z = max(Z, max(p_.z for p_ in pts_) / s + 0.5)
+        print('ROOM_FIT', round(X, 2), round(Yf, 2), round(Yb, 2), round(Z, 2))
     wall('room-left', [(-X, Yf, 0), (-X, Yb, 0), (-X, Yb, Z), (-X, Yf, Z)], 0.8)
     wall('room-right', [(X, Yf, 0), (X, Yf, Z), (X, Yb, Z), (X, Yb, 0)], 0.8)
     wall('room-back', [(-X, Yb, 0), (X, Yb, 0), (X, Yb, Z), (-X, Yb, Z)], 0.8)

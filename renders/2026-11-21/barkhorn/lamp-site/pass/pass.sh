@@ -24,7 +24,7 @@ case $G in
   *) echo "group A B C D"; exit 1 ;;
 esac
 [ -s $D/audit/$n.txt ] || { env $E ${FL:+"$FL"} AUDIT=1 MASK=$S/m.png python3.11 lamp_site.py $f > $S/$n.aud 2>&1 && \
-    grep -E "^AUDIT|HIDDENCAST|CASTCHECK|  (in|out) |CORE_ABS" $S/$n.aud > $D/audit/$n.txt; }
+    grep -E "^AUDIT|HIDDENCAST|CASTCHECK|^   (IN FRAME|in|out|practical) |^RAYVIS|^LINK|CORE_ABS" $S/$n.aud > $D/audit/$n.txt; }
 if [ ! -s $D/$n.png ]; then
   t0=$(date +%s)
   env $E ${FL:+"$FL"} EXR=0 DENOISE=1 LAMP_OUT=$S/$n-raw.png python3.11 lamp_site.py $f --samples $sp > $S/$n.log 2>&1
