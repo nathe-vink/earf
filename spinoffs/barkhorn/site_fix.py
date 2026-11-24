@@ -1505,6 +1505,9 @@ def fix_12(p, web):
     for line in MOOD:
         assert line not in p.head and line not in p.rest, ('fix_12: a mood line left', line)
     p.css("""
+/* C6b: on a phone the line and both buttons stay on the first screen under the names grid: the picture gives up the grid's
+   height (4:5 kept, so every product stays whole); 356 px = the title (~130), the grid (96), the line and buttons (122), 8 to spare */
+@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100svh - 356px) * 0.8)) !important } }
 /* C5 (10), C6 (1, 2): the hero's names row. Wide: on the picture's bottom edge, on a dark veil; the picture is capped at the
    window less the header (cropped a little top and bottom, every product whole) so the row is on the first screen.
    Stacked layouts (portrait, phones, the 701-960 tablet layout): under the picture in ink; on phones a 2 x 2 grid. Taps 44 px. */
@@ -1526,7 +1529,8 @@ def fix_12(p, web):
 }
 @media (max-aspect-ratio: 1/1) { .hs-hero .hero-title { order: 0 } }
 @media (max-width: 560px) {
-  .hero-names { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; padding: 8px 16px 0; font-size: 15px }
+  .hero-names { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; padding: 4px 16px 0; font-size: 15px }
+  .hs-hero .hero-more { padding-top: 12px }
   .hero-names .hn { display: contents } .hero-names .hn > span { display: none }
   .hero-names a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 4px; text-align: center }
 }
