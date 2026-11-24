@@ -1,0 +1,13 @@
+NO GLASS SHADOWS: 6 materials: ['bark@cloud-violet', 'bark@cloud-violet.001', 'clear-cast@cloud-violet', 'horn-formed@cloud-violet', 'horn-lot@cloud-violet', 'horn-satin@cloud-violet']
+SHADOW RAY LINKS LEFT: 0 []
+00:24.171  cycles           | WARNING CUEW initialization failed: Error opening the library
+08:00.082  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-haze-12.png'
+/home/user/earf/studio/engine/render.py:480: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+08:05.308  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-haze-12.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:531: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+08:06.530  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-haze-12.swatch.png'
+finish: white 236 -> 236 (gain 1.0), contrast 0.2, clarity 0.05, sharpen 0.3 at 0.7 px
+renders/2026-11-24/barkhorn/light-c2/turn-haze-12.png  {'build': 23.9, 'render': 455.9}  samples 96
