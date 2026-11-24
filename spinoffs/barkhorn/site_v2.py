@@ -2176,7 +2176,7 @@ def rc_home(p, web):
 # per color (fa0c3a65: satin black hardware, polished bevels); the lamps lit, per tint, and in rows (r32-lamps-final 17a9da5e;
 # Core's base in its own color fee3b161; Hemisphere direct, from under, in a group cd703d56)
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
-TROPOS_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar.png'   # Tropos in Acid at the bar (r33-speaker-horn 04c6fb4c)
+TROPOS_BAR = 'renders/2026-11-21/barkhorn/b1-test/fixed8.png'   # Tropos in Acid at the bar: fixed-8 (r33-speaker-horn 31ca39748d; the owner 2026-11-24)
 TROPOS_BAR_ALT = 'Tropos in Acid in the bar\\u2019s bay, a wall of records around it, Hemispheres and Cores over the counter.'
 MANTLE_COVER = {k: f'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{n}-cover.png' for k, n in   # as each passes (r48-mantle-design 5637cfe9);
                 (('red', 'ember'), ('green', 'poison'), ('violet', 'haze'), ('ice', 'fog'))}                 # a tint without one shows no cover view
@@ -2217,10 +2217,10 @@ def rc_products(p, web):
             im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
         im.save(os.path.join(web.IMG, 'rc', name), 'WEBP', quality=q, method=6)
         return {'src': f'img/rc/{name}', 'w': im.width, 'h': im.height}
-    def views(src, base, width):
-        full = save(src, f'{base}.webp', width)
-        th = save(src, f'{base}-th.webp', 168, 80)
-        card = save(src, f'{base}-800.webp', 800) if width > 800 else dict(full)
+    def views(src, base, width, q=82, qth=80):
+        full = save(src, f'{base}.webp', width, q)
+        th = save(src, f'{base}-th.webp', 168, qth)
+        card = save(src, f'{base}-800.webp', 800, q) if width > 800 else dict(full)
         return dict(full, th=th['src']), card
     i = p.rest.index('const D = ') + len('const D = ')
     j = p.rest.index(', BY = Object', i)
@@ -2235,7 +2235,7 @@ def rc_products(p, web):
             D['tt']['colours'][k]['views']['cover'], _ = views(MANTLE_COVER[k], f'mantle-{n}-cover', 1600)
     # Tropos in Acid at the bar, the new record wall (r33-speaker-horn 04c6fb4c), after the front
     acid = next(c for c in D['clouds'] if c['k'] == 'amber')
-    acid['views']['bar'], _ = views(TROPOS_BAR, 'tropos-bar', 1600)
+    acid['views']['bar'], _ = views(TROPOS_BAR, 'tropos-bar', 1600, 90, 90)   # quality 90: the wall bands at 82
     # the lamps: each lit in its tint, the eight in a row, Hemisphere from below (Ember)
     rows = {}
     room = [(views(src, name, 1600)[0], alt, tints) for src, name, alt, tints in ROOM]
@@ -2682,6 +2682,7 @@ def rc_finish(web):
     site_fix.finish_5(web)
     site_fix.finish_10(web)
     site_fix.finish_12(web)
+    site_fix.finish_13(web)
 
 
 BANNED_RC = r'seven colors|Ember to Fog|Smoke as current|still to come|on hold|polished black' if EIGHT else r'eight colors|to Smoke|Smoke as current'
