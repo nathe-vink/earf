@@ -27,3 +27,13 @@ Quick audits of horn-back-fog and amp-fog (fifth size): equipment 0, hidden 0, N
    `no_glass_shadows.cut` 6 and `shadow_ray_links_left.count` 0 (the same lines are in `NAME.log`).
 4. Helpers work on their own branch, `r33-lightc2-<tint>`, from r33-speaker-horn: their tint's 24 turn frames,
    `horn-back-<tint>` and `amp-<tint>` (26 frames). The fronts are rendered on r33-speaker-horn.
+
+## After this batch: a buildable rig (24 Nov, the S4b critics)
+
+The 216 shots here were generated at b7b73df1 and are rendered as they are (the critics: they equal a buildable setup
+within 0.4-0.6 L* on the backdrop). For any later studio render, `light_c.model_c` also runs `buildable()`: each card
+trimmed off the floor and the sweep's curve and back from every lit lamp's face. On the front it trims flag 0 and the
+floor card behind-right at the curve, flag 1 back from bg-right (3.0 to 1.88 m wide), flag 2 back from the horn lamp
+(2.4 to 1.87), flag 4 back from the kick lamp (2.0 to 0.43: the kick stands just in front of it), the horn cutter back
+from the horn lamp (2.5 to 1.68), the back-edge card and the fill card right off the floor. The engine's
+flags_crossing_set audit (now reading the set's cards and the lamps' faces) reads nothing on the trimmed front.
