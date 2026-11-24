@@ -56,6 +56,14 @@
    58.0,
    88.8
   ],
+  "white-paint": [
+   -58.0,
+   -58.0,
+   56.5,
+   58.0,
+   58.0,
+   65.2
+  ],
   "hub": [
    -31.0,
    -31.0,
@@ -152,29 +160,53 @@
    16.5,
    114.0
   ],
-  "tether": [
-   -38.0,
-   -45.5,
-   66.0,
-   3.8,
-   40.6,
-   83.8
-  ],
   "grippers": [
-   -46.0,
+   -52.0,
    -6.0,
-   730.0,
-   46.0,
+   733.0,
+   52.0,
    6.0,
-   749.1
+   753.1
+  ],
+  "gripper-nuts": [
+   -54.9,
+   -8.0,
+   742.1,
+   54.9,
+   8.0,
+   750.1
   ],
   "gripper-brackets": [
-   -48.6,
-   -8.0,
-   742.0,
-   48.6,
-   8.0,
+   -59.6,
+   -12.0,
+   740.5,
+   59.6,
+   12.0,
    774.4
+  ],
+  "bracket-rivets": [
+   -58.4,
+   -9.0,
+   772.0,
+   58.4,
+   9.0,
+   776.8
+  ],
+  "canopy-screws": [
+   -4.0,
+   -75.0,
+   766.0,
+   4.0,
+   75.0,
+   774.0
+  ],
+  "box-screws": [
+   -3.8,
+   -48.2,
+   772.0,
+   3.8,
+   48.2,
+   784.0
   ],
   "cord": [
    -3.0,
@@ -185,12 +217,12 @@
    729.0
   ],
   "suspension": [
-   -40.8,
+   -46.8,
    -2.6,
-   60.4,
-   40.8,
+   62.4,
+   46.8,
    2.6,
-   762.1
+   765.1
   ],
   "canopy": [
    -75.0,
@@ -201,20 +233,28 @@
    776.0
   ],
   "strap": [
-   -71.5,
-   -11.0,
-   760.0,
-   71.5,
-   11.0,
+   -71.8,
+   -71.8,
+   764.0,
+   71.8,
+   71.8,
    776.0
   ],
   "enclosure": [
    -32.0,
    -46.0,
-   740.4,
+   736.4,
    32.0,
    46.0,
    774.4
+  ],
+  "plunger": [
+   -2.5,
+   28.8,
+   90.5,
+   2.5,
+   41.6,
+   95.5
   ]
  },
  "finishes": {
@@ -225,6 +265,7 @@
   "collar": "anodised",
   "clamp": "anodised",
   "gaskets": "silicone",
+  "white-paint": "white",
   "hub": "anodised",
   "ring": "trim",
   "pins": "anodised",
@@ -237,13 +278,17 @@
   "grip": "cord",
   "crown-screws": "steel",
   "cap-key": "steel",
-  "tether": "steel",
   "grippers": "steel",
+  "gripper-nuts": "steel",
   "gripper-brackets": "steel",
+  "bracket-rivets": "steel",
+  "canopy-screws": "anodised",
+  "box-screws": "steel",
   "cord": "cord",
-  "suspension": "steel",
+  "suspension": "stainless",
   "canopy": "anodised",
   "strap": "steel",
-  "enclosure": "steel"
+  "enclosure": "steel",
+  "plunger": "steel"
  }
 }

@@ -43,6 +43,11 @@
    "preset": "rubber",
    "color": "#1A1A1A"
   },
+  "stainless": {
+   "preset": "metal",
+   "color": "#8E9093",
+   "roughness": 0.32
+  },
   "steel": {
    "preset": "gunmetal",
    "color": "#232120"
@@ -56,12 +61,12 @@
   },
   "white": {
    "preset": "satin_paint",
-   "color": "#888888"
+   "color": "#EEEEEA"
   }
  },
  "assign": [
   {
-   "match": "collar|clamp|hub|pins|carrier|stem|crown|gland|canopy",
+   "match": "collar|clamp|lock|hub|pins|carrier|stem|crown|gland|canopy-screws|canopy",
    "material": "anodised"
   },
   {
@@ -85,7 +90,11 @@
    "material": "silicone"
   },
   {
-   "match": "crown-screws|cap-key|tether|grippers|gripper-brackets|suspension|strap|enclosure",
+   "match": "suspension",
+   "material": "stainless"
+  },
+  {
+   "match": "crown-screws|cap-key|grippers|gripper-nuts|gripper-brackets|bracket-rivets|box-screws|strap|enclosure",
    "material": "steel"
   },
   {
@@ -93,7 +102,7 @@
    "material": "trim"
   },
   {
-   "match": "white-disc",
+   "match": "white-paint|white-disc",
    "material": "white"
   }
  ],
