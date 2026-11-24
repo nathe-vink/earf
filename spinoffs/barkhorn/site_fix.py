@@ -1519,7 +1519,7 @@ def fix_12(p, web):
   .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 384px) * 0.8)) !important; width: min(100%, calc((100svh - 384px) * 0.8)) !important }
   /* C6e-6: the headline's, the line's and the buttons' column is the picture's width again (C2-4), at least 320 px so the line keeps
      to two lines and the buttons sit side by side; the headline scales to the column, so it is never clipped (C6d 9) */
-  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, max(calc((100svh - 384px) * 0.8), 320px)) !important; margin-inline: auto !important;
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100% - 32px, max(calc((100svh - 384px) * 0.8), 320px)) !important; margin-inline: auto !important;   /* C6f-6: never under 16 px from the window's edge */
     padding-inline: 0 !important; box-sizing: border-box }
   .hs-hero .hero-title h1 { font-size: min(44px, calc(min(100vw - 32px, max(calc((100svh - 384px) * 0.8), 320px)) / 12.69)) !important }
 }
@@ -1583,8 +1583,8 @@ def fix_12(p, web):
     font: 500 14px/21px var(--sans); color: #F4F1EC; background: none; text-shadow: 0 1px 2px rgb(0 0 0 / .6); pointer-events: none }
   .hero-names::before { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: min(192px, calc(100svh - 290px)); z-index: -1; pointer-events: none;
     background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%) }
-  .hero-names a { display: inline-block; min-height: 0; padding: 8px 0; pointer-events: auto }
-  .hero-names .hn { display: inline } .hero-names .hn > span { display: inline; margin-inline: 3px }
+  .hero-names a { display: inline-block; min-height: 0; padding: 8px 0; pointer-events: auto; max-width: 100%; white-space: normal; text-align: center }
+  .hero-names .hn { display: inline; white-space: normal } .hero-names .hn > span { display: inline; margin-inline: 3px }      /* C6f-7: a name too wide wraps inside the picture */
   .hs-hero .hero-more { padding-top: 20px }
   /* C6e-1: what does not fit stays inside the picture (live clipped it there): nothing on the page or under the header */
   .hero-names { clip-path: inset(calc(298px - 100svh) -2px -8px -2px) }
@@ -1593,16 +1593,22 @@ def fix_12(p, web):
 @media (aspect-ratio: 1/1) {
   .hs-hero .hero-title { color: #1C1A18 !important; text-align: left }
   .hs-hero .hero-more { text-align: left }
-  .hs-hero .hero-sub { color: #1C1A18; margin: 0 0 16px; max-width: none }
+  .hs-hero .hero-sub { color: #1C1A18; margin: 0 0 16px; max-width: none; font-size: 17px }      /* C6f-7: its usual size */
   .hs-hero .hero-cta { justify-content: flex-start }
   .hs-hero .cta-solid { background: #1C1A18; color: #F4F1EC; border-color: #1C1A18 }
   .hs-hero .cta-solid:hover { background: #000 }
   .hs-hero .cta-line { background: transparent; color: #1C1A18; border-color: #1C1A18 }
   .hs-hero .cta-btn:focus-visible { outline-color: #1C1A18 }
 }
+/* C6f-7: below 560 a square's headline, line and buttons share one left edge, 16 px in */
+@media (aspect-ratio: 1/1) and (max-width: 559px) {
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { margin: 0 !important; padding-inline: 16px !important; width: auto !important; max-width: none !important; box-sizing: border-box; text-align: left !important }
+  .hs-hero .hero-more { margin: 0 !important; width: auto !important; left: auto !important; right: auto !important }
+  .hs-hero .hero-title h1 { font-size: clamp(18px, min(9.4vw, calc((100vw - 32px) / 12.69)), 44px) !important }      /* the upright phones' size: it fits the column */
+}
 /* C6e-6 in a square from 560: the column is the square's picture's width (live's 330), at least 320 px */
 @media (aspect-ratio: 1/1) and (min-width: 560px) {
-  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, max(calc((100svh - 330px) * 0.8), 320px)) !important; margin-inline: auto !important; padding-inline: 0 !important }
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100% - 32px, max(calc((100svh - 330px) * 0.8), 320px)) !important; margin-inline: auto !important; padding-inline: 0 !important }
   .hs-hero .hero-title h1 { font-size: min(44px, calc(min(100vw - 32px, max(calc((100svh - 330px) * 0.8), 320px)) / 12.69)) !important }
 }
 """)
@@ -1665,12 +1671,14 @@ def fix_14(p, web):
     # C6c (1, 6): the names row of a picture of several products lies under the thumbnail strip, wrapped: its height moves
     # nothing above it, so the caption stays C5's; the page's own name is plain text, not a link back to view 1
     p.sub('<div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>',
-          '<div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>\n        <p class="namerow" id="namerow" aria-live="polite" hidden></p>')      # C6e-10: announced, as #cap was
+          '<div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>\n        <p class="namerow" id="namerow" hidden></p><p class="sr-say" id="namerow-say" aria-live="polite"></p>')      # C6e-10, C6f-9: announced through a live region that is always rendered
     anchor = "const nr = NAMEROWS[(s.src || '').split('/').pop()]; if (nr) { e.innerHTML = nr; e.hidden = false; }"
     _sub_any(p, anchor, "const nr = NAMEROWS[(s.src || '').split('/').pop()];\n"
              "    { const r = document.getElementById('namerow'), self = `#${P.route}-${c.name.toLowerCase()}`; r.innerHTML = nr || ''; r.hidden = !nr;\n"
              "      r.querySelectorAll('a').forEach(a => { if (a.getAttribute('href') === self) { const b = document.createElement('span'); b.className = 'self'; b.textContent = a.textContent; a.replaceWith(b); } });\n"
              "      if (nr && !r.querySelector('a')) { r.innerHTML = ''; r.hidden = true; }      // C6d (18): only the page's own name: no row (its picture says it)\n"
+             "      { const say = document.getElementById('namerow-say'), words = r.hidden ? '' : r.textContent.replace(/\\s+/g, ' ').trim(); say.textContent = '';\n"
+             "        if (words) setTimeout(() => { say.textContent = words; }, 120); }      // C6f-9: filled after it is in the page, so it is announced\n"
              "      }\n"
              "    if (nr) { }")
     _sub_any(p, "    if (nr) { }\n    else if (s.shown && !e.textContent)", "    if (!nr && s.shown && !e.textContent)")
@@ -1686,13 +1694,17 @@ def fix_14(p, web):
              "    // C6e-2: a real overlap of the controls themselves (the arrows, the counter, each thumbnail, the names), no margin\n"
              "    const top = innerHeight - bar.offsetHeight, R = s => { const e = document.querySelector(s); return e ? e.getBoundingClientRect() : null; };\n"
              "    const ctl = '#pdp .gallery .nav, #pdp .gallery .count, #thumbs button, #namerow a, #namerow .self' + (ph.matches ? '' : ', #swatches a');\n"
-             "    // on a phone a control counts as under the bar when its centre is (an edge of a thumbnail behind it is not), from 701 any overlap\n"
-             "    const over = [...document.querySelectorAll(ctl)].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.top < innerHeight && (ph.matches ? (q.top + q.bottom) / 2 > top : q.bottom > top); });\n"
+             "    // C6f-2, 3: a control is under the bar when its bottom edge is (on a phone with its 4 px focus ring); a name in the row by its\n"
+             "    // letters and underline (its 44 px tap box less 11 px of padding)\n"
+             "    const over = [...document.querySelectorAll(ctl)].some(e => { const q = e.getBoundingClientRect(); if (!(q.height > 0 && q.top < innerHeight)) return false;\n"
+             "      if (e.matches('#namerow a, #namerow .self')) return q.bottom - 11 > top; return q.bottom + (ph.matches ? 4 : 0) > top; });\n"
              "    // C6d (7), C6e-3: from 701 and on a phone held sideways, once the dots reach the bar's strip it stays back until the inline\n"
              "    // ask is on screen (then it is off); once it waits it keeps waiting while the dots are close below, so it does not flash up\n"
-             "    // C6e-4: at the top of the page only a real overlap keeps it back\n"
-             "    const side = !ph.matches || matchMedia('(orientation: landscape) and (max-height: 500px)').matches, atTop = scrollY < 8;\n"
-             "    const dots = R('#swatches'), ask = R('#p-enquire'); const between = side && !atTop && dots && ask && ask.top >= innerHeight && (dots.top < innerHeight || (bar.classList.contains('wait') && dots.top < innerHeight + 160));\n"
+             "    // C6e-4, C6f-4, 5: on an upright tablet (only there) the bar is up until the dots reach its strip, the same on the way down, after\n"
+             "    // a view change or a round trip (no hold); elsewhere it waits from the dots through to the inline ask, with the hold, as live\n"
+             "    const side = !ph.matches || matchMedia('(orientation: landscape) and (max-height: 500px)').matches;\n"
+             "    const tab = matchMedia('(min-width: 701px) and (max-width: 860px) and (max-aspect-ratio: 999/1000)').matches;\n"
+             "    const dots = R('#swatches'), ask = R('#p-enquire'); const between = side && dots && ask && ask.top >= innerHeight && (dots.top < innerHeight || (!tab && bar.classList.contains('wait') && dots.top < innerHeight + 160));\n"
              "    bar.classList.toggle('wait', over || between); };\n"
              "  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); addEventListener('hashchange', () => setTimeout(check, 60));\n"
              "  new ResizeObserver(check).observe(document.querySelector('#pdp .gallery'));      // C6d (6): after every view change\n"
@@ -1730,6 +1742,10 @@ def fix_14(p, web):
   .lt-room .names .hn > span[aria-hidden] { width: 7px }
   .lt-room .names > * { flex-shrink: 0 }      /* no name squeezed onto two lines */
 }
+/* C6f-1: from 701 the thumbnails are no page snap points (they snap only in the phone's sideways strip) */
+@media (min-width: 701px) { .thumb { scroll-snap-align: none !important } }
+/* C6f-9: the names' live region: always rendered, seen by screen readers only */
+.sr-say { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0 }
 /* C6e-8: a hidden row is not laid out */
 #namerow[hidden], .lt-room .names[hidden] { display: none !important }
 /* /lighting: the row no longer sizes the picture's column; the column keeps live's width, the one-line row's 591 px */
@@ -1755,8 +1771,8 @@ def fix_14(p, web):
   .ask-bar { transition: transform .2s ease } .ask-bar.off, .ask-bar.wait { transform: translateY(110%); visibility: hidden }
 }
 @media (max-width: 700px) { .ask-bar.wait { transform: translateY(110%); visibility: hidden } }
-@media (min-width: 701px) and (max-width: 860px) and (max-aspect-ratio: 999/1000) { :root { --cap: calc(100svh - 390px) } }
-@media (max-width: 700px) and (orientation: portrait) { :root { --cap: max(260px, calc(100svh - 308px)) } }   /* C6e-2: on a short upright phone the picture gives up enough that the thumbnails end above the bar (header and crumbs ~147, strip 44, thumbnails ~52, bar 65); a 260 px floor */   /* C6d (5) portrait only; C6e-1 not a square; the home indicator's inset (the bar grows by it) */
+@media (min-width: 701px) and (max-width: 860px) and (max-aspect-ratio: 999/1000) { :root { --cap: calc(100svh - 390px) } }   /* C6d (5): upright only; C6e-1: not a square; C6e.1/C6f-10: no safe-area term (it changes while the page scrolls) */
+@media (max-width: 700px) and (max-aspect-ratio: 999/1000) { :root { --cap: max(260px, calc(100svh - 313px)) } }   /* C6e-2, C6f-2: on a short upright phone the picture gives up enough that the thumbnails and their 4 px ring end above the bar (header and crumbs ~147, strip 44, thumbnails ~52, ring 5, bar 65); a 260 px floor. C6f-8: not a square (live's picture). No safe-area term */
 """)
 
 
