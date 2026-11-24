@@ -1,0 +1,90 @@
+HIDDENCAST mantle-house-acid-cover-solid: 7 hidden, 0 in frame
+   out         0.0 %  area lamp (rectangle) house-key
+   out         0.0 %  area lamp (rectangle) house-fill
+   out         0.0 %  area lamp (rectangle) house-kick
+   out         0.0 %  area lamp (rectangle) house-front
+   out         0.0 %  area lamp (rectangle) house-wall
+   out         0.0 %  area lamp (rectangle) house-floor
+   out         0.0 %  area lamp (rectangle) house-right
+RAYVIS MESH plinth-L1-stack camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH base-L1-stack camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH post-1 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH post-2 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH post-3 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH post-4 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH platter-disc camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH platter-hub camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH platter-screws camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH platter-inserts camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH spindle camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH bearing-housing camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH bearing-nut camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH bearing-spring camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH bearing-washer camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH bushes camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH ball camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH thrust-plate camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH motor-plate camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH motor camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH motor-screws camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH pulley camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH belt camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-puck camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cartridge camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH feet camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH foot-pads camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH foot-studs camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH phono-stage camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH phono-pads camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH rear-plate camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH rear-hardware camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cover-top-shell camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cover-feet camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH mark camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH record camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH puck-screw-0 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH puck-screw-1 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH puck-screw-2 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-base camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-yoke camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-axle camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-axle.001 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-tube camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-head camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-lift-tab camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-stub camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-cw camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-cw-ring camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-bias camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cue-post camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cue-bar camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cue-lever camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cue-knob camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-body camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-stylus camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-cantilever camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-diamond camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-screw camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-screw.001 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH arm-collar camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-pin camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-pin.001 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-pin.002 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH cart-pin.003 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH hs-washer camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH hs-screw camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH hs-socket camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH hs-washer.001 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH hs-screw.001 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH hs-socket.001 camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH sweep camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT house-key camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT house-fill camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT house-kick camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT house-front camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT house-wall camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT house-floor camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT house-right camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+LINK none: no light- or shadow-linking collection in the scene
+CASTCHECK mantle-house-acid-cover-solid {'house-key': 0.0, 'house-fill': 0.0, 'house-kick': 0.0, 'house-front': 0.0, 'house-wall': 0.0, 'house-floor': 0.0, 'house-right': 0.0}
