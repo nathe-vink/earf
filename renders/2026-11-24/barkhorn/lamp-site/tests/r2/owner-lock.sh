@@ -6,7 +6,7 @@
 #   lock-2-profile  HEMI_ROT=-79   (the knob at 26 deg: across the view, in profile)
 #   lock-3-back     HEMI_ROT=-169  (the knob at -64 deg: toward the camera, end-on)
 #   lock-4-none     HEMI_ROT=-79 HEMI_LOCK=0 (no lock, from 2's angle)
-#   lock-5-below    the knob's side (105 deg), 30 deg below the top, 1.6 m off, 200 mm lens; the even dome, no room
+#   lock-5-below    the knob's side (105 deg), 30 deg below the top, 0.75 m off, 100 mm lens; the even dome, no room
 cd "$(dirname "$0")/../../../../../.."
 T=renders/2026-11-24/barkhorn/lamp-site/tests/r2.sh
 D=renders/2026-11-24/barkhorn/lamp-site/tests/r2
@@ -17,5 +17,6 @@ LIT="HOUSE_ROOM=0 HOUSE_DOME=1.0 HOUSE_WB=6500,10 STUDIO_OFF=house-key,house-key
 X="$G $LV HEMI_ROT=-79" $T lock-2-profile hoff red
 X="$G $LV HEMI_ROT=-169" $T lock-3-back hoff red
 X="$G $LV HEMI_ROT=-79 HEMI_LOCK=0" $T lock-4-none hoff red
-X="$G $LIT HOUSE_CAM=-0.3587,1.3384,-0.395,0,0,0.405,200,1" $T lock-5-below hoff red
+# (the first try, 1.6 m off with the 200 mm lens, put the camera under the paper ground: re-shot from 0.75 m, 100 mm lens)
+X="$G $LIT HOUSE_CAM=-0.168,0.628,0.03,0,0,0.38,100,1" $T lock-5-below hoff red
 date -u
