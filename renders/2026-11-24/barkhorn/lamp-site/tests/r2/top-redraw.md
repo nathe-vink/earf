@@ -40,7 +40,7 @@ lower outer edge and the collar's top inner edge. The meshes, the render's copie
    - The crown sits on the neck on its pad, held and keyed by three M2.5 countersunk screws at r 9.25, at 90, 210 and
      330 deg (clear of the cables), flush in its floor, their heads inside the Ø24 pocket.
    - The lamp hangs level from TWO cables, symmetric about the axis at r 17.5 (0 and 180 deg). Its centre of mass is on
-     the axis (today 1601 g at z 65.7, A 1682 g at 68.2, B 1581 g at 65.3, from the solids). One cable at r 17.5 would tilt
+     the axis (v5: today 1598 g at z 65.8, A 1679 g at 68.2, B 1577 g at 65.3, from the solids, the cables and their stud ends left out). One cable at r 17.5 would tilt
      it about 16 deg (16.2 / 16.8 / 16.1). With two it hangs level once their lengths are set equal at the canopy's
      grippers: the lamp hung, a level across the rim, the two lengths equal to about ±0.25 mm (1 mm out tilts it about
      1.6 deg), the cord left slack. The cord carries current only (UL 153: an SPT-2 cord 2.5 lb, the lamp about 3.5).
@@ -118,5 +118,5 @@ The sheet: top-sheet-v4.jpg (its renders' commands: v4.sh).
   and magnet holes at r 14 stand 3.0 from its Ø20 pocket but only 1.0 from its outside (5.0 in today's Ø40 cap, 13 in A's
   Ø56). The crown's cable bores stand 4.3 from the
   pocket in all three.
-- Hanging weights for v5 are on the sheet, from the rebuilt solids.
+- Hanging weights for v5 (section 2, rule 6): 1598 / 1679 / 1577 g, from the rebuilt solids (v4: 1601 / 1682 / 1581).
 - The heat row is not rerun: the heat model counts the tiers' outer areas and their stack, which v5 does not change.
