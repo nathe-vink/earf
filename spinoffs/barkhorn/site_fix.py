@@ -1755,8 +1755,8 @@ def fix_14(p, web):
   .ask-bar { transition: transform .2s ease } .ask-bar.off, .ask-bar.wait { transform: translateY(110%); visibility: hidden }
 }
 @media (max-width: 700px) { .ask-bar.wait { transform: translateY(110%); visibility: hidden } }
-@media (min-width: 701px) and (max-width: 860px) and (max-aspect-ratio: 999/1000) { :root { --cap: calc(100svh - 390px - env(safe-area-inset-bottom, 0px)) } }
-@media (max-width: 700px) and (orientation: portrait) { :root { --cap: max(260px, calc(100svh - 308px - env(safe-area-inset-bottom, 0px))) } }   /* C6e-2: on a short upright phone the picture gives up enough that the thumbnails end above the bar (header and crumbs ~147, strip 44, thumbnails ~52, bar 65); a 260 px floor */   /* C6d (5) portrait only; C6e-1 not a square; the home indicator's inset (the bar grows by it) */
+@media (min-width: 701px) and (max-width: 860px) and (max-aspect-ratio: 999/1000) { :root { --cap: calc(100svh - 390px) } }
+@media (max-width: 700px) and (orientation: portrait) { :root { --cap: max(260px, calc(100svh - 308px)) } }   /* C6e-2: on a short upright phone the picture gives up enough that the thumbnails end above the bar (header and crumbs ~147, strip 44, thumbnails ~52, bar 65); a 260 px floor */   /* C6d (5) portrait only; C6e-1 not a square; the home indicator's inset (the bar grows by it) */
 """)
 
 
