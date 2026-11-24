@@ -17,16 +17,16 @@ INK, GREY, SOFT = (0, 0, 0), (40, 40, 40), (60, 60, 60)
 # per column: the frame, its title, its labels (mm), the hanging weight from the v8 solids
 COLS = [
     ('v8-today', 'Today', ['clamp ring 104 across x 5 tall', 'collar top 96 across x 3', 'crown 80 across x 11.5',
-                           'cap 40 across x 14', 'foot ring 10.9 tall', 'NO positive lock (its 5 tall ring cannot', 'take one): the J-slot and a detent only', 'hangs HANG_T g']),
+                           'cap 40 across x 14', 'foot ring 10.9 tall', 'NO positive lock (its 5 tall ring cannot', 'take one): the J-slot and a detent only', 'hangs 1607 g']),
     ('v8-A', 'A: three even tiers', ['ring 10.8 + the collar\'s 0.5, 104 across', 'crown 80 across x 11.3',
                                      'cap 56 across x 11.3', 'steps of 24 across (12 per side)',
                                      'foot ring 10.9 tall, sloped', 'the lock at the back (hidden here; below)',
-                                     'its cables on the lock\'s line: one behind the other', 'hangs HANG_A g']),
+                                     'its cables on the lock\'s line: one behind the other', 'hangs 1708 g']),
     ('v8-B', 'B: four even tiers', ['ring 8.0 + the collar\'s 0.5, 104 across', 'crown 80 and 56 across x 8.5 each',
                                     'cap 32 across x 8.5', 'steps of 24 across (12 per side)',
                                     'foot ring 10.9 tall, sloped', 'cables beside the cap; the cap on a magnet',
                                     'only, its Ø56 tier the handle', 'NO positive lock (its 8 tall ring cannot take',
-                                    'one): the J-slot and a detent only', 'hangs HANG_B g']),
+                                    'one): the J-slot and a detent only', 'hangs 1586 g']),
 ]
 FOOT = [
     'All three use the fixed shade release: a smaller white disc on the hub and a white lip on the collar, inside the shade\'s top.',

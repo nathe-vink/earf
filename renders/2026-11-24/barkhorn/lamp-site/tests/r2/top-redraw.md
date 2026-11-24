@@ -289,3 +289,74 @@ its stud ends. The cables' own weight above the lamp hangs from the grippers. Th
 From the v7 solids, the cables inside the lamp included: today 1608 g at z 65.9, A 1717 g at z 68.8 (1.2 off the axis
 along its cables: the lock), B 1586 g at z 65.4. The tether is gone; A carries the lock, and today's top and B the
 detent.
+
+## 10. v8 (the v7 check)
+
+- THE LOCK GOES TO THE OWNER. His pictures are tests/r2/lock-sheet.jpg. Frames 1 to 4 share one camera, light and exposure:
+  A as drawn (knob hidden), the knob in profile, the knob from the back, and no lock. Frame 5 is from 30 deg below on the
+  knob's side. He chooses between the visible knob (about $18 a shade, each spare shade with its own) and no positive lock:
+  the J-slot (a lift, a turn and a lower against the shade's weight) and a ball detent, as today's top and B have.
+- (1) THE BAYONET IS KEYED in all three tops. The pin at 30 deg has a Ø6 shoulder, and its slot (the entry at 0 deg, the
+  turn and the notch) is 7 wide, its turn passage 7.5 tall. The Ø6 pin passes no 5 wide slot, so every shade fits one way
+  only. top_check: turned 120 or 240 deg and pushed up its entries, the shade is refused (9 mm3 into the pins).
+- (2) THE SEATED POSE. The lock's hole in the PEEK ring is at z 96.0, where the pin stands with the shade seated, 0.5 under
+  the drawn pose. It is Ø6.4 for the bayonet's play (about -+0.43 at the hole and the land's 0.2).
+  - top_check, the lock released at the seat: its pin clear in the hole (0.00 mm3); lifted 1.5, 14 mm3 into the ring;
+    turned 4 deg, 41 mm3. It blocks, as it must.
+  - The detent's dimple in today's top and B now spans the seat and the drawn pose.
+- (3) THE SHEET shows A's knob in profile and from the back, and says plainly that today's top and B have no positive lock.
+- (4) THE CANOPY.
+  - The wire path: the supply comes through a Ø22 opening in the plate's centre into a listed snap bushing in the
+    enclosure's top. The Class 2 cord leaves the enclosure's floor through a strain-relief bushing, down to the canopy's
+    cord grip (an M12 gland in the floor, its dome nut under it). All of it is drawn.
+  - The enclosure (35 tall) hangs on four PEM SO-M4 standoffs pressed into the plate, by four serrated M4 screws from
+    inside its top.
+  - The grippers are at r 48 in the CAD and the texts. Each bracket is now a U along the cables' line, its legs 42 apart,
+    so a 16 open-end spanner reaches the nut from outside. Its flanges turn out under the plate on PEM FH-M3 flush studs
+    and nuts, so the plate's top stays flat and a gripper changes without drilling. The foot is Ø10.5.
+- (5) LEVELLING:
+  - Read the rim against a laser line, or measure each side from the table; never rest a level on the lamp.
+  - Set the cord after the canopy is up: loosen the grip's dome nut from below, feed the cord until it bows about 2 cm,
+    tighten.
+  - The procedure is in NOTES and on the gripper's row.
+- (6) IF THE LOCK STAYS:
+  - Machining: the clamp ring's thread start is clocked to the collar's, so screwed to its shoulder it lands at one
+    angle; its Ø10.5 hole and Ø20 spot face are machined before anodising.
+  - Depth: the body goes in until its end stands 0.2 behind the bore (a depth gauge), then the lock nut, with a 17 mm
+    crowfoot.
+  - The two-hand swap: keep the knob pulled through the lift, the turn and the lower; let it go only with the shade home.
+    Let go elsewhere, the pin presses about 14 N on the crown's first tier.
+  - The cam chamfer is gone, and so is "rides onto the land".
+  - The clamp ring round the hole: its Ø10.5 runs 0.75 below the ring's foot (into the shoulder's air), with 1.1 above.
+  - The texts read 96.5 drawn (96.0 seated) and Ø20.
+  - The BOM row is per shade.
+- (7) TEXTS AND DRAWINGS:
+  - The thread callouts are now the first note of each part, so the drawings print them.
+  - A's BOM no longer buys the M5 detent; the ring's note names the lock's hole on A.
+  - Today's and B's clamp ring sheets no longer carry the lock's callout.
+  - NOTES gives the two-hand swap with B's handle and the levelling.
+  - The suspension row is short, essentials first.
+  - The crown reads 1/16 in; the cap's pocket Ø20; the hub's note describes the stem build.
+  - The paint film covers the lip's lead-in.
+- (8) THE DETENT goes in first: screwed into the PEEK ring, which then slides down over the hub, its end in a groove open
+  to the hub's top.
+- (9) pass2/RERENDER.md names:
+  - the other lane's frames;
+  - the live site files;
+  - the cutaway's three sources;
+  - the top and hanging pass v2 renders;
+  - the photometry rerun.
+- (10) GROUNDING: a green 10-32 grounding screw tapped into the plate (NEC 410.44) takes the equipment grounding conductor.
+  The enclosure bonds through its serrated screws and standoffs, the canopy through its cup-point set screws into the rim.
+  Drawn, with a BOM row.
+- (11) NUMBERS AND WORDS:
+  - A's balance: Ganter's 24 g lock and the Ø6 key pin put A's centre 0.86 off the axis, along its cables. That tilts it
+    about 0.2 deg (0.73 for the lock alone), taken up by about 0.16 mm of cable.
+  - The cord "is set 2 mm longer, so it bows about 2 cm".
+  - The 35 deg view names its stem.
+  - "One picture serves" is limited to the lip, the disc and the carrier.
+- Weights (v8): today 1607 g, A 1708 g, B 1586 g.
+- Checks:
+  - fixings_check: zero clashes over all three tops, with the new parts in (standoffs, screws, bushings, the canopy's grip,
+    the grounding screw).
+  - top_check: every top comes off; the keyed shade refuses the wrong turn; A's lock is clear at the seat and blocks.

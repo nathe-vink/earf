@@ -345,10 +345,10 @@ def cover_parts(p=N):
     pz, w, rs = p['pin_z'], 5.0, ci / 2 + 4.5
     n0, n1 = p['notch']
     for a in (0, 120, 240):
-        # v8 (the v7 check's (1)): the bayonet keyed: the slot at 0 deg 6 wide (its turn passage 6 tall) for the one pin
-        # with a Ø5 shoulder, so the shade fits one way only (the Ø5 pin passes no 5 wide slot)
-        wk_ = 6.0 if (a == 0 and p.get('fixings')) else w
-        hk_ = 0.5 if (a == 0 and p.get('fixings')) else 0.0
+        # v8 (the v7 check's (1)): the bayonet keyed: the slot at 0 deg 7 wide (its turn passage 7.5 tall) for the one pin
+        # with a Ø6 shoulder, so the shade fits one way only (the Ø6 pin passes no 5 wide slot)
+        wk_ = 7.0 if (a == 0 and p.get('fixings')) else w
+        hk_ = 1.25 if (a == 0 and p.get('fixings')) else 0.0
         collar = collar - at(a, box(ci / 2 - 2, -wk_ / 2, pz - 10.5 - hk_, rs, wk_ / 2, cz1 + 1))           # the entry
         collar = collar - sector(ci / 2 - 2, rs, a, a + p['turn'], pz - 10.5 - hk_, pz - 5.5 + hk_)         # the turn
         collar = collar - at(a + p['turn'], box(ci / 2 - 2, -wk_ / 2, n0 - hk_, rs, wk_ / 2, n1 + hk_))     # the notch
@@ -367,10 +367,10 @@ def cover_parts(p=N):
         # v7: the white paint as a film 0.05 off the collar's foot and the flange's inner face
         paint_ = (cyl('z', (0, 0), co, cz0 - 0.05, cz0) - cyl('z', (0, 0), WHITE_SPLIT['lip'][0] + 2.0, cz0 - 1, cz0 + 1)) + \
             _sphere_band(r_ki - 5.0, r_ki - 5.05, co / 2, fr)
-        # v8 (the v7 check's (7)): and the lip's 1 x 45 lead-in ring, which the render paints too: a film 0.035 off it
-        from build123d import Polyline as _PL, make_face as _mf, revolve as _rv, Axis as _Ax
-        lr_ = WHITE_SPLIT['lip'][0] / 2; e_ = 0.035
-        paint_ = paint_ + _rv(_mf(_PL((lr_ + 1.0, 0, cz0), (lr_, 0, cz0 + 1.0), (lr_ - e_, 0, cz0 + 1.0 - e_), (lr_ + 1.0 - e_, 0, cz0 - e_), close=True)), _Ax.Z)
+        # v8 (the v7 check's (7)): and the lip's 1 x 45 lead-in ring, which the render paints too: a film 0.15 off it
+        lr_ = WHITE_SPLIT['lip'][0] / 2; e_ = 0.1
+        paint_ = paint_ + ((_edge(lr_ - e_, cz0 - e_, 1.0, inner=True, down=False) - _edge(lr_, cz0, 1.0, inner=True, down=False))
+                           - cyl('z', (0, 0), 2 * lr_ + 2.0, cz0 - 0.06, cz0 + 0.01))
     if sh_:
         # v6 (the v5 check's (9)): the 0.25 PTFE slip washer drawn between the outer gasket and the clamp ring's band (the
         # gasket drawn at 0.75 there; the shims picked per shade take up the stack)
@@ -409,7 +409,9 @@ def cover_parts(p=N):
     if p.get('white_split') and p.get('fixings') and not lock_:
         # v7 (the v6 check's (9)): the detent's dimple in the bore at 90 deg, z 93, where the pins sit in their notches (cut
         # last, after the shoulder's union); today's top and B only (A has the lock)
-        collar = collar - at(90.0, cyl('x', (0, p['pin_z'] + 0.5), 2.6, ci / 2 - 1, p['ring'][1] / 2 + 0.9))   # v8: at the seat (drawn 0.5 up)
+        # v8: the dimple where the ball stands with the shade seated (0.5 above, as drawn) and drawn, a short vertical slot
+        collar = collar - at(90.0, cyl('x', (0, p['pin_z'] + 0.5), 2.6, ci / 2 - 1, p['ring'][1] / 2 + 0.9) + cyl('x', (0, p['pin_z']), 2.6, ci / 2 - 1, p['ring'][1] / 2 + 0.9)
+                                   + box(ci / 2 - 1, -1.3, p['pin_z'], p['ring'][1] / 2 + 0.9, 1.3, p['pin_z'] + 0.5))
     if lock_:
         # v7 (the coordinator's decision): the lock, Ganter GN 617-5-M10X1-AK, radially at 105 deg (opposite the level views'
         # camera, between the pins' notch at 30 and the slot's entry at 120), z 96. Its M10 x 1 tapped through the collar's
@@ -554,7 +556,7 @@ def north_parts(p=N):
     sd_, tip, td, tin = p['pin']
     pins = None
     for a in (0, 120, 240):
-        sdk_ = 5.0 if (a == 0 and p.get('fixings')) else sd_            # v8: the key, one pin's shoulder Ø5
+        sdk_ = 6.0 if (a == 0 and p.get('fixings')) else sd_            # v8: the key, one pin's shoulder Ø6
         pin = at(a + p['turn'], cyl('x', (0, pz), sdk_, ro / 2, tip) + cyl('x', (0, pz), td, tin, ro / 2))
         pins = pin if pins is None else pins + pin
         # (check 3, (l)) the pin's thread through a Ø3.2 clearance in the PEEK, tapped M3 (Ø2.5) in the hub
@@ -806,20 +808,20 @@ def north_parts(p=N):
         encl = encl - cyl('z', (sx_, sy_), 4.0, ez1_ - 2, ez1_ + 0.1)
         sto_ = so_ if sto_ is None else sto_ + so_
         esc_ = sc6_ if esc_ is None else esc_ + sc6_
-    driver = box(-28.5, -42, ez0_ + 1.2, 28.5, 42, ez0_ + 1.2 + 29.5)
-    bush_ = ((cyl('z', (0, 0), 26.0, ez1_ - 1.0 - 2.0, ez1_ + 0.8) - cyl('z', (0, 0), 16.0, ez1_ - 4, ez1_ + 2)) - (cyl('z', (0, 0), 26.0, ez1_ - 1.0, ez1_) - cyl('z', (0, 0), 22.0, ez1_ - 1.0, ez1_))
-             + (cyl('z', (0, 0), 18.0, ez0_ - 1.2, ez0_ + 2.5) - cyl('z', (0, 0), 6.4, ez0_ - 2, ez0_ + 3) - (cyl('z', (0, 0), 18.0, ez0_, ez0_ + 1.0) - cyl('z', (0, 0), 14.0, ez0_, ez0_ + 1.0))))
+    driver = box(-28.5, -42, ez0_ + 2.1, 28.5, 42, ez0_ + 2.1 + 29.5)
+    bush_ = ((cyl('z', (0, 0), 26.0, ez1_ - 1.0 - 1.0, ez1_ + 0.8) - cyl('z', (0, 0), 16.0, ez1_ - 4, ez1_ + 2)) - (cyl('z', (0, 0), 26.0, ez1_ - 1.0, ez1_) - cyl('z', (0, 0), 22.0, ez1_ - 1.0, ez1_))
+             + (cyl('z', (0, 0), 18.0, ez0_ - 1.2, ez0_ + 2.0) - cyl('z', (0, 0), 6.4, ez0_ - 2, ez0_ + 3) - (cyl('z', (0, 0), 18.0, ez0_, ez0_ + 1.0) - cyl('z', (0, 0), 14.0, ez0_, ez0_ + 1.0))))
     strap = strap - cyl('z', (0, 0), 22.0, ztop - 2, ztop + 1)
     gsc_ = cyl('z', (0, 56.0), 4.8, ztop - 1.6, ztop) + cyl('z', (0, 56.0), 4.8, ztop - 1.6 - 6.0, ztop - 1.6) + cyl('z', (0, 56.0), 8.0, ztop - 1.6 - 9.0, ztop - 1.6 - 6.0)
     strap = strap - at(a0_, cyl('z', (0, 56.0), 4.8, ztop - 2, ztop + 1))
-    cgrip_ = (cyl('z', (0, 0), 12.0, zc, zc + 3.0) + cyl('z', (0, 0), 16.0, zc + 3.0, zc + 7.0) + cyl('z', (0, 0), 17.6, zc - 3.0, zc)) - cyl('z', (0, 0), 6.0, zc - 4, zc + 8)
+    cgrip_ = (cyl('z', (0, 0), 12.0, zc, zc + 3.0) + cyl('z', (0, 0), 16.0, zc + 3.0, zc + 7.0) + cyl('z', (0, 0), 17.6, zc - 3.0, zc)) - cyl('z', (0, 0), 7.0, zc - 4, zc + 8)
     canopy = canopy - cyl('z', (0, 0), 12.0, zc - 1, zc + 4)
     if a0_:
         sto_, esc_, bush_, gsc_ = at(a0_, sto_), at(a0_, esc_), at(a0_, bush_), at(a0_, gsc_)
     if a0_:
         encl, driver = at(a0_, encl), at(a0_, driver)
     if tt_:
-        cord = cord + cyl('z', (0, 0), 6.0, zc, ez0_ + 2.5)           # v8: the cord on up through its grip to the enclosure's bushing
+        cord = cord + cyl('z', (0, 0), 6.0, zc, ez0_ + 2.0)           # v8: the cord on up through its grip to the enclosure's bushing
     parts_ = cover_parts(p) + [
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=[('aluminium 6061, black anodised: the core, turned from bar, solid; the stem bonded and pinned in a Ø16.1 socket '
@@ -833,7 +835,7 @@ def north_parts(p=N):
                     'the cover touches the fixture only through it. Review 2026-11-01: its 81.6 OD is the centering land '
                     'in the collar\'s 82 bore (0.2 diametral), three Ø3.2 clearance holes for the pins\' threads']),
         Part('pins', pins, Bought('dome-pins'), finish='anodised', group='fixture',
-             notes=[('v8: the bayonet keyed: the pin at 30 deg has a Ø5 shoulder and its slot is 6 wide, so the shade fits one way only. ' if p.get('fixings') else '') + 'stainless shouldered pins: Ø4 shoulder 4.2 long, M3 thread 15.8, screwed through the PEEK into the '
+             notes=[('v8: the bayonet keyed: the pin at 30 deg has a Ø6 shoulder and its slot is 7 wide, so the shade fits one way only. ' if p.get('fixings') else '') + 'stainless shouldered pins: Ø4 shoulder 4.2 long, M3 thread 15.8, screwed through the PEEK into the '
                     'hub (6 of thread in the aluminium, a pre-applied nylon patch, no anaerobic locker); 4.0 of engagement in the '
                     'collar\'s slots']),
     ] + ([
