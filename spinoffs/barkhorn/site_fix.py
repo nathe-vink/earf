@@ -1574,6 +1574,18 @@ def fix_12(p, web):
   .hero-names::before { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 110px; background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%); z-index: -1; pointer-events: none }
   .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 2 }
 }
+/* C6e-1: squares to 504 px keep live's square rule (the portrait row would take two lines there and push the buttons off the
+   first screen): the row on the picture's foot, as wide as the picture, in C5's sizes; from 505 the portrait rule (one line under) */
+@media (aspect-ratio: 1/1) and (max-width: 504px) {
+  .hero-names { position: relative; bottom: auto; order: 1; align-self: center; width: min(100%, calc((100svh - 290px) * 0.8)); height: 0; margin-top: 0;
+    padding: 0 10px; display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-end; translate: 0 -8px;
+    font: 500 14px/21px var(--sans); color: #F4F1EC; background: none; text-shadow: 0 1px 2px rgb(0 0 0 / .6); pointer-events: none }
+  .hero-names::before { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: min(192px, calc(100svh - 290px)); z-index: -1; pointer-events: none;
+    background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%) }
+  .hero-names a { display: inline-block; min-height: 0; padding: 8px 0; pointer-events: auto }
+  .hero-names .hn { display: inline } .hero-names .hn > span { display: inline; margin-inline: 3px }
+  .hs-hero .hero-more { padding-top: 20px }
+}
 """)
 
 
