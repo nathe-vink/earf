@@ -355,8 +355,13 @@ def _row_cuts(path):
 
 
 def names_row(pic):
-    """"Tropos in Acid · Hemisphere in Ember · ...": each name a link to that product in that tint."""
-    return ' &middot; '.join(f'<a href="#{r}-{NAMES[k]}">{PNAME[r]} in {CNAME[k]}</a>' for r, k in BAR_NAMES[pic])
+    """"Tropos in Acid · Hemisphere in Ember · ...": each name a link to that product in that tint. C6c (6): within a
+    product the tints in the site's order (Ember, Dust, Acid); each dot kept with the name after it (no line ends or
+    starts on one) and hidden from screen readers, as in the hero."""
+    order = list(dict.fromkeys(r for r, _ in BAR_NAMES[pic]))
+    items = sorted(BAR_NAMES[pic], key=lambda rk: (order.index(rk[0]), KEYS.index(rk[1])))
+    links = [f'<a href="#{r}-{NAMES[k]}">{PNAME[r]} in {CNAME[k]}</a>' for r, k in items]
+    return links[0] + ''.join(f' <span class="hn"><span aria-hidden="true">&middot;</span> {a}</span>' for a in links[1:])
 
 
 def finish_1b(web):
@@ -1505,12 +1510,18 @@ def fix_12(p, web):
     for line in MOOD:
         assert line not in p.head and line not in p.rest, ('fix_12: a mood line left', line)
     p.css("""
-/* C6b: on a phone the line and both buttons stay on the first screen under the names grid: the picture gives up the grid's
-   height (4:5 kept, so every product stays whole); 356 px = the title (~130), the grid (96), the line and buttons (122), 8 to spare */
-@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100svh - 356px) * 0.8)) !important } }
-/* C5 (10), C6 (1, 2): the hero's names row. Wide: on the picture's bottom edge, on a dark veil; the picture is capped at the
-   window less the header (cropped a little top and bottom, every product whole) so the row is on the first screen.
-   Stacked layouts (portrait, phones, the 701-960 tablet layout): under the picture in ink; on phones a 2 x 2 grid. Taps 44 px. */
+/* C6b, C6c (3): on a portrait screen the line and both buttons stay on the first screen under the names: the picture gives
+   up the row's height (4:5 kept, so every product stays whole). Phones (to 559): the title (~130), the 2 x 2 grid (96), the line
+   and buttons (122), 8 to spare = 356; below 360 the buttons take two rows (+60). From 560: C5's 330 plus the one-line row (54). */
+@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 356px) * 0.8)) !important; width: min(100%, calc((100svh - 356px) * 0.8)) !important } }
+@media (max-aspect-ratio: 1/1) and (max-width: 359px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 416px) * 0.8)) !important; width: min(100%, calc((100svh - 416px) * 0.8)) !important } }
+@media (max-aspect-ratio: 1/1) and (min-width: 560px) {
+  .hs-hero .hero-pic > .hero-photo, .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, calc((100vh - 384px) * 0.8)) !important; width: min(100%, calc((100svh - 384px) * 0.8)) !important }
+}
+/* C5 (10), C6 (1, 2), C6c (3, 4, 8): the hero's names row. Wide, and the stacked landscape layout (to 960, over 640 tall): on the
+   picture's bottom edge, on a dark veil, as in C5; the wide picture is capped at the window less the header (cropped a little
+   top and bottom, every product whole) so the row is on the first screen. Portrait: under the picture in ink; on a phone held
+   upright a 2 x 2 grid. Taps 44 px. */
 .hs-hero .hero-photo, .hs-hero .hero-pic { position: relative }
 .hero-names { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 40px 16px 6px; text-align: center; color: #F4F1EC;
   font: 500 15px/22px var(--sans); background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%); text-shadow: 0 1px 2px rgb(0 0 0 / .6); pointer-events: none }
@@ -1519,16 +1530,20 @@ def fix_12(p, web):
 .hero-names a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px }
 .hero-names .hn { white-space: nowrap }
 .hero-names .hn > span { margin-inline: 6px; opacity: .8 }
-@media (min-aspect-ratio: 1/1) and (min-height: 600px) {
-  .hs-hero .hero-photo { aspect-ratio: auto !important; height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) }
+@media (min-aspect-ratio: 1001/1000) and (min-height: 600px) {
+  .hs-hero .hero-photo { aspect-ratio: auto !important; height: clamp(calc(56.25vw * .88), calc(100vh - var(--header) - 2px), 56.25vw);
+    height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) }
   .hs-hero .hero-photo img { object-position: 50% 35% }
 }
-@media (max-aspect-ratio: 1/1), (max-width: 960px) and (min-height: 641px) {
-  .hero-names { position: static; order: 2; background: none; color: #1C1A18; text-shadow: none; padding: 4px 16px 0; pointer-events: auto }
-  .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 3 }
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (min-height: 641px), (aspect-ratio: 1/1) {
+  .hero-names { position: relative; bottom: auto; order: 1; margin-top: -90px }
+  .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 2 }
 }
-@media (max-aspect-ratio: 1/1) { .hs-hero .hero-title { order: 0 } }
-@media (max-width: 560px) {
+@media (max-aspect-ratio: 999/1000) {
+  .hero-names { position: static; order: 2; background: none; color: #1C1A18; text-shadow: none; padding: 6px 16px 0; pointer-events: auto; margin-top: 0 }
+  .hs-hero .hero-title { order: 0 } .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 3 }
+}
+@media (max-aspect-ratio: 999/1000) and (max-width: 559px) {
   .hero-names { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; padding: 4px 16px 0; font-size: 15px }
   .hs-hero .hero-more { padding-top: 12px }
   .hero-names .hn { display: contents } .hero-names .hn > span { display: none }
@@ -1588,22 +1603,42 @@ def finish_13(web):
 
 # --- Push C6 (the coordinator 24 Nov 05:58; each item passed a reviewer and a skeptic)
 def fix_14(p, web):
-    # (5) a size wraps between its figures: "17.6 x 14.1 x 3.9 in (448 x 358 x 100 mm)" was one unbreakable run past a phone's edge;
-    # each figure still keeps its unit, and "x" stays with the figure before it
-    _sub_any(p, "  .replace(/(\\d) x (\\d)/g, '$1\\u00a0x\\u00a0$2');\n", "  .replace(/(\\d) x (\\d)/g, '$1\\u00a0x $2');\n")
-    # (4) the wrapped names row would push the page down when its picture comes up: the caption keeps the height of the
-    # tallest names row among this product's pictures in this tint, measured in an unseen copy at the caption's own width
+    # C6c (9): a dimension stays whole ("17.6 x 14.1 x 3.9 in", "(448 x 358 x 100 mm),"); the only break allowed is before
+    # its "(" (C6's break after an "x" is undone; C5 never broke there)
+    _sub_any(p, ".replace(/\\b(in|mm|lb|kg|ft|m) \\(/g, '$1\\u00a0(')", "")
+    # C6c (1, 6): the names row of a picture of several products lies under the thumbnail strip, wrapped: its height moves
+    # nothing above it, so the caption stays C5's; the page's own name is plain text, not a link back to view 1
+    p.sub('<div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>',
+          '<div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>\n        <p class="namerow" id="namerow" hidden></p>')
     anchor = "const nr = NAMEROWS[(s.src || '').split('/').pop()]; if (nr) { e.innerHTML = nr; e.hidden = false; }"
-    _sub_any(p, anchor, "{ const rows = Object.values(P.views(c.k) || {}).map(x => NAMEROWS[((x && x.src) || '').split('/').pop()]).filter(Boolean); let h = 0;\n"
-             "      if (rows.length) { const m = e.cloneNode(false); m.removeAttribute('id'); m.removeAttribute('aria-live'); m.hidden = false; m.setAttribute('aria-hidden', 'true');\n"
-             "        m.style.cssText = `position:absolute;visibility:hidden;left:0;top:0;min-height:0;width:${e.getBoundingClientRect().width}px`; e.parentNode.appendChild(m);\n"
-             "        rows.forEach(r => { m.innerHTML = r; h = Math.max(h, m.getBoundingClientRect().height); }); m.remove(); }\n"
-             "      if (h) e.style.setProperty('min-height', `${Math.ceil(h)}px`, 'important'); else e.style.removeProperty('min-height'); }\n    " + anchor)
+    _sub_any(p, anchor, "const nr = NAMEROWS[(s.src || '').split('/').pop()];\n"
+             "    { const r = document.getElementById('namerow'), self = `#${P.route}-${c.name.toLowerCase()}`; r.innerHTML = nr || ''; r.hidden = !nr;\n"
+             "      r.querySelectorAll('a').forEach(a => { if (a.getAttribute('href') === self) { const b = document.createElement('span'); b.className = 'self'; b.textContent = a.textContent; a.replaceWith(b); } }); }\n"
+             "    if (nr) { }")
+    # C6c (7): an ask under the sticky header is not on screen: the bar's watch starts below the header
+    _sub_any(p, "bar.classList.toggle('off', seen.size > 0); });",
+             "bar.classList.toggle('off', seen.size > 0); }, { rootMargin: `-${(document.querySelector('header.top') || {}).offsetHeight || 0}px 0px 0px 0px` });")
+    # C6c (2): where the bar is new (701-860 wide; a phone held sideways), it waits while any of the gallery's controls,
+    # its thumbnails or the color dots lie in its strip, so on arrival it covers none of them
+    _sub_any(p, "document.getElementById('p-copy').addEventListener('click', () => {",
+             "{ const bar = document.querySelector('#pdp .ask-bar'), mq = matchMedia('(min-width: 701px) and (max-width: 860px), (min-width: 701px) and (max-height: 500px)');\n"
+             "  const check = () => { if (!mq.matches || document.getElementById('pdp').hidden) { bar.classList.remove('wait'); return; }\n"
+             "    const top = innerHeight - bar.offsetHeight - 4;\n"
+             "    bar.classList.toggle('wait', [...document.querySelectorAll('#pdp .gallery .nav, #pdp .gallery .count, #thumbs, #swatches')].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.bottom > top && q.top < innerHeight; })); };\n"
+             "  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); addEventListener('hashchange', () => setTimeout(check, 60));\n"
+             "  addEventListener('load', check); setTimeout(check, 0); setTimeout(check, 400);\n"
+             "  document.addEventListener('focusin', e => { const a = e.target; if (!a.getBoundingClientRect || bar.contains(a)) return;     // focus never behind the bar\n"
+             "    const bs = getComputedStyle(bar); if (bs.display === 'none' || bs.visibility === 'hidden' || bar.classList.contains('off') || bar.classList.contains('wait')) return;\n"
+             "    const r = a.getBoundingClientRect(), t = bar.getBoundingClientRect().top - 8; if (r.bottom > t && r.top < innerHeight) scrollBy(0, r.bottom - t); }); }\n"
+             "document.getElementById('p-copy').addEventListener('click', () => {")
     p.css("""
-/* C6 (4): the names row under a picture wraps, every name whole and tappable; beside the arrows on a wide screen,
-   under the strip on a phone, so the counter and the arrows never sit on it */
-.gallery .cap { height: auto !important; min-height: 44px; line-height: 24px !important; padding-block: 10px; white-space: normal !important; overflow: visible !important }
-@media (max-width: 700px) { .gallery .cap { margin-top: 0 !important; padding: 6px 0 0 !important; min-height: 0 } }
+/* C6c (1, 6): the names row under the thumbnail strip: wrapped, each name 44 px tall, the dots kept with the name after */
+.namerow { margin: 2px 0 0; font-size: 15px; line-height: 22px; color: var(--ink) }
+.namerow a, .namerow .self, .lt-room .names a { display: inline-block !important; padding-block: 11px !important }
+.namerow .self { color: var(--muted) }
+.namerow .hn, .lt-room .names .hn { white-space: nowrap }
+.namerow .hn > span[aria-hidden], .lt-room .names .hn > span[aria-hidden] { margin-inline: 6px; color: var(--muted) }
+.lt-room .names { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; height: auto !important; line-height: 22px !important }
 /* C6 (10): the family chips fit at every width: four to a row from 480, three from 363 (widest chip 104 px, 331 px a row),
    two below that; never wider than the column, so the page never pans sideways */
 @media (max-width: 479px) { #family .tint-pick { grid-template-columns: repeat(3, max-content) !important } }
@@ -1611,14 +1646,18 @@ def fix_14(p, web):
 #family .tint-pick { max-width: 100% }
 /* C6 (5): a long value wraps rather than widen the page */
 #pdp dd, #pdp .rows td, #pdp .rows dd { overflow-wrap: break-word; min-width: 0 }
-/* C6 (6): the fixed ask bar also on a phone held sideways and on a portrait tablet (701-860), where no ask is on the first screen */
-@media (min-width: 701px) and (max-height: 500px), (min-width: 701px) and (max-width: 860px) and (orientation: portrait) {
+/* C6 (6), C6c (2): the fixed ask bar also from 701 to 860 wide and on a phone held sideways, where no ask is on the first
+   screen; above 500 tall the picture gives up the bar's height (as on phones) so the counter, the arrows and the
+   thumbnails sit above it, and elsewhere it waits until they have scrolled above it; focus never lands behind it */
+@media (min-width: 701px) and (max-width: 860px), (min-width: 701px) and (max-height: 500px) {
   .ask-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
     background: var(--page); border-top: 1px solid var(--rule); justify-content: center }
   .ask-bar .cta-btn { flex: 0 1 420px; justify-content: center }
   body:has(#pdp:not([hidden])) { padding-bottom: 72px }
-  .ask-bar { transition: transform .2s ease } .ask-bar.off { transform: translateY(110%); visibility: hidden }
+  html { scroll-padding-bottom: 84px }
+  .ask-bar { transition: transform .2s ease } .ask-bar.off, .ask-bar.wait { transform: translateY(110%); visibility: hidden }
 }
+@media (min-width: 701px) and (max-width: 860px) and (min-height: 501px) { :root { --cap: calc(100svh - 390px) } }   /* C5's 222, the bar's 72, the thumbnails and their gap 88, 8 to spare */
 """)
 
 
@@ -1662,6 +1701,48 @@ def _strip_css(css):
     return ''.join(out)
 
 
+def _svh_fallback(css):
+    """C6c (5): every size set with svh gets a 100vh-based value for browsers without svh (Chrome/Edge 88-107, Safari
+    15.0-15.3, Firefox 89-100). A property: the vh value declared just before the svh one. A custom property, or a value with a
+    var() (either is checked only when used, so an unsupported unit would void it and its fallback): the vh value in place,
+    the svh value in @supports right after the rule."""
+    out, i, n = [], 0, len(css)
+    while i < n:
+        j = css.find('{', i)
+        if j < 0:
+            out.append(css[i:]); break
+        head = css[i:j]
+        if re.sub(r'/\*.*?\*/', '', head, flags=re.S).strip().startswith('@'):
+            d, k = 1, j + 1
+            while d:
+                d += {'{': 1, '}': -1}.get(css[k], 0); k += 1
+            out.append(head + '{' + _svh_fallback(css[j + 1:k - 1]) + '}'); i = k; continue
+        k = css.index('}', j)
+        body = css[j + 1:k]
+        if 'svh' not in body:
+            out.append(css[i:k + 1]); i = k + 1; continue
+        decls, sup, prev = [], [], None
+        for dcl in body.split(';'):
+            m = re.match(r'(\s*)([\w-]+)(\s*:\s*)(.*)$', dcl, flags=re.S)
+            if not m or 'svh' not in m.group(4):
+                decls.append(dcl); prev = m.group(2) if m else prev; continue
+            ws, prop, colon, val = m.groups()
+            vh = val.replace('svh', 'vh')
+            if prop.startswith('--') or 'var(' in val:       # a var() is checked only when used: a fallback before it would be lost
+                decls.append(ws + prop + colon + vh); sup.append(f'{prop}: {val.strip()}')
+            elif prev == prop:
+                decls.append(dcl)                      # a fallback already precedes it
+            else:
+                decls.append(f'{ws}{prop}{colon}{vh.strip()}; {prop}{colon}{val}')
+            prev = prop
+        sel = re.sub(r'/\*.*?\*/', '', head, flags=re.S).strip()
+        out.append(head + '{' + ';'.join(decls) + '}')
+        if sup:
+            out.append(f'\n@supports (height: 1svh) {{ {sel} {{ ' + '; '.join(sup) + ' } }')
+        i = k + 1
+    return ''.join(out)
+
+
 def finish_14(web):
     """C6 (7) the dead code out, none of it visible; (9) the home's twitter card matches its og."""
     import glob, sys
@@ -1682,6 +1763,7 @@ def finish_14(web):
         t = re.sub(r'(<style[^>]*>)(.*?)(</style>)', lambda m: m.group(1) + _strip_css(m.group(2)) + m.group(3), t, flags=re.S)
         for a, b in after:
             t = t.replace(a, b)
+        t = re.sub(r'(<style[^>]*>)(.*?)(</style>)', lambda m: m.group(1) + _svh_fallback(m.group(2)) + m.group(3), t, flags=re.S)
         for bad in ('hs-pt', 'hs-dot', 'hs-label', 'unit:', '"line":""', 'c.line', '.price', 'closer-cap', "getElementById('light-line')"):
             assert bad not in t, ('finish_14: left', bad, f)
         if t != s:
