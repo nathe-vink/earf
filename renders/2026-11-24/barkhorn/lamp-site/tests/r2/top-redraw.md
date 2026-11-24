@@ -36,15 +36,28 @@ lower outer edge and the collar's top inner edge. The meshes, the render's copie
      did not move. Its body is drawn as the hex and a round dome to the overall height (its outline to confirm).
    - The crown sits on the neck on its pad, its 2.5 floor held by three M3 x 8 countersunk screws at r 9.25 into the
      neck (keyed and held; flush, so the grip's hex and the socket pass over them).
-   - The suspension cable (the default; the fixture is about 3.5 lb, the SPT-2 cord carries 2.5) is anchored in the
-     hub: an M4 swaged stud screwed 6 into the neck at r 14, its collar in a counterbore, its top at 101.5 (above the
-     lip's travel, which ends at 75). The cable runs up a 2 bore through the crown and out through the cap's lid.
+   - (Addendum (g)) The lamp hangs from TWO suspension cables, symmetric about the axis (0 and 180 deg at r 14), so it
+     hangs level. Its centre of mass is on the axis: today 1601 g at z 65.7, A 1682 g at 68.2, B 1581 g at 65.3 (from
+     the solids). One cable off the axis would tilt it until that point is under the cable's exit: at r 14, 13.1 / 13.6 /
+     13.0 deg (the rim 23 to 24 mm higher on one side). With two, it hangs level; 1 mm of difference in their lengths
+     tilts it about 2.0 deg, so the two grippers in the canopy are set to equal length when the lamp is hung. The cord
+     carries current only (UL 153: an SPT-2 cord 2.5 lb, the lamp about 3.5).
+   - Each cable ends in a swaged M4 x 0.7 threaded stud (a rated part from the cable's maker; Lexco lists an M4 x 0.7
+     threaded plug and advises a pull test of the assembly: to confirm for 1.5 mm cable), screwed 8 into the hub, its
+     top 4 above the neck in a Ø5 bore in the crown, far above the lip's travel (it ends at 75). The cables run up Ø2
+     bores through the crown and the cap's lid, in the crown's metal outside the grip's pocket.
+   - The crown is keyed and held by its three screws, not by the cables (a turn of the crown cannot kink them).
    - The cap rests on the crown, located by the cord and the cable through its lid, held down by its own weight (the
      lamp hangs; nothing pulls the cap up). No screws, no thread.
-   - The pocket Ø24 takes a thin-wall 16 socket (about 22.5 across), clear of the countersunk heads and the cable.
-   - The order: the hub; the cable's stud screwed into the hub; the crown lowered over the cable onto the neck, its
-     three screws; the grip screwed into the hub and tightened with the socket down the pocket; the cord through it,
-     its dome nut tightened; the cap lowered over the cord and the cable.
+   - The pocket Ø24 takes a thin-wall 16 socket (about 22.5 across) for the grip's body and then its dome nut, clear of
+     the countersunk heads; the cables are outside the pocket. The hub is tapped M12 13 deep (to 88.5, through the old
+     Ø10 wire bore), so all 12 of the grip's thread are engaged (9.5 in the hub, 2.5 through the crown's floor).
+   - The order: the hub; the two studs screwed into the hub; the crown lowered over the cables onto the neck, its three
+     screws; the grip screwed into the hub and tightened with the socket down the pocket; the cord through it, its dome
+     nut tightened with the same socket; the cap lowered over the cord and the cables; the grippers in the canopy set to
+     equal length, the lamp level.
+   - (Addendum (l)) The bayonet's pins are a custom turned part (no catalogue pin matches the CAD): stainless 303, a Ø4
+     shoulder 4.2 long, an M3 thread 15.8 long through a Ø3.2 clearance in the PEEK (now drawn so) and 6 into the hub.
 7. The clamp thread's run-out is a DIN 76 undercut on the collar (Ø93.7, 92 to 95.75, 2.5 pitches); the ring's thread
    has a 1 x 45 lead-in.
 8. South's slot entries (dropped in round 38) are left out of the collar with the lip (they cut it, seen from below).

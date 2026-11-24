@@ -221,15 +221,20 @@ TOP_TIERS = {
 # height, its outline to confirm on the sheet. The hub is tapped M12 13 deep from the neck's top (101.5), so all 12 of
 # thread are in the aluminium and the cord's pull goes straight into the hub. The crown sits on the neck on its pad, its
 # 2.5 floor held down by three M3 countersunk screws at r 9.25 into the neck (keyed and held, flush under the grip's
-# hex). The suspension cable's swaged stud screws into the hub (M4, 6 deep, at r 14, its collar in a counterbore, top
-# at 101.5, the neck's top; the grip's seat 104, its top 124.5 under the lid at 125), the cable up a Ø2 bore through the crown and the cap. The cap rests on the crown, located by the cord and
-# the cable through its lid, held down by its weight (the lamp hangs; nothing pulls it up). The pocket Ø24 takes a
-# thin-wall 16 socket (about 22.5 across) clear of the countersunk heads and the cable.
-# The order: the hub; the cable's stud into the hub; the crown over the cable onto the neck, its three screws; the
-# grip into the hub, tightened with the socket down the pocket; the cord through it, its dome nut tightened; the cap
-# down over the cord and the cable
+# hex). (Addendum (g)) The fixture hangs level from TWO suspension cables, symmetric about the axis (0 and 180 deg at
+# r 14): one cable off the axis tilts the lamp until its centre of mass (on the axis, about z 65 to 68) is under the
+# cable's exit (about 9 to 13 deg). Each cable ends in a swaged M4 threaded stud (a rated part with the cable maker, e.g.
+# Lexco's M4 x 0.7 threaded plug, to confirm with a pull test as Lexco advises) screwed 8 into the hub, its top 4 above the
+# neck in a Ø5 bore in the crown; the cables up Ø2 bores through the crown and the cap's lid to two grippers in the
+# canopy, set to equal length when the lamp is hung (1 mm of difference tilts it about 2 deg). The crown is keyed and held
+# by its three screws, not by the cables. The cap rests on the crown, located by the cord and the cables through its lid,
+# held down by its weight (the lamp hangs; nothing pulls it up). The pocket Ø24 takes a thin-wall 16 socket (about 22.5
+# across) for the grip's body and then its dome nut, clear of the countersunk heads; the cables are in the crown's metal,
+# outside the pocket. The order: the hub; the two studs into the hub; the crown over the cables onto the neck, its three
+# screws; the grip into the hub, tightened with the socket; the cord through it, its dome nut tightened with the socket;
+# the cap down over the cord and the cables; the grippers in the canopy, levelled
 GRIP = dict(thread=(12.0, 12.0), tap=13.0, hex=(17.6, 5.0), overall=32.5, pocket=24.0, lid=1.0,
-            floor=(101.5, 104.0), screws_r=9.25, cable_r=14.0, stud=(7.0, 4.0, 6.0))
+            floor=(101.5, 104.0), screws_r=9.25, cable_r=14.0, cables=(0.0, 180.0), stud=(4.0, 8.0, 4.0))
 # The white under the hub (2026-11-24): since 2026-11-11 a Ø95 disc on the fixture, which the collar's r 41 bore cannot
 # pass, so the shade could not be lowered off (4.0 free, 9.0 needed). Split: a Ø62 disc on the fixture (the hub's own
 # Ø, it passes the bore) and a white ring on the cover, Ø95 x Ø63, under the collar's foot; together they hide the slots
@@ -452,9 +457,9 @@ def north_parts(p=N):
     for a in (0, 120, 240):
         pin = at(a + p['turn'], cyl('x', (0, pz), sd_, ro / 2, tip) + cyl('x', (0, pz), td, tin, ro / 2))
         pins = pin if pins is None else pins + pin
-        hole = at(a + p['turn'], cyl('x', (0, pz), td, tin, ro / 2 + 1))
-        ring = ring - hole
-        core = core - hole
+        # (check 3, (l)) the pin's thread through a Ø3.2 clearance in the PEEK, tapped M3 (Ø2.5) in the hub
+        ring = ring - at(a + p['turn'], cyl('x', (0, pz), 3.2, ri / 2 - 1, ro / 2 + 1))
+        core = core - at(a + p['turn'], cyl('x', (0, pz), 2.5, tin, ro / 2 + 1))
     # the reflector: a faceted cone of high-reflectance aluminium in the bore, from the COB's edge to the mouth
     from build123d import Cone, Pos, Align
     al = (Align.CENTER, Align.CENTER, Align.MIN)
@@ -499,9 +504,14 @@ def north_parts(p=N):
             crown = t_ if crown is None else crown + t_
         gd_, g0_, g1_ = tt_['gland']
         f0_, f1_ = GRIP['floor']; td_, tl_ = GRIP['thread']; pk_ = GRIP['pocket']; lid_ = GRIP['lid']; cr_ = GRIP['cable_r']
-        sr_ = GRIP['screws_r']; cbd_, cbh_, sth_ = GRIP['stud']
+        sr_ = GRIP['screws_r']
         crown = (crown - cyl('z', (0, 0), nd + 0.2, sz0 - 1, f0_) - cyl('z', (0, 0), td_ + 0.5, f0_ - 1, f1_ + 0.1)
-                 - cyl('z', (0, 0), pk_, f1_, g0_ + 1) - cyl('z', (cr_, 0), 2.0, f0_ - 1, g0_ + 1))
+                 - cyl('z', (0, 0), pk_, f1_, g0_ + 1))
+        # (check 3, (g)) two cables, symmetric about the axis (0 and 180 deg at r 14), so the lamp hangs level from them
+        cxy_ = [(cr_ * math.cos(math.radians(a_)), cr_ * math.sin(math.radians(a_))) for a_ in GRIP['cables']]
+        sd2_, sin_, sup_ = GRIP['stud']
+        for xy_ in cxy_:
+            crown = crown - cyl('z', xy_, sd2_ + 1.0, f0_ - 1, f0_ + sup_ + 0.5) - cyl('z', xy_, 2.0, f0_ - 1, g0_ + 1)
         from build123d import Cone, Pos, Align, RegularPolygon, extrude
         sc_ = None
         for a_ in (60, 180, 300):
@@ -511,14 +521,18 @@ def north_parts(p=N):
             core = core - cyl('z', (x_, y_), 2.5, f0_ - 6.0, f0_ + 0.1)                     # M3 tapped 6 into the neck
             s_ = cyl('z', (x_, y_), 3.0, f0_ - 5.0, f1_ - 1.65) + Pos(x_, y_, f1_ - 1.65) * Cone(1.5, 3.0, 1.65, align=(Align.CENTER, Align.CENTER, Align.MIN))
             sc_ = s_ if sc_ is None else sc_ + s_
-        core = (core - cyl('z', (0, 0), nd + 1, f0_, nz + 1) - cyl('z', (0, 0), td_, f0_ - GRIP['tap'], f0_ + 0.1)
-                - cyl('z', (cr_, 0), cbd_, f0_ - cbh_, f0_ + 0.1) - cyl('z', (cr_, 0), 3.3, f0_ - cbh_ - sth_, f0_))
+        core = core - cyl('z', (0, 0), nd + 1, f0_, nz + 1) - cyl('z', (0, 0), td_, f0_ - GRIP['tap'], f0_ + 0.1)
         gland = (eased(gd_, g0_, g1_, 1.0) - cyl('z', (0, 0), pk_, g0_ - 1, g1_ - lid_)
-                 - cyl('z', (0, 0), 8, g1_ - lid_ - 1, g1_ + 1) - cyl('z', (cr_, 0), 2.0, g0_ - 1, g1_ + 1))
+                 - cyl('z', (0, 0), 8, g1_ - lid_ - 1, g1_ + 1))
+        stud = None
+        for xy_ in cxy_:
+            core = core - cyl('z', xy_, 3.3, f0_ - sin_, f0_ + 0.1)                        # M4 tapped 8
+            gland = gland - cyl('z', xy_, 2.0, g0_ - 1, g1_ + 1)
+            st_ = cyl('z', xy_, sd2_, f0_ - sin_, f0_ + sup_)
+            stud = st_ if stud is None else stud + st_
         hx_, hh_ = GRIP['hex']; sq_ = f1_; top_ = sq_ + GRIP['overall'] - tl_
         grip = (cyl('z', (0, 0), td_, sq_ - tl_, sq_) + Pos(0, 0, sq_) * extrude(RegularPolygon(hx_ / 2, 6), hh_)
                 + eased(hx_ - 0.6, sq_ + hh_, top_, 3.0, bottom=False) - cyl('z', (0, 0), 7.0, sq_ - tl_ - 1, top_ + 1))
-        stud = cyl('z', (cr_, 0), 4.0, f0_ - cbh_ - sth_, f0_ - cbh_) + cyl('z', (cr_, 0), cbd_ - 0.6, f0_ - cbh_, f0_)
         z_cord = g1_
     cord = cyl('z', (0, 0), 6, z_cord, z_cord + p['drop'])
     zc = z_cord + p['drop']
@@ -526,7 +540,9 @@ def north_parts(p=N):
     # carries current only (UL 153 lets an SPT-2 cord carry 2.5 lb; Hemisphere is about 3.5); an option until signed
     susp = cyl('z', (5.5, 0), 1.5, z_cord, zc) + cyl('z', (5.5, 0), 5.0, z_cord, z_cord + 9) + cyl('z', (5.5, 0), 5.0, zc - 9, zc)
     if tt_:                                   # (check 3) the cable from its stud in the hub up through the crown and the cap's lid
-        susp = cyl('z', (GRIP['cable_r'], 0), 1.5, GRIP['floor'][0], zc) + stud + cyl('z', (GRIP['cable_r'], 0), 5.0, zc - 9, zc)
+        susp = stud
+        for xy_ in cxy_:
+            susp = susp + cyl('z', xy_, 1.5, GRIP['floor'][0] + GRIP['stud'][2], zc) + cyl('z', xy_, 5.0, zc - 9, zc)
     cnd, cnh = p['canopy']
     canopy = cyl('z', (0, 0), cnd, zc, zc + cnh) - cyl('z', (0, 0), cnd - 6, zc - 1, zc + cnh - 3)
     driver = box(-42, -28.5, zc + 6, 42, 28.5, zc + 6 + 29.5)
