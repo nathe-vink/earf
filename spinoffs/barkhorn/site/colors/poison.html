@@ -1524,8 +1524,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
         <p class="line" id="p-line"></p>
         <p class="sizel" id="p-size"></p>
         <p class="para" id="p-para" hidden></p>
-        <p class="price">Price on request. <span id="p-unit"></span></p>
-        <div class="acts"><a id="p-enquire" class="cta-btn cta-solid p-ask" href="mailto:hello@earf.world">Ask</a><button type="button" class="ic-btn" id="p-share" aria-label="Copy link" title="Copy link"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8.5 11.5a3.5 3.5 0 0 0 5 0l2.5-2.5a3.5 3.5 0 0 0-5-5l-1 1M11.5 8.5a3.5 3.5 0 0 0-5 0L4 11a3.5 3.5 0 0 0 5 5l1-1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div>
+        <div class="acts"><a id="p-enquire" class="cta-btn cta-solid p-ask" href="mailto:hello@earf.world">Make first contact</a><button type="button" class="ic-btn" id="p-share" aria-label="Copy link" title="Copy link"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8.5 11.5a3.5 3.5 0 0 0 5 0l2.5-2.5a3.5 3.5 0 0 0-5-5l-1 1M11.5 8.5a3.5 3.5 0 0 0-5 0L4 11a3.5 3.5 0 0 0 5 5l1-1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div>
         <p class="addr2"><span>hello@earf.world</span> <button type="button" class="btn sm" id="p-copy">Copy address</button></p>
         <p class="share-note" id="p-share-note" aria-live="polite"></p>
       </aside>
@@ -1533,9 +1532,9 @@ a.cta-btn, .ft-btn { min-height: 44px }
     <section class="rows" id="p-rows" aria-label="In each color" hidden></section>
     <section class="lights" id="p-lights" aria-labelledby="p-lights-h" hidden><figure><picture><source media="(max-width: 860px)" srcset="img/rc/hemisphere-ember-cutaway-phone.webp" width="1200" height="1200"><img src="img/rc/hemisphere-ember-cutaway.webp" width="1200" height="1200" loading="lazy" alt="Hemisphere in Ember, cut in half: the white diffuser, the clear shell tinted outside, the black center, the LEDs on a ring facing up, and warm white light going down"></picture><figcaption id="p-lights-note"></figcaption></figure><div><h2 id="p-lights-h">How it lights</h2><p>Twenty-four LEDs face away from you, so there&rsquo;s no bright point to look into.</p></div></section>
     <div id="p-company"></div>
-    <div class="foot-ask"><a class="cta-btn cta-solid p-ask" href="mailto:hello@earf.world">Ask</a></div>
+    <div class="foot-ask"><a class="cta-btn cta-solid p-ask" href="mailto:hello@earf.world">Make first contact</a></div>
     <section class="others" id="p-others" aria-label="The family"></section>
-    <div class="ask-bar"><a class="cta-btn cta-solid p-ask" href="mailto:hello@earf.world">Ask</a></div>
+    <div class="ask-bar"><a class="cta-btn cta-solid p-ask" href="mailto:hello@earf.world">Make first contact</a></div>
   </div>
 </main>
 
@@ -1786,17 +1785,17 @@ const tintWord = c => c.k === 'ice' ? 'clear' : c.tint.toLowerCase();
 const PRODUCTS = [
   { id: 'speaker', line: 'speakers', lineName: 'Tropos', route: 'speaker', kind: 'Horn speaker', name: () => 'Tropos',
     num: () => 'Horn speaker', copy: c => `A powered horn speaker in ${tintWord(c)} cast acrylic. Sold in pairs.`, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
-    card: k => { const o = BY[k].views.off; return o.tall || o.card || o; }, unit: 'Each pair is made to order.', ask: 'Ask about a pair',
+    card: k => { const o = BY[k].views.off; return o.tall || o.card || o; }, unit: 'Each pair is made to order.', ask: 'Make first contact',
     facts: c => [['Acrylic', `${c.tint}`], ['Cabinet', `Cast acrylic, 20 mm, tinted through; lined in white`], ['Lining', `Polyester batts in white voile, 100 mm at the top and the bottom`], ['Horn', `Thermoformed cast acrylic, 10 mm, in the cabinet&rsquo;s color; polished inside and out, on four black posts`], ['Woofer', `FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners`], ['Horn driver', `B&amp;C DE1085TN, 2-inch compression driver`], ['Amplifier', `Hypex FusionAmp FA123 built in: the woofer on two bridged channels, up to 125 W into its 8 &Omega;; the horn on its own; crossed at 1 kHz in its DSP`], ['Bass', `To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz`], ['Loudness', `Up to about 115 dB at 1 m, each`], ['Inputs', `XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up`], ['Size', `1295 high, 560 wide (the horn flush with the cabinet), 442 deep overall, 420 at the cabinet (mm)`], ['Weight', `About 75 kg (165 lb) each`], ['Care', `${D.care}`]],
     title: c => `Tropos in ${c.name}` },
   ...Object.entries(D.lamps).map(([id, L]) => ({ id, line: 'lighting', lineName: 'Lighting', route: L.route || id, kind: L.kind, name: () => L.name,
     num: () => L.kind, copy: c => (id === 'dome' ? `A pendant in ${tintWord(c)} cast acrylic. The shade comes off with a quarter turn.`
       : `A table lamp in ${tintWord(c)} cast acrylic. Cordless. About five hours a charge.`), views: k => (L.colours[k] || {}).views, VIEWS: LAMP_VIEWS[id],
-    card: k => L.colours[k].card, unit: 'Made to order.', ask: 'Ask about it', facts: c => [...L.facts.map(f => L.lm && f[1].includes('{lm}') ? [f[0], f[1].replace('{lm}', L.lm[c.k])] : f), ['Color', c.name]],
+    card: k => L.colours[k].card, unit: 'Made to order.', ask: 'Make first contact', facts: c => [...L.facts.map(f => L.lm && f[1].includes('{lm}') ? [f[0], f[1].replace('{lm}', L.lm[c.k])] : f), ['Color', c.name]],
     title: c => `${L.name} in ${c.name}` })),
   ...(D.tt ? [{ id: 'turntable', line: 'turntable', lineName: 'Mantle', route: D.tt.route || 'turntable', kind: 'Turntable', name: () => D.tt.name,
     num: () => 'Turntable', copy: c => `A turntable in ${tintWord(c)} cast acrylic.`, views: k => (D.tt.colours[k] || {}).views, VIEWS: TT_VIEWS,
-    card: k => D.tt.colours[k].card, unit: 'Made to order.', ask: 'Ask about it', facts: c => [...D.tt.facts, ['Color', c.name]],
+    card: k => D.tt.colours[k].card, unit: 'Made to order.', ask: 'Make first contact', facts: c => [...D.tt.facts, ['Color', c.name]],
     title: c => `${D.tt.name} in ${c.name}` }] : []),
 ];
 const CAPS = {speaker: {"off": "", "habitat": "", "bar": "", "studio-light": "", "studio": "", "amp": "", "reel": "", "turn": "", "spin": "Drag across it to turn it.", "back": "The name cut into the back and filled with color; grips in the sides.", "horn-side": "The flare, the driver's pod, four slim posts.", "horn-back": "", "inside": "The woofer's motor, the batts in their voile sleeves, a port."}, dome: {"hero": (c, s) => s ? `Shown lit in ${BY[s].name}.` : '', "bar": "", "off": "", "cluster": "", "row": "", "below": "", "table": "", "cap": "", "rim": "", "unlit": "Shown in Smoke, a color on hold."}, orb: {"hero": (c, s) => s ? `Shown lit in ${BY[s].name}.` : '', "bar": "", "row": "", "day": "", "unlit": "Shown in Smoke, a color on hold."}, turntable: {"house": "", "studio": "", "cover": "", "bar": "", "open": "", "detail": "", "pod": "The motor in its own pod, clear of the plinth."}};  
@@ -1892,7 +1891,6 @@ function renderProduct(Pr, k) {
   document.getElementById('p-pick').textContent = c.name;
   document.getElementById('p-icon').innerHTML = '';         // the color's own icon: by the
   document.getElementById('p-pick-ic').innerHTML = icons(c);     // name it is, else by the color
-  document.getElementById('p-unit').innerHTML = P.unit;
   renderSpec(P, c); renderAsk(P, c);
   document.getElementById('swatches').replaceChildren(...D.clouds.filter(o => P.views(o.k)).map(o => { const li = el('li');
     li.appendChild(el('a', { href: `#${P.route}-${o.name.toLowerCase()}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
@@ -1929,7 +1927,7 @@ const SPEC = {"speaker":[["Materials",[["Acrylic","{tint}"],["Cabinet","Cast acr
 const GR = {};
 const grOf = s => { const h = s && GR[s.src]; if (!h) return ''; const c = h.match(/.{6}/g).map(x => '#' + x), st = cs => cs.map((x, i) => `${x} ${5 + 10 * i}%`).join(', ');
   return `linear-gradient(${st(c.slice(0, 10))}) left / 51% 100% no-repeat, linear-gradient(${st(c.slice(10))}) right / 51% 100% no-repeat`; };
-const ASK = {"speaker": "Ask about a pair", "dome": "Ask about Hemisphere", "orb": "Ask about Core", "turntable": "Ask about Mantle"}, MAIL = 'hello@earf.world', OTHERS = [{"route":"speaker","name":"Tropos","kind":"Horn speaker","w":1000,"h":1250,"ground":"#E9E5DC","pics":{"red":"img/rc/red-tall.webp","orange":"img/rc/orange-tall.webp","amber":"img/rc/amber-tall.webp","green":"img/rc/green-tall.webp","blue":"img/rc/blue-tall.webp","violet":"img/rc/violet-tall.webp","ice":"img/rc/ice-tall.webp","black":"img/rc/black-tall.webp"}},{"route":"hemisphere","name":"Hemisphere","kind":"Pendant","w":800,"h":1000,"ground":"#221F1E","pics":{"red":"img/rc/tile-hemisphere-ember.webp","orange":"img/rc/tile-hemisphere-dust.webp","amber":"img/rc/tile-hemisphere-acid.webp","green":"img/rc/tile-hemisphere-poison.webp","blue":"img/rc/tile-hemisphere-ice.webp","violet":"img/rc/tile-hemisphere-haze.webp","ice":"img/rc/tile-hemisphere-fog.webp","black":"img/rc/tile-hemisphere-smoke.webp"}},{"route":"core","name":"Core","kind":"Table lamp","w":800,"h":1000,"ground":"#242121","pics":{"red":"img/rc/tile-core-ember.webp","orange":"img/rc/tile-core-dust.webp","amber":"img/rc/tile-core-acid.webp","green":"img/rc/tile-core-poison.webp","blue":"img/rc/tile-core-ice.webp","violet":"img/rc/tile-core-haze.webp","ice":"img/rc/tile-core-fog.webp","black":"img/rc/tile-core-smoke.webp"}},{"route":"mantle","name":"Mantle","kind":"Turntable","w":800,"h":1000,"ground":"#E9E5DC","pics":{"red":"img/rc/tile-mantle-ember.webp","orange":"img/rc/tile-mantle-dust.webp","amber":"img/rc/tile-mantle-acid.webp","green":"img/rc/tile-mantle-poison.webp","blue":"img/rc/tile-mantle-ice.webp","violet":"img/rc/tile-mantle-haze.webp","ice":"img/rc/tile-mantle-fog.webp","black":"img/rc/tile-mantle-smoke.webp"}}], ARROW = "<svg class=\"arr\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M4 10h11M11 5l5 5-5 5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>";
+const ASK = {"speaker": "Make first contact", "dome": "Make first contact", "orb": "Make first contact", "turntable": "Make first contact"}, MAIL = 'hello@earf.world', OTHERS = [{"route":"speaker","name":"Tropos","kind":"Horn speaker","w":1000,"h":1250,"ground":"#E9E5DC","pics":{"red":"img/rc/red-tall.webp","orange":"img/rc/orange-tall.webp","amber":"img/rc/amber-tall.webp","green":"img/rc/green-tall.webp","blue":"img/rc/blue-tall.webp","violet":"img/rc/violet-tall.webp","ice":"img/rc/ice-tall.webp","black":"img/rc/black-tall.webp"}},{"route":"hemisphere","name":"Hemisphere","kind":"Pendant","w":800,"h":1000,"ground":"#221F1E","pics":{"red":"img/rc/tile-hemisphere-ember.webp","orange":"img/rc/tile-hemisphere-dust.webp","amber":"img/rc/tile-hemisphere-acid.webp","green":"img/rc/tile-hemisphere-poison.webp","blue":"img/rc/tile-hemisphere-ice.webp","violet":"img/rc/tile-hemisphere-haze.webp","ice":"img/rc/tile-hemisphere-fog.webp","black":"img/rc/tile-hemisphere-smoke.webp"}},{"route":"core","name":"Core","kind":"Table lamp","w":800,"h":1000,"ground":"#242121","pics":{"red":"img/rc/tile-core-ember.webp","orange":"img/rc/tile-core-dust.webp","amber":"img/rc/tile-core-acid.webp","green":"img/rc/tile-core-poison.webp","blue":"img/rc/tile-core-ice.webp","violet":"img/rc/tile-core-haze.webp","ice":"img/rc/tile-core-fog.webp","black":"img/rc/tile-core-smoke.webp"}},{"route":"mantle","name":"Mantle","kind":"Turntable","w":800,"h":1000,"ground":"#E9E5DC","pics":{"red":"img/rc/tile-mantle-ember.webp","orange":"img/rc/tile-mantle-dust.webp","amber":"img/rc/tile-mantle-acid.webp","green":"img/rc/tile-mantle-poison.webp","blue":"img/rc/tile-mantle-ice.webp","violet":"img/rc/tile-mantle-haze.webp","ice":"img/rc/tile-mantle-fog.webp","black":"img/rc/tile-mantle-smoke.webp"}}], ARROW = "<svg class=\"arr\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M4 10h11M11 5l5 5-5 5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>";
 const keepUnits = t => t.replace(/(\d) (in|mm|lb|kg|ft|m|W|V|Wh|K|lm|lux|dB|Hz|kHz|rpm)\b/g, '$1\u00a0$2').replace(/\b(in|mm|lb|kg|ft|m) \(/g, '$1\u00a0(')
   .replace(/(\d) x (\d)/g, '$1\u00a0x\u00a0$2');
 const fillSpec = (t, c) => keepUnits(t).replace(/\{([^{}|]*)\|([^{}]*)\}/g, (x, a, b) => c.k === 'ice' ? b : a).replace('{tint}', c.tint)
@@ -1940,7 +1938,7 @@ function renderSpec(P, c) { document.getElementById('p-size').textContent = SIZE
     ? `<p class="spec1">${fillSpec(rows[0][1], c)}</p>` : '<dl class="facts">' + rows.map(([a, b]) => `<dt>${a}</dt><dd>${fillSpec(b, c)}</dd>`).join('') + '</dl>')).join(''); }
 function renderAsk(P, c) {         // the ask: a letter, its subject the product in its color (18)
   const t = P.title(c), href = `mailto:${MAIL}?subject=${encodeURIComponent(t)}&body=${encodeURIComponent(`${t}. Quantity: \nCountry: `)}`;
-  document.querySelectorAll('#pdp .p-ask').forEach(a => { a.textContent = ASK[P.id] || 'Ask'; a.href = href; }); }
+  document.querySelectorAll('#pdp .p-ask').forEach(a => { a.textContent = ASK[P.id] || 'Make first contact'; a.href = href; }); }
 function renderOthers(P, c) {      // the other three in the tint now chosen, each a link to it (19)
   const nm = c.name.toLowerCase();
   document.getElementById('p-others').innerHTML = '<div class="ftiles ftiles3">' + OTHERS.filter(o => o.route !== P.route).map(o =>
