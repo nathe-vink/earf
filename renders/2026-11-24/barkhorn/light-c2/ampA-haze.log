@@ -1,0 +1,13 @@
+NO GLASS SHADOWS: 6 materials: ['bark@cloud-violet', 'bark@cloud-violet.001', 'clear-cast@cloud-violet', 'horn-formed@cloud-violet', 'horn-lot@cloud-violet', 'horn-satin@cloud-violet']
+SHADOW RAY LINKS LEFT: 0 []
+00:21.956  cycles           | WARNING CUEW initialization failed: Error opening the library
+40:19.261  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/ampA-haze.png'
+/home/user/earf/studio/engine/render.py:511: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+40:23.398  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/ampA-haze.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:562: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+40:24.915  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/ampA-haze.swatch.png'
+finish: white 235 -> 238 (gain 1.0128), contrast 0.1, clarity 0.03, sharpen 0.12 at 0.7 px
+renders/2026-11-24/barkhorn/light-c2/ampA-haze.png  {'build': 21.7, 'render': 2397.3}  samples 128
