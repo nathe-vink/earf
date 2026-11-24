@@ -13,6 +13,11 @@
 # THE GATE: each frame's audit runs first; any hidden object in frame (CASTCHECK above 0.0) stops it before the render.
 # PASS_AUDIT_ONLY=1: the audit and the gate only, no render.
 # Writes pass2/TINT/{hemisphere,core}-TINT-{off,lit}.png and audit/; prints the meters. Skips what exists.
+# THE RE-RENDER LIST (v6, the v5 check's (15)): from 2026-11-10 to the v5 fix, the collar's white test read 0.080 against
+# mm coordinates, so every Hemisphere picture drew the collar's painted faces black, including faces that take the LEDs'
+# light. Every Hemisphere frame of this pass is re-rendered, the LIT ones (GROUP C) included, and so is the live cutaway
+# 'How it lights' (renders/2026-11-12/barkhorn/lamp-site/legible/hemisphere-ember-cutaway.png). The white is limited to the
+# painted faces in every render now (lamp_site.py), with or without HEMI_COLLAR_CAP.
 set -e
 T=${1:?tint}; G=${2:?group}
 ROOT=$(cd "$(dirname "$0")/../../../../.." && pwd)

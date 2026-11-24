@@ -27,8 +27,8 @@ lower outer edge and the collar's top inner edge. The meshes, the render's copie
 4. The clamp ring screws down to a shoulder turned on the collar (Ø100, 86 to 92; the acrylic's hole 100.4, against
    today's 96.4), so its height, and the collar's top 0.5 over it, are held on the collar. The thread's run-out is a DIN
    76 undercut (Ø93.7, 92 to 95.75); the band's bore is relieved (Ø100.4) below 92, so only the ring is threaded. The
-   collar's threaded length is 7.58 (A) and 4.75 (B); full-thread engagement with the ring 6.08 (A, about 4 turns) and
-   3.25 (B, about 2). The thread carries only the preload: the shade's weight rests on the collar's flange through the
+   collar's threaded length is 7.58 (A) and 4.75 (B); full-thread engagement with the ring 6.68 (A, about 4.5 turns) and
+   3.85 (B, about 2.5; v6, the v5 check's (9)). The thread carries only the preload: the shade's weight rests on the collar's flange through the
    inner silicone, not on the thread. Lead-ins: the ring's bore at its leading edge (z 92), the collar's top
    outer edge down to the thread's root.
 5. The squeeze is then set by the stack (the table below), not by torque.
@@ -144,3 +144,77 @@ The sheet: top-sheet-v4.jpg (its renders' commands: v4.sh).
   - (22) The thread engagement and the load path are corrected in rule 4; the cord's BOM row now names the two cables
     and the grip under the cap.
   - (23) The screws went to 90/210/330.
+
+## 6. v6: the hanging (the v5 check, items 1 to 16)
+
+The fixings of section 2, rule 6 are replaced where this section differs.
+
+- (1) THE ANCHOR, a part whose maker publishes its shape. Each cable is 1/16 in (1.59) 7x7 stainless (Cable Grippers Inc.'s
+  bulk cable). Its hub end is a Nicopress 871-1-C copper stop sleeve, swaged with the 51-C-887 tool. Nicopress's own data
+  sheet names the part and the tool; its size (13/64 x 7/32 in, about Ø5.2 x 5.6) and its 430 lb typical holding strength
+  come from a distributor's copy of Nicopress's table, to confirm. It bears up under a Ø5.6 x 6 counterbore in the hub's
+  bottom face. In V3 (the light on a stem) the hub is solid there from z 60 to the neck, so the cable runs up a Ø2.4 hole
+  through it, then through the crown and the cap. The white disc closes the counterbores. No turning, no thread, no tool
+  inside the lamp. The old stud's tap ran into the hub's light chamber; it is gone.
+- (2) THE CANOPY, right side up: open at the top against the ceiling, its 3 mm floor closed below with the cord's gland in
+  its centre. The canopy is a cover, held to the strap by two flush black set screws in its wall; the strap carries the
+  load. The locks are Cable Grippers MGR-M10-MM. Their chart gives 17.1 mm long without the plunger, a Ø11.9 body and an
+  M10 thread. Their table gives MGR on 1/16 in stainless 7x7 as 312 lb minimum break in independent tests, 50 lb a cable
+  at 5:1, against the lamp's 3.7 lb on two. Each is threaded up into a steel L bracket under the strap, plunger down, 1 mm
+  above a Ø6 hole in the canopy's floor. The cable passes through that hole: push the plunger from below and the cable
+  slides; let go and it grips. The grippers sit at r 40, clear of the driver's enclosure, which is now turned across the
+  cables' line (64 along it, 92 across). The cables splay from their exits (r 16; B r 18.5) to r 40. With the splay, 1 mm
+  of length difference tilts the lamp 1.46 / 1.47 / 1.39 deg (today, A, B; parallel cables would give 1.79 / 1.79 / 1.55).
+- (3) THE CORD is set 2 mm longer than the cables between its grips. The cables stretch about 0.05 mm under the lamp, so
+  the cord carries none of it. Over the 600 drop it bows about 21 mm to one side, and is drawn so. Installing: the lamp
+  hung and levelled on the cables, feed the cord until it bows, then tighten the canopy's grip.
+- (4) THE TETHER: 1.5 mm 7x7 stainless rope, 125 mm between its two screws.
+  - The hub end: an M4 button screw radially into the hub at z 80, 90 deg, clamps a crimped loop, the hub's eye. That is
+    above the lip's 75 in the lift and under the PEEK's 86.
+  - The clip: a 4 x 40 stainless snap hook (DIN 5299 C) on that eye. It stands on the lip's top along the bore, its ends at
+    r 38.8 and its middle at r 33.3.
+  - The rope runs round the lip's top, under the pins and the land, to an M3 button screw through the collar's wall at
+    z 70, 270 deg. That hole is tapped through from outside, under the shade's flange. The v5 eye tab is dropped.
+  - Clearance: the shade turns and lowers 100 mm before the rope goes taut.
+  - In a swap: lower the shade a hand's width, then unclip at the hub, which is then clear of the collar. The step is in
+    NOTES_DOME.
+  - If the bayonet failed, the shade's drop onto the tether peaks at about 1.3 kN. That is a stiff elastic estimate that
+    leaves out the rope's own give. It is under the rope's 2.2 kN (a seller's figure) and the snap's 1.9 kN (the lowest
+    seller listing; sellers list 1.9 to 5.8 kN). It holds once; it is not a margin of 10.
+- (5) The cables render bare stainless grey; the copper sleeves are hidden in the hub.
+- (6) The clamp ring's lead-in is now cut after the band's union.
+- (7) Thin walls:
+  - Today's and A's cables sit at r 16, so today's Ø40 cap keeps 2.8 mm round them.
+  - B's cables sit at r 18.5, 1.3 mm clear of its Ø32 cap's side.
+  - The dowel and magnet sit at r 15.5, 2.5 mm from the crown's Ø24 pocket.
+  - B's cap is held by a Ø1.5 magnet at r 14 only (1.25 mm from the pocket and the fillet), with no dowel.
+- (8) The swap: hold the cap in today's top and A; hold the Ø56 tier in B. The texts now agree: crystal.py, NOTES_DOME,
+  the cap's note and this note.
+- (9) Texts and BOM:
+  - The clamp's note is now the shoulder and the shims; torque applies to today's top only.
+  - The PTFE slip washer is drawn and is a BOM row (hemi-slip-washer); in the drawing it takes 0.25 of the outer gasket's
+    1.0.
+  - The silicone row lists the shim set.
+  - The suspension row is rewritten.
+  - NOTES_DOME names the grippers and the pull test.
+  - The thread engagement is 6.68 (A) and 3.85 (B).
+- (10) The build's clash check no longer exempts any fixing:
+  - Tapped holes are drawn at the thread's major Ø, so threads touch and never overlap.
+  - fabkit builds all three tops with 0 clashes.
+  - fixings_check.py reports no overlap at zero tolerance.
+  - dome_pendant_v2 and South keep the old pairs (TOUCHING_DOME_LEGACY).
+- (11) to (13) The sheet:
+  - The 35 deg view is cropped above the shade, where the cord and cables ended in mid-air.
+  - The footer's sentence on the crown's inside is gone.
+  - The dome is shot at Blender's neutral (6500 K, tint 10).
+- (14) The white paint is a BOM row (hemi-white-paint): the disc's powder coat, and the lip masked and painted beneath.
+- (15) The collar's white is limited to its painted faces in every render, with or without HEMI_COLLAR_CAP. For pass v2:
+  every lit picture made since 2026-11-10 drew those faces black, so the lit pictures join the re-render list.
+- (16) The weights now include the cables inside the lamp and the sleeves (section 7).
+
+## 7. v6 weights (the v5 check's (16))
+
+From the v6 solids, everything that hangs from the cables: today 1620 g at z 66.0, A 1701 g at 68.4, B 1598 g at 65.5. These
+include the tether and its snap, the slip washer, the two stop sleeves and the cables inside the lamp (2.2 g); v5 left out
+its stud ends. The cables' own weight above the lamp hangs from the grippers. The lamp is about 3.7 lb, on two cables rated
+50 lb each.

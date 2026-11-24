@@ -322,7 +322,7 @@
  "dome-pins": {
   "kind": "hardware",
   "maker": "any",
-  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye turned on the collar's bore at z 68, above the lip (v5; hemi-tether), rated well over 10 x the 1.1 kg shade (review, 2026-11-01)",
+  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to the collar through the tether (v6; hemi-tether), rated well over 10 x the 1.1 kg shade (review, 2026-11-01)",
   "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -564,7 +564,7 @@
  "hemi-cord": {
   "kind": "wiring",
   "maker": "any (UL listed)",
-  "model": "Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip under the cap (Lapp 53112005 through the crown into the hub, 2026-11-24) and one in the canopy, strain relief only: the fixture hangs from the two steel suspension cables (hemi-suspension; v5, 2026-11-24), the cord carries current only (confirm the cord-support test with the lab)",
+  "model": "Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip under the cap (Lapp 53112005 through the crown into the hub, 2026-11-24) and one in the canopy, strain relief only: the fixture hangs from the two steel suspension cables (hemi-suspension; v6, 2026-11-24); the cord set 2 mm longer than the cables between its grips, so it bows about 21 mm and carries no load, the cord carries current only (confirm the cord-support test with the lab)",
   "usd": 16.0,
   "estimate": true,
   "supplier": "a lighting supplier",
@@ -722,12 +722,12 @@
  },
  "hemi-suspension": {
   "kind": "hardware",
-  "maker": "Griplock Systems or Gripple (to choose)",
-  "model": "PROPOSAL 2026-11-24 (v5): TWO nVent CADDY Speed Link SLK15L2SE250 (1.5 mm wire, 2 m, a 1/4 in threaded stud end, 44 lb rated each at a 5:1 static safety factor, cULus; electrogalvanized steel, bare: 1.5 is its whole diameter, through Ø2.4 bores in the crown and cap; the stud end comes swaged on from nVent. A black-coated cable, if one is wanted, must stay under 2.2 outside or the bores open up; to confirm on the part), symmetric about the lamp's axis at r 17.5; each stud end screwed into the hub (1/4-20 tapped 13, its body in a Ø10 bore, Loctite 243), the cables up through the crown to the canopy, where each passes through its own SLK locking device (the system's rated wedge lock: it slides freely one way to shorten the cable, holds under load, and releases with its key to lengthen), the two locks 35 apart either side of the cord grip, each cable's tail looped round the canopy strap. The spacing is kept at 35 (check 4 (19): 50 to 60 would halve the sensitivity, but only by bringing the cables out beside the cap, where they no longer read as one stem). LEVELLING: the lamp hung, a level across the rim, the two lengths set equal to about ±0.25 mm at the grippers (1 mm out tilts it about 1.6 deg), the cord left slack. The stud's length and body size are not on nVent's sheet: drawn as assumed, to confirm on the part; pull-test the assembly. The cord carries current only",
-  "usd": 24.0,
+  "maker": "Cable Grippers Inc. (cable, grippers) and Nicopress (stop sleeves)",
+  "model": "PROPOSAL 2026-11-24 (v6, the v5 check's (1) and (2)): TWO 1/16 in (1.59) 7x7 stainless cables (Cable Grippers Inc. bulk cable, fuse cut), symmetric about the axis at r 16 (today's top, A) or r 18.5 (B). The hub end: a Nicopress 871-1-C copper stop sleeve swaged on with the 51-C-887 tool (13/64 x 7/32 in, about Ø5.2 x 5.6, 430 lb typical holding strength, as a distributor's copy of Nicopress's table gives it: to confirm on Nicopress's sheet), bearing up under a Ø5.6 x 6 counterbore in the hub's bottom face; the cable up a Ø2.4 hole through the hub and the crown (and the cap's lid in today's top and A). The canopy end: a Cable Grippers MGR-M10-MM gripper on each (hemi-gripper), at r 40, the cables splayed to it. Rated as a system by Cable Grippers' independent tests: MGR on 1/16 in stainless 7x7, 312 lb minimum break, 50 lb a cable at their 5:1 (the lamp 1.6 to 1.7 kg, about 3.7 lb, on two). Each assembly is pull-tested. LEVELLING: the lamp hung, a level across the rim, push each gripper's plunger from below and slide until level; 1 mm of difference tilts it about 1.5 deg (1.46 / 1.47 / 1.39 for today, A, B, with the splay); the cord left slack (2 mm longer than the cables). The cord carries current only",
+  "usd": 14.0,
   "estimate": true,
-  "supplier": "lighting-hardware distributors",
-  "price_date": "2026-10-31"
+  "supplier": "Cable Grippers Inc. (Las Vegas) and a Nicopress distributor",
+  "price_date": "2026-11-24"
  },
  "tint-chip-engrave": {
   "kind": "service",
@@ -777,7 +777,7 @@
  "hemi-canopy-strap": {
   "kind": "hardware",
   "maker": "any (a lighting supplier)",
-  "model": "Zinc-plated steel crossbar, 1.6 mm, screwed to the 4 in junction box; the cord grip, the suspension gripper and the canopy's screws anchor in it, and the driver and the 120 V splices sit in a closed steel enclosure on it. The black cast-acrylic canopy is a decorative cover only (black acrylic can't enclose 120 V splices) (review, 2026-11-01). No change to how the canopy looks | PROPOSAL 2026-11-24 (v5): it carries the cord grip and the two suspension grippers, 35 apart either side of it",
+  "model": "Zinc-plated steel crossbar, 1.6 mm, screwed to the 4 in junction box (review, 2026-11-01) | PROPOSAL 2026-11-24 (v6): 138 long, its ends bent down 16 with tapped holes for the canopy's two set screws; two 1.6 steel L brackets riveted under it at r 40 carry the grippers (an M10 hole and lock nut each); the driver's steel enclosure hangs from its centre. It carries the load; the canopy is a cover",
   "usd": 6.0,
   "estimate": true,
   "supplier": "a lighting supplier",
@@ -795,11 +795,11 @@
  "hemi-tether": {
   "kind": "hardware",
   "maker": "any",
-  "model": "Review 2026-11-01: the shade's secondary retention, a 1 mm stainless wire-rope tether (7x7), crimped loops, from an eye screwed into the hub to an eye on the collar, slack in use; rated well over 10 x the 1.1 kg shade | PROPOSAL 2026-11-24 (v5): an M3 stainless eye screw radially into the hub at z 81 (90 deg), a 1 mm stainless tether with a snap hook to the eye turned on the collar's bore at z 68; unhooked in a swap once the shade is turned and lowered a hand's width",
-  "usd": 4.0,
+  "model": "Review 2026-11-01: the shade's secondary retention, slack in use; rated well over 10 x the 1.1 kg shade | PROPOSAL 2026-11-24 (v6, the v5 check's (4)): 1.5 mm 7x7 stainless rope (about 2.2 kN minimum break, a seller's figure), 125 between its two screws, crimped loops (Nicopress oval sleeves): an M4 x 6 stainless button screw radially into the hub (z 80, 90 deg) clamps the hub's eye; a 4 x 40 stainless snap hook (DIN 5299 C; sellers list 1.9 to 5.8 kN breaking: the lowest taken) clipped to it; the rope round the lip's top to an M3 x 6 stainless button screw through the collar's wall (z 70, 270 deg). It lets the shade be turned and lowered 100 before it goes taut. A drop of the shade onto it (the bayonet failed) peaks at about 1.3 kN in a stiff elastic estimate (it ignores the rope's own give): under the rope's 2.2 and the snap's 1.9, once",
+  "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
-  "price_date": "2026-11-01"
+  "price_date": "2026-11-24"
  },
  "hemi-driver-box": {
   "kind": "hardware",
@@ -915,7 +915,7 @@
  "hemi-gaskets-4": {
   "kind": "hardware",
   "maker": "a silicone die-cutter (to choose)",
-  "model": "PROPOSAL 2026-11-24 (Hemisphere's even-tier top, the clamp ring's height held on the collar): four spherical silicone rings, Shore 40, 1.3 mm free (1.0 and 1.6 for selection): the two gaskets under the clamp ring and over the collar's flange, and two shims in the crown's air gaps; the shims picked per shade from its measured crown stack",
+  "model": "PROPOSAL 2026-11-24 (Hemisphere's even-tier top, the clamp ring's height held on the collar): four spherical silicone rings, Shore 40, 1.3 mm free: the two gaskets under the clamp ring and over the collar's flange, and two shims in the crown's air gaps; the shims picked per shade from its measured crown stack (0, left out, 0.5, 1.0, 1.6, 2.2 or 2.9) so the squeeze lands at 20 to 35 %; the 0.25 PTFE slip washer (hemi-slip-washer) under the clamp ring's band",
   "usd": 4.0,
   "estimate": true,
   "supplier": "die-cut silicone",
@@ -933,10 +933,38 @@
  "hemi-cap-key": {
   "kind": "hardware",
   "maker": "any",
-  "model": "PROPOSAL 2026-11-24 (v5): the cap's key and hold-down: a Ø2 x 5 stainless dowel pin (ISO 2338) pressed 3 into the crown's top, 2 into the cap; a Ø2 x 2 N42 neodymium magnet bonded in the crown's top under a Ø2 x 0.5 steel disc bonded in the cap",
+  "model": "PROPOSAL 2026-11-24 (v6): today's and A's caps: a Ø2 x 5 stainless dowel pin (ISO 2338) pressed 3 into the crown's top, 2 into the cap, and a Ø2 x 2 N42 magnet bonded in the crown's top under a Ø2 x 0.5 steel disc in the cap, both at r 15.5 (2.5 from the crown's pocket). B's Ø32 cap: a Ø1.5 x 2 magnet and a Ø1.5 steel disc at r 14, no dowel",
   "usd": 0.6,
   "estimate": true,
   "supplier": "any",
+  "price_date": "2026-11-24"
+ },
+ "hemi-gripper": {
+  "kind": "hardware",
+  "maker": "Cable Grippers Inc.",
+  "model": "PROPOSAL 2026-11-24 (v6): MGR-M10-MM mini gripper for 1/16 in cable, bottom exit, M10 thread (their chart: 0.675 in long without the plunger, Ø0.47 in body, 7/16 in mounting hole), with its safety nut; mounted plunger down, threaded up into a bracket under the canopy strap (M10 lock nut), its plunger 1 above a Ø6 hole in the canopy's floor. Push the plunger to let the cable slide; let go and it grips. Two a lamp",
+  "usd": 7.0,
+  "estimate": true,
+  "supplier": "Cable Grippers Inc.",
+  "price_date": "2026-11-24",
+  "url": "https://cablegrippers.com/wp-content/uploads/2019/05/webcat-min.pdf"
+ },
+ "hemi-slip-washer": {
+  "kind": "hardware",
+  "maker": "a film die-cutter (to choose)",
+  "model": "PROPOSAL 2026-11-24 (v6): a 0.25 PTFE film ring, cut flat and laid on the spherical seat, between the outer silicone ring and the clamp ring's band: the ring turns against it while it is screwed down to the shoulder",
+  "usd": 0.5,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-11-24"
+ },
+ "hemi-white-paint": {
+  "kind": "finish",
+  "maker": "a powder coater",
+  "model": "The white inside the shade's top (review 2, 2026-11-24): the Ø62 disc under the hub white powder coat; the collar's lip masked after anodising and painted white beneath (its underside only, the rest of the collar black anodised): a process step for the hub's disc and each shade's collar",
+  "usd": 1.5,
+  "estimate": true,
+  "supplier": "a powder coater",
   "price_date": "2026-11-24"
  }
 }

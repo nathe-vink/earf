@@ -1,8 +1,8 @@
 """Hemisphere's top: every part against every other at zero tolerance (check 4 (20), 2026-11-24).
 
-fabkit's clash check skips overlaps under 1 mm3 and crystal.py's TOUCHING_DOME exempts the fixings from it, so this
-checks them on their own. The only overlaps allowed are a thread in its tapped hole (the thread is drawn at its major
-diameter, the hole at its tap drill); each is listed with the volume that engagement should give.
+fabkit's clash check skips overlaps under 1 mm3, so this checks the fixings on their own. v6 (the v5 check's (10)): the
+tapped holes are drawn at the thread's major diameter and TOUCHING_DOME exempts no fixing, so no overlap is allowed at
+all: any is a failure.
 
     .venv-fab/bin/python spinoffs/barkhorn/companions/fixings_check.py      (exit 1 on any other overlap)
 """
@@ -11,16 +11,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..', '..', '..', 'studio', 'fabkit'))
 import crystal as C
 
-FIX = {'crown', 'gland', 'grip', 'crown-screws', 'cap-key', 'suspension', 'tether', 'hub'}
+FIX = {'crown', 'gland', 'grip', 'crown-screws', 'cap-key', 'suspension', 'tether', 'hub', 'grippers', 'gripper-brackets',
+       'cord', 'canopy', 'strap', 'enclosure', 'slip-washer', 'collar', 'pins'}
 
 
-def ring(d, t, L, n=1):                 # a thread's major Ø d in a tap drill Ø t, L engaged, n of them
-    return n * math.pi * (d * d - t * t) / 4 * L
-
-
-# thread pairs: the volume a thread in its tapped hole should overlap, ±40 % (the run-outs and chamfers)
-THREADS = {('hub', 'suspension'): ring(6.35, 5.1, 12, 2), ('crown-screws', 'hub'): ring(2.5, 2.05, 6, 3),
-           ('hub', 'pins'): ring(3.0, 2.5, 6, 3), ('hub', 'tether'): None, ('grip', 'hub'): None}
+THREADS = {}
 
 bad = 0
 for top in (None, 'A', 'B'):

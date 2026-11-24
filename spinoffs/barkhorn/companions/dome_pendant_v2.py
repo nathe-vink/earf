@@ -10,4 +10,4 @@ import crystal as C                                                 # noqa: E402
 
 PRODUCT = C.Product('earf-dome-pendant-v2', 'Hemisphere v2 (alternative)', 'Pendant in cast acrylic, the tint inside',
                     params=dict(C.D), parts=lambda P: C.north_parts(C.D), count=1, materials=C.MATERIALS,
-                    variants=C.VARIANTS, notes=C.NOTES_DOME, touching=C.TOUCHING_DOME, drawing_prefix='EDP2')
+                    variants=C.VARIANTS, notes=C.NOTES_DOME, touching=C.TOUCHING_DOME_LEGACY, drawing_prefix='EDP2')

@@ -378,9 +378,10 @@ def build(frame, samples, scale):
             # (since 2026-11-10 the test was never true: every collar face meant white rendered black)
             lt = nt.nodes.new('ShaderNodeMath'); lt.operation = 'LESS_THAN'; lt.inputs[1].default_value = 80.0
             nt.links.new(tc.outputs['Object'], sx.inputs[0]); nt.links.new(sx.outputs['Z'], lt.inputs[0])
-            if os.environ.get('HEMI_COLLAR_CAP') == '1':
+            if True:
                 # (check 3, 2026-11-24) white only where it is painted: the faces below z 80 that face down (the flange's face
-                # under the shade and the lip beneath), not the bore and the slots
+                # under the shade and the lip beneath), not the bore and the slots. v6 (the v5 check's (15)): always, with or
+                # without HEMI_COLLAR_CAP (without it, the units fix had painted every collar face below z 80 white)
                 gn_ = nt.nodes.new('ShaderNodeNewGeometry'); sn_ = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(gn_.outputs['Normal'], sn_.inputs[0])
                 dn_ = nt.nodes.new('ShaderNodeMath'); dn_.operation = 'LESS_THAN'; dn_.inputs[1].default_value = -0.3
                 nt.links.new(sn_.outputs['Z'], dn_.inputs[0])
@@ -407,9 +408,13 @@ def build(frame, samples, scale):
                 # (check 3) the outer ring only (the inner one, 0.0 off the opal, drew the two rows of dots)
                 gp_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'gasket-out.stl')
                 part(tdir_, 'gasket-out' if os.path.exists(gp_) else 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
-            if 'suspension' in loaded_:               # (check 3) the steel cable, black-coated, from its stud in the hub up
-                part(tdir_, 'suspension', SC.principled('cable', '#151516', 0.35, 1.0), c)
-            part('out-dome-pendant', 'cord', braid_mat(f'cord-braid-{tint}') if os.environ.get('BRAID', '1') == '1' else SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
+            if 'suspension' in loaded_:
+                # v6 (the v5 check's (5)): the two cables bare 1/16 in stainless, their sleeves copper (hidden in the hub)
+                part(tdir_, 'suspension', SC.principled('cable', '#8E9093', 0.32, 1.0), c)
+            cv6_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'cord-v6.stl')
+            # v6 (the v5 check's (3)): with the v6 hanging, the cord 2 mm longer than the cables, bowed to one side
+            part(tdir_ if os.path.exists(cv6_) else 'out-dome-pendant', 'cord-v6' if os.path.exists(cv6_) else 'cord',
+                 braid_mat(f'cord-braid-{tint}') if os.environ.get('BRAID', '1') == '1' else SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
             part('out-dome-pendant', 'carrier', an, c)
             part('out-dome-pendant', 'stem', an, c)
             part('out-dome-pendant', 'board', SC.principled('board', '#E6E4DE', 0.5), c)

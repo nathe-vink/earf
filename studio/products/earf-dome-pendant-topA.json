@@ -61,7 +61,7 @@
  },
  "assign": [
   {
-   "match": "collar|clamp|hub|pins|carrier|stem|crown|gland|suspension|canopy",
+   "match": "collar|clamp|hub|pins|carrier|stem|crown|gland|canopy",
    "material": "anodised"
   },
   {
@@ -85,11 +85,11 @@
    "material": "silicone"
   },
   {
-   "match": "crown-screws|cap-key|tether|strap|enclosure",
+   "match": "crown-screws|cap-key|tether|grippers|gripper-brackets|suspension|strap|enclosure",
    "material": "steel"
   },
   {
-   "match": "ring",
+   "match": "slip-washer|ring",
    "material": "trim"
   },
   {
