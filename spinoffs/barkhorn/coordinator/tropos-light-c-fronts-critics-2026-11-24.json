@@ -1,0 +1,289 @@
+{
+ "workflow": "wf_af9d5298-355",
+ "subject": "Tropos fronts in light model C (r33 renders/2026-11-24/barkhorn/light-c/front-<tint>.png) against the live fronts",
+ "results": [
+  {
+   "verdict": "go live after fixes: replace all eight together. Ember, Poison, Haze, Acid and Fog read deeper or more real than live, Smoke slightly better, and nothing reads fake, cropped or stray. But re-cut the 24 card/hero/thumb files from the new fronts in the same push, and show the owner Dust and Ice beside live first: both are paler at the front, and Ice drifts cyan away from its horn.",
+   "findings": [
+    {
+     "id": "dust-ice-depth",
+     "severity": "should-fix",
+     "tints": "Dust, Ice",
+     "claim": "Dust and Ice are the two tints that lose depth in light C. Their fronts and lower compartments go paler: Dust toward peach, Ice toward a lighter azure. Ice's cabinet also drifts toward cyan while its horn stays cobalt, so at page size the horn and the cabinet read as two different blues. The owner has not seen either tint in light C, because his test was Ember and Fog only.",
+     "evidence": "Measured in CIELAB on the lossless masters (live: renders/2026-11-04/barkhorn/rollout/A-polished-tallr7/site-front-off-tall-<tint>.png; new: renders/2026-11-24/barkhorn/light-c/front-<tint>.png). Results in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/owner-eye/measure.json, script measure.py.\n- Front above the woofer, L*/C*/h live to new: Dust 69.3/65.0/56.9 to 73.2/54.7/57.3; Ice 65.8/48.9/267.1 to 71.4/41.8/263.1.\n- Lower compartment: Dust 54.2/63.6 to 65.8/57.2; Ice 47.2/44.2 to 60.9/42.2.\n- Body saturation C*/sqrt(C*^2+L*^2): Dust 0.82 to 0.74; Ice 0.77 to 0.66.\n- Ice body hue 276.3 to 270.2 and right side 279.3 to 266.3, while the horn stays at 277.0. The body-to-horn gap grows from 0.7 to 6.8 degrees (right side +2.3 to -10.7).\n- Cause: the dominant channel caps at the sRGB ceiling and the view (Khronos PBR Neutral, exposure -0.1, the same in all eight shots) pushes values above that toward white. Ice blue channel at 250 or more: front 46.2% to 64.1%, lower compartment 2.5% to 32.7%. Dust red channel: 64.8% to 70.1% and 5.9% to 38.8%. Single-channel pixels at 254 or more on the speaker: Dust 1,032 to 1,865; Ice 655 to 1,568.\n- These are real changes, not encode noise: body dE00 live to new is 14.1 (Dust) and 12.7 (Ice), against 0.2 for the WebP encode.\n- Their sides are richer than live: Dust right side 32.3/54.1 to 52.4/67.4; Ice 27.3/38.8 to 46.4/40.7.\n- Page-size views: owner-eye/pair-dust-500.png, owner-eye/pair-ice-500.png.\n- The house rule allows one exposure for all eight, so any fix must be global. Otherwise the owner accepts it."
+    },
+    {
+     "id": "derived-crops",
+     "severity": "should-fix",
+     "tints": "all eight",
+     "claim": "The site's card, hero and thumbnail images for every tint are cut from the live light-A front. Swapping only the -tall files would show the same speaker in light A in cards and thumbnails next to the light-C front, and Fog's card would keep the black plinth.",
+     "evidence": "- <color>-card.webp (625x1250, crop x 186-811), <color>-hero.webp (720x1250, crop x 140-860) and <color>-thumb.webp (168x210, full frame) in gate/tree2/spinoffs/barkhorn/site/img/rc/.\n- Against the live front these differ by mean |d| 1.4-4.2 levels; against the new front by 4.6-15.8 (script owner-eye/derived.py and the follow-up per-tint check).\n- approved-renders.md line 1846 (15 Nov) kept the share cards because they were 'made from the fronts, which have not changed'. That no longer holds.\n- Which other share or social cards derive from the fronts is UNVERIFIED."
+    },
+    {
+     "id": "one-set",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "The eight read as one set, with the same framing, camera, exposure and paper tone. Each reads as its tint: Ember red, Dust orange, Acid lemon, Poison green, Ice blue, Haze violet, Fog clear, Smoke black.",
+     "evidence": "- The eight new shot files are identical except for the tint and title (owner-eye/shotdiff.py). Each differs from its approved tallr7 shot only by the 11 light-C keys: caustics on, clamp 8 to 0, filter_glossy 0, contact strength 1.7/2.2 to 0, no_glass_shadows.\n- The speaker mask is 316,806 px in all eight, the same count as live. 3,143 px are relabelled, all at the ports and screws.\n- The product spans x 299-722, y 211-1087 of 1000x1250, so nothing is cropped.\n- Wall paper is identical across all 16 images: top-left 81.2/+0.5/+5.2, top-right 92.8-93.0, mid-left 88.3-88.7. Paper outside the speaker changes by median dL* 0.00-0.08.\n- Body hues new: Ember 35.6, Dust 53.8, Acid 101.6, Poison 138.7, Ice 270.2, Haze 309.2. Fog C* 2.8 at L* 85.3; Smoke L* 2.7.\n- Equipment and hidden pixels are 0 in every mask (owner-eye/maskcheck.py)."
+    },
+    {
+     "id": "better-tints",
+     "severity": "note",
+     "tints": "Ember, Poison, Haze, Acid, Fog, Smoke",
+     "claim": "Ember, Poison and Haze are clearly deeper: their side panels go from near-black to rich color, and the body's hue now matches the horn. Acid reads lemon instead of olive. Fog loses the black plinth and its gray lining. Smoke's lower compartment becomes readable. None of these is muddier than live.",
+     "evidence": "Right side panel, L*/C*/h live to new, with the share of pixels below L* 20:\n- Ember 10.2/34.4/28.0 to 24.0/58.5/37.8 (99% to 18%)\n- Poison 10.1/24.1/143.9 to 28.4/50.8/136.1 (100% to 17%)\n- Haze 8.5/60.1 to 19.7/79.4 (100% to 59%)\n- Acid 46.1/52.7 to 68.5/69.8\n- Fog 58.2 to 80.7 (front lower 81.9 to 96.1)\n- Smoke lower front 13.1 to 25.7 (76% to 25%)\n\nWhole-body C*: Ember +15.7, Poison +15.1, Haze +14.6, Acid +13.4.\n\nBody-to-horn hue gap, live to new: Ember right side -11.6 to -1.8, Poison +5.9 to -1.9.\n\nThe front above the woofer gains on the dark tints (Ember C* 81.5 to 91.6, Poison 68.2 to 82.1); Haze dips slightly, 110.3 to 105.8.\n\nViews: owner-eye/set-live-vs-new.png, owner-eye/right-3x-b.png."
+    },
+    {
+     "id": "owner-saw-ember-fog",
+     "severity": "note",
+     "tints": "Ember, Fog",
+     "claim": "The new Ember and Fog fronts are exactly the S1 test-c frames the owner chose C from. The other six tints are new to him in light C.",
+     "evidence": "- front-ember.png and front-fog.png against renders/2026-11-21/barkhorn/s1-test/ember-c.png and fog-c.png: mean |d| 0.0, p99 0.0. The shot JSON differs only in title.\n- Model hashes (cloud f80fab61440e5c87, variants c9409ba32d184d39) match the S1 rebuild."
+    },
+    {
+     "id": "base-contact",
+     "severity": "note",
+     "tints": "all, Fog most",
+     "claim": "The base now reads physically lit: the painted black band is gone, the black feet show, and the light under the front edge carries each tint's color. Fog is very light-footed, with almost no cast shadow. At 1:1 the colored line under the front edge is crisp and even and can read like an LED underglow strip; at page size it is about 1 px.",
+     "evidence": "- Floor 2-8 px under the front edge (x 310-585): live L* 1.7-13.1; new 84.7-96.5, against open paper 93.7-97.1. Darkening is now 0.6 (Fog) to 11.3 (Haze) L* (owner-eye/contact.py).\n- Cast shadow at x 730, y 1040: live 59.4-66.6 L*; new 88.2-94.8 against about 96 open paper, so tinted bodies darken it 3.3-8.1 L* and Fog 1.7.\n- Under-edge tint on the floor: Haze 84.7/13.4/309.8.\n- Floor bounce in front at (500,1200): Acid b* +10.4 (live +5.0); Dust a*/b* +3.6/+7.8.\n- Crops: owner-eye/base-1to1-a.png, owner-eye/base-1to1-b.png, owner-eye/ground-fog-acid-ember.png, owner-eye/frontedge-3x.png, owner-eye/pair-fog-500.png.\n- The S1 critics recorded this caveat (approved-renders.md, 21 Nov 08:34) before the owner chose C. Whether the Core OFF was re-rendered with HOUSE_SWEEP_AO=0, so the lamp row is lit one way (21 Nov 08:52), is UNVERIFIED."
+    },
+    {
+     "id": "no-cg-artifacts",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Nothing reads computer-made at page size or 1:1. There are no fireflies or caustic specks despite clamp 0, and the paper is cleaner than live. The extra mid-scale texture inside is the batting showing, not denoiser blotching. The woofer, the horn and its streaks are unchanged.",
+     "evidence": "- Outliers more than 25 L* above their 5x5 median, live to new: Ember 192 to 171, Dust 523 to 465, Acid 685 to 617, Poison 247 to 255, Ice 585 to 578, Haze 261 to 311, Fog 970 to 749, Smoke 839 to 980. The examples sit on the horn rim and the HF throat highlight (owner-eye/fireflies.py).\n- Paper specks: live 8-9 px, new 1 px, with no chroma specks (owner-eye/paperspecks.py).\n- Right-panel mottle (SD of L*, blur 2 minus blur 10) rises 2 to 2.5 times, e.g. Ice 2.73 to 6.06, Poison 2.01 to 5.35. At 3x it reads as fibrous batting (owner-eye/right-3x-a.png, owner-eye/blotch-3x-a.png, owner-eye/lowcomp-2x.png).\n- Horn dE00 live to new: 0.0-0.3.\n- Woofer crops: owner-eye/woofer-1to1-a.png, owner-eye/woofer-1to1-b.png."
+    },
+    {
+     "id": "acid-horn-lemon",
+     "severity": "note",
+     "tints": "Acid",
+     "claim": "Acid's horn color is unchanged. It reads a darker mustard-lemon than the cabinet front, in live and new alike. In light C the cabinet sides now match the horn, where live's sides were darker olive, so Acid reads more as one lemon material.",
+     "evidence": "- Horn L*/C*/h: live 66.6/69.0/97.4, new 66.8/69.0/97.4 (dE00 0.1).\n- Cabinet front above the woofer, new: 95.1/73.7/104.4.\n- Right side: live 46.1/52.7/102.1, new 68.5/69.8/101.9.\n- Crop: owner-eye/horn-1to1.png."
+    },
+    {
+     "id": "nothing-stray",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Nothing in frame should not be there: no cropped horn or base, no stray object, and no new lamp reflection. The only set object inside the frame is the deliberate black back-edge card, entirely hidden behind the speaker. It is unchanged from live, and the equipment audit cannot count it by design. Whether it shows through Fog's clear lower compartment is UNVERIFIED.",
+     "evidence": "- Of every flag and bounce card in front-<tint>.json, only the 'back-edge card' (0.543 x 0.045 m, centre 0.0135/0.21/0.0225) projects into the frame: x 444-714, y 926-1005, 100% behind the speaker mask. This uses the engine's level-camera model, checked against the report, which puts the feet's centre at 512.9/1012.9 (I project 514.1/1014.1). Script: owner-eye/flags_inframe.py.\n- shots.py back_edge_card (line 767) documents it as a real card that stops the clear bottom panel from light-piping a colored bar.\n- render.py _masks counts equipment only 'not behind the product'.\n- At 3x, a dark-gray strip at Fog's back-right bottom fits either the card or the black back-right foot (owner-eye/backedge-3x.png).\n- Top-face and horn highlights are unchanged: p99 L* within 0.5, pixel counts above L* 90 within about 10%."
+    },
+    {
+     "id": "detail-pass",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "The new fronts show the current CAD from the 12 Nov detail pass: round bonded port rings without screws, black feet, and the IR cup in the bottom batt. The live fronts show the older square screwed port frames. This is a gain in accuracy, but the owner may notice the ports changed.",
+     "evidence": "- Model hashes: cloud f4feb9c2100d0d39 to f80fab61440e5c87; variants 68136b3e0f158935 to c9409ba32d184d39.\n- Commits 62e8335e2d and 7f551fd522 (12 Nov).\n- Masks: port-screws 171 px in live, absent in new; port-frame-left 2,976 to 1,713 px; port-frame-right 3,675 to 2,089 px.\n- Crops: owner-eye/lowcomp-2x.png, owner-eye/base-1to1-a.png."
+    }
+   ]
+  },
+  {
+   "verdict": "Go live. The eight new fronts render light C exactly as the owner chose it. Ember and Fog are byte-for-byte the S1 test 'c' frames he picked from. My own count of the masks gives 0 equipment px and 0 hidden px. Neither 1:1 nor 3x shows fireflies, blotches or banding, and every change from the live fronts comes from refraction, caustics or removing the painted contact term. Two things should be recorded. First, a decision on the five shadowless reflect-only flags (S4, also in the live fronts). Second, commit the NO GLASS SHADOWS logs.",
+   "findings": [
+    {
+     "id": "S4-reflect-only-flags",
+     "severity": "should-fix",
+     "tints": "all eight (and the 192 turn frames, which use the same set)",
+     "claim": "The rule 'every object casts shadows' fails on five set flags in every front. They are reflect-only: they cast no shadow, take no diffuse light, are invisible to transmitted rays and are one-sided. Light C did not change them, so a ray that has passed through the acrylic still sees lit paper where a real black card stands.",
+     "evidence": "front-<tint>.json set.flags[0,1,2,3,5] carry 'reflect_only': true. They sit at (1.6,2.05,0.005) 1.6x2.9 m, (1.8,2.1,1.3) 3.0x2.6, (1.92,-1.44,1.2) 2.4x2.4, (0,-0.6,2.6) 2.5x2.0 and (0,-1.0,2.2) 2.0x1.2. studio/engine/sets.py:180-184 turns off their shadow, diffuse, transmission and volume visibility, keeps glossy on and makes them one-sided. The same five are in the live source (studio-refresh shot), so they are inherited, not new. They are out of frame: 0% by projection (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/rig_table.txt) and 0 px of id 255 in every mask. The 21 Nov audit confirmed this as low severity (coordinator/acrylic-light-audit-2026-11-21.json, lane 1, S4: 'a veil of a few L* on Fog's upper right face, perhaps up to about 6 ... Nothing here is measured'). The size of the effect is still UNVERIFIED because no S4 test render exists. light-c/README.md nonetheless calls C 'one physical light model'. Fix: set reflect_only false with every ray on (the flags are out of frame), or record an explicit exception the way the paper-only lamps were kept. Any fix means re-rendering the 8 fronts and the 192 turn frames."
+    },
+    {
+     "id": "glass-shadow-count-uncommitted",
+     "severity": "should-fix",
+     "tints": "all eight",
+     "claim": "The record's 'NO GLASS SHADOWS 6' (24 Nov 06:27) rests on logs that were never committed. Nothing on the branch shows the count, or shows that no shadow-ray link was left.",
+     "evidence": "run.sh writes /tmp/lightc-$n.log and only echoes a grep of it. front-<tint>.report.json has no such field. The shots carry no living_ext.shadow_ray_report, which the B1 bar runs did include ('shadow-ray links left 0'). By construction the cut should be complete: materials.py:1238 (_clear_resin) is the engine's only 'Is Shadow Ray' link, and living_ext.py:75-102 cuts exactly that Mix-with-Transparent pattern (Fac set to 0, keeping the Principled BSDF). The count of 6 matches s1-test/README.md ('6 materials') and the six clear_resin-type materials the product defs declare: barkhorn-cloud.json bark, horn-formed, horn-satin; barkhorn-variants.json bark, clear-cast, horn-lot. The count itself is UNVERIFIED. Fix: commit the eight logs, or add shadow_ray_report after no_glass_shadows (no pixel changes)."
+    },
+    {
+     "id": "light-C-settings-verified",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "All eight were rendered with light C's settings, and those settings are the only change from the live fronts.",
+     "evidence": "Every front-<tint>.json has caustics_refractive true, caustics_reflective true, clamp 0, filter_glossy 0.0 and samples 96. Its set has contact strength 0.0 and core_strength 0.0, and props holds only [no_glass_shadows], which is therefore last. In all eight, .shot.json (the resolved shot render.py writes) equals .json, and the report's applied/sets/pending lists are empty. The engine maps clamp to sample_clamp_indirect=0; render.py never sets the direct clamp, which I take to keep Blender's factory 0 (off), as the 21 Nov lamps audit also reads it. filter_glossy maps to blur_glossy=0 (render.py). materials.py:385 adds the painted AO only when contact or core is above 0. Against the live source (renders/2026-11-12/barkhorn/studio-refresh/site-front-off-tall-<tint>.shot.json), only these change: caustics added, clamp 8 to 0, filter_glossy from its 0.5 default to 0, contact 1.7/2.2 to 0, the prop and the title. Ember and Fog are byte-identical to s1-test/ember-c.png and fog-c.png (blobs 8c78e244, 83bcda2d). They were rendered separately (325.7 s vs 685.9 s; 507.0 s vs 1044.2 s) from identical shots and model hashes, so they are exactly the frames the owner chose. The generator lives at spinoffs/barkhorn/campaign/light_c.py, not in the light-c folder."
+    },
+    {
+     "id": "one-camera-studio-exposure",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "All eight share one camera, one studio and one exposure, and the framing matches the live fronts.",
+     "evidence": "The eight .json files differ only in the title and four flavour fields; the rest hashes to de2b59ad93f9761f in all of them. The masks are pixel-identical across the eight and match the studio-refresh masks (0 px differ). All eight share one mask.json (blob f3263aef). Every report shows exposure -0.1, PBR Neutral, white balance 5600/3.0 and finish gain 1.0. Paper more than 150 px from the product reads L* 90.01-90.08, a* +0.04..+0.17, b* +4.74..+4.94 across the tints. The live webp matches the studio-refresh PNG to a mean |d| of 1.16-1.50 levels, with region means within 0.2 L*, so comparing C with live is the same as comparing C with refresh. The models were rebuilt (light C f80fab61/c9409ba3 vs live 3a9aa032/b77a894b). The S1 'a' re-render on the rebuilt model differs from the live source by a mean |d| of 0.048 (Ember) and 0.185 (Fog) per channel. For the other six tints this is inferred from the identical masks."
+    },
+    {
+     "id": "equipment-hidden-0",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Equipment 0 and hidden 0 hold in all eight, and no emitting lamp or card is in frame.",
+     "evidence": "All eight .equipment.txt files are one blob (e3d28b7c) reading 'equipment in frame: 0 px / hidden in frame: 0 px'. My own count of each mask PNG agrees: 0 px of id 255 and 0 px of ids 247-254. The legend's hidden ids are exactly the 8 emitting lamps, and no camera-hidden mesh exists apart from the flags. Every lamp and card is listed in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/rig_table.txt. Lamp powers (irradiance x pi x d^2): key 29.4 W, fill 80.4, kick 19.9, horn 117.3, bg-left 73.5, bg-right 28.4, wall_left 204.9, bg-high 46.7. All are hidden from the camera and 0% of each projects into the frame. bg-left, bg-right, wall_left and bg-high are paper-only (receivers sweep, specular 0), which the owner kept on 24 Nov ('3. Keep'). Cards: flag4, flag6 'floor card behind-right' (nearest corner lands at x 1035 of 1000), flag8 'horn cutter' and bounce0 'fill card right' all have every ray on and are out of frame."
+    },
+    {
+     "id": "audit-gaps-card-and-zero-lamps",
+     "severity": "note",
+     "tints": "all eight (most visible in Fog)",
+     "claim": "The 0/0 audit cannot see two things: a real card behind the base that the camera sees through the acrylic, and six zero-power lamps placed inside the frame.",
+     "evidence": "flag7 'back-edge card' sits at (0.0135,0.21,0.0225), measures 0.543x0.045 m, has every ray on and projects wholly inside the frame (x 445-713, y 926-1005) behind the lower compartment. The mask pass (render.py _masks) draws every material as an opaque id, so the card counts as hidden behind the cabinet. In the render the camera sees it by design (shots.py back_edge_card) through the clear bottom panel's polished edge, as the dark bottom line (Fog x 400, y 1029-1038: L* 51-69 in C, 29-40 in live). This is not new in C. Separately, the zero-power lamps back, pool, edge, rim, paper and through are still created, and 89.8, 36.0, 100, 100, 100 and 38.8% of them respectively project inside the frame. At 0 W they light nothing, and the audit skips them by design (render.py checks energy > 0). Setting 'off': true would make the shot file read cleanly."
+    },
+    {
+     "id": "no-fireflies-or-speckle",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "The caustics bring no fireflies and no speckle.",
+     "evidence": "Per /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/scripts/faults.py: on paper more than 25 px from the product, 0 px sit more than 15 L* above their 5x5 median in any of the eight, in A or C; the floor by the base also has 0. The brightest isolated points in C are glints at the same pixels in the live source: (581-582, 476-481) and (531, 479) are the rod feet on the top, (546, 449) is the horn throat, and x 717, y 818-843 is the right panel's back edge. For Ember 24, and for Poison 23, of C's top 25 points are also in A's top 25. Spikes that are new in C (scripts/spikes.py) are dark lines that disappeared: A's painted contact line under the front-left foot (342-368, 1030-1037), a hard shadow line under the top batt (334-345, 571), and one bottom-panel corner glint at (316, 1006). The woofer-cone texture is unchanged (high-pass 0.45-0.47 and band-pass 0.35-0.36 L* in both). Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/crops/glints-top-zoom4.png, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/crops/spike-feet-zoom4.png, and the 1:1 and 3x sets /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/crops/c-1x-ember-dust.png and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/crops/c-3x-ember-dust.png (same names for the other pairs)."
+    },
+    {
+     "id": "denoiser-and-banding",
+     "severity": "note",
+     "tints": "Smoke (streaks); all eight (banding check)",
+     "claim": "There are no visible denoiser blotches and no banding. One faint smear appears only under heavy gain.",
+     "evidence": "Smoke's black right-side batts (x 615-705, y 690-800) show dark brush-like streaks at 8x gain (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/crops/smoke-right-8x-zoom2.png). The area averages 3.6/255 (live 1.0) with p99 at 6 and a band-pass sd of 1.60 vs 1.19 levels, so it is invisible at 1:1 and barely visible at 3x. The coloured floor patches stay smooth under a 6x stretch (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/crops/floor-stretch6.png). Band-pass on the floor by the base is lower in C (0.34-0.45) than in A (0.50-0.52). The paper has no empty 8-bit levels between p1 and p99 in any channel, in A, C or live, and its profile residual sd is 0.43-0.45 in both A and C. Two flaws predate light C and appear in A, C and live alike: a 2-px dip at x 997-998 (231.3/232.3 vs 234.3 levels) from the finish, and smeary driver detail behind Fog's horn throat."
+    },
+    {
+     "id": "differences-follow-light-C",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "Every difference from the live fronts follows from light C. Light now reaches the interior by refraction and caustics, the painted contact term is gone, and everything lit directly is unchanged.",
+     "evidence": "Full table: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/regions.md, which reproduces s1-test/meas.md for Ember and Fog. Unchanged: horn dL* 0.0..+0.2 and dC* at most 0.5 in all eight; top edge \u00b10.3; sweep \u00b10.3; woofer cone +0.4..+1.0. Lighter in C, with dL* relative to live: right-side batts audit box +9.9 (Haze) to +22.3 (Fog), Smoke +0.9 (black lining); front above the woofer +3.9..+11.2 (Smoke +0.1); lower compartment +7.8..+11.8; ports +10.3..+33.0; bottom edge +13.2..+27.8; feet from L* 3-8 to 18-30. With the contact term off, the floor shadow right of the base goes from 76.4-80.3 to 91.8-96.2, the floor under the front edge from 86.0-88.1 to 94.3-97.1, and Fog's black band at x 400, y 1041-1044 from 14-17 to 96-98. As a check (scripts/predict_scale.py), I undid the finish and PBR Neutral and scaled A's scene-linear light by k = 1.5-4.0. That reproduces C within \u00b12.7 C* and \u00b11.5\u00b0 hue on the Ember, Poison and Acid front, sides and lower compartment. The chroma drop on the bright Dust, Acid and Ice fronts (-5.2 to -7.1) is PBR Neutral's highlight desaturation (Acid predicted 69.0, measured 71.7). A bright refracted patch on the woofer rings moved from about (562-566, 783-788) to (552-560, 810-811) (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/physics/crops/caldera-spot-zoom3.png)."
+    },
+    {
+     "id": "dye-path-hue-shift",
+     "severity": "note",
+     "tints": "Dust, Ice (Haze smaller)",
+     "claim": "On the right side, Dust's batts turn 6\u00b0 yellower and Ice's turn 11\u00b0 toward cyan, more than extra light alone explains. This fits cast acrylic: refraction shortens oblique paths through the dye compared with the old straight shadow rays. How large the shift should be is unverified.",
+     "evidence": "Dust right audit box goes from h 52.1 to 58.5, with C* 7.1 below the scaled-A prediction (upper batts +6.0\u00b0, -7.2). Ice goes from 281.6 to 270.2, with C* 14.0 below prediction (upper -10.9\u00b0, -12.7). Haze's C* is 6.3-6.5 below prediction. _clear_resin (materials.py) absorbs each channel at its own rate with Beer-Lambert ('deep' after 'radius'). The 21 Nov audit found the old shortcut mis-weighting direct light with angle ('-10 % at 60 deg, -30 % at 75 deg'). The direction of the shift is physical; its size is UNVERIFIED (no thickness or spectral test)."
+    },
+    {
+     "id": "floor-colour-and-light-feet",
+     "severity": "note",
+     "tints": "all eight",
+     "claim": "The new tinted light on the floor in front and the light-footed base are physically plausible. The key light's cast shadow is still there.",
+     "evidence": "Floor at bottom centre (x 450-650, y 1180-1250), live to C: Acid b* 4.6 to 9.1; Dust a*/b* 0.3/4.1 to 3.2/7.0; Ice b* 1.9 to -1.4; Haze a*/b* -0.2/2.1 to 1.7/-1.2; Ember a* -0.1 to 1.9; Fog L* 88.1 to 92.4; Smoke unchanged in hue. Ember also shows a pink patch front-left of the base. These come from the bright back wall and the 'fill card right' (x 1.4) shining through the tinted cabinet, which caustics now allow. The floor right of the cabinet, back-projected to (0.29-0.41, 0.04-0.27), lies on the key's path through the cabinet (z 0.07-0.63) and reads 83-92 against 96 on open floor, identical for Ember and Smoke, so the soft key shadow remains. The critics' 'lightest-footed' caveat fits an unlined tinted lower compartment standing on feet."
+    }
+   ]
+  },
+  {
+   "verdicts": [
+    {
+     "id": "dust-ice-depth",
+     "stands": true,
+     "reason": "The core claim holds. I measured git-extracted masters with my own Lab code (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/regions_measure.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/rgbcheck.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/clipcheck.py).\n- Front above the woofer: Dust median RGB (249,131,58) to (250,145,77), L*/C* 67.3/63.7 to 70.4/55.8. Ice (54,157,246) to (76,172,249), 63.1/48.2 to 68.0/42.1.\n- Lower compartment: Dust 54.1/63.4 to 66.4/56.9; Ice 47.2/43.9 to 61.9/42.2.\n- Their channel-ceiling figures reproduce exactly: Ice blue >=250 46.2 to 64.1% and 2.5 to 32.7%; Dust red 64.8 to 70.1% and 5.9 to 38.8%; pixels >=254 Dust 1,032 to 1,865, Ice 655 to 1,568.\n- The paling is visible at page size (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/crop-ice-dust-08.png).\n- The owner saw only Ember and Fog in light C.\n\nThree parts are overstated:\n(a) The Ice 'two different blues / cyan' claim. By median-RGB dE00, Ice's body sits closer to its horn in C (9.2 to 5.1), and the right side much closer (13.3 to 5.5). Only the front's gap grows (21.5 to 25.7), and it was already large in live. In OKLab the front hue moves only -3.0 deg and the body -2.2 deg (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/rgbcheck2.py). Their CIELAB hues reproduce (body 276.2 to 269.8, side 279.0 to 266.4), but the big drift is on the side, which is also the face that now matches the horn best.\n(b) Not only Dust and Ice. Acid's front hits the same ceiling: front-panel share with a channel >=251 goes 0.0 to 9.0%. The reviewer's own measure.json has Acid's front C* 83.8 to 73.7, as large a drop as Dust's 65.0 to 54.7. By median RGB, Acid's loss is smaller: OKLab C -3%, against Dust -10% and Ice -11%.\n(c) 'Body dE00 14.1/12.7' is a region-median number driven by the side panels getting lighter (body L* Dust +14.8, Ice +14.0, Acid +20.0). It does not single out Dust and Ice."
+    },
+    {
+     "id": "derived-crops",
+     "stands": true,
+     "reason": "Confirmed (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/derived2.py):\n- Card = the live front at x 187-812 (not 186-811); hero = x 140-860; thumb = full frame.\n- Mean |d| to the live front is 1.42-2.44 levels; to the new front 4.55-14.74.\n- The Fog card carries the black band.\n\nThe job is bigger than 24 files. The eight og-<color>.jpg share cards are also cut from the live fronts: the front at 504x630, x 348, on #F4F1EC; mean |d| 1.05-1.82 to live against 4.36-9.63 to new (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/ogcheck.py). So is og-home.jpg: eight 144x249 tiles, 2.50-3.87 to live against 6.71-13.54 to new (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/oghome2.py).\n\nThe record says so itself (approved-renders.md:3266: 'og-home and the color cards are cut from the Tropos studio fronts'). The 'share cards' kept at line 1846 are these og files. That makes 33 site files."
+    },
+    {
+     "id": "one-set",
+     "stands": true,
+     "reason": "Everything reproduces:\n- Exactly 11 keys differ per tint from the tallr7 shot, and across tints only the flavour and title differ (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/shotdiff2.py).\n- Masks: 316,806 speaker px in all 16 with silhouette XOR 0. 3,143 px are relabelled: port frames to front panel 2,849, port-screws 171, woofer-frame to woofer-screws 123 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/maskcmp.py).\n- Product bbox x 299-721, y 211-1087.\n- Paper: top-left 81.2/+0.5/+5.2 in all 16; top-right 92.8 to 93.0; mid-left 88.6 to 88.3; median dL* outside the speaker 0.00-0.08 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/paper2.py).\n- All eight .equipment.txt read 0/0.\n- Every shot uses PBR Neutral at exposure -0.1."
+    },
+    {
+     "id": "better-tints",
+     "stands": true,
+     "reason": "Their right-panel numbers reproduce exactly with their box:\n- Ember 10.2/34.4 to 24.0/58.5 (<L*20 99 to 18%)\n- Poison 10.1/24.1 to 28.4/50.8 (100 to 17%)\n- Haze 8.5/60.1 to 19.7/79.4 (100 to 59%)\n- Acid 46.1/52.7 to 68.5/69.8\n- Fog 58.2 to 80.7\n\nAlso reproduced: whole-body C* gains of +15.7, +15.1, +14.6 and +13.4; the side-to-horn hue gap for Ember -11.6 to -1.8 and Poison +5.8 to -2.0; Smoke lower front 13.2 to 25.7. The page-size pairs agree (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/pp-ember-dust.png).\n\nTwo caveats:\n- The sides got richer by getting lighter (L* +10 to +23), so 'deeper' means richer, not darker.\n- 'Acid reads lemon' leaves out that Acid's front above the woofer pales by the same mechanism as Dust: C* 83.8 to 73.7 in their own measure.json, and the front panel's share at the channel ceiling goes 0.0 to 9.0%. Haze's front also rises 7.9 L*."
+    },
+    {
+     "id": "owner-saw-ember-fog",
+     "stands": true,
+     "reason": "Confirmed:\n- front-ember.png and front-fog.png are byte-identical to renders/2026-11-21/barkhorn/s1-test/ember-c.png and fog-c.png (max |d| 0).\n- The shot JSON differs only in its title.\n- All S1 reports carry hashes f80fab61440e5c87 and c9409ba32d184d39.\n- approved-renders.md:4012-4014 shows S1 covered Ember and Fog only.\n- The coordinator's 24 Nov 06:27 entry plans for the owner to see all eight first."
+    },
+    {
+     "id": "base-contact",
+     "stands": true,
+     "reason": "Reproduced:\n- With their window (their contact.py): the floor under Haze's front edge is 84.7/13.4/309.8, and darkening runs 0.6 (Fog) to 11.3 (Haze).\n- With mine (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/shadow2.py): the cast shadow at (730,1040) is 59.2-66.6 live and 88.2-94.8 new, against about 96 for open paper. The floor at (500,1200) goes Acid b* +5.0 to +10.4, Dust a*/b* +3.6/+7.8.\n\nThe darkening figure depends on the window. The light-C contact line is only about 4-5 px thick: Haze's profile reads L* 28, 48, 51, 51, 58, 87, 96 at 0-6 px below the mask. A 2-8 px window therefore gives 0.3-3.9 L* (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/contact2.py).\n\nThe 2x crops show the crisp tinted line and the black feet (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/base-2x-v.png).\n\nThe reviewer did not connect this to the record's precedent: the Dust habitat was pulled because 'it hovers at phone size' ('the founder's grounded test', approved-renders.md:4241)."
+    },
+    {
+     "id": "no-cg-artifacts",
+     "stands": true,
+     "reason": "The outlier counts reproduce exactly (192 to 171 ... 839 to 980; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/fireflies2.py). Paper specks drop from 8-9 px to 1, with no chroma specks (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/specks2.py). Horn dE00 between region means is 0.0-0.1.\n\nTwo corrections:\n- The outliers do not mostly sit on the horn rim and HF throat; those were only the first ones in y order. Most sit on the cabinet's back-right vertical edge, in live and new alike. For example, 466 of Smoke C's 467 right-panel outliers are at x 715-725 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/outliers-right-smoke.png).\n- Their mottle patch (x 610-680) contains a dark rib. On rib-free patches, mid-scale mottle is about 0.7-3.4 L* (live 0.4-2.2), and fine noise is unchanged at 0.3-0.7 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/mottle2.py).\n\nCrops at 1:1 and 3x show no fireflies or blotches (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/cabinet-1to1-C.png)."
+    },
+    {
+     "id": "acid-horn-lemon",
+     "stands": true,
+     "reason": "The numbers reproduce: horn 66.6/69.0/97.4 to 66.8/69.0/97.4; right side 46.1/52.7 to 68.5/69.8. By median RGB, Acid's body-to-horn dE00 falls 17.5 to 3.5 and the side 20.9 to 3.3 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/rgbcheck2.py). So the sides do now match the horn.\n\nBut the front's gap to the horn grows: 18.1 to 19.4 by median RGB, and 3.8 to 11.7 for the lower front by region mean. That is the same pattern the reviewer calls a defect for Ice (body 9.2 to 5.1, front 21.5 to 25.7). The two findings read identical measurements in opposite ways."
+    },
+    {
+     "id": "nothing-stray",
+     "stands": true,
+     "reason": "My own projection uses render.py's level camera with 200x200 samples per card (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/proj.py).\n- Only the back-edge card enters the frame: x 444.6-713.5, y 926.1-1004.7, with 40,000 of 40,000 samples on the speaker mask.\n- The other nine cards put 0 samples in frame.\n- The origin projects to 514.1/1014.1, against the report's feet-base centre of 512.9/1012.9.\n\nshots.py:767 and render.py's mask rule ('not behind the product') read as cited. Top and horn highlights: p99 within 0.5 L*, and pixel counts above L* 90 within about 12% (Smoke top 818 to 717).\n\nAt 5x, the stepped dark-grey strip at Fog's back-right bottom (about x 658-706, y 972-1001) is present in live and new alike (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/fog-ice-backright-5x.png), so it is not new. Whether it is the card, a foot or a rib is still UNVERIFIED."
+    },
+    {
+     "id": "detail-pass",
+     "stands": true,
+     "reason": "Confirmed:\n- Hashes: live f4feb9c2100d0d39/68136b3e0f158935, new f80fab61440e5c87/c9409ba32d184d39.\n- The tallr7 masters were committed on 10 Nov (370de3dafc), before 62e8335e2d (12 Nov 16:12) and 7f551fd522 (12 Nov 19:04).\n- Mask counts reproduce: port-screws 171 to absent; port frames 2,976 to 1,713 and 3,675 to 2,089.\n- The crop shows square screwed frames becoming round rings, plus the IR cup and black feet (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/fog-lower-2x.png).\n\nThe risk is lower than stated: the owner was shown the detail pass on 12 Nov at 19:48 (approved-renders.md:939). Note also that the live turn, last changed 10 Nov (f8ca6ff853), still shows the old CAD."
+    }
+   ],
+   "missed": [
+    "Share cards: og-red/orange/amber/green/blue/violet/ice/black.jpg and og-home.jpg are cut from the live light-A fronts. I measured it (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/ogcheck.py and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/oghome2.py), and approved-renders.md:3266 says so. These files are the og:image and twitter:image of tropos/<tint>, s/speaker-<tint>, colors/<tint>, index, contact, lighting and mantle. The re-cut is 33 site files, not 24; the reviewer left this UNVERIFIED.",
+    "Off-site copies: the record's rule (approved-renders.md:7, 'every asset that used it is refreshed in one batch') and its asset list (approved-renders.md:4135-4136: Brand Book v22, artifact WGpswpvvETozjgRAxBuUK3, built with the fronts, and social.jpg 'made from the fronts'; plus the investor deck) mean the Book, social and deck need the same refresh. Which current versions carry the tallr7 fronts is UNVERIFIED.",
+    "The Tropos pages would mix two light models. light-c/ holds only front-* and turn-* shots, so the eight horn-back pictures (last changed 20 Nov, a30942eac3) and the eight amp-plate pictures (15 Nov, 263dd4e0ae) stay in light A. The 21 Nov audit's S1 (CONFIRMED HIGH, approved-renders.md:4001) names these frames as having the same caustics-off fault. The live turn (turn-<color>*.webp, last changed 10 Nov, f8ca6ff853) is also light A and predates the detail pass. The reviewer's 'go live after fixes' does not tie the swap to the turn (the coordinator's 06:27 plan ships fronts and turn in one gate), and does not tell the owner the horn-back and plate pictures stay in A. How visible the mismatch is: UNVERIFIED (the light-A Ember horn-back shows the cabinet near-black red; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/live-gallery-A.png).",
+    "Acid's front pales by the same ceiling mechanism. The front panel's share with a channel >=251 goes 0.0 to 9.0%, and speaker pixels >=251 go 300 to 10,175 (Dust 14,701 to 26,792; Ice 9,271 to 22,385). The reviewer's own measure.json has Acid's front C* 83.8 to 73.7. Their >=254 threshold hid this (10 to 46). The owner should see all eight beside live, not only Dust and Ice.",
+    "S4 is still open. Every light-C front keeps five reflect_only flags (front-<tint>.json, at (1.6,2.05,0.005), (1.8,2.1,1.3), (1.92,-1.44,1.2), (0,-0.6,2.6) and (0,-1.0,2.2)). sets.py:180-183 turns off their shadow, diffuse and transmission visibility, so they are objects that cast no shadow, against the house rule. The 21 Nov audit confirmed S4 (low; an estimated, unmeasured veil of a few L* on Fog's upper right face). Light C covered only S1 and S3, and the record has no follow-up.",
+    "No phone-size grounded test was run. The record pulled the Dust habitat because 'it hovers at phone size' (approved-renders.md:4241). Light C removes the contact band: the floor 2-8 px under the front edge goes from L* 2.3-15.3 live to 89.8-96.8 new. Fog's cast shadow at (730,1040) is now only 1.4 L* below open paper. My 240 px view shows Fog standing on its black feet (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-owner/phone-size-240.png), but that is a judgement, not the owner's test."
+   ]
+  },
+  {
+   "verdicts": [
+    {
+     "id": "S4-reflect-only-flags",
+     "stands": true,
+     "reason": "Confirmed from my own reads. front-<tint>.json set.flags[0,1,2,3,5] carry reflect_only true at the stated centres and sizes, and all eight share the rest-hash de2b59ad93f9761f, so the flags are the same in every front. turn-ember-07.json has the same five. studio/engine/sets.py:180-185 keeps glossy on, turns off shadow, diffuse, transmission and volume, and makes the cards one-sided. My JSON diff of studio-refresh/site-front-off-tall-<tint>.shot.json against front-<tint>.json changes only the render keys, contact, props and title, so the flags are inherited. My camera projection (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/scripts/project.py) puts 0.0% of each of the five in frame. No mask has any id at or above 247 (the highest id is 109). The 21 Nov audit's S4 skeptic text matches ('perhaps up to about 6 ... Nothing here is measured'). No S4 render exists: none under renders/2026-11-2*, and git log --all since 20 Nov shows none. The README does say 'one physical light model'. One caveat weakens the reviewer's reliance on the 21 Nov size estimate: that estimate was made under model A, and light C makes S4 larger (see missed)."
+    },
+    {
+     "id": "glass-shadow-count-uncommitted",
+     "stands": true,
+     "reason": "The facts check out. run.sh writes the log to /tmp/lightc-$n.log and only echoes a grep of it. light-c/ holds no .log file. The report.json keys are shot, image, seconds, samples, size, applied, pending, sets, glints, sun_aim, flags_crossing_set, model_hash, parts_2d, masks and finish, so no count. set.props is only no_glass_shadows, with no shadow_ray_report (living_ext.py:304-315). The B1 runs did log 'shadow-ray links left 0' (approved-renders.md:4069 and :4119). The front commit message (b3f499cc3f) carries no count. The expected 6 does match the product defs: cloud has bark, horn-formed and horn-satin ($bark, so clear_resin), variants has bark, clear-cast and horn-lot. s1-test/README.md says '(6 materials)'. Two corrections. First, 'Is Shadow Ray' also appears in studio/engine/kit_ext/ice_b_el.py:545/566/734, so materials.py:1238 is the only one these shots load, not the engine's only one. Second, the severity is overstated: this is a gap in the record, not a risk to pixels. kit._ext (kit.py:363-371) has no try/except, so a failing prop aborts render.py, and run.sh commits only on rc 0. The cut is complete by construction, and Ember and Fog are byte-identical to S1 c."
+    },
+    {
+     "id": "light-C-settings-verified",
+     "stands": true,
+     "reason": "Everything reproduced. My diff of refresh shot.json against light-C .json for all eight changes only these: caustics_reflective and caustics_refractive added, clamp 8 to 0, filter_glossy added at 0.0 (the render.py:282 default is 0.5), contact 1.7/2.2 to 0, props [no_glass_shadows], and the title. .shot.json equals .json in all eight, and applied, pending and sets are empty. render.py:281 maps clamp to sample_clamp_indirect. git grep finds no sample_clamp_direct anywhere in studio/ or campaign/, and render.py starts from read_factory_settings, where the direct clamp is 0 (off). The materials.py:385 gate holds. Blobs 8c78e244 and 83bcda2d are shared with s1-test ember-c and fog-c. The renders were separate: the Ember mask PNG Date is 2026/11/21 06:58:18 against 2026/11/24 05:37:48, the commits are f672722fba and b3f499cc3f, and the render times are 325.7 s / 685.9 s and 507.0 s / 1044.2 s. The model hashes are equal, and the S1 c shot differs only in its title. The generator is at spinoffs/barkhorn/campaign/light_c.py. One nuance: 'the only change' is true for the shot files, but the GLBs were rebuilt (f80fab61/c9409ba3 against 3a9aa032/b77a894b). The rebuild is tiny for Ember and Fog (next finding)."
+    },
+    {
+     "id": "one-camera-studio-exposure",
+     "stands": true,
+     "reason": "Confirmed. I reproduced the rest-hash de2b59ad93f9761f. The masks differ by 0 px across the eight and against the refresh masks (the PNG blobs differ only in Date and RenderTime metadata), and mask.json is blob f3263aef. Live webp against the refresh PNG gives a mean |d| of 1.39/1.50/1.44/1.32/1.48/1.43/1.29/1.16 levels. S1 'a' against the refresh gives 0.048 (Ember) and 0.185 (Fog) per channel. Two corrections. First, the report.json files do not hold exposure, view or white balance; those sit in the .json/.shot.json render block (-0.1, Khronos PBR Neutral, 5600/3.0, the same in all eight). The reports hold only the finish block (gain 1.0, white 236). Second, the paper figure (L* 90.01-90.08, a* +0.04..+0.17, b* +4.74..+4.94) is true only of the upper wall. My region more than 150 px from the product with y<600 reads 89.92-89.98, +0.04..+0.17, +4.75..+4.95. All paper more than 150 px away reads L* 91.34-91.74, a* -0.37..+0.33, b* 3.85-5.11 in C (A: -0.21..-0.05 and 4.34-4.60), because the floor takes on the tint (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/paper.txt). That is the product's own transmitted light, not a second studio."
+    },
+    {
+     "id": "equipment-hidden-0",
+     "stands": true,
+     "reason": "The audit numbers hold. All eight .equipment.txt files are blob e3d28b7c. My read of each mask's red channel finds 30 ids, the highest 109, and nothing at or above 247. Legend ids 247-254 are exactly the eight lamps with power above 0. render.py:447-471 builds the hidden list from camera-hidden meshes (none besides the flags and cards) and from lamps with energy above 0. My projection puts 0.0% of each emitting lamp in frame, and of flag4, flag6, flag8 and bounce0. flag6's nearest corner lands at x 1034.6. My powers: key 29.3, fill 80.3, kick 19.9, horn 117.3, bg-left 73.5, bg-right 28.4, wall_left 204.9, bg-high 46.7 W. The owner's 'Keep' is in approved-renders.md:4101. One correction: 'no ... card is in frame' is wrong as written. flag7, the back-edge card, projects 100% inside the frame at (445-713, 926-1005), behind the cabinet, and is seen through the acrylic by design. The reviewer's own audit-gaps finding says this."
+    },
+    {
+     "id": "audit-gaps-card-and-zero-lamps",
+     "stands": true,
+     "reason": "Reproduced by my projection. flag7's bbox is (445, 926, 713, 1005). The mask pass replaces every material with an opaque emission (render.py:478-483), so the cabinet hides the card in the audit. The shots.py:767-774 docstring says the camera sees the card through the bottom panel. In the Fog column at x 400, y 1027-1038 reads L* 46.7-69.0 in C against 26.1-40.2 in A. Share of each zero-power lamp inside the frame: back 89.7%, pool 35.9%, edge 100%, rim 100%, paper 100%, through 38.2%; wall, wash and floor 0%. _masks skips energy 0 (render.py:471). Cycles lamps do not occlude, so there is no pixel effect. This is not new in C."
+    },
+    {
+     "id": "no-fireflies-or-speckle",
+     "stands": true,
+     "reason": "My own scan (L* minus the 5x5 median excluding the centre; /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/fireflies.txt): on paper more than 25 px from the product, 0 px exceed +15 in A or C for all eight. On the product, C has fewer pixels more than 25 above the median than A in 6 of 8 tints; Haze goes 292 to 319 and Smoke 924 to 1010, both glint-level. Of C's top 25 points, 13-23 fall within 2 px of A's top 25 (Ember 21, Poison 23). The brightest are shared glints: (582,481), (581,465), (546,449) on Fog's horn, and (412,619), a woofer-screw glint also present in A."
+    },
+    {
+     "id": "denoiser-and-banding",
+     "stands": true,
+     "reason": "Reproduced. Smoke at x 615-705, y 690-800 reads mean 3.56 with p99 7 in C (the reviewer said 6), against A 0.97 and live 0.99. Its band-pass sd is 1.60 against 1.19. The streaks show only at 8x gain (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/views/right-smoke-8x.png), and the batts are smooth at 3x (views/right-fog-3x.png in the same folder). The paper's histogram has 0 empty levels between p1 and p99 in every channel, in A and C. The column dip at x 997-998 is present in A (231.3/232.2 against 233.4), C (231.9/232.8 against 234.0) and live. The coloured floor stays smooth under a 6x stretch (views/floor-stretch6.png)."
+    },
+    {
+     "id": "differences-follow-light-C",
+     "stands": true,
+     "reason": "My independent region table (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/regions2.txt) reproduces the reviewer's figures. Horn dL* 0.0..+0.2 (dC* down to -0.5). Top -0.3..0.0. Sweep \u00b10.3. Cone +0.4..+1.0. Right audit box +9.9 (Haze) to +22.3 (Fog), Smoke +0.9. Front above the woofer +3.9..+11.2 (Smoke +0.1). Lower compartment +7.8..+11.8. Ports +10.3..+33.0. Bottom edge +13.2..+27.8. Feet (unaltered mask) 2.8-7.9 to 17.7-30.0. Floor shadow right of the base 76.4-80.3 to 91.8-96.2. Under the front edge 86.0-88.1 to 94.3-97.1. Fog at x 400, y 1041-1044: 15.4 to 96.1. The caldera patch move is confirmed (Ember (562-566, 783-788) 27.0 to 16.5; (552-560, 810-811) 19.1 to 31.2). The dE map (views/dE-maps.png in the same folder) confines the change to the product, the base and the floor reached through the cabinet. I did not verify predict_scale's \u00b12.7 C* / \u00b11.5\u00b0 hue fit."
+    },
+    {
+     "id": "dye-path-hue-shift",
+     "stands": true,
+     "reason": "The measured shifts are right. Dust's audit box goes from a*/b* +33.3/+42.8 to +35.0/+57.0 (h 52.1 to 58.5). Ice goes from +8.0/-38.7 to +0.1/-41.3 (h 281.7 to 270.1). The logic holds: in the cube-root range of CIELAB, a uniform change in light scales a* and b* together and leaves hue fixed, and PBR Neutral's shoulder is not reached at L* 32-50. So a 6-11\u00b0 shift means the light reaching the batts changed in spectrum, which fits less dye traversed (materials.py:1179-1196). The mechanism is not isolated, though. Under C the batts also take new light from new sources: by my cosine-weighted estimate, the fill card fills about 37% of the batts' outward view, open sweep about 30%, and spots where reflect-only flags stand about 16% (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/scripts/batts_view.py). 'Refraction shortens oblique paths' is therefore one candidate among several. The size remains UNVERIFIED."
+    },
+    {
+     "id": "floor-colour-and-light-feet",
+     "stands": true,
+     "reason": "The floor at x 450-650, y 1180-1250 reproduces. Acid b* 4.6 (A) to 9.1. Dust a*/b* 0.3/4.1 to 3.2/7.0. Ice b* 1.9 to -1.4. Haze -0.2/2.1 to 1.7/-1.2. Ember a* -0.1 to 1.9. Fog L* 88.1 to 92.4. Smoke unchanged at -0.8/3.2. I projected the key-shadow zone (0.29-0.41, 0.04-0.27, 0) and read it: Ember C 73.8-92.6 and Smoke C 74.4-93.0, equal within about 1.6 L*, against open floor at (0.6, 0.3) of 94.7/95.2. The opaque lining's shadow therefore remains, and some points are darker than the reviewer's 83. The attribution of the tint to the back wall and the fill card is untested. By my estimate (floor_view.py in the same scripts folder) the fill card takes only about 4% of the front-left floor's view against about 20% for the cabinet. The front-left tint therefore comes mostly from the back-right sweep seen through the cabinet, and part of that sweep lies behind reflect-only flag1."
+    }
+   ],
+   "missed": [
+    "Light C makes S4 bigger than the 21 Nov estimate the reviewer cites. Under A, no indirect light reached the batts through the acrylic, so 'the negative fill matters little' was a safe assumption. Under C, the batts' outward view through the right panel lights them. Rays that cross the panel are transmission rays, and those pass straight through reflect-only cards (sets.py:183). By my rough cosine-weighted estimate over 9 points on the right face (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/scripts/batts_view.py), that view is: fill card right 37.2%, open sweep 30.2%, real flag4 11.0%, and reflect-only flag1 9.1% + flag2 4.1% + flag5 1.8% + flag3 1.5% = 16.5%. About a sixth of the batts' view is therefore lit sweep that a real black card would hide, and it lies inside the region with the largest C change (right audit box +9.9..+22.3 L*). For floor points near the base, reflect-only flags fill 11-19% of the sky (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/scripts/floor_view.py). Most of that is overhead flag3 and flag5 against the dark world, but flag1 is 8.7% for the floor right of the cabinet. The pixel effect is UNVERIFIED. It needs the S4 test (the five cards made real) rendered in light C for Ember and Fog, at the right side and the base, before 'go live' rests on the 21 Nov size.",
+    "No convergence check exists for C's caustic light. Every front, and S1 c, is 96 spp with adaptive 0.01, OIDN and clamp 0 (front-<tint>.json render block). That is the same budget as A, which had no caustic paths. B1 used 512 spp with adaptive 0.003 (approved-renders.md:4087). The interior and floor figures every finding rests on are denoised estimates of caustic paths. OIDN tends to remove rare bright samples, which can bias caustic-lit areas dark and smooth. The visible trace is the Smoke batts' streaks: band-pass sd 1.60 against 1.19, mean 3.56 against 0.99 levels. A crop at 4-8x the samples, for one tint's right side and base, would bound the effect. UNVERIFIED either way.",
+    "The house ground is no longer one ground. approved-renders.md:3545 records it as 'the same in every tint' (bottom-right shadow 86.9). In C, paper more than 150 px from the product spans a* -0.37..+0.33 and b* 3.85-5.11 (A: -0.21..-0.05 and 4.34-4.60). The foreground floor (x 200-800, y>1150) spans b* -0.44 (Ice) to +8.11 (Acid), and L* rises by +0.5 (Ember) to +2.8 (Fog). The shadow box right of the base reads 91.8-96.2 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b83/skeptic-physics/paper.txt). This is physical, but other lanes match their pictures to this ground. The lamps' OFF frames keep the painted contact term (HOUSE_SWEEP_AO defaults to 1, approved-renders.md:4016), and the Core OFF re-render at 0 was planned 'if he picks C'. Nothing after 24 Nov 04:03 records that it was done. Putting the Tropos fronts live alone would show two light models side by side. UNVERIFIED which live lamp files carry the term."
+   ]
+  }
+ ]
+}
