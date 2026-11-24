@@ -10,7 +10,7 @@
 | clamp | lathe | 1 | Aluminium 6061 | 126 x 126 x 24 | 54.65 |
 | gaskets | buy | 1 | Two moulded silicone rings (Shore 40, black, 1 mm, spherical): one between the collar's flange and the skin inside, one between the clamp ring and the shell outside |  | 3.00 |
 | vent | buy | 1 | Gore or alike A press-in ePTFE pressure-equalising vent (about 4 across), in the rim ring: it lets the air gaps between the layers breathe and keeps out dust and liquid |  | 1.50 |
-| hub | lathe | 1 | Aluminium 6061 | 72 x 72 x 54 | 52.00 |
+| hub | lathe | 1 | Aluminium 6061 | 72 x 72 x 52 | 51.67 |
 | ring | lathe | 1 | PEEK rod, unfilled | 92 x 92 x 24 | 115.48 |
 | pins | buy | 1 | Three stainless shouldered pins, M3 thread with a Ø4 × 10.5 shoulder, screwed through the PEEK ring into the hub, a pre-applied nylon patch (no anaerobic locker: it crazes acrylic); 4 mm or more of bayonet engagement against a centering land on the hub, radial play 0.2 or less. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to an eye on the collar, rated well over 10 × the 1.1 kg shade (review, 2026-11-01). Replaces 4 x 8 dowels pressed into the hub, which gave about 2.5 mm of engagement with 2 mm of play and could not span the 10.5 mm pin |  | 6.00 |
 | tether | buy | 1 | Review 2026-11-01: the shade's secondary retention, a 1 mm stainless wire-rope tether (7x7), crimped loops, from an eye screwed into the hub to an eye on the collar, slack in use; rated well over 10 x the 1.1 kg shade |  | 4.00 |
@@ -20,8 +20,10 @@
 | white-disc | laser | 1 | Aluminium 6061 | 72 x 72 x 11 | 46.43 |
 | crown | lathe | 1 | Aluminium 6061 | 90 x 90 x 22 | 49.35 |
 | gland | lathe | 1 | Aluminium 6061 | 50 x 50 x 24 | 46.50 |
-| cord | buy | 1 | any (UL listed) Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip in the cap and one in the canopy, the pair tested to hold the fixture (UL 1598's cord-support test: confirm the load with the lab) |  | 16.00 |
-| suspension | buy | 1 | Griplock Systems or Gripple (to choose) Round 43, PROPOSAL (certification.md): a 1.5 mm black-coated stainless suspension cable, 2 m, cut to the drop, with an adjustable gripper in the canopy and a fixed end in the cap; rated well over the fixture's 1.6 kg (Griplock's 1.5 mm kits are rated about 30 to 45 kg; to confirm on the part's sheet). The fixture hangs from it; the cord beside it carries the 26 V only |  | 12.00 |
+| grip | buy | 1 | Lapp (SKINTOP family) PROPOSAL 2026-11-24 (Hemisphere's top, check 3): Lapp 53112005, a nickel-plated brass M12 x 1.5 cable gland: cord 3.5 to 7 mm, 16 mm across the flats, 17.6 across the corners, 32.5 mm overall, 12 mm of thread (Lapp's datasheet DB53112005EN as the reviewer read it; not opened here: to confirm). Threaded 12 into the hub; the cord-support test with the lab |  | 6.00 |
+| crown-screws | buy | 1 | PROPOSAL 2026-11-24: three M3 x 8 countersunk (ISO 10642) stainless screws, the crown to the hub's neck |  | 0.50 |
+| cord | buy | 1 | any (UL listed) Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip in the cap (Lapp 53112005 into the hub, 2026-11-24) and one in the canopy, strain relief only: the fixture hangs from the steel suspension cable (hemi-suspension; check 3, 2026-11-24), the cord carries current only (confirm the cord-support test with the lab) |  | 16.00 |
+| suspension | buy | 1 | Griplock Systems or Gripple (to choose) PROPOSAL 2026-11-24 (check 3): a 1.5 mm black-coated stainless suspension cable, 2 m, cut to the drop, with an adjustable gripper in the canopy and an M4 threaded swaged stud screwed into the hub (its collar in a counterbore at the hub's neck); the cable up a 2 mm bore through the crown and the cap's lid. The fixture (about 1.6 kg) hangs from it; the cord beside it carries current only. Rated well over the fixture (Griplock's 1.5 mm kits about 30 to 45 kg; to confirm on the part's sheet) |  | 12.00 |
 | canopy | lathe | 1 | Aluminium 6061 | 160 x 160 x 60 | 83.40 |
 | strap | buy | 1 | any (a lighting supplier) Zinc-plated steel crossbar, 1.6 mm, screwed to the 4 in junction box; the cord grip, the suspension gripper and the canopy's screws anchor in it, and the driver and the 120 V splices sit in a closed steel enclosure on it. The black cast-acrylic canopy is a decorative cover only (black acrylic can't enclose 120 V splices) (review, 2026-11-01). No change to how the canopy looks |  | 6.00 |
 | enclosure | buy | 1 | to make (a sheet-metal shop) or a listed driver enclosure Review 2026-11-01: a closed steel enclosure, 92 x 64 x 37, 1.0 wall, zinc-plated, round the driver and the 120 V splices, screwed to the canopy strap; a listed bushing where the Class 2 cord leaves it |  | 12.00 |
@@ -31,12 +33,12 @@
 
 | | USD |
 |---|---|
-| buy | 95 |
+| buy | 102 |
 | formed | 4,246 |
 | laser | 46 |
 | lathe | 582 |
 | tube | 47 |
-| total | 5,016 |
+| total | 5,022 |
 
 No price yet for: UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run.
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

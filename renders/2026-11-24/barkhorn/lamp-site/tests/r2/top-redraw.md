@@ -1,4 +1,4 @@
-# Hemisphere's top in even tiers: the redraw, after review 2 (2026-11-24)
+# Hemisphere's top in even tiers: the redraw, after review 2 and check 3 (2026-11-24)
 
 PROPOSALS for the owner's question ("does it need that many tiers, or is there a way to make the tiers more even in
 height and diameter difference?"). CAD: `crystal.py` (TOP_TIERS, GRIP, WHITE_SPLIT; `top` off by default); builds
@@ -28,18 +28,26 @@ lower outer edge and the collar's top inner edge. The meshes, the render's copie
    to 93.2); the band's bore is relieved (Ø100.4) below 92, so only the ring is threaded: 10.8 long (A), 8.0 (B), less the
    run-out.
 5. The squeeze is then set by the stack (the table below), not by torque.
-6. The cord grip is a real part, Lapp 53112005 (M12 x 1.5, nickel-plated brass, cord 2.5 to 6.5, 15 across the flats,
-   21 over its seat, 6 of thread; from DigiKey's listing of its datasheet, the datasheet itself not opened here: to
-   confirm). The tiers did not need to move: it threads through the crown's 1 floor (102.5 to 103.5) into the hub
-   (5 of thread in the aluminium), so the fixture hangs from the hub and the grip clamps the crown down on its pad;
-   its body stands in a 21 pocket, its top 124.5 under the cap's 1.0 lid (125).
-7. The cap screws onto an M26 x 1 spigot on the crown (no screws through its wall; B's cap wall over the thread about
-   2.4, enough for a cap that carries nothing). The order: the hub; the crown on its neck; the grip through the floor
-   into the hub, tightened with a thin-wall 15 socket down the pocket; the cord through it and its dome nut tightened;
-   the cap screwed on.
-8. The suspension cable is the default (the fixture is about 3.5 lb, the SPT-2 cord carries 2.5): its swaged ferrule
-   in a counterbore in the hub's neck under the crown's floor at r 9.5, the cable up the pocket beside the grip and out
-   through the cap's lid; far above the lip's travel (z 64 to 75).
+6. (Check 3) The fixings, for today's top, A and B alike (`fixings`, V3's default; crystal.py GRIP):
+   - The cord grip is Lapp 53112005 as its datasheet gives it (DB53112005EN, as the reviewer read it; I could not open
+     Lapp's page here: to confirm): M12 x 1.5, 16 across the flats, 17.6 across the corners, 32.5 overall, 12 of thread,
+     cord 3.5 to 7. The hub is tapped M12 13 deep from its neck's top (101.5), so all its thread is in the aluminium and
+     the cord's pull goes straight into the hub. Its seat 104, its top 124.5, under the cap's 1.0 lid (125): the tiers
+     did not move. Its body is drawn as the hex and a round dome to the overall height (its outline to confirm).
+   - The crown sits on the neck on its pad, its 2.5 floor held by three M3 x 8 countersunk screws at r 9.25 into the
+     neck (keyed and held; flush, so the grip's hex and the socket pass over them).
+   - The suspension cable (the default; the fixture is about 3.5 lb, the SPT-2 cord carries 2.5) is anchored in the
+     hub: an M4 swaged stud screwed 6 into the neck at r 14, its collar in a counterbore, its top at 101.5 (above the
+     lip's travel, which ends at 75). The cable runs up a 2 bore through the crown and out through the cap's lid.
+   - The cap rests on the crown, located by the cord and the cable through its lid, held down by its own weight (the
+     lamp hangs; nothing pulls the cap up). No screws, no thread.
+   - The pocket Ø24 takes a thin-wall 16 socket (about 22.5 across), clear of the countersunk heads and the cable.
+   - The order: the hub; the cable's stud screwed into the hub; the crown lowered over the cable onto the neck, its
+     three screws; the grip screwed into the hub and tightened with the socket down the pocket; the cord through it,
+     its dome nut tightened; the cap lowered over the cord and the cable.
+7. The clamp thread's run-out is a DIN 76 undercut on the collar (Ø93.7, 92 to 95.75, 2.5 pitches); the ring's thread
+   has a 1 x 45 lead-in.
+8. South's slot entries (dropped in round 38) are left out of the collar with the lip (they cut it, seen from below).
 
 ## 3. The squeeze, with the ring's height held on the collar
 
@@ -53,8 +61,9 @@ The flange-to-band distance is fixed at 16.0 (radial). The acrylic is 12 nominal
 | ±5 % | 1.3 | 23 % | 16 to 30 % | 12 to 35 % |
 | ±5 % | 1.5 | 33 % | 27 to 39 % | 23 to 43 % |
 
-So holding the height needs the shade maker to hold the crown's sheet within about ±5 % (or to choose the shims per
-shade). The other way, torqued as today, lets the collar's top float: 0.5 proud nominal, ±1.4 at worst (±10 % sheet).
+Cast sheet is held only to ±(0.4 + 0.1t) (ISO 7823-1), about ±10 % here, so the squeeze is set per shade: four silicone
+rings, Shore 40, 1.3 free (drawn at 1.0), and the shims picked per shade (1.0, 1.3 or 1.6) from the measured crown
+stack so the squeeze lands at 20 to 35 %: a process step in the BOM (hemi-gaskets-4; the gaskets' part note). The other way, torqued as today, lets the collar's top float: 0.5 proud nominal, ±1.4 at worst (±10 % sheet).
 
 ## 4. The two
 
@@ -64,14 +73,13 @@ shade). The other way, torqued as today, lets the collar's top float: 0.5 proud 
 | Steps | 24 across (12 per side) | 24 across (12 per side) |
 | Collar's top | 103.33 | 100.5 |
 | Lifted, from where it hangs | 8.0 to 9.0 | 8.0 to 9.0 |
-| Lowered to come off | 12.8 | 10.0 |
-| Weight per shade (collar, clamp ring) | +25 g | +1 g |
-| Weight, fixture (crown, cap, hub) | +47 g | -31 g |
-| Grip (both) | 33 g brass | 33 g brass |
+| Lowered to come off, from the drawn pose (from where it hangs) | 12.33 (11.83) | 9.5 (9.0) |
+| Weight per shade against today (collar, clamp ring; silicone) | +22 g; +6 g | −2 g; +6 g |
+| Weight, fixture against today (crown, cap, hub) | +64 g | −13 g |
+| The grip, screws and cable stud | as today's (check 3's fixings are in all three) | the same |
 | Hub, 35 C room (today 50.6) | 50.3 C | 50.2 C |
 
-Both change every shade's collar and clamp ring (and its crown hole), so a shade of one top does not fit another's
-fixture. Both come off by solids (top_check.py: hanging seated, lifted 8.0 and 9.0, turned, lowered past the pins and
+Both change every shade's collar and clamp ring (and its crown hole). Both come off by solids (top_check.py: hanging seated, lifted 8.0 and 9.0, turned, lowered past the pins and
 on 140 down past the carrier; the control, lowered 3 unturned, is held by the pins).
 
-The sheet: top-sheet-v3.jpg.
+The sheet: top-sheet-v4.jpg (its renders' commands: v4.sh).

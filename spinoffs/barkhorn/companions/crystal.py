@@ -211,19 +211,25 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
 # B: four tiers, 8.5 each: the clamp ring Ø104, the crown in two, Ø80 and Ø56, the gland Ø32.
 # Each entry (diameter, z0, z1) in the cover's frame; 'top' the collar's top, the clamp ring's 0.5 under it.
 TOP_TIERS = {
+    'today': dict(top=None, crown=[(80.0, 100.5, 112.0)], gland=(40.0, 112.0, 126.0)),   # today's top, with check 3's fixings
     'A': dict(top=103.33, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0)),
     'B': dict(top=100.5, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 109.0), (56.0, 109.0, 117.5)], gland=(32.0, 117.5, 126.0)),
 }
-# The cord grip (review 2, 2026-11-24: a real part, not a generic shape): Lapp 53112005, a nickel-plated brass M12 x 1.5
-# cable gland for a 2.5 to 6.5 cord, 15 across the flats, 21 tall over its seat, 6 of thread (DigiKey's listing of its
-# datasheet, https://www.digikey.com/en/products/detail/lapp/53112005/18879098; to confirm on Lapp's sheet). It
-# threads through the crown's 1 floor into the hub (5 of thread in the aluminium), so the fixture hangs from the hub
-# and the grip's body clamps the crown down on its thermal pad; its body stands in a Ø21 pocket under the cap's 1.0 lid.
-# Its seat 103.5, its top 124.5 under the lid's 125. The order: the hub, the crown on its neck, the grip through the
-# crown's floor into the hub (tightened by a thin-wall 15 socket down the pocket), the cord through it and its dome nut
-# tightened, then the cap screwed onto the crown's spigot (M26 x 1, no screws through the cap's wall)
-GRIP = dict(seat=103.5, thread=(12.0, 6.0), hex=(17.3, 5.0), body=(16.0, 21.0), pocket=21.0, lid=1.0,
-            spigot=(26.0, 4.0), floor=(102.5, 103.5), cable_r=9.5)
+# The top's fixings (check 3, 2026-11-24; for today's top, A and B alike). The cord grip: Lapp 53112005 as its datasheet
+# gives it (DB53112005EN, as the reviewer read it; the sheet not opened here): M12 x 1.5, 16 across the flats, 17.6 across
+# the corners, 32.5 overall, 12 of thread, cord 3.5 to 7. Its body is drawn as the hex (5) and a round dome to the overall
+# height, its outline to confirm on the sheet. The hub is tapped M12 13 deep from the neck's top (101.5), so all 12 of
+# thread are in the aluminium and the cord's pull goes straight into the hub. The crown sits on the neck on its pad, its
+# 2.5 floor held down by three M3 countersunk screws at r 9.25 into the neck (keyed and held, flush under the grip's
+# hex). The suspension cable's swaged stud screws into the hub (M4, 6 deep, at r 14, its collar in a counterbore, top
+# at 101.5, the neck's top; the grip's seat 104, its top 124.5 under the lid at 125), the cable up a Ø2 bore through the crown and the cap. The cap rests on the crown, located by the cord and
+# the cable through its lid, held down by its weight (the lamp hangs; nothing pulls it up). The pocket Ø24 takes a
+# thin-wall 16 socket (about 22.5 across) clear of the countersunk heads and the cable.
+# The order: the hub; the cable's stud into the hub; the crown over the cable onto the neck, its three screws; the
+# grip into the hub, tightened with the socket down the pocket; the cord through it, its dome nut tightened; the cap
+# down over the cord and the cable
+GRIP = dict(thread=(12.0, 12.0), tap=13.0, hex=(17.6, 5.0), overall=32.5, pocket=24.0, lid=1.0,
+            floor=(101.5, 104.0), screws_r=9.25, cable_r=14.0, stud=(7.0, 4.0, 6.0))
 # The white under the hub (2026-11-24): since 2026-11-11 a Ø95 disc on the fixture, which the collar's r 41 bore cannot
 # pass, so the shade could not be lowered off (4.0 free, 9.0 needed). Split: a Ø62 disc on the fixture (the hub's own
 # Ø, it passes the bore) and a white ring on the cover, Ø95 x Ø63, under the collar's foot; together they hide the slots
@@ -266,7 +272,7 @@ def cover_parts(p=N):
     R, r_si, r_l, r_k, r_ki = _radii(p)
     co, ci, cz0, cz1 = p['collar']
     fr = p['flange_r']
-    tt_ = TOP_TIERS.get(p.get('top'))
+    tt_ = TOP_TIERS.get(p.get('top')) if p.get('top') in ('A', 'B') else None
     if tt_:
         cz1 = tt_['top']; fr = tt_['band_r']
     sh_ = bool(tt_)                       # the clamp ring held on a collar shoulder (review 2, (5))
@@ -293,9 +299,9 @@ def cover_parts(p=N):
     if sh_:
         # (review 2, (4) and (5)) the shoulder the clamp ring screws down to, Ø100 from inside the crown's hole up to 92, so
         # the ring's height, and the collar's top 0.5 over it, are held on the collar; the thread M96 from a relief groove
-        # (Ø94.5, 92 to 93.2) up; the squeeze is set by the stack and the silicone (top-redraw.md, the tolerance table)
+        # (check 3: a DIN 76 undercut, Ø93.7, 92 to 95.75, 2.5 pitches) up; the squeeze is set by the stack and the silicone (top-redraw.md, the tolerance table)
         collar = collar + (cyl('z', (0, 0), co + 4.0, 86.0, 92.0) - cyl('z', (0, 0), ci, 85, 93))
-        collar = collar - (cyl('z', (0, 0), co + 1, 92.0, 93.2) - cyl('z', (0, 0), co - 1.5, 91.9, 93.3))
+        collar = collar - (cyl('z', (0, 0), co + 1, 92.0, 95.75) - cyl('z', (0, 0), 93.7, 91.9, 95.85))
     # the L-slots, blind from inside (the clamp ring's thread is on the outside). Two sets (round 36): North's open at
     # the outer end (its hub outside the crown), South's at the inner end (its hub inside the bowl, so nothing hangs
     # below it). Each notch runs back toward its own entry, so the shade's weight holds each pin in it
@@ -306,12 +312,19 @@ def cover_parts(p=N):
         collar = collar - sector(ci / 2 - 2, rs, a, a + p['turn'], pz - 10.5, pz - 5.5)                    # the turn
         collar = collar - at(a + p['turn'], box(ci / 2 - 2, -w / 2, n0, rs, w / 2, n1))                    # the notch
     zs, off = p['south_pins']
-    for a in (off, off + 120, off + 240):
+    # (check 3, 2026-11-24) South's (dropped in round 38) slots' entries cut through the white lip, seen from below: with
+    # the lip they are left out (South's shades would need their own collar)
+    for a in (() if p.get('white_split') else (off, off + 120, off + 240)):
         collar = collar - at(a, box(ci / 2 - 2, -w / 2, cz0 - 1, rs, w / 2, zs + 7.5))                    # the entry
         collar = collar - sector(ci / 2 - 2, rs, a, a + p['turn'], zs + 2.5, zs + 7.5)                     # the turn
         collar = collar - at(a + p['turn'], box(ci / 2 - 2, -w / 2, zs - 2.5, rs, w / 2, zs + 7.5))        # the notch
     gasket_in = _sphere_band(r_ki, r_ki - 1.0, (co / 2 + 2.2) if sh_ else (co / 2 + 0.2), fr)
     gasket_out = _sphere_band(R + 1.0, R, (co / 2 + 2.2) if sh_ else (co / 2 + 0.2), fr)
+    if sh_:
+        # (check 3, (e)) the silicone as built when the clamp ring's height is held on the collar: four rings, Shore 40, 1.3
+        # thick free and drawn at 1.0 (23 % squeeze): the two gaskets and two shims in the air gaps at the crown (skin to
+        # liner, liner to shell), the shims chosen per shade from the measured crown stack (the BOM's process step)
+        gasket_in = gasket_in + _sphere_band(r_l - p['liner'], r_k, co / 2 + 2.2, fr) + _sphere_band(r_si, r_l, co / 2 + 2.2, fr)
     clamp = _sphere_band(R + 6.0, R + 1.0, co / 2, fr) + (cyl('z', (0, 0), co + 8, 92.0, 97.0) - cyl('z', (0, 0), co, 91, 98))
     clamp = clamp - cyl('z', (0, 0), co, 80, 110)
     if tt_:
@@ -319,6 +332,7 @@ def cover_parts(p=N):
         # bore the M96 thread its full height (no shoulder: it bottoms on nothing but the silicone), its top edge eased 1.0;
         # its band on the shade Ø116 as today, tapered to a 1.0 land (below)
         ring_ = eased(tt_['clamp'], 92.0, cz1 - 0.5, 1.0, bottom=False) - cyl('z', (0, 0), co, 80, 110) - cyl('z', (0, 0), co + 4.4, 80, 92.0)
+        ring_ = ring_ - _edge(co / 2, cz1 - 0.5, 1.0, inner=True, down=True)      # (check 3) the thread's lead-in, 1 x 45
         band_ = _sphere_band(R + 6.0, R + 1.0, co / 2, fr) - cyl('z', (0, 0), co, 80, 110) - cyl('z', (0, 0), co + 4.4, 80, 92.0)
         if tt_.get('taper'):
             # the taper: everything above the line from the band's outer edge at the clamp ring's foot (r 52, on R+6) to
@@ -390,14 +404,17 @@ def cover_parts(p=N):
                         'white ring that hides the slots from below; 1.5 radial to the hub and the Ø62 disc, so the shade comes off); '
                         'its top inner edge led in 1 x 45') if p.get('white_split') else '')
                     + (('. Even-tier top (PROPOSAL): up to the clamp ring\'s top + 0.5, a Ø100 shoulder at 86 to 92 that the clamp '
-                        'ring screws down to (its height held on the collar), a relief groove Ø94.5 at 92 to 93.2, the thread above '
+                        'ring screws down to (its height held on the collar), a DIN 76 undercut Ø93.7 at 92 to 95.75, the thread above '
                         'it; the crown\'s hole Ø100.4') if sh_ else '')]),
         Part('clamp', clamp, Machined('aluminium', 'lathe'), finish='anodised', group='cover',
              notes=['aluminium, black anodised: screwed onto the collar over the crown, its spherical face on a silicone '
                     'ring, to a torque the shade maker sets (the acrylic is clamped between two silicone rings, never metal '
                     'on acrylic); no thread-locker near acrylic (review 2026-11-01: anaerobics craze it): held by the '
                     'silicone\'s preload and a nylon-tipped set screw through the ring into the collar']),
-        Part('gaskets', gasket_in + gasket_out, Bought('hemi-gaskets'), finish='silicone', group='cover'),
+        Part('gaskets', gasket_in + gasket_out, Bought('hemi-gaskets-4' if sh_ else 'hemi-gaskets'), finish='silicone', group='cover',
+             notes=(['PROPOSAL (check 3): four silicone rings, Shore 40, 1.3 free, drawn at 1.0: the two gaskets and two shims in the '
+                     'crown\'s air gaps. PROCESS: the shade maker measures each crown\'s stack (cast sheet is held to only ±(0.4 + '
+                     '0.1t), ISO 7823-1) and picks the shims (1.0, 1.3 or 1.6) so the squeeze lands at 20 to 35 %'] if sh_ else [])),
         Part('vent', None, Bought('hemi-vent')),
     ]
 
@@ -471,40 +488,45 @@ def north_parts(p=N):
     crown = eased(sd, sz0, sz1, 1.0) - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
     gland = eased(cd, sz1, sz1 + ch, 1.0) - cyl('z', (0, 0), 8, sz1 - 1, sz1 + ch + 1)
     z_cord = sz1 + ch
-    tt_ = TOP_TIERS.get(p.get('top'))
+    tt_ = TOP_TIERS.get(p.get('top') or ('today' if p.get('fixings') else None))
     if tt_:
-        # PROPOSAL (2026-11-24, review 2): the crown's tiers and the cap (gland) as TOP_TIERS draws them, each eased 1.0,
-        # the crown on the hub's neck on its thermal pad, its first tier Ø80 inside the collar's Ø82 bore (the shade
-        # rises past it). The neck ends at the crown's 1 floor (102.5); the grip (GRIP) threads through the floor into
-        # the hub and clamps the crown; the cap screws onto the crown's spigot; the suspension cable's ferrule sits in a
-        # counterbore in the neck under the floor, the cable up beside the grip and out through the cap's lid
+        # PROPOSAL (check 3, 2026-11-24): the crown's tiers and the cap (gland) as TOP_TIERS draws them, each eased 1.0, the
+        # crown on the hub's neck on its pad (the first tier Ø80, inside the collar's Ø82 bore, so the shade rises past it);
+        # the fixings as GRIP describes them
         crown = None
         for d_, a_, b_ in tt_['crown']:
             t_ = eased(d_, a_, b_, 1.0)
             crown = t_ if crown is None else crown + t_
         gd_, g0_, g1_ = tt_['gland']
-        f0_, f1_ = GRIP['floor']; sq_ = GRIP['seat']; td_, tl_ = GRIP['thread']; pk_ = GRIP['pocket']; lid_ = GRIP['lid']
-        spd_, sph_ = GRIP['spigot']; cr_ = GRIP['cable_r']
-        crown = crown + (cyl('z', (0, 0), spd_, g0_ - 0.1, g0_ + sph_))
+        f0_, f1_ = GRIP['floor']; td_, tl_ = GRIP['thread']; pk_ = GRIP['pocket']; lid_ = GRIP['lid']; cr_ = GRIP['cable_r']
+        sr_ = GRIP['screws_r']; cbd_, cbh_, sth_ = GRIP['stud']
         crown = (crown - cyl('z', (0, 0), nd + 0.2, sz0 - 1, f0_) - cyl('z', (0, 0), td_ + 0.5, f0_ - 1, f1_ + 0.1)
-                 - cyl('z', (0, 0), pk_, f1_, g0_ + sph_ + 1) - cyl('z', (cr_, 0), 1.8, f0_ - 1, f1_ + 1))
-        core = (core - cyl('z', (0, 0), nd + 1, f0_, nz + 1) - cyl('z', (0, 0), td_, sq_ - tl_, f0_ + 0.1)
-                - cyl('z', (cr_, 0), 4.5, f0_ - 3.0, f0_ + 0.1))
-        gland = (eased(gd_, g0_, g1_, 1.0) - cyl('z', (0, 0), spd_, g0_ - 1, g0_ + sph_) - cyl('z', (0, 0), pk_, g0_ + sph_ - 0.1, g1_ - lid_)
-                 - cyl('z', (0, 0), 8, g1_ - lid_ - 1, g1_ + 1) - cyl('z', (cr_, 0), 2.0, g1_ - lid_ - 1, g1_ + 1))
-        hx_, hh_ = GRIP['hex']; bd_, bh_ = GRIP['body']
-        from build123d import RegularPolygon, extrude, Pos
+                 - cyl('z', (0, 0), pk_, f1_, g0_ + 1) - cyl('z', (cr_, 0), 2.0, f0_ - 1, g0_ + 1))
+        from build123d import Cone, Pos, Align, RegularPolygon, extrude
+        sc_ = None
+        for a_ in (60, 180, 300):
+            x_, y_ = sr_ * math.cos(math.radians(a_)), sr_ * math.sin(math.radians(a_))
+            hole_ = cyl('z', (x_, y_), 3.4, f0_ - 1, f1_ + 0.1) + Pos(x_, y_, f1_ - 1.65) * Cone(1.7, 3.35, 1.66, align=(Align.CENTER, Align.CENTER, Align.MIN))
+            crown = crown - hole_
+            core = core - cyl('z', (x_, y_), 2.5, f0_ - 6.0, f0_ + 0.1)                     # M3 tapped 6 into the neck
+            s_ = cyl('z', (x_, y_), 3.0, f0_ - 5.0, f1_ - 1.65) + Pos(x_, y_, f1_ - 1.65) * Cone(1.5, 3.0, 1.65, align=(Align.CENTER, Align.CENTER, Align.MIN))
+            sc_ = s_ if sc_ is None else sc_ + s_
+        core = (core - cyl('z', (0, 0), nd + 1, f0_, nz + 1) - cyl('z', (0, 0), td_, f0_ - GRIP['tap'], f0_ + 0.1)
+                - cyl('z', (cr_, 0), cbd_, f0_ - cbh_, f0_ + 0.1) - cyl('z', (cr_, 0), 3.3, f0_ - cbh_ - sth_, f0_))
+        gland = (eased(gd_, g0_, g1_, 1.0) - cyl('z', (0, 0), pk_, g0_ - 1, g1_ - lid_)
+                 - cyl('z', (0, 0), 8, g1_ - lid_ - 1, g1_ + 1) - cyl('z', (cr_, 0), 2.0, g0_ - 1, g1_ + 1))
+        hx_, hh_ = GRIP['hex']; sq_ = f1_; top_ = sq_ + GRIP['overall'] - tl_
         grip = (cyl('z', (0, 0), td_, sq_ - tl_, sq_) + Pos(0, 0, sq_) * extrude(RegularPolygon(hx_ / 2, 6), hh_)
-                + eased(bd_, sq_ + hh_, sq_ + bh_, 3.0, bottom=False) - cyl('z', (0, 0), 6.5, sq_ - tl_ - 1, sq_ + bh_ + 1))
-        ferrule = cyl('z', (cr_, 0), 4.0, f0_ - 3.0, f0_)
+                + eased(hx_ - 0.6, sq_ + hh_, top_, 3.0, bottom=False) - cyl('z', (0, 0), 7.0, sq_ - tl_ - 1, top_ + 1))
+        stud = cyl('z', (cr_, 0), 4.0, f0_ - cbh_ - sth_, f0_ - cbh_) + cyl('z', (cr_, 0), cbd_ - 0.6, f0_ - cbh_, f0_)
         z_cord = g1_
     cord = cyl('z', (0, 0), 6, z_cord, z_cord + p['drop'])
     zc = z_cord + p['drop']
     # round 43 (proposal, certification.md): the fixture hangs from a fine steel cable beside the cord, so the cord
     # carries current only (UL 153 lets an SPT-2 cord carry 2.5 lb; Hemisphere is about 3.5); an option until signed
     susp = cyl('z', (5.5, 0), 1.5, z_cord, zc) + cyl('z', (5.5, 0), 5.0, z_cord, z_cord + 9) + cyl('z', (5.5, 0), 5.0, zc - 9, zc)
-    if tt_:                                   # (review 2, (8)) the cable from its ferrule in the hub up through the cap's lid
-        susp = (cyl('z', (GRIP['cable_r'], 0), 1.5, GRIP['floor'][0] - 3.0, zc) + ferrule + cyl('z', (GRIP['cable_r'], 0), 5.0, zc - 9, zc))
+    if tt_:                                   # (check 3) the cable from its stud in the hub up through the crown and the cap's lid
+        susp = cyl('z', (GRIP['cable_r'], 0), 1.5, GRIP['floor'][0], zc) + stud + cyl('z', (GRIP['cable_r'], 0), 5.0, zc - 9, zc)
     cnd, cnh = p['canopy']
     canopy = cyl('z', (0, 0), cnd, zc, zc + cnh) - cyl('z', (0, 0), cnd - 6, zc - 1, zc + cnh - 3)
     driver = box(-42, -28.5, zc + 6, 42, 28.5, zc + 6 + 29.5)
@@ -550,22 +572,25 @@ def north_parts(p=N):
         Part('cob', cob, Bought('hemi-cob'), finish='led', group='fixture', inside=True),
     ]) + [
         Part('crown', crown, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
-             notes=[('PROPOSAL (even tiers, ' + p['top'] + '): ' + ', '.join(f'{d:.0f} across from {a:.2f} to {b:.2f}' for d, a, b in tt_['crown'])
-                     + '; on the hub\'s neck on a thermal pad, a 1 floor at 102.5 that the cord grip clamps to the hub, a Ø21 pocket '
-                     'for the grip, an M26 x 1 spigot for the cap' if tt_ else
+             notes=[('PROPOSAL (' + (('even tiers, ' + p['top']) if p.get('top') else 'today\'s top, check 3\'s fixings') + '): ' + ', '.join(f'{d:.0f} across from {a:.2f} to {b:.2f}' for d, a, b in tt_['crown'])
+                     + '; on the hub\'s neck on a thermal pad, its 2.5 floor held by three M3 countersunk into the neck, a Ø24 pocket for '
+                     'the cord grip and its socket, a Ø2 bore for the suspension cable' if tt_ else
                      'the heat sink (round 41; the fins until then), round 32f\'s low top: 80 across, 11.5 tall over the '
                     'collar') + ', turned from 6061 bar, black anodised (emissivity about 0.85: half its loss is radiation), on '
                     'the core\'s neck on a thermal pad, 0.5 clear of the PEEK ring and the collar']),
         Part('gland', gland, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
-             notes=[(f'PROPOSAL (even tiers, {p["top"]}): the cap, {tt_["gland"][0]:.0f} across x {tt_["gland"][2] - tt_["gland"][1]:.1f}, screwed onto the '
-                     'crown\'s M26 x 1 spigot (no screws through its wall), its 1.0 lid over the grip, holes for the cord and the '
-                     'suspension cable' if tt_ else
+             notes=[(f'PROPOSAL ({("even tiers, " + p["top"]) if p.get("top") else "today, check 3"}): the cap, {tt_["gland"][0]:.0f} across x {tt_["gland"][2] - tt_["gland"][1]:.1f}, set on the '
+                     'crown, resting there by its weight, located by the cord and the suspension cable through its 1.0 lid (no screws, no thread), '
+                     'its Ø24 pocket over the cord grip' if tt_ else
                      'the cap, 40 x 14, over the listed cord grip (the strain relief, tested with the fixture\'s weight), on two M3 into the crown') +
                     ': 6061, turned, edges eased 1.0, SATIN black anodised; part of the heat sink']),
     ] + ([Part('grip', grip, Bought('hemi-cord-grip'), finish='cord', group='fixture', inside=True,
-               notes=['PROPOSAL 2026-11-24 (review 2): Lapp 53112005, M12 x 1.5 nickel-plated brass cable gland, cord 2.5 to '
-                      '6.5, 15 across the flats, 21 over its seat, 6 of thread (DigiKey 18879098; to confirm on Lapp\'s sheet): '
-                      'through the crown\'s floor into the hub, clamping the crown; listed for the cord-support test with the lab'])] if tt_ else []) + [
+               notes=['PROPOSAL (check 3): Lapp 53112005, M12 x 1.5 nickel-plated brass cable gland, cord 3.5 to 7, 16 across the '
+                      'flats, 32.5 overall, 12 of thread (DB53112005EN as the reviewer read it; to confirm): through the crown\'s '
+                      'floor into the hub, tapped 13 deep; tightened with a thin-wall 16 socket down the crown\'s Ø24 pocket']),
+           Part('crown-screws', sc_, Bought('hemi-crown-screws'), finish='steel', group='fixture', inside=True,
+                notes=['PROPOSAL (check 3): three M3 x 8 countersunk screws, stainless, through the crown\'s 2.5 floor at r 9.25 into '
+                       'the hub\'s neck (tapped 6): the crown keyed and held on its pad'])] if tt_ else []) + [
         Part('cord', cord, Bought('hemi-cord'), finish='cord', group='fixture'),
         # review 2 (2026-11-24, (8)): the fixture (about 3.5 lb) hangs from the steel cable by default; the SPT-2 cord's
         # 2.5 lb (UL 153) carries current only
@@ -591,7 +616,8 @@ V3 = dict(N, shell=3.0, liner=6.0, skin=3.0, build='v3',
           # option 3 (the owner, 2026-11-10: "it should work like core cut in half"): the light at the mouth's centre,
           # facing up into the shade, on a stem from the hub; the COB, its reflector and holder gone
           engine='ring', carrier=(56.0, 4.5), board=(50.0, 1.6), stem=(16.0, 12.0), white_disc=95.0,   # 2026-11-11: Ø95, hides the collar's slots from below
-          white_split=True)   # 2026-11-24 (review 2): the Ø95 disc trapped the shade (top_check.py): a Ø62 disc and the collar's white lip
+          white_split=True,   # 2026-11-24 (review 2): the Ø95 disc trapped the shade (top_check.py): a Ø62 disc and the collar's white lip
+          fixings=True)       # 2026-11-24 (check 3): the grip into the hub, the crown screwed, the cable on a stud in the hub (GRIP)
 
 
 def dome_parts(p=None):
@@ -1027,7 +1053,11 @@ NOTES_ORB = [
 ]
 TOUCHING_DOME = [('suspension', 'gland'), ('suspension', 'canopy'), ('suspension', 'cord'), ('pins', 'ring'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'liner'), ('cob', 'hub'), ('gland', 'crown'),
                  ('crown', 'hub'), ('clamp', 'collar'), ('gaskets', 'collar'), ('gaskets', 'clamp'), ('gaskets', 'shell'),
-                 ('gaskets', 'skin'), ('reflector', 'hub'), ('pins', 'hub'), ('strap', 'canopy'), ('enclosure', 'strap')]
+                 ('gaskets', 'skin'), ('reflector', 'hub'), ('pins', 'hub'), ('strap', 'canopy'), ('enclosure', 'strap'),
+                 # check 3 (2026-11-24): threads in their tapped holes (drawn at the thread's size over the tap drill), the
+                 # grip's thread in the hub, the suspension cable through the crown and the cap, the four silicone rings
+                 ('suspension', 'hub'), ('crown-screws', 'hub'), ('grip', 'hub'), ('suspension', 'crown'), ('grip', 'crown'),
+                 ('crown-screws', 'crown'), ('gaskets', 'liner')]
 TOUCHING_ORB = [('grommet', 'shell'), ('grommet', 'core'), ('window', 'base'), ('seat', 'base'), ('ring', 'base'), ('led', 'board'),
                 ('chassis', 'base'), ('ballast', 'chassis'), ('ballast', 'base'), ('cable', 'base'), ('board', 'chassis'),
                 ('foot-ring', 'base'), ('cells', 'holder'), ('hatch', 'base'), ('usb', 'base'), ('cable', 'hatch'),

@@ -362,7 +362,10 @@ def build(frame, samples, scale):
             # clamp, crown, gland, collar and the split white (top_tiers.py's meshes); the audit names the top
             tp_ = os.environ.get('HEMI_TOP')
             tdir_ = f'out-dome-pendant-top{tp_}' if tp_ else 'out-dome-pendant'
-            print('HEMI_TOP', tp_ or 'today', 'meshes', tdir_ + ': clamp crown gland hub collar white-disc ring gaskets' + (' grip' if tp_ else ''))
+            loaded_ = ['clamp', 'crown', 'gland', 'hub', 'collar', 'white-disc', 'ring'] + (['gasket-out'] if os.environ.get('GASKETS', '0') == '1' else []) + \
+                (['suspension'] if os.path.exists(os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'suspension.stl')) else [])
+            print('HEMI_TOP', tp_ or 'today', 'meshes', tdir_ + ': ' + ' '.join(loaded_), '| HEMI_COLLAR_CAP', os.environ.get('HEMI_COLLAR_CAP', '0'),
+                  '| BORDER', os.environ.get('BORDER', 'none'))
             for nm in ('clamp', 'crown', 'gland', 'hub'):
                 part(tdir_, nm, cap, c)
             white = SC.principled('crown-white', '#EEEEEA', 0.55)
@@ -370,7 +373,17 @@ def build(frame, samples, scale):
             cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
             mx = nt.nodes.new('ShaderNodeMixShader'); tc = nt.nodes.new('ShaderNodeTexCoord'); sx = nt.nodes.new('ShaderNodeSeparateXYZ')
             lt = nt.nodes.new('ShaderNodeMath'); lt.operation = 'LESS_THAN'; lt.inputs[1].default_value = 0.080
-            nt.links.new(tc.outputs['Object'], sx.inputs[0]); nt.links.new(sx.outputs['Z'], lt.inputs[0]); nt.links.new(lt.outputs[0], mx.inputs[0])
+            nt.links.new(tc.outputs['Object'], sx.inputs[0]); nt.links.new(sx.outputs['Z'], lt.inputs[0])
+            if os.environ.get('HEMI_COLLAR_CAP') == '1':
+                # (check 3, 2026-11-24) white only where it is painted: the faces below z 80 that face down (the flange's face
+                # under the shade and the lip beneath), not the bore and the slots
+                gn_ = nt.nodes.new('ShaderNodeNewGeometry'); sn_ = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(gn_.outputs['Normal'], sn_.inputs[0])
+                dn_ = nt.nodes.new('ShaderNodeMath'); dn_.operation = 'LESS_THAN'; dn_.inputs[1].default_value = -0.3
+                nt.links.new(sn_.outputs['Z'], dn_.inputs[0])
+                an_ = nt.nodes.new('ShaderNodeMath'); an_.operation = 'MULTIPLY'
+                nt.links.new(lt.outputs[0], an_.inputs[0]); nt.links.new(dn_.outputs[0], an_.inputs[1]); nt.links.new(an_.outputs[0], mx.inputs[0])
+            else:
+                nt.links.new(lt.outputs[0], mx.inputs[0])
             b1 = nt.nodes.new('ShaderNodeBsdfPrincipled'); b1.inputs['Base Color'].default_value = (0.012, 0.012, 0.013, 1); b1.inputs['Roughness'].default_value = 0.45
             b2 = nt.nodes.new('ShaderNodeBsdfPrincipled'); b2.inputs['Base Color'].default_value = (0.85, 0.85, 0.82, 1); b2.inputs['Roughness'].default_value = 0.55
             if os.environ.get('HEMI_COLLAR_CAP') == '1':
@@ -387,7 +400,11 @@ def build(frame, samples, scale):
             if os.environ.get('GASKETS', '0') == '1':
                 # (2026-11-20) off by default: two 1 mm silicone rings sandwiched under the clamp ring and the collar's
                 # flange, unseen in the lamp; their faceted STL pierced the smooth shell and drew two rows of dots
-                part(tdir_, 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
+                # (check 3) the outer ring only (the inner one, 0.0 off the opal, drew the two rows of dots)
+                gp_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'gasket-out.stl')
+                part(tdir_, 'gasket-out' if os.path.exists(gp_) else 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
+            if 'suspension' in loaded_:               # (check 3) the steel cable, black-coated, from its stud in the hub up
+                part(tdir_, 'suspension', SC.principled('cable', '#151516', 0.35, 1.0), c)
             part('out-dome-pendant', 'cord', braid_mat(f'cord-braid-{tint}') if os.environ.get('BRAID', '1') == '1' else SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
             part('out-dome-pendant', 'carrier', an, c)
             part('out-dome-pendant', 'stem', an, c)
@@ -1139,7 +1156,13 @@ def build(frame, samples, scale):
         # frame read 8 levels over the same frame without the tree; with the tree off, ON and OFF match and the paper is
         # the unbiased figure. HOUSE_LTREE=1 for the tree
         sc.cycles.use_light_tree = os.environ.get('HOUSE_LTREE', '0') == '1'
-        HG.camera(bpy, sc, hcam, W, H, s=hs)
+        cob_ = HG.camera(bpy, sc, hcam, W, H, s=hs)
+        if os.environ.get('HOUSE_CAM') and len(os.environ['HOUSE_CAM'].split(',')) > 7:
+            # (check 3) HOUSE_CAM's 8th value 1: the camera aimed freely at its target (no level camera, no shift), e.g. from below
+            cp_ = Vector(hcam['position']); tg_ = Vector(hcam['target'])
+            cob_.rotation_euler = (tg_ - cp_).to_track_quat('-Z', 'Y').to_euler(); cob_.data.shift_x = cob_.data.shift_y = 0.0
+            cob_.data.dof.use_dof = False
+            print('HOUSE_CAM free', tuple(cp_), tuple(tg_))
     else:
       SC.camera(cam[0], cam[1], lens=cam[2], fstop=float(os.environ.get('FSTOP', '8.0')),   # FSTOP, FOCUS: a detail's shallow focus
               focus=tuple(eval(os.environ['FOCUS'])) if os.environ.get('FOCUS') else None)

@@ -26,7 +26,7 @@ for kv in $X; do [ "${kv%%=*}" = DENOISE ] && DN=${kv#*=}; done
 X2=$(for kv in $X; do [ "${kv%%=*}" = DENOISE ] || printf '%s\n' "$kv"; done)
 # (HOUSE_LAMP_K in X replaces the base's: the Core LIT's key:0 is kept by adding it there)
 [ -s $D/audit/$N.txt ] || { env $E ${FL:+"$FL"} $X2 AUDIT=1 MASK=$S/m.png python3.11 lamp_site.py $f --scale $SC > $S/$N.aud 2>&1 && \
-    grep -E "^AUDIT|HIDDENCAST|CASTCHECK|^   (IN FRAME|in|out|practical) |^RAYVIS|^LINK|LAMP_MOVE|LAMPK|ROOM_FIT|HOUSE_WB|HOUSE_GEL|HOUSE_CAM|HEMI_TOP|CORE_ABS" $S/$N.aud > $D/audit/$N.txt; }
+    grep -E "^AUDIT|HIDDENCAST|CASTCHECK|^   (IN FRAME|in|out|practical) |^RAYVIS|^LINK|LAMP_MOVE|LAMPK|ROOM_FIT|HOUSE_WB|HOUSE_GEL|HOUSE_CAM|HEMI_TOP|CORE_ABS|BORDER" $S/$N.aud > $D/audit/$N.txt; }
 nz_=$(grep -o "CASTCHECK.*" $D/audit/$N.txt | tr ',' '\n' | grep -v " 0.0" || true)
 [ -n "$nz_" ] && echo "$nz_" | sed "s/^/$N castcheck NOT ZERO: /" || echo "$N castcheck all 0.0"
 if [ ! -s $D/$N.png ]; then

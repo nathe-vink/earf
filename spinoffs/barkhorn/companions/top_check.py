@@ -28,7 +28,9 @@ def check(name):
     p = CONF[name]
     P = {q.name: q.solid for q in C.north_parts(p) if q.solid is not None}
     top = (C.TOP_TIERS[p['top']]['top'] if p.get('top') else p['collar'][3])
-    out_ = top - 90.5 + 0.5                       # net lowering below hanging until the pins clear the collar's top, +0.5
+    # lowered from the drawn pose until the pins (z 91 to 95, lifted 8.5 to 82.5 to 86.5) clear the collar's top: top - 91
+    # (check 3: A 12.33, B 9.5 from the drawn pose; from where it hangs, 0.5 lower, 11.83 and 9.0), then 0.5 more
+    out_ = top - 91.0 + 0.5
     # (review 2: it hangs with each notch's top seated on its pin, 0.5 under the drawn position, so the drawn +7.5
     # and +8.5 are lifts of 8.0 and 9.0 from where it hangs)
     poses = [('hanging (seated)', -0.5, 0), ('lifted 8.0', 7.5, 0), ('lifted 9.0', 8.5, 0), ('lifted 9.0, turned', 8.5, 30)]
@@ -36,7 +38,7 @@ def check(name):
     while z > -out_:
         z = max(z - 2.0, -out_); poses.append((f'turned, lowered to {z:+.1f}', z, 30))
     poses += [(f'turned, lowered to {-d:+.0f} (off, past the carrier)', -d, 30) for d in (30, 60, 100, 140)]
-    print(f'## {name}: collar top {top}, lowering needed {out_ - 0.5:.1f} net below hanging')
+    print(f'## {name}: collar top {top}, lowered {out_ - 0.5:.2f} below the drawn pose ({out_ - 1.0:.2f} below where it hangs) to come off')
     bad = 0
     for lab, dz, rot in poses:
         hits = []
