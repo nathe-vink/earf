@@ -167,7 +167,7 @@ def cozy_close(tint='ember'):
     s = cozy(tint)
     x, y = CORNER
     s['title'] = f'The Core\'s corner by evening: close on the lamp and the chair\'s arm ({tint})'
-    s['camera'] = {'position': [x + 1.1, y - 1.2, 0.95], 'target': [x, y, 0.7], 'lens_mm': 50.0, 'level': True, 'fstop': 3.2,
+    s['camera'] = {'position': [x + 0.3, y - 1.35, 0.95], 'target': [x + 0.15, y, 0.65], 'lens_mm': 45.0, 'level': True, 'fstop': 3.2,
                    'focus': [x - 0.08, y - 0.05, 0.75]}
     return s
 
