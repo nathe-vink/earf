@@ -1469,3 +1469,65 @@ def fix_11(p, web):
 #copy-note { display: block !important; height: 22px !important; min-height: 0 !important; line-height: 22px !important; overflow: hidden }
 #copy:focus:not(:focus-visible), .btn:focus:not(:focus-visible), .ic-btn:focus:not(:focus-visible) { outline: none !important; box-shadow: none }
 """)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Push C5: two of the owner's decisions (24 Nov, "go with the research and critics"; the coordinator 03:58)
+MOOD = ['The last light of the fire.', 'A long, dry afternoon.', 'A yellow with an edge.', 'Bottle green. Keep out of reach.',
+        'Glacier blue, and in no hurry.', 'Dusk, kept indoors.', 'Water-clear. Almost not there.', 'Smoked glass, for after dark.']
+HERO_NAMES = [('speaker', 'acid', 'Tropos in Acid'), ('hemisphere', 'ember', 'Hemisphere in Ember'), ('core', 'ember', 'Core in Ember'), ('mantle', 'ember', 'Mantle in Ember')]
+
+
+def fix_12(p, web):
+    # (10) the hero: no dots; one names row inside its bottom edge, each name a link to that product in that tint
+    p.rest, n = re.subn(r'<a class="hs-pt[^"]*" href="#[a-z]+-[a-z]+" style="[^"]*"><span class="hs-dot" aria-hidden="true"></span><span class="hs-label">[^<]*</span></a>', '', p.rest)
+    assert n == 8, ('fix_12: hero dots', n)
+    names = '<nav class="hero-names" aria-label="In the picture">' + ' <span aria-hidden="true">&middot;</span> '.join(
+        f'<a href="#{r}-{t}">{label}</a>' for r, t, label in HERO_NAMES) + '</nav>'
+    p.sub('</script></div>\n      <script>if (document.documentElement.dataset.home) heroIn()</script>',
+          '</script>' + names + '</div>\n      <script>if (document.documentElement.dataset.home) heroIn()</script>')
+    # (11) the eight mood lines out, everywhere; the plain facts beside them stay
+    for line in MOOD:
+        esc = json.dumps(line)[1:-1]
+        for where in ('head', 'rest'):
+            s = getattr(p, where)
+            s = s.replace(f'"line":"{esc}"', '"line":""').replace(f'"line": "{esc}"', '"line": ""').replace(f'<p class="line">{line}</p>', '')
+            setattr(p, where, s)
+    # the switcher's line would say only the color's name: it goes, with what filled it
+    p.rest, n = re.subn(r'<p class="tint-line" aria-live="polite"><b>[^<]*</b> <span>[^<]*</span></p>', '', p.rest)
+    assert n == 1, ('fix_12: the switcher line', n)
+    p.rest, n = re.subn(r'line\.innerHTML = `<b>\$\{t\.name\}\.</b> <span>\$\{t\.line\}</span>`;', '', p.rest)
+    assert n == 2, ('fix_12: the line scripts', n)
+    p.sub('<div class="wrap mk-head"><h2>Each color is a place.</h2></div>', '')
+    for line in MOOD:
+        assert line not in p.head and line not in p.rest, ('fix_12: a mood line left', line)
+    p.css("""
+/* C5 (10): the hero's names row, inside its bottom edge, on a dark veil so it reads on the picture */
+.hs-hero .hero-photo { position: relative }
+.hero-names { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 44px 16px 14px; text-align: center; color: #F4F1EC;
+  font: 500 15px/1.5 var(--sans); background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%); text-shadow: 0 1px 2px rgb(0 0 0 / .6) }
+.hero-names a { color: #F4F1EC; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; display: inline-block; padding-block: 8px }
+.hero-names a:hover { color: #fff; text-decoration-thickness: 2px }
+.hero-names a:focus-visible { outline: 2px solid #F4F1EC; outline-offset: 2px }
+.hero-names span { margin-inline: 6px; opacity: .8 }
+@media (max-width: 560px) { .hero-names { font-size: 14px; padding: 36px 10px 8px } .hero-names span { margin-inline: 3px } }
+""")
+
+
+def finish_12(web):
+    """No mood line in any built file (the pages, the previews, their descriptions and structured data)."""
+    import glob
+    for f in glob.glob(os.path.join(web.SITE, '**', '*.html'), recursive=True) + [os.path.join(web.SITE, 'vercel.json')]:
+        s = open(f).read()
+        t = s.replace('<h2>Eight colors, the full spectrum.</h2>', '<h2>Eight colors</h2>').replace('Eight colors, the full spectrum.', 'Eight colors.').replace('eight colors, the full spectrum.', 'eight colors.')     # set late (rc_finish's SPECTRUM)
+        if t != s:
+            open(f, 'w').write(t); s = t
+        assert 'the full spectrum' not in s and 'Each color is a place' not in s, ('finish_12: a retired heading in', f)
+        t = s
+        for line in MOOD:                       # removed, not rewritten: the plain facts after it stay ("Acid: translucent golden yellow ...")
+            for form in (line, json.dumps(line)[1:-1]):
+                t = t.replace(form + ' ', '').replace(form, '')
+        if t != s:
+            open(f, 'w').write(t); s = t
+        for line in MOOD:
+            assert line not in s and json.dumps(line)[1:-1] not in s, ('finish_12: a mood line in', f, line)
