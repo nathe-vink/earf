@@ -37,3 +37,11 @@ floor card behind-right at the curve, flag 1 back from bg-right (3.0 to 1.88 m w
 (2.4 to 1.87), flag 4 back from the kick lamp (2.0 to 0.43: the kick stands just in front of it), the horn cutter back
 from the horn lamp (2.5 to 1.68), the back-edge card and the fill card right off the floor. The engine's
 flags_crossing_set audit (now reading the set's cards and the lamps' faces) reads nothing on the trimmed front.
+
+## The amp plates, rig A (24 Nov, the coordinator 19:47)
+
+`ampA-<tint>` (8): the amp shots on the S4b amp rig (`light_c.real_bounces_and_panels`: the bounce card a real
+two-sided card and the front strip a real light; `buildable`: flag 1 out of the cove), back-top off, exposure -0.2 for
+all eight; 1600 x 1600, 128 samples. With back-top off the big panels' blotch energy is 0.80 at 128 and at 256 samples
+against FA123's 0.85 (Ember, left-panel window; `amp-test/blotch_crop.py`), so 128 stands: about 45 min a frame.
+Render: `bash renders/2026-11-24/barkhorn/light-c2/run.sh ampA-<tint>`. The test that chose rig A: `amp-test/`.
