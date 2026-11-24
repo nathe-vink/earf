@@ -902,5 +902,14 @@
   "url": "https://www.erp-power.com/erp-series/ess-series/",
   "alternate": "EPtronics LD6W120-36-C0170-TL: 170 mA, 22-36 V (a comfortable window for 24.5 V), 6 W, 120 V AC, TRIAC/ELV phase dimming, US Class 2, UL 8750 / UL 1310 recognized (Type HL), FCC Part 15 Class B at 120 V AC, PF 0.90 or more, THD under 20 %, 82 % efficient (EPtronics LD6W-TL datasheet). But it dims only to about 15 % ('<15% to ~100% CCR'), short of the 10 % JA8 and the brief ask; about 560 lm at 170 mA",
   "note": "The COB (Gen 7 Vero 10; the Vero SE 10 was the wrong part in earlier text) is gone with option 3; the driver stays."
+ },
+ "hemi-cord-grip": {
+  "kind": "hardware",
+  "maker": "Lapp (SKINTOP family)",
+  "model": "PROPOSAL 2026-11-24 (Hemisphere's even-tier top): Lapp 53112005, a nickel-plated brass M12 x 1.5 cable gland for a 2.5 to 6.5 mm cord, 15 mm across the flats, 21 mm over its seat, 6 mm of thread (from DigiKey's listing, https://www.digikey.com/en/products/detail/lapp/53112005/18879098; the datasheet itself not opened: to confirm). Through the crown's 1 mm floor into the hub; the cord-support test with the lab",
+  "usd": 6.0,
+  "estimate": true,
+  "supplier": "DigiKey",
+  "price_date": "2026-11-24"
  }
 }

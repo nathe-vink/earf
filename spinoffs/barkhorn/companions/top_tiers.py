@@ -13,7 +13,7 @@ for top in (None, 'A', 'B'):
     parts = C.north_parts(dict(C.V3, top=top, white_split=True) if top else C.V3)
     d = os.path.join(HERE, 'lamp-site-meshes', f'out-dome-pendant-top{top}', 'stl')
     for p in parts:
-        if p.name in ('clamp', 'crown', 'gland', 'collar', 'white-disc', 'white-ring', 'grip') and p.solid is not None:
+        if p.name in ('clamp', 'crown', 'gland', 'collar', 'white-disc', 'grip', 'gaskets', 'hub', 'ring', 'suspension') and p.solid is not None:
             bb = p.solid.bounding_box()
             print(top or 'today', p.name, 'z', round(bb.min.Z, 2), 'to', round(bb.max.Z, 2), 'Ø', round(bb.max.X - bb.min.X, 2),
                   'volume', round(p.solid.volume / 1000, 1), 'cm3')

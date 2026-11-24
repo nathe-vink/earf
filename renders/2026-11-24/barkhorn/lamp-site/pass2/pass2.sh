@@ -20,7 +20,7 @@ D=$ROOT/renders/2026-11-24/barkhorn/lamp-site/pass2/$T; mkdir -p $D/audit
 S=${TMPDIR:-/tmp}/pass2-$T-$G; mkdir -p $S
 FPY=$ROOT/.venv-fab/bin/python; M=$ROOT/renders/2026-11-20/barkhorn/lamp-site/meter
 cd $ROOT/spinoffs/barkhorn/companions
-HG="HOUSE_ROOM_TRANS=1 HOUSE_S=0.2 HOUSE_LIFT=0.25 HOUSE_LIFT_RX=bg-left,wall_left HOUSE_ROOM_FIT=1 HOUSE_BG=1.16 HOUSE_AIM=key:-0.7,0,0.1;wall_left:0,0,-0.5"
+HG="HEMI_COLLAR_CAP=1 HOUSE_ROOM_TRANS=1 HOUSE_S=0.2 HOUSE_LIFT=0.25 HOUSE_LIFT_RX=bg-left,wall_left HOUSE_ROOM_FIT=1 HOUSE_BG=1.16 HOUSE_AIM=key:-0.7,0,0.1;wall_left:0,0,-0.5"
 CG="HOUSE_ROOM_TRANS=1 HOUSE_S=0.19 CORE_DOCK=0 HOUSE_ROOM_FIT=1 HOUSE_BG=1.16"
 W1=${PASS_CARDS:-0.025}; W2=${PASS_CARDS:-0.025}   # (2.5 cm, the coordinator 2026-11-24 05:11: tests/r2/cards-sheet.jpg)
 SPOT="GUIDE_ORB=1 HOUSE_BOUNCE=0,0,0,0,0.19,-0.405,0.03,18,8.5,0.015 HOUSE_BOUNCE_BLEND=0.9 HOUSE_BOUNCE_COLOR=FFF4E8 HOUSE_BOUNCE_CUT=0.01,0.06,0.0262,$W1 HOUSE_BOUNCE_SOFT=0.003 HOUSE_BOUNCE_TOP=0.01,0.10,0.0335,$W2"

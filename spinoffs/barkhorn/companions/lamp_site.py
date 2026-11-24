@@ -362,9 +362,9 @@ def build(frame, samples, scale):
             # clamp, crown, gland, collar and the split white (top_tiers.py's meshes); the audit names the top
             tp_ = os.environ.get('HEMI_TOP')
             tdir_ = f'out-dome-pendant-top{tp_}' if tp_ else 'out-dome-pendant'
-            print('HEMI_TOP', tp_ or 'today', 'meshes', tdir_ + ': clamp crown gland' + (' collar white-disc white-ring' if tp_ else ''))
+            print('HEMI_TOP', tp_ or 'today', 'meshes', tdir_ + ': clamp crown gland hub collar white-disc ring gaskets' + (' grip' if tp_ else ''))
             for nm in ('clamp', 'crown', 'gland', 'hub'):
-                part(tdir_ if nm != 'hub' else 'out-dome-pendant', nm, cap, c)
+                part(tdir_, nm, cap, c)
             white = SC.principled('crown-white', '#EEEEEA', 0.55)
             # the collar: its flange face inside the shade white (below z 80 in the shade's frame), the rest black
             cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
@@ -382,14 +382,12 @@ def build(frame, samples, scale):
             nt.links.new(mx.outputs[0], nt.nodes['Material Output'].inputs['Surface'])
             part(tdir_, 'collar', cm, c)
             part(tdir_, 'white-disc', white, c)
-            if tp_:
-                part(tdir_, 'white-ring', white, c)
-            part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), c)
+            part(tdir_, 'ring', SC.principled('peek', '#151515', 0.6), c)
             part('out-dome-pendant', 'pins', steel, c)
             if os.environ.get('GASKETS', '0') == '1':
                 # (2026-11-20) off by default: two 1 mm silicone rings sandwiched under the clamp ring and the collar's
                 # flange, unseen in the lamp; their faceted STL pierced the smooth shell and drew two rows of dots
-                part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
+                part(tdir_, 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
             part('out-dome-pendant', 'cord', braid_mat(f'cord-braid-{tint}') if os.environ.get('BRAID', '1') == '1' else SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
             part('out-dome-pendant', 'carrier', an, c)
             part('out-dome-pendant', 'stem', an, c)

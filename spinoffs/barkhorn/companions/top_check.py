@@ -10,9 +10,9 @@ sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..', '..', '..'
 import crystal as C
 from build123d import Pos, Rot
 
-COVER = ('shell', 'liner', 'skin', 'rim', 'collar', 'clamp', 'gaskets', 'white-ring')
+COVER = ('shell', 'liner', 'skin', 'rim', 'collar', 'clamp', 'gaskets')
 FIXT = ('hub', 'ring', 'pins', 'crown', 'gland', 'grip', 'white-disc', 'carrier', 'board', 'stem')
-CONF = {'today': dict(C.V3), 'today-fixed': dict(C.V3, white_split=True),
+CONF = {'today-as-built': dict(C.V3, white_split=False), 'today': dict(C.V3),
         'A': dict(C.V3, top='A', white_split=True), 'B': dict(C.V3, top='B', white_split=True)}
 
 
@@ -29,7 +29,9 @@ def check(name):
     P = {q.name: q.solid for q in C.north_parts(p) if q.solid is not None}
     top = (C.TOP_TIERS[p['top']]['top'] if p.get('top') else p['collar'][3])
     out_ = top - 90.5 + 0.5                       # net lowering below hanging until the pins clear the collar's top, +0.5
-    poses = [('hanging', 0, 0), ('lifted 7.5', 7.5, 0), ('lifted 8.5', 8.5, 0), ('lifted 8.5, turned', 8.5, 30)]
+    # (review 2: it hangs with each notch's top seated on its pin, 0.5 under the drawn position, so the drawn +7.5
+    # and +8.5 are lifts of 8.0 and 9.0 from where it hangs)
+    poses = [('hanging (seated)', -0.5, 0), ('lifted 8.0', 7.5, 0), ('lifted 9.0', 8.5, 0), ('lifted 9.0, turned', 8.5, 30)]
     z = 8.5
     while z > -out_:
         z = max(z - 2.0, -out_); poses.append((f'turned, lowered to {z:+.1f}', z, 30))
@@ -50,6 +52,8 @@ def check(name):
         bad += bool(hits)
         print(f'  {lab:28s} ' + ('clear' if not hits else 'BLOCKED: ' + '; '.join(hits)))
     print(f'  => {"comes off" if not bad else "does NOT come off"}')
+    if p.get('white_split'):
+        print(f"  the lip's bore Ø{C.WHITE_SPLIT['lip'][0]} against the hub and disc Ø{C.WHITE_SPLIT['disc']}: {(C.WHITE_SPLIT['lip'][0] - C.WHITE_SPLIT['disc']) / 2:.2f} radial")
     # the control: lowered 3 without the turn, the pins must hold it (else the check sees nothing)
     v = sum(overl(Pos(0, 0, -3.0) * P['collar'], P[f]) for f in ('pins',))
     print(f'  control, lowered 3 unturned: collar x pins {v:.0f} mm3 ({"held, as it must be" if v > 1 else "NOT HELD: the check is blind"})')
