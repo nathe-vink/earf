@@ -1385,14 +1385,15 @@ a.cta-btn, .ft-btn { min-height: 44px }
 /* C6b, C6c (3): on a portrait screen the line and both buttons stay on the first screen under the names: the picture gives
    up the row's height (4:5 kept, so every product stays whole). Phones (to 559): the title (~130), the 2 x 2 grid (96), the line
    and buttons (122), 8 to spare = 356; below 360 the buttons take two rows (+60). From 560: C5's 330 plus the one-line row (54). */
-@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 356px) * 0.8)) !important; width: min(100%, calc((100svh - 356px) * 0.8)) !important } }
-@media (max-aspect-ratio: 1/1) and (max-width: 359px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 416px) * 0.8)) !important; width: min(100%, calc((100svh - 416px) * 0.8)) !important } }
+@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, max(calc((100vh - 356px) * 0.8), calc((100vh - 290px) * 0.8 * 2 / 3))) !important; width: min(100%, max(calc((100svh - 356px) * 0.8), calc((100svh - 290px) * 0.8 * 2 / 3))) !important } }   /* C6e-5: never below two-thirds of live's */
+@media (max-aspect-ratio: 1/1) and (max-width: 359px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, max(calc((100vh - 416px) * 0.8), calc((100vh - 290px) * 0.8 * 2 / 3))) !important; width: min(100%, max(calc((100svh - 416px) * 0.8), calc((100svh - 290px) * 0.8 * 2 / 3))) !important } }
 @media (max-aspect-ratio: 1/1) and (min-width: 560px) {
   .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 384px) * 0.8)) !important; width: min(100%, calc((100svh - 384px) * 0.8)) !important }
-  /* C6d (8, 9): the headline's and the line's column at least 560 px (or the window less its margins): the headline is never
-     clipped and the line keeps to two lines with the buttons side by side */
-  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100% - 32px, max(calc((100vh - 384px) * 0.8), 560px)) !important;
-    width: min(100% - 32px, max(calc((100svh - 384px) * 0.8), 560px)) !important; box-sizing: border-box }
+  /* C6e-6: the headline's, the line's and the buttons' column is the picture's width again (C2-4), at least 320 px so the line keeps
+     to two lines and the buttons sit side by side; the headline scales to the column, so it is never clipped (C6d 9) */
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, max(calc((100vh - 384px) * 0.8), 320px)) !important; width: min(100%, max(calc((100svh - 384px) * 0.8), 320px)) !important; margin-inline: auto !important;
+    padding-inline: 0 !important; box-sizing: border-box }
+  .hs-hero .hero-title h1 { font-size: min(44px, calc(min(100vw - 32px, max(calc((100vh - 384px) * 0.8), 320px)) / 12.69)) !important; font-size: min(44px, calc(min(100vw - 32px, max(calc((100svh - 384px) * 0.8), 320px)) / 12.69)) !important }
 }
 /* C5 (10), C6 (1, 2), C6c (3, 4, 8): the hero's names row. Wide, and the stacked landscape layout (to 960, over 640 tall): on the
    picture's bottom edge, on a dark veil, as in C5; the wide picture is capped at the window less the header (cropped a little
@@ -1412,10 +1413,16 @@ a.cta-btn, .ft-btn { min-height: 44px }
 @supports (height: 1svh) { .hs-hero .hero-photo { height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) } }
   .hs-hero .hero-photo img { object-position: 50% 35% }
 }
-/* C6d (11): a square window: the row on the picture, as wide as the picture (C5's look) */
-@media (aspect-ratio: 1/1) { .hero-names { align-self: center; width: min(100%, calc((100vh - 384px) * 0.8)); width: min(100%, calc((100svh - 384px) * 0.8)) } }
-@media (aspect-ratio: 1/1) and (max-width: 559px) { .hero-names { width: min(100%, calc((100vh - 356px) * 0.8)); width: min(100%, calc((100svh - 356px) * 0.8)) } }
-@media (aspect-ratio: 1/1) and (max-width: 359px) { .hero-names { width: min(100%, calc((100vh - 416px) * 0.8)); width: min(100%, calc((100svh - 416px) * 0.8)) } }
+/* C6e-1: a square window: the row under the picture (no name over a product), the picture as large as live's (C5's 330 and 290) */
+@media (aspect-ratio: 1/1) and (min-width: 560px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 330px) * 0.8)) !important; width: min(100%, calc((100svh - 330px) * 0.8)) !important } }
+@media (aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 290px) * 0.8)) !important; width: min(100%, calc((100svh - 290px) * 0.8)) !important } }
+/* below 560 a square keeps the line and buttons on the first screen with C5's compact one-line row, not the phone's 2 x 2 grid */
+@media (aspect-ratio: 1/1) and (max-width: 559px) {
+  .hero-names { display: block; font-size: 14px; padding: 4px 8px 0 }
+  .hero-names .hn { display: inline } .hero-names .hn > span { display: inline; margin-inline: 3px }
+  .hero-names a { display: inline-block; min-height: 0; padding: 11px 0 }
+  .hs-hero .hero-more { padding-top: 12px }
+}
 /* C6d (9): in a landscape window the headline's column is the middle third: below ~650 px wide the headline shrinks to fit it */
 @media (min-aspect-ratio: 1001/1000) { .hs-hero .hero-title h1 { font-size: min(clamp(28px, 3.3vw, 52px), 4.3vw) !important } }
 /* C6d (10): a small landscape window keeps C5's one line at the picture's foot */
@@ -1426,14 +1433,14 @@ a.cta-btn, .ft-btn { min-height: 44px }
   .hero-names { position: static; order: 2; background: none; color: #1C1A18; text-shadow: none; padding: 6px 16px 0; pointer-events: auto; margin-top: 0 }
   .hs-hero .hero-title { order: 0 } .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 3 }
 }
-@media (max-aspect-ratio: 1/1) and (max-width: 559px) {
+@media (max-aspect-ratio: 999/1000) and (max-width: 559px) {   /* the phone grid upright; a square (below 560 no window lies between 999/1000 and 1) keeps the one-line row */
   .hero-names { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; padding: 4px 16px 0; font-size: 15px }
   .hs-hero .hero-more { padding-top: 12px }
   .hero-names .hn { display: contents } .hero-names .hn > span { display: none }
   .hero-names a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 4px; text-align: center }
 }
-/* C6d (17): the stacked landscape layout and squares, after the portrait rules (a square matches both) */
-@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (min-height: 641px), (aspect-ratio: 1/1) {
+/* C6d (17), C6e-1: the stacked landscape layout, after the portrait rules; a square is not landscape (it takes the portrait rules) */
+@media (min-aspect-ratio: 1001/1000) and (max-width: 960px) and (min-height: 641px) {
   .hero-names { position: relative; bottom: auto; order: 1; height: 0; padding: 0 16px; background: none; color: #F4F1EC; text-shadow: 0 1px 2px rgb(0 0 0 / .6); display: flex; flex-wrap: wrap;
     justify-content: center; align-content: flex-end; translate: 0 -6px; margin-top: 0; pointer-events: none }
   .hero-names a { display: inline-block; min-height: 0; padding: 11px 0 }
@@ -1441,18 +1448,59 @@ a.cta-btn, .ft-btn { min-height: 44px }
   .hero-names::before { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 110px; background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%); z-index: -1; pointer-events: none }
   .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 2 }
 }
+/* C6e-1: squares to 504 px keep live's square rule (the portrait row would take two lines there and push the buttons off the
+   first screen): the row on the picture's foot, as wide as the picture, in C5's sizes; from 505 the portrait rule (one line under) */
+@media (aspect-ratio: 1/1) and (max-width: 504px) {
+  .hero-names { position: relative; bottom: auto; order: 1; align-self: center; width: min(100%, calc((100vh - 290px) * 0.8)); width: min(100%, calc((100svh - 290px) * 0.8)); height: 0; margin-top: 0;
+    padding: 0 10px; display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-end; translate: 0 -8px;
+    font: 500 14px/21px var(--sans); color: #F4F1EC; background: none; text-shadow: 0 1px 2px rgb(0 0 0 / .6); pointer-events: none }
+  .hero-names::before { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: min(192px, calc(100vh - 290px)); height: min(192px, calc(100svh - 290px)); z-index: -1; pointer-events: none;
+    background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%) }
+  .hero-names a { display: inline-block; min-height: 0; padding: 8px 0; pointer-events: auto }
+  .hero-names .hn { display: inline } .hero-names .hn > span { display: inline; margin-inline: 3px }
+  .hs-hero .hero-more { padding-top: 20px }
+  /* C6e-1: what does not fit stays inside the picture (live clipped it there): nothing on the page or under the header */
+  .hero-names { clip-path: inset(calc(298px - 100vh) -2px -8px -2px); clip-path: inset(calc(298px - 100svh) -2px -8px -2px) }
+}
+/* C6e-1 (H-7): every exact square in the upright palette: the headline, the line and the buttons dark on the light page */
+@media (aspect-ratio: 1/1) {
+  .hs-hero .hero-title { color: #1C1A18 !important; text-align: left }
+  .hs-hero .hero-more { text-align: left }
+  .hs-hero .hero-sub { color: #1C1A18; margin: 0 0 16px; max-width: none }
+  .hs-hero .hero-cta { justify-content: flex-start }
+  .hs-hero .cta-solid { background: #1C1A18; color: #F4F1EC; border-color: #1C1A18 }
+  .hs-hero .cta-solid:hover { background: #000 }
+  .hs-hero .cta-line { background: transparent; color: #1C1A18; border-color: #1C1A18 }
+  .hs-hero .cta-btn:focus-visible { outline-color: #1C1A18 }
+}
+/* C6e-6 in a square from 560: the column is the square's picture's width (live's 330), at least 320 px */
+@media (aspect-ratio: 1/1) and (min-width: 560px) {
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, max(calc((100vh - 330px) * 0.8), 320px)) !important; width: min(100%, max(calc((100svh - 330px) * 0.8), 320px)) !important; margin-inline: auto !important; padding-inline: 0 !important }
+  .hs-hero .hero-title h1 { font-size: min(44px, calc(min(100vw - 32px, max(calc((100vh - 330px) * 0.8), 320px)) / 12.69)) !important; font-size: min(44px, calc(min(100vw - 32px, max(calc((100svh - 330px) * 0.8), 320px)) / 12.69)) !important }
+}
 
 /* C6c (1, 6): the names row under the thumbnail strip: wrapped, each name 44 px tall, the dots kept with the name after */
 .namerow { margin: 2px 0 0; font-size: 15px; line-height: 22px; color: var(--muted) }
 .namerow a { color: inherit }      /* C6d: C5's muted ink, as under the picture before and on /lighting; not the browser's blue */
 .namerow a, .namerow .self, .lt-room .names a { display: inline-block !important; padding-block: 11px !important }
-.namerow .self { color: var(--ink) }
+.namerow .self { color: var(--muted); text-decoration: none }      /* C6e-12: the page's own name as the breadcrumb shows it: muted, plain */
 .namerow .hn, .lt-room .names .hn { white-space: nowrap }
 /* C6d (3, 4): each dot an 18 px box on its name's left; the row is shifted left by one box and clipped at its own edge, so a
    dot that would open a line falls outside; no line starts or ends on one. The row's width is live's (it sizes /lighting's column) */
-.namerow, .lt-room .names { display: flex !important; flex-wrap: wrap; align-items: center; margin-left: -18px !important; clip-path: inset(-6px -6px -6px 18px) }
+.namerow, .lt-room .names { display: flex !important; flex-wrap: wrap; align-items: center; margin-left: -18px !important; clip-path: inset(-6px -6px -6px 13px) }
 .namerow > :first-child, .lt-room .names > :first-child { margin-left: 18px }
 .namerow .hn > span[aria-hidden], .lt-room .names .hn > span[aria-hidden] { display: inline-block; width: 18px; text-align: center; color: var(--muted) }
+/* C6e-9: the clip keeps the focus ring of a line's first name (left inset 13 px still hides a line-start dot) */
+/* C6e-7: from 861 /lighting's row is live's one line: live's spacing (" · " is 7.05 px; 7 here), no wrap, so no dot can open a line
+   and nothing is clipped; below 861, where it wraps, the 18 px boxes and the clip above */
+@media (min-width: 861px) {
+  .lt-room .names { margin-left: 0 !important; clip-path: none; flex-wrap: nowrap }
+  .lt-room .names > :first-child { margin-left: 0 }
+  .lt-room .names .hn > span[aria-hidden] { width: 7px }
+  .lt-room .names > * { flex-shrink: 0 }      /* no name squeezed onto two lines */
+}
+/* C6e-8: a hidden row is not laid out */
+#namerow[hidden], .lt-room .names[hidden] { display: none !important }
 /* /lighting: the row no longer sizes the picture's column; the column keeps live's width, the one-line row's 591 px */
 .lt-room .names { contain: inline-size }
 @media (min-width: 861px) { .lt-room { width: 591px; max-width: 100% } }
@@ -1476,8 +1524,10 @@ a.cta-btn, .ft-btn { min-height: 44px }
   .ask-bar { transition: transform .2s ease } .ask-bar.off, .ask-bar.wait { transform: translateY(110%); visibility: hidden }
 }
 @media (max-width: 700px) { .ask-bar.wait { transform: translateY(110%); visibility: hidden } }
-@media (min-width: 701px) and (max-width: 860px) and (orientation: portrait) { :root { --cap: calc(100vh - 390px) }
-@supports (height: 1svh) { :root { --cap: calc(100svh - 390px) } } }   /* C6d (5): portrait only */   /* C5's 222, the bar's 72, the thumbnails and their gap 88, 8 to spare */
+@media (min-width: 701px) and (max-width: 860px) and (max-aspect-ratio: 999/1000) { :root { --cap: calc(100vh - 390px - env(safe-area-inset-bottom, 0px)) }
+@supports (height: 1svh) { :root { --cap: calc(100svh - 390px - env(safe-area-inset-bottom, 0px)) } } }
+@media (max-width: 700px) and (orientation: portrait) { :root { --cap: max(260px, calc(100vh - 308px - env(safe-area-inset-bottom, 0px))) }
+@supports (height: 1svh) { :root { --cap: max(260px, calc(100svh - 308px - env(safe-area-inset-bottom, 0px))) } } }   /* C6e-2: on a short upright phone the picture gives up enough that the thumbnails end above the bar (header and crumbs ~147, strip 44, thumbnails ~52, bar 65); a 260 px floor */   /* C6d (5) portrait only; C6e-1 not a square; the home indicator's inset (the bar grows by it) */
 </style>
 
 <div class="splash" aria-hidden="true"></div>
@@ -1605,7 +1655,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
         </div>
         <p class="cap" id="cap" aria-live="polite"></p>
         <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>
-        <p class="namerow" id="namerow" hidden></p>
+        <p class="namerow" id="namerow" aria-live="polite" hidden></p>
         <p class="render-note">Pictures are renders. Nothing is built yet.</p>
       </section>
       <section class="spec2" id="p-spec" aria-labelledby="p-spec-h"><h2 id="p-spec-h">Specifications</h2><div id="p-spec-body"></div><p class="figs">All figures come from the design; none is measured yet.</p></section>
@@ -2047,11 +2097,16 @@ function renderOthers(P, c) {      // the other three in the tint now chosen, ea
 { const bar = document.querySelector('#pdp .ask-bar'), mq = matchMedia('(min-width: 701px) and (max-width: 860px), (min-width: 701px) and (max-height: 500px)');
   const ph = matchMedia('(max-width: 700px)');      // C6d: a phone's bar waits for the gallery's controls (not the dots, as on C5)
   const check = () => { if (!(mq.matches || ph.matches) || document.getElementById('pdp').hidden) { bar.classList.remove('wait'); return; }
-    const top = innerHeight - bar.offsetHeight - 4, R = s => { const e = document.querySelector(s); return e ? e.getBoundingClientRect() : null; };
-    const over = [...document.querySelectorAll(ph.matches ? '#pdp .gallery .nav, #pdp .gallery .count, #thumbs' : '#pdp .gallery .nav, #pdp .gallery .count, #thumbs, #namerow, #swatches')].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.bottom > top && q.top < innerHeight; });
-    // C6d (7): from 701, once the dots reach the bar's strip it stays back until the inline ask is on screen (then it is off)
-    // (once it waits, it keeps waiting while the dots are close below, so it does not come up for a moment in between)
-    const dots = R('#swatches'), ask = R('#p-enquire'); const between = !ph.matches && dots && ask && ask.top >= innerHeight && (dots.top < innerHeight || (bar.classList.contains('wait') && dots.top < innerHeight + 160));
+    // C6e-2: a real overlap of the controls themselves (the arrows, the counter, each thumbnail, the names), no margin
+    const top = innerHeight - bar.offsetHeight, R = s => { const e = document.querySelector(s); return e ? e.getBoundingClientRect() : null; };
+    const ctl = '#pdp .gallery .nav, #pdp .gallery .count, #thumbs button, #namerow a, #namerow .self' + (ph.matches ? '' : ', #swatches a');
+    // on a phone a control counts as under the bar when its centre is (an edge of a thumbnail behind it is not), from 701 any overlap
+    const over = [...document.querySelectorAll(ctl)].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.top < innerHeight && (ph.matches ? (q.top + q.bottom) / 2 > top : q.bottom > top); });
+    // C6d (7), C6e-3: from 701 and on a phone held sideways, once the dots reach the bar's strip it stays back until the inline
+    // ask is on screen (then it is off); once it waits it keeps waiting while the dots are close below, so it does not flash up
+    // C6e-4: at the top of the page only a real overlap keeps it back
+    const side = !ph.matches || matchMedia('(orientation: landscape) and (max-height: 500px)').matches, atTop = scrollY < 8;
+    const dots = R('#swatches'), ask = R('#p-enquire'); const between = side && !atTop && dots && ask && ask.top >= innerHeight && (dots.top < innerHeight || (bar.classList.contains('wait') && dots.top < innerHeight + 160));
     bar.classList.toggle('wait', over || between); };
   addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); addEventListener('hashchange', () => setTimeout(check, 60));
   new ResizeObserver(check).observe(document.querySelector('#pdp .gallery'));      // C6d (6): after every view change
@@ -2060,9 +2115,13 @@ function renderOthers(P, c) {      // the other three in the tint now chosen, ea
   // shown, with the bar drawn and up, and only by the element's real overlap with it
   let keyed = false; document.addEventListener('keydown', () => { keyed = true; }, true); document.addEventListener('pointerdown', () => { keyed = false; }, true);
   document.addEventListener('focusin', e => { const a = e.target; if (!keyed || !a.getBoundingClientRect || bar.contains(a) || document.getElementById('pdp').hidden || !document.getElementById('pdp').contains(a)) return;
-    const bs = getComputedStyle(bar), b = bar.getBoundingClientRect(); if (bs.display === 'none' || bs.visibility === 'hidden' || b.height < 1 || b.top >= innerHeight || bar.classList.contains('off') || bar.classList.contains('wait')) return;
+    // C6e-11: wherever the bar is in use (it may be waiting or off at the moment of focus and come up after the scroll), keep the
+    // focused control above where it stands
+    if (getComputedStyle(bar).display === 'none' || bar.offsetHeight < 1) return; const b = { top: innerHeight - bar.offsetHeight, bottom: innerHeight };
     if (a.matches('main, section, article, [tabindex="-1"]')) return;      // C6d (13): a skip link's target is not a control
-    const r = a.getBoundingClientRect(); if (r.height > 0 && r.height < innerHeight / 2 && r.bottom > b.top && r.top < b.bottom) scrollBy(0, r.bottom - b.top + 8); }); }
+    // C6e-11: a tall control (a family tile) brings its text above the bar, not its whole box
+    let r = a.getBoundingClientRect(); if (r.height >= innerHeight / 2) { const tx = a.querySelector('.ft-body, h3, .ft-btn'); if (!tx) return; r = tx.getBoundingClientRect(); }
+    if (r.height > 0 && r.bottom > b.top && r.top < b.bottom) scrollBy(0, r.bottom - b.top + 8); }); }
 document.getElementById('p-copy').addEventListener('click', () => {
   const note = document.getElementById('p-share-note'), say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };
   try { navigator.clipboard.writeText(MAIL).then(() => say('Address copied.'), () => say(MAIL)); } catch (e) { say(MAIL); } });
