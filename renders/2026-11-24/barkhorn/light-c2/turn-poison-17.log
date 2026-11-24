@@ -1,0 +1,13 @@
+NO GLASS SHADOWS: 6 materials: ['bark@eucalyptus-y2k-green', 'bark@eucalyptus-y2k-green.001', 'clear-cast@eucalyptus-y2k-green', 'horn-formed@eucalyptus-y2k-green', 'horn-lot@eucalyptus-y2k-green', 'horn-satin@eucalyptus-y2k-green']
+SHADOW RAY LINKS LEFT: 0 []
+00:26.416  cycles           | WARNING CUEW initialization failed: Error opening the library
+08:19.178  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-poison-17.png'
+/home/user/earf/studio/engine/render.py:480: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+08:23.771  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-poison-17.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:531: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+08:24.892  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/turn-poison-17.swatch.png'
+finish: white 236 -> 236 (gain 1.0), contrast 0.2, clarity 0.05, sharpen 0.3 at 0.7 px
+renders/2026-11-24/barkhorn/light-c2/turn-poison-17.png  {'build': 26.1, 'render': 472.8}  samples 96
