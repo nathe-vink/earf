@@ -9,7 +9,7 @@
 # Switches, until the owner picks (the defaults are today's):
 #   PASS_WB=5600|4000   the camera's white balance; 4000 re-gels the studio (HOUSE_GEL 5600:3900) so the ground stays
 #   PASS_TOP=A|B        Hemisphere's top in even tiers (crystal.py TOP_TIERS); unset, today's
-#   PASS_CARDS=W        the Core LIT spot's two cards' width in m (LIT-g: 0.05 and 0.06)
+#   PASS_CARDS=W        the Core LIT spot's two cards' width in m (default 0.025; LIT-g had 0.05 and 0.06)
 # THE GATE: each frame's audit runs first; any hidden object in frame (CASTCHECK above 0.0) stops it before the render.
 # PASS_AUDIT_ONLY=1: the audit and the gate only, no render.
 # Writes pass2/TINT/{hemisphere,core}-TINT-{off,lit}.png and audit/; prints the meters. Skips what exists.
@@ -22,7 +22,7 @@ FPY=$ROOT/.venv-fab/bin/python; M=$ROOT/renders/2026-11-20/barkhorn/lamp-site/me
 cd $ROOT/spinoffs/barkhorn/companions
 HG="HOUSE_ROOM_TRANS=1 HOUSE_S=0.2 HOUSE_LIFT=0.25 HOUSE_LIFT_RX=bg-left,wall_left HOUSE_ROOM_FIT=1 HOUSE_BG=1.16 HOUSE_AIM=key:-0.7,0,0.1;wall_left:0,0,-0.5"
 CG="HOUSE_ROOM_TRANS=1 HOUSE_S=0.19 CORE_DOCK=0 HOUSE_ROOM_FIT=1 HOUSE_BG=1.16"
-W1=${PASS_CARDS:-0.05}; W2=${PASS_CARDS:-0.06}
+W1=${PASS_CARDS:-0.025}; W2=${PASS_CARDS:-0.025}   # (2.5 cm, the coordinator 2026-11-24 05:11: tests/r2/cards-sheet.jpg)
 SPOT="GUIDE_ORB=1 HOUSE_BOUNCE=0,0,0,0,0.19,-0.405,0.03,18,8.5,0.015 HOUSE_BOUNCE_BLEND=0.9 HOUSE_BOUNCE_COLOR=FFF4E8 HOUSE_BOUNCE_CUT=0.01,0.06,0.0262,$W1 HOUSE_BOUNCE_SOFT=0.003 HOUSE_BOUNCE_TOP=0.01,0.10,0.0335,$W2"
 LIT="HOUSE_SOFTBOX_SEEN=1 DENOISE_PASSES=RGB HOUSE_SWEEP_AO=0"
 case $G in
@@ -37,13 +37,14 @@ case $G in
 esac
 [ "${PASS_WB:-5600}" = 4000 ] && E="$E HOUSE_WB=4000 HOUSE_GEL=5600:3900"
 [ -n "$PASS_TOP" ] && E="$E HEMI_TOP=$PASS_TOP"
+A=$D/audit/$n${PASS_TOP:+-top$PASS_TOP}${PASS_WB:+-wb$PASS_WB}.txt   # (one audit file per set of switches)
 if [ ! -s $D/$n.png ]; then          # (the audit always runs before a render, with this run's switches)
   env $E AUDIT=1 MASK=$S/m.png python3.11 lamp_site.py $f > $S/$n.aud 2>&1
-  echo "SWITCHES $E" > $D/audit/$n.txt
-  grep -E "^AUDIT|HIDDENCAST|CASTCHECK|^   (IN FRAME|in|out|practical) |^RAYVIS|^LINK|LAMP_MOVE|LAMPK|ROOM_FIT|HOUSE_WB|HOUSE_GEL|CORE_ABS|BOUNCE" $S/$n.aud >> $D/audit/$n.txt
+  echo "SWITCHES $E" > $A
+  grep -E "^AUDIT|HIDDENCAST|CASTCHECK|^   (IN FRAME|in|out|practical) |^RAYVIS|^LINK|LAMP_MOVE|LAMPK|ROOM_FIT|HOUSE_WB|HOUSE_GEL|CORE_ABS|BOUNCE" $S/$n.aud >> $A
 fi
-nz_=$(grep -o "CASTCHECK.*" $D/audit/$n.txt | tr ',' '\n' | grep -v " 0.0" || true)
-if [ -n "$nz_" ] || ! grep -q CASTCHECK $D/audit/$n.txt; then
+nz_=$(grep -o "CASTCHECK.*" $A | tr ',' '\n' | grep -v " 0.0" || true)
+if [ -n "$nz_" ] || ! grep -q CASTCHECK $A; then
   echo "GATE: $n has a hidden object in frame (or no CASTCHECK); not rendered:"; echo "${nz_:-no CASTCHECK line}"; exit 3
 fi
 echo "$n castcheck all 0.0"
