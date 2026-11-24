@@ -1627,15 +1627,19 @@ def fix_14(p, web):
              "    bar.classList.toggle('wait', [...document.querySelectorAll('#pdp .gallery .nav, #pdp .gallery .count, #thumbs, #swatches')].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.bottom > top && q.top < innerHeight; })); };\n"
              "  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); addEventListener('hashchange', () => setTimeout(check, 60));\n"
              "  addEventListener('load', check); setTimeout(check, 0); setTimeout(check, 400);\n"
-             "  document.addEventListener('focusin', e => { const a = e.target; if (!a.getBoundingClientRect || bar.contains(a)) return;     // focus never behind the bar\n"
-             "    const bs = getComputedStyle(bar); if (bs.display === 'none' || bs.visibility === 'hidden' || bar.classList.contains('off') || bar.classList.contains('wait')) return;\n"
-             "    const r = a.getBoundingClientRect(), t = bar.getBoundingClientRect().top - 8; if (r.bottom > t && r.top < innerHeight) scrollBy(0, r.bottom - t); }); }\n"
+             "  // focus never behind the bar: keyboard focus only (a tap or a click must land where it was aimed), on a product page\n"
+             "  // shown, with the bar drawn and up, and only by the element's real overlap with it\n"
+             "  let keyed = false; document.addEventListener('keydown', () => { keyed = true; }, true); document.addEventListener('pointerdown', () => { keyed = false; }, true);\n"
+             "  document.addEventListener('focusin', e => { const a = e.target; if (!keyed || !a.getBoundingClientRect || bar.contains(a) || document.getElementById('pdp').hidden || !document.getElementById('pdp').contains(a)) return;\n"
+             "    const bs = getComputedStyle(bar), b = bar.getBoundingClientRect(); if (bs.display === 'none' || bs.visibility === 'hidden' || b.height < 1 || b.top >= innerHeight || bar.classList.contains('off') || bar.classList.contains('wait')) return;\n"
+             "    const r = a.getBoundingClientRect(); if (r.height > 0 && r.bottom > b.top && r.top < b.bottom) scrollBy(0, r.bottom - b.top + 8); }); }\n"
              "document.getElementById('p-copy').addEventListener('click', () => {")
     p.css("""
 /* C6c (1, 6): the names row under the thumbnail strip: wrapped, each name 44 px tall, the dots kept with the name after */
-.namerow { margin: 2px 0 0; font-size: 15px; line-height: 22px; color: var(--ink) }
+.namerow { margin: 2px 0 0; font-size: 15px; line-height: 22px; color: var(--muted) }
+.namerow a { color: inherit }      /* C6d: C5's muted ink, as under the picture before and on /lighting; not the browser's blue */
 .namerow a, .namerow .self, .lt-room .names a { display: inline-block !important; padding-block: 11px !important }
-.namerow .self { color: var(--muted) }
+.namerow .self { color: var(--ink) }
 .namerow .hn, .lt-room .names .hn { white-space: nowrap }
 .namerow .hn > span[aria-hidden], .lt-room .names .hn > span[aria-hidden] { margin-inline: 6px; color: var(--muted) }
 .lt-room .names { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; height: auto !important; line-height: 22px !important }
