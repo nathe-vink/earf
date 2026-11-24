@@ -1,8 +1,8 @@
-SWITCHES HOUSE_SOFTBOX_SEEN=1 DENOISE_PASSES=RGB HOUSE_SWEEP_AO=0 GUIDE_ORB=1 HOUSE_BOUNCE=0,0,0,0,0.19,-0.405,0.03,18,8.5,0.015 HOUSE_BOUNCE_BLEND=0.9 HOUSE_BOUNCE_COLOR=FFF4E8 HOUSE_BOUNCE_CUT=0.01,0.06,0.0262,0.05 HOUSE_BOUNCE_SOFT=0.003 HOUSE_BOUNCE_TOP=0.01,0.10,0.0335,0.06 HOUSE_LAMP_K=key:0 HOUSE_STUDIO=0.714 HOUSE_EV=-2.85 HOUSE_ROOM_TRANS=1 HOUSE_S=0.19 CORE_DOCK=0 HOUSE_ROOM_FIT=1 HOUSE_BG=1.16
+SWITCHES HOUSE_SOFTBOX_SEEN=1 DENOISE_PASSES=RGB HOUSE_SWEEP_AO=0 GUIDE_ORB=1 HOUSE_BOUNCE=0,0,0,0,0.19,-0.405,0.03,18,8.5,0.015 HOUSE_BOUNCE_BLEND=0.9 HOUSE_BOUNCE_COLOR=FFF4E8 HOUSE_BOUNCE_CUT=0.01,0.06,0.0262,0.025 HOUSE_BOUNCE_SOFT=0.003 HOUSE_BOUNCE_TOP=0.01,0.10,0.0335,0.025 HOUSE_LAMP_K=key:0 HOUSE_STUDIO=0.714 HOUSE_EV=-2.85 HOUSE_ROOM_TRANS=1 HOUSE_S=0.19 CORE_DOCK=0 HOUSE_ROOM_FIT=1 HOUSE_BG=1.16
 LAMPK house-key 0
 ROOM_FIT 11.28 -4.5 6.07 8.47
-BOUNCE_CUT [(0.2084, -0.3853, 0.0262), (0.1871, -0.3401, 0.0262), (0.1419, -0.3613, 0.0262), (0.1631, -0.4066, 0.0262)]
-BOUNCE_TOP [(0.2129, -0.3832, 0.0335), (0.1747, -0.3017, 0.0335), (0.1204, -0.3272, 0.0335), (0.1586, -0.4087, 0.0335)]
+BOUNCE_CUT [(0.1971, -0.3906, 0.0262), (0.1758, -0.3454, 0.0262), (0.1532, -0.356, 0.0262), (0.1744, -0.4013, 0.0262)]
+BOUNCE_TOP [(0.1971, -0.3906, 0.0335), (0.1588, -0.3092, 0.0335), (0.1362, -0.3198, 0.0335), (0.1744, -0.4013, 0.0335)]
 BOUNCE (0.0, 0.0, 0.0, 0.0) (0.19, -0.405, 0.03) 18.0 8.5 colour (1.0, 0.905, 0.807) scale (1.0, 1.0, 1.0)
 AUDIT house-orb-green hidden ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] no-shadow ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front'] lights [('house-key', 'AREA', 0.0), ('house-fill', 'AREA', 2.047), ('house-kick', 'AREA', 0.502), ('house-horn', 'AREA', 3.023), ('house-bg-left', 'AREA', 2.197), ('house-bg-right', 'AREA', 0.85), ('house-wall_left', 'AREA', 6.125), ('house-bg-high', 'AREA', 1.395), ('house-bounce-spot', 'SPOT', 8.5), ('led-green', 'AREA', 2.5)]
 HIDDENCAST house-orb-green: 22 hidden, 1 in frame
