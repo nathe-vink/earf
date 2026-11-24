@@ -1626,7 +1626,10 @@ def fix_14(p, web):
              "    const top = innerHeight - bar.offsetHeight - 4;\n"
              "    bar.classList.toggle('wait', [...document.querySelectorAll('#pdp .gallery .nav, #pdp .gallery .count, #thumbs, #swatches')].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.bottom > top && q.top < innerHeight; })); };\n"
              "  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); addEventListener('hashchange', () => setTimeout(check, 60));\n"
-             "  addEventListener('load', check); setTimeout(check, 0); setTimeout(check, 400); }\n"
+             "  addEventListener('load', check); setTimeout(check, 0); setTimeout(check, 400);\n"
+             "  document.addEventListener('focusin', e => { const a = e.target; if (!a.getBoundingClientRect || bar.contains(a)) return;     // focus never behind the bar\n"
+             "    const bs = getComputedStyle(bar); if (bs.display === 'none' || bs.visibility === 'hidden' || bar.classList.contains('off') || bar.classList.contains('wait')) return;\n"
+             "    const r = a.getBoundingClientRect(), t = bar.getBoundingClientRect().top - 8; if (r.bottom > t && r.top < innerHeight) scrollBy(0, r.bottom - t); }); }\n"
              "document.getElementById('p-copy').addEventListener('click', () => {")
     p.css("""
 /* C6c (1, 6): the names row under the thumbnail strip: wrapped, each name 44 px tall, the dots kept with the name after */
