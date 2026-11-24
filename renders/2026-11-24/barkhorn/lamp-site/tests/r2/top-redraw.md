@@ -26,8 +26,10 @@ lower outer edge and the collar's top inner edge. The meshes, the render's copie
    today's; under 0.5 MPa it bends 0.24 um (today 0.11), the same 2.2 MPa peak at its root.
 4. The clamp ring screws down to a shoulder turned on the collar (Ø100, 86 to 92; the acrylic's hole 100.4, against
    today's 96.4), so its height, and the collar's top 0.5 over it, are held on the collar. The thread's run-out is a DIN
-   76 undercut (Ø93.7, 92 to 95.75); the band's bore is relieved (Ø100.4) below 92, so only the ring is threaded; full
-   thread on the collar 7.58 (A) and 4.75 (B). Lead-ins: the ring's bore at its leading edge (z 92), the collar's top
+   76 undercut (Ø93.7, 92 to 95.75); the band's bore is relieved (Ø100.4) below 92, so only the ring is threaded. The
+   collar's threaded length is 7.58 (A) and 4.75 (B); full-thread engagement with the ring 6.08 (A, about 4 turns) and
+   3.25 (B, about 2). The thread carries only the preload: the shade's weight rests on the collar's flange through the
+   inner silicone, not on the thread. Lead-ins: the ring's bore at its leading edge (z 92), the collar's top
    outer edge down to the thread's root.
 5. The squeeze is then set by the stack (the table below), not by torque.
 6. The fixings (v5, after checks 3 and 4), for today's top, A and B alike (V3's default; crystal.py GRIP):
@@ -37,25 +39,31 @@ lower outer edge and the collar's top inner edge. The meshes, the render's copie
      9.5 of its thread are in the hub and the rest through the crown's 2.5 floor; the cord's pull goes into the hub. Its
      seat 104, its top 124.5 under the cap's lid (125): the tiers did not move. It is turned by a slotted (pass-through)
      16 mm socket, the cord in its slot: the dome nut off, the body torqued into the hub, the dome nut on and tightened.
-   - The crown sits on the neck on its pad, held and keyed by three M2.5 countersunk screws at r 9.25, at 90, 210 and
+   - The crown sits on the neck metal to metal (a film of thermal compound; no pad, which would creep under the
+     screws and the grip), held and keyed by three M2.5 countersunk screws at r 9.25, at 90, 210 and
      330 deg (clear of the cables), flush in its floor, their heads inside the Ø24 pocket.
    - The lamp hangs level from TWO cables, symmetric about the axis at r 17.5 (0 and 180 deg). Its centre of mass is on
      the axis (v5: today 1598 g at z 65.8, A 1679 g at 68.2, B 1577 g at 65.3, from the solids, the cables and their stud ends left out). One cable at r 17.5 would tilt
      it about 16 deg (16.2 / 16.8 / 16.1). With two it hangs level once their lengths are set equal at the canopy's
-     grippers: the lamp hung, a level across the rim, the two lengths equal to about ±0.25 mm (1 mm out tilts it about
+     locks: the lamp hung, a level across the rim, the two lengths equal to about ±0.25 mm (1 mm out tilts it about
      1.6 deg), the cord left slack. The cord carries current only (UL 153: an SPT-2 cord 2.5 lb, the lamp about 3.5).
-   - Each cable is an nVent CADDY Speed Link SLK15L2SE250: 1.5 mm wire, a 1/4 in threaded stud end, 44 lb rated at a
-     5:1 static safety factor, cULus (its datasheet's table; electrogalvanized, so a black finish to confirm). The stud's
+   - Each cable is an nVent CADDY Speed Link SLK15L2SE250: 1.5 mm bare electrogalvanized wire (1.5 is its whole
+     diameter; the Ø2.4 bores pass it; a coated cable must stay under 2.2), a 1/4 in threaded stud end, 44 lb rated at a
+     5:1 static safety factor, cULus (its datasheet's table). The stud's
      length and its body's size are not on the sheet: drawn as a 1/4-20 thread 12 long under a Ø9 x 16 body with an 8 hex,
      to confirm on the part. It screws into the hub (1/4-20 tapped 13, its body in a Ø10 bore, its top 0.5 under the hub's
      face, Loctite 243), and the assembly is pull-tested. The wires run up Ø2.4 bores in the crown (4.3 clear of the
      pocket, their exits rounded) and through the cap's lid (today and A) or beside the cap (B: its Ø32 cap is too small
-     to carry them with real walls, so the wires leave the crown's top just outside it) to two grippers 35 apart either
-     side of the canopy's cord grip.
+     to carry them with real walls, so the wires leave the crown's top just outside it) to the canopy. There each passes
+     through its own SLK locking device (the system's rated wedge lock: it slides to shorten, holds under load, releases
+     with its key), the two 35 apart either side of the cord grip, the tails looped round the strap. Kept at 35: 50 to 60
+     would halve the sensitivity, but only with the cables out beside the cap, no longer one stem (check 4 (19)).
    - The cap is keyed to the crown by a Ø2 dowel and held down by a Ø2 x 2 magnet over a steel disc (both at r 14; in B
-     their holes stand 1.0 from the pocket); its pocket Ø20 over the dome nut. In a swap, hold the crown, not the cap.
+     their holes stand 1.0 from the pocket); its pocket Ø20 over the dome nut. In a swap, hold the cap: keyed to the crown,
+     it is the handle (check 4 (18): at the 9.0 lift the collar's top leaves only 2.5 / 1.84 mm of the crown's Ø80 tier
+     in today's top and A, a pinch point; B's Ø56 tier stands 6.5 clear).
    - The order: the hub; the two stud ends into the hub; the crown down over the wires onto the neck, its three screws;
-     the grip, as above; the cap down over the cord (and the wires) onto its dowel; the grippers in the canopy, levelled.
+     the grip, as above; the cap down over the cord (and the wires) onto its dowel; the cables through the locks in the canopy, levelled.
    - The shade's tether, drawn: an M3 eye screw radially into the hub at z 81 (between the lip's highest point in the
      lift, 75, and the PEEK ring, 86), at 90 deg (clear of the slots and pins); a 1 mm stainless tether with a snap hook to
      an eye turned on the collar's bore at z 68, above the lip. In a swap it is unhooked once the shade is turned and
@@ -120,3 +128,19 @@ The sheet: top-sheet-v4.jpg (its renders' commands: v4.sh).
   pocket in all three.
 - Hanging weights for v5 (section 2, rule 6): 1598 / 1679 / 1577 g, from the rebuilt solids (v4: 1601 / 1682 / 1581).
 - The heat row is not rerun: the heat model counts the tiers' outer areas and their stack, which v5 does not change.
+- The coordinator's v4 check, items 16 to 23:
+  - (16) The tether's snap hook is drawn: a Ø6 ring of 1.0 wire through the collar's eye, now a 2 mm tab with a Ø1.6
+    hole at r 39.5, z 68. In the swap: turn the shade, lower it a hand's width, unclip the hook; no tools.
+  - (17) The cable is bare: 1.5 is its whole diameter (electrogalvanized, no coating), through Ø2.4 bores; the stud end
+    comes swaged on by nVent. A black-coated cable must stay under 2.2 outside.
+  - (18) The cap is the handle in a swap (keyed to the crown by its dowel).
+  - (19) The spacing stays 35; the gripper is the SLK's own locking device, one per cable, in the canopy.
+  - (20) fixings_check.py (spinoffs/barkhorn/companions) checks every part of the top against every other at zero
+    tolerance. The only overlaps left are threads in their tapped holes, at the volumes their engagement gives (the two
+    studs 270 mm3, the three crown screws 24, the three pins 39, the eye screw 3). It found the tether drawn into the
+    collar's eye; fixed with the tab and the hook.
+  - (21) No pad: the crown sits on the neck metal to metal with a film of thermal compound (a pad would creep under the
+    screws and the grip). The CAD always drew it so; the texts now agree.
+  - (22) The thread engagement and the load path are corrected in rule 4; the cord's BOM row now names the two cables
+    and the grip under the cap.
+  - (23) The screws went to 90/210/330.

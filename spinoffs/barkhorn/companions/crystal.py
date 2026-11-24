@@ -219,8 +219,8 @@ TOP_TIERS = {
 # gives it (DB53112005EN, as the reviewer read it; the sheet not opened here): M12 x 1.5, 16 across the flats, 17.6 across
 # the corners, 32.5 overall, 12 of thread, cord 3.5 to 7. Its body is drawn as the hex (5) and a round dome to the overall
 # height, its outline to confirm on the sheet. The hub is tapped M12 13 deep from the neck's top (101.5), so all 12 of
-# thread are in the aluminium and the cord's pull goes straight into the hub. The crown sits on the neck on its pad, its
-# 2.5 floor held down by three M3 countersunk screws at r 9.25 into the neck (keyed and held, flush under the grip's
+# thread are in the aluminium and the cord's pull goes straight into the hub. The crown sits on the neck metal to metal (v5, check 4 (21): no pad,
+# which would creep under the screws and the grip; a film of thermal compound), its 2.5 floor held down by three M3 countersunk screws at r 9.25 into the neck (keyed and held, flush under the grip's
 # hex). v5 (2026-11-24, check 4): the crown's screws are M2.5 countersunk at 90/210/330 deg (clear of the cables), their heads
 # inside the pocket. The fixture hangs level from TWO suspension cables, symmetric about the axis (0 and 180 deg at r 17.5):
 # one cable off the axis tilts the lamp until its centre of mass (on the axis, about z 65 to 68) is under the cable's exit
@@ -309,7 +309,8 @@ def cover_parts(p=N):
         collar = collar - _edge(ld_ / 2, cz0, 1.0, inner=True, down=False)
         # (v5, check 4 (11)) the tether's eye on the collar: a boss turned in the bore at 90 deg, z 66.5 to 69.5, r 38 to 41, its
         # Ø1.6 cross hole for the tether's snap hook; clear of the slots (0/120/240), the notches (30/150/270) and the hub
-        collar = collar + (at(90.0, box(ci / 2 - 3.0, -2.0, cz0 + 2.5, ci / 2 + 0.5, 2.0, cz0 + 5.5))
+        # (v5, check 4 (16), (20)) a 2 thick tab, so the snap hook's ring passes through its hole
+        collar = collar + (at(90.0, box(ci / 2 - 3.0, -1.0, cz0 + 2.5, ci / 2 + 0.5, 1.0, cz0 + 5.5))
                            - at(90.0, cyl('y', (ci / 2 - 1.5, cz0 + 4.0), 1.6, -3.0, 3.0)))
     # the lead-in on the collar's top inner edge (review 2, (6)): the shade centres itself on the PEEK land going up
     collar = collar - _edge(ci / 2, cz1, 1.0, inner=True, down=True)
@@ -514,7 +515,7 @@ def north_parts(p=N):
     tt_ = TOP_TIERS.get(p.get('top') or ('today' if p.get('fixings') else None))
     if tt_:
         # PROPOSAL (check 3, 2026-11-24): the crown's tiers and the cap (gland) as TOP_TIERS draws them, each eased 1.0, the
-        # crown on the hub's neck on its pad (the first tier Ø80, inside the collar's Ø82 bore, so the shade rises past it);
+        # crown on the hub's neck, metal to metal (the first tier Ø80, inside the collar's Ø82 bore, so the shade rises past it);
         # the fixings as GRIP describes them
         crown = None
         for d_, a_, b_ in tt_['crown']:
@@ -578,8 +579,12 @@ def north_parts(p=N):
         ta_, tz0_, tz1_ = GRIP['tether']; ca_, sa_ = math.cos(math.radians(ta_)), math.sin(math.radians(ta_))
         heye = Solid.make_cylinder(1.5, 5.0, Plane(origin=(29.5 * ca_, 29.5 * sa_, tz0_), z_dir=(ca_, sa_, 0))) + \
             Solid.make_cylinder(2.5, 1.5, Plane(origin=(34.5 * ca_, 34.5 * sa_, tz0_), z_dir=(ca_, sa_, 0)))
-        p0_ = V3(36.0 * ca_, 36.0 * sa_, tz0_); p1_ = V3(39.0 * ca_, 39.0 * sa_, tz1_ + 1.0); dv_ = p1_ - p0_
-        tline = Solid.make_cylinder(0.5, dv_.length, Plane(origin=p0_, z_dir=dv_))
+        # the snap hook drawn as a Ø6 ring of 1.0 wire through the eye's hole (r 39.5, z 68), level, the tether to its
+        # inner side
+        hr_ = p['collar'][1] / 2 - 1.5 - 3.0
+        hook = Solid.make_torus(3.0, 0.5, Plane(origin=(hr_ * ca_, hr_ * sa_, tz1_), z_dir=(0, 0, 1)))
+        p0_ = V3(36.0 * ca_, 36.0 * sa_, tz0_); p1_ = V3((hr_ - 3.0) * ca_, (hr_ - 3.0) * sa_, tz1_ + 0.5); dv_ = p1_ - p0_
+        tline = Solid.make_cylinder(0.5, dv_.length, Plane(origin=p0_, z_dir=dv_)) + hook
         core = core - Solid.make_cylinder(1.25, 6.0, Plane(origin=(25.5 * ca_, 25.5 * sa_, tz0_), z_dir=(ca_, sa_, 0)))
         z_cord = g1_
     cord = cyl('z', (0, 0), 6, z_cord, z_cord + p['drop'])
@@ -605,7 +610,7 @@ def north_parts(p=N):
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=['aluminium 6061, black anodised: the core, turned from bar. The COB on its holder at the top of the 46 '
                     'bore (22 up: the cut-off, about 46 deg from the vertical), the reflector in the bore, the PEEK ring '
-                    'round it, the crown on its neck on a thermal pad; a 10 bore for the wires']),
+                    'round it, the crown on its neck (metal to metal, a film of thermal compound, no pad); a 10 bore for the wires']),
         Part('ring', ring, Machined('peek', 'lathe'), finish='trim', group='fixture', inside=True,
              notes=['PEEK, unfilled (0.25 W/m K), black: the thermal break. It carries the three pins and the detent, so '
                     'the cover touches the fixture only through it. Review 2026-11-01: its 81.6 OD is the centering land '
@@ -638,14 +643,14 @@ def north_parts(p=N):
     ]) + [
         Part('crown', crown, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=[('PROPOSAL (' + (('even tiers, ' + p['top']) if p.get('top') else 'today\'s top, check 3\'s fixings') + '): ' + ', '.join(f'{d:.0f} across from {a:.2f} to {b:.2f}' for d, a, b in tt_['crown'])
-                     + '; on the hub\'s neck on a thermal pad, its 2.5 floor held by three M3 countersunk into the neck, a Ø24 pocket for '
-                     'the cord grip and its socket, a Ø2 bore for the suspension cable' if tt_ else
+                     + '; on the hub\'s neck metal to metal (a film of thermal compound, no pad), its 2.5 floor held by three M2.5 countersunk into the neck, a Ø24 pocket for '
+                     'the cord grip and its socket, two Ø2.4 bores for the suspension cables (bare 1.5)' if tt_ else
                      'the heat sink (round 41; the fins until then), round 32f\'s low top: 80 across, 11.5 tall over the '
                     'collar') + ', turned from 6061 bar, black anodised (emissivity about 0.85: half its loss is radiation), on '
-                    'the core\'s neck on a thermal pad, 0.5 clear of the PEEK ring and the collar']),
+                    'the core\'s neck ' + ('metal to metal' if tt_ else 'on a thermal pad') + ', 0.5 clear of the PEEK ring and the collar']),
         Part('gland', gland, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=[(f'PROPOSAL ({("even tiers, " + p["top"]) if p.get("top") else "today, check 3"}): the cap, {tt_["gland"][0]:.0f} across x {tt_["gland"][2] - tt_["gland"][1]:.1f}, set on the '
-                     'crown, resting there by its weight, located by the cord and the suspension cable through its 1.0 lid (no screws, no thread), '
+                     'crown, resting there by its weight, keyed by a dowel and held by a magnet (hemi-cap-key; the swap\'s handle), the cord through its 1.0 lid (no screws, no thread), '
                      'its Ø24 pocket over the cord grip' if tt_ else
                      'the cap, 40 x 14, over the listed cord grip (the strain relief, tested with the fixture\'s weight), on two M3 into the crown') +
                     ': 6061, turned, edges eased 1.0, SATIN black anodised; part of the heat sink']),
@@ -655,7 +660,7 @@ def north_parts(p=N):
                       'floor into the hub, tapped 13 deep; tightened with a thin-wall 16 socket down the crown\'s Ø24 pocket']),
            Part('crown-screws', sc_, Bought('hemi-crown-screws'), finish='steel', group='fixture', inside=True,
                 notes=['PROPOSAL (v5): three M2.5 x 8 countersunk screws (ISO 10642), stainless, through the crown\'s 2.5 floor at r 9.25, '
-                       '90/210/330 deg, into the hub\'s neck (tapped 6): the crown keyed and held on its pad']),
+                       '90/210/330 deg, into the hub\'s neck (tapped 6): the crown keyed and held, metal to metal']),
            Part('cap-key', dowel + mag, Bought('hemi-cap-key'), finish='steel', group='fixture', inside=True,
                 notes=['PROPOSAL (v5): a Ø2 x 5 stainless dowel (the cap\'s key) and a Ø2 x 2 N42 magnet in the crown\'s top over a '
                        'Ø2 x 0.5 steel disc bonded in the cap (its hold-down), both at r 14; in B their holes stand 1.0 from the pocket']),
