@@ -1,0 +1,94 @@
+LAMPK house-key 0
+AUDIT house-orb-green hidden ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front', 'house-floorcard'] no-shadow ['house-key-face', 'house-key-housing', 'house-fill-face', 'house-fill-housing', 'house-kick-face', 'house-kick-housing', 'house-horn-face', 'house-horn-housing', 'room-left', 'room-right', 'room-back', 'room-ceiling', 'room-front', 'house-floorcard'] lights [('house-key', 'AREA', 0.0), ('house-fill', 'AREA', 2.047), ('house-kick', 'AREA', 0.502), ('house-horn', 'AREA', 3.023), ('house-bg-left', 'AREA', 2.197), ('house-bg-right', 'AREA', 0.85), ('house-wall_left', 'AREA', 6.125), ('house-bg-high', 'AREA', 1.395), ('house-horn-floor', 'AREA', 3.023), ('house-fill-floor', 'AREA', 2.047), ('house-bounce-spot', 'SPOT', 8.5), ('led-green', 'AREA', 2.5)]
+HIDDENCAST house-orb-green: 25 hidden, 2 in frame
+   out         0.0 %  area lamp (rectangle) house-key
+   out         0.0 %  hidden mesh house-key-face
+   out         0.0 %  hidden mesh house-key-housing
+   out         0.0 %  area lamp (rectangle) house-fill
+   out         0.0 %  hidden mesh house-fill-face
+   out         0.0 %  hidden mesh house-fill-housing
+   out         0.0 %  area lamp (rectangle) house-kick
+   out         0.0 %  hidden mesh house-kick-face
+   out         0.0 %  hidden mesh house-kick-housing
+   out         0.0 %  area lamp (rectangle) house-horn
+   out         0.0 %  hidden mesh house-horn-face
+   out         0.0 %  hidden mesh house-horn-housing
+   out         0.0 %  area lamp (rectangle) house-bg-left
+   out         0.0 %  area lamp (rectangle) house-bg-right
+   out         0.0 %  area lamp (rectangle) house-wall_left
+   out         0.0 %  area lamp (rectangle) house-bg-high
+   out         0.0 %  area lamp (rectangle) house-horn-floor
+   out         0.0 %  area lamp (rectangle) house-fill-floor
+   out         0.0 %  hidden mesh room-left
+   out         0.0 %  hidden mesh room-right
+   IN FRAME   47.0 %  hidden mesh room-back
+   out         0.0 %  hidden mesh room-ceiling
+   out         0.0 %  hidden mesh room-front
+   IN FRAME   53.6 %  hidden mesh house-floorcard
+   out         0.0 %  spot lamp house-bounce-spot
+RAYVIS MESH sweep camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT house-key camera=0 diffuse=1 glossy=0 transmission=0 volume_scatter=1 shadow=1
+LINK house-key blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH house-key-face camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+LINK house-key-face blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH house-key-housing camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS LIGHT house-fill camera=0 diffuse=1 glossy=0 transmission=0 volume_scatter=1 shadow=1
+LINK house-fill receiver [('sweep', 'EXCLUDE')]
+LINK house-fill blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH house-fill-face camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+LINK house-fill-face blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH house-fill-housing camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS LIGHT house-kick camera=0 diffuse=1 glossy=0 transmission=0 volume_scatter=1 shadow=1
+LINK house-kick blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH house-kick-face camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+LINK house-kick-face blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH house-kick-housing camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS LIGHT house-horn camera=0 diffuse=1 glossy=0 transmission=0 volume_scatter=1 shadow=1
+LINK house-horn receiver [('sweep', 'EXCLUDE')]
+LINK house-horn blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH house-horn-face camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+LINK house-horn-face blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH house-horn-housing camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS LIGHT house-bg-left camera=0 diffuse=1 glossy=0 transmission=1 volume_scatter=1 shadow=1
+LINK house-bg-left receiver [('sweep', 'INCLUDE'), ('house-floorcard', 'INCLUDE')]
+LINK house-bg-left blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS LIGHT house-bg-right camera=0 diffuse=1 glossy=0 transmission=1 volume_scatter=1 shadow=1
+LINK house-bg-right receiver [('sweep', 'INCLUDE'), ('house-floorcard', 'INCLUDE')]
+LINK house-bg-right blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS LIGHT house-wall_left camera=0 diffuse=1 glossy=0 transmission=1 volume_scatter=1 shadow=1
+LINK house-wall_left receiver [('sweep', 'INCLUDE'), ('house-floorcard', 'INCLUDE')]
+LINK house-wall_left blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS LIGHT house-bg-high camera=0 diffuse=1 glossy=0 transmission=1 volume_scatter=1 shadow=1
+LINK house-bg-high receiver [('sweep', 'INCLUDE'), ('house-floorcard', 'INCLUDE')]
+LINK house-bg-high blocker [('flag0', 'EXCLUDE'), ('flag1', 'EXCLUDE')]
+RAYVIS MESH flag0 camera=1 diffuse=0 glossy=0 transmission=0 volume_scatter=0 shadow=1
+RAYVIS MESH flag1 camera=1 diffuse=0 glossy=0 transmission=0 volume_scatter=0 shadow=1
+RAYVIS LIGHT house-horn-floor camera=0 diffuse=1 glossy=0 transmission=0 volume_scatter=1 shadow=1
+LINK house-horn-floor receiver [('sweep', 'INCLUDE')]
+LINK house-horn-floor blocker [('flag1', 'EXCLUDE')]
+RAYVIS LIGHT house-fill-floor camera=0 diffuse=1 glossy=0 transmission=0 volume_scatter=1 shadow=1
+LINK house-fill-floor receiver [('sweep', 'INCLUDE')]
+LINK house-fill-floor blocker [('flag0', 'EXCLUDE')]
+RAYVIS MESH room-left camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS MESH room-right camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS MESH room-back camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS MESH room-ceiling camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS MESH room-front camera=0 diffuse=0 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS MESH house-floorcard camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=0 shadow=0
+RAYVIS LIGHT house-bounce-spot camera=0 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH house-bounce-cut camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH house-bounce-top camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH base-skin-B-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH base-foot-B-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH base-lipend-B-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH base-liner-B-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH seat camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH grommet camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH well camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH window camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH ball-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH ball-in-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH core-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS MESH grommet-bore-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+RAYVIS LIGHT led-green camera=1 diffuse=1 glossy=1 transmission=1 volume_scatter=1 shadow=1
+CASTCHECK house-orb-green {'house-key': 0.0, 'house-key-face': 0.0, 'house-key-housing': 0.0, 'house-fill': 0.0, 'house-fill-face': 0.0, 'house-fill-housing': 0.0, 'house-kick': 0.0, 'house-kick-face': 0.0, 'house-kick-housing': 0.0, 'house-horn': 0.0, 'house-horn-face': 0.0, 'house-horn-housing': 0.0, 'house-bg-left': 0.0, 'house-bg-right': 0.0, 'house-wall_left': 0.0, 'house-bg-high': 0.0, 'house-horn-floor': 0.0, 'house-fill-floor': 0.0, 'room-left': 0.0, 'room-right': 0.0, 'room-back': 0.0, 'room-ceiling': 0.0, 'room-front': 0.0, 'house-floorcard': 30.09, 'house-bounce-spot': 0.0}
