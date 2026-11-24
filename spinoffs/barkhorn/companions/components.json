@@ -322,7 +322,7 @@
  "dome-pins": {
   "kind": "hardware",
   "maker": "any",
-  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to the collar through the tether (v6; hemi-tether), rated well over 10 x the 1.1 kg shade (review, 2026-11-01)",
+  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention: a 1 mm stainless safety tether, crimped, from the hub to the collar through the tether (v6; hemi-tether) (review, 2026-11-01)",
   "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -723,7 +723,7 @@
  "hemi-suspension": {
   "kind": "hardware",
   "maker": "Cable Grippers Inc. (cable, grippers) and Nicopress (stop sleeves)",
-  "model": "PROPOSAL 2026-11-24 (v6, the v5 check's (1) and (2)): TWO 1/16 in (1.59) 7x7 stainless cables (Cable Grippers Inc. bulk cable, fuse cut), symmetric about the axis at r 16 (today's top, A) or r 18.5 (B). The hub end: a Nicopress 871-1-C copper stop sleeve swaged on with the 51-C-887 tool (13/64 x 7/32 in, about Ø5.2 x 5.6, 430 lb typical holding strength, as a distributor's copy of Nicopress's table gives it: to confirm on Nicopress's sheet), bearing up under a Ø5.6 x 6 counterbore in the hub's bottom face; the cable up a Ø2.4 hole through the hub and the crown (and the cap's lid in today's top and A). The canopy end: a Cable Grippers MGR-M10-MM gripper on each (hemi-gripper), at r 40, the cables splayed to it. Rated as a system by Cable Grippers' independent tests: MGR on 1/16 in stainless 7x7, 312 lb minimum break, 50 lb a cable at their 5:1 (the lamp 1.6 to 1.7 kg, about 3.7 lb, on two). Each assembly is pull-tested. LEVELLING: the lamp hung, a level across the rim, push each gripper's plunger from below and slide until level; 1 mm of difference tilts it about 1.5 deg (1.46 / 1.47 / 1.39 for today, A, B, with the splay); the cord left slack (2 mm longer than the cables). The cord carries current only",
+  "model": "PROPOSAL 2026-11-24 (v7, the v5 and v6 checks): TWO 1/16 in (1.59) 7x7 stainless cables (Cable Grippers Inc. bulk cable, fuse cut), symmetric about the axis at r 16 (today's top, A) or r 17.6 (B). The hub end: a Nicopress 871-1-C copper stop sleeve swaged on with the 51-C-887 tool (Nicopress: a stop sleeve gives about 50 % of the cable's rated break, typical, about 1.07 kN on 1/16 7x7; about Ø5.2 x 5.6 before swaging, which lengthens it), bearing up under a Ø5.6 x 8 counterbore in the hub's bottom face; the cable up a Ø2.4 hole through the hub and the crown (and the cap's lid in today's top and A). The canopy end: a Cable Grippers MGR-M10-MM gripper on each (hemi-gripper), at r 48, the cables splayed to it. Rated as a system by Cable Grippers' independent tests: MGR on 1/16 in stainless 7x7, 312 lb minimum break, 50 lb a cable at their 5:1 (the lamp 1.6 to 1.7 kg, about 3.7 lb, on two). PROOF: each cable assembly loaded to 90 N (5 x the whole lamp) for 1 min before fitting. LEVELLING: the canopy hanging on the cables below its plate, loosen each gripper's safety nut, push the plunger and slide until a 200 mm level across the rim reads level to 1 deg (its two sides within 3.5 mm below the ceiling; 1 mm of cable is about 1.3 deg, 4.5 mm across the rim), tighten the safety nuts, set the cord's 2 mm of slack, push the canopy up and fix its set screws. The cord carries current only",
   "usd": 14.0,
   "estimate": true,
   "supplier": "Cable Grippers Inc. (Las Vegas) and a Nicopress distributor",
@@ -777,7 +777,7 @@
  "hemi-canopy-strap": {
   "kind": "hardware",
   "maker": "any (a lighting supplier)",
-  "model": "Zinc-plated steel crossbar, 1.6 mm, screwed to the 4 in junction box (review, 2026-11-01) | PROPOSAL 2026-11-24 (v6): 138 long, its ends bent down 16 with tapped holes for the canopy's two set screws; two 1.6 steel L brackets riveted under it at r 40 carry the grippers (an M10 hole and lock nut each); the driver's steel enclosure hangs from its centre. It carries the load; the canopy is a cover",
+  "model": "Zinc-plated steel mounting for the 4 in junction box (review, 2026-11-01) | PROPOSAL 2026-11-24 (v7): a round mounting plate, 1.6 steel, Ø140 with a rim turned down 12 (two M4 clinch nuts in it for the canopy's set screws), screwed to the box by its two 8-32 screws at y -+44.45; the gripper brackets riveted under it, the driver's steel enclosure on four 6 standoffs below it (fitted after the plate is screwed up, the screws' heads in the gap). It carries the load; the canopy is a cover",
   "usd": 6.0,
   "estimate": true,
   "supplier": "a lighting supplier",
@@ -795,7 +795,7 @@
  "hemi-tether": {
   "kind": "hardware",
   "maker": "any",
-  "model": "Review 2026-11-01: the shade's secondary retention, slack in use; rated well over 10 x the 1.1 kg shade | PROPOSAL 2026-11-24 (v6, the v5 check's (4)): 1.5 mm 7x7 stainless rope (about 2.2 kN minimum break, a seller's figure), 125 between its two screws, crimped loops (Nicopress oval sleeves): an M4 x 6 stainless button screw radially into the hub (z 80, 90 deg) clamps the hub's eye; a 4 x 40 stainless snap hook (DIN 5299 C; sellers list 1.9 to 5.8 kN breaking: the lowest taken) clipped to it; the rope round the lip's top to an M3 x 6 stainless button screw through the collar's wall (z 70, 270 deg). It lets the shade be turned and lowered 100 before it goes taut. A drop of the shade onto it (the bayonet failed) peaks at about 1.3 kN in a stiff elastic estimate (it ignores the rope's own give): under the rope's 2.2 and the snap's 1.9, once",
+  "model": "PENDING (v7, the v6 check's (1) and (2)): the shade's secondary retention is being redesigned (the v6 tether blocked the swap and its parts were not rated for the drop); this row is replaced when it is decided. Was: Review 2026-11-01: the shade's secondary retention, slack in use | PROPOSAL 2026-11-24 (v6, the v5 check's (4)): 1.5 mm 7x7 stainless rope (about 2.2 kN minimum break, a seller's figure), 125 between its two screws, crimped loops (Nicopress oval sleeves): an M4 x 6 stainless button screw radially into the hub (z 80, 90 deg) clamps the hub's eye; a 4 x 40 stainless snap hook (DIN 5299 C; sellers list 1.9 to 5.8 kN breaking: the lowest taken) clipped to it; the rope round the lip's top to an M3 x 6 stainless button screw through the collar's wall (z 70, 270 deg). It lets the shade be turned and lowered 100 before it goes taut. A drop of the shade onto it (the bayonet failed) peaks at about 1.3 kN in a stiff elastic estimate (it ignores the rope's own give): under the rope's 2.2 and the snap's 1.9, once",
   "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -942,8 +942,8 @@
  "hemi-gripper": {
   "kind": "hardware",
   "maker": "Cable Grippers Inc.",
-  "model": "PROPOSAL 2026-11-24 (v6): MGR-M10-MM mini gripper for 1/16 in cable, bottom exit, M10 thread (their chart: 0.675 in long without the plunger, Ø0.47 in body, 7/16 in mounting hole), with its safety nut; mounted plunger down, threaded up into a bracket under the canopy strap (M10 lock nut), its plunger 1 above a Ø6 hole in the canopy's floor. Push the plunger to let the cable slide; let go and it grips. Two a lamp",
-  "usd": 7.0,
+  "model": "PROPOSAL 2026-11-24 (v7): MGR-M10-MM mini gripper for 1/16 in cable, bottom exit, M10 thread (their chart: 0.675 in long without the plunger, Ø0.47 in body, 7/16 in mounting hole), with its knurled safety nut; mounted plunger down, threaded up through its bracket's foot and held by an M10 nylon-insert nut. To adjust: loosen the safety nut, push the plunger, slide; tighten the safety nut when level. Two a lamp: the price is the pair ($7 each, an estimate)",
+  "usd": 14.0,
   "estimate": true,
   "supplier": "Cable Grippers Inc.",
   "price_date": "2026-11-24",
@@ -961,10 +961,55 @@
  "hemi-white-paint": {
   "kind": "finish",
   "maker": "a powder coater",
-  "model": "The white inside the shade's top (review 2, 2026-11-24): the Ø62 disc under the hub white powder coat; the collar's lip masked after anodising and painted white beneath (its underside only, the rest of the collar black anodised): a process step for the hub's disc and each shade's collar",
+  "model": "The white inside the shade's top (review 2, 2026-11-24; scope set in v7): the Ø62 disc under the hub white powder coat; on each shade's collar, masked after anodising and painted white: every down-facing face below z 80, the foot beneath the lip (r 33.5 to 48) and the flange's inner face under the shade (r 48 to 58), about 8,460 mm2; the render paints the same faces",
   "usd": 1.5,
   "estimate": true,
   "supplier": "a powder coater",
+  "price_date": "2026-11-24"
+ },
+ "hemi-gripper-nut": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "v7: two M10 nylon-insert hex nuts, ISO 10511, A2 stainless, 16 AF, 8 tall: the grippers to their brackets",
+  "usd": 0.6,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-11-24"
+ },
+ "hemi-gripper-bracket": {
+  "kind": "hardware",
+  "maker": "a sheet-metal shop (to make)",
+  "model": "PROPOSAL 2026-11-24 (v7): two U brackets, 1.6 zinc-plated steel: a 24 x 24 foot with a Ø10.5 hole for the gripper, two legs across the cables' line (the nut open to a spanner from the sides) and two inward flanges riveted under the mounting plate by four Ø3.2 blind rivets each",
+  "usd": 6.0,
+  "estimate": true,
+  "supplier": "a sheet-metal shop",
+  "price_date": "2026-11-24"
+ },
+ "hemi-bracket-rivets": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "v7: eight Ø3.2 x 6 steel blind rivets (dome head): the gripper brackets to the mounting plate",
+  "usd": 0.5,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-11-24"
+ },
+ "hemi-canopy-setscrews": {
+  "kind": "hardware",
+  "maker": "any (PEM for the nuts)",
+  "model": "v7: two M4 x 8 black-oxide flat-point set screws, flush in the canopy's wall at 90/270 deg, into two M4 clinch nuts (PEM S-M4 class) pressed into the mounting plate's rim: the canopy held up",
+  "usd": 1.0,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-11-24"
+ },
+ "hemi-box-screws": {
+  "kind": "hardware",
+  "maker": "supplied with the junction box",
+  "model": "v7: the 4 in junction box's two 8-32 screws, through the mounting plate at y -+44.45",
+  "usd": 0.0,
+  "estimate": true,
+  "supplier": "with the box",
   "price_date": "2026-11-24"
  }
 }

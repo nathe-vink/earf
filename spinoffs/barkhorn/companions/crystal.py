@@ -68,6 +68,9 @@ MATERIALS = dict(B.MATERIALS,
                  # black, so the tint is the only colour. The working metal black anodised aluminium, satin; the trim
                  # black cast acrylic, polished, as the cord
                  anodised={'preset': 'metal', 'color': '#2A2A2D', 'roughness': 0.36, 'anisotropic': 0.3},
+                 # v7 (the v6 check's (13)): the cables bare stainless and the painted white in the CAD's own render export
+                 stainless={'preset': 'metal', 'color': '#8E9093', 'roughness': 0.32},
+                 white={'preset': 'satin_paint', 'color': '#EEEEEA'},
                  trim={'preset': 'gloss_plastic', 'color': '#0C0C0D', 'roughness': 0.04, 'coat': 1.0,
                        'coat_roughness': 0.02},
                  fabric={'preset': 'rubber', 'color': '#141414', 'roughness': 0.8, 'sheen': 0.4},
@@ -214,7 +217,7 @@ TOP_TIERS = {
     'today': dict(top=None, crown=[(80.0, 100.5, 112.0)], gland=(40.0, 112.0, 126.0)),   # today's top, with check 3's fixings
     'A': dict(top=103.33, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0)),
     'B': dict(top=100.5, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 109.0), (56.0, 109.0, 117.5)], gland=(32.0, 117.5, 126.0),
-              cable_r=18.5, key=None, magnet=(14.0, 270.0, 1.5)),
+              cable_r=17.6, key=None, magnet=(14.0, 270.0, 1.5)),     # v7: B's cables at r 17.6 (1.2 of the Ø40 neck round each hole, 0.8 clear of the cap)
 }
 # The top's fixings (check 3, 2026-11-24; for today's top, A and B alike). The cord grip: Lapp 53112005 as its datasheet
 # gives it (DB53112005EN, as the reviewer read it; the sheet not opened here): M12 x 1.5, 16 across the flats, 17.6 across
@@ -223,31 +226,36 @@ TOP_TIERS = {
 # thread are in the hub and the cord's pull goes into the hub. The crown sits on the neck metal to metal (no pad, which
 # would creep under the screws and the grip; a film of thermal compound), its 2.5 floor held down by three M2.5 countersunk
 # screws at r 9.25, 90/210/330 deg, into the neck, their heads inside the pocket.
-# v6 (2026-11-24, the v5 check's (1) to (8)): THE HANGING. Two cables, symmetric about the axis (0 and 180 deg), at r 16
-# in today's top and A and r 18.5 in B (beside its Ø32 cap, 1.3 clear): 1/16 in (1.59) 7x7 stainless cable (Cable Grippers
-# Inc.'s bulk cable). The hub end: a Nicopress 871-1-C copper stop sleeve swaged on (13/64 in x 7/32 in, about Ø5.2 x 5.6,
-# 430 lb typical holding strength, as a distributor's copy of Nicopress's table gives it; tool 51-C-887), bearing up under
-# a Ø5.6 counterbore 6 deep in the hub's bottom face, the cable up a Ø2.4 hole through the hub, the crown and the cap
-# (today, A) or beside the cap (B); the white disc closes the counterbores. No turning, no thread. The canopy end: a Cable
-# Grippers MGR-M10-MM gripper on each cable (their chart: 17.1 long without the plunger, Ø11.9 body, M10 thread; MGR on
-# 1/16 in stainless 7x7: 312 lb minimum break in their independent tests, 50 lb a cable at their 5:1), threaded up into a
-# steel bracket under the canopy strap, its plunger down, 1 above a Ø6 hole in the canopy's floor through which the cable
-# passes: push the plunger from below with a fingertip to let the cable slide, let go and it holds. The cables splay from
-# their exits to the grippers at r 40 (clear of the driver's enclosure). Each assembly is pull-tested.
-# The cord (v6, (3)): set 2 mm longer than the cables between its grips, so it carries no load (the cables stretch about
+# v6/v7 (2026-11-24, the v5 and v6 checks): THE HANGING. Two cables, symmetric about the axis (0 and 180 deg), at r 16 in
+# today's top and A and r 17.6 in B (beside its Ø32 cap, 0.8 clear; 1.2 of the Ø40 neck round each hole): 1/16 in (1.59)
+# 7x7 stainless cable (Cable Grippers Inc.'s bulk cable). The hub end: a Nicopress 871-1-C copper stop sleeve swaged on
+# (tool 51-C-887; Nicopress gives a stop sleeve about 50 % of the cable's rated break, typical: about 1.07 kN on 1/16 7x7;
+# its size about Ø5.2 x 5.6 before swaging, which lengthens it), bearing up under a Ø5.6 x 8 counterbore in the hub's bottom
+# face, the cable up a Ø2.4 hole through the hub, the crown and the cap (today, A) or beside the cap (B); the white disc
+# closes the counterbores. No turning, no thread. The canopy end: a Cable Grippers MGR-M10-MM gripper on each cable (their
+# chart: 17.1 long without the plunger, Ø11.9 body, M10 thread; MGR on 1/16 in stainless 7x7: 312 lb minimum break in
+# their independent tests, 50 lb a cable at their 5:1), plunger down, with its knurled safety nut, threaded up through a
+# steel U bracket riveted under the canopy's mounting plate (an M10 nylon-insert nut on top). The cables splay from their
+# exits to the grippers at r 48 (clear of the driver's enclosure). Each cable assembly is proof-loaded to 90 N (5 x the
+# lamp's 1.7 kg) for 1 min before it is fitted.
+# LEVELLING (v7): the plate screwed to the box and the canopy hanging on the cables below it, the lamp hung; loosen each
+# gripper's safety nut, push its plunger and slide the cable until a 200 mm level across the rim reads level to 1 deg
+# (the rim's two sides within 3.5 mm of each other below the ceiling); 1 mm of cable tilts it about 1.3 deg; tighten the
+# safety nuts; feed the cord until it bows (2 mm longer than the cables) and tighten the canopy's cord grip; slide the
+# canopy up the cables and fix its two set screws. The tails (about 50) coiled in the brackets.
+# The cord (v6): set 2 mm longer than the cables between its grips, so it carries no load (the cables stretch about
 # 0.05 mm under the lamp); hung, it bows about 21 mm to one side over the drop: drawn so.
-# The cap (v6, (7), (8)): today's and A's caps keyed to the crown by a Ø2 dowel and held down by a Ø2 x 2 magnet over a steel
-# disc, both at r 15.5 (2.5 from the crown's Ø24 pocket); the cap is the handle in a swap. B's Ø32 cap is held by a Ø1.5 x 2
-# magnet only (r 14, 1.25 from the pocket and the fillet): B's handle in a swap is its Ø56 tier.
+# The cap (v6): today's and A's caps keyed to the crown by a Ø2 dowel and held down by a Ø2 x 2 magnet over a steel disc,
+# both at r 15.5 (2.5 from the crown's Ø24 pocket); the cap is the handle in a swap. B's Ø32 cap is held by a Ø1.5 x 2
+# magnet only (r 14): B's handle in a swap is its Ø56 tier.
 # The grip is turned by a slotted (pass-through) 16 socket, the cord in its slot: the dome nut off, the body torqued into
 # the hub, the dome nut on and tightened on the cord. The order: the cables up through the hub from below, their sleeves
 # into the counterbores; the white disc; the crown down over the cables onto the neck, its three screws; the grip, as above;
-# the cap down over the cord (and the cables) onto its dowel; the cables through the canopy's floor and the grippers, the
-# lamp levelled; the cord's 2 mm of slack and the canopy's grip tightened. In a swap, hold the cap (B: the Ø56 tier):
-# lift, turn, lower a hand's width onto the tether, unclip its snap at the hub.
+# the cap down over the cord (and the cables) onto its dowel; the cables through the canopy's floor and the grippers, and
+# the levelling above. In a swap, hold the cap (B: the Ø56 tier).
 GRIP = dict(thread=(12.0, 12.0), tap=13.0, hex=(16.0, 17.6, 5.0), overall=32.5, pocket=24.0, cap_pocket=20.0, lid=1.0,
             floor=(101.5, 104.0), screws_r=9.25, screws_a=(90.0, 210.0, 330.0), cable_r=16.0, cables=(0.0, 180.0),
-            cable=1.59, sleeve=(5.16, 5.56), cbore=(5.6, 6.0), gripper_r=40.0,
+            cable=1.59, sleeve=(5.16, 5.56), cbore=(5.6, 8.0), gripper_r=46.0,     # v7: the counterbore 8 deep (the swaged sleeve lengthens); the grippers at r 46 (their nuts clear the enclosure)
             key=(15.5, 90.0, 2.0), magnet=(15.5, 270.0, 2.0),
             # v6 (the v5 check's (4)): the tether, 1.5 mm 7x7 stainless, 125 between its ends: an M4 button screw radially
             # into the hub (z 80, 90 deg) holding a crimped loop (the hub's eye), a 4 x 40 stainless snap hook (DIN 5299 C)
@@ -351,6 +359,11 @@ def cover_parts(p=N):
     gasket_in = _sphere_band(r_ki, r_ki - 1.0, (co / 2 + 2.2) if sh_ else (co / 2 + 0.2), fr)
     gasket_out = _sphere_band(R + 1.0, R, (co / 2 + 2.2) if sh_ else (co / 2 + 0.2), fr)
     slip_ = None
+    paint_ = None
+    if p.get('white_split') and p.get('fixings'):
+        # v7: the white paint as a film 0.05 off the collar's foot and the flange's inner face
+        paint_ = (cyl('z', (0, 0), co, cz0 - 0.05, cz0) - cyl('z', (0, 0), WHITE_SPLIT['lip'][0] + 2.0, cz0 - 1, cz0 + 1)) + \
+            _sphere_band(r_ki - 5.0, r_ki - 5.05, co / 2, fr)
     if sh_:
         # v6 (the v5 check's (9)): the 0.25 PTFE slip washer drawn between the outer gasket and the clamp ring's band (the
         # gasket drawn at 0.75 there; the shims picked per shade take up the stack)
@@ -384,6 +397,10 @@ def cover_parts(p=N):
         clamp = band_ + ring_
         # v6 (the v5 check's (6)): the thread's lead-in cut after the union (the band filled it back in)
         clamp = clamp - _edge(co / 2, 92.0, 1.0, inner=True, down=False)
+    if p.get('white_split') and p.get('fixings'):
+        # v7 (the v6 check's (9)): the detent's dimple in the bore at 90 deg, z 93, where the pins sit in their notches (cut
+        # last, after the shoulder's union)
+        collar = collar - at(90.0, cyl('x', (0, p['pin_z']), 2.6, ci / 2 - 1, p['ring'][1] / 2 + 0.9))
     note_formed = ('drape-formed from cast sheet over an aluminium mould, trimmed and polished; the prototypes are formed on '
                    'the production moulds')
     if p.get('build') == 'v3':
@@ -456,12 +473,17 @@ def cover_parts(p=N):
                      'on acrylic); no thread-locker near acrylic (review 2026-11-01: anaerobics craze it): held by the '
                      'silicone\'s preload and a nylon-tipped set screw through the ring into the collar')]),
         Part('gaskets', gasket_in + gasket_out, Bought('hemi-gaskets-4' if sh_ else 'hemi-gaskets'), finish='silicone', group='cover',
-             notes=(['PROPOSAL (v5): four silicone rings, Shore 40: two 1.3 gaskets and two shims in the crown\'s air gaps, drawn at 1.0, '
-                     'with a 0.25 PTFE slip washer under the clamp ring\'s band (it turns against it while tightening). PROCESS: the shade '
-                     'maker measures each crown\'s stack (cast sheet is held to only ±(0.4 + 0.1t), ISO 7823-1: ±0.7, ±1.0, ±0.7 here) and '
-                     'picks the two shims from 0 (left out), 0.5, 1.0, 1.6, 2.2 and 2.9 so the squeeze lands at 20 to 35 % (the whole '
-                     'RSS range; at the thinnest worst-case stack it reaches 38 %)'] if sh_ else
+             notes=(['PROPOSAL (v7): four silicone rings, Shore 40, each 1.3 free: two gaskets and two shims in the crown\'s air gaps, '
+                     'drawn at 1.0 (the outer gasket at 0.75, the 0.25 PTFE slip washer drawn over it under the clamp ring\'s band, '
+                     'which turns against it while tightening). PROCESS: the shade maker measures each crown\'s stack (cast sheet is '
+                     'held to only ±(0.4 + 0.1t), ISO 7823-1: ±0.7, ±1.0, ±0.7 here) and picks the two shims from 0 (left out), 0.5, '
+                     '1.0, 1.6, 2.2 and 2.9 so the squeeze lands at 20 to 35 % over the whole RSS range (at the thickest worst-case '
+                     'stack it reaches 38 %)'] if sh_ else
                     ['two silicone gaskets, 1.0, the acrylic clamped between them; the clamp ring tightened to the shade maker\'s torque'])),
+        *([Part('white-paint', paint_, Bought('hemi-white-paint'), finish='white', group='cover',
+                notes=['v7 (the v6 check\'s (7)): the painted faces, drawn as a 0.05 film: the collar\'s foot beneath (the lip, '
+                       'r 33.5 to 48) and the flange\'s inner face (r 48 to 58), every down-facing face below z 80, about 8,460 mm2: '
+                       'the render and the BOM paint the same faces'])] if paint_ is not None else []),
         *([Part('slip-washer', slip_, Bought('hemi-slip-washer'), finish='trim', group='cover', inside=True,
                 notes=['PROPOSAL (v6): a 0.25 PTFE film ring, spherical, between the outer silicone ring and the clamp ring\'s band'])]
           if slip_ is not None else []),
@@ -504,7 +526,20 @@ def north_parts(p=N):
         pins = pin if pins is None else pins + pin
         # (check 3, (l)) the pin's thread through a Ø3.2 clearance in the PEEK, tapped M3 (Ø2.5) in the hub
         ring = ring - at(a + p['turn'], cyl('x', (0, pz), 3.2, ri / 2 - 1, ro / 2 + 1))
-        core = core - at(a + p['turn'], cyl('x', (0, pz), 3.0 if p.get('fixings') else 2.5, tin, ro / 2 + 1))   # v6: tapped M3, drawn at its major Ø
+        # v6: tapped M3, drawn at its major Ø; v7 (the v6 check's (10)): 7.5 deep for 6.0 of thread (the tap's run-out), so a
+        # pin seats on its shoulder and cannot stand proud toward the slot's floor
+        core = core - at(a + p['turn'], cyl('x', (0, pz), 3.0 if p.get('fixings') else 2.5, (tin - 1.5) if p.get('fixings') else tin, ro / 2 + 1))
+    plunger_ = None
+    if p.get('fixings'):
+        # v7 (the v6 check's (9)): the bayonet's detent drawn, an M5 stainless ball spring plunger (dome-plunger), 12 long,
+        # radially at 90 deg, z 93 (between the pins at 30/150/270 and off the turn's path): threaded through the PEEK ring
+        # (tapped M5, drawn at its major Ø), its inner end in a Ø5.4 clearance in the hub, its Ø2.5 ball 0.8 proud of the
+        # land into a Ø2.6 dimple in the collar's bore where the pins sit in their notches
+        dpa_ = 90.0
+        plunger_ = at(dpa_, cyl('x', (0, pz), 5.0, ro / 2 - 12.0, ro / 2) )
+        plunger_ = plunger_ + at(dpa_, cyl('x', (0, pz), 2.5, ro / 2, ro / 2 + 0.8))     # its ball, drawn as its Ø2.5 tip
+        ring = ring - at(dpa_, cyl('x', (0, pz), 5.0, ri / 2 - 1, ro / 2 + 1))
+        core = core - at(dpa_, cyl('x', (0, pz), 5.4, ro / 2 - 12.5, ri / 2 + 0.1))
     # the reflector: a faceted cone of high-reflectance aluminium in the bore, from the COB's edge to the mouth
     from build123d import Cone, Pos, Align
     al = (Align.CENTER, Align.CENTER, Align.MIN)
@@ -557,7 +592,7 @@ def north_parts(p=N):
         from build123d import Cone, Pos, Align, RegularPolygon, extrude, Solid, Plane, Vector as V3
         al_ = (Align.CENTER, Align.CENTER, Align.MIN)
         # v6 (the v5 check's (1)): two cables at r cr_ (0 and 180 deg), each from a Nicopress stop sleeve bearing under a
-        # Ø5.6 x 6 counterbore in the hub's bottom face (the white disc closes it), up a Ø2.4 hole through the hub and the
+        # Ø5.6 x 8 counterbore in the hub's bottom face (the white disc closes it), up a Ø2.4 hole through the hub and the
         # crown, its exit rounded, and through the cap's lid (today, A) or beside the cap (B)
         cxy_ = [(cr_ * math.cos(math.radians(a_)), cr_ * math.sin(math.radians(a_))) for a_ in GRIP['cables']]
         cbd_, cbh_ = GRIP['cbore']; svd_, svl_ = GRIP['sleeve']; cbl_ = GRIP['cable']
@@ -667,50 +702,80 @@ def north_parts(p=N):
     # carries current only (UL 153 lets an SPT-2 cord carry 2.5 lb; Hemisphere is about 3.5); an option until signed
     susp = cyl('z', (5.5, 0), 1.5, z_cord, zc) + cyl('z', (5.5, 0), 5.0, z_cord, z_cord + 9) + cyl('z', (5.5, 0), 5.0, zc - 9, zc)
     if tt_:
-        # v6: each cable straight up from its sleeve to where it leaves the top, then splayed to its gripper at r 40 in the
-        # canopy, through the gripper and its tail 15 above it (cut and tucked); the grippers' plungers 1 above the floor
+        # v6/v7: each cable straight up from its sleeve to where it leaves the top, then splayed to its gripper at r 48 in the
+        # canopy, through the gripper and its tail (50, coiled in the bracket); v7 (the v6 check's (3), (4)): each gripper's
+        # knurled safety nut drawn round its plunger end; the gripper threaded up through a U bracket's foot, held by an M10
+        # nylon-insert nut (ISO 10511, 16 AF, 8 tall) on top, the bracket's two legs across the cables' line (the nut open
+        # to a spanner from the sides) and its two top flanges riveted under the plate (four Ø3.2 blind rivets)
         gr_ = GRIP['gripper_r']; susp = sleeves
-        grippers = brackets = None
-        zg0_ = zc + 3.0 + 1.0                        # the plunger's tip, 1 above the floor's top
+        grippers = brackets = gnuts = safety = rivets = None
+        zg0_ = zc + 3.0 + 4.0                        # the safety nut's foot, 4 above the floor's top
         for (x_, y_), a_ in zip(cxy_, GRIP['cables']):
             gx_, gy_ = gr_ * math.cos(math.radians(a_)), gr_ * math.sin(math.radians(a_))
             susp = (susp + cyl('z', (x_, y_), cbl_, z0 + cbh_, cex_ + 0.5)
-                    + _rod(V3(x_, y_, cex_), V3(gx_, gy_, zg0_), cbl_ / 2) + cyl('z', (gx_, gy_), cbl_, zg0_, zg0_ + 17.1 + 15.0))
-            # the gripper as Cable Grippers' chart gives it: a plunger Ø6 x 2, the body Ø11.9, the M10 thread 12.6 at its top
-            g_ = (cyl('z', (gx_, gy_), 6.0, zg0_, zg0_ + 2.0) + cyl('z', (gx_, gy_), 11.9, zg0_ + 2.0, zg0_ + 6.5)
-                  + cyl('z', (gx_, gy_), 10.0, zg0_ + 6.5, zg0_ + 19.1))
-            g_ = g_ - cyl('z', (gx_, gy_), cbl_ + 0.1, zg0_ - 1, zg0_ + 20)
-            grippers = g_ if grippers is None else grippers + g_
-            # its bracket: a 1.6 steel L under the strap, the foot at the gripper's thread with an M10 lock nut above it
-            sx_ = 1.0 if gx_ > 0 else -1.0
-            zf_ = zg0_ + 12.0
-            br_ = (box(min(gx_ - 7 * sx_, gx_ + 8.6 * sx_), -8.0, zf_, max(gx_ - 7 * sx_, gx_ + 8.6 * sx_), 8.0, zf_ + 1.6)
-                   + box(min(gx_ + 7 * sx_, gx_ + 8.6 * sx_), -8.0, zf_, max(gx_ + 7 * sx_, gx_ + 8.6 * sx_), 8.0, zc + cnh - 1.6))
+                    + _rod(V3(x_, y_, cex_), V3(gx_, gy_, zg0_ - 0.5), cbl_ / 2) + cyl('z', (gx_, gy_), cbl_, zg0_ - 0.5, zg0_ + 20.1 + 12.0))
+            # the gripper as Cable Grippers' chart gives it: its plunger end Ø6 inside the knurled safety nut (Ø12 x 3), the
+            # body Ø11.9 x 4.5 and the M10 thread 12.6 (17.1 without the plunger)
+            g_ = (cyl('z', (gx_, gy_), 6.0, zg0_ + 0.5, zg0_ + 3.0) + cyl('z', (gx_, gy_), 11.9, zg0_ + 3.0, zg0_ + 7.5)
+                  + cyl('z', (gx_, gy_), 10.0, zg0_ + 7.5, zg0_ + 20.1))
+            g_ = g_ - cyl('z', (gx_, gy_), cbl_ + 0.1, zg0_ - 1, zg0_ + 21)
+            sn_ = cyl('z', (gx_, gy_), 12.0, zg0_, zg0_ + 3.0) - cyl('z', (gx_, gy_), 6.0, zg0_ - 1, zg0_ + 4)
+            zf_ = zg0_ + 7.5                         # the bracket's foot on the body's shoulder
+            nut_ = (Pos(gx_, gy_, zf_ + 1.6) * extrude(RegularPolygon(16.0 / math.sqrt(3), 6), 8.0)) & cyl('z', (gx_, gy_), 17.8, zf_, zf_ + 12)
+            nut_ = nut_ - cyl('z', (gx_, gy_), 10.0, zf_, zf_ + 12)
+            zp_ = zc + cnh - 1.6                     # the plate's underside
+            br_ = box(gx_ - 12.0, gy_ - 12.0, zf_, gx_ + 12.0, gy_ + 12.0, zf_ + 1.6)
+            for sx_ in (-1.0, 1.0):                  # the legs at x = gx -+ 12..13.6, their flanges inward under the plate
+                xl0_, xl1_ = sorted((gx_ + sx_ * 12.0, gx_ + sx_ * 13.6))
+                br_ = br_ + box(xl0_, gy_ - 12.0, zf_, xl1_, gy_ + 12.0, zp_)
+                xf0_, xf1_ = sorted((gx_ + sx_ * 13.6, gx_ + sx_ * 7.0))
+                br_ = br_ + box(xf0_, gy_ - 12.0, zp_ - 1.6, xf1_, gy_ + 12.0, zp_)
+                for ry_ in (-6.0, 6.0):
+                    rx_ = gx_ + sx_ * 9.4                  # its tail Ø5 clear of the leg at 12
+                    rv_ = cyl('z', (rx_, gy_ + ry_), 3.2, zp_ - 1.6 - 0.8, zp_ + 1.6) + cyl('z', (rx_, gy_ + ry_), 6.0, zp_ + 1.6, zp_ + 2.4) \
+                        + cyl('z', (rx_, gy_ + ry_), 5.0, zp_ - 1.6 - 0.8, zp_ - 1.6)
+                    rivets = rv_ if rivets is None else rivets + rv_
+                    br_ = br_ - cyl('z', (rx_, gy_ + ry_), 3.2, zp_ - 2, zp_ + 0.1)
             br_ = br_ - cyl('z', (gx_, gy_), 10.0, zf_ - 1, zf_ + 3)
-            nut_ = cyl('z', (gx_, gy_), 16.0, zf_ + 1.6, zf_ + 6.6) - cyl('z', (gx_, gy_), 10.0, zf_, zf_ + 8)
-            br_ = br_ + nut_
+            grippers = g_ if grippers is None else grippers + g_
+            gnuts = nut_ if gnuts is None else gnuts + nut_
+            safety = sn_ if safety is None else safety + sn_
             brackets = br_ if brackets is None else brackets + br_
-    # v6 (the v5 check's (2)): the canopy right side up: open at the top against the ceiling, its 3 floor closed below
-    # (the cord's gland in its centre, the two cables through Ø6 holes at r 40, the grippers' plungers 1 above them), held
-    # to the strap by two flush black set screws through its wall into the strap's bent-down ends. The strap (1.6 steel)
-    # screwed to the junction box carries the load: the grippers on their brackets under it, the driver's steel enclosure
-    # hung from it across the cables' line (64 along it, 92 across)
+    # v6/v7: the canopy right side up: open at the top against the ceiling, its 3 floor closed below (the cord's gland in
+    # its centre, the two cables through Ø3 holes at r 48). v7 (the v6 check's (3), (8)): the strap becomes a round mounting
+    # plate (1.6 steel, Ø140 with a down-turned rim 12 deep), screwed to the junction box by two 8-32 screws at y -+44.45 (a
+    # 4 in box); the canopy is held to the rim by two M4 x 8 flush black set screws (90/270 deg) into clinch nuts in it.
+    # The plate carries the load: the grippers' brackets riveted under it, and the driver's steel enclosure on four 6
+    # standoffs below it (fitted after the plate is screwed up: the box screws' heads in the gap)
     canopy = cyl('z', (0, 0), cnd, zc, zc + cnh) - cyl('z', (0, 0), cnd - 6, zc + 3.0, zc + cnh + 1)
     canopy = canopy - cyl('z', (0, 0), 12.5, zc - 1, zc + 4)
     if tt_:
         for a_ in GRIP['cables']:
-            canopy = canopy - cyl('z', (gr_ * math.cos(math.radians(a_)), gr_ * math.sin(math.radians(a_))), 6.0, zc - 1, zc + 4)
+            canopy = canopy - cyl('z', (gr_ * math.cos(math.radians(a_)), gr_ * math.sin(math.radians(a_))), 3.0, zc - 1, zc + 4)
     ztop = zc + cnh
-    hw_ = cnd / 2 - 3.0 - 0.5                     # the strap's ends 0.5 inside the canopy's wall
-    strap = (box(-hw_ + 1.6, -11, ztop - 1.6, hw_ - 1.6, 11, ztop) + box(-hw_, -8, ztop - 16, -hw_ + 1.6, 8, ztop)
-             + box(hw_ - 1.6, -8, ztop - 16, hw_, 8, ztop))
-    setsc_ = cyl('x', (0, ztop - 8), 4.0, -cnd / 2, -hw_ + 1.6) + cyl('x', (0, ztop - 8), 4.0, hw_ - 1.6, cnd / 2)
+    rr0_ = cnd / 2 - 3.0 - 0.2                     # the plate's rim, 0.2 inside the canopy's wall
+    strap = (cyl('z', (0, 0), 2 * rr0_, ztop - 1.6, ztop) + (cyl('z', (0, 0), 2 * rr0_, ztop - 12.0, ztop) - cyl('z', (0, 0), 2 * rr0_ - 3.2, ztop - 13, ztop + 1)))
+    if tt_:
+        strap = strap - rivets
+    setsc_ = None; cnuts_ = None
+    for a_ in (90.0, 270.0):
+        ss_ = at(a_, cyl('x', (0, ztop - 6.0), 4.0, rr0_ - 1.6 - 3.0, cnd / 2))
+        cn_ = at(a_, cyl('x', (0, ztop - 6.0), 8.0, rr0_ - 1.6 - 3.0, rr0_ - 1.6 - 0.15) - cyl('x', (0, ztop - 6.0), 4.0, rr0_ - 6, rr0_))
+        setsc_ = ss_ if setsc_ is None else setsc_ + ss_
+        cnuts_ = cn_ if cnuts_ is None else cnuts_ + cn_
     canopy = canopy - setsc_
     strap = strap - setsc_
-    ez1_ = ztop - 1.6; ez0_ = ez1_ - 34.0
+    bscr_ = None
+    for y_ in (-44.45, 44.45):                     # the box's two 8-32 screws, their heads under the plate
+        b_ = cyl('z', (0, y_), 4.2, ztop - 1.6, ztop + 8.0) + cyl('z', (0, y_), 7.6, ztop - 1.6 - 2.4, ztop - 1.6)
+        strap = strap - cyl('z', (0, y_), 4.2, ztop - 2, ztop + 1)
+        bscr_ = b_ if bscr_ is None else bscr_ + b_
+    ez1_ = ztop - 1.6 - 6.0; ez0_ = ez1_ - 32.0
     encl = box(-32, -46, ez0_, 32, 46, ez1_) - box(-31, -45, ez0_ + 1, 31, 45, ez1_ - 1)
-    driver = box(-28.5, -42, ez0_ + 2, 28.5, 42, ez0_ + 2 + 29.5)
-    return cover_parts(p) + [
+    for sx_, sy_ in ((-24, -30), (24, -30), (-24, 30), (24, 30)):   # its four standoffs to the plate
+        encl = encl + cyl('z', (sx_, sy_), 7.0, ez1_, ztop - 1.6)
+    driver = box(-28.5, -42, ez0_ + 1.2, 28.5, 42, ez0_ + 1.2 + 29.5)
+    parts_ = cover_parts(p) + [
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=['aluminium 6061, black anodised: the core, turned from bar. The COB on its holder at the top of the 46 '
                     'bore (22 up: the cut-off, about 46 deg from the vertical), the reflector in the bore, the PEEK ring '
@@ -775,15 +840,25 @@ def north_parts(p=N):
                        'the hub (z 80, 90 deg) clamps a crimped loop (the hub\'s eye); a 4 x 40 stainless snap hook (DIN 5299 C) on it; '
                        'the rope round the lip\'s top to an M3 x 6 button screw through the collar\'s wall (z 70, 270 deg). In a swap: '
                        'turn the shade, lower it a hand\'s width, unclip the snap at the hub']),
-           Part('grippers', grippers, Bought('hemi-gripper'), finish='steel', group='canopy', inside=True,
-                notes=['PROPOSAL (v6): two Cable Grippers MGR-M10-MM, plunger down, threaded up into their brackets under the strap']),
-           Part('gripper-brackets', brackets, Bought('hemi-canopy-strap'), finish='steel', group='canopy', inside=True,
-                notes=['PROPOSAL (v6): two 1.6 steel L brackets riveted under the strap, each with an M10 hole and lock nut for a gripper'])]
+           Part('grippers', grippers + safety, Bought('hemi-gripper'), finish='steel', group='canopy', inside=True,
+                notes=['PROPOSAL (v7): two Cable Grippers MGR-M10-MM, plunger down, each with its knurled safety nut (loosen to '
+                       'adjust, tighten when level), threaded up through its bracket\'s foot']),
+           Part('gripper-nuts', gnuts, Bought('hemi-gripper-nut'), finish='steel', group='canopy', inside=True,
+                notes=['v7: two M10 nylon-insert nuts (ISO 10511), 16 AF, 8 tall, on the brackets\' feet']),
+           Part('gripper-brackets', brackets, Bought('hemi-gripper-bracket'), finish='steel', group='canopy', inside=True,
+                notes=['PROPOSAL (v7): two 1.6 steel U brackets (a foot with an M10 clearance hole, two legs across the cables\' line, '
+                       'their flanges inward under the plate), each riveted to the plate by four Ø3.2 blind rivets']),
+           Part('bracket-rivets', rivets, Bought('hemi-bracket-rivets'), finish='steel', group='canopy', inside=True),
+           Part('canopy-screws', setsc_ + cnuts_, Bought('hemi-canopy-setscrews'), finish='anodised', group='canopy', inside=True,
+                notes=['v7: two M4 x 8 black-oxide flush set screws through the canopy\'s wall at 90/270 deg into two M4 clinch '
+                       'nuts in the plate\'s rim']),
+           Part('box-screws', bscr_, Bought('hemi-box-screws'), finish='steel', group='canopy', inside=True,
+                notes=['v7: the junction box\'s two 8-32 screws (supplied with the box), at y -+44.45 through the plate'])]
          if tt_ else []) + [
         Part('cord', cord, Bought('hemi-cord'), finish='cord', group='fixture'),
         # review 2 (2026-11-24, (8)): the fixture (about 3.5 lb) hangs from the steel cable by default; the SPT-2 cord's
         # 2.5 lb (UL 153) carries current only
-        Part('suspension', susp, Bought('hemi-suspension'), finish=('steel' if tt_ else 'anodised'), group='fixture'),
+        Part('suspension', susp, Bought('hemi-suspension'), finish=('stainless' if tt_ else 'anodised'), group='fixture'),
         Part('canopy', canopy, Machined('aluminium', 'lathe'), finish='anodised', group='canopy',
              notes=[('150 x 50, 6061 turned, SATIN black anodised: v6, right side up: open at the top against the ceiling, '
                      'its 3 floor closed below with the cord\'s gland in its centre (a turned 6061 gland, satin black, its nut '
@@ -797,10 +872,35 @@ def north_parts(p=N):
         Part('strap', strap, Bought('hemi-canopy-strap'), finish='steel', group='canopy', inside=True),
         Part('enclosure', encl, Bought('hemi-driver-box'), finish='steel', group='canopy', inside=True),
         Part('driver', driver, Bought('north-driver-ring' if ring_ else 'north-driver-575'), finish='steel', group='canopy', inside=True, render=False),   # round 36: 575 lm
-        *([Part('white-paint', None, Bought('hemi-white-paint'))] if p.get('white_split') else []),
+        Part('plunger', plunger_, Bought('dome-plunger'), finish='steel', group='fixture', inside=True,
+             notes=['v7: an M5 x 12 stainless ball spring plunger (light force, about 10 N), radially through the PEEK ring at 90 deg, '
+                    'z 93; its ball clicks into a dimple in the collar\'s bore when the pins sit in their notches']) if plunger_ is not None else
         Part('plunger', None, Bought('dome-plunger')),
         Part('listing', None, Bought('moon-listing')),
     ]
+    if tt_:
+        # v7 (the v6 check's (11)): the threads and holes as the shop makes them (the STEP files draw every thread at its
+        # major Ø, so the fixings touch and never overlap)
+        crq_ = tt_.get('cable_r', GRIP['cable_r'])
+        TH_ = {
+            'hub': f'THREADS AND HOLES: M12 x 1.5 tapped 13 deep from the neck\'s top (drill 10.5); 3 x M2.5 tapped 6 deep at r 9.25, '
+                   f'90/210/330 deg (drill 2.05 x 7.5); 3 x M3 radial at z 93 for the pins, tapped 6 (drill 2.5 x 7.5); M4 radial at '
+                   f'z 80, 90 deg, tapped 6 (drill 3.3 x 7.5; the tether); 2 x Ø5.6 x 8 counterbores in the bottom face at r {crq_:g}, '
+                   f'0/180 deg, then Ø2.4 through to the neck\'s top; Ø5.4 x 1.8 at z 93, 90 deg (the plunger\'s end)',
+            'ring': 'THREADS AND HOLES: M5 tapped through at z 93, 90 deg (drill 4.2; the plunger); 3 x Ø3.2 through at z 93 (the pins)',
+            'collar': 'THREADS AND HOLES: M3 tapped through the wall at z 70, 270 deg (drill 2.5, tapped from outside; the tether); a '
+                      'Ø2.6 x 0.7 dimple in the bore at z 93, 90 deg (the detent)' + ('; M96 x 1.5 outside, 6g, run out into a DIN 76 undercut' if tt_.get('top') else ''),
+            'crown': f'HOLES: 3 x Ø2.9 countersunk 90 deg (M2.5, ISO 10642) at r 9.25; 2 x Ø2.4 at r {crq_:g}, their top exits rounded; '
+                     'a Ø2 H7 x 3 hole for the dowel and a Ø2 x 2 pocket for the magnet',
+            'canopy': 'HOLES: Ø12.5 in the floor\'s centre (the cord\'s gland); 2 x Ø3 at r 48 (the cables); 2 x Ø4.3 in the wall, '
+                      '6 below its top, at 90/270 deg (the set screws)',
+            'strap': 'HOLES: 2 x Ø4.3 at y -+44.45 (8-32, the box); 8 x Ø3.3 (the brackets\' rivets); 2 x clinch-nut holes in the rim',
+            'gripper-brackets': 'HOLES: Ø10.5 in each foot (M10, the gripper); 4 x Ø3.3 in each bracket\'s flanges (the rivets)',
+        }
+        for q_ in parts_:
+            if q_.name in TH_:
+                q_.notes = list(q_.notes) + [TH_[q_.name]]
+    return parts_
 
 
 # The owner signed v3 (2026-11-01, r46-owner-notes 5b63e05b: "Hemisphere: color outside"): the main build's shade is
@@ -1180,8 +1280,8 @@ NOTES_DOME = [
     'mouth\'s centre and faces up into the shade, so the shade glows in its tint and the light cast down is the bulb\'s. '
     'A Ø50 ring board of 24 mid-power LEDs (two strings of 12 at about 90 mA, about 1,000 lm, about 200 lux under the '
     'lamp) on a black Ø56 x 4.5 carrier, its underside on the rim plane, the LEDs\' faces about 5 above it; a 16/12 '
-    'black anodised stem up to the hub; the crown\'s inside white (a white Ø95 disc under the hub, the collar\'s flange '
-    'face white); the opal to the rim. The COB, its reflector and holder are gone; the ERP driver, the Class 2 cord, '
+    'black anodised stem up to the hub; the inside of the shade\'s top white (a white Ø62 disc under the hub, the collar\'s '
+    'lip beneath and its flange face painted white); the opal to the rim. The COB, its reflector and holder are gone; the ERP driver, the Class 2 cord, '
     'the canopy and the UL 1598 path stay. Without a lens until a stock side-emitting ring optic with an IES file is '
     'named. Heat test needed: the hub about 6 K warmer than today (estimate). The notes below describe the COB build.',
     'Hemisphere (the Dome until round 35; Hemisphere North in rounds 35 to 37): the shade hangs mouth down. Its shades '

@@ -12,7 +12,8 @@ sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..', '..', '..'
 import crystal as C
 
 FIX = {'crown', 'gland', 'grip', 'crown-screws', 'cap-key', 'suspension', 'tether', 'hub', 'grippers', 'gripper-brackets',
-       'cord', 'canopy', 'strap', 'enclosure', 'slip-washer', 'collar', 'pins'}
+       'cord', 'canopy', 'strap', 'enclosure', 'slip-washer', 'collar', 'pins', 'plunger', 'ring', 'gripper-nuts',
+       'bracket-rivets', 'canopy-screws', 'box-screws', 'white-paint', 'driver'}
 
 
 THREADS = {}

@@ -32,44 +32,19 @@ lower outer edge and the collar's top inner edge. The meshes, the render's copie
    inner silicone, not on the thread. Lead-ins: the ring's bore at its leading edge (z 92), the collar's top
    outer edge down to the thread's root.
 5. The squeeze is then set by the stack (the table below), not by torque.
-6. The fixings (v5, after checks 3 and 4), for today's top, A and B alike (V3's default; crystal.py GRIP):
-   - The cord grip: Lapp 53112005 as its datasheet gives it (DB53112005EN, as the reviewer read it; I could not open
-     Lapp's page here: to confirm): M12 x 1.5, 16 across the flats with its corners turned to 17.6, 32.5 overall, 12 of
-     thread, cord 3.5 to 7. The hub is tapped M12 13 deep from its neck's top (101.5, through the old Ø10 wire bore), so
-     9.5 of its thread are in the hub and the rest through the crown's 2.5 floor; the cord's pull goes into the hub. Its
-     seat 104, its top 124.5 under the cap's lid (125): the tiers did not move. It is turned by a slotted (pass-through)
-     16 mm socket, the cord in its slot: the dome nut off, the body torqued into the hub, the dome nut on and tightened.
-   - The crown sits on the neck metal to metal (a film of thermal compound; no pad, which would creep under the
-     screws and the grip), held and keyed by three M2.5 countersunk screws at r 9.25, at 90, 210 and
-     330 deg (clear of the cables), flush in its floor, their heads inside the Ø24 pocket.
-   - The lamp hangs level from TWO cables, symmetric about the axis at r 17.5 (0 and 180 deg). Its centre of mass is on
-     the axis (v5: today 1598 g at z 65.8, A 1679 g at 68.2, B 1577 g at 65.3, from the solids, the cables and their stud ends left out). One cable at r 17.5 would tilt
-     it about 16 deg (16.2 / 16.8 / 16.1). With two it hangs level once their lengths are set equal at the canopy's
-     locks: the lamp hung, a level across the rim, the two lengths equal to about ±0.25 mm (1 mm out tilts it about
-     1.6 deg), the cord left slack. The cord carries current only (UL 153: an SPT-2 cord 2.5 lb, the lamp about 3.5).
-   - Each cable is an nVent CADDY Speed Link SLK15L2SE250: 1.5 mm bare electrogalvanized wire (1.5 is its whole
-     diameter; the Ø2.4 bores pass it; a coated cable must stay under 2.2), a 1/4 in threaded stud end, 44 lb rated at a
-     5:1 static safety factor, cULus (its datasheet's table). The stud's
-     length and its body's size are not on the sheet: drawn as a 1/4-20 thread 12 long under a Ø9 x 16 body with an 8 hex,
-     to confirm on the part. It screws into the hub (1/4-20 tapped 13, its body in a Ø10 bore, its top 0.5 under the hub's
-     face, Loctite 243), and the assembly is pull-tested. The wires run up Ø2.4 bores in the crown (4.3 clear of the
-     pocket, their exits rounded) and through the cap's lid (today and A) or beside the cap (B: its Ø32 cap is too small
-     to carry them with real walls, so the wires leave the crown's top just outside it) to the canopy. There each passes
-     through its own SLK locking device (the system's rated wedge lock: it slides to shorten, holds under load, releases
-     with its key), the two 35 apart either side of the cord grip, the tails looped round the strap. Kept at 35: 50 to 60
-     would halve the sensitivity, but only with the cables out beside the cap, no longer one stem (check 4 (19)).
-   - The cap is keyed to the crown by a Ø2 dowel and held down by a Ø2 x 2 magnet over a steel disc (both at r 14; in B
-     their holes stand 1.0 from the pocket); its pocket Ø20 over the dome nut. In a swap, hold the cap: keyed to the crown,
-     it is the handle (check 4 (18): at the 9.0 lift the collar's top leaves only 2.5 / 1.84 mm of the crown's Ø80 tier
-     in today's top and A, a pinch point; B's Ø56 tier stands 6.5 clear).
-   - The order: the hub; the two stud ends into the hub; the crown down over the wires onto the neck, its three screws;
-     the grip, as above; the cap down over the cord (and the wires) onto its dowel; the cables through the locks in the canopy, levelled.
-   - The shade's tether, drawn: an M3 eye screw radially into the hub at z 81 (between the lip's highest point in the
-     lift, 75, and the PEEK ring, 86), at 90 deg (clear of the slots and pins); a 1 mm stainless tether with a snap hook to
-     an eye turned on the collar's bore at z 68, above the lip. In a swap it is unhooked once the shade is turned and
-     lowered a hand's width.
-   - The bayonet's pins are a custom turned part (no catalogue pin matches the CAD): stainless 303, a Ø4 shoulder 4.2
-     long, an M3 thread 15.8 long through a Ø3.2 clearance in the PEEK and 6 into the hub.
+6. The fixings (as of v7), for today's top, A and B alike (V3's default; crystal.py GRIP and its comment):
+   - The cord grip: Lapp 53112005 (M12 x 1.5, 16 AF, 32.5 overall, 12 of thread), tapped 13 deep into the hub from the
+     neck's top, 9.5 of its thread in the hub; turned by a slotted 16 socket.
+   - The crown sits metal to metal on the neck (a film of thermal compound, no pad), held by three M2.5 countersunk
+     screws at r 9.25, 90/210/330 deg.
+   - The cap: today's and A's keyed by a Ø2 dowel and held by a Ø2 magnet at r 15.5, the handle in a swap; B's held by a
+     Ø1.5 magnet only, its Ø56 tier the handle.
+   - The hanging (sections 6 and 8): two 1/16 in stainless cables on Nicopress stop sleeves in the hub's bottom face, up
+     through the hub, crown and cap (beside B's cap), splayed to Cable Grippers MGR-M10-MM grippers at r 48 in the canopy,
+     on U brackets riveted under its mounting plate; the cord 2 mm slack.
+   - The detent: an M5 ball spring plunger in the PEEK ring (90 deg, z 93), its ball in a dimple in the collar's bore.
+   - The shade's secondary retention: being redesigned (section 8).
+   - The bayonet's pins: custom turned (stainless 303, a Ø4 shoulder, M3 thread 15.8 long), in M3 holes 7.5 deep.
 7. The clamp thread's run-out is a DIN 76 undercut on the collar (Ø93.7, 92 to 95.75, 2.5 pitches); the ring's thread
    has a 1 x 45 lead-in.
 8. South's slot entries (dropped in round 38) are left out of the collar with the lip (they cut it, seen from below).
@@ -218,3 +193,68 @@ From the v6 solids, everything that hangs from the cables: today 1620 g at z 66.
 include the tether and its snap, the slip washer, the two stop sleeves and the cables inside the lamp (2.2 g); v5 left out
 its stud ends. The cables' own weight above the lamp hangs from the grippers. The lamp is about 3.7 lb, on two cables rated
 50 lb each.
+
+## 8. v7 (the v6 check, items 1 to 14)
+
+- (1), (2) THE TETHER blocked the swap: its snap, on the lip in the 10 mm gap under the PEEK ring, let the shade rise only
+  about 6.0 of the 7.5 to 8.0 the pins need. Its parts were not rated for the drop either (the 1.5 mm rope breaks at 1.26
+  to 1.37 kN; the 4 x 40 snap is rated 500 N static by its maker). The suggested move, an anchor under the hub's bottom
+  face, would hang the snap and rope in the ring board's light, which faces up from the mouth, and so throw a shadow on the
+  lit shade's top. So the retention waits on a decision, put to the coordinator at 17:58 UTC: (a) that anchor, shadow and
+  all; (b) a positive lock in place of the tether (an indexing plunger with a maker's rating instead of the M5 detent: the
+  shade cannot turn off without pulling its knob), my recommendation; (c) a permanent rope (not removable without a tool).
+  The v6 tether stays drawn until then; its BOM row is marked PENDING, and the "rated well over 10 x" claims are gone
+  from the pins' and tether's rows.
+- (3) THE CANOPY. The strap is now a round mounting plate, 1.6 steel, Ø140, with a rim turned down 12, screwed to the 4 in
+  box by its two 8-32 screws at y -+44.45 (drawn).
+  - The driver's enclosure hangs on four 6 mm standoffs below the plate, so the screws' heads sit in the gap. It goes on
+    after the plate is screwed up.
+  - The grippers sit at r 48. Each is threaded up through the 24 x 24 foot of a U bracket and held by an M10 nylon-insert
+    nut (ISO 10511, 16 AF, 8 tall, its own part).
+  - Each bracket's legs run across the cables' line, so the nut is open to a spanner from both sides. Its inner leg is
+    2.4 mm from the enclosure.
+  - The brackets' two inward flanges are riveted under the plate by four Ø3.2 blind rivets each (drawn).
+  - The canopy hangs on two M4 x 8 flush set screws (90/270 deg) into clinch nuts in the plate's rim (drawn).
+- (4) LEVELLING. Each gripper's knurled safety nut is drawn. The procedure, in crystal.py, NOTES and the BOM:
+  1. Screw the plate to the box and hang the lamp, with the canopy resting on the cables below the plate.
+  2. Loosen each safety nut, push the plunger and slide the cable until a 200 mm level across the rim reads level to 1 deg
+     (the rim's sides within 3.5 mm of each other below the ceiling).
+  3. Tighten the safety nuts.
+  4. Set the cord's 2 mm of slack and tighten its grip.
+  5. Slide the canopy up and fix its set screws.
+  The cable tails, about 50 mm, coil in the brackets. With the grippers at r 48, 1 mm of cable tilts the lamp
+  1.27 / 1.29 / 1.29 deg (today, A, B), about 4.5 mm across the rim.
+- (5) THE STOP SLEEVE.
+  - Nicopress gives a stop sleeve about 50 % of the cable's rated break, typical: about 1.07 kN on 1/16 7x7. The 430 lb
+    figure had no source and is gone.
+  - Each cable assembly is proof-loaded to 90 N (5 x the lamp) for 1 min before fitting.
+  - The counterbore is now 8 deep, against the sleeve's 5.6 before swaging, which lengthens it.
+- (6) B's cables now sit at r 17.6. That leaves 1.2 mm of the Ø40 neck round each hole and 0.8 mm clear of the Ø32 cap.
+- (7) THE PAINT: every down-facing face of the collar below z 80, about 8,460 mm2:
+  - the foot beneath the lip (r 33.5 to 48), and
+  - the flange's inner face under the shade (r 48 to 58).
+  The render already painted these, and NOTES and the disc's note said so. The BOM now agrees, and the CAD draws the
+  paint as a 0.05 mm film (white-paint), so its own render export shows it. The photometry is rerun with the pass v2 list
+  (item 13), from the same painted faces.
+- (8) Texts and BOM:
+  - The brackets have their own row; the set screws and clinch nuts, the M10 nuts, the rivets and the box screws are rows.
+  - The grippers' price is the pair.
+  - Section 2's rule 6 is rewritten.
+  - NOTES names the Ø62 disc and the painted lip and flange face.
+  - The sheet says "between".
+  - The squeeze reads "each 1.3 free" next to the shims, "the outer gasket drawn at 0.75 under the slip washer", and 38 %
+    at the thickest stack.
+- (9) THE DETENT is drawn: an M5 x 12 ball spring plunger through the PEEK ring at 90 deg, z 93, its end in a Ø5.4
+  clearance in the hub, its ball tip in a Ø2.6 dimple in the collar's bore. It is clear of the pins' taps (30/150/270), the
+  tether's screw (z 80) and the rope (on the lip).
+- (10) The pins' M3 holes are 7.5 deep for 6.0 of thread, so each pin seats on its shoulder.
+- (11) THREAD CALLOUTS (size, drill, depth) are in the notes of the hub, ring, collar, crown, canopy, plate and brackets,
+  and so on the drawings' notes.
+- (12) The section drawing is redrawn: the legend outside the plot, the missing parts and their names, dimensions.
+- (13) Pass v2's re-render list: pass2/RERENDER.md. It covers the frame kinds hemisphere() draws, every Hemisphere
+  picture committed in the window, and the photometry files. The CAD's render export now draws the cables stainless and
+  the paint white.
+- (14) The sheet waits on (1). B's header gains its cables beside the cap, its magnet-only cap and its Ø56 handle.
+- Zero clashes: fixings_check.py over all three tops, with the plunger, ring, nuts, rivets, screws and paint added.
+- The notes not acted on (no action unless cheap): the crown's 0.61 land by each countersink, B's magnet pocket 0.45 to
+  0.56 from the cap's edge, and B's cap unkeyed. They are as they were, and the last is now stated as B's choice.
