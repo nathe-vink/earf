@@ -278,13 +278,16 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .lightband { --ink: #ECE8E1; background: #0B0C10; color: #ECE8E1; padding-block: 0 clamp(56px, 8vw, 112px) }
 .lightband .eyebrow, .lightband .num { color: #A39E95 }
 .light-head { display: none }
-.light-run { position: relative; height: calc(100svh - var(--header) + 8 * 25svh) }
-.light-stage { position: sticky; top: calc(var(--header) + env(safe-area-inset-top, 0px)); height: calc(100svh - var(--header));
-  display: grid; grid-template-columns: min(58vw, calc(100svh - var(--header))) minmax(0, 1fr); grid-template-rows: 100%;
+.light-run { position: relative; height: calc(100vh - var(--header) + 8 * 25vh) }
+@supports (height: 1svh) { .light-run { height: calc(100svh - var(--header) + 8 * 25svh) } }
+.light-stage { position: sticky; top: calc(var(--header) + env(safe-area-inset-top, 0px)); height: calc(100vh - var(--header));
+  display: grid; grid-template-columns: min(58vw, calc(100vh - var(--header))) minmax(0, 1fr); grid-template-rows: 100%;
   overflow: hidden; isolation: isolate; transition: --glow .9s ease, --glow2 .9s ease }
+@supports (height: 1svh) { .light-stage { height: calc(100svh - var(--header)); grid-template-columns: min(58vw, calc(100svh - var(--header))) minmax(0, 1fr) } }
 .light-stage.dip { transition-duration: .16s }
 .light-glow { position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse 62vw 80% at calc(min(58vw, 100svh - var(--header)) / 2) 58%, var(--glow), var(--glow2) 40%, transparent 72%) }
+  background: radial-gradient(ellipse 62vw 80% at calc(min(58vw, 100vh - var(--header)) / 2) 58%, var(--glow), var(--glow2) 40%, transparent 72%) }
+@supports (height: 1svh) { .light-glow { background: radial-gradient(ellipse 62vw 80% at calc(min(58vw, 100svh - var(--header)) / 2) 58%, var(--glow), var(--glow2) 40%, transparent 72%) } }
 .light-pic { grid-column: 1; position: relative; margin: 0; width: 100%; height: 100%; max-width: 100%;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 86%, transparent);
   -webkit-mask-composite: source-in;
@@ -319,9 +322,10 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   .light-intro { display: none }
   .light-stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) }
   .light-glow { background: radial-gradient(ellipse 90vw 60% at 50% 48%, var(--glow), var(--glow2) 45%, transparent 80%) }
-  .light-pic { grid-column: 1; height: min(125vw, calc(100svh - var(--header) - 200px));
+  .light-pic { grid-column: 1; height: min(125vw, calc(100vh - var(--header) - 200px));
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 84%, transparent); -webkit-mask-composite: source-over;
     mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 84%, transparent); mask-composite: add }
+@supports (height: 1svh) { .light-pic { height: min(125vw, calc(100svh - var(--header) - 200px)) } }
   .light-pic img { object-position: 50% 55% }
   .light-text { grid-column: 1; justify-content: end; padding: 0 max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px)) }
   .light-colour .num { display: none }
@@ -741,13 +745,16 @@ figcaption, .cap, .t-line { font-size: 15px }
 .light-list .tok { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: -1px }
 
 
-.hero { height: calc(100svh - var(--header)); min-height: 520px; padding: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden }
-.hero-pic { flex: none; width: min(100%, calc((100svh - var(--header) - 56px) * 2)); margin-inline: auto }
+.hero { height: calc(100vh - var(--header)); min-height: 520px; padding: 0; display: flex; flex-direction: column; justify-content: center; overflow: hidden }
+@supports (height: 1svh) { .hero { height: calc(100svh - var(--header)) } }
+.hero-pic { flex: none; width: min(100%, calc((100vh - var(--header) - 56px) * 2)); margin-inline: auto }
+@supports (height: 1svh) { .hero-pic { width: min(100%, calc((100svh - var(--header) - 56px) * 2)) } }
 .hero-title .wrap { padding-block: clamp(20px, 5vh, 64px) 0 }
 .hero-cap { width: 100%; display: flex; justify-content: space-between; gap: 16px; padding-block: 14px 0; color: var(--muted); font-size: 14px }
 .hero-cap .render { margin: 0 }
 @media (max-width: 860px) {
-  .hero-pic { width: min(100%, calc((100svh - var(--header) - 56px) * 0.8)) }
+  .hero-pic { width: min(100%, calc((100vh - var(--header) - 56px) * 0.8)) }
+@supports (height: 1svh) { .hero-pic { width: min(100%, calc((100svh - var(--header) - 56px) * 0.8)) } }
   .hero-title { position: absolute; color: var(--ink) }
   .hero-title .wrap { padding-block: 22px 0 }
 }
@@ -758,12 +765,15 @@ html { scroll-snap-type: y proximity; scroll-padding-top: var(--header) }
 .light-pic img, .light-pic img.on, .light-pic.wake img.on { transition: opacity .6s ease }
 .lightband { padding: 0; background: #13110F }
 .light-head { display: none !important } .anchor { display: block; height: 0 }
-.light-run { height: calc(100svh - var(--header) + 7 * 20svh) }
-.light-run .snap { position: absolute; left: 0; width: 1px; height: 1px; top: calc(var(--s) * 20svh + 10svh); scroll-snap-align: start }
+.light-run { height: calc(100vh - var(--header) + 7 * 20vh) }
+@supports (height: 1svh) { .light-run { height: calc(100svh - var(--header) + 7 * 20svh) } }
+.light-run .snap { position: absolute; left: 0; width: 1px; height: 1px; top: calc(var(--s) * 20vh + 10vh); scroll-snap-align: start }
+@supports (height: 1svh) { .light-run .snap { top: calc(var(--s) * 20svh + 10svh) } }
 .light-stage { display: block; position: sticky; background: #13110F }
 .light-glow { display: none }
-.light-pic { position: absolute; inset: 0 max(0px, calc((100% - (100svh - var(--header)) * 2.4) / 2)); width: auto; overflow: hidden;
+.light-pic { position: absolute; inset: 0 max(0px, calc((100% - (100vh - var(--header)) * 2.4) / 2)); width: auto; overflow: hidden;
   -webkit-mask-image: none !important; mask-image: none !important; height: 100% !important }
+@supports (height: 1svh) { .light-pic { inset: 0 max(0px, calc((100% - (100svh - var(--header)) * 2.4) / 2)) } }
 .light-pic picture { display: contents }
 .light-pic img { object-fit: cover; object-position: 50% 50% }
 .light-text { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr) auto;
@@ -777,9 +787,11 @@ html { scroll-snap-type: y proximity; scroll-padding-top: var(--header) }
 .light-name, .light-line, .light-kicker, .light-intro .render { text-shadow: 0 0 28px rgb(19 17 15 / .6), 0 0 10px rgb(19 17 15 / .5) }
 .light-coins { grid-column: 2; grid-row: 1 / span 2; align-self: end; margin: 0; border-radius: 40px;
   background: radial-gradient(closest-side, rgb(19 17 15 / .55), rgb(19 17 15 / 0)); padding: 6px 10px }
-.lightband .facade { opacity: 1 !important; height: calc(100svh - var(--header)); position: relative; background: #13110F;
+.lightband .facade { opacity: 1 !important; height: calc(100vh - var(--header)); position: relative; background: #13110F;
   -webkit-mask-image: none !important; mask-image: none !important }
-.lightband .facade picture { display: block; width: 100%; height: 100%; max-width: calc((100svh - var(--header)) * 2.4); margin-inline: auto; container-type: size }
+@supports (height: 1svh) { .lightband .facade { height: calc(100svh - var(--header)) } }
+.lightband .facade picture { display: block; width: 100%; height: 100%; max-width: calc((100vh - var(--header)) * 2.4); margin-inline: auto; container-type: size }
+@supports (height: 1svh) { .lightband .facade picture { max-width: calc((100svh - var(--header)) * 2.4) } }
 .lightband .facade img { width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; border-radius: 0 }
 @container (min-aspect-ratio: 17/10) { .lightband .facade img { object-fit: cover } }
 .eight-render { right: max(16px, env(safe-area-inset-right, 0px), calc((100vw - 1240px) / 2 + 16px)) !important }
@@ -833,7 +845,7 @@ html { scroll-snap-type: y proximity; scroll-padding-top: var(--header) }
 .beat h2 a { color: inherit; text-decoration: none } .beat h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px }
 .strip { margin: 32px 0 0 } .strip img { display: block; width: 100%; height: auto } .strip figcaption { padding-top: 12px; color: var(--muted); font-size: 15px }
 .beat-line { color: var(--muted); margin: 8px 0 0 } .mantle-pic { background: #F1EFEB } .mantle-pic figcaption { text-align: right; padding-bottom: 10px } 
-.type-only { min-height: 60svh; display: grid; align-content: center } .type-only h2 { font-size: clamp(48px, 7vw, 104px) }
+.type-only { min-height: 60vh; min-height: 60svh; display: grid; align-content: center } .type-only h2 { font-size: clamp(48px, 7vw, 104px) }
 .type-only p { color: var(--muted); max-width: 36ch }
 #sound, #habitats, #room, #lamps-beat, #mantle-beat, #contact { scroll-margin-top: var(--header) }
 
@@ -1125,7 +1137,8 @@ html.intro .splash { background: var(--page, #F4F1EC) }
 @media (max-width: 860px) { .lt-grid { grid-template-columns: minmax(0, 1fr) } .lt-room img { max-height: none } }
 
 /* fix list 2026-11-20, build 2: the product page */
-:root { --cap: max(300px, calc(100svh - 270px)) }
+:root { --cap: max(300px, calc(100vh - 270px)) }
+@supports (height: 1svh) { :root { --cap: max(300px, calc(100svh - 270px)) } }
 .pdp { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr) !important; gap: clamp(28px, 3.4vw, 56px) !important }
 .pcol { display: grid; gap: clamp(40px, 5vw, 72px); min-width: 0; align-content: start }
 /* the stage spans the column; its height the picture's at that width, capped so the thumbnails stay on the first screen;
@@ -1160,11 +1173,13 @@ html.intro .splash { background: var(--page, #F4F1EC) }
 .ask-bar { display: none }
 #copy { display: inline-flex } #copy-note { display: block }
 #home.only-contact > :not(#contact) { display: none !important }
-#home.only-contact #contact { min-height: calc(100svh - var(--header, 64px) - 160px); padding-top: clamp(48px, 8vw, 120px) }
+#home.only-contact #contact { min-height: calc(100vh - var(--header, 64px) - 160px); padding-top: clamp(48px, 8vw, 120px) }
+@supports (height: 1svh) { #home.only-contact #contact { min-height: calc(100svh - var(--header, 64px) - 160px) } }
 @media (max-width: 860px) {
   .pdp { grid-template-columns: minmax(0, 1fr) !important }
   .pcol { display: contents } .pcol > .spec2 { order: 3 }
-  :root { --cap: calc(100svh - 200px) }
+  :root { --cap: calc(100vh - 200px) }
+@supports (height: 1svh) { :root { --cap: calc(100svh - 200px) } }
   .spec2 .facts { grid-template-columns: minmax(0, 1fr) }
 }
 @media (max-width: 700px) {
@@ -1179,7 +1194,8 @@ html.intro .splash { background: var(--page, #F4F1EC) }
   body:has(#pdp:not([hidden])) { padding-bottom: 72px }
   .ask-bar { transition: transform .2s ease } .ask-bar.off { transform: translateY(110%); visibility: hidden }
 }
-@media (orientation: landscape) and (max-height: 520px) { :root { --cap: 80svh } }
+@media (orientation: landscape) and (max-height: 520px) { :root { --cap: 80vh }
+@supports (height: 1svh) { :root { --cap: 80svh } } }
 
 /* fix list 2026-11-20, build 3: phone and input */
 .skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: var(--page); text-decoration: none }
@@ -1199,7 +1215,8 @@ a.cta-btn, .ft-btn { min-height: 44px }
 .nf-links { display: flex; flex-wrap: wrap; gap: 8px 24px } .nf-links a { color: var(--ink); min-height: 44px; display: inline-flex; align-items: center }
 
 
-:root { --cap: max(300px, calc(100svh - 300px)) }
+:root { --cap: max(300px, calc(100vh - 300px)) }
+@supports (height: 1svh) { :root { --cap: max(300px, calc(100svh - 300px)) } }
 .cap { margin: 8px 0 0; min-height: 1.6em; font-size: 14px; line-height: 1.6; color: var(--muted) }
 .cap a { white-space: nowrap }
 @media (max-width: 700px) { .cap { min-height: 4.8em } }
@@ -1221,7 +1238,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
 /* /lighting: the tiles with their lamps; the room whole and its names row on the first screen */
 .lt-tile { display: grid; grid-template-columns: minmax(0, 38%) minmax(0, 1fr); gap: 18px; align-items: start }
 .lt-pic { display: block; border-radius: 4px; overflow: hidden } .lt-pic img { display: block; width: 100%; height: auto }
-.lt-room img { width: auto !important; max-width: 100%; max-height: max(260px, calc(100svh - 330px)) !important; object-fit: contain !important }
+.lt-room img { width: auto !important; max-width: 100%; max-height: max(260px, calc(100vh - 330px)) !important; max-height: max(260px, calc(100svh - 330px)) !important; object-fit: contain !important }
 @media (max-width: 860px) {
   .lt-tiles { order: -1 } .lt-grid { display: flex; flex-direction: column }
   .lt-tile { grid-template-columns: minmax(0, 30%) minmax(0, 1fr); gap: 12px; padding: 14px }
@@ -1250,7 +1267,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
 /* C12: the chips four and four where one line does not fit */
 @media (min-width: 480px) and (max-width: 1000px) { #family .tint-pick { display: grid !important; grid-template-columns: repeat(4, max-content); justify-content: start } }
 /* C11: on an upright tablet the hero's picture is capped so its line and buttons show */
-@media (max-aspect-ratio: 1/1) and (min-width: 560px) { .hs-hero .hero-photo { width: min(100%, calc((100svh - 330px) * 0.8)); margin-inline: auto } }
+@media (max-aspect-ratio: 1/1) and (min-width: 560px) { .hs-hero .hero-photo { width: min(100%, calc((100vh - 330px) * 0.8)); width: min(100%, calc((100svh - 330px) * 0.8)); margin-inline: auto } }
 /* C10: /lighting, the room and two compact tiles filling the row, both whole on the first screen */
 @media (min-width: 861px) {
   .lt-grid { grid-template-columns: auto minmax(0, 1fr) !important; gap: 24px }
@@ -1292,7 +1309,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
 /* C2-4: on an upright tablet the capped hero picture is centered, and the headline and its line align with it */
 @media (max-aspect-ratio: 1/1) and (min-width: 560px) {
   .hs-hero .hero-pic > .hero-photo { margin-left: auto !important; margin-right: auto !important; align-self: center }
-  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, calc((100svh - 330px) * 0.8)); max-width: none !important;
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, calc((100vh - 330px) * 0.8)); width: min(100%, calc((100svh - 330px) * 0.8)); max-width: none !important;
     margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; box-sizing: border-box }
 }
 
@@ -1326,7 +1343,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
 .crumbs a { margin-inline: 3px } .crumbs a:first-child { margin-left: 0 } .crumbs a:focus-visible { outline-offset: 1px }
 /* 9: the hero's line and both buttons on the first screen of a phone too; in a short wide window the buttons side by side, clear of the pendants */
 @media (max-aspect-ratio: 1/1) and (max-width: 559px) {
-  .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100svh - 290px) * 0.8)); margin-left: auto !important; margin-right: auto !important; align-self: center }
+  .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 290px) * 0.8)); width: min(100%, calc((100svh - 290px) * 0.8)); margin-left: auto !important; margin-right: auto !important; align-self: center }
 }
 @media (min-aspect-ratio: 1/1) and (max-width: 960px) and (max-height: 640px) {
   .hs-hero .hero-more { left: 0 !important; right: 0 !important; margin-inline: auto !important; width: min(92vw, 640px) !important; max-width: none !important }
@@ -1350,8 +1367,10 @@ a.cta-btn, .ft-btn { min-height: 44px }
   .gallery .cap { padding-right: 156px }
   .pdp { row-gap: 14px !important } #pdp .gallery { gap: 8px !important } #pdp .render-note { margin: 0 !important }
 }
-:root { --cap: max(300px, calc(100svh - 322px)) }
-@media (max-width: 860px) { :root { --cap: calc(100svh - 222px) } }
+:root { --cap: max(300px, calc(100vh - 322px)) }
+@supports (height: 1svh) { :root { --cap: max(300px, calc(100svh - 322px)) } }
+@media (max-width: 860px) { :root { --cap: calc(100vh - 222px) }
+@supports (height: 1svh) { :root { --cap: calc(100svh - 222px) } } }
 /* 5: a visible gap between a label and its value */
 .spec2 .facts { column-gap: 16px } .spec2 .facts dt { overflow-wrap: anywhere; padding-right: 6px }
 /* 6: a focused dot never under the ask bar */
@@ -1363,12 +1382,18 @@ a.cta-btn, .ft-btn { min-height: 44px }
 #copy-note { display: block !important; height: 22px !important; min-height: 0 !important; line-height: 22px !important; overflow: hidden }
 #copy:focus:not(:focus-visible), .btn:focus:not(:focus-visible), .ic-btn:focus:not(:focus-visible) { outline: none !important; box-shadow: none }
 
-/* C6b: on a phone the line and both buttons stay on the first screen under the names grid: the picture gives up the grid's
-   height (4:5 kept, so every product stays whole); 356 px = the title (~130), the grid (96), the line and buttons (122), 8 to spare */
-@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100svh - 356px) * 0.8)) !important } }
-/* C5 (10), C6 (1, 2): the hero's names row. Wide: on the picture's bottom edge, on a dark veil; the picture is capped at the
-   window less the header (cropped a little top and bottom, every product whole) so the row is on the first screen.
-   Stacked layouts (portrait, phones, the 701-960 tablet layout): under the picture in ink; on phones a 2 x 2 grid. Taps 44 px. */
+/* C6b, C6c (3): on a portrait screen the line and both buttons stay on the first screen under the names: the picture gives
+   up the row's height (4:5 kept, so every product stays whole). Phones (to 559): the title (~130), the 2 x 2 grid (96), the line
+   and buttons (122), 8 to spare = 356; below 360 the buttons take two rows (+60). From 560: C5's 330 plus the one-line row (54). */
+@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 356px) * 0.8)) !important; width: min(100%, calc((100svh - 356px) * 0.8)) !important } }
+@media (max-aspect-ratio: 1/1) and (max-width: 359px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 416px) * 0.8)) !important; width: min(100%, calc((100svh - 416px) * 0.8)) !important } }
+@media (max-aspect-ratio: 1/1) and (min-width: 560px) {
+  .hs-hero .hero-pic > .hero-photo, .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, calc((100vh - 384px) * 0.8)) !important; width: min(100%, calc((100svh - 384px) * 0.8)) !important }
+}
+/* C5 (10), C6 (1, 2), C6c (3, 4, 8): the hero's names row. Wide, and the stacked landscape layout (to 960, over 640 tall): on the
+   picture's bottom edge, on a dark veil, as in C5; the wide picture is capped at the window less the header (cropped a little
+   top and bottom, every product whole) so the row is on the first screen. Portrait: under the picture in ink; on a phone held
+   upright a 2 x 2 grid. Taps 44 px. */
 .hs-hero .hero-photo, .hs-hero .hero-pic { position: relative }
 .hero-names { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 40px 16px 6px; text-align: center; color: #F4F1EC;
   font: 500 15px/22px var(--sans); background: linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / .62) 55%); text-shadow: 0 1px 2px rgb(0 0 0 / .6); pointer-events: none }
@@ -1377,26 +1402,34 @@ a.cta-btn, .ft-btn { min-height: 44px }
 .hero-names a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px }
 .hero-names .hn { white-space: nowrap }
 .hero-names .hn > span { margin-inline: 6px; opacity: .8 }
-@media (min-aspect-ratio: 1/1) and (min-height: 600px) {
-  .hs-hero .hero-photo { aspect-ratio: auto !important; height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) }
+@media (min-aspect-ratio: 1001/1000) and (min-height: 600px) {
+  .hs-hero .hero-photo { aspect-ratio: auto !important; height: clamp(calc(56.25vw * .88), calc(100vh - var(--header) - 2px), 56.25vw);
+    height: clamp(calc(56.25vw * .88), calc(100vh - var(--header) - 2px), 56.25vw) }
+@supports (height: 1svh) { .hs-hero .hero-photo { height: clamp(calc(56.25vw * .88), calc(100svh - var(--header) - 2px), 56.25vw) } }
   .hs-hero .hero-photo img { object-position: 50% 35% }
 }
-@media (max-aspect-ratio: 1/1), (max-width: 960px) and (min-height: 641px) {
-  .hero-names { position: static; order: 2; background: none; color: #1C1A18; text-shadow: none; padding: 4px 16px 0; pointer-events: auto }
-  .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 3 }
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) and (min-height: 641px), (aspect-ratio: 1/1) {
+  .hero-names { position: relative; bottom: auto; order: 1; margin-top: -90px }
+  .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 2 }
 }
-@media (max-aspect-ratio: 1/1) { .hs-hero .hero-title { order: 0 } }
-@media (max-width: 560px) {
+@media (max-aspect-ratio: 999/1000) {
+  .hero-names { position: static; order: 2; background: none; color: #1C1A18; text-shadow: none; padding: 6px 16px 0; pointer-events: auto; margin-top: 0 }
+  .hs-hero .hero-title { order: 0 } .hs-hero .hero-photo { order: 1 } .hs-hero .hero-more { order: 3 }
+}
+@media (max-aspect-ratio: 999/1000) and (max-width: 559px) {
   .hero-names { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; padding: 4px 16px 0; font-size: 15px }
   .hs-hero .hero-more { padding-top: 12px }
   .hero-names .hn { display: contents } .hero-names .hn > span { display: none }
   .hero-names a { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 4px; text-align: center }
 }
 
-/* C6 (4): the names row under a picture wraps, every name whole and tappable; beside the arrows on a wide screen,
-   under the strip on a phone, so the counter and the arrows never sit on it */
-.gallery .cap { height: auto !important; min-height: 44px; line-height: 24px !important; padding-block: 10px; white-space: normal !important; overflow: visible !important }
-@media (max-width: 700px) { .gallery .cap { margin-top: 0 !important; padding: 6px 0 0 !important; min-height: 0 } }
+/* C6c (1, 6): the names row under the thumbnail strip: wrapped, each name 44 px tall, the dots kept with the name after */
+.namerow { margin: 2px 0 0; font-size: 15px; line-height: 22px; color: var(--ink) }
+.namerow a, .namerow .self, .lt-room .names a { display: inline-block !important; padding-block: 11px !important }
+.namerow .self { color: var(--muted) }
+.namerow .hn, .lt-room .names .hn { white-space: nowrap }
+.namerow .hn > span[aria-hidden], .lt-room .names .hn > span[aria-hidden] { margin-inline: 6px; color: var(--muted) }
+.lt-room .names { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; height: auto !important; line-height: 22px !important }
 /* C6 (10): the family chips fit at every width: four to a row from 480, three from 363 (widest chip 104 px, 331 px a row),
    two below that; never wider than the column, so the page never pans sideways */
 @media (max-width: 479px) { #family .tint-pick { grid-template-columns: repeat(3, max-content) !important } }
@@ -1404,14 +1437,19 @@ a.cta-btn, .ft-btn { min-height: 44px }
 #family .tint-pick { max-width: 100% }
 /* C6 (5): a long value wraps rather than widen the page */
 #pdp dd, #pdp .rows td, #pdp .rows dd { overflow-wrap: break-word; min-width: 0 }
-/* C6 (6): the fixed ask bar also on a phone held sideways and on a portrait tablet (701-860), where no ask is on the first screen */
-@media (min-width: 701px) and (max-height: 500px), (min-width: 701px) and (max-width: 860px) and (orientation: portrait) {
+/* C6 (6), C6c (2): the fixed ask bar also from 701 to 860 wide and on a phone held sideways, where no ask is on the first
+   screen; above 500 tall the picture gives up the bar's height (as on phones) so the counter, the arrows and the
+   thumbnails sit above it, and elsewhere it waits until they have scrolled above it; focus never lands behind it */
+@media (min-width: 701px) and (max-width: 860px), (min-width: 701px) and (max-height: 500px) {
   .ask-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
     background: var(--page); border-top: 1px solid var(--rule); justify-content: center }
   .ask-bar .cta-btn { flex: 0 1 420px; justify-content: center }
   body:has(#pdp:not([hidden])) { padding-bottom: 72px }
-  .ask-bar { transition: transform .2s ease } .ask-bar.off { transform: translateY(110%); visibility: hidden }
+  html { scroll-padding-bottom: 84px }
+  .ask-bar { transition: transform .2s ease } .ask-bar.off, .ask-bar.wait { transform: translateY(110%); visibility: hidden }
 }
+@media (min-width: 701px) and (max-width: 860px) and (min-height: 501px) { :root { --cap: calc(100vh - 390px) }
+@supports (height: 1svh) { :root { --cap: calc(100svh - 390px) } } }   /* C5's 222, the bar's 72, the thumbnails and their gap 88, 8 to spare */
 </style>
 
 <div class="splash" aria-hidden="true"></div>
@@ -1495,7 +1533,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
   <div class="lineview" data-line="lighting">
     <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Lighting</p><h1 class="lt-title">Lighting</h1></div>
   <section class="band lamps" id="lamps"><div class="wrap">
-    <div class="lt-grid"><figure class="lt-room"><img loading="lazy" src="img/rc/bar-pendants.webp" width="1600" height="1600" alt="Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter, a wall of records behind"><figcaption class="names"><a href="#hemisphere-ember">Hemisphere in Ember</a> &middot; <a href="#hemisphere-acid">Hemisphere in Acid</a> &middot; <a href="#hemisphere-dust">Hemisphere in Dust</a> &middot; <a href="#core-ember">Core in Ember</a> &middot; <a href="#core-dust">Core in Dust</a></figcaption></figure>
+    <div class="lt-grid"><figure class="lt-room"><img loading="lazy" src="img/rc/bar-pendants.webp" width="1600" height="1600" alt="Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter, a wall of records behind"><figcaption class="names"><a href="#hemisphere-ember">Hemisphere in Ember</a> <span class="hn"><span aria-hidden="true">&middot;</span> <a href="#hemisphere-dust">Hemisphere in Dust</a></span> <span class="hn"><span aria-hidden="true">&middot;</span> <a href="#hemisphere-acid">Hemisphere in Acid</a></span> <span class="hn"><span aria-hidden="true">&middot;</span> <a href="#core-ember">Core in Ember</a></span> <span class="hn"><span aria-hidden="true">&middot;</span> <a href="#core-dust">Core in Dust</a></span></figcaption></figure>
     <div class="lt-tiles"><article class="lt-tile" data-p="hemisphere" data-name="Hemisphere"><a class="lt-pic" href="#hemisphere-ember" data-carry="hemisphere" tabindex="-1" aria-hidden="true"><img loading="lazy" src="img/rc/tile-hemisphere-ember.webp" width="800" height="1000" alt=""></a><div class="lt-body"><p class="ft-kind">Pendant</p><h2>Hemisphere</h2><ul class="dots-row" aria-label="Colors"><li><a href="#hemisphere-ember" aria-label="Ember" title="Ember"><span class="coin-dot" style="--i:0"></span><span class="dn">Ember</span></a></li><li><a href="#hemisphere-dust" aria-label="Dust" title="Dust"><span class="coin-dot" style="--i:1"></span><span class="dn">Dust</span></a></li><li><a href="#hemisphere-acid" aria-label="Acid" title="Acid"><span class="coin-dot" style="--i:2"></span><span class="dn">Acid</span></a></li><li><a href="#hemisphere-poison" aria-label="Poison" title="Poison"><span class="coin-dot" style="--i:3"></span><span class="dn">Poison</span></a></li><li><a href="#hemisphere-ice" aria-label="Ice" title="Ice"><span class="coin-dot" style="--i:4"></span><span class="dn">Ice</span></a></li><li><a href="#hemisphere-haze" aria-label="Haze" title="Haze"><span class="coin-dot" style="--i:5"></span><span class="dn">Haze</span></a></li><li><a href="#hemisphere-fog" aria-label="Fog" title="Fog"><span class="coin-dot" style="--i:6"></span><span class="dn">Fog</span></a></li><li><a href="#hemisphere-smoke" aria-label="Smoke" title="Smoke"><span class="coin-dot" style="--i:7"></span><span class="dn">Smoke</span></a></li></ul><a class="cta-btn cta-solid" href="#hemisphere-ember" data-carry="hemisphere">See Hemisphere</a></div></article><article class="lt-tile" data-p="core" data-name="Core"><a class="lt-pic" href="#core-ember" data-carry="core" tabindex="-1" aria-hidden="true"><img loading="lazy" src="img/rc/tile-core-ember.webp" width="800" height="1000" alt=""></a><div class="lt-body"><p class="ft-kind">Table lamp</p><h2>Core</h2><ul class="dots-row" aria-label="Colors"><li><a href="#core-ember" aria-label="Ember" title="Ember"><span class="coin-dot" style="--i:0"></span><span class="dn">Ember</span></a></li><li><a href="#core-dust" aria-label="Dust" title="Dust"><span class="coin-dot" style="--i:1"></span><span class="dn">Dust</span></a></li><li><a href="#core-acid" aria-label="Acid" title="Acid"><span class="coin-dot" style="--i:2"></span><span class="dn">Acid</span></a></li><li><a href="#core-poison" aria-label="Poison" title="Poison"><span class="coin-dot" style="--i:3"></span><span class="dn">Poison</span></a></li><li><a href="#core-ice" aria-label="Ice" title="Ice"><span class="coin-dot" style="--i:4"></span><span class="dn">Ice</span></a></li><li><a href="#core-haze" aria-label="Haze" title="Haze"><span class="coin-dot" style="--i:5"></span><span class="dn">Haze</span></a></li><li><a href="#core-fog" aria-label="Fog" title="Fog"><span class="coin-dot" style="--i:6"></span><span class="dn">Fog</span></a></li><li><a href="#core-smoke" aria-label="Smoke" title="Smoke"><span class="coin-dot" style="--i:7"></span><span class="dn">Smoke</span></a></li></ul><a class="cta-btn cta-solid" href="#core-ember" data-carry="core">See Core</a></div></article></div></div>
     <div class="lt-rows"><figure class="row8 split"><div class="half h0"><img src="img/rc/hemisphere-row.webp" width="2000" height="667" loading="lazy" alt="Eight Hemispheres, one in each color"><a href="#hemisphere-ember" style="left:0.00%;width:27.86%" aria-label="Hemisphere in Ember"></a><a href="#hemisphere-dust" style="left:27.86%;width:23.74%" aria-label="Hemisphere in Dust"></a><a href="#hemisphere-acid" style="left:51.60%;width:24.16%" aria-label="Hemisphere in Acid"></a><a href="#hemisphere-poison" style="left:75.76%;width:24.24%" aria-label="Hemisphere in Poison"></a></div><div class="half h1"><img src="img/rc/hemisphere-row.webp" width="2000" height="667" loading="lazy" alt="" aria-hidden="true"><a href="#hemisphere-ice" style="left:0.04%;width:24.20%" aria-label="Hemisphere in Ice"></a><a href="#hemisphere-haze" style="left:24.24%;width:24.00%" aria-label="Hemisphere in Haze"></a><a href="#hemisphere-fog" style="left:48.24%;width:23.76%" aria-label="Hemisphere in Fog"></a><a href="#hemisphere-smoke" style="left:72.00%;width:28.00%" aria-label="Hemisphere in Smoke"></a></div></figure><figure class="row8 split"><div class="half h0"><img src="img/rc/core-row.webp" width="2000" height="667" loading="lazy" alt="Eight Core lamps, lit, one in each color"><a href="#core-ember" style="left:0.00%;width:34.18%" aria-label="Core in Ember"></a><a href="#core-dust" style="left:34.18%;width:21.86%" aria-label="Core in Dust"></a><a href="#core-acid" style="left:56.04%;width:21.98%" aria-label="Core in Acid"></a><a href="#core-poison" style="left:78.02%;width:21.96%" aria-label="Core in Poison"></a></div><div class="half h1"><img src="img/rc/core-row.webp" width="2000" height="667" loading="lazy" alt="" aria-hidden="true"><a href="#core-ice" style="left:0.00%;width:22.00%" aria-label="Core in Ice"></a><a href="#core-haze" style="left:22.00%;width:21.92%" aria-label="Core in Haze"></a><a href="#core-fog" style="left:43.92%;width:21.80%" aria-label="Core in Fog"></a><a href="#core-smoke" style="left:65.72%;width:34.28%" aria-label="Core in Smoke"></a></div></figure></div>
   </div></section>
@@ -1539,6 +1577,7 @@ a.cta-btn, .ft-btn { min-height: 44px }
         </div>
         <p class="cap" id="cap" aria-live="polite"></p>
         <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>
+        <p class="namerow" id="namerow" hidden></p>
         <p class="render-note">Pictures are renders. Nothing is built yet.</p>
       </section>
       <section class="spec2" id="p-spec" aria-labelledby="p-spec-h"><h2 id="p-spec-h">Specifications</h2><div id="p-spec-body"></div><p class="figs">All figures come from the design; none is measured yet.</p></section>
@@ -1891,12 +1930,10 @@ function showView(v, focus) {
   stage.style.background = 'transparent';     
   { const k = (CAPS[P.id] || {})[v], t = k === undefined ? tell(c, v) : typeof k === 'function' ? k(c, (vw()[v] || {}).shown) : k,
       e = document.getElementById('cap'); e.textContent = t; e.hidden = !t;
-    { const rows = Object.values(P.views(c.k) || {}).map(x => NAMEROWS[((x && x.src) || '').split('/').pop()]).filter(Boolean); let h = 0;
-      if (rows.length) { const m = e.cloneNode(false); m.removeAttribute('id'); m.removeAttribute('aria-live'); m.hidden = false; m.setAttribute('aria-hidden', 'true');
-        m.style.cssText = `position:absolute;visibility:hidden;left:0;top:0;min-height:0;width:${e.getBoundingClientRect().width}px`; e.parentNode.appendChild(m);
-        rows.forEach(r => { m.innerHTML = r; h = Math.max(h, m.getBoundingClientRect().height); }); m.remove(); }
-      if (h) e.style.setProperty('min-height', `${Math.ceil(h)}px`, 'important'); else e.style.removeProperty('min-height'); }
-    const nr = NAMEROWS[(s.src || '').split('/').pop()]; if (nr) { e.innerHTML = nr; e.hidden = false; }
+    const nr = NAMEROWS[(s.src || '').split('/').pop()];
+    { const r = document.getElementById('namerow'), self = `#${P.route}-${c.name.toLowerCase()}`; r.innerHTML = nr || ''; r.hidden = !nr;
+      r.querySelectorAll('a').forEach(a => { if (a.getAttribute('href') === self) { const b = document.createElement('span'); b.className = 'self'; b.textContent = a.textContent; a.replaceWith(b); } }); }
+    if (nr) { }
     else if (s.shown && !e.textContent) { e.textContent = `Shown in ${BY[s.shown].name}.`; e.hidden = false; } }
   document.getElementById('g-count').textContent = list.length > 1 ? `${i + 1} / ${list.length}` : ''; document.getElementById('g-count').hidden = list.length < 2; thumbs.hidden = list.length < 2;   // labelled on the picture itself
   thumbs.querySelectorAll('button').forEach(b => { const sel = b.dataset.v === v; b.setAttribute('aria-selected', String(sel)); b.tabIndex = sel ? 0 : -1;
@@ -1941,7 +1978,7 @@ function renderProduct(Pr, k) {
   v3sync();
 }
 const PARA = {};
-const NAMEROWS = {"tropos-bar.webp":"<a href=\"#speaker-acid\">Tropos in Acid</a> &middot; <a href=\"#hemisphere-ember\">Hemisphere in Ember</a> &middot; <a href=\"#hemisphere-acid\">Hemisphere in Acid</a> &middot; <a href=\"#hemisphere-dust\">Hemisphere in Dust</a> &middot; <a href=\"#core-ember\">Core in Ember</a> &middot; <a href=\"#core-acid\">Core in Acid</a> &middot; <a href=\"#core-dust\">Core in Dust</a> &middot; <a href=\"#mantle-ember\">Mantle in Ember</a>","bar-pendants.webp":"<a href=\"#hemisphere-ember\">Hemisphere in Ember</a> &middot; <a href=\"#hemisphere-acid\">Hemisphere in Acid</a> &middot; <a href=\"#hemisphere-dust\">Hemisphere in Dust</a> &middot; <a href=\"#core-ember\">Core in Ember</a> &middot; <a href=\"#core-dust\">Core in Dust</a>","core-bar-table.webp":"<a href=\"#core-ember\">Core in Ember</a>","mantle-bar.webp":"<a href=\"#speaker-acid\">Tropos in Acid</a> &middot; <a href=\"#core-ember\">Core in Ember</a> &middot; <a href=\"#mantle-ember\">Mantle in Ember</a>"};
+const NAMEROWS = {"tropos-bar.webp":"<a href=\"#speaker-acid\">Tropos in Acid</a> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#hemisphere-ember\">Hemisphere in Ember</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#hemisphere-dust\">Hemisphere in Dust</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#hemisphere-acid\">Hemisphere in Acid</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#core-ember\">Core in Ember</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#core-dust\">Core in Dust</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#core-acid\">Core in Acid</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#mantle-ember\">Mantle in Ember</a></span>","bar-pendants.webp":"<a href=\"#hemisphere-ember\">Hemisphere in Ember</a> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#hemisphere-dust\">Hemisphere in Dust</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#hemisphere-acid\">Hemisphere in Acid</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#core-ember\">Core in Ember</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#core-dust\">Core in Dust</a></span>","core-bar-table.webp":"<a href=\"#core-ember\">Core in Ember</a>","mantle-bar.webp":"<a href=\"#speaker-acid\">Tropos in Acid</a> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#core-ember\">Core in Ember</a></span> <span class=\"hn\"><span aria-hidden=\"true\">&middot;</span> <a href=\"#mantle-ember\">Mantle in Ember</a></span>"};
 const ROWS = {"dome":[{"src":"img/rc/hemisphere-row.webp","w":2000,"h":667,"alt":"Eight Hemispheres, one in each color","cuts":[0,13.93,25.8,37.86,50.01,62.14,74.14,86.0,100]}],"orb":[{"src":"img/rc/core-row.webp","w":2000,"h":667,"alt":"Eight Core lamps, lit, one in each color","cuts":[0,17.09,28.02,39.01,50.0,61.01,71.96,82.86,100]},{"src":"img/rc/core-row-day.webp","w":2000,"h":667,"alt":"Eight Core lamps by day, one in each color","cuts":[0,17.16,28.09,39.05,50.0,60.95,71.79,82.73,100]}],"speaker":"fronts"};
 function renderRows(P, c) {        // the row of eight under the gallery: each product in it a link to its own tint; two rows of four on a phone
   const box = document.getElementById('p-rows'), R = ROWS[P.id], nm = o => o.name.toLowerCase(), cur = o => o.k === c.k ? ' aria-current="true"' : '';
@@ -1959,8 +1996,8 @@ const GR = {};
 const grOf = s => { const h = s && GR[s.src]; if (!h) return ''; const c = h.match(/.{6}/g).map(x => '#' + x), st = cs => cs.map((x, i) => `${x} ${5 + 10 * i}%`).join(', ');
   return `linear-gradient(${st(c.slice(0, 10))}) left / 51% 100% no-repeat, linear-gradient(${st(c.slice(10))}) right / 51% 100% no-repeat`; };
 const ASK = {"speaker": "Make first contact", "dome": "Make first contact", "orb": "Make first contact", "turntable": "Make first contact"}, MAIL = 'hello@earf.world', OTHERS = [{"route":"speaker","name":"Tropos","kind":"Horn speaker","w":1000,"h":1250,"ground":"#E9E5DC","pics":{"red":"img/rc/red-tall.webp","orange":"img/rc/orange-tall.webp","amber":"img/rc/amber-tall.webp","green":"img/rc/green-tall.webp","blue":"img/rc/blue-tall.webp","violet":"img/rc/violet-tall.webp","ice":"img/rc/ice-tall.webp","black":"img/rc/black-tall.webp"}},{"route":"hemisphere","name":"Hemisphere","kind":"Pendant","w":800,"h":1000,"ground":"#221F1E","pics":{"red":"img/rc/tile-hemisphere-ember.webp","orange":"img/rc/tile-hemisphere-dust.webp","amber":"img/rc/tile-hemisphere-acid.webp","green":"img/rc/tile-hemisphere-poison.webp","blue":"img/rc/tile-hemisphere-ice.webp","violet":"img/rc/tile-hemisphere-haze.webp","ice":"img/rc/tile-hemisphere-fog.webp","black":"img/rc/tile-hemisphere-smoke.webp"}},{"route":"core","name":"Core","kind":"Table lamp","w":800,"h":1000,"ground":"#242121","pics":{"red":"img/rc/tile-core-ember.webp","orange":"img/rc/tile-core-dust.webp","amber":"img/rc/tile-core-acid.webp","green":"img/rc/tile-core-poison.webp","blue":"img/rc/tile-core-ice.webp","violet":"img/rc/tile-core-haze.webp","ice":"img/rc/tile-core-fog.webp","black":"img/rc/tile-core-smoke.webp"}},{"route":"mantle","name":"Mantle","kind":"Turntable","w":800,"h":1000,"ground":"#E9E5DC","pics":{"red":"img/rc/tile-mantle-ember.webp","orange":"img/rc/tile-mantle-dust.webp","amber":"img/rc/tile-mantle-acid.webp","green":"img/rc/tile-mantle-poison.webp","blue":"img/rc/tile-mantle-ice.webp","violet":"img/rc/tile-mantle-haze.webp","ice":"img/rc/tile-mantle-fog.webp","black":"img/rc/tile-mantle-smoke.webp"}}], ARROW = "<svg class=\"arr\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M4 10h11M11 5l5 5-5 5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>";
-const keepUnits = t => t.replace(/(\d) (in|mm|lb|kg|ft|m|W|V|Wh|K|lm|lux|dB|Hz|kHz|rpm)\b/g, '$1\u00a0$2').replace(/\b(in|mm|lb|kg|ft|m) \(/g, '$1\u00a0(')
-  .replace(/(\d) x (\d)/g, '$1\u00a0x $2');
+const keepUnits = t => t.replace(/(\d) (in|mm|lb|kg|ft|m|W|V|Wh|K|lm|lux|dB|Hz|kHz|rpm)\b/g, '$1\u00a0$2')
+  .replace(/(\d) x (\d)/g, '$1\u00a0x\u00a0$2');
 const fillSpec = (t, c) => keepUnits(t).replace(/\{([^{}|]*)\|([^{}]*)\}/g, (x, a, b) => c.k === 'ice' ? b : a).replace('{tint}', c.tint)
   .replace('{lm}', (LM[P.id] || {})[c.k]).replace('{K}', KELVIN[c.k]).replace('{care}', CARE);
 const SIZEL = {"speaker": "51 in (1295 mm) tall", "dome": "7.9 in (200 mm) across", "orb": "7.4 in (187 mm) tall", "turntable": "17.7 in (450 mm) wide"};
@@ -1976,8 +2013,17 @@ function renderOthers(P, c) {      // the other three in the tint now chosen, ea
     `<a class="ftile" href="#${o.route}-${nm}"><span class="ft-pic" style="background:${o.ground}"><img src="${o.pics[c.k]}" width="${o.w}" height="${o.h}" loading="lazy" alt="${o.name} in ${c.name}"></span>`
     + `<span class="ft-body"><span class="ft-kind">${o.kind}</span><h3 class="ft-name">${o.name}</h3><span class="ft-btn">See ${o.name} ${ARROW}</span></span></a>`).join('') + '</div>'; }
 { const bar = document.querySelector('#pdp .ask-bar'), seen = new Set();      // the phone's bar steps away while an ask is on screen
-  const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)); bar.classList.toggle('off', seen.size > 0); });
+  const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)); bar.classList.toggle('off', seen.size > 0); }, { rootMargin: `-${(document.querySelector('header.top') || {}).offsetHeight || 0}px 0px 0px 0px` });
   document.querySelectorAll('#p-enquire, #pdp .foot-ask .p-ask').forEach(a => io.observe(a)); }
+{ const bar = document.querySelector('#pdp .ask-bar'), mq = matchMedia('(min-width: 701px) and (max-width: 860px), (min-width: 701px) and (max-height: 500px)');
+  const check = () => { if (!mq.matches || document.getElementById('pdp').hidden) { bar.classList.remove('wait'); return; }
+    const top = innerHeight - bar.offsetHeight - 4;
+    bar.classList.toggle('wait', [...document.querySelectorAll('#pdp .gallery .nav, #pdp .gallery .count, #thumbs, #swatches')].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.bottom > top && q.top < innerHeight; })); };
+  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); addEventListener('hashchange', () => setTimeout(check, 60));
+  addEventListener('load', check); setTimeout(check, 0); setTimeout(check, 400);
+  document.addEventListener('focusin', e => { const a = e.target; if (!a.getBoundingClientRect || bar.contains(a)) return;     // focus never behind the bar
+    const bs = getComputedStyle(bar); if (bs.display === 'none' || bs.visibility === 'hidden' || bar.classList.contains('off') || bar.classList.contains('wait')) return;
+    const r = a.getBoundingClientRect(), t = bar.getBoundingClientRect().top - 8; if (r.bottom > t && r.top < innerHeight) scrollBy(0, r.bottom - t); }); }
 document.getElementById('p-copy').addEventListener('click', () => {
   const note = document.getElementById('p-share-note'), say = t => { note.textContent = t; setTimeout(() => { note.textContent = ''; }, 2400); };
   try { navigator.clipboard.writeText(MAIL).then(() => say('Address copied.'), () => say(MAIL)); } catch (e) { say(MAIL); } });
