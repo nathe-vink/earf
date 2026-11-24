@@ -1513,14 +1513,15 @@ def fix_12(p, web):
 /* C6b, C6c (3): on a portrait screen the line and both buttons stay on the first screen under the names: the picture gives
    up the row's height (4:5 kept, so every product stays whole). Phones (to 559): the title (~130), the 2 x 2 grid (96), the line
    and buttons (122), 8 to spare = 356; below 360 the buttons take two rows (+60). From 560: C5's 330 plus the one-line row (54). */
-@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 356px) * 0.8)) !important; width: min(100%, calc((100svh - 356px) * 0.8)) !important } }
-@media (max-aspect-ratio: 1/1) and (max-width: 359px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 416px) * 0.8)) !important; width: min(100%, calc((100svh - 416px) * 0.8)) !important } }
+@media (max-aspect-ratio: 1/1) and (max-width: 559px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, max(calc((100svh - 356px) * 0.8), calc((100svh - 290px) * 0.8 * 2 / 3))) !important } }   /* C6e-5: never below two-thirds of live's */
+@media (max-aspect-ratio: 1/1) and (max-width: 359px) { .hs-hero .hero-pic > .hero-photo { width: min(100%, max(calc((100svh - 416px) * 0.8), calc((100svh - 290px) * 0.8 * 2 / 3))) !important } }
 @media (max-aspect-ratio: 1/1) and (min-width: 560px) {
   .hs-hero .hero-pic > .hero-photo { width: min(100%, calc((100vh - 384px) * 0.8)) !important; width: min(100%, calc((100svh - 384px) * 0.8)) !important }
-  /* C6d (8, 9): the headline's and the line's column at least 560 px (or the window less its margins): the headline is never
-     clipped and the line keeps to two lines with the buttons side by side */
-  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100% - 32px, max(calc((100vh - 384px) * 0.8), 560px)) !important;
-    width: min(100% - 32px, max(calc((100svh - 384px) * 0.8), 560px)) !important; box-sizing: border-box }
+  /* C6e-6: the headline's, the line's and the buttons' column is the picture's width again (C2-4), at least 320 px so the line keeps
+     to two lines and the buttons sit side by side; the headline scales to the column, so it is never clipped (C6d 9) */
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, max(calc((100svh - 384px) * 0.8), 320px)) !important; margin-inline: auto !important;
+    padding-inline: 0 !important; box-sizing: border-box }
+  .hs-hero .hero-title h1 { font-size: min(44px, calc(min(100vw - 32px, max(calc((100svh - 384px) * 0.8), 320px)) / 12.69)) !important }
 }
 /* C5 (10), C6 (1, 2), C6c (3, 4, 8): the hero's names row. Wide, and the stacked landscape layout (to 960, over 640 tall): on the
    picture's bottom edge, on a dark veil, as in C5; the wide picture is capped at the window less the header (cropped a little
@@ -1585,6 +1586,24 @@ def fix_12(p, web):
   .hero-names a { display: inline-block; min-height: 0; padding: 8px 0; pointer-events: auto }
   .hero-names .hn { display: inline } .hero-names .hn > span { display: inline; margin-inline: 3px }
   .hs-hero .hero-more { padding-top: 20px }
+  /* C6e-1: what does not fit stays inside the picture (live clipped it there): nothing on the page or under the header */
+  .hero-names { clip-path: inset(calc(298px - 100svh) -2px -8px -2px) }
+}
+/* C6e-1 (H-7): every exact square in the upright palette: the headline, the line and the buttons dark on the light page */
+@media (aspect-ratio: 1/1) {
+  .hs-hero .hero-title { color: #1C1A18 !important; text-align: left }
+  .hs-hero .hero-more { text-align: left }
+  .hs-hero .hero-sub { color: #1C1A18; margin: 0 0 16px; max-width: none }
+  .hs-hero .hero-cta { justify-content: flex-start }
+  .hs-hero .cta-solid { background: #1C1A18; color: #F4F1EC; border-color: #1C1A18 }
+  .hs-hero .cta-solid:hover { background: #000 }
+  .hs-hero .cta-line { background: transparent; color: #1C1A18; border-color: #1C1A18 }
+  .hs-hero .cta-btn:focus-visible { outline-color: #1C1A18 }
+}
+/* C6e-6 in a square from 560: the column is the square's picture's width (live's 330), at least 320 px */
+@media (aspect-ratio: 1/1) and (min-width: 560px) {
+  .hs-hero .hero-title .wrap, .hs-hero .hero-more .wrap { width: min(100%, max(calc((100svh - 330px) * 0.8), 320px)) !important; margin-inline: auto !important; padding-inline: 0 !important }
+  .hs-hero .hero-title h1 { font-size: min(44px, calc(min(100vw - 32px, max(calc((100svh - 330px) * 0.8), 320px)) / 12.69)) !important }
 }
 """)
 
@@ -1646,7 +1665,7 @@ def fix_14(p, web):
     # C6c (1, 6): the names row of a picture of several products lies under the thumbnail strip, wrapped: its height moves
     # nothing above it, so the caption stays C5's; the page's own name is plain text, not a link back to view 1
     p.sub('<div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>',
-          '<div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>\n        <p class="namerow" id="namerow" hidden></p>')
+          '<div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>\n        <p class="namerow" id="namerow" aria-live="polite" hidden></p>')      # C6e-10: announced, as #cap was
     anchor = "const nr = NAMEROWS[(s.src || '').split('/').pop()]; if (nr) { e.innerHTML = nr; e.hidden = false; }"
     _sub_any(p, anchor, "const nr = NAMEROWS[(s.src || '').split('/').pop()];\n"
              "    { const r = document.getElementById('namerow'), self = `#${P.route}-${c.name.toLowerCase()}`; r.innerHTML = nr || ''; r.hidden = !nr;\n"
@@ -1664,11 +1683,16 @@ def fix_14(p, web):
              "{ const bar = document.querySelector('#pdp .ask-bar'), mq = matchMedia('(min-width: 701px) and (max-width: 860px), (min-width: 701px) and (max-height: 500px)');\n"
              "  const ph = matchMedia('(max-width: 700px)');      // C6d: a phone's bar waits for the gallery's controls (not the dots, as on C5)\n"
              "  const check = () => { if (!(mq.matches || ph.matches) || document.getElementById('pdp').hidden) { bar.classList.remove('wait'); return; }\n"
-             "    const top = innerHeight - bar.offsetHeight - 4, R = s => { const e = document.querySelector(s); return e ? e.getBoundingClientRect() : null; };\n"
-             "    const over = [...document.querySelectorAll(ph.matches ? '#pdp .gallery .nav, #pdp .gallery .count, #thumbs' : '#pdp .gallery .nav, #pdp .gallery .count, #thumbs, #namerow, #swatches')].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.bottom > top && q.top < innerHeight; });\n"
-             "    // C6d (7): from 701, once the dots reach the bar's strip it stays back until the inline ask is on screen (then it is off)\n"
-             "    // (once it waits, it keeps waiting while the dots are close below, so it does not come up for a moment in between)\n"
-             "    const dots = R('#swatches'), ask = R('#p-enquire'); const between = !ph.matches && dots && ask && ask.top >= innerHeight && (dots.top < innerHeight || (bar.classList.contains('wait') && dots.top < innerHeight + 160));\n"
+             "    // C6e-2: a real overlap of the controls themselves (the arrows, the counter, each thumbnail, the names), no margin\n"
+             "    const top = innerHeight - bar.offsetHeight, R = s => { const e = document.querySelector(s); return e ? e.getBoundingClientRect() : null; };\n"
+             "    const ctl = '#pdp .gallery .nav, #pdp .gallery .count, #thumbs button, #namerow a, #namerow .self' + (ph.matches ? '' : ', #swatches a');\n"
+             "    // on a phone a control counts as under the bar when its centre is (an edge of a thumbnail behind it is not), from 701 any overlap\n"
+             "    const over = [...document.querySelectorAll(ctl)].some(e => { const q = e.getBoundingClientRect(); return q.height > 0 && q.top < innerHeight && (ph.matches ? (q.top + q.bottom) / 2 > top : q.bottom > top); });\n"
+             "    // C6d (7), C6e-3: from 701 and on a phone held sideways, once the dots reach the bar's strip it stays back until the inline\n"
+             "    // ask is on screen (then it is off); once it waits it keeps waiting while the dots are close below, so it does not flash up\n"
+             "    // C6e-4: at the top of the page only a real overlap keeps it back\n"
+             "    const side = !ph.matches || matchMedia('(orientation: landscape) and (max-height: 500px)').matches, atTop = scrollY < 8;\n"
+             "    const dots = R('#swatches'), ask = R('#p-enquire'); const between = side && !atTop && dots && ask && ask.top >= innerHeight && (dots.top < innerHeight || (bar.classList.contains('wait') && dots.top < innerHeight + 160));\n"
              "    bar.classList.toggle('wait', over || between); };\n"
              "  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); addEventListener('hashchange', () => setTimeout(check, 60));\n"
              "  new ResizeObserver(check).observe(document.querySelector('#pdp .gallery'));      // C6d (6): after every view change\n"
@@ -1677,22 +1701,37 @@ def fix_14(p, web):
              "  // shown, with the bar drawn and up, and only by the element's real overlap with it\n"
              "  let keyed = false; document.addEventListener('keydown', () => { keyed = true; }, true); document.addEventListener('pointerdown', () => { keyed = false; }, true);\n"
              "  document.addEventListener('focusin', e => { const a = e.target; if (!keyed || !a.getBoundingClientRect || bar.contains(a) || document.getElementById('pdp').hidden || !document.getElementById('pdp').contains(a)) return;\n"
-             "    const bs = getComputedStyle(bar), b = bar.getBoundingClientRect(); if (bs.display === 'none' || bs.visibility === 'hidden' || b.height < 1 || b.top >= innerHeight || bar.classList.contains('off') || bar.classList.contains('wait')) return;\n"
+             "    // C6e-11: wherever the bar is in use (it may be waiting or off at the moment of focus and come up after the scroll), keep the\n"
+             "    // focused control above where it stands\n"
+             "    if (getComputedStyle(bar).display === 'none' || bar.offsetHeight < 1) return; const b = { top: innerHeight - bar.offsetHeight, bottom: innerHeight };\n"
              "    if (a.matches('main, section, article, [tabindex=\"-1\"]')) return;      // C6d (13): a skip link's target is not a control\n"
-             "    const r = a.getBoundingClientRect(); if (r.height > 0 && r.height < innerHeight / 2 && r.bottom > b.top && r.top < b.bottom) scrollBy(0, r.bottom - b.top + 8); }); }\n"
+             "    // C6e-11: a tall control (a family tile) brings its text above the bar, not its whole box\n"
+             "    let r = a.getBoundingClientRect(); if (r.height >= innerHeight / 2) { const tx = a.querySelector('.ft-body, h3, .ft-btn'); if (!tx) return; r = tx.getBoundingClientRect(); }\n"
+             "    if (r.height > 0 && r.bottom > b.top && r.top < b.bottom) scrollBy(0, r.bottom - b.top + 8); }); }\n"
              "document.getElementById('p-copy').addEventListener('click', () => {")
     p.css("""
 /* C6c (1, 6): the names row under the thumbnail strip: wrapped, each name 44 px tall, the dots kept with the name after */
 .namerow { margin: 2px 0 0; font-size: 15px; line-height: 22px; color: var(--muted) }
 .namerow a { color: inherit }      /* C6d: C5's muted ink, as under the picture before and on /lighting; not the browser's blue */
 .namerow a, .namerow .self, .lt-room .names a { display: inline-block !important; padding-block: 11px !important }
-.namerow .self { color: var(--ink) }
+.namerow .self { color: var(--muted); text-decoration: none }      /* C6e-12: the page's own name as the breadcrumb shows it: muted, plain */
 .namerow .hn, .lt-room .names .hn { white-space: nowrap }
 /* C6d (3, 4): each dot an 18 px box on its name's left; the row is shifted left by one box and clipped at its own edge, so a
    dot that would open a line falls outside; no line starts or ends on one. The row's width is live's (it sizes /lighting's column) */
-.namerow, .lt-room .names { display: flex !important; flex-wrap: wrap; align-items: center; margin-left: -18px !important; clip-path: inset(-6px -6px -6px 18px) }
+.namerow, .lt-room .names { display: flex !important; flex-wrap: wrap; align-items: center; margin-left: -18px !important; clip-path: inset(-6px -6px -6px 13px) }
 .namerow > :first-child, .lt-room .names > :first-child { margin-left: 18px }
 .namerow .hn > span[aria-hidden], .lt-room .names .hn > span[aria-hidden] { display: inline-block; width: 18px; text-align: center; color: var(--muted) }
+/* C6e-9: the clip keeps the focus ring of a line's first name (left inset 13 px still hides a line-start dot) */
+/* C6e-7: from 861 /lighting's row is live's one line: live's spacing (" · " is 7.05 px; 7 here), no wrap, so no dot can open a line
+   and nothing is clipped; below 861, where it wraps, the 18 px boxes and the clip above */
+@media (min-width: 861px) {
+  .lt-room .names { margin-left: 0 !important; clip-path: none; flex-wrap: nowrap }
+  .lt-room .names > :first-child { margin-left: 0 }
+  .lt-room .names .hn > span[aria-hidden] { width: 7px }
+  .lt-room .names > * { flex-shrink: 0 }      /* no name squeezed onto two lines */
+}
+/* C6e-8: a hidden row is not laid out */
+#namerow[hidden], .lt-room .names[hidden] { display: none !important }
 /* /lighting: the row no longer sizes the picture's column; the column keeps live's width, the one-line row's 591 px */
 .lt-room .names { contain: inline-size }
 @media (min-width: 861px) { .lt-room { width: 591px; max-width: 100% } }
@@ -1716,7 +1755,8 @@ def fix_14(p, web):
   .ask-bar { transition: transform .2s ease } .ask-bar.off, .ask-bar.wait { transform: translateY(110%); visibility: hidden }
 }
 @media (max-width: 700px) { .ask-bar.wait { transform: translateY(110%); visibility: hidden } }
-@media (min-width: 701px) and (max-width: 860px) and (orientation: portrait) { :root { --cap: calc(100svh - 390px) } }   /* C6d (5): portrait only */   /* C5's 222, the bar's 72, the thumbnails and their gap 88, 8 to spare */
+@media (min-width: 701px) and (max-width: 860px) and (max-aspect-ratio: 999/1000) { :root { --cap: calc(100svh - 390px - env(safe-area-inset-bottom, 0px)) } }
+@media (max-width: 700px) and (orientation: portrait) { :root { --cap: max(260px, calc(100svh - 308px - env(safe-area-inset-bottom, 0px))) } }   /* C6e-2: on a short upright phone the picture gives up enough that the thumbnails end above the bar (header and crumbs ~147, strip 44, thumbnails ~52, bar 65); a 260 px floor */   /* C6d (5) portrait only; C6e-1 not a square; the home indicator's inset (the bar grows by it) */
 """)
 
 
