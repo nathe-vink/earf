@@ -359,7 +359,9 @@ def build(frame, samples, scale):
                 te = bpy.data.objects.new(f'tint-edge-{tint}', me); bpy.context.scene.collection.objects.link(te); te.location = c
             part('out-dome-pendant', 'rim', acrylic(f'rim-{tint}', 0.0, tname, 0.5), c)   # (polished, chamfered: the bar)
             for nm in ('clamp', 'crown', 'gland', 'hub'):
-                part('out-dome-pendant', nm, cap, c)
+                # HEMI_TOP A or B (2026-11-24, PROPOSALS, crystal.py TOP_TIERS): the even-tier top's clamp, crown and gland
+                tp_ = os.environ.get('HEMI_TOP')
+                part(f'out-dome-pendant-top{tp_}' if tp_ and nm != 'hub' else 'out-dome-pendant', nm, cap, c)
             white = SC.principled('crown-white', '#EEEEEA', 0.55)
             # the collar: its flange face inside the shade white (below z 80 in the shade's frame), the rest black
             cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree

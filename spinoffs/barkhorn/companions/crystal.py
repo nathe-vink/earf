@@ -195,6 +195,16 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
          crown=(80.0, 100.5, 112.0),             # round 41: the low top, the heat sink: OD, z0, z1 (the fins of rounds
                                                  # 35 to 39 were 80 across from 110 to 146, 16 x 1.8: in git at 950a7eaf)
          cap=(40.0, 14.0), drop=600.0, canopy=(150.0, 50.0))
+# PROPOSAL (2026-11-24, the owner's question on the top's tiers; the coordinator's two ways): the visible stack from the
+# clamp ring's foot (92) to the gland's top (126), 34 tall, in even tiers with even steps in diameter. Today's: the clamp
+# Ø104 x 5, the collar's lip Ø96 x 3, the crown Ø80 x 11.5, the gland Ø40 x 14 (steps +40, +16, +8; heights 14, 11.5, 3, 5).
+# A: three tiers, about 11.3 each: the clamp ring Ø104, the crown Ø76, the gland Ø48 (steps 28).
+# B: four tiers, 8.5 each: the clamp ring Ø104, the crown in two, Ø84 and Ø64, the gland Ø44 (steps 20).
+# Each entry (diameter, z0, z1) in the cover's frame; the clamp's (diameter, top).
+TOP_TIERS = {
+    'A': dict(clamp=(104.0, 103.33), crown=[(76.0, 103.33, 114.67)], gland=(48.0, 114.67, 126.0)),
+    'B': dict(clamp=(104.0, 100.5), crown=[(84.0, 100.5, 109.0), (64.0, 109.0, 117.5)], gland=(44.0, 117.5, 126.0)),
+}
 D = N                                            # the old name (dome_pendant.py, Planet's kit piece)
 
 DOME_LIGHT = (0.0, 0.0, 81.5)                    # the COB's face, just under it (was 74: the old hub)
@@ -253,6 +263,15 @@ def cover_parts(p=N):
     gasket_out = _sphere_band(R + 1.0, R, co / 2 + 0.2, fr)
     clamp = _sphere_band(R + 6.0, R + 1.0, co / 2, fr) + (cyl('z', (0, 0), co + 8, 92.0, 97.0) - cyl('z', (0, 0), co, 91, 98))
     clamp = clamp - cyl('z', (0, 0), co, 80, 110)
+    tt_ = TOP_TIERS.get(p.get('top'))
+    if tt_:
+        # PROPOSAL (2026-11-24, the owner: "make the tiers more even in height and diameter difference"): the clamp ring is
+        # the first tier: Ø104 from 92 up to the tier's top, its thread on the collar's M96 x 1.5 now over the collar's whole
+        # outer end (92 to 100: 8 of thread, was 5), and above the collar a 92 bore (the pins' tips at r 45 pass, the
+        # collar's top and the PEEK ring sit below it, out of the side view); its top edge eased 1.0
+        zt_ = tt_['clamp'][1]
+        ring_ = eased(co + 8, 92.0, zt_, 1.0, bottom=False) - cyl('z', (0, 0), co, 91, 100.0) - cyl('z', (0, 0), 92.0, 99.9, zt_ + 1)
+        clamp = (_sphere_band(R + 6.0, R + 1.0, co / 2, fr) - cyl('z', (0, 0), co, 80, 110)) + ring_
     note_formed = ('drape-formed from cast sheet over an aluminium mould, trimmed and polished; the prototypes are formed on '
                    'the production moulds')
     if p.get('build') == 'v3':
@@ -384,6 +403,23 @@ def north_parts(p=N):
     crown = eased(sd, sz0, sz1, 1.0) - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
     gland = eased(cd, sz1, sz1 + ch, 1.0) - cyl('z', (0, 0), 8, sz1 - 1, sz1 + ch + 1)
     z_cord = sz1 + ch
+    tt_ = TOP_TIERS.get(p.get('top'))
+    if tt_:
+        # PROPOSAL (2026-11-24): the crown's tiers and the gland as TOP_TIERS draws them, each eased 1.0; the crown still
+        # sits on the hub at 100.5 on its thermal pad (a hidden Ø84 skirt under the clamp ring's top when its first tier is
+        # narrower, so the PEEK ring stays covered), the gland's top and the cord grip where they were (126)
+        crown = None
+        for d_, a_, b_ in tt_['crown']:
+            t_ = eased(d_, a_, b_, 1.0)
+            crown = t_ if crown is None else crown + t_
+        d0_, z0_ = tt_['crown'][0][:2]
+        if z0_ > sz0:                         # down to the hub inside the clamp ring, the skirt 1.0 under its top
+            crown = crown + cyl('z', (0, 0), d0_, sz0, z0_ + 1.0) + cyl('z', (0, 0), 84.0, sz0, z0_ - 1.0)
+        top_ = tt_['crown'][-1][2]
+        crown = crown - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, top_ + 1)
+        gd_, g0_, g1_ = tt_['gland']
+        gland = eased(gd_, g0_, g1_, 1.0) - cyl('z', (0, 0), 8, g0_ - 1, g1_ + 1)
+        z_cord = g1_
     cord = cyl('z', (0, 0), 6, z_cord, z_cord + p['drop'])
     zc = z_cord + p['drop']
     # round 43 (proposal, certification.md): the fixture hangs from a fine steel cable beside the cord, so the cord

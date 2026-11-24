@@ -162,7 +162,57 @@ def table():
           'acrylic.')
 
 
+# 2026-11-24 (the owner's question on the top's tiers; crystal.py TOP_TIERS, PROPOSALS A and B): the same low-top model
+# for a stack of turned tiers (each a short vertical side and an up-facing annulus to the next, the gland's top a disc),
+# for the engine the shade has had since 2026-11-10: the ring board (24 mid-power LEDs, about 1,000 lm at about 5.9 W in,
+# out-dome-pendant/bom.md) on the stem to the hub. Its light out of the fitting taken as the COB's 85 % (an estimate:
+# the white crown and the opal send most of the rest back down). The hub to the room through the tiers, and through the
+# PEEK break to the collar as before. Comparisons between the three tops are the point; every input an estimate.
+TOPS = {
+    'today: crown Ø80 x 11.5, gland Ø40 x 14': [(80.0, 11.5), (40.0, 14.0)],
+    'A, three even tiers: crown Ø76 x 11.3, gland Ø48 x 11.3': [(76.0, 11.33), (48.0, 11.33)],
+    'B, four even tiers: crown Ø84 x 8.5 and Ø64 x 8.5, gland Ø44 x 8.5': [(84.0, 8.5), (64.0, 8.5), (44.0, 8.5)],
+}
+RING = (5.9, 1000.0)
+
+
+def tiers_G(dT, Ta, tiers, eps=EPS_ANOD):
+    """A stack of tiers' conductance to the room, W/K: each tier's side, each up-facing step, the top disc."""
+    T = Ta + dT
+    hr = eps * SIGMA * (T ** 2 + Ta ** 2) * (T + Ta)
+    G = 0.0
+    for i, (D, h) in enumerate(tiers):
+        D, h = D / 1000, h / 1000
+        G += (1.42 * (dT / h) ** 0.25 + hr) * math.pi * D * h
+        d = tiers[i + 1][0] / 1000 if i + 1 < len(tiers) else 0.0
+        L = (D - d) / 4 if d else D / 4
+        G += (1.32 * (dT / L) ** 0.25 + hr) * math.pi / 4 * (D * D - d * d)
+    return G
+
+
+def solve_tiers(P_in, lm, eta_out, Ta, tiers, R_hc=9.2, R_ca=6.9):
+    P_opt = lm / LER
+    Q = P_in - P_opt + P_opt * (1 - eta_out)
+    T = Ta + 20.0
+    for _ in range(60):
+        R_s = 1 / tiers_G(max(T - Ta, 1.0), Ta + 273.15, tiers)
+        T = Ta + Q / (1 / R_s + 1 / (R_hc + R_ca))
+    Tcol = Ta + (T - Ta) * R_ca / (R_hc + R_ca)
+    return dict(Q=Q, Th=T, Tcol=Tcol, R_sink=R_s)
+
+
+def table_tiers():
+    print('\n### The top\'s tiers (2026-11-24, PROPOSALS A and B against today), the ring engine (about 1,000 lm, 5.9 W)\n')
+    print('| top | room | heat in the hub, W | top to room, K/W | hub | collar, the acrylic next to it |')
+    print('|---|---|---|---|---|---|')
+    for name, tiers in TOPS.items():
+        for Ta in (25.0, 35.0):
+            r = solve_tiers(*RING, 0.85, Ta, tiers)
+            print(f"| {name} | {Ta:.0f} C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.1f} C | {r['Tcol']:.1f} C |")
+
+
 if __name__ == '__main__':
     print('### Rounds 35 to 39 (a record): the fins, and the dropped South\n')
     table()
     table_low()
+    table_tiers()
