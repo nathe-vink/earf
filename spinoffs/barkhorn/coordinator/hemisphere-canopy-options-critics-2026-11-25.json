@@ -1,0 +1,608 @@
+{
+ "critic:wiring-and-code": {
+  "verdict": "O1 and O2 can both be built, wired and made code-sound. Every fix below is the same for both, but neither is ready as drawn. ERP's real tabs put the two M3 screws through solid case. One WAGO 221-412 is drawn for two poles. The cover's Heyco strain relief needs Heyco's pliers (UL 1598 5.2.1) and may not fit the 4.4 under the cover. The 'tie' that keeps 120 V apart has no anchor. The \u00d816 plate opening, the ground path and the cord's polarity are still open.\nO2's +12 is more than needed: with a strain relief in the cover, a centred cord needs a canopy of about 55 to 60.\nThe lane's 'can't keep it centred in 150 x 50' is true only for a strain relief in the cover. With the grip back in the canopy's floor (v8's flush gland), or no grip if the lab accepts 11.6.6, the centred cord needs about 7.5 above the cover. The real driver leaves 9.8, so a centred cord fits 150 x 50.",
+  "findings": [
+   {
+    "id": "driver-tabs-placeholder",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "The driver's fixing is drawn on a placeholder that is wrong in shape, place and thickness, so the two M3 screws that hold the driver and hang the enclosure go through solid case.\n- ERP's ESS case has no end tabs. Its two mounting tabs are corner tabs inside the 84 x 40 outline, 1.8 thick. Their \u00d83.2 holes are at diagonally opposite corners, 77 x 33 apart.\n- The lane draws two 20 x 6 x 1 tabs on the centreline, 80 apart, which make the driver 86 long.\n- At ERP's real holes, one SO-M3 standoff is 5.95 from a box-screw hole (PEM asks 6.0) and 1.5 from that screw's head. Moving the driver 1 to 2 along the enclosure clears it; each end gap is 7.\n- ERP's leads leave at the base, which sits against the enclosure's top once the driver hangs base-up. They are drawn at mid-height.\nWith ERP's 1.8 tab, M3 x 6 still gets 3.2 of thread in the standoff.",
+    "evidence": "ERP ESS/ESST datasheet p.11, Figure 7 (https://www.erp-power.com/wp-content/series-assets/ess-esst-series/datasheet-long/ess-esst-series-datasheet.pdf), rendered at 500 dpi:\n- 84 x 40 x 25.2;\n- '2X - \u00d83.2' at 77 and 33, at the top-right and bottom-left corners;\n- tabs '1.8 TYP';\n- leads at the base: input at one end, about 7.5-10.5 from one side; output and dimming at the other end, about 23-33 from it.\n\nCAD at ac459972da, crystal.py:\n- :910-914, the driver box(-31,-37,..,9,37) plus tabs from y \u00b137 to \u00b143, holes at (-11, \u00b140);\n- :899-900, SO-M3 at (-11, \u00b140);\n- :924-926, input leads drawn at dzm_.\n\nMy overlay of ERP's outline where the lane put its driver (py/realdriver10.py, out/realdriver10-O1.json and -O2.json):\n- it overlaps the lane's M3 screws by 92.7 mm3 in both options and both mirror cases;\n- the nearest real hole is 16.6 from the drawn screw;\n- the real holes are at (-27.5, 38.5) and (5.5, -38.5), or mirrored;\n- SO-M3 hole edge to the box-screw hole: 5.95;\n- SO-M3 hex to the box-screw head: 1.53.\n\nPEM SO-M3-4: minimum 6.00 from the hole's centreline to an edge (https://catalogue.zygology.com/item/thru-hole-threaded-standoffs-types-so-soa-sos/ru-hole-threaded-standoffs-types-so-soa-sos-metric/so-m3-4zi).\n\nREADME:30-31 already lists the tabs 'to confirm'."
+   },
+   {
+    "id": "one-wago-for-two-poles",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "One WAGO 221-412 is ordered and drawn for four conductors: the driver's red and black leads and the cord's two conductors.\n- A 221-412 has two ports and joins them into one node, so it serves one pole.\n- Four conductors will not go into one. If two pairs were forced into one node, the driver's output would be shorted.\n- Two are needed. Both fit: 1.5 to spare under the real driver in O1, 13.5 in O2.\n- The part suits 18 AWG stranded. WAGO's strip length is 11, and ERP's leads come stripped 9.5 and tinned, so re-strip them.",
+    "evidence": "- components.json:1052-1060 (hemi-splice): 'one WAGO 221-412 lever splice (2 conductors ...) ... the Class 2 splice of the driver's output leads to the cord's two conductors'.\n- crystal.py:927-938: one splice box and four wires to it.\n- WAGO 221-412, a '2-conductor' splicing connector (https://www.wago.com/us/wire-splicing-connectors/splicing-connector-with-levers/p/221-412). A distributor's copy of WAGO's datasheet (https://www.100y.com.tw/pdf_file/11-WAGO-221-412.pdf, watermarked) reads: UL 486C; 24-12 AWG solid and stranded; 0.14-4 mm2 fine-stranded; strip 11 mm (0.43 in); T85. Its size, about 13.1 x 18.6 x 8.3, is UNVERIFIED.\n- ERP p.11: 'stripped by approximately 9.5mm, and tinned'.\n- out/realdriver10-O1.json: 9.8 under the real driver, 1.5 to spare over 8.3. O2: 21.8."
+   },
+   {
+    "id": "strain-relief-tool-head-and-cover",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "The cover's straight-through strain relief cannot yet be fitted and pull-tested as drawn.\n(a) Tool. The Heyco part for an SV/SVT 18/2 cord of 5.6-6.2 is SR 5MN-3 (#1157). It goes on with Heyco's squeeze pliers. A cord cut to length at installation cannot use it under UL 1598 5.2.1 unless the pliers ship with the lamp.\n(b) Size. It is 11.1 overall (Heyco's C covers head and body), not the drawn 12.5. Heyco publishes no head thickness. Scaled from Heyco's own side view it is about 4.6 (UNVERIFIED). In both options only 3.4 is left between the cover and the floor grommet's 1.0 flange; the drawn head is 3.0, with 0.4 clear.\n(c) Anchor. The 1.0 cover, held only by two M3 screws at its ends, cannot take UL's 156 N pull (17.21.1, at most 1.6 of movement). It would bend about 2.2 and yield. The test passes only if the relief bottoms on the floor grommet 0.4 below, so the canopy carries it.\nFix:\n- a relief fitted with a screwdriver, such as a screw cord clamp inside, sized to the chosen cord's measured diameter (the cord row names no diameter);\n- 5.5 to 6 under the cover, or a floor grommet without the inside flange;\n- the relief near a screw, or a stiffer cover.\nHeyco's tool-free snap-in cordgrips need 1.6-3.2 panels and are about 31 overall, so they do not fit.",
+    "evidence": "Heyco, the straight-through strain reliefs for round cable (https://www.heyco.com/products/strain-relief-bushings/original-strain-reliefs/heyco-original-strain-relief-bushings-straight-thru-for-round-cables-375-95-mm-to-500-127-mm-mounting-holes; sheet https://www.hweckhardt.com/images/pdf/data/Heyco%20Original%20Strain%20Relief%20Bushings%20Round%20Cable.pdf):\n- SR 5MN-3: hole .500 (12.7) with a .450 (11.4) flat; panel up to .062 (1.6); C .438 (11.1);\n- nylon 6/6, 94V-2, 105 C, 'Recognized ... File E15331';\n- 'Squeeze Pliers'; no pull rating published;\n- C spans head and body on the drawing https://www.heyco.com/wp-content/uploads/2024/09/4-19drawb_114.gif.\nThe pliers: https://www.heyco.com/products/strain-relief-bushings/original-assembly-equipment-and-tools/heyco-original-strain-relief-bushing-assembly-pliers-instructions-and-spare-parts\nThe snap-in cordgrips: https://www.heyco.com/products/strain-relief-bushings/snap-in-cordgrip-strain-reliefs/heyco-snap-in-cordgrip-strain-reliefs-straight-thru/\n\nUL 1598 4th ed. (https://law.resource.org/pub/us/cfr/ibr/inc/ul/ul.s1598.4.2018.pdf): 5.2.1 (ordinary tools), 5.15.1.1, 5.15.2.1, 17.21.1.\n\nCAD and BOM:\n- crystal.py:943-944: head \u00d816 x 3, body \u00d814 x 8.5;\n- crystal.py:948: the grommet's flange, \u00d816 x 1;\n- NOTES crystal.py:1521-1522: 'squeeze the bushing on at the mark';\n- components.json:564: the cord's diameter is unset.\n\nMy probe (out/realdriver10-O1.json and -O2.json): room under the cover 4.4, 3.4 to the flange. A head of 3.0 leaves 0.4, 4.0 is short by 0.6, 4.6 is short by 1.2.\n\nThe bending figures are my own beam estimate: 156 N at mid-span between the screws 90 apart, on a 64 x 1.0 section, gives about 330 MPa and 2.2 deflection."
+   },
+   {
+    "id": "separation-not-yet-a-means",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "UL 1598 6.17.2.2 accepts 'separate entries and reliable routing'. O1 and O2 now meet the first half: no field branch-circuit wiring enters the enclosure. 'Tie the leads to the input end' is not yet a reliable means.\n- It exists only in the README. No tie, anchor, lance or clip is in the CAD, BOM or NOTES.\n- It fixes only the 120 V side. The field-made Class 2 side is free to move: the cord's conductors, the splices, and the -XL driver's 300 mm output and dimming leads.\n- As drawn the gaps are large: O1 26.8 to the Class 2 conductors and 51.1 to the splice; O2 37.7 and 57.2.\n- In O1, though, the cord rises in the same 22 strip that carries the 120 V leads to the snap bushing, 26 along from it.\nFix, either:\n- anchor the 120 V leads (a tie to a lance, or around the driver's case), fix the Class 2 splices in a carrier at the output end, and cut the output leads short at the factory; or\n- a barrier (6.17.2.3/.4: at least 0.4 bonded steel or 0.7 fibre or rated polymer, gaps 1.6 at most). In O1 it runs across the strip, about 22 x 35.\nIn O2 the driver's body sits between the two sides, so a fixed splice place is probably enough. The lab decides (UNVERIFIED).",
+    "evidence": "UL 1598 6.17.2.1-6.17.2.4, p.74-75: 'permanently separated a minimum 6.4 mm ... by a) separate entries ... and b) reliable routing ...; or c) barriers' (URL above).\n\nNEC 2017 725.136(D)(1): routed to keep 6 mm (https://archive.org/download/gov.law.nfpa.nec.2017/gov.law.nfpa.nec.2017_djvu.txt). The 2023 numbering is UNVERIFIED.\n\nThe lane's files:\n- README:26-28 is the only place 'tie' appears in the commit (git show ac459972da | grep tie);\n- crystal.py:886 puts the bushing at (20, 26);\n- crystal.py:229 puts O1's cord at (20, 0).\n\nMy probe (py/probe10.py, out/probe10-O1-A-lock0.json and probe10-O2-A-lock0.json): sep_input_leads_to_class2_conductors 26.765 / 37.726; sep_input_leads_to_splice 51.066 / 57.177.\n\nERP p.11: input and output leads leave at the base; the -XL has 300 mm leads (p.2, note 2)."
+   },
+   {
+    "id": "plate-opening-11-5-3",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "UL 1598 11.5.3 is the clause that names this opening, not 11.4.4. By 11.5.3, both \u00d816 and the old \u00d822 fail.\n- 11.4.4 limits luminaire mounting holes to 2.6 cm2 each. \u00d816 (2.0 cm2) would pass it and \u00d822 (3.8 cm2) would not, but this opening is a wiring passage, not a mounting hole.\n- 11.4.1 puts any open hole within 13 of the mounting surface into four kinds. A wiring opening can only be an access opening.\n- 11.5.3 asks for 'openings through a supporting strap, cross-bar, or plate': a single opening passing a 44.5 rod, or two of at least 10 cm2 passing a 16 rod.\n- 11.5.1 lets a lamp of 4.54 kg or less be taken down for inspection 'without additional access openings'. The lab may read that as an exemption (UNVERIFIED).\nIt is safe either way to cut one \u00d845 at (-11, 0), over the driver, with the steel top 4 below. It clears the SO-M4 by 9.3 to its edge (PEM asks 8), the box-screw holes by 21 and the gripper studs by 21, and lies inside a 4 in box.\nThe CAD cuts a plain \u00d816, while the callout still says '\u00d822 ... rolled edge'. In 1.6 sheet, 5.14.1 asks only that the leads be kept off the edge: deburr or coin it, or bush it.",
+    "evidence": "UL 1598 (URL above):\n- 11.4.1, 11.4.4 p.110 ('Luminaire mounting holes ... maximum area of each hole shall be 2.6 cm2');\n- 11.5.1 and 11.5.3 p.112 (quoted above);\n- 5.14.1.\n\nCAD at ac459972da:\n- crystal.py:886-887: a \u00d816 plain cut at (20, 26);\n- crystal.py:1117: the plate's callout, unchanged for O1/O2.\n\nPEM SO-M4-4: minimum 8 to an edge (https://catalogue.zygology.com/item/thru-hole-threaded-standoffs-types-so-soa-sos/ru-hole-threaded-standoffs-types-so-soa-sos-metric/so-m4-4zi).\n\nClearances (my arithmetic, from the CAD's positions):\n- SO-M4 at (20, 6) is 31.6 from (-11, 0), so 9.3 from a \u00d845's edge;\n- box screws at (0, \u00b144.45) are 45.8 away;\n- gripper studs at (\u00b143.5, \u00b129.3) are 43.9 away."
+   },
+   {
+    "id": "ground-path",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "The green screw stays at (0, 56) on the plate, 1.25 past the enclosure's end.\n- The supply's equipment grounding conductor must come down the \u00d816 at (20, 26) beside the two leads, then run about 36 along the 4.0 gap over the enclosure's top.\n- It passes about 3.9 from a box-screw head and 3.4 from ERP's real SO-M3. The snap bushing's head sits right under the opening.\n- A bare 12 AWG fits. An insulated one (about 3.3-3.6, UNVERIFIED) has 0.4 to 0.7 left.\n- It must be landed before the enclosure is hung. NOTES never say this, and still say 'the supply wired in it'.\nBetter: a factory green 18 AWG pigtail from that screw up through the opening into the box, spliced to the supply's grounding conductor with the supply. That puts the grounding means 'in the same location as the power supply connection' (6.14.2.2), and box fill omits it.\nThe enclosure's bond now rests on two serrated M4 screws (v9 had four). The two M3 heads bear on the driver's plastic tabs and do not bond. Two serrated screws should pass the bonding test (18.2), to be tested.",
+    "evidence": "CAD and NOTES at ac459972da:\n- crystal.py:817-819 and :884-885: the screw and its extrusion at (0, 56);\n- crystal.py:904-905: the M4 serrated screws;\n- NOTES crystal.py:1516-1517: 'the enclosure on its standoffs, the supply wired in it'.\n\nMy probe (out/probe10-O1-A-lock0.json): 'ground-screw|enclosure' 1.25; 'box-screws|enclosure' 1.6 (the heads 2.4 tall in the 4.0 gap).\n\nUL 1598 (URL above):\n- 6.14.2.2 (pigtail lead allowed; same location as the supply connection);\n- 6.14.2.4 (the crossbar's grounding termination);\n- 6.14.2.5 (not smaller than the supply leads; 18 AWG at least);\n- 6.14.2.8 (green).\n\nNEC 2017 (archive URL above): 410.44, 410.46; 314.16(B)(1) Exception ('An equipment grounding conductor ... or not over four fixture wires smaller than 14 AWG ... enter a box from a domed luminaire or similar canopy and terminate within that box')."
+   },
+   {
+    "id": "shared-m3-order-and-service",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "Using the same two M3 screws for the driver and the enclosure moves ERP's required fixing into the field.\n- The box screws at (0, \u00b144.45) lie under the enclosure, which spans y \u00b150. So the plate goes up first, and the enclosure and driver can only be fixed after it.\n- The order at installation:\n  - splice the leads in the box, with the plate below it;\n  - screw the plate up, with the enclosure and driver dangling on the 18 AWG leads;\n  - hold the driver against the inside of the enclosure's top, and drive the two M3 screws up through its corner pockets;\n  - drive the two M4 screws;\n  - then the cord and the cover.\n- The enclosure cannot come off for service without the driver coming loose. Unscrewing the M3s drops the driver out of the open bottom onto its leads. That is about 0.3 kg with the enclosure, under UL 1598 11.5.2's 4.5 kg, so it is not a code failure. Through its plastic tab, each M3 also clamps plastic.\nFix:\n- screw the driver to the enclosure's top at the factory, into clinch nuts or studs at ERP's 77 x 33 diagonal (PEM parts for 1.0 sheet: UNVERIFIED);\n- hang the enclosure on its own fixings: the two M4 plus two more, for example in the 7 end gaps clear of the leads.",
+    "evidence": "CAD and NOTES at ac459972da:\n- crystal.py:813-816: the box screws under the plate;\n- crystal.py:888: the enclosure;\n- crystal.py:899-909: the M3 screws, 'through the driver's tab (1) and the top (1): M3 x 6', that also hang the enclosure;\n- NOTES crystal.py:1516: 'the plate screwed to the box (its two screws before the enclosure goes on)'.\n\nERP p.11: 'must be secured on a flat surface through the two mounting tabs'; 154 g; plastic case.\n\nUL 1598 5.2.2 (field-assembly instructions) and 11.5.2 (4.5 kg) (URL above).\n\nBOM: components.json:795 (enclosure, about 141 g by the v9 check)."
+   },
+   {
+    "id": "polarity-not-identified",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "The cord is wired to the driver's red (+) and black (-) output leads at installation. UL 1598 5.2.7 requires 'matching identification' on conductors meant for field connection, and none is given.\n- The cord row names a textile-braided 18/2 with no ribbed or coloured conductor.\n- NOTES have no polarity step.\nName a cord with identified conductors, mark the driver's leads to match, and show it on the wiring diagram. Whether the ring board survives a reversed cord is UNVERIFIED; reverse-polarity protection on the board would make it moot.",
+    "evidence": "UL 1598 5.2.7, p.31 (URL above).\n\nERP p.11: output 'LED +: RED, LED -: BLACK'.\n\nThe lane's files: components.json:564 (hemi-cord); NOTES crystal.py:1520-1523.\n\nThe v9 skeptic raised the same point, and it is still open in O1 and O2."
+   },
+   {
+    "id": "claim-7-centred-in-50-possible",
+    "severity": "should-fix",
+    "option": "third-way",
+    "claim": "The lane's 'the cord can't stay centred in 150 x 50' is right only for a strain relief mounted in the cover.\nIf the grip moves back to the canopy's floor, the cover needs only a protected hole:\n- the grip is a flush turned gland, like v8's 'turned 6061 gland ... its nut flush', worked from below once the canopy is up;\n- the hole is a rolled edge, or a smooth hole in a cover of 1.1 or more.\nInside, the cord then needs about 2 of jacket past the cover and about 5.4 for the conductors' 90-degree turn: about 7.4. Under ERP's real 25.2 driver, O1's 50 stack leaves 9.8.\nThe minimum canopy is then about 48 to 49:\n3.0 floor + 4.4 under the cover + 1.0 cover + 7.4 + clearance + 25.2 driver + 1.0 top + 4.0 standoffs + 1.6 plate.\nThe splices go under the driver or in the strip.\nWith no grip at all, the same fits, if the lab reads 11.6.6 ('the flexible cord on a chain or cable suspended luminaire shall not be required to be provided with strain relief') over 5.15.1.1. This is the v9 reviewer's route; the skeptic disputed it.\nEither way, a centred cord in 150 x 50 is a third choice the owner has not been shown.\nConditions:\n- the floor grip is a made part that passes 156 N (17.21.1), with its inside part 3.4 or less, or the cover moves up within the 2.4 spare;\n- the lab accepts it (UNVERIFIED);\n- the owner accepts a flush ring the size of today's grommet.",
+    "evidence": "The canopy note at crystal.py:1050-1051 and :1056-1057 still describes v6-v8's floor gland ('a turned 6061 gland, satin black, its nut flush'). v9 moved the strain relief to the cover (crystal.py:859-860: 'no grip at the canopy').\n\nUL 1598 (URL above): 11.6.6 p.113; 5.15.1.1; 5.14.1 (sheet under 1.1: rolled edge or a non-rubber bushing 1.2 thick); 17.21.1.\n\nThe v9 critic's fix: 'bring the cord up through a low grommet ... (11.6.6)' (coordinator/hemisphere-top-v9-critics-2026-11-25.json, critic:wiring-and-code). The skeptic's objection is in the same file.\n\nMy numbers (out/realdriver10-O1.json): cover top 734.4; real driver underside 744.2 (dz1 769.4 - 25.2); 9.8 between.\n\nThe conductors' turn is my estimate: SVT 18 AWG conductor about 2.7 across (30 mil PVC), bent at about its own diameter.\n\nThe canopy's floor as an anchor is my plate estimate: 3.0 aluminium deflects about 0.1-0.25 under 156 N. It is held by two M4 cup-point set screws."
+   },
+   {
+    "id": "o2-height-more-than-needed",
+    "severity": "note",
+    "option": "O2",
+    "claim": "For a centred cord through a strain relief in the cover, O2's 62 (+12) is safe but about 2 to 7 more than needed.\nThe true minimum, from the floor up: 3.0 floor + 1.0 grommet flange + 0.4 + 11.1 Heyco SR overall (the 1.0 cover sits in its groove) + jacket + conductors' turn + 0.5 + 25.2 driver + 1.0 top + 4.0 standoffs + 1.6 plate = 47.8 + jacket + turn.\n- With the jacket 2 past the relief and a tight turn of 5.4: about 55.\n- With the lane's 6 + 6: about 60.\n- Without the grommet's inside flange: 1.0 less.\nThe lane's own arithmetic is off on both sides:\n- its 11.8 is v9's room with 2.4 under the cover, which can hold neither the relief's head nor the 1.65 button heads; with 4.4 under the cover, 50 leaves 9.8;\n- the relief stands 5.5 to 7.1 inside the cover (11.1 overall less a head of 3.0-4.6 less the 1.0 cover), not 8.5.\nWith real parts O2 keeps 2.7 to 4.3 to spare under its 21.8.",
+    "evidence": "README:7-11 ('11.8 ... about 8.5 inside ... about 21').\n\nHeyco: C .438 (11.1) is the overall length (sheet and drawing URLs above).\n\nMy probe:\n- out/realdriver10-O2.json: room_under_real_driver 21.8; sr_body_inside_above_cover_top 7.1 (head 3.0) and 5.5 (head 4.6);\n- out/realdriver10-O1.json: 9.8.\n\nv9 enclosure: crystal.py:833 (38 tall, 37 inside), so 37 - 25.2 = 11.8."
+   },
+   {
+    "id": "mains-leads-and-box-fill",
+    "severity": "note",
+    "option": "both",
+    "claim": "The mains route works.\nThe leads:\n- The ESS010W-0180-42-XL is real, with 300 mm leads, and the -XL is needed.\n- Routed under the top to the snap bushing at (20, 26), the input leads use about 51 (leads on the strip side) or 76 (far side) to reach the plate's top. That leaves 249 or 224 in the box, against UL 1598 6.15.1.6's 150.\n- Standard 152 leads would leave only 76-101.\n- The BOM still names the plain -42 driver.\n- The leads may pass through the plate into the box this way: 6.15.1.1(a) provides conductors for an outlet box. They meet 6.10.2(a) (neutral white) and 6.9.2 (USA): 18 AWG, 105 C, 300 V. Whether ERP's leads meet Table 6.9.3 (USA)'s 0.33 is UNVERIFIED.\nThe bushing:\n- The 3/8 in snap bushing is Heyco SB 375-4 (#2030): .375 hole, .25 (6.4) bore, panel up to 1/8, Recognized E15331. Its wall is about 1.55, against 5.14.1(b)'s 1.2.\n- Its height is not listed; the SB 375-3 is .41 (10.3), against 4.0 drawn. It must go head up in the 4.0 gap with its body inside. There is room in both options.\nBox fill:\n- The two 18 AWG leads, and a green pigtail, are omitted (NEC 314.16(B)(1) Exception).\n- A 4 in x 1-1/2 in box (15.5 in3) with a 12/2 cable, its grounding conductor and clamps counts 9.0 in3.\n- A 1/2 in pancake box would be marginal.\n- Name the box: 4 in, 1-1/2 in deep, designed for luminaire support (314.27(A)(2)).",
+    "evidence": "ERP p.2 model table: 'ESS010W-0180-42-XL (2)'; note 2: 'Models with the \"-XL\" suffix have extended wire leads 12 in (300 mm) long'.\n\nERP's series page (https://www.erp-power.com/erp-series/ess-series/) shows it in production, as read through search. Stock at distributors is UNVERIFIED.\n\nThe lane's files:\n- components.json:885 (north-driver-ring: ESS010W-0180-42);\n- crystal.py:886-887 and :939-942 (the bushing, drawn 1.5 + 1.0 + 1.5).\n\nMy probe (out/realdriver10-O1.json): input_lead_length_to_plate_top 50.8 / 75.8; input_lead_left_in_box_of_300 249.2 / 224.2.\n\nHeyco snap bushings: https://www.heyco.com/products/bushings-grommets-heycaps-plugs/tubing-caps-and-plugs/heyco-snap-bushings-250-64-mm-to-875-222-mm-mounting-hole-diameter\n\nUL 1598: 6.15.1.1, 6.15.1.6, 6.10.2, 6.9.2 (USA), Table 6.9.3 (USA), 5.14.1 (URL above).\n\nNEC 2017: 314.16(B)(1) and its Exception, Table 314.16(A)/(B) (archive URL above). The 2023 wording is UNVERIFIED."
+   },
+   {
+    "id": "zero-to-ten-volt-no-entry",
+    "severity": "note",
+    "option": "both",
+    "claim": "O1 and O2 give the 0-10 V control wires no way in.\n- The only entries are the 120 V snap bushing in the top and the cord's strain relief in the cover.\n- Field 0-10 V wires through the 120 V bushing would break the separation of 6.17.2 and NEC 725.136.\nSay phase-cut only, and cap the purple and pink leads individually (ERP allows it), or add a third entry.",
+    "evidence": "The texts still offer 0-10 V: NOTES crystal.py:1533 ('or 0-10 V') and components.json:885 (north-driver-ring, '0-10 V').\n\nERP p.9, section 11: 'When not used, the -Dim wire (pink) and the +Dim wire (purple) can be individually capped or cut off'.\n\nUL 1598 6.17.2.1 (URL above)."
+   },
+   {
+    "id": "thermal-ok",
+    "severity": "note",
+    "option": "both",
+    "claim": "The driver runs well within ERP's limits in the closed 1.0 steel box inside the canopy, in both options.\n- The ring board takes about 33 V at 180 mA, so 5.9 W.\n- At ERP's nominal 82 % (78 % assumed as the worst), the driver loses 1.3 to 1.7 W.\n- My lumped estimate puts the case at 34-54 C in a 25 C room and about 64 C in a 35 C room. ERP allows Tc 70 C for rated life and warranty, and 90 C at most. O1 and O2 are within 0.6 of each other.\n- The supply splices sit in the outlet box at about the canopy's 28-39 C, under UL 1598 11.6.10 (USA)'s 60 C.\nConfirm with clause 15's normal-temperature test at ERP's Tc point.",
+    "evidence": "ERP datasheet:\n- p.3: 'nominal efficiency of 82%' for ESS010;\n- p.4: Tc operating -30 to +70, maximum +90; warranty 5 years at Tc 70 C or less.\n\nBOM: components.json:885 ('about 33 V, about 5.9 W').\n\nMy estimate: py/thermal10.py, output out/thermal10.txt:\n- O1: 34.0 / 54.0 / 63.6 C;\n- O2: 33.6 / 53.4 / 63.0 C.\nThe network is still air. It uses the black anodised canopy (emissivity 0.85), zinc-plated walls (0.10-0.25), and base contact of 0.05-0.3 W/K.\n\nUL 1598 11.6.10 (USA) (URL above)."
+   },
+   {
+    "id": "driver-real-recognized",
+    "severity": "note",
+    "option": "both",
+    "claim": "The ESS010W-0180-42-XL is a real ERP part, but it is UL 8750 Recognized Class 2, not Listed. Its conditions of acceptability apply (UNVERIFIED).\n- Case: plastic, IP64, UL94 V-0, 84 x 40 x 25.2, 154 g.\n- One end: input, N white and L black, 18 AWG.\n- The other end: output, LED+ red and LED- black, 18 AWG; dimming, DIM+ purple and DIM- pink, 22 AWG.\n- All leads leave at the base. They are 152 \u00b15, or 300 on the -XL; 105 C; 300 V; stranded.\n- Bend room: the real 84 case leaves 7 at each end inside the 98, not the drawn 12 to the body. The input leads turn in 7 under the top; the output leads drop down the 7 gap to the cover (O1 about 35, O2 about 47). That is tight but workable for stranded 18 AWG.\n- The output and dimming leads on the -XL are 300 each, so they should be cut short at the factory.",
+    "evidence": "ERP datasheet (URL above):\n- p.2: the model table and note 2;\n- p.5: 'UL8750 recognized Class 2'; cUL CSA C22.2 No. 250.13;\n- p.11: section 13 (plastic case, leads, 'must be secured ... through the two mounting tabs') and Figure 7.\n\nCAD: crystal.py:910-914 (body \u00b137, tabs to \u00b143; inside wall at \u00b149, crystal.py:888)."
+   },
+   {
+    "id": "pem-and-cover-screws",
+    "severity": "note",
+    "option": "both",
+    "claim": "The plate suits both standoffs, but the M3 holes are drawn for a different part.\nThe standoffs:\n- SO-M3-4 takes a 4.22 +0.08 hole, a 4.8 hex, sheet 1.00 or more, and 6.0 to an edge. The CAD cuts \u00d85.4 with a 6.4 hex, which are the sizes of the larger SO-3.5M3.\n- SO-M4-4 takes a 7.14 +0.08 hole, a 7.9 hex, sheet 1.27 or more, and 8.0 to an edge. It matches the CAD and BOM, and sits 12 from the \u00d816's edge.\n- The plate's 1.6 suits both.\nThe screws:\n- M3 x 6 through ERP's 1.8 tab and the 1.0 top gives 3.2 of thread.\n- M4 x 6 gives 5.0, with its tip 0.6 below the plate's top.\nThe cover:\n- The cover's M3 x 4 ISO 7380 heads (1.65) leave 2.75 to the canopy's floor.\n- They are still tapped into 1.0 tabs, so about 2 threads. The hole edge is now 2.5 from the bend face (v9: 0.5).\n- Use a clinch nut or an extruded thread for a cover that comes off.",
+    "evidence": "PEM data (distributor mirror of PEM's catalogue):\n- SO-M3-4ZI: https://catalogue.zygology.com/item/thru-hole-threaded-standoffs-types-so-soa-sos/ru-hole-threaded-standoffs-types-so-soa-sos-metric/so-m3-4zi\n- SO-M4-4ZI: https://catalogue.zygology.com/item/thru-hole-threaded-standoffs-types-so-soa-sos/ru-hole-threaded-standoffs-types-so-soa-sos-metric/so-m4-4zi\n- SO-3.5M3's 5.41 hole: from PEM's catalogue as read through search.\n\nCAD and BOM:\n- crystal.py:899-900: hd_, hx_ = (5.4, 6.4) for M3;\n- crystal.py:889-897: the tabs at y 41-49 and the M3 at y \u00b145;\n- components.json:1016 (hemi-plate-standoffs).\n\nMy probe (out/probe10-O1-A-lock0.json): 'cover-screws|canopy' 2.75."
+   },
+   {
+    "id": "fixings-check-passes-but-blind",
+    "severity": "note",
+    "option": "both",
+    "claim": "I reran fixings_check.py at zero tolerance and it passes for O1 and O2 with the lock off and on. Each run covers today's top, A and B.\nIt checks only overlaps of the drawn solids. It cannot see:\n- the placeholder tabs (92.7 mm3 against ERP's real case);\n- the splice count;\n- the real lengths of the strain relief (11.1 vs 12.5 drawn) and the snap bushing (about 10 vs 4.0 drawn).\nThe contacts at 0.0 are intended: the tabs on the top, the leads at the driver, the screw heads on the tabs.\nNo printed text describes either option yet:\n- the canopy callout still says '\u00d812.5 in the floor's centre';\n- the plate callout still says '\u00d822 ... 4 x \u00d87.14 for PEM SO-M4';\n- the BOM rows still describe v8 and v9.\nThat is expected for V10-2..12, but the sheet's notes are the only words that go with the pictures.",
+    "evidence": "Outputs:\n- out/fixings-O1-lock0.txt and -lock1.txt: 'fixings_check: ok', exit 0;\n- out/fixings-O2-lock0.txt and -lock1.txt: 'fixings_check: ok', exit 0;\n- the 0.0 contacts in out/probe10-*.json.\n\nThe lane's files:\n- crystal.py:1115-1118 (callouts);\n- components.json:1016, :1025 ('four M4 x 6'), :1034 ('v8 ... 7/8 in ... \u00d814');\n- README:35."
+   }
+  ],
+  "checked": [
+   "Read the v9 check's wiring-and-code and texts-and-build parts (critic and skeptic): /home/user/earmilk-site/spinoffs/barkhorn/coordinator/hemisphere-top-v9-critics-2026-11-25.json",
+   "Read the lane's README (the committed copy matches the scratchpad copy), the options sheet (right half viewed), and git diff 217145b8d0..ac459972da: crystal.py, components.json, fixings_check.py, wiring_options.py, make_options_sheet.py",
+   "Exported the companions .py/.json and studio/fabkit at ac459972da with git archive. Built O1, O2 and v9 with my own probe on top A without the lock, and O1 and O2 on today's top with the lock. Measured bounding boxes, gaps and separations: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/wirecode/py/probe10.py; outputs in .../wirecode/out/probe10-*.json",
+   "Ran fixings_check.py with HEMI_WIRING=O1 and O2 and HEMI_LOCK_ON=0 and 1 (today, A and B in each run): all 'ok', exit 0. Outputs: .../wirecode/out/fixings-O1-lock0.txt, -O1-lock1, -O2-lock0, -O2-lock1",
+   "Overlaid ERP's real ESS outline (diagonal corner tabs 77 x 33, 1.8 thick, leads at the base) in O1 and O2, both mirror cases. Checked it against the lane's solids, the PEM edge rules, the input-lead lengths, the room left for two WAGOs and the strain relief's head: .../wirecode/py/realdriver10.py; outputs .../wirecode/out/realdriver10-O1.json and -O2.json",
+   "Estimated the driver's case temperature in each option with a lumped still-air model: .../wirecode/py/thermal10.py; output .../wirecode/out/thermal10.txt",
+   "ERP ESS/ESST datasheet: read the text of pp.2-5, 9 and 11, and rendered Figure 7 at 500 dpi. Checked the -XL note, Recognized Class 2, the efficiency, Tc, the lead colours and exits, the tab holes 77 x 33 and the 1.8 tabs",
+   "UL 1598 4th ed. (law.resource.org), read in the text: 5.1.3, 5.2.1-5.2.8, 5.14.1, 5.15.1-5.15.3, 6.9.2 (USA) and Tables 6.9.2/6.9.3 (USA), 6.10.2, 6.14.2.1-6.14.2.9, 6.15.1.1-6.15.1.7, 6.17.1-6.17.2.4, 11.4.1-11.4.9, 11.5.1-11.5.3, 11.6.6, 11.6.8 (USA), 11.6.10 (USA), 17.21.1-17.21.2",
+   "NEC 2017 text (archive.org): 314.16(B)(1) and its Exception, 410.42, 410.44, 410.46, 410.48, 725.136(A)-(E). The 2023 numbering and wording are UNVERIFIED",
+   "Heyco: the straight-through strain relief table and its C-dimension drawing (SR 5MN-3, 11.1 overall, Recognized E15331; head thickness unpublished, so the scaled ~4.6 is UNVERIFIED), the pliers page, the snap bushings (SB 375-4), and the snap-in cordgrips (1.6-3.2 panels)",
+   "WAGO 221-412: the product page and a distributor's (watermarked) copy of WAGO's datasheet (UL 486C, 24-12 AWG, 11 mm strip, T85); 2-conductor",
+   "PEM SO-M3-4 and SO-M4-4: hole, hex, minimum sheet and edge distance, from a distributor mirror of PEM's catalogue",
+   "Cleanup: deleted the tree export (3.4 MB) and the downloads (19 MB). Only scripts and outputs remain (84 KB) in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/wirecode/. Nothing was checked out, committed, pushed or fetched in /home/user/earmilk-site"
+  ]
+ },
+ "critic:third-way": {
+  "verdict": "Yes, a third way works in 150 x 50, and it beats both options. Stand the same ERP ESS010W-0180-42-XL on edge (40 tall, 25.2 wide) in a 28-wide steel tray beside the axis. The tray hangs flush under the plate, clear of the box screws, so the axis is free from floor to plate (45.4) for the cord, a strain relief and two Class 2 splices. The canopy stays 150 x 50 with the cord centered, nothing visible changes, the CAD finds 0 clashes against today's parts, and the cost is about the same as O1.\nO1 is then unnecessary: it moves the cord 20 off center for nothing. O2 is also unnecessary, and its +12 is probably too much: Heyco's 11.1 body length includes a head of about 4.7 that stays outside, so +4 to +8 would do.\nRunner-up: the strain relief in the canopy's floor with the driver flat (150 x 50, about 3 mm margin, a visible black head). I found no slimmer listed phase-cut driver for this load, and a remote driver suits a bar fit-out only.",
+  "findings": [
+   {
+    "id": "T1-driver-on-edge-keeps-150x50",
+    "severity": "should-fix",
+    "option": "third-way",
+    "claim": "The lane stopped because 'the cord can't stay centered in 150 x 50'. It can. Stand the same ERP driver on edge in a narrow tray beside the axis (frame: x on the cables' line; heights above the canopy's underside).\n- Tray: 1.0 steel, x -35 to -7, y -56 to +39, z 6.4 to 48.4. Its top is open and the plate closes it. It hangs on two PEM FH-M3-8 studs through two tabs: one off the outer wall at y -52 to -40, one off the inner end.\n- Driver: on edge at x -34 to -8.8, y -53 to +31, z 7.9 to 47.9. Its two tabs are screwed to the tray's outer wall.\n- Input leads (300 mm, -XL): they rise in the tray's 7 mm inner end gap and go straight up through a rolled \u00d87 hole in the plate at (-21, 34.5) into the 4 in box, where they are spliced. There is no 120 V wiring in the canopy at all.\n- Output leads: they leave through a 1/4 in snap bushing in the tray's outer end and run outside the tray to two lever splices beside the cord.\n- Cord: it rises through today's flush floor grommet and bends 2.5 mm over about 11 mm to a strain relief on a small 1.6 steel bracket off the tray (z 17 to 30). The jacket ends at z 36 and the splices sit at z 37.5 to 45.7.\nWhat the owner sees: the same canopy, 150 x 50, the cord leaving the center. Cost is about the same as O1. The tray replaces the enclosure, its cover, four SO-M4 standoffs, four M4 screws and the top snap bushing; it adds one small bracket and two studs.",
+    "evidence": "CAD and check:\n- /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/third-way/py/tw.py (build_T1) and check.py, run against the v9 canopy parts of top A without the lock, built by crystal.py at ac459972da with HEMI_WIRING unset.\n- Result in out/check-T1.txt: 0 clashes at zero tolerance. The only overlaps are intended pass-throughs, plus a 0.42 mm3 lapped-rod artifact where the cord leaves the grommet.\n- Clearances: tray to gripper bracket 2.0; to the plate rim 3.8; to the floor 3.4; to the box screws 3.2 (4.0 to a \u00d86 screwdriver); strain relief to tray 1.5.\n- Sketch: out/third-way-sections.jpg, row 1.\nWhy it fits:\n- The inside height from the floor's top to the plate's underside is 45.4 (crystal.py:795, :802, :810).\n- The box screws sit at (0, \u00b144.45) (crystal.py:813-816), and the gripper brackets start at |x| = 37 (crystal.py:769: gx - 11, gripper radius 48).\n- So a 28-wide tray at x -35 to -7 leaves both the screws and the axis free. It needs no 4.0 gap; v9 has that gap only because its enclosure covers the screw heads (crystal.py:833).\n- The v9 critics' 'cannot stand on edge (40 > 37)' holds only inside the v9 enclosure (37 inside, under a 4.0 gap).\nERP datasheet (https://www.erp-power.com/wp-content/series-assets/ess-esst-series/datasheet-long/ess-esst-series-datasheet.pdf):\n- p.11: 84 x 40 x 25.2; tabs in two diagonal corner pockets with \u00d83.2 holes 77 x 33 apart, 1.8 thick; 'must be secured on a flat surface through the two mounting tabs'.\n- p.2 note 2: the -XL leads are 300 mm.\nSeparation: the tray is a bonded steel barrier, as UL 1598 6.17.2.2(c) and 6.17.2.3(a) allow (UL 1598 4th ed., https://law.resource.org/pub/us/cfr/ibr/inc/ul/ul.s1598.4.2018.pdf)."
+   },
+   {
+    "id": "T1-what-it-needs",
+    "severity": "note",
+    "option": "third-way",
+    "claim": "What third way 1 needs, to be done right:\n- ERP to confirm that mounting on edge is fine. The datasheet names no orientation, and at about 5.9 W out the loss is about 1 W.\n- The tray in two parts (the outer wall, then a U-shaped cover). The tabs' pockets face the inner wall, so the tab screws must go in before the U closes.\n- Plate changes: close the \u00d822 center hole and the four SO-M4 holes; add the rolled \u00d87 at (-21, 34.5) and two FH-M3-8 studs.\n- Move the green grounding screw onto the plate's top face, inside the box's opening, so the ground wire is landed where the supply is connected and never leaves the box.\n- Cut the dimming leads at the factory (phase-cut only), or bring them out as Class 2 wires.\n- A strain relief that goes on with ordinary tools: ship Heyco's pliers, or use a two-screw saddle clamp. The axis has more than 30 of free height.\n- Polarity marking on the cord.\n- Optional: trim the gripper brackets' inner edge by 1 mm (gx - 10). The tray can then move to x -36 to -8, and the cord's bend drops to 1.5 mm.",
+    "evidence": "- ERP p.9: the dimming leads 'can be individually capped or cut off'; p.11: the mounting rule.\n- UL 1598 4th ed.: 6.14.2.2 (grounding means at the supply connection), 5.2.1 (ordinary tools), 5.2.7 (conductor identification, the v9 skeptic's point), 17.21.1 (pull test).\n- NEC 2017 314.16(B)(1) Exception: the driver's two 18 AWG input leads that enter the box from the canopy do not count toward box fill. Text from https://archive.org/download/gov.law.nfpa.nec.2017/gov.law.nfpa.nec.2017_djvu.txt; the 2023 wording is UNVERIFIED.\n- Bend and gripper figures: check-T1.txt; the gripper bracket at crystal.py:769-774."
+   },
+   {
+    "id": "C-strain-relief-in-floor",
+    "severity": "note",
+    "option": "third-way",
+    "claim": "Runner-up, also 150 x 50 with the cord centered. Keep the ERP flat as in O1 (its enclosure, the splices in the 22-wide strip, the input leads up to the box), and put the cord's strain relief in the canopy's floor at the center.\n- The jacket ends 2.5 past the strain relief.\n- The two conductors run flat under the cover to a 1/4 in bushing at x 20.\n- Margins: 3.0 under the cover (1.5 to the bushing's head), with v9's 4.0 plate gap kept.\nCosts and look:\n- The owner sees a black nylon head (about \u00d816 x 4) under the canopy instead of today's flush grommet, unless a turned flush clamp is made; that clamp would have to pass the 156 N pull test.\n- A pull on the cord goes into the canopy's two set screws.\n- Heyco's SR 5M-3 needs a panel of 2.5 or less, so the floor is thinned to 2.5 at the center.",
+    "evidence": "- CAD: tw.py build_C and out/check-C.txt: 0 clashes; enclosure to box screws 1.6 and to the gripper brackets 5.0 (as v9). Sketch: row 2 of out/third-way-sections.jpg.\n- Stack: strain relief inside 3.9 = body length 11.1 - head 4.7 - panel 2.5. The head's share is read off Heyco's side view: UNVERIFIED until a part is measured.\n- Heyco straight-through table (body length C .438 in, D-hole .500 in with a .450 flat, panels up to .062 or .100 in, UL Recognized E15331, sold with squeeze pliers): https://www.hweckhardt.com/images/pdf/data/Heyco%20Original%20Strain%20Relief%20Bushings%20Round%20Cable.pdf"
+   },
+   {
+    "id": "O2-height-overstated",
+    "severity": "should-fix",
+    "option": "O2",
+    "claim": "O2's +12 assumes 8.5 of strain relief inside the cover. But Heyco's 11.1 mm (.438 in) body length C includes the head, which stays outside (about 42 % of C on Heyco's side view). That leaves about 5.4 inside a 1.0 cover.\n- With the lane's own 6 of jacket and 6 of turn, a centered cord under the flat driver needs a canopy of about 58 (+8).\n- With 3 of jacket and a 5 turn, about 54 (+4).\nMeasure a part before the owner is shown '62'. O2 is not needed at all if third way 1 holds.",
+    "evidence": "- crystal.py:943 draws the body \u00d814 x 8.5 above the cover; v10/README.md gives 'Option 2 ... 62 tall'.\n- My sum: head 4.7 + 0.5 under the cover, cover 1, 5.4 + 6 + 6 inside, driver 25.2, top 1, gap 4, plate 1.6 = 58.4.\n- Height bars: row 3 of out/third-way-sections.jpg.\n- Heyco side view on https://www.heyco.com/products/strain-relief-bushings/original-strain-reliefs/heyco-original-strain-relief-bushings-straight-thru-for-round-cables-375-95-mm-to-500-127-mm-mounting-holes (proportions UNVERIFIED)."
+   },
+   {
+    "id": "relief-head-may-not-fit-4.4",
+    "severity": "note",
+    "option": "both",
+    "claim": "By the same reading, the strain relief's outside head is about 4.7 thick. O1 and O2 leave 4.4 under the cover (head drawn \u00d816 x 3.0), so the head may bear on the canopy's floor. Size that gap from a measured part.",
+    "evidence": "- crystal.py:877 ('The cover's screws and the strain relief's head need 4.4 under the cover') and :943 (the head drawn 3.0).\n- The O1 and O2 enclosure heights: crystal.py:229 (eh 36 and 48).\n- Heyco side view as above; UNVERIFIED."
+   },
+   {
+    "id": "one-splice-cannot-join-two-poles",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "The BOM and the CAD give one WAGO 221-412 for the cord's two conductors and the driver's two output leads. A 221-412 has two openings and joins two conductors (one circuit), so the + and - poles need two of them. Third way 1 draws two.",
+    "evidence": "- components.json:1052 (hemi-splice: 'one WAGO 221-412 lever splice (2 conductors, ...)') and crystal.py:928 (one box).\n- WAGO cut sheet: '2 openings, copper conductor, 24-12 AWG ... 20A, 600V', UL Listed E201573, E69654 (https://cdn.automationdirect.com/static/specs/cutsheet/221-412_K007-0000_cutsheet.pdf)."
+   },
+   {
+    "id": "a-no-slimmer-listed-driver",
+    "severity": "note",
+    "option": "third-way",
+    "claim": "(a) I found no listed or recognized 120 V phase-cut (TRIAC and ELV) Class 2 constant-current driver for this load that is lower than about 14.5, or narrower than about 22 lying flat. The load is the ring board's two strings of 12 LEDs at about 180 mA in all, about 33 V, about 5.9 W. The slim US parts found are 350 mA, so the board would need re-stringing. The ERP on edge needs no new driver.",
+    "evidence": "Load: components.json:876 (hemi-ring-board) and :885 (north-driver-ring).\nChecked:\n- ERP ESS010W-0180-42(-XL): 84 x 40 x 25.2, TRIAC/ELV/0-10 V, 'UL8750 recognized Class 2' (p.5), about $16 (estimate).\n- ERP ESM: metal case, lowest model 350 mA (https://www.erp-power.com/erp-series/esm-series/).\n- Hatch LC12-0350P-120-B: 350 mA, 17-34 V, leading/trailing edge, UL Recognized Class 2, $24.99 (https://www.superbrightleds.com/lc12-0350p-120-b). B case about 80 x 34 x 20.3 from a Mouser sheet; UNVERIFIED which case those figures belong to.\n- LTF DA15W350C1042-3001: 350 mA, 10-42 V, ELV and TRIAC, Class 2, UL/ETL, 95 (77) x 31 x 21 aluminum (https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/6488/3993_DA15W350C10423001SpecSheet.pdf).\n- Fulham T1T11200350-15L: 350 mA, 20-42 V, leading or trailing edge 100-10 %, cURus Class 2, FCC 15B (https://www.fulham.com/PDFs/SpecSheets/T1T11200350-15L-2015-551.pdf); size not read.\n- Lutron Hi-lume LTE K-case: 76 x 25 x 124, forward phase only (search snippet of https://assets.lutron.com/a/documents/369543_ENG.pdf).\n- Mean Well PCD-16: 84 x 57 x 29.5 (components.json).\n- RECOM RACT12: 11 mm low-profile case, but 198-264 VAC, IEC/EN only (via search; https://recom-power.com/en/rec-s-RACT12.html).\n- Euchips EUP10T: 110 x 30 x 22; PUP10T: 75 x 35 x 26.5; both rated at 230 V (cdn.shopify.com datasheets).\n- EPtronics LD6W120-36-C0170-TL (the BOM's alternate): size not found.\nNot checked: eldoLED, Tridonic, Osram, Signify/Advance, Thomas Research, Inventronics, LEDdynamics (UNVERIFIED)."
+   },
+   {
+    "id": "b-right-angle-or-low-reliefs-no-gain",
+    "severity": "note",
+    "option": "third-way",
+    "claim": "(b) Right-angle or low-profile strain reliefs and glands do not save the flat-driver layout.\n- Heyco's right-angle SR 15-1 turns the cord parallel to the panel outside it, so the cord would have to arrive horizontally in the 2.4 to 4.4 under the cover.\n- Glands clamp outside the panel and need 20 or more below the cover.\nThe only gain is the corrected inside length of the straight Heyco part (see O2-height-overstated).",
+    "evidence": "- Heyco SR 15-1 (SV/SVT 18/2, .500 in hole, panel up to 2.5, head 9.9, body 17.5, UL Recognized E15331): https://www.heyco.com/wp-content/uploads/2024/09/Original-Strain-Relief-Right-Angle-Round.pdf\n- Lapp SKINTOP ST-M 12x1.5 (53111000): cord 3.5-7, 15 across flats, 30.0 overall, 8.0 thread (via search; https://www.lapp.com/en/de/skintop-st-m/skintop-str-m/p/53111000)."
+   },
+   {
+    "id": "e-remote-driver-bar-only",
+    "severity": "note",
+    "option": "third-way",
+    "claim": "(e) A remote driver is allowed but is wrong for a retail pendant.\n- The canopy keeps 150 x 50 (it could drop to about 40, which the grippers and brackets set) and holds only the strain relief and the Class 2 splices.\n- The installer must put a listed Class 2 driver in an accessible metal box elsewhere and run Class 2 wire to the canopy.\n- In the outlet box itself: the ERP is only Recognized, so it needs a metal cabinet (plastic boxes are common). Its 5.16 in3 takes a third of a 4 x 1-1/2 octagon box's 15.5 in3, and its Class 2 leads must stay 6 mm from the supply conductors in a crowded box.\nFine for a bar fit-out with ceiling access, not for homes.",
+    "evidence": "- UL 1598 10.5.3: a luminaire for a remote constant-current driver is marked with the current, the nature of the supply and the voltage or wattage. 6.7.2 covers remote ballasts.\n- NEC 2017:\n  - 410.137(A): auxiliary equipment not installed as part of a luminaire goes in 'accessible, permanently installed metal cabinets'.\n  - 410.137(B): a driver listed for direct connection to a wiring system needs no extra enclosure.\n  - 725.136(A), (B), (D)(1): 6 mm separation inside boxes.\n  - Table 314.16(A): 4 x 1-1/2 octagon box, 15.5 in3.\n- NEC 2023 numbering UNVERIFIED.\n- CAD: tw.py build_E and out/check-E.txt (0 clashes); sketch: row 3 of the sheet."
+   },
+   {
+    "id": "driver-outline-placeholder",
+    "severity": "note",
+    "option": "both",
+    "claim": "The lane drew ERP's outline as a placeholder: a 40 x 74 body with 20 x 6 x 1 tabs at its ends, holes 80 apart. The real case keeps its tabs inside the 84 x 40 outline, in two diagonal corner pockets, with \u00d83.2 holes 77 x 33 apart, 1.8 thick. The leads leave low at the base, input at one end and output at the other. O1's and O2's M3 standoffs at (-11, \u00b140) must move to the diagonal corners.",
+    "evidence": "- crystal.py:911-915 (the placeholder) and :899 (the standoffs).\n- ERP datasheet p.11, figure 7."
+   },
+   {
+    "id": "ranking",
+    "severity": "note",
+    "option": "third-way",
+    "claim": "Ranked, best way to keep the cord centered:\n1. Third way 1, the ERP on edge in a tray beside the axis: 150 x 50 (+0), nothing visible changes, same driver, cost about O1's.\n2. Third way 2, the strain relief in the floor with the driver flat: 150 x 50 (+0), a visible black head or a custom flush clamp, about 3 mm margin on UNVERIFIED Heyco proportions.\n3. O2 re-measured: about 54 to 58 (+4 to +8).\n4. O2 as drawn: 62 (+12).\n5. Remote driver: 150 x 50 or lower, bar fit-out only.\n(a) A slimmer driver: none found.\nO1 keeps 150 x 50 but moves the cord 20 off center, and is not needed if third way 1 holds.",
+    "evidence": "- Section sheet (cut from solids, true scale): /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/third-way/out/third-way-sections.jpg\n- Checks: out/check-T1.txt, out/check-C.txt, out/check-E.txt (all 0 clashes).\n- Scripts: py/probe_v9.py, tw.py, check.py, draw.py. The tree export and BREPs were deleted after use; the folder is now 3 MB."
+   }
+  ],
+  "checked": [
+   "v9 critics: the wiring-and-code and texts-and-build parts and their skeptics (coordinator/hemisphere-top-v9-critics-2026-11-25.json); the v8 wiring critic for the enclosure's history",
+   "The lane's commit ac459972da: the README (identical to the local copy), the diffs to crystal.py (:229, :714-729, :865-951), components.json (:1052) and fixings_check.py, wiring_options.py, and the options sheet",
+   "Built today's v9 canopy for top A without the lock with crystal.north_parts (HEMI_WIRING unset): positions of the plate, rim, box screws, ground screw, brackets, grippers, studs, set screws, grommet and cables",
+   "Built third ways 1 (ERP on edge), 2 (strain relief in the floor) and 3 (remote driver) as solids and checked each against the parts it keeps at zero tolerance: 0 clashes each, with clearances",
+   "ERP ESS/ESST datasheet: p.2 models and the -XL, p.5 'UL8750 recognized Class 2', p.9 dimming leads may be capped or cut off, p.11 outline, tabs and mounting rule; ERP's ESM page",
+   "Heyco straight-through strain relief table and side view, Heyco right-angle SR 15-1 table, Lapp SKINTOP ST-M 12x1.5 (via search), WAGO 221-412 cut sheet",
+   "Drivers: Hatch LC12-B, LTF DA15W350C1042, Fulham T1T11200350-15L, Lutron LTE K-case, RECOM RACT12, Euchips EUP10T and PUP10T, Mean Well PCD-16 and EPtronics LD6W (from the BOM); not checked: eldoLED, Tridonic, Osram, Signify/Advance, Thomas Research, Inventronics, LEDdynamics",
+   "UL 1598 4th ed. (2018): 6.7.2, 6.9.4, 6.15.1.6, 6.17.1, 6.17.2.1-6.17.2.4, 10.5.2-10.5.3, 11.2.11, 11.5.1-11.5.3, 11.6.6",
+   "NEC 2017: 314.16(B)(1) Exception, 314.16(B)(4), Table 314.16(A), 410.104, 410.137(A)-(B), 725.136(A)-(E); NEC 2023 numbering UNVERIFIED",
+   "Heights at the axis for v9, O2, O2 re-measured, third way 2 and third way 1, drawn as bars on the sheet; American spelling on the sheet",
+   "Cleanup: the tree export and BREP builds deleted; the large downloads removed; the folder is about 3 MB"
+  ]
+ },
+ "critic:owner-pictures": {
+  "verdict": "Sheet: it matches the CAD and both options are drawn at one scale. The outside views measure 150 x 49.9, 49.9 and 62.3, with O1's cord 19.8 off center, and the 10.0, 22.0, 36, 48 and 6 figures all match my build. It is not an owner sheet, though: half of it is the tiers sheet, the rest is sections and jargon in mm, no text can be read on a phone (1.7 to 3.4 pt), and no picture shows the canopy.\nO1: the cord comes out 20 off center on the cables' line, 28 from one cable and 68 from the other. Facing across the cables, that is 13% of the canopy's width (22 to 41 arcmin standing). From a bar stool it sits about a quarter of the way to the rim from every side (33 to 70 arcmin). That is 8 to 13 times the size at which people notice an off-center position. It is a near miss that will read as a mistake, and the ceiling box, not the installer, decides which side it shows.\nO2: the extra 12 mm reads as a thicker canopy (visible band +24%, proportion 1:3 to 1:2.4). That height is normal for a canopy that holds the power unit (Flos 150 x 70 and 149 x 71). I recommend O2, asked on its own after the tiers and the lock, with rendered pictures from a standing spot and from a bar stool.",
+  "findings": [
+   {
+    "id": "sheet-not-for-the-owner",
+    "severity": "blocking",
+    "option": "both",
+    "claim": "The lane's options-sheet.jpg can't go to the owner as it is.\n- The left 1,130 px are the v9 tiers/lock sheet, which is a separate open question.\n- The rest is three flat outside views, six sections, three plans and a 13-item color legend.\n- The words are engineering terms ('strain relief', 'lever splice', 'snap bushing', 'standoffs', 'in3', 'V10-1'), and sizes are in mm only.\n- There is no plain question, no recommendation, and nothing shows the canopy in a room.\n- On a phone nothing can be read.",
+    "evidence": "Script, renders/2026-11-25/barkhorn/lamp-site/v10/ at ac459972da:\n- make_options_sheet.py:7 pastes 2026-11-24/.../tests/r2/top-sheet-v9.jpg on the left;\n- make_options_sheet.py:9-10 sets 34 and 26 px fonts; :15-20 holds the heading text;\n- wiring_options.py:29 uses figsize 34x25 saved at dpi 60 (:108), with labels at fontsize 10-13 (:48, :74, :81-87, :104-106).\n\nMeasured with /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/owner-view/py/text_px.py on the 3778 px wide sheet:\n- heading line 33 px, body line 25 px, drawing text about 16 px tall;\n- on a 390 pt phone screen that is 3.4 / 2.6 / 1.7 pt (7.4 / 5.6 / 3.6 pt in landscape), against roughly 11 pt needed to read;\n- the outside views are 436 px wide, 45 pt on the phone.\n\nPhone-size copies: .../owner-view/out/sheet_phone390.jpg and sheet_phone1170.jpg."
+   },
+   {
+    "id": "sheet-true-to-cad",
+    "severity": "note",
+    "option": "both",
+    "claim": "What the sheet draws matches the CAD, and all three options are drawn at the same scale.",
+    "evidence": "My build of ac459972da, top A without the lock (.../owner-view/py/probe_opts.py; out/probe_v9.json, probe_O1.json, probe_O2.json):\n- canopy 150 x 50 (z 726-776) in v9 and O1, 150 x 62 (726-788) in O2;\n- floor holes: the cables \u00d83 at x \u00b148 in all three; the cord \u00d812 at (20, 0) in O1 and (0, 0) in O2 (\u00d812.5 in v9);\n- enclosure 36 / 48 plus the 1.0 cover;\n- driver to cover 10.0 (O1) and 22.0 (O2);\n- strain relief 8.5 inside, the jacket ending 6 past it, 4.4 under the cover.\n\nThe sheet (py/sheet_measure.py):\n- all three outside views at 2.907 px/mm: 150 x 49.9, 150 x 49.9 and 150 x 62.3 (aspect 0.333 / 0.333 / 0.415);\n- O1's cord center 19.8 off, 5.8 wide.\n\nThe sections and plans use fixed, shared axes (wiring_options.py:47, :75, :103)."
+   },
+   {
+    "id": "sheet-omits-how-o1-reads",
+    "severity": "should-fix",
+    "option": "O1",
+    "claim": "The sheet shows O1's offset only as a 20 mm dimension on a flat silhouette, cut off 90 mm below the canopy and seen square to the cables. That is its worst direction, and the sheet doesn't say so. Three things are never shown:\n- the cord then runs on a slant to the lamp's center, nearly parallel to the near cable;\n- how big the offset looks from where people stand or sit;\n- from below, the offset shows from every side.\n'Option 1 keeps the canopy' also undersells a change the owner would see.",
+    "evidence": "- wiring_options.py:47 sets ylim (zc - 90, zt + 15); :43-45 project onto x-z only.\n- crystal.py:729 (ac459972da) moves the cord's top end linearly from the cap's center to (20, 0).\n- probe_O1.json cord_at: x 19.98 at the canopy, 10.0 at mid-drop, 0.34 at the cap.\n- Front view (out/sightlines.txt, last block): the cord leans 1.9 deg, each cable 3.0 deg. Seen across the cables, the cable-cord-cable gaps are 2.45:1 at the canopy, 1.91:1 at mid-drop and 1:1 at the cap."
+   },
+   {
+    "id": "o1-offset-reads-as-a-mistake",
+    "severity": "should-fix",
+    "option": "O1",
+    "claim": "The owner must see this before choosing, and it is why O2 is the pick.\n\nWhere the cord sits: on the cables' line, 20 mm from the center. That is 28 mm from one cable's exit and 68 mm from the other (2.4 to 1), or 42% of the way to the near cable. It is neither centered nor beside a cable.\n\nStanding 1.5-3 m away (eye 1.6 m, canopy at 2.4-2.7 m):\n- facing across the cables, the exit is 13.3% of the canopy's width off center (22-41 arcmin);\n- 12% at 64 deg to the cables, 9.5% at 45 deg;\n- it disappears only when you look along the cables.\n\nFrom a bar stool (eye 1.5 m, 0.5-0.9 m out, looking up 43-67 deg): the shade hides none of the canopy's underside, and the exit sits about a quarter of the way to the rim from every side (33-70 arcmin).\n\nScale: this is 8-13 times the threshold of about 1/60 of the span at which people notice an off-center position. On a lamp where everything else is round and centered, a near miss like this reads as a mistake (judgment).\n\nInstallation: the ceiling box's ears set the cables' line (the plate has two round holes, so it fits only two ways round). The installer cannot hide the offset, and lamps in a row can point different ways.",
+    "evidence": "- Viewing angles: out/sightlines.txt (standing and stool tables) and out/floor_offset.txt (radial position 0.23-0.27 of the seen outline from every side on the stool).\n- Geometry: probe_O1.json floor_holes.\n- Plate holes: crystal.py:882-883, round, at y \u00b144.45.\n- Driver: crystal.py:911, x -31..9.\n- Floor grommet at (20, 0): crystal.py:948-949.\n- Preview: out/preview.jpg (flat-shaded geometry, NOT a render). Rows 1-2 are across the cables, row 3 along them, row 4 from a stool.\n- Threshold: Wolfe et al., Sensation & Perception 4e, essay 3.1: position thresholds 'on the order of about 1/60 (k = 0.0167) of the separation'. https://learninglink.oup.com/public/files/cdn/wolfe4e/essay03.01.html"
+   },
+   {
+    "id": "o1-offset-can-only-point-at-a-cable",
+    "severity": "note",
+    "option": "O1",
+    "claim": "O1's offset can't be turned 90 deg, which would make the cord look centered between the cables from the front.\n- The driver covers x -31..9 and y -37..37.\n- The only free strip is x 9..31, on the cables' line.\n- Turning the 100 mm enclosure onto the cables' line would hit the gripper brackets at x 37-59.\nSo within this layout the cord always lands between the center and a cable.",
+    "evidence": "- crystal.py:888 (enclosure \u00b132 x \u00b150) and :911 (driver box(-31, -37, ..., 9, 37)).\n- crystal.py:764: bracket box at gx \u00b1 11, with gx = \u00b148.\n- probe_O1.json bb_gripper-brackets: x -59..59, y -36..36."
+   },
+   {
+    "id": "o2-reads-as-a-thicker-normal-canopy",
+    "severity": "note",
+    "option": "O2",
+    "claim": "O2's extra 12 mm (1/2 in) reads as a slightly thicker canopy, not a fault.\n\nHow it looks:\n- the visible band grows 24-25% (77 to 96 arcmin at 2 m under a 2.4 m ceiling; 61 to 76 arcmin from a stool under 2.7 m);\n- the whole outline grows 8-13% standing and 3-6% from a stool;\n- the proportion goes from 1:3 to 1:2.4;\n- it adds 1.5% to the ceiling-to-rim height.\n\nIt also leaves the installer 13.5 mm over the splice instead of 1.5.\n\nWhat it costs:\n- about 90 g (3 oz) more on the ceiling;\n- the site's Canopy line changes from 2.0 in deep (150 x 50) to 2.4 in (150 x 62);\n- the Drop line changes from 30.6 in (776 mm) ceiling to rim to 31.0 in (788 mm), unless the standard cord is cut 12 mm shorter;\n- the canopy weight line changes.",
+    "evidence": "- Angles: out/sightlines.txt.\n- CAD volumes (py/export_meshes.py): canopy 117,670 to 134,295 mm3 (+45 g at 2.70 g/cm3); enclosure 17,744 to 21,632 (+31 g at 7.85); brackets 9,249 to 10,939 (+13 g).\n- Splice z 734.7-742.9 against the driver's underside at 744.4 (O1) and 756.4 (O2): probe_O1.json and probe_O2.json.\n- Live text on main 1e7460909a: spinoffs/barkhorn/site_fix.py:567, :569, :570 and site_v2.py:2294."
+   },
+   {
+    "id": "references-canopy-heights",
+    "severity": "note",
+    "option": "both",
+    "claim": "What is normal:\n- canopies that only cover the box are thin, 32-36 mm (or 7 mm on Bocci);\n- canopies that hold the power unit run 45-71 mm.\nToday's 50 is slim for a canopy with a driver. O2's 62 sits between Flos Noctambule (45) and Flos Arrangements and Coordinates (70-71), and those two are 150 mm across like ours. These make the owner's picture references.",
+    "evidence": "Makers' pages:\n- Flos Arrangements Small Rose (Michael Anastassiades, 2018): canopy 150 mm across, 70 mm tall, power supply integrated. https://professional.flos.com/en/global/product/arrangements-small-rose-f0416030/\n- Flos Coordinates Suspension 1 (Anastassiades, 2020): 149 x 71, integrated electronics. https://professional.flos.com/en/global/product/coordinates-suspension-1-f1860033\n- Flos Noctambule Suspension 1 Low Cylinder Cone (Grcic, 2019): 187 x 45, 'Ceiling rose houses the power supply unit'. https://professional.flos.com/en/global/product/noctambule-suspension-1-low-cylinder-cone-f0268000/\n- Flos IC Lights S1 (2014): 113 x 32, bulb, no driver. https://professional.flos.com/en/global/product/ic-lights-s1-f3175030/\n- Flos Skygarden 1: 146 x 36. https://professional.flos.com/en/global/product/skygarden-1-f0001009\n- Bocci 14.1: shallow canopy 116 x 7 mm, 12 V supplies placed elsewhere. https://cdn.shopify.com/s/files/1/0435/8032/6038/files/14.1_SpecInstructions.pdf\n\nNot found: no maker's sheet with a 150 mm canopy close to 50 mm tall (UNVERIFIED gap)."
+   },
+   {
+    "id": "references-off-center-cords",
+    "severity": "note",
+    "option": "O1",
+    "claim": "I found no well-made single round pendant whose cord leaves its canopy a little off center (UNVERIFIED negative). The normal single round canopy has a centered cord. Off-center cords show up only where the offset is the point or follows a cable:\n- offset pendants meant to hang away from the ceiling box;\n- cable kits with a power hole beside a center cable hole;\n- linear fixtures whose cord is clipped to one cable.",
+    "evidence": "- LED Supply 5 in round canopy, 0.25 in tall: 'Center Hole: 3/8\"' plus 'Power Hole Size: 5/8\"'. The power hole's position is not stated. https://www.ledsupply.com/suspension-hardware/5in-round-aircraft-cable-canopy\n- Lighting Styles offset pendants: https://www.lightingstyles.co.uk/ceiling-lights/pendant-lighting/off-set-pendant-lights\n- Artemide Tolomeo Off Center Pendant: https://www.lumens.com/tolomeo-off-center-pendant-by-artemide-ATD2559169.html\n- Cord clipped to an aircraft cable, per search summaries only, not opened (UNVERIFIED): https://noralighting.com/wp-content/uploads/2022/01/IS-NLUD-PCC.pdf and https://lumenwerx.com/wp-content/files/CANYON-PENDANT-CABLE-INST.pdf"
+   },
+   {
+    "id": "canopy-in-no-picture",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "No site picture and no owner picture has ever shown the canopy.\n- Neither option forces a re-render of any live picture.\n- The owner sheet needs new frames.\n- Live text, and a drawing on a branch not yet on main, do state the canopy:\n  - O2 changes that text and the drawing.\n  - O1 changes neither, though the drawing's centered cord would be untrue for O1 if it went live.",
+    "evidence": "lamp_site.py at ac459972da:\n- hemisphere() loads clamp, crown, gland, hub, collar, white-disc, ring, suspension, cord-v6, pins, carrier, stem, board and rim, never a canopy (:364-432); lamp-site-meshes/out-dome-pendant/stl/canopy.stl exists but is unused;\n- the house frames hang the lamp with 'the cord running out of the frame's top' (:1031-1033);\n- the in-use room's ceiling is at 2.40 (:812-814), but its rim hangs at 1.25 (:1086-1088), so a canopy would stop 0.37 m short of the ceiling.\n\nLive site, main 1e7460909a:\n- bar-pendants.webp crops the cords; home-ice-wide-1600.webp loses them in the dark ceiling;\n- site_fix.py:569-570 states the canopy's size and the 776 mm ceiling-to-rim.\n\nThe dims drawing (canopy 150 x 50, cord centered) is on origin/r47-site-next only: spinoffs/barkhorn/dims-site/hemisphere-dims.png, drawn by launch/dims_drawing.py:125-144.\n\nThe v9 critic's 'canopy-never-pictured' finding agrees."
+   },
+   {
+    "id": "owner-sheet-spec",
+    "severity": "should-fix",
+    "option": "both",
+    "claim": "Make this sheet instead: pictures only, no sections.\n\nLayout\n- One portrait sheet sized for a phone: 1170 px wide (390 pt at 3x), about 2,500 px tall, white.\n- All text at least 36 px (12 pt on the phone), inches first.\n- Title: 'Hemisphere: which ceiling canopy?'\n- Three columns, 370 px each with 15 px gaps, headed:\n  - 'Today's drawing (can't be built)', 5.9 x 2 in;\n  - '1. Same canopy, cord 3/4 in off center', 5.9 x 2 in;\n  - '2. Cord centered, canopy 1/2 in taller', 5.9 x 2.4 in.\n\nRows\n- A 'From across the room' (370 x 700): the whole lamp under a white ceiling 8 ft 6 in (2.6 m) high, standard 23.6 in drop. Camera at eye height 5 ft 3 in, 6 1/2 ft away, facing across the two cables. A small line says this is where option 1 shows most.\n- B 'The canopy, closer' (370 x 280): same camera position, a longer lens (rendered, not enlarged).\n- C 'Looking up from a bar stool' (370 x 370): eye 4 ft 11 in, 2 ft 4 in out, aimed at the canopy's underside.\n- Optional small row D 'Standing, looking along the cables': the one view where option 1 looks like today, to be fair to it.\n\nReferences strip\n- Flos Arrangements and Coordinates: 5.9 in across, 2.8 in tall, power unit inside.\n- Flos IC Lights: 4.4 x 1.3 in, no power unit inside.\n- Include the links.\n\nAt the bottom: the question and 'My pick: 2'.\n\nKeep fixed across the three columns:\n- the same top (his tiers pick, or A without the lock marked 'doesn't affect this choice');\n- the same lamp height (O2's cord 12 mm shorter);\n- lamp off, room evenly lit;\n- the same camera, light, exposure and audit.",
+    "evidence": "How to make it with lamp_site.py:\n1. Meshes: export canopy, canopy-bushing (the floor grommet), canopy-screws and O1's own cord (as cord-v6) from crystal.py, with HEMI_WIRING unset / O1 / O2 and HEMI_LOCK_ON=0, into new lamp-site-meshes folders.\n2. Loading: in hemisphere(), load them behind a switch, with the cap's satin black (lamp_site.py:232) for the canopy and grommet.\n3. Room: add a frame built on room() (:800-830) and make its ceiling height a parameter (now fixed at 2.40-2.42, :814). Hang the rim at ceiling - 0.776 (- 0.788 for O2).\n4. Rotation: turn the lamp with HEMI_ROT (:215-217) so the cables are square to the camera.\n5. Cameras: DOMECAM (:1089) for the standing views; the free aim used by HOUSE_CAM's 8th value (:1181-1186) for the stool.\n6. Light: LIGHTS_OFF with ROOM_FILL (:1080).\n7. Audits: the CASTCHECK/HIDDENCAST audits as tests/r2.sh does, with each column's mesh list differing only in canopy and cord.\n\nThe house ground can't be used: it has no ceiling.\n\nMy flat-shaded framing check, not for the owner: .../owner-view/out/preview.jpg. In row A the 3/4 in offset is only about 5 pt (14 px) on a phone, which is why rows B and C are needed."
+   },
+   {
+    "id": "question-order",
+    "severity": "should-fix",
+    "option": "third-way",
+    "claim": "Send the canopy question by itself, third:\n- after the owner answers the tiers and the lock, both still open with him;\n- only if the third-way check finds no way to center the cord in 150 x 50 done right (if it does, there is nothing to ask);\n- never on the same sheet as the tiers, as the lane's sheet does.\n\nIt is independent of both: the canopy is the same for today, A and B, and with A's lock its inside just turns 105 deg with the cables. Nothing waits on it except V10-2's green screw and V10-3's holes, so waiting costs little and lets the pictures show the top he picks.",
+    "evidence": "- renders/2026-11-25/barkhorn/lamp-site/v10/README.md:37-38: 'Not started until the owner picks: V10-2 to V10-12. They don't depend on the choice except V10-2's green screw and V10-3's sheet-metal holes'.\n- crystal.py:658, :798, :952: the canopy's parts turn with a0_, the cables' angle.\n- v9 critic wiring-and-code: 'the same gaps in all four' tops."
+   },
+   {
+    "id": "draft-question",
+    "severity": "note",
+    "option": "both",
+    "claim": "Draft for the owner, six sentences:\n\n\"The Hemisphere's canopy, the black disc at the ceiling, can't be wired properly with the cord coming out of its center: the power unit inside leaves only about half the room the cord needs. Option 1 keeps the canopy the same size, 5.9 in across and 2 in tall, and brings the cord out 3/4 in off center, toward one of the two steel cables. Option 2 keeps the cord in the center and makes the canopy 1/2 in taller, 2.4 in. I recommend Option 2: from a bar stool you see the off-center cord from every side, and on a lamp that is otherwise perfectly round it looks like a mistake, while a 2.4 in canopy is normal for lamps with the power unit inside (Flos makes its Arrangements and Coordinates canopies 2.8 in tall). The pictures show today's drawing and both options from across the room and from a bar stool. Which do you want, 1 or 2?\"",
+    "evidence": "- 'About half the room': 11.8 mm under the driver against about 21 needed (lane README).\n- 3/4 in = 20 mm; 1/2 in = 12 mm; 2.4 in = 62 mm.\n- Flos 70-71 mm = 2.8 in.\n- Bar-stool visibility: out/floor_offset.txt."
+   }
+  ],
+  "checked": [
+   "Read the v9 critics JSON parts: wiring-and-code, texts-and-build and sheet-and-owner (spinoffs/barkhorn/coordinator/hemisphere-top-v9-critics-2026-11-25.json)",
+   "Read the lane's commit ac459972da: README, make_options_sheet.py, wiring_options.py, and the crystal.py, components.json and fixings_check.py diff against 217145b8d0",
+   "Viewed options-sheet.jpg at full size, in crops and at phone sizes; measured its text heights (py/text_px.py) and its outside views' scale, canopy sizes and cord offset (py/sheet_measure.py)",
+   "Built v9, O1 and O2 (top A without the lock) in the b84 build123d venv and probed canopy, floor holes, cord path, cables, enclosure, driver gap, splice and strain relief (py/probe_opts.py; out/probe_v9.json, probe_O1.json, probe_O2.json)",
+   "Viewing angles: standing at 1.5, 2 and 3 m with ceilings of 2.4 and 2.7 m, from 4 directions; bar stool at 0.5, 0.7 and 0.9 m, from 3 directions, including whether the shade hides the canopy; O2 against today at the same spots (py/sightlines.py, out/sightlines.txt)",
+   "Where the cord's exit sits on the canopy's underside as seen, from every direction (py/floor_offset.py, out/floor_offset.txt)",
+   "Exported the CAD meshes and drew a flat-shaded framing preview of today, O1 and O2: standing, close, along the cables and from a stool (py/export_meshes.py, py/preview.py, out/preview.jpg; not a render)",
+   "Weight change from CAD volumes: canopy, enclosure and brackets",
+   "lamp_site.py at ac459972da: hemisphere() mesh list, house frames, room() ceiling, the in-use frame, HEMI_ROT, DOMECAM and the free-aim camera; tests/r2/v9.sh and owner-lock.sh",
+   "Live site (main 1e7460909a): the Hemisphere page's images, bar-pendants.webp and home-ice-wide-1600.webp for canopies; site_fix.py:567-570 and site_v2.py:2294 for canopy text; the dims drawing on origin/r47-site-next (dims_drawing.py)",
+   "References: Flos maker pages for Arrangements Small Rose, Coordinates S1, Noctambule S1, IC Lights S1 and Skygarden 1; the Bocci 14.1 spec PDF; the LED Supply canopy page; Lighting Styles offset pendants; Artemide Tolomeo Off Center; Wolfe et al. on position thresholds",
+   "Cleanup: deleted the tree export, the STL builds, the downloaded PDFs and the site image copies. The lens folder /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/owner-view is now 2.0 MB"
+  ]
+ },
+ "skeptic:wiring-and-code": {
+  "verdicts": [
+   {
+    "id": "driver-tabs-placeholder",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed. I downloaded ERP's ESS/ESST datasheet (https://www.erp-power.com/wp-content/series-assets/ess-esst-series/datasheet-long/ess-esst-series-datasheet.pdf) and rendered p.11, Figure 7, at 200 and 600 dpi:\n- 84 x 40 x 25.2;\n- '2X - \u00d83.2' at 77 and 33, top-right and bottom-left corners;\n- '1.8 TYP' tabs at the base;\n- the leads leave at the base, about 2 above the mounting face.\nAt 600 dpi each hole sits 3.4-3.5 from both edges in a corner pocket about 9.5 x 9.5, so an M3 pan head and a driver bit fit.\n\nMy own build of O1 at ac459972da (scratchpad/b106/skeptic-wiring-and-code/py/sk_probe10.py, out/sk_probe10-O1.json) reproduces every number:\n- the real case overlaps the lane's M3 screws by 92.66 mm3 in both mirror cases;\n- the lane's M3 sits 16.57 from the nearest real hole;\n- the real holes are (-27.5, 38.5) and (5.5, -38.5), or mirrored;\n- SO-M3 centre to the box-screw hole's edge: 5.95, against PEM's 6.00 (zygology SO-M3-4ZI);\n- hex corner to the screw head: 1.53.\nA shift of 0.5-1.0 along y gives 6.3-6.7.\n\nThe CAD lines are as cited: crystal.py:899-900, 910-914, 924-926."
+   },
+   {
+    "id": "one-wago-for-two-poles",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed. components.json:1052-1060 orders 'one WAGO 221-412'. crystal.py:927-938 draws one 13.1 x 18.3 x 8.2 box: the two output leads go into one end, the two cord conductors into the other. WAGO calls the 221-412 a 'COMPACT splicing connector; 2-conductor' (product page).\n\nThe size the reviewer left UNVERIFIED appears in WAGO datasheet copies found by search (I did not open them): 13.1 wide, 8.3 high, 18.6 deep in the 2026 copy (13.2 x 8.4 x 18.6 in a 2024 copy); 24-12 AWG; 11 mm strip. So the BOM's 18.3 x 8.2 is slightly small.\n\nOne more point: a 221-412 takes both conductors through the same face. The drawn inline layout fits neither one nor two of them. Each pole's driver lead and cord conductor must come in from the same side."
+   },
+   {
+    "id": "strain-relief-tool-head-and-cover",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed from Heyco's sheet p.4-19 (https://www.hweckhardt.com/images/pdf/data/Heyco%20Original%20Strain%20Relief%20Bushings%20Round%20Cable.pdf):\n- SR 5MN-3 (#1157), SV/SVT 18/2, .220-.245;\n- hole .500 with a .450 flat; panel .062 maximum;\n- C .438 (11.1), headed 'BODY LENGTH';\n- 'Squeeze Pliers'; 'See pages 4-27 & 4-28 for SR assembly tools';\n- Recognized E15331; 94V-2.\nHeyco's schematic (https://www.heyco.com/wp-content/uploads/2024/09/4-19drawb_114.gif) runs C from the head's outer face to the body's end, so 11.1 is the overall length. I measure the head at about 0.42 of C, so about 4.6 (UNVERIFIED: the drawing is generic).\n\nUL 1598 5.2.1 (pdf p.35) reads as quoted, and NOTES (crystal.py:1520-1522) put the squeeze at installation. 17.21.1.1-.2 (pdf p.189): 156 N, at most 1.6 of movement.\n\nMy beam check (out/sk_geom10.json):\n- without the stop, 329 MPa and 2.22 mm;\n- the cover closes the 0.4 gap at about 28 N, and after that the canopy takes the load.\n\nHeyco's tool-free snap-in cordgrips: 'panels from .062 to .125'; the RSCG 500 is 30.7 long. Confirmed.\n\nOne more point: the CAD cuts a round \u00d812.7 in the cover (crystal.py:945). Heyco needs the 11.4 flat to stop the relief turning."
+   },
+   {
+    "id": "separation-not-yet-a-means",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "UL 1598 6.17.2.1-6.17.2.4 (pdf p.78) read as quoted. 'tie' occurs once in the whole commit, in the README (git show ac459972da, line 48). No tie, lance or clip is in crystal.py, components.json or NOTES.\n\nMy separations from the lane's polylines (py/sk_geom10.py, out/sk_geom10.json):\n- O1: 26.7 to the cord's conductors, 51.5 to the splice;\n- O2: 36.7 and 56.1;\n- in O1 the cord's axis is 26.0 from the snap bushing.\nThese agree with the reviewer to within about 1 mm.\n\nOne nuance that does not change the fix: the driver's output leads are factory wiring with 300 V insulation (6.17.1.1). The field-installed items that need 6.17.2 are the cord's conductors and the splices. Leaving 300 mm -XL output leads coiled would make them field-routed in practice, so cutting them at the factory is right."
+   },
+   {
+    "id": "plate-opening-11-5-3",
+    "stands": false,
+    "severity_ok": false,
+    "reason": "The text is quoted correctly (pdf p.116), but 'both \u00d816 and \u00d822 fail' is not established.\n- 11.5.1 lets a luminaire of 4.54 kg or less be taken down for access 'without additional access openings'. This one weighs about 2.75 kg: about 1.06 kg on the canopy side and the 1688 g lamp, by the v9 check.\n- 11.5.2's 4.5 kg on the leads is not reached.\n- The \u00d816 at (20, 26) reaches only r 40.8, inside a 4 in box (about r 49 inside), so it opens only into the box. 11.4's open-hole limits do not apply to it either.\nSo this is a note for the lab, not a should-fix.\n\nThe \u00d845 would do no harm. My clearances: SO-M4 centre 9.08 from its edge, box-screw hole edge 21.1, studs 21.3, real SO-M3 19.4. But it lies 18 from the snap bushing, so it would be a second opening, not the leads' path.\n\nTwo valid leftovers, both text items:\n- the plate callout (crystal.py:1117) still says '\u00d822 ... rolled edge' while the CAD cuts a plain \u00d816 (crystal.py:887);\n- deburr that opening (UL 1598 5.1.3)."
+   },
+   {
+    "id": "ground-path",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed:\n- the green screw is at (0, 56) (crystal.py:884-885), its head 1.25 past the enclosure;\n- the plate's only opening is the \u00d816 at (20, 26) (crystal.py:886-887);\n- NOTES (crystal.py:1516-1517) still say 'the supply wired in it'.\nUL 1598 6.14.2.2 (pdf p.69) allows 'a pigtail lead grounding conductor' at the supply connection, and 6.14.2.5 sets 18 AWG as the minimum.\n\nThe reviewer is too generous on fit.\n- My line from the opening to the screw passes 2.6 from the box-screw head and 2.4 from the real SO-M3's hex corner, not 3.9 and 3.4.\n- At the opening itself, the snap bushing's head sits right under the \u00d816: \u00d812.7 x 1.5 as drawn; the SB 375-3's head is .47 in (11.9).\n- So the conductor must bend flat against the plate within the 2.0-2.5 left above that head. A bare 12 AWG only just fits, with a sharp bend over the opening's edge; an insulated one does not.\nThe factory 18 AWG pigtail, or a green screw whose terminal sits inside the box's footprint, is needed, not just better."
+   },
+   {
+    "id": "shared-m3-order-and-service",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed:\n- the box screws at (0, \u00b144.45) (crystal.py:813-816) lie inside the enclosure's y \u00b150 (crystal.py:888);\n- the M3s go 'through the driver's tab (1) and the top (1)' into the plate's standoffs (crystal.py:899-909);\n- NOTES (crystal.py:1516) put the plate's screws first;\n- ERP p.11: 'must be secured on a flat surface through the two mounting tabs'; 154 g.\nThe 0.3 kg dangling load is far under UL 1598 11.5.2's 4.5 kg.\n\nThe fix (driver fixed to the top at the factory, enclosure on its own four fixings) is sound. It misses one consequence, the slack in the 120 V leads; see missed."
+   },
+   {
+    "id": "polarity-not-identified",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "UL 1598 5.2.7 (pdf p.35): 'Conductors intended for field connection shall have matching identification by color, number, letter, or other acceptable means.' ERP p.11: LED+ red, LED- black.\n\nThe cord row (components.json:567) names no ribbed or colored conductor, and NOTES (crystal.py:1520-1523) have no polarity step.\n\nERP lists open-load protection, so a reversed cord most likely just leaves the lamp dark. The LEDs' reverse rating is UNVERIFIED."
+   },
+   {
+    "id": "claim-7-centred-in-50-possible",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "It stands as a question to settle, not yet as a third option for the owner.\n\nThe height is right:\n- my build gives 9.8 under the real 25.2 driver in O1's 50 (out/sk_probe10-O1.json);\n- the stack is 3.0 + 4.4 + 1.0 + 7.4 + 25.2 + 1.0 + 4.0 + 1.6 = 47.6 (out/sk_geom10.json);\n- the lane's arithmetic (README:7-11) does assume the relief in the cover.\n\nTwo cautions.\n(a) 'v8's flush gland' never existed as a part. v8's canopy grip was the Lapp 53112005 gland (components.json at 310be83c66, row hemi-canopy-grip: 'its dome nut under it'), 32.5 long. The v8 check found it could not be fitted. 'A turned 6061 gland ... its nut flush' is a stale v6 note still printed on the canopy sheet (crystal.py:1050-1051). So this branch needs a new made gland that grips a textile-braided cord to 156 N with at most 1.6 of slip, inside a 3.0 floor plus 3.4 or less. That is unproven, and its pull would end on the canopy's two M4 set screws.\n(b) The no-grip branch rests on 11.6.6's second sentence (pdf p.117) against 5.15.1.1 and 6.15.1.3 (pdf p.44 and p.74). 5.15.2.4 (pdf p.45) also waives a canopy-end relief for cord pendants given a field method 'such as a knot', but a knot in \u00d86 cord does not fit in 9.8.\n\nThe coordinator and the lab should settle it before the owner sees it (the owner's rule: technically possible first)."
+   },
+   {
+    "id": "o2-height-more-than-needed",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "The arithmetic is reproduced: 47.8 + jacket + turn = 55.2 to 59.8 (out/sk_geom10.json). With real parts O2 keeps 2.7-4.3 spare under 21.8.\n\nTwo small slips:\n- The 2.4 under the v9 cover does hold a 1.65 ISO 7380 head, with 0.75 clear. Only the relief's head fails there.\n- An SVT 18 AWG conductor is about 2.0-2.2 across (inside a 5.6-6.2 jacket), so 2.7 is conservative. It fits SPT-2-type conductors.\n\nWith the jacket nearer the lane's 6, O2's surplus is about 2-4, not 7. The note level is right."
+   },
+   {
+    "id": "mains-leads-and-box-fill",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed:\n- ERP p.2 lists ESS010W-0180-42-XL, with note 2: 'extended wire leads 12 in (300 mm) long'. The BOM still names the plain -42 (components.json:888).\n- Heyco SB 375-4 (#2030): .375 hole, .25 ID, panels up to .125, E15331. The SB 375-3 is .41 (10.3) tall (heyco.com snap-bushings page).\n- UL 1598 6.15.1.1(a) and 6.15.1.6 (pdf p.73-74).\n- Box fill: 4 x 2.25 = 9.0 in3 against 15.5 (NEC Table 314.16(A)).\n\nOne addition: hung base-up, the input leads leave about 2 under the steel top. They must drop below the bushing's body (about 7) and turn up into it. That adds about 10-15 to the route and still leaves 200 or more in the box."
+   },
+   {
+    "id": "zero-to-ten-volt-no-entry",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed. ERP p.9 allows the purple and pink leads to be 'individually capped or cut off'. NOTES (crystal.py:1533) and the driver row (components.json:888) still offer 0-10 V, and the only two entries are the 120 V bushing and the cord's relief. Saying phase-cut only, or adding a third entry, is right."
+   },
+   {
+    "id": "thermal-ok",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "ERP pp.3-4: 'nominal efficiency of 82%' for ESS010/015; Tc -30 to +70 in operation and +90 maximum; 5 years at Tc 70 C or less.\n\nRebuilding his network by hand gives the same terms:\n- about 20 K from the driver to the enclosure, at his worst base contact;\n- about 5 K from the enclosure to the canopy;\n- about 4 K from the canopy to the room.\nHis 0.05 W/K base contact is pessimistic: even a 0.1 mm air film over the base gives about 0.8 W/K. So 'within limits' is safe, pending UL 1598 clause 15's test."
+   },
+   {
+    "id": "driver-real-recognized",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed. ERP p.5: 'UL8750 recognized Class 2'. ERP p.11:\n- plastic case, IP64, V-0, 154 g;\n- lead colors and gauges as stated;\n- 152 mm leads (300 on the -XL), 105 C, 300 V;\n- every lead at the base.\nThe 7 mm end gaps follow from 98 - 84."
+   },
+   {
+    "id": "pem-and-cover-screws",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "The PEM data match the zygology catalogue pages:\n- SO-M3-4ZI: hole 4.22 +0.08, sheet 1.00, 6.00 to an edge, H 4.8;\n- SO-M4-4ZI: hole 7.14 +0.08, sheet 1.27, 8 to an edge, H 7.9.\nThe CAD uses (5.4, 6.4) for M3 (crystal.py:900). The thread-length and head-height arithmetic checks."
+   },
+   {
+    "id": "fixings-check-passes-but-blind",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "I reran it on my own export of ac459972da:\n- HEMI_WIRING=O1, lock off: 'fixings_check: ok', exit 0 (out/sk-fixings-O1-lock0.txt);\n- HEMI_WIRING=O2, lock off: 'fixings_check: ok', exit 0 (out/sk-fixings-O2-lock0.txt).\nAs he says, it sees only overlaps. My real-case overlay finds the 92.66 mm3 that it cannot see, and the stale callouts are at crystal.py:1115-1118."
+   }
+  ],
+  "verdict_ok": true,
+  "missed": [
+   "O1: two of the reviewer's fixes collide. Suppose the real relief head is about 4.6 and the first fix is taken (5.5-6 under the cover). Then only about 8.2 is left under the real driver, less than one WAGO 221-412 (8.3), and the reviewer's '1.5 to spare' becomes -0.1 (out/sk_geom10.json). In O1, either drop the floor grommet's inside flange, which keeps 9.8, or lay the splices on the cover in the strip. In O1 the strip also carries the cord's rise and the 120 V route. O2 has room either way (about 20 under the driver).",
+   "In every option, the 156 N cord pull ends on the canopy, not on the enclosure.\n- The 1.0 cover closes its 0.4 gap at about 28 N.\n- The load then goes through the floor grommet's flange (crystal.py:948) into the canopy floor.\n- From there it goes into the canopy's two M4 cup-point set screws on the plate's 1.6 rim (crystal.py:823-826; BOM M4 x 4).\nThe v9 checks found that fit untoleranced: an M4 x 4 stands 0.8 proud or bends the rim, and an M4 x 3 reaches the rim only with the nominal 0.2 gap. So the canopy's hold is the real 17.21.1 risk in O1, O2 and the third way alike. A relief anchored in the enclosure (beside a cover screw, or in a stiffer cover) avoids it.",
+   "The slack in the 120 V leads at installation. The box screws lie under the enclosure, so the driver and enclosure hang on the 300 mm leads while the plate is screwed up. To swing them clear of the screwdriver, the installer needs roughly 50-100 mm of lead below the plate. Afterwards that slack must be pushed back up through the \u00d816, past the bushing's head, into the box. Otherwise it ends up coiled in the enclosure and defeats the 'reliable routing' (UL 1598 6.17.2.2(b)) that the separation fix relies on. NOTES (crystal.py:1516-1517) say nothing about it, and still say 'the supply wired in it'.",
+   "UL 1598 5.2.1's first sentence (pdf p.35): 'All splices and electrical connections shall be completed at the factory, unless packaging requires partial disassembly.' The Class 2 lever splices made at installation rely on the lab accepting a cord cut to length on site as that reason. This holds for O1, O2 and the third way. Ask the lab directly. The fallback is a factory-connected cord in set drop lengths.",
+   "Heyco gives .062 as the SR 5MN-3's maximum panel: 'Part has additional clearance. Consult Heyco for your Custom Finished Fit Panel Thickness'. In the 1.0 cover the relief may float axially by up to about 0.6 (UNVERIFIED). That play adds to the cover's 0.4 to the stop, against 17.21.1's 1.6 limit. Ask Heyco for a 1.0 fit, or thicken the cover.",
+   "Two things in the verdict should not be passed on as stated.\n- 'Every fix ... is the same for both' is not quite true. The separation means differs (a barrier across O1's strip; a fixed splice place in O2), and the relief-head fix squeezes the splices' room only in O1.\n- 'A centred cord fits 150 x 50' is true only of the height. The grip it needs does not exist yet ('v8's flush gland' was a stale note, not a part), and the no-grip route waits on the lab.\nNeither should reach the owner as a third option until a grip is named and drawn, or the lab answers on 11.6.6."
+  ]
+ },
+ "skeptic:third-way": {
+  "verdicts": [
+   {
+    "id": "T1-driver-on-edge-keeps-150x50",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "The core claim holds, but the T1 as drawn needs fixing first. I built today's v9 canopy for top A without the lock (HEMI_WIRING unset) from my own export of ac459972da (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/py/sk_probe.py). It gives an inside height of 45.4, box screws at (0, \u00b144.45), brackets from |x| 37 and the plate's underside at z 48.4. The reviewer's tw.py and check.py, rerun on that build, give the same 0 clashes and the same clearances (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/out/rev-check-T1.txt).\n\nThree errors in the drawing:\n- It mirrors ERP's outline. ERP's p.11 figure 7 is third-angle: its right-side view puts the LED leads 14.7 to 16.7 from the front and the output pocket at the back, which matches the top view. With the base on the outer wall and the input end at +y, the input leads leave at z 15.4/17.6 (drawn at 33.9/38.9). The LED leads leave at z 31.0/33.1, but the bushing is drawn at z 20. The tab holes land at (y 27.7, z 44.4) and (y -49.7, z 11.1).\n- As drawn, the output leads have 1.0 of length to move 11 in z and 2.5 in x into the bushing. A 1/4 in bushing also cannot be centered on the leads: its \u00d89.5 flange needs x >= -29.25, and the leads leave at x -31.5.\n- The tab fixing is not drawn. A nut outside the outer wall at the input-end hole overlaps the gripper bracket's flange (0.88 mm3).\n\nA corrected T1c passes at zero tolerance with 0 clashes. It has:\n- the tray at y -58 to 41 (99 long) and the driver at y -51 to 33, leaving end gaps of 6 and 7;\n- the bushing at x -29, z 32, and the plate opening at (-21, 36.5);\n- flush studs for the driver's tabs;\n- Heyco's C of 11.1 with a 4.7 head.\nClearances: tray to the plate rim 2.26, output leads to the canopy 3.17, and output leads to a \u00d86 screwdriver on the box screw 1.8 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/py/sk_check.py, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/out/sk-check.txt).\n\nThermal is on par with O1 in the wiring lens's own lumped network. The worst case in a 35 C room gives a Tc of 64.2 to 65.7 C, against 63.6 C for O1 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/out/sk-thermal.txt). Should-fix is right. ERP must still OK mounting the driver on edge: p.11 only says 'secured on a flat surface through the two mounting tabs'."
+   },
+   {
+    "id": "T1-what-it-needs",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Every item on the list is correct, but the list is incomplete.\n\nWhat I checked:\n- ERP p.11 says 'must be secured on a flat surface through the two mounting tabs'. I found no orientation rule anywhere in the datasheet text.\n- UL 1598 4th ed. reads as quoted: 6.14.2.2 ('in the same location as the power supply connection means'), 5.2.1, 5.2.7, and 17.21.1.1 (156 N for 1 min, cord movement under 1.6 mm).\n\nWhat it misses:\n- The tab method it implies (screws from the pocket side before the U closes) leaves a nut outside the outer wall. At the input-end hole that nut overlaps the gripper bracket's flange (0.88 mm3). The fix is PEM flush-head studs pressed into the wall from outside, with the nuts in ERP's pockets: 2.19 clear.\n- The plate opening moves to about (-21, 36.5) once the tray is lengthened for a real output-end gap.\n- The strain-relief bracket's fasteners through the inner wall must be flush inside, because the driver's top face is 0.8 away.\n\nThe NEC 2023 numbering is still UNVERIFIED."
+   },
+   {
+    "id": "C-strain-relief-in-floor",
+    "stands": false,
+    "severity_ok": true,
+    "reason": "The geometry reproduces (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/out/rev-check-C.txt): 0 clashes, the enclosure 1.6 from the box screws and 5.0 from the brackets. Heyco's table does give SR 5M-3 a 2.5 maximum panel.\n\nAs a runner-up it fails on installation, which the finding never walks through:\n- The strain relief sits in the canopy's floor, and the canopy is the part that slides up the cables last.\n- The cord's two conductors (about 40 from the floor to the bushing in the cover) must be spliced in the strip inside the enclosure, which is fixed to the plate.\n- Splicing needs the canopy lowered, and the slack this leaves then has to fold into the 3.0 under the cover.\n\nO1, O2 and T1 all keep the strain relief on parts fixed to the plate, so their canopy slides freely on the cord. C's 3 mm margin also rests on the UNVERIFIED 4.7 head. Note-level is fine, but C should not be offered as second best as drawn."
+   },
+   {
+    "id": "O2-height-overstated",
+    "stands": false,
+    "severity_ok": false,
+    "reason": "Half right.\n\nThe right half: Heyco's C (.438 in, 11.1) is the overall length. On the side view, C's arrow spans both the head and the body, and the head is about 42 % of it (my read: 154 of 362 px). So the lane's drawn relief (3.0 head + 1.0 cover + 8.5 body = 12.5, crystal.py:943-944) is about 1.4 too long.\n\nThe wrong half: the reviewer's 58.4 puts the 4.7 head 0.5 above the floor. But the floor grommet's \u00d816 x 1 flange sits directly under the head on the same axis (crystal.py:861; for O1 and O2 at :948). The 58.4 also drops the lane's 1.5 spare.\n\nMy stack reproduces the lane's 62.0 exactly, then gives (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/out/sk-o2-stack.txt):\n- 60.8 (+10.8) with Heyco's 11.1 and the lane's allowances;\n- 59.3 (+9.3) without the spare;\n- 55.3 (+5.3) only if the jacket is cut to 3 and the turn to 5.\n\nSo '+4 to +8 would do' is not supported. The real correction is 1 to 3 mm, which is a note. Showing the owner '+4' would mislead him more than '62'."
+   },
+   {
+    "id": "relief-head-may-not-fit-4.4",
+    "stands": true,
+    "severity_ok": false,
+    "reason": "Confirmed as a risk, and it is worse than a note.\n\nIn O1 and O2, the 4.4 under the cover (crystal.py:877) must hold both the grommet's 1.0 flange and the relief's head, which share the cord's axis (:948, :943). So any head over 3.4 bears on the flange (not on the floor, as the finding says). Heyco publishes no head thickness (UNVERIFIED; my search found none), but its side view gives about 4.7.\n\nThis should be should-fix because O1's stack has no slack: floor 3 + 4.4 under the cover + cover 1 + 10 under the driver for the 8.2 splice + driver 25 + top 1 + gap 4 + plate 1.6 = 50.0. A 4.7 head with ERP's real 25.2 driver leaves about 0.3 over the splice. So the claim that O1 keeps 150 x 50 depends on measuring a real part."
+   },
+   {
+    "id": "one-splice-cannot-join-two-poles",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed.\n- WAGO's cut sheet (AutomationDirect 221-412/K007-0000) says '2 openings', 'side-entry', 24-12 AWG, UL Listed E201573/E69654.\n- components.json:1052-1055 orders one 221-412 for the cord's two conductors and the driver's two output leads.\n- crystal.py:927-938 draws one box, with the leads entering one end and the conductors the other. A side-entry part cannot take wires from both ends.\n\nEach pole needs its own splice: two 221-412s, or two inline 221-2411s. Should-fix is right."
+   },
+   {
+    "id": "a-no-slimmer-listed-driver",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "The data I spot-checked are as cited:\n- LTF DA15W350C1042-3001: 350 mA, ELV and TRIAC, Class 2, '95 (77) x 31 x 21mm'.\n- Fulham T1T11200350-15L: 350 mA, leading or trailing edge, cURus Class 2.\n- ERP's -XL leads are 300 mm (model table, note 2).\n\nThe conclusion only covers the makers searched, as the finding says. T1 does not depend on a slimmer driver. Note is right."
+   },
+   {
+    "id": "b-right-angle-or-low-reliefs-no-gain",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Heyco's right-angle table row checks out: SR 15-1, .500 hole with a .450 flat, panel .100, .39 (9.9) and .69 (17.5), for SV/SVT 18/2 and 18/3. A right-angle part turns the cord parallel to the panel on the outside, so it gains nothing in the 3.4 left under a cover above the grommet flange. I did not verify the Lapp figures. Note is right."
+   },
+   {
+    "id": "e-remote-driver-bar-only",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Checked:\n- UL 1598 10.5.3 reads as quoted (the constant-current marking for a remote driver).\n- ERP's case is 84.7 cm3, or 5.16 in3 (p.11).\n- A 4 x 1-1/2 octagon box is 15.5 in3 (NEC Table 314.16(A)).\n- The driver is only 'UL8750 recognized', so it needs an enclosure.\n\nThe NEC 2023 numbering is UNVERIFIED, as the finding says. Note is right."
+   },
+   {
+    "id": "driver-outline-placeholder",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed against ERP's p.11 figure 7: 84 x 40 x 25.2, two \u00d83.2 holes 77 x 33 apart in diagonal corner pockets, 1.8 TYP tabs, and the leads about 2.5 above the base. crystal.py:911-914 draws a 40 x 74 body with 20 x 6 x 1 end tabs and holes 80 apart at (-11, \u00b140). crystal.py:899 puts the M3 standoffs on those holes.\n\nThe reviewer's own T1 got the next detail wrong:\n- the input leads are near the back edge (7.5 to 9.7 from it);\n- the LED leads are mid-width (23 to 25) and the dimming leads at 31 to 32;\n- the input-end hole is at the front, the output-end hole at the back."
+   },
+   {
+    "id": "ranking",
+    "stands": false,
+    "severity_ok": true,
+    "reason": "- #1 (T1) holds once it is corrected: my T1c has 0 clashes.\n- #2 (C) fails on installation. Its strain relief rides on the sliding canopy while the splice is inside the enclosure fixed to the plate.\n- #3 ('O2 re-measured, about 54 to 58') is about 59 to 61 under the lane's own allowances, once the grommet flange under the head and the spare are counted (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/out/sk-o2-stack.txt).\n\nA fair order would be:\n1. T1, corrected.\n2. O1 (150 x 50 with the cord 20 off center, pending a measured head).\n3. O2 at about 61 (+11).\n4. C, only with a workable install sequence.\n5. The remote driver, for fit-outs."
+   }
+  ],
+  "verdict_ok": true,
+  "missed": [
+   "T1 cannot be wired as drawn, because tw.py places ERP's leads and tab holes mirrored. ERP's p.11 figure 7 is third-angle: the right-side view puts the LED leads 14.7 to 16.7 from the front and the output pocket at the back, which agrees with the top view. With the base on the outer wall and the input end at +y:\n- the input leads leave at z 15.4/17.6, not 33.9/38.9;\n- the LED leads leave at z 31.0/33.1, against a bushing drawn at z 20;\n- the dimming leads leave at z 38.6/40.2;\n- the tab holes are at (y 27.7, z 44.4) and (y -49.7, z 11.1).\nThe output end has 1.0 of lead before the bushing, and a 1/4 in bushing cannot be centered on the leads (its flange needs x >= -29.25; the leads are at x -31.5). The fix is the tray at y -58 to 41 with end gaps of 6 and 7, the bushing at (x -29, z 32) and the opening at (-21, 36.5). That passes with 0 clashes, 2.26 to the plate rim and 3.17 from the leads to the canopy (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-third-way/out/sk-check.txt). The sheet's T1 section (third-way/out/third-way-sections.jpg) shows the leads the wrong way round and needs redrawing before the owner sees it.",
+   "T1's driver-tab fixing sits beside the gripper bracket. The input-end hole (y 27.7, z 44.4) faces the -x bracket's flange (x <= -37, y 22.6 to 36, z 46.8 to 48.4) across the 2.0 gap. The method the reviewer implies leaves a nut outside the wall, and an M3 hex nut there overlaps the bracket (0.88 mm3). Use PEM flush-head studs pressed into the outer wall from outside, with the nuts in ERP's pockets (2.19 clear). Under the reviewer's own mirrored reading, a nut outside would instead hit the tray's hanging-stud nut (14.0 mm3).",
+   "'There is no 120 V wiring in the canopy at all' is wrong, both in the finding and on the sheet ('no 120 V in the canopy'). The driver's 120 V input leads run inside the tray, inside the canopy, up through the plate. The tray and the plate are their enclosure, so:\n- the tray's rim must close on the plate with no opening over 1.6 (UL 1598 6.17.2.4);\n- both parts of the tray must be bonded (6.17.2.3(a));\n- the strain-relief bracket's fasteners must not stand into the 0.8 gap at the driver.\nDo not tell the owner there is no line voltage in the canopy.",
+   "Runner-up C cannot be installed sensibly, and the reviewer never checked its install sequence. Its strain relief is in the canopy's floor, and the canopy is the part that slides up the cables last. Meanwhile the cord's conductors, about 40 from the floor to the bushing in the cover, must be spliced inside the enclosure, which is fixed to the plate. Any slack left to splice with the canopy lowered has to fold into the 3.0 under the cover. O1, O2 and T1 keep the strain relief on parts fixed to the plate.",
+   "The claim that O1 keeps 150 x 50 depends on the strain relief's head. O1's stack has zero slack (3 + 4.4 + 1 + 10 under the driver for the 8.2 splice + 25 + 1 + 4 + 1.6 = 50), and the grommet's 1.0 flange sits under the head (crystal.py:948). A head of about 4.7, as Heyco's side view suggests, leaves about 0.3 over the splice with ERP's real 25.2 driver. Measure a part before the owner is told O1 keeps 150 x 50.",
+   "Minor, in T1: the strain-relief bracket cantilevers about 9 off the tray's 1.0 inner wall, whose top edge is free. If the lab runs 17.21.1 (156 N for 1 min, the cord moving under 1.6), the bracket's flex counts against that limit, so hang the bracket from the plate or stiffen it. With Heyco's C of 11.1 (a 4.7 head), the cord's 2.5 S-bend also shortens to about 11 between the grommet and the head."
+  ]
+ },
+ "skeptic:owner-pictures": {
+  "verdicts": [
+   {
+    "id": "sheet-not-for-the-owner",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed: the sheet can't go to the owner as it is. It bundles the open tiers and lock sheet (make_options_sheet.py:7 and :26). It has no rendered picture of the canopy, only silhouettes, sections and plans. It is full of jargon and asks no question. My text measurements agree (py/text_rows.py): the heading is 33 px and the body 25 px, which is 3.4 and 2.6 pt on a 390-pt phone.\n\nTwo of the reasons don't hold as stated:\n- The phone test is not a known owner need. The coordinator's own sheets that already went to the owner fail it the same way: hemisphere-lock-or-not-2026-11-24.jpg measures 2.1-2.7 pt and hemisphere-tops-today-A-B-2026-11-24.jpg 2.9-4.6 pt.\n- Those sheets are also in mm ('\u00d821, 29 out', '104 across x 5 tall'), so mm alone does not break house practice.\n\nSmall number errors: the left panel is 1,071 px plus a 30 px gap, not 1,130, and the legend has 14 items, not 13.\n\nThe real breaches of the owner's rules are two questions on one sheet, no picture references, jargon, and British spellings ('centre', 'centred')."
+   },
+   {
+    "id": "sheet-true-to-cad",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "My scripts are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-owner-pictures (py/probe.py, out/probe_v9_A0.json, probe_O1_A0.json, probe_O2_A0.json).\n\nMy own rebuild of ac459972da (top A, no lock) gives:\n- canopy z 726-776, and 726-788 in O2;\n- floor holes \u00d83 at \u00b148, plus \u00d812 at (20, 0) in O1, \u00d812 at (0, 0) in O2 and \u00d812.5 at (0, 0) in v9;\n- enclosure 36 and 48 tall plus the 1.0 cover;\n- driver to cover 10.0 and 22.0;\n- splice to driver 1.5 and 13.5;\n- strain relief 8.5 inside, 4.4 under the cover.\n\nThe sheet's scale, taken from each view's own 25 mm grid rather than the canopy (py/sheet_grid.py):\n- 2.917 px/mm in all three outside views;\n- canopy 149.5 x 49.7, 149.5 x 49.7 and 149.4 x 62.0;\n- O1's cord 19.8 off center, 5.8 wide.\nThe sections also share one scale: the walls span 547.5 px in all three rows (py/section_scale.py).\n\nCitation nits: the y-limits at wiring_options.py:47 are not shared (they depend on zt), but the views are limited by their width, so the scale still matches. The sections' limits are at :73, not :75."
+   },
+   {
+    "id": "sheet-omits-how-o1-reads",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed. wiring_options.py:43-47 projects onto x-z and stops 90 mm below the floor, and crystal.py:729 slants the cord's top end out to (20, 0).\n\nMy probe puts the cord at x 19.97 at the floor, 10.0 at 300 below and 0.67 at 580 below. My own front view (py/views.py, out/views.txt) gives cable-cord-cable gap ratios of 2.45, 1.89 and 1.00, and leans of 1.91 deg for the cord and 3.02 deg for each cable.\n\nTwo small points:\n- The sheet's plan 'from below' does show the grommet off center, but as a parts plan, not as anyone sees it.\n- 'Nearly parallel' is loose: the gap to the near cable closes from 28 to about 16 mm."
+   },
+   {
+    "id": "o1-offset-reads-as-a-mistake",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "My own perspective code (py/views.py, out/views.txt) reproduces the numbers.\n- Standing: 13.3, 12.1 and 9.5 % of the width at 90, 64.3 and 45 deg; nothing sideways at 0 deg; 21.6-41.0 arcmin.\n- From the stool, the exit sits 0.23-0.31 of the way to the rim from all four sides, at 37-70 arcmin of true angle. That includes the far side, which the reviewer skipped (0.29-0.31).\n- Wolfe essay 3.1 ('Hyperacuity') does give threshold \u2248 separation/60 for Vernier and bisection tasks, so 8x (against the canopy's width) to 13x (against the 96 mm cable span) holds.\n- The plate's holes are round in v9 too (crystal.py:813-815).\n\nTwo flaws in the reasoning:\n- 'Everything else is round and centered' is untrue. In every option the cord bows about 21 mm to one side at mid-drop by design (crystal.py:721-729; my probe has y 21.21 at 300 below in v9, O1 and O2), and the reviewer's own preview row 3 shows it.\n- The box sets the cables' line in every option, so 'lamps in a row can point different ways' is not O1's problem alone.\n\nThe core judgment, a visible near miss seen from most directions and from below on every side, stands."
+   },
+   {
+    "id": "o1-offset-can-only-point-at-a-cable",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed. The driver spans x -31..9 (crystal.py:911) and the enclosure \u00b132 x \u00b150 (:888).\n- The end strips (y 37..49) are 12 wide, narrower than the strain relief's \u00d814-16 head.\n- An enclosure turned onto the cables' line (x \u00b150) would overlap the brackets (x 37-59, y \u00b136, z 740.5-774.4 by my probe) and the grippers.\n\nLine nit: the bracket box is at crystal.py:769-774. Line :764 is the plate's underside."
+   },
+   {
+    "id": "o2-reads-as-a-thicker-normal-canopy",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "My numbers agree:\n- the visible band goes from 76.8 to 95.5 arcmin at 2 m under a 2.4 m ceiling (+24 %), and from 60.7 to 75.8 from a stool (+25 %);\n- the whole outline grows 9-11 % standing and 4-5 % from a stool;\n- the proportion goes from 1:3 to 1:2.4;\n- 12/776 is 1.5 %.\nThe volumes match my build: canopy 117,670 to 134,295, enclosure 17,744 to 21,632, brackets 9,249 to 10,939 mm3, which is +88.7 g. The splice gaps of 1.5 and 13.5 match. The live lines are as quoted at main 1e7460909a (site_fix.py:567, :569, :570; site_v2.py:2294).\n\nTwo corrections:\n- In O1 and O2 the grippers sit at the same height (z 733.0-753.1), and the lamp hangs from the cables. To keep 776, the cables and the cord would both have to be 12 mm shorter, not 'the standard cord'.\n- The canopy's weight line ('about 0.9 lb') is already wrong for v9: about 2 lb per the v9 sheet-and-owner critic. O2 does not just change it."
+   },
+   {
+    "id": "references-canopy-heights",
+    "stands": false,
+    "severity_ok": true,
+    "reason": "The maker data check out:\n- Arrangements Small Rose: 150 x 70, power supply integrated;\n- Coordinates S1: 149 x 71, integrated electronics;\n- Noctambule S1 Low Cylinder Cone: 187 x 45, 'Ceiling rose houses the power supply unit';\n- IC Lights S1: 113 x 32, bulb;\n- Skygarden 1: 146 x 36, bulb.\n\nThe conclusion does not hold. The Blackjack Tria 5 in Small Pendant has a canopy 5 in across and 1.5 in tall (127 x 38 mm). Its sheet says 'Driver located in canopy housing' (7 W, TRIAC): https://blackjack-webflow.s3.us-east-2.amazonaws.com/Spec+Sheets/Tria-5in-Small-Pendant-SpecSheet-v2023b.pdf. So 45-71 mm is not the range for canopies that hold a driver. 'Today's 50 is slim' was already undercut by the reviewer's own Noctambule (45 mm).\n\nBocci 14.1's sheet says its power supply is 'housed within junction box', which says more than 'elsewhere'. O2's 62 is still a normal height."
+   },
+   {
+    "id": "references-off-center-cords",
+    "stands": false,
+    "severity_ok": true,
+    "reason": "The LED Supply page checks out: 5.00 x 0.25 in, a 3/8 in center hole and an optional 5/8 in power hole whose position is not given. The Artemide Tolomeo page returned 403 to me. The reviewer did not open the Nora or Lumenwerx PDFs. The core claim is a negative the reviewer marked UNVERIFIED, and I could not confirm it either. Present it as an impression, not a reference."
+   },
+   {
+    "id": "canopy-in-no-picture",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed.\n- lamp_site.py at ac459972da does not contain the word 'canopy' anywhere. Lines :370-432 load the listed parts, and canopy.stl exists only in lamp-site-meshes/out-dome-pendant/stl/.\n- Lines :1031-1033 hang the house frames with the cord out of the top of the frame. Lines :812-818 put the in-use room's ceiling at 2.40-2.42, and :1086-1088 hang the rim at 1.25.\n- I viewed bar-pendants.webp, where the cords run out of the frame, and home-ice-wide-1600.webp, where they vanish into a dark beamed ceiling. Neither shows a canopy.\n- The dims drawing comes from launch/dims_drawing.py:125-144 at ac459972da, with the cord centered at :129-130. hemisphere-dims.png is on origin/r47-site-next only (0b8ef9131b), not on main.\n\nMissed: that drawing shows no cables at all, so it is wrong for every option, not just O1. The in-use room's 0.37 m gap only arises with the standard 600 drop; a longer drop is a valid install."
+   },
+   {
+    "id": "owner-sheet-spec",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "The render route checks out at ac459972da: lamp_site.py:232 (the cap's satin black), :215-217 (HEMI_ROT), :800-830 (room()), :814 (ceiling), :1089 (DOMECAM), :1181-1186 (HOUSE_CAM's 8th value), :433 (LIGHTS_OFF) and :1080 (ROOM_FILL).\n\nOne contradiction must be fixed before use:\n- The spec keeps 'the same lamp height (O2's cord 12 mm shorter)'.\n- Step 3 hangs O2's rim at ceiling - 0.788, and row A says 'standard drop'.\nThe lamp hangs from the cables, so the same height needs new suspension and cord-v6 meshes with a 588 drop. Otherwise the columns differ in two things at once. Pick one and say which on the sheet.\n\nThe phone-first layout does no harm, but it is not a known owner need."
+   },
+   {
+    "id": "question-order",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "README:37-38 is quoted correctly, and the canopy's parts do turn with a0_ (crystal.py:658, :798, :952), so the canopy question is independent of the tiers and the lock.\n\nBut 'waiting costs little' leaves out that the README says V10-2 to V10-12 are 'Not started until the owner picks'. Holding the question until third idles the lane's whole list. That stays true unless the coordinator now releases the items that don't depend on the choice: everything except V10-2's green screw and V10-3's sheet-metal holes."
+   },
+   {
+    "id": "draft-question",
+    "stands": false,
+    "severity_ok": true,
+    "reason": "The conversions are right: 150 mm = 5.9 in, 50 = 2.0, 20 = 0.79 (about 3/4), 12 = 0.47 (about 1/2), 62 = 2.44, 70-71 = 2.8.\n\nAs text for the owner it is still wrong in two places:\n- 'Otherwise perfectly round' is untrue. The cord bows about 21 mm to one side by design, and two cables hang beside it.\n- 'About half the room the cord needs' uses the lane's 21 mm, which counts 8.5 mm of strain relief. The v9 wiring critic said UL 1598 11.6.6 does not require that on a cable-hung cord and proposed a low grommet in the 11.8, so the figure is contested.\n\nIt also leaves out what O2 costs at the standard drop: the shade hangs 1/2 in lower, or the standard drop changes."
+   }
+  ],
+  "verdict_ok": true,
+  "missed": [
+   "The reviewer's own Bocci reference points to a third way it never raised. Bocci 14.1's sheet says 'POWER SUPPLIES: integral (power supply housed within junction box)', with a canopy 116 x 7 mm. With the driver in the outlet box, today's 150 x 50 canopy would hold only the Class 2 cord and its splice, with the cord centered. Pass this to the third-way lens before any owner question. Whether ERP's ESS fits a 4 in box is UNVERIFIED (box fill, depth, and its two mounting tabs). https://cdn.shopify.com/s/files/1/0435/8032/6038/files/14.1_SpecInstructions.pdf",
+   "The draft's premise could mislead the owner. 'Only about half the room the cord needs' uses the lane's 21 mm: 8.5 of strain relief, 6 of jacket and 6 for the turn. The v9 wiring critic (critic:wiring-and-code, canopy-still-cannot-be-wired) said a cable-hung lamp's cord needs no strain relief (UL 1598 11.6.6) and proposed a low grommet in the 11.8. Tell the owner the cord can't be centered only after the third-way lens says so, and use that lens's figure.",
+   "The proposed reference strip leans toward O2. It shows only Flos's 70-71 mm canopies with a power unit and a 32 mm one without. Two references show that 50 mm with a driver is also normal:\n- the reviewer's own Flos Noctambule: 45 mm, power supply in the ceiling rose;\n- the Blackjack Tria 5 in pendant: a 127 x 38 mm canopy with the driver in it, 7 W.\nCanopy height does not separate the two options; the off-center cord does. Put a 45-50 mm example beside the 70 mm ones.",
+   "Every column must show the cord's existing bow honestly. In all options the cord bows about 21 mm sideways at mid-drop by design (crystal.py:721-729; my probe gives y 21.21 at 300 below the floor in v9, O1 and O2). Seen along the cables, it is the most visible asymmetry, and it is the same in all three. Neither the spec's rows nor the draft mention it, and the draft's 'otherwise perfectly round' denies it.",
+   "The owner-sheet spec contradicts itself on lamp height. It asks for 'the same lamp height (O2's cord 12 mm shorter)', but its step 3 hangs O2's rim at ceiling - 0.788. My probe puts the grippers and cables at the same height in O1 and O2 (grippers z 733.0-753.1). So the same height means re-exporting the suspension and cord-v6 with a 588 drop; otherwise the columns change two things at once. The o2 note's 'unless the standard cord is cut 12 mm shorter' has the same slip: it is the cables (and the cord).",
+   "Holding the canopy question until third (question-order) idles the lane. README:37-38 says V10-2 to V10-12 are not started until the owner picks. Release the items that don't depend on the choice now, which is everything except V10-2's green screw and V10-3's sheet-metal holes.",
+   "The dims drawing waiting on origin/r47-site-next shows the cord alone, centered, with no cables (launch/dims_drawing.py:129-130 at ac459972da; hemisphere-dims.svg). Two steel cables carry the lamp, so the drawing is wrong for every option, not just O1, and needs the cables whichever option wins.",
+   "The lane's sheet, README and section texts use British spellings ('centre', 'centred'), against the owner's 'plain American English'. The reviewer flagged the jargon and the mm but not the spelling.",
+   "Outside this lens, for the wiring lens: the CAD does not draw the driver's input leads into the outlet box. The README's 'no mains splice in the enclosure' and its passing O2 fixings_check both rely on those leads.\n- I sliced the driver solid along the lead path (crystal.py:924-926) with /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b106/skeptic-owner-pictures/py/leads2.py.\n- O2 has no lead above the driver's body: nothing at z 783.4, 787.2 or 792.0, though the leads should rise to 794.\n- O1 has only one of its two leads rising: one \u00d82.4 piece at (18, 26), none at (22, 26).\n- build123d warned 'Boolean operation unable to clean'.\nSo the zero-tolerance check never tested the leads through the 3/8 in snap bushing and the plate's \u00d816 opening in O2, nor the second lead in O1."
+  ]
+ }
+}
