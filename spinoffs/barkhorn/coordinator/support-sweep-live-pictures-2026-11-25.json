@@ -1,0 +1,494 @@
+{
+ "critic:habitats-outdoor": {
+  "pictures_covered": [
+   "img/rc/red-habitat.webp (+ -600, -th): Tropos in Ember. Source: r48-biomes 0db25bafa0 renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg. Scene: studio/shots/barkhorn/element31/ember_d-portrait.json @0db25bafa0, SINK 0.018",
+   "img/rc/orange-habitat.webp (+ -600, -th): Tropos in Dust. Source: fa0c5d78c7 dust-final-portrait-finish.jpg. Scene: dust-portrait.json @fa0c5d78c7 + habitats.py SETS['dust'], SINK 0.028",
+   "img/rc/amber-habitat.webp (+ -600, -th): Tropos in Acid. Source: ce0aa08987/e869e99b53 acid-b-final-portrait-finish.jpg. Scene: acid_b-portrait.json @ce0aa08987 + SETS['acid_b'] (rotate_z -8, dips), SINK 0.025",
+   "img/rc/green-habitat.webp (+ -600, -th): Tropos in Poison. Source: fe192e62a3 poison-b-final-portrait-2-finish.jpg. Scene: poison_ivy_b-portrait.json @fe192e62a3, SINK 0.02",
+   "img/rc/blue-habitat.webp (+ -600, -th): Tropos in Ice. Source: 8f4c9fd9f2 ice-final-portrait-finish.jpg. Scene: ice-portrait.json @8f4c9fd9f2, SINK 0.03",
+   "img/rc/violet-habitat.webp (+ -600, -th): Tropos in Haze. Source: 7895f4d664 haze-b-final-portrait-finish.jpg. Scene: haze_b-portrait.json + SETS['haze_b'] (rotate_z -10, shift_y -0.13), SINK 0.012",
+   "img/rc/ice-habitat.webp (+ -600, -th): Tropos in Fog. Source: ba05aed509 fog-b-final-portrait-finish.jpg. Scene: fog_b-portrait.json + SETS['fog_b'] (camera, rotate_z -5, shift_y 0.18), SINK 0.012",
+   "img/rc/black-habitat.webp (+ -600, -th): Tropos in Smoke. Source: e3850c91dc smoke-f-shower-B-portrait-finish.jpg (built on the w1/no-trail master). Scene: smoke_f-portrait.json @f0b2dd23b7, SINK 0.012",
+   "Other outdoor pictures: none. home-ice-wide-1600/2400.webp now holds the bar. og-*.jpg, core-row-day, mantle-*-house, hemisphere-cluster/-table, plate-*, turn-*, tall/card/hero and the globe frames are all studio, room or brand pictures (looked at)",
+   "Method: none of the habitat finals has a .report.json, because habitat.py committed JPEGs only. I fitted each speaker's z from the picture itself: the brightness step at the cabinet's projected top-front edge, using the camera from the shot plus SETS and the render.py model (b109/habitats/hproj.py, zfit.py). The projected cabinet outline matches all eight pictures (ov-*-full.jpg). Ground heights come from the kit code. Scatters (rubble, ivy, embers) were replayed from their seeded random"
+  ],
+  "findings": [
+   {
+    "id": "H1-acid-overhang",
+    "severity": "should-fix",
+    "picture": "img/rc/amber-habitat.webp, its -600 and -th cuts: the home places tile and /tropos/acid 'Out' (/colors/acid redirects there). Source: r48-biomes renders/2026-11-12/barkhorn/habitats/acid-b-final-portrait-finish.jpg. Scene: studio/shots/barkhorn/element31/acid_b-portrait.json @ce0aa08987 with spinoffs/barkhorn/biomes/habitats.py SETS['acid_b'] (rotate_z -8, set.props.0.dips) and SINK['acid_b'] 0.025",
+    "claim": "Tropos in Acid stands level on rock that falls away under its front half toward the puddle. The front of the cabinet overhangs a slope of about 9 degrees. Both front feet are in the air and the back feet are sunk 25 mm into the rock.",
+    "evidence": "The speaker is at (0,0), rotate_z -8. Fitted z is -0.025: the top-front edge step falls on the projected row within 1 px at 9.4 px/cm (ov-acid-topleft.jpg, ov-acid-topright.jpg). That equals settle()'s highest ray hit, 0.000 at the back corners, minus the 0.025 sink. The ground is acid_rain_el.wet_ground. Its flat r 0.7 zeroes the lumps, but _lumps applies the dips everywhere: dip (0,-0.95) r 1.1 depth 0.2 and dip (-0.2,-1.2) r 1.2 depth 0.2. Mesh height under each foot, before the render-time displace of 0.07 (+/-35 mm): back-left 0.000, back-right 0.000, front-left -0.047, front-right -0.065. The foot bottoms are at -0.025, so the back feet are 25 mm into the rock and the front feet are 22 mm and 40 mm above it (the front-right one clears even the largest displacement). Along the front-bottom edge (z -0.013) the rock mesh is at -0.049 to -0.080, a gap of 36-67 mm that closes to zero near mid-depth. The slope is 7-10 degrees front to back and 2 degrees across. The five settle hits were 0.000, 0.000, -0.052, -0.071 and -0.014. The picture confirms this ground: the computed waterline (mesh at the puddle's z of -0.11, 9 cm in front of the front face) sits exactly on the rendered shoreline (acid-wateredge-check.jpg). The front-right foot (stem and swivel base) is plainly visible hanging under the cabinet's corner over lit rock. At the site's 1200 px a dark band about 30 px tall runs under the left two-thirds of the front edge where the rock drops away. On the 360 px home tile it is about 9 px and reads as shadow. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/habitats/acid-evidence-full-res.jpg and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/habitats/acid-evidence-site-size-x2.jpg (cyan: the cabinet's bottom; red: the rock under its front edge; yellow dashed: where rock meets the bottom; magenta: the front-foot gaps), and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/habitats/acid-site-clean-x3.jpg (clean, site size). Fix: keep the dips out of the footprint, either by applying the flat-zone factor to the dips or by giving dip 1 a radius that ends at the front face, so the rock under all four feet is level with a lip at the front face. Then re-render. No earlier note on this in the record."
+   },
+   {
+    "id": "H2-settle-no-spread-check",
+    "severity": "note",
+    "picture": "All eight habitats (the cause of H1). Code: spinoffs/barkhorn/biomes/habitat.py settle() on r48-biomes",
+    "claim": "settle() lowers the speaker until its lowest foot meets the highest of five downward ray hits: the four corners of the feet-base bounding box (+/-0.25, -0.209/+0.201) and its centre. It never checks how far apart the hits are. On any uneven ground the downhill feet are left in the air, with no warning.",
+    "evidence": "In Acid the hits spread 71 mm and passed silently. The other seven passed only because their ground is level by construction inside a flat zone: Ember r 0.45, Dust 2.2, Poison and Fog 0.9, Haze 0.8, Ice 2.6, Smoke 0.9. The rays also see whatever mesh lies under the corners (drift triangles, scatters), which is how Ice ended up 19 mm high (H4). Suggest: fail the shot when max hit minus min hit exceeds about 5 mm, and cast the rays at the foot centres."
+   },
+   {
+    "id": "H3-ember-bedded-in-rock",
+    "severity": "note",
+    "picture": "img/rc/red-habitat.webp, -600, -th (Tropos in Ember). Source: ember-d-final-portrait-finish.jpg. Scene: ember_d-portrait.json @0db25bafa0",
+    "claim": "Tropos in Ember is sunk into solid lava crust. Its feet are 18 mm below the crust's surface and the cabinet's bottom panel is 6 mm below it. This follows seating rule S1 ('feet bedded in the crust and its cinders'); it is invisible, but physically possible only if the crust there is loose cinder.",
+    "evidence": "Fitted z is -0.018, exactly as expected (top edge on the projected row, 9.4 px/cm; ov-ember-topleft.jpg). ember_el.terrain is level at z 0 within r 0.45: relief, ropes and lobes are multiplied by level=0, and the nearest lava channel stays at least 0.81 m from the feet, beyond its 0.76 m reach. So all four feet are on level crust, bedded 18 mm, with the crust displaced +/-15 mm (displace 0.03). The bottom edge meets the crust with no gap and no foot shows (ov-ember-base.jpg). The same bedding applies elsewhere, all on soft ground and all invisible: Dust 28 mm in sand (cabinet 16 mm in), Poison 20 mm in leaf litter (8 mm), Haze, Fog and Smoke 12 mm in soil (cabinet bottom at the surface)."
+   },
+   {
+    "id": "H4-ice-rides-high",
+    "severity": "note",
+    "picture": "img/rc/blue-habitat.webp, -600, -th (Tropos in Ice). Source: ice-final-portrait-finish.jpg. Scene: ice-portrait.json @8f4c9fd9f2",
+    "claim": "Tropos in Ice stands 19 mm higher than the shot intends. Its feet are 11 mm into the snow, not the 30 mm set after the earlier 'light under its left front corner' fix. It still rests properly and nothing shows.",
+    "evidence": "Fitted z is -0.011 (best step score -22.4; 9.9 px/cm). The expected value, level snow at 0 minus 0.030, does not match: tops-ice.jpg (z -0.030) shows the projected top edge about 17 px low; tops-ice-011.jpg (z -0.011) matches. The camera's vertical calibration was checked on the cabin window, which projects centred in its glow (ice-window-check.jpg). Probable cause: the front ray points lie 1.3 mm inside the drift's inner rectangle (bank d 0.42 centred on y 0, while the cabinet's front is at -0.2137). They hit 3.6 cm mesh triangles that slope up into the windward drift, which is 5-9 cm high. Inside the footprint the snow is level, so the feet are 11 mm in and the cabinet's bottom is 1 mm above the snow. The drift banks against the front and right faces and hides the base, with no light under it (ov-ice-base.jpg)."
+   },
+   {
+    "id": "H5-ember-rubble-cuts-front-edge",
+    "severity": "note",
+    "picture": "img/rc/red-habitat.webp (Tropos in Ember). Scene: ember_d-portrait.json prop 8 (ember_el.rubble, boulder_01, seed 22)",
+    "claim": "One rubble piece is placed across the cabinet's front-bottom edge, so it would intersect the bottom panel. It cannot be seen. UNVERIFIED: the model's size and origin are not in the repo.",
+    "evidence": "Replaying assets.scatter's seeded stream, piece 5 lands at (0.101, -0.221) at scale 0.030. boulder_01 is about 1.0-1.1 m wide at scale 1, judging by the Fog frame, so this piece is about 3 cm across. Its centre is 2 mm in front of the front face, so it reaches about 1.3 cm into the footprint, at z -0.006 to about +0.02 against the panel's -0.006 to 0.014. At its pixel (1211, 2360 of 2400) the picture shows only dark crust: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/habitats/ember-rubble-front-x4.jpg. A second piece sits 17 mm outside the back-left corner, hidden behind the cabinet. The settle rays missed all six pieces (z matches exactly)."
+   },
+   {
+    "id": "H6-smoke-embers-clod-in-cabinet",
+    "severity": "note",
+    "picture": "img/rc/black-habitat.webp (Tropos in Smoke). Scene: smoke_f-portrait.json @f0b2dd23b7, props 13 and 23",
+    "claim": "Three small objects at Tropos in Smoke's base overlap the cabinet: two glowing embers and one clod. None is visible at site size.",
+    "evidence": "Replayed from the seeds. Prop 23 (kit scatter, seed 208): an ember of r 4.1 mm at (0.282, -0.161, 0.019), local (0.267, -0.185), lies inside the bottom panel (z 0 to 0.020) under the front panel. Another ember of r 6.8 mm at (0.202, -0.199, 0.002) is centred 2 mm outside the front face and cuts 4.8 mm into the panel's edge, glowing at px (1387, 2177). Prop 13 (rubble, seed 31): a clod at scale 0.051 (about 5 cm), centred 13 mm outside the right side near the back, runs about 1.2 cm into the right wall. At 1200 px the embers are 1-3 px; the clod is behind the dark-lined cabinet (ov-smoke-base.jpg). The speaker itself rests correctly: z -0.012, as expected."
+   },
+   {
+    "id": "H7-poison-ivy-through-bottom",
+    "severity": "note",
+    "picture": "img/rc/green-habitat.webp (Tropos in Poison). Scene: poison_ivy_b-portrait.json prop 5 (ivy_el.cover, seed 5)",
+    "claim": "Two ivy ground-cover leaves are rooted inside Tropos's footprint and grow up through its bottom panel into the cabinet. The bottom batt hides them.",
+    "evidence": "Prop 5's avoid circle is (0,0) r 0.2, but the cabinet's corners are 0.35 m out. Replaying cover()'s random stream (8003 leaves) puts two inside: rooted at local (-0.18, 0.19) and (-0.18, 0.12), with tops 0.021 and 0.070 m up and the second leaf's leaflets reaching about 0.12 m. Two runner segments cross the footprint. Projected, they fall behind the bright bottom batt and nothing shows: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/habitats/poison-ivy-inside.jpg. For later shots, widen the avoid circle to the footprint."
+   },
+   {
+    "id": "H8-smoke-far-columns-float",
+    "severity": "note",
+    "picture": "img/rc/black-habitat.webp (Tropos in Smoke, meteor shower B). Script: renders/2026-11-18/barkhorn/habitats/smoke-f-shower-B-build.py @e3850c91dc",
+    "claim": "In the 3D scene the two far smoke columns and their fire mounds float in the air, because the 'distant rises' they should stand on were never modelled. In the picture they sit on the skyline and read as fires beyond the ridge.",
+    "evidence": "column() sets the bases at rise minus 2 m: 43 m at 5.5 km and 58 m at 8 km. The ground there is flat at -0.06, and the 6 km ground patch ends at y 5.99 km, so there is nothing under column B. In the frame the near ridge (2.2 km, about 15 m there) puts the skyline at row about 1630 of 3000. Glow A's bottom is about 3 px above it and glow B's touches it (smoke-farfeet-x4.jpg). At 1200 px that is 1-2 px, so invisible."
+   }
+  ],
+  "checked": [
+   "Ember (red-habitat.webp): Tropos at (0,0), rotate_z -3. Fitted z -0.018 equals the expected 0 - 0.018 (top-front step on the projected row; 9.4 px/cm). The terrain is level at z 0 under all four feet (flat r 0.45; nearest channel at least 0.81 m away), so there is no slope or overhang. Bottom edge seated, feet hidden. Foreground rubble sits on the crust or in the streams, with no visible gaps (ember-fg-right.jpg). Sparks float by design.",
+   "Dust (orange-habitat.webp): Tropos at (0,0), rotate_z 0. Fitted z -0.028 equals 0 - 0.028. The sand is level at 0 for d < 1.54 m (swell factor t = 0 inside 2.2 m, t2 = 0 inside 1.54 m). The ripples are bump only. Feet 28 mm in, cabinet 16 mm in. No lit strip under the bottom edge (ov-dust-base.jpg). The tumbleweed is dropped.",
+   "Poison (green-habitat.webp): Tropos at (0,0), rotate_z -15. Fitted z -0.020 (steps at rows 1408/1409 and 1401/1402 against projected 1408.7/1402.2; 9.7 px/cm). The litter is level (relief 0.1 x 0 within 0.9 m). Feet 20 mm in, cabinet 8 mm in. Seated, with ivy over the base. Mushrooms: the left and back clusters lie within 0.95 m (relief at most 1 mm). The right cluster at 1.0-1.2 m: stems end 3-4 cm above z 0 where the raised litter hides their bases, with no gap or detached shadow (poison-mushrooms-right.jpg). Redwoods stand on the litter at z -0.1.",
+   "Ice (blue-habitat.webp): Tropos at (0,0), rotate_z -10, fitted z -0.011 (see note H4). Level snow inside the footprint (flat r 2.6 around (0,-1.5)). Feet 11 mm in, drift banked 5-9 cm on the front and right. No gap. Snowflakes are kept 0.4 m away.",
+   "Haze (violet-habitat.webp): Tropos at (0,0), rotate_z -10 (camera shift_y -0.13, shift_x -0.12). Fitted z -0.012 equals 0 - 0.012 (score -36.6; 9.3 px/cm). The ridge is level within r 0.8, with the crest at least 0.8 m behind and slope_front only beyond 0.8 m in front. Feet 12 mm in, cabinet bottom at the soil surface (+/-12.5 mm displacement). Grass kept 0.36 m clear, base seated (ov-haze-base.jpg).",
+   "Fog (ice-habitat.webp): Tropos at (0,0), rotate_z -5, camera from SETS. z -0.012 (the bright top edge at rows 1752-1754 against projected 1752.9; 9.8 px/cm). The ground is level within 0.9 m, and crest() only edits y > 2.0 m. Feet 12 mm in, seated in short grass (ov-fog-base.jpg). boulder_01 at (2.6, 3.6, -0.12): the near side is buried in grass with no gap (fog-boulder.jpg). Its far side lies over the falling crest and is hidden from the camera (not measured). Tufts are landed by land_scatter.",
+   "Smoke (black-habitat.webp): Tropos at (0,0), rotate_z 5. Fitted z -0.012 equals 0 - 0.012 (score -40.2; 9.0 px/cm). The ground is level within 0.9 m (crater edits start at least 1.4 m behind). Feet 12 mm in, seated among clods. The grass tuft in front is rooted about 24 cm in front of the face, not inside it. See note H6 for the small overlaps.",
+   "Acid (amber-habitat.webp): camera, position, rotation and z all verified (z -0.025); the support fails, see finding H1. The near rock shelves are terrain and the puddle meets them with no floating rock (acid-site-foreground.jpg).",
+   "Variants: every -600 and -th file is a plain downscale of its full picture (mean difference 1.7-3.3 levels). Every full site picture is the source -finish.jpg at half size (mean difference 1.8-2.7 levels), not a crop.",
+   "Scripts, overlays and crops are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/habitats/ (hproj.py, overlay.py, zfit.py, tops.py, acid_ground.py, acid_evidence.py, scat.py, ivycover.py; ov-*.jpg, tops-*.jpg). Nothing in /home/user/earmilk-site was changed."
+  ]
+ },
+ "critic:bar-and-rooms": {
+  "pictures_covered": [
+   "img/rc/home-ice-wide-2400.webp and home-ice-wide-1600.webp (desktop hero) <- r33-speaker-horn renders/2026-11-11/barkhorn/product/planet-bar/bar-hero.png (a50e8da167; shot a9c41b7a41); straight resize, mean diff 1.7 levels",
+   "img/rc/home-bar-tall-1200.webp and home-bar-tall-800.webp (phone hero) <- planet-bar/bar-backbar-portrait.png (a50e8da167; shot 41494d4294); mean diff 1.7",
+   "img/rc/tropos-bar.webp and tropos-bar-th.webp (Tropos 'At the bar', all eight galleries) <- NOT bar-backbar.png any more: r33 2802834a71 renders/2026-11-21/barkhorn/b1-test/fixed9.png (site C6 ce62c5eabd, live in 1e7460909a); mean diff 1.7. Same camera, Mantle, props as bar-backbar.shot.json; near Tropos 2 cm right and deeper; glasses are living_ext water_glass",
+   "img/rc/bar-pendants.webp and bar-pendants-th.webp (Hemisphere and Core 'At the bar', /lighting) <- planet-bar/bar-pendants.png (a50e8da167; shot 9e8ddccfc1); mean diff 1.3",
+   "img/rc/mantle-bar.webp and mantle-bar-th.webp (Mantle 'At the bar') <- planet-bar/mantle-bar.png (cce235cf4e; shot 8ebd169087); mean diff 1.0",
+   "img/rc/core-bar-table.webp and core-bar-table-th.webp (Core 'At the bar') <- planet-bar/core-bar-table.png (e833b93390); mean diff 0.9",
+   "img/rc/hemisphere-ember-table.webp and -th ('Over a table', the only other interior scene on the site) <- r32-lamps-final 8e07dda48b renders/2026-11-12/barkhorn/lamp-site/legible/hemisphere-ember-inuse.png (lamp_site.py frame 'inuse'); mean diff 1.2",
+   "Searched for other rooms: every other site picture (talls, cards, heroes, horn-backs, plates, turns, habitats, cutaway, under/cap/rim/off, cluster, rows, day row, Mantle house/studio/cover, tiles, home tiles, share cards) is a studio or outdoor frame (contact sheet viewed); none is a room"
+  ],
+  "findings": [
+   {
+    "id": "B1-triangle-sleeve-tropos-bar",
+    "severity": "blocking",
+    "picture": "img/rc/tropos-bar.webp + tropos-bar-th.webp (Tropos 'At the bar', all eight Tropos galleries) from r33 2802834a71 renders/2026-11-21/barkhorn/b1-test/fixed9.png, shot fixed9.shot.json. The same board is in bar-backbar.png, which is no longer live.",
+    "claim": "The pulled-out record sleeve with the triangle hangs in mid-air in front of the record wall with nothing under it. It is board tex/cover-14.png, 315x315x3 mm, at (6.600, 5.580, 2.285), rot [-4, 0, 58]. From the bar seat you can see the shelf and its records below it, so it reads as a hanging sign.",
+    "evidence": "bar_life.boards places a board by its bottom-front-centre. The record wall's shelves span y 5.72 to 6.08, and the top of the shelf under this cell is at z 2.280. The sleeve's bottom edge runs from y 5.446 to 5.714, so 0 % of it is over the shelf. Its front corner is 27 cm in front of the shelf face, 5 mm above shelf level. The next thing below it is the back-bar worktop at z 0.92. The cause is planet_bar._life(): y = R.RECORD_WALL['y'] - 0.14, which applies to all three 'pulled half out' sleeves. The camera is at eye height 1.42 m, below the sleeve. At 1600 px, the sleeve's front-bottom corner sits 16 px above the shelf edge directly under it. Crops (shelf front edge red, sleeve bottom edge yellow): /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/bar-rooms/out/site2x-triangle-tropos-bar.jpg (the site picture at 2x), site2x-triangle-tropos-bar-plain.jpg, wall-fixed9-cover-14.jpg (render at 3x)."
+   },
+   {
+    "id": "B2-mantle-extent-confirmed",
+    "severity": "blocking",
+    "picture": "Three live pictures: home-bar-tall-1200/800 (bar-backbar-portrait.png); tropos-bar.webp/-th (fixed9.png, r33 2802834a71); mantle-bar.webp/-th (mantle-bar.png). Also in bar-backbar.png (not live).",
+    "claim": "KNOWN; the speaker lane is fixing it. This confirms the extent and corrects two details. (1) Mantle's origin is the front-left corner of a 470 x 380 mm envelope, 10 mm outside the plinth's corner on both axes, and local +y is the back. (2) Two of the four feet stand in the air. The centre of the plinth is 10.5 cm behind the line through the two feet that are supported, so Mantle would tip off the back of the bar. The live Tropos picture is now fixed-9, so fixed9.shot.json needs the same fix as planet_bar.py.",
+    "evidence": "The report box_px values fit across all six frames (rms 0.24 px, max 0.5 px). Plinth: local x 0.010-0.460, y 0.010-0.370, z 0.069-0.094 (450x360). Base layer: x 0.045-0.425, y 0.045-0.335, z 0.016-0.029. Feet: four, under the posts at local (0.155|0.315, 0.085|0.295), r about 18 mm, pads at z 0-0.004. Hinge blocks: y 0.370-0.379, at the back. Placed at (8.5, 4.32, 1.071) rz 25, the same in all three frames: feet 1 (8.605, 4.463) and 2 (8.750, 4.530) stand on the flat top, foot 2 just 1.4 cm from the end of the flat at 4.562. Feet 3 (8.516, 4.653) and 4 (8.661, 4.720) are 6.3 and 13.0 cm past the edge at 4.59. Plinth corners: back-left 7.0 cm and back-right 26.0 cm past the edge. Plinth centre (8.633, 4.592) is 0.2 cm past the edge. 50 % of the plinth footprint is past the edge and 41 % is over the flat. Visibility at site size: in the phone hero and tropos-bar, the lit stone ends diagonally under the plinth and its right half sits over black void (out/site-mantle-bar-backbar-portrait.jpg, out/site-mantle-fixed9.jpg; feet drawn green, edge red). In mantle-bar the plinth hides most of it; only a dark gap under the right rear shows (out/site-mantle-mantle-bar.jpg). The desktop hero is fine (out/site-mantle-bar-hero.jpg). bar-pendants shows no part of Mantle: it projects to x 3810-4970 px in a 2400 px frame. core-bar-table shows none: x 8868-13677 px in a 3200 px frame. At most a small distorted reflection could appear in a Core ball, and it shows nothing of the support. In planet_bar.py, mantle_bar() and bar_hero() assume the centre is at local (0.23, 0.21); it is actually at (0.235, 0.190)."
+   },
+   {
+    "id": "S1-triangle-sleeve-phone-hero",
+    "severity": "should-fix",
+    "picture": "img/rc/home-bar-tall-1200.webp and -800 (phone hero) from bar-backbar-portrait.png",
+    "claim": "The same floating triangle sleeve is in the upper left of the phone hero. That part of the wall is darker, so it reads less strongly than in tropos-bar, but the sleeve still hangs clear of the shelf.",
+    "evidence": "Same board and numbers as B1: z 2.285, bottom edge 0 % over the shelf. Its front-bottom corner is 22 px above the shelf edge under it at 1200 px, and about 11 px at 800 px. Crops: out/site2x-triangle-home-bar-tall-1200.jpg (+ -plain), out/wall-bar-backbar-portrait-cover-14.jpg (render at 2x), out/site-phonehero-top-800.jpg (the picture at its phone size). It can be fixed in the same re-render as Mantle."
+   },
+   {
+    "id": "S2-mantle-bar-nowplaying-over-aisle",
+    "severity": "should-fix",
+    "picture": "img/rc/mantle-bar.webp/-th from mantle-bar.png",
+    "claim": "The now-playing sleeve and its walnut stand stand on nothing. They are over the bartender's aisle, 36-52 cm behind the counter's back edge, 1.07 m above the aisle floor. Moving Mantle alone will not fix this.",
+    "evidence": "The stand is a box 0.20x0.05x0.022 at (8.819, 5.032, 1.07), rot 35; its footprint runs y 4.954-5.109 and x 4.723-8.915 [sic: x 8.723-8.915]. The sleeve is cover-00, 0.18 square, at (8.819, 5.022, 1.092), rot [-14, 0, 35]. The counter's edge is at y 4.59 and the back bar's front is at 5.65. The niche ledge spans x 7.846-8.654, so nothing is under the stand. In the picture, Mantle's plinth hides the stand, and the sleeve shows above the tonearm, so it looks like it stands behind Mantle (out/F-mantlebar-sleeve-core.jpg at site size, out/mantlebar-stand.jpg; stand green, sleeve cyan, edge red). mantle_bar() places it at Mantle's centre + 0.36 right - 0.30 front, which is 42 cm behind the centre in y. On the 72 cm deep flat top, with Mantle wholly on it, that position is still past the edge, so the stand has to be placed separately."
+   },
+   {
+    "id": "S3-other-pulled-out-sleeves",
+    "severity": "should-fix",
+    "picture": "home-ice-wide-2400/1600 (bar-hero.png): cover-10 rings and cover-03; tropos-bar.webp (fixed9): cover-03",
+    "claim": "The other two 'pulled half out' sleeves also stand on nothing, 27-29 cm in front of the shelf face at their front corners. From these cameras they mostly read as standing. The ring sleeve in the desktop hero shows a slight lift.",
+    "evidence": "cover-10 is at (9.35, 5.58, 1.925), rz -64; its bottom edge runs y 5.438-5.722, 1 % over the shelf, and its front corner is 13 px above the shelf edge at 2400 px (out/wall-bar-hero-cover-10.jpg). cover-03 is at (4.4, 5.58, 1.565), rz 70; its bottom edge runs y 5.432-5.728, 3 % over the shelf, with a lift of 1 px in the hero and 2 px in tropos-bar (out/wall-bar-hero-cover-03-plain.jpg, out/wall-fixed9-cover-03.jpg). In the hero, cover-14 has been lowered to 1.565 and the Ember shade hides it. The cause is the same _life() line as B1."
+   },
+   {
+    "id": "S4-mantle-bar-core-over-edge",
+    "severity": "should-fix",
+    "picture": "img/rc/mantle-bar.webp/-th",
+    "claim": "The Ember Core beside Mantle has the back of its base hanging 2.6 cm past the counter's back edge. Its ball hides this.",
+    "evidence": "The Core is at (8.287, 4.541). Lamps are r32 3e38954b, Core base B with the whole base in its own colour: skirt r 75 mm at the bar top, ball r 80 mm centred 107 mm up; the ball size is confirmed in core-bar-table at about 1008 px against 1024 px predicted. The back of the skirt is at y 4.616: 2.6 cm past the edge at 4.59 and 5.4 cm past the end of the flat at 4.562. The centre is 2.1 cm inside the end of the flat, so the lamp would stand. Its position is derived from Mantle's assumed centre (-0.33 right, -0.08 front), so it moves when Mantle moves. Crop: out/F-mantlebar-sleeve-core.jpg (skirt magenta)."
+   },
+   {
+    "id": "S5-hero-glass-inside-ember-core",
+    "severity": "should-fix",
+    "picture": "home-ice-wide-2400/1600 (bar-hero.png)",
+    "claim": "In the desktop hero, the second drink glass is built into the Ember Core. Its top cuts up to 22 mm into the ball and its foot cuts 15.5 mm into the base. The ball hides all of this.",
+    "evidence": "The glass is a lathe at (6.31, 4.18, 1.07): r 41 mm at the foot, 44 mm at the 92 mm rim. The Ember Core is at (6.30, 4.08), 10.05 cm away. The foot overlaps the base by 15.5 mm at the bar top. At rim height the ball's radius is 78.6 mm, so the glass reaches 22 mm into the ball, and 12 mm into the opal inner ball (r 70). From the seat, only a sliver of the glass shows at the ball's right edge. Crop: out/F-hero-life-glass.jpg (glass white, Core magenta). This exists only in the hero: there HERO_CORES puts Ember at (6.30, 4.08) next to the _life() drinks."
+   },
+   {
+    "id": "S6-pendants-cloth-through-newspaper",
+    "severity": "should-fix",
+    "picture": "img/rc/bar-pendants.webp/-th (Hemisphere and Core 'At the bar', /lighting)",
+    "claim": "The bar cloth and the newspaper occupy the same 17 x 16 cm of the bar top. The cloth's corner pokes 7.5 mm up through the newspaper, and a small plain patch shows on the newspaper beside the Ember ball.",
+    "evidence": "The cloth is a box 0.22x0.13x0.014 at (6.62, 4.46, 1.07), rz -14, so z 1.070-1.084. The newspaper is 0.29x0.40x0.006 at (6.97, 4.36), rz 82, z 1.0705-1.0765. They overlap by 195 cm2 in plan and 6 mm in height. Most of the overlap is behind the Ember Core's ball. At 1600 px, about 45 px shows to its right as an unprinted patch with a light edge: out/pendants-cloth-news-zoom.jpg (+ -plain, at 3x of the render), out/pendants-cloth-news.jpg. Behind the same ball, the newspaper also crosses the corner of the flat sleeve cover-09 (1.4 x 10 cm at the same base height)."
+   },
+   {
+    "id": "S7-drinks-twist-and-ice-float",
+    "severity": "should-fix",
+    "picture": "bar-pendants.webp (largest), tropos-bar.webp (fixed9), home-bar-tall (one glass), home-ice-wide (small)",
+    "claim": "The orange twist floats above each glass without touching the rim. The ice sits too high: in the fuller glass it floats almost out of the liquid, and in the 30 mm glass it hangs in the air above the drink. At site size the twist reads as a garnish on the rim and the ice as clear blocks.",
+    "evidence": "Twist: a tube r 3.5 mm whose centreline is at z 1.164-1.170, 2-8 mm above the rim (1.162), and 33-36 mm from the glass axis, inside the 40.5 mm inner wall. It is 4.5-7 cm above the liquid. Ice (planet_bar kit boxes, bottom at position z): cubes at 1.106-1.130 and 1.112-1.136. In the 45 mm glass they are 9 and 3 mm submerged; in the 30 mm glass (liquid top 1.100) they are 6 and 12 mm above the liquid. fixed-9's water_glass centres the cubes: in its 30 mm glass they are 6.3 and 0.3 mm submerged. Crops: out/drinks-bar-pendants.jpg (rim white, liquid orange, ice blue, twist green), out/F-pendants-drinks.jpg (at 3x site size), out/drinks-fixed9.jpg."
+   },
+   {
+    "id": "N1-leftover-r36-record-and-sleeve",
+    "severity": "note",
+    "picture": "home-ice-wide (Acid and Ember Cores, one glass); tropos-bar fixed9 (Dust Core). In every bar scene; in frame only in these two.",
+    "claim": "The round-36 room's 'record out of its sleeve' was never removed, so lamps and a glass stand partly sunk into it.",
+    "evidence": "planet_r36.life() builds life-record (r 0.15 at (5.85, 4.13), z 1.071-1.0728) and life-sleeve (0.314 square at (6.10, 4.15), rz 12, z 1.0705-1.0735). No 'remove' list in any bar shot names them. In the hero, the Acid skirt overlaps the sleeve by 103 cm2 and the record by 80 cm2, the Ember skirt overlaps the sleeve by 48 cm2, and a glass foot overlaps it by 61 cm2; each is sunk 1.8-3.5 mm. In fixed9, the Dust Core stands entirely on the sleeve (176 cm2), sunk 3.5 mm. A real lamp standing half on a 3 mm sleeve would tilt about 2.3 degrees. At site size it reads as a lamp standing on a sleeve (out/F-hero-life-glass-plain.jpg, out/life-fixed9.jpg)."
+   },
+   {
+    "id": "N2-pendants-napkin-touches-dust-core",
+    "severity": "note",
+    "picture": "bar-pendants.webp",
+    "claim": "The back roll of the folded napkin grazes the Dust Core's base by up to about 5 mm. The napkin's own top hides it.",
+    "evidence": "The napkin is a fold at (7.24, 3.94), rz -15, w 0.18, legs [0.12, 0.09, 0.06], rr 6 mm, and its roll reaches local y 0.126. The Dust Core is at (7.26, 4.14): the roll's closest point is about 70.5 mm from the Core's axis, where the skirt radius at the roll's height is about 71.7 mm, plus ripples. Crop: out/pendants-napkin.jpg."
+   },
+   {
+    "id": "N3-sleeve-stack-and-throw",
+    "severity": "note",
+    "picture": "home-ice-wide, tropos-bar (fixed9), home-bar-tall",
+    "claim": "In the stack of four sleeves, the second sleeve is sunk 2.5 mm into the first and the top two float 1 mm. The wool throw's back edge cuts 3 mm into the stack's front corner. None of it is visible.",
+    "evidence": "Only the bottom sleeve was raised by _raise_flat. The stack's z ranges are 1.0705-1.0735, 1.071-1.074, 1.075-1.078 and 1.079-1.082. cover-12's back corner is 4 mm past the edge, with the stack's centre 15 cm inside, which is a sound overhang. The throw at (7.86, 4.04), rz 90, w 0.42, cuts 1.8 x 1.1 cm into the stack in fixed9; in the phone hero this happens out of frame. Its front edge is 8 mm onto the front bevel, at most 1.2 mm above it. Crops: out/stack-fixed9.jpg, out/throw-fixed9.jpg."
+   },
+   {
+    "id": "N4-acid-cord-on-beam-face",
+    "severity": "note",
+    "picture": "In the scenes of tropos-bar, home-bar-tall and mantle-bar, but out of frame in all of them",
+    "claim": "The Acid Hemisphere's cord runs up the side face of a ceiling beam for its top 30 cm.",
+    "evidence": "The cords are stretched to top_z 3.40, the underside of the plank deck. The Acid cord is at x 6.92, and the fir beam at x 6.85 is 140 wide (faces 6.78 and 6.92), z 3.10-3.40. In every bar picture, where each cord meets the ceiling projects above the frame. The hero and pendants cords at 6.93 and 6.75 clear the beam faces by 1.0 and 3.0 cm."
+   },
+   {
+    "id": "N5-core-bar-table-leftover-stand",
+    "severity": "note",
+    "picture": "core-bar-table scene, out of frame",
+    "claim": "core_bar_table() keeps _life()'s walnut stand at (8.92, 4.54), rot 20. It hangs 8 mm past the back edge and cuts 5 mm into Mantle's base layer, but it projects to x 12853+ px, so the picture is unaffected.",
+    "evidence": "Box 0.20x0.05x0.022, z 1.070-1.092. Mantle's base layer bottom is at 1.087. Only the cover-05 sleeve and the matches were removed there."
+   },
+   {
+    "id": "N6-inuse-room-minor",
+    "severity": "note",
+    "picture": "img/rc/hemisphere-ember-table.webp/-th (r32 8e07dda48b, lamp_site 'inuse')",
+    "claim": "Everything rests. The only flaws are hidden: the open book's page blocks dip up to 5 mm into its covers and the table, and the coffee disc reaches 0.5 mm into the cup wall. The chair's mesh is not in the repo, so its clearance is UNVERIFIED.",
+    "evidence": "The page surface is z = 4.5 + 10.5(1 - e^(-d/12)) - 6(d/150)^2 mm, solidified 9.5 mm downward. Its underside is at -5 mm at the gutter, 1.6 mm at d=12, 4.4 mm at d=30 and -0.5 mm at the fore-edge, against covers 0-3 mm thick. The coffee disc is r 36.2 mm against an inner wall of 35.7 mm at z 68 mm. The overlay matches the picture: out/inuse-overlay.jpg (table red, legs green, cup cyan, lamp magenta)."
+   }
+  ],
+  "checked": [
+   "Projector and back-projector checked: Mantle parts back-projected from all six bar reports agree to 0.5 mm, and part boxes fit the reports' box_px at rms 0.24 px. The renderer treats every camera as level with a lens shift, including mantle-bar, whose 'level' key sits in a code comment.",
+   "Desktop hero, both Tropos (Acid) at (5.55|8.25, 5.7162, 1.09): the feet's bottoms (box fit z 0.000-0.006 above the origin) stand on the niche floor board at 1.09 (ledge 1.07 + 0.02). The feet span x \u00b10.25 and y -0.209..+0.201, inside the floor's x \u00b10.35 and y 5.46-6.08: 4.7 cm in from its front edge, 10 cm from the side felts, 11 cm from the back felt. The horn tops at 2.385 sit under the niche head felt at 2.52.",
+   "tropos-bar (fixed9): the near Tropos at (8.27, 5.7362), feet x 8.02-8.52 and y 5.527-5.939 on the floor x 7.90-8.60, y 5.46-6.08, 6.7 cm in from the front edge. The far Tropos is as in the hero. The phone hero and mantle-bar show the near Tropos at 8.25, which is fine.",
+   "Desktop hero, Mantle (6.73, 4.033, rz 10): all four feet on the flat top, 16.5-31.6 cm in from its end. The plinth corners are 11.2-31.3 cm inside the counter edge; its centre is at (6.928, 4.261). The magazine and the bar cloth slip under the plinth's overhang with 12.5 mm and 3 mm to spare; no contact.",
+   "Desktop hero, Cores: Acid (5.95, 4.24), Ember (6.30, 4.08) and Dust (7.65, 4.06) have their bases (r 75) 27.5, 19.5 and 17.5 cm inside the counter edge, all on the flat. The Cores are at least 38.5 cm apart.",
+   "Desktop hero, Hemispheres: five rims at 1.59-1.85, 0.52-0.78 m above the top. Shade centres are at least 22.8 cm apart (\u00d8200), so they don't touch, and no cord passes through a shade. Cords run to 3.40, the plank deck's underside, which is out of frame.",
+   "Desktop hero, props: magazine cover-08 lies flat and starts exactly at the flat's front end (0.028). Matchbook 13.3 cm inside. Sleeve stack flat, 0.6-1.5 cm inside the back edge; cover-12's corner 4 mm over the edge with the stack's centre 15 cm inside. Bar cloth (box, base at 1.07) 4.0 cm inside the edge. The now-playing sleeve stands on its steel ledge (z 1.95). Bowl, limes and lemon look seated with no gap (asset geometry UNVERIFIED; the bowl and cloth corner are close, with no visible contact).",
+   "Phone hero: the Ember Core at (8.17, 4.42) is 9.5 cm inside the edge (6.7 cm inside the flat) and 19 cm from Mantle. Acid (8.4, 4.55, rim 2.2) and Ember (7.85, 4.45, rim 2.3) Hemispheres: cords 26 and 15 cm from the 8.07 beam. Votive (8.55, 3.97) and the room's rocks glass (8.30, 3.98) stand on the flat, 12.6-12.7 cm inside. The drink glass's foot is on the flat (base 13.6 cm inside). The sleeve stack at the left edge is fine.",
+   "tropos-bar (fixed9): Cores Ember (7.32, 4.10) at 21.5 cm, Dust (6.05, 4.12) at 23.5 cm (on the leftover sleeve, N1) and Acid (6.95, 4.35) at 16.5 cm inside the edge. Five Hemispheres hang at 1.66-1.86, at least 38 cm apart. The newspaper's front corner is 6 mm onto the front bevel, at most 0.6 mm above it. Also fine: the matchbook; the bowl and cloth; the votive and room glass at the bottom edge; the room glass (5.40, 4.02) at the left edge.",
+   "bar-pendants: Cores Ember (6.66, 4.08) and Dust (7.26, 4.14) are 19.5 and 25.5 cm inside the edge. Hemisphere rims are at 1.44-1.70, 37-63 cm above the top, shades at least 22.8 cm apart. Flat sleeve cover-09 is 21.5 cm inside and 1.75 cm clear of the Ember base. The newspaper is on the flat, 3.1 cm inside the edge. The glasses' feet are on the flat. The bowl and limes are seated. Mantle, the leftover record and sleeve, and the wall sleeves are all out of frame.",
+   "core-bar-table: the Ember Core (7.05, 4.10) is 21.5 cm inside the edge, 18.7 cm onto the flat. The bar cloth at the left edge is on the flat, 4.0 cm inside the edge. The newspaper corner at the bottom left is 6 mm onto the front bevel. Mantle, the stand, the stack and the drinks are out of frame.",
+   "mantle-bar: the Ember Hemisphere over Mantle (8.62, 4.608, rim 1.50) and its cord are above the frame. The Core is 3.5 cm clear of Mantle's plinth at plinth height.",
+   "Rug, armchair, potted plant, the eight counter stools, the coat on stool 2, the banquette, tables and listening zone: by projection, none is in any bar picture (behind the camera or outside the field of view). The rug lies at z 0.001 on the floor.",
+   "Record wall contents in frame (records, leaning groups, flat stacks, books, boxes, face-out sleeves): by construction (record_wall.build) all stand on their cell floors, 0.2 mm up, inside the cells. The now-playing ledge's sleeve stands on the ledge.",
+   "hemisphere-ember-table (the in-use room): table legs run z 0-0.72 on the floor (z 0), with the apron and top boards on them; top at 0.75. The cup's foot ring (r 32-35 mm) is on the top, its handle overlapping the wall by 7.6 mm (attached). The book's covers are on the top. The chair (dining_chair_02) is at floor level, its back behind the table's far edge with no visible contact; its mesh is UNVERIFIED. The lamp rim is at 1.25, 0.50 above the top. The cord leaves through the frame's top, and the ceiling at 2.40 is not in frame. The overlay matches the render."
+  ]
+ },
+ "critic:studio-and-lamps": {
+  "pictures_covered": [
+   "Tropos fronts, 8 tints: img/rc/<k>-tall.webp, <k>-hero.webp, <k>-card.webp, <k>-thumb.webp, og-<k>.jpg and og-home.jpg (the row of 8). Source: renders/2026-11-12/barkhorn/studio-refresh/site-front-off-tall-<tint>.png. The PNG blobs on main 1e7460909a are identical to those on r33-speaker-horn, and shot/report are on r33-speaker-horn. The light-c2 set is NOT live (the record says the push waits on the owner); the live red-tall differs from light-c2/front-ember by 5.6 levels mean and from studio-refresh by 1.4.",
+   "Tropos horn-backs: img/rc/<k>-horn-back.webp and -th. Source: renders/2026-11-13/barkhorn/fa123/horn-back-<tint>.png.",
+   "Tropos turns: img/rc/turn-<k>.webp (6x4 sprite), turn-<k>-0.webp (frame 20) and -th. Source: renders/2026-11-04/barkhorn/rollout/A-polished-p2-p2b/turn-<tint>-00..23.png (all 192 blobs on main equal r33-speaker-horn).",
+   "Tropos amplifier: img/rc/plate-<k>.webp and -th. Source: renders/2026-11-13/barkhorn/fa123/macro-amp-<tint>.png.",
+   "Mantle 'Under a spot': img/rc/mantle-<n>.webp, -800, -th. Source: renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-<n>.png (r48-mantle-design 6da73fadba / adacfc79aa).",
+   "Mantle 'With its cover': img/rc/mantle-<n>-cover.webp and -th. Source: mantle-final-day-<n>-cover.png (Ember, Poison, Haze, Fog) and -cover-strong.png (Dust, Acid, Ice, Smoke).",
+   "Mantle 'In the studio' plus the tiles and share cards: img/rc/mantle-<n>-house.webp, -th, tile-mantle-<n>.webp, card-mantle-<n>.jpg. Source: renders/2026-11-20/barkhorn/mantle-r48/mantle-house-<n>.png (r48-mantle-design 2d5726300b for Ember, Fog and Smoke; 06228224a6 for the rest).",
+   "Hemisphere lit: img/rc/hemisphere-<n>.webp, -800, -th, tile-hemisphere-<n>.webp, home-hemisphere-<n>.webp (square crop), card-hemisphere-<n>.jpg. Source: renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-<n>-direct.png. All lamp finals on main equal r32-lamps-final HEAD.",
+   "Hemisphere 'From below': img/rc/hemisphere-<n>-under.webp and -th. Source: final/hemisphere-<n>-under.png.",
+   "Hemisphere Ember details (shown in every tint's gallery): hemisphere-ember-off, -cap, -rim (.webp and -th), and hemisphere-ember-cutaway.webp / -cutaway-phone.webp (How it lights). Source: final/hemisphere-ember-{off,cap,rim,cutaway,cutaway-phone}.png.",
+   "Hemisphere 'Over a table' (every tint's gallery): img/rc/hemisphere-ember-table.webp and -th. Source: final/hemisphere-ember-inuse.png.",
+   "Hemisphere 'In a group' (every tint's gallery and lighting.html): img/rc/hemisphere-cluster.webp and -th. Source: final/hemisphere-cluster.png (5e86d76e62).",
+   "Rows ('All eight', 'By day'): img/rc/hemisphere-row.webp, core-row.webp, core-row-day.webp. Source: final/hemisphere-row.png, core-row.png, core-row-day.png.",
+   "Core: img/rc/core-<n>.webp, -800, -th, tile-core-<n>.webp, home-core-<n>.webp, card-core-<n>.jpg. Source: final/core-<n>.png.",
+   "Not in this lens: the bar pictures (home-ice-wide, home-bar-tall, bar-pendants, core-bar-table, mantle-bar, tropos-bar), the habitats and the globe/icons."
+  ],
+  "findings": [
+   {
+    "id": "cluster-cords-end-mid-air",
+    "severity": "blocking",
+    "picture": "img/rc/hemisphere-cluster.webp (1600x1600) and its -th: the 'In a group' view in all eight Hemisphere galleries and on lighting.html. Source: renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-cluster.png (r32-lamps-final 5e86d76e62), made by lamp_site.py frame 'cluster' with its default camera ((0.30,-1.50,0.36) -> (0,0,0.67), 46 mm, 2000x2000).",
+    "claim": "Two of the eight pendants hang from cords that stop in mid-air inside the picture. Poison's cord ends 118 px and Smoke's 158 px below the top edge of the live 1600 px file; the other six run off the top. Nothing holds them up. lamp_site.py hemisphere() builds the CAD's 600 mm cord (cord.stl, 126-726 mm above the rim) but never the canopy (canopy.stl, 150 mm across, 726-776 mm), and the set has no ceiling. The cluster hangs the shades at different heights (rims 0.42-0.88 m) on the same 600 mm cord, so the two lowest cords end in frame.",
+    "evidence": "Poison's rim is at (-0.30,-0.12,0.48) m and Smoke's at (-0.06,-0.12,0.42) m, so their cord tops are at z 1.206 and 1.146 m. strata/scene.py camera() is a look-at camera with the 36 mm sensor on the larger side. Projected, the cord tops fall at (496,147) and (864,197) in the 2000 px source, which is (397,118) and (691,158) on the live file; the measured ends are about (395,118) and (690,155). Along those cords the frame's top edge is at z 1.309 and 1.279 m, so they stop 103 and 133 mm short of it. Every other cord leaves the frame: Ember (top 1.566 m against an edge at 1.476), Acid, Haze, Fog; Dust by only 18 mm; Ice exactly at the edge (1.446 against 1.446). Size on the site: the cords are about 8 px wide, black on the dark grey paper, and the two ends sit at 7 % and 10 % of the picture's height. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/studio-lamps/crops/FINDING-hemisphere-cluster-live-1600.jpg (live file, ends circled, top edge in yellow) and .../crops/FINDING-hemisphere-cluster-cord-ends.jpg (source). Fix: cut each cord to a common height above the frame (the highest frame edge along any cord is 1.476 m, so for example 1.75 m), or add the canopy and a ceiling. The site's facts say 'a 600 mm drop as standard, cut to length'."
+   },
+   {
+    "id": "inuse-chair-through-table-top",
+    "severity": "should-fix",
+    "picture": "img/rc/hemisphere-ember-table.webp (1600x1067) and its -th: 'Over a table' in all eight Hemisphere galleries. Source: renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-inuse.png (r32-lamps-final 5fa6ef9464), made by lamp_site.py frame 'inuse': room(0.75), camera (0.80,-1.10,1.16) -> (0,0,0.97), 30 mm, 2400x1600.",
+    "claim": "The chair meant to stand 'across the table, pushed in under it' has its back inside the table's footprint. Its back meets the oak top about 0.11-0.12 m in from the far edge, so it passes through the 30 mm top and the solid apron box below it, which runs to y 0.37. The chair seems to face away from the table: AS.place('dining_chair_02', location (-0.02, 0.58, 0), rotation_deg (0,0,180)), and the imported glTF chair probably faces -Y. The 180-degree turn would then put its back on the table side of its origin, near y 0.30.",
+    "evidence": "The table top spans y -0.45 to +0.4485 at z 0.72-0.75; the apron spans y \u00b10.37 at z 0.64-0.72. The camera model is confirmed on the cup's foot ring, the book's boards and the table's far edge, each to about 2 px. Under the backrest a dark strip covers the lit oak in front of the far edge. Its lower boundary, back-projected onto the top (z 0.75), lies at y 0.327-0.343 m for x -0.21 to +0.19 m, a width of 0.42 m, which is the chair's width. No light in the scene can cast that strip from a chair standing behind the edge: the only emitters are the pendant over the table's centre and a 6 W ceiling panel at (-1.2,1.0,2.38). So the chair's body is within the footprint. With the chair centred at x -0.02 as placed, the backrest silhouette (x 1166-1660 px, top 743-771 px in the source) stands at y about 0.30 m, 0.46 m wide, top at about 0.98 m. Standing behind the edge at y 0.78 it would have to be 0.62 m wide and centred at x -0.30. UNVERIFIED: the chair asset is not in the repo, so its position comes from the picture. At the site's size the area is in deep shadow and reads as the chair's shadow, so it is hard to see. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/studio-lamps/crops/FINDING-hemisphere-ember-table-chair-through-top.jpg (live file, gamma-lifted; cyan is the table's far edge, red is where the chair's back meets the top). The plain version is .../crops/hemisphere-ember-table-chair-live-plain.jpg."
+   },
+   {
+    "id": "inuse-cord-short-of-ceiling",
+    "severity": "note",
+    "picture": "img/rc/hemisphere-ember-table.webp, from the same source final/hemisphere-ember-inuse.png.",
+    "claim": "The pendant over the table hangs from a 600 mm cord that ends at z 1.976 m with no canopy. The room's ceiling is at 2.40 m, so the cord stops 0.424 m short of it and the lamp is held by nothing. This is out of frame: the cord leaves the top edge at about z 1.49 m, and its end projects 815 px above the 1600 px frame.",
+    "evidence": "room() puts the ceiling box at z 2.40-2.42. hemisphere('red', 0, 0, TZ+0.50) puts the rim at 1.25 m. cord.stl spans z 126-726 mm over the rim, and hemisphere() adds no canopy part. This is the same root cause as the cluster finding; the other Hemisphere frames show no ceiling and their cords leave the frame."
+   },
+   {
+    "id": "core-dock-cable-floats",
+    "severity": "note",
+    "picture": "Every Core picture: core-<n>.webp, -800, -th, tile-core-*, home-core-*, card-core-*, core-row.webp, core-row-day.webp (sources final/core-<n>.png, core-row.png, core-row-day.png).",
+    "claim": "core() adds the dock's cable (dock-cable.stl, 4 mm thick, running from r 74.6 mm to 180 mm behind the lamp) at z 1.75-5.75 mm. It floats 1.75 mm over the paper and ends in mid-air 180 mm from the lamp's axis. It is hidden behind the ball and base in every live Core frame.",
+    "evidence": "z0 = floor + 6.5 mm, and dock-cable.stl spans z -4.75 to -0.75 mm. I ray-tested 66 points along the cable's top against the ball (r 80 mm, centre 107 mm up) and the base (r 75 mm narrowing to 50 mm): none are visible in the singles (ORBCAM (0.09,-0.86,0.21) -> (0,0,0.10), 70 mm), and none for any lamp in the rows (camera (0,-4.4,1.88))."
+   },
+   {
+    "id": "inuse-book-pages-dip-into-table",
+    "severity": "note",
+    "picture": "img/rc/hemisphere-ember-table.webp, from final/hemisphere-ember-inuse.png.",
+    "claim": "The open book's page blocks (SOLIDIFY 9.5 mm, offset -1) reach 5 mm below the table top at the spine and 0.5 mm below it at the fore-edge, and float about 1 mm over the 3 mm boards mid-page. This is sub-pixel at the site's size: 1 mm is about 0.9 px and the book is about 330 px wide.",
+    "evidence": "Above the table top, the page surface is z = 4.5 + 10.5(1 - e^(-d/12)) - 6(d/150)^2 mm, and the block's bottom is 9.5 mm lower: -5.0 mm at d 0, +4.0 at d 75, -0.5 at d 150. The boards lie at z 0-3 mm on the top, inside its outline, and their projected outline matches the picture."
+   }
+  ],
+  "checked": [
+   "Method. render.py camera: sensor_fit HORIZONTAL, a level camera with tan(tilt)*lens/36 lens shift, plus the shot's own shift_x and shift_y in units of the frame width; the x shift enters as px = W/2 + f*x/z - shift_x*W. The other sign puts the cabinet's bottom panel 0.076 m off its axis. Note that b108/proj.py ignores shift_x and the shot's extra shift_y. parts_2d centre_px is the projected centre of each part's world bounding box and box_px is its 8 projected corners, so a part's full box can be refit (tools/camx.py fit_box). Feet, bottom and top panels refit to under 0.3 px residual.",
+   "Tropos fronts, all 8 tints (studio-refresh, r33-speaker-horn; the live tall, hero, card, thumb, og-<k> and og-home): instance at (0,0,0), rotate_z -6. The feet-base box refits to z 0.0000-0.0060 m (residual 0.06 px), a 0.498 x 0.414 m footprint centred at (-0.0005,-0.0035). The sweep floor is z 0, flat to y 2.70 m (depth 5.5, radius 2.8). The bottom panel sits at z 0.0121-0.0319. In the picture the cabinet has a contact shadow on the paper (crops/front-ember-feet-live.jpg). On the paper, no float, no sink.",
+   "Pending light-c2 fronts (not live): same instance, feet-base z min 0.0000 m.",
+   "Tropos horn-backs, 8 tints (fa123): rotate_z 155. Feet are out of frame (centre at y 1659 px of 900), refit z min +0.0002 m. The footprint's furthest point is y 0.294 m against the cove start at 0.300 (depth 1.5, radius 1.2). In frame are only the cabinet top and the horn on its four black posts.",
+   "Tropos turns, 8 x 24 frames (p2b): every instance at (0,0,0). Feet are about 545 px below the 576 px frame, and their refit z min lies within -1.6 to +3.0 mm, which is the precision limit for parts that far off frame. In 88 of the 192 frames a foot corner reaches up to 25 mm onto the start of the cove, where the paper has risen 0.26 mm or less. That is out of frame and negligible.",
+   "Tropos amp plates, 8 tints (fa123 macro-amp): feet out of frame (y about 1934 px of 1600), refit z min -0.0007 m. The cove starts at y 1.0 m and the footprint reaches 0.313 m.",
+   "Mantle 'In the studio', 8 tints (mantle-house; mantle-<n>-house, tile-mantle and card-mantle): CAD mantle_strata_v3.py puts the pads at z 0-4 mm under the posts at (155,85), (315,85), (155,295) and (315,295) mm. The base spans x 45-425 and y 45-335 at z 16-28.7 mm. house() scales the sweep x0.5 about (0.235, 0.19, 0), so the floor stays at z 0 and the cove starts at y about 0.62 m, behind the deck's back edge at 0.37. Projected with the house camera (az 30, el 22, 1.75 m, 70 mm), the base and plinth outlines match the frame and the front feet show just under the base's front edge where projected (crops/mantle-house-fog-feet-proj.jpg).",
+   "Mantle 'Under a spot', 8 tints (mantle-final-day): the same CAD model on the scene's sweep, floor z 0 flat to y 1.045 m, deck at y 0.01-0.37. The contact shadow under the base is continuous (crops/mantle-final-day-fog-base.jpg). This frame's camera was not recovered, so it is UNVERIFIED by projection.",
+   "Mantle 'With its cover', 8 tints: the cover is 448 x 358 x 100 mm and stands 1 mm inside the 450 x 360 deck, on four 2.2 mm bumpers (deck top 94.1 mm, cover from 96.3 mm). The arm's top at 161 mm clears the cover's inside at 193 mm.",
+   "Hemisphere lit (direct), 8 tints, with its tile, home square and share card: rim at z 0.50, and the cord leaves the top (its end projects 2250 px above the 2000 px frame). The square and tile crops cut the cord at their top edge.",
+   "Hemisphere from below, 8 tints: the cord's end projects 683 px above the frame. Ember's Off view: same camera as the lit view, cord out. Cap view: cord out by 4945 px. Rim view: cord out by 4416 px. Cutaway: cord out by 4918 px, the section shows nothing loose.",
+   "Hemisphere row: rims at 0.45 m, 0.25 m apart (5 cm gaps between the 200 mm shades). Each cord leaves the top, its end projecting 436 px above the 800 px frame.",
+   "Cluster: no shade touches another and no cord passes a shade. Plan centres are at least 0.24 m apart against 200 mm shades, and each cord is at least 0.137 m from any other shade.",
+   "Core singles, 8 tints: the base skirt's foot ring (r 68.5-75 mm) sits at z 0 on the paper (BASE_ALL starts at z -6.5 mm, with z0 = floor + 6.5 mm). The projected ring coincides with the base's bottom edge in core-fog (crops/core-fog-foot-ring.jpg). The ball sits in the lip with 0.48 mm clearance, as in the CAD.",
+   "Core rows, lit and by day: 8 Cores 0.22 m apart (6 cm gaps between balls), skirts at z 0.",
+   "In-use table: the legs stand on the floor (z 0-0.72). The cup's foot ring (r 35 mm) sits at z 0.75 at (0.26, -0.16), wholly on board 1 (y -0.2246 to -0.0007). The book's boards (z 0-3 mm) lie at x -0.386 to -0.015, y -0.224 to 0.084, inside the top. The projected outlines match the frame (crops/inuse-table-props-proj.jpg)."
+  ]
+ },
+ "skeptic:habitats-outdoor": {
+  "verdicts": [
+   {
+    "id": "H1-acid-overhang",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "I reproduced this with my own projector and fit: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/sk.py and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/zfit2.py. The source is right: amber-habitat.webp matches acid-b-final-portrait-finish.jpg (r48 ce0aa08987/e869e99b53) at a mean of 2.45 levels; the next-best source is 37.6. SPEAKER HEIGHT: z -0.0250 (sharp peak, 0 at plus or minus 1 cm; 9.44 px/cm), with rotate_z -8 from SETS. GROUND: at ce0aa08987, acid_rain_el._lumps subtracts the dips before the flat factor and never multiplies them by it. SETS['acid_b'] has dips (0,-0.95, r 1.1, depth 0.2) and (-0.2,-1.2, r 1.2, depth 0.2). FEET: centres at +/-0.230 and -0.1887/+0.1813 (product.py feet_places, cloud.py inset_y 25, origin_mm 280/213.7/-12). Mesh under the foot centres: BL 0.000, BR 0.000, FL -0.0474, FR -0.0647. The settle hits come out as 0.000, 0.000, -0.0518, -0.0711 and -0.0135, which gives z -0.025, exactly what the picture shows. Gap under the front feet: 22 and 40 mm at the centres (15-30 and 32-48 mm across the 40 mm discs). Gap under the front-bottom edge: 36-67 mm. The mesh meets the bottom panel 160-220 mm behind the front face. Slope: 7.3 and 9.9 deg front to back (20-21 deg locally at the front feet), 2.1 deg across. INDEPENDENT IMAGE CHECK: the computed -0.11 contour, 7-12 cm in front of the face, lies on the rendered shoreline (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/acid-waterline-check.jpg). CAVEATS: (1) The true displacement is 0.07 at midlevel 0.5, so +/-35 mm. The rock could reach FL only where the texture height exceeds 0.71, and FR's uphill disc edge only above 0.96, so FR is almost surely in the air and FL probably. (2) 'Plainly visible hanging' is overstated. At full resolution the FR stem and swivel base show under the corner (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/acid-base-overlay-x2.jpg: cyan is the cabinet bottom, red is the rock under the face, magenta/yellow are the foot rings and the mesh under them). But one view cannot show the foot hangs, because the rock seen below it lies behind it. (3) The roughly 30 px dark band at 1200 px is real (rows 1044-1073 at x 500-540), but it is mostly the cabinet's own shadow: the sun is at az 120, behind right, el 7. SITE SIZE: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/acid-site-size-x3-edges.jpg shows foot gaps of 11 and 19 px at 1200; the FR foot is about 5 px and the base reads as seated on a shelf. Physically wrong but hard to see, so should-fix is right. Another possible fix: screw the product's levelling front feet out 22-40 mm (modelled with longer stems)."
+   },
+   {
+    "id": "H2-settle-no-spread-check",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed in the code at ce0aa08987 and 8f4c9fd9f2 (habitat.py settle(), lines 317-355). It casts five rays down: four at the bounding-box corners of the asset's points within 1 cm of its lowest z, and one at their mean. It sets z = max(hits) - zmin - sink and only prints; nothing tests how far apart the hits are. The ray points (+/-0.250, -0.2087/+0.2013) and (0, -0.0037) follow from the CAD. Acid's hits spread 71.1 mm with no warning (H1). I checked each flat zone in the code: Ember level within 0.45 m (feet at most 0.317 m out); Dust t=0 inside 2.2 m and t2=0 inside 1.54 m; Poison, Fog and Smoke use assets.ground flat 0.9; Haze ridge flat_r 0.8 with the crest at least 0.8 m behind; Ice flat 2.6 m around (0,-1.5). My image fits give z = -sink everywhere except Ice, where z is -0.0115 instead of -0.030 (H4). Acid also fits z = -sink, but only because its back hits were 0 while the front ones were 52-71 mm lower (H1). This is a process cause, rightly a note."
+   },
+   {
+    "id": "H3-ember-bedded-in-rock",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "My fit gives z -0.0175 on both halves of the top-front edge (9.44 px/cm), which equals 0 - 0.018. ember_el.terrain at 0db25bafa0 multiplies relief, ropes and lobes by level = smooth(0.45, 0.99, d), which is 0 at every foot point (at most 0.317 m out). The nearest channel (#11: width 0.45, bank 0.2) is 0.814 m from any foot point; its reach is 0.762 m with fbm at 1.0, and 0.819 m only with the theoretical fbm 1.5, where the effect is under 1 mm. So the feet are 17.5 mm and the bottom panel 5.5 mm below level crust, which is displaced +/-15 mm. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/ember-base-overlay-x2.jpg (cyan bottom edge under the yellow crust line, no gap). All eight top edges at their expected z are on /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/tops-all-expected.jpg. This follows rule S1 and is invisible, so note is right."
+   },
+   {
+    "id": "H4-ice-rides-high",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "My fit gives z -0.0115, from the whole edge and from each half on its own (scores -23.8 and -25.0; about 0 at plus or minus 1 cm; 9.90 px/cm). The expected value is -0.030: SINK['ice'] became 0.03 at ccfe76717c, before i1 and before the final at 8f4c9fd9f2, and the snowfield's flat zone (2.6 m around (0,-1.5)) keeps the field level under the footprint. Visual check: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/ice-topedge-x2.jpg. The green line (-0.0115) lies on the top edge where the horn posts stand; the red line (-0.030) falls 18 px inside the dark top-panel band. I checked the camera independently: my projected cabin window (wx 0.8-1.8, z 0.9-1.9) sits centred in its glow (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/ice-cabin-overlay.jpg). So the speaker is 18.5 mm higher than intended: bottom panel 0.5 mm above the mesh, feet 11.5 mm into the snow. The drift-triangle cause is plausible: the front ray points lie 1.3 mm inside the bank's 0.42 m inner rectangle centred on y 0, on 3.56 cm cells, with the drift 5-11 cm high at the front-right. I could not reproduce it without Blender's Perlin noise and the grid phase, so 'probable' is the right word. The base is buried in the drift with no light under it (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/ice-base-clean-x2.jpg). Note is right."
+   },
+   {
+    "id": "H5-ember-rubble-cuts-front-edge",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "My own replay of assets.scatter (random.Random(22), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/scat2.py) agrees. Piece index 4 (the fifth) lands at world (0.101,-0.221), local (0.113,-0.215), scale 0.030, tilt (32,-13): 2.0 mm in front of the front face. Piece 3 is at local (-0.291, 0.219), 17 mm off the back-left corner. In prop 7 (seed 21, 55 pieces) nothing lands within 6 cm of the footprint. The size stays UNVERIFIED, as the reviewer says, but it is probably larger than the reviewer's 1.0-1.1 m estimate. The same boulder_01 in the Fog final (scale 1.1 at (2.6,3.6,-0.12), 578 px/m) shows 0.97 m left of its origin before the frame cuts it (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/fog-boulder-region.jpg). That means at least 0.88 m half-extent at scale 1, so this piece is about 3-5 cm across. It reaches about 1.3-2.5 cm into the footprint, overlapping the bottom panel's z -0.0055 to +0.0145. At its pixel (1211, 2366) the picture shows only dark crust (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/ember-rubble-front-x3-sk.jpg). Invisible, so note."
+   },
+   {
+    "id": "H6-smoke-embers-clod-in-cabinet",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "My own replays agree: kit._scatter, which draws x, y, z and r uniformly per ball, and assets.scatter. I used rotate_z 5 from smoke_f-portrait.json @f0b2dd23b7; my fit on the B finish gives z -0.0120. Prop 23 ember 2: (0.282,-0.161,0.019), r 4.1 mm, local (0.267,-0.185), inside the joint of the bottom and front panels. Prop 23 ember 0: (0.202,-0.199,0.002), r 6.8 mm, local (0.184,-0.216). Its centre is 2.0 mm outside the face and it cuts 4.8 mm into the panel's edge, overlapping z 0 to 8.8 mm. Prop 13 piece 12: (0.276,0.208), local (0.293,0.183), scale 0.051, 13 mm outside the right wall. The overlap needs boulder_01 to be over 0.51 m at scale 1; the Fog frame shows it is. One correction on visibility: ember 0 projects to (1387.6, 2177.0) and is plainly the glowing dot on the bottom edge (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/smoke-embers-overlay-x3.jpg). It is 6.3 px in radius at full size, so about 6 px across at 1200, not 1-3 px. It reads as an ember at the foot, and the cut into the edge cannot be seen. Ember 2 shows nothing. Note is right."
+   },
+   {
+    "id": "H7-poison-ivy-through-bottom",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "My own replay of ivy_el.cover at fe192e62a3 agrees exactly (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/ivyreplay.py, including _triplet's 12 random draws and the gauss calls). It makes 8003 leaves and 1611 runners. Leaves 955 and 956 root at local (-0.182, 0.187) and (-0.182, 0.120), with tops at z 0.021 and 0.070 and tips at z 0.051 and 0.124. That takes them through the bottom panel (z -0.008 to 0.012 at the fitted z -0.020) into the cabinet. Two runner segments cross the footprint; prop 6 has none. Projected, both fall on the uniform bright bottom batt and nothing shows (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/poison-ivy-under-overlay.jpg). Note is right."
+   },
+   {
+    "id": "H8-smoke-far-columns-float",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Confirmed in smoke-f-shower-B-build.py @e3850c91dc. column() puts the column's end at z rise - 2 (43 m at 5.5 km, 58 m at 8 km) and each glow mound at rise + 0.1 r0. No rise is modelled; the comment's 'distant rises' do not exist. The 6 km ground patch spans y -10 to 5990 at z -0.06, so column B has nothing under it. My projection (F 5666.7, CY 1668) puts the glow bottoms at rows 1626.7 (A) and 1628.4 (B). The near ridge's skyline is at about row 1631 (15 m high at 2.2 km). Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/smoke-farfeet-x4-sk.jpg. Glow A sits about 3 px above the skyline band and B touches it. That is 1-2 px at 1200, and the picture reads as fires beyond the ridge. Note is right."
+   }
+  ],
+  "missed": [
+   "Coverage gap, no defect found: Ice (blue-habitat.webp) cabin and firs were not checked. Neither is landed: land_scatter returns early for Ice. The cabin (ice_el.cabin at (6.8,72), base fixed at z 0) stands on the 220 m ground, whose z is -0.7 + 1.2 x Perlin with no flat zone. The firs are fixed at z -0.05; the one in frame, at (6.5,13.5), stands on the snowfield's 0.5 m relief. Their support is therefore UNVERIFIED. In the picture the cabin wall ends on its projected base row (1906) with snow directly below, and its window projects centred in the glow. The right-edge fir's trunk ends on a lit snow crest about 0.3 m above its projected base, which nearer snow hides. Nothing reads as floating. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/ice-cabin-overlay.jpg and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/ice-rightfir-base.jpg",
+   "Coverage gap, plus one misstated number: Poison (green-habitat.webp). The ivy ground cover (props 5-6, runners at z about 0.002), the ferns (z 0) and the amanitas (z -0.02) are set at fixed heights with no landing. The litter has relief 0.1 x Perlin beyond 0.9 m, at full strength by 1.8 m. The reviewer checked only inside 0.9 m. It put the right amanita cluster at '1.0-1.2 m', but it is at 1.55-1.69 m, where the relief is about 90 % (+/-9 cm). Its conclusion still holds: the stems end 69-75 px (about 5 cm) above their projected z -0.02 bases, so raised litter hides the bases, with no gap or detached shadow (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/poison-mush-right.jpg). The ferns in frame are 1.03 and 1.17 m out (+/-5 and +/-21 mm). Over the relief zone the foreground ivy may float in hollows or be buried in humps; that is UNVERIFIED (Blender's Perlin noise cannot be computed here). It lies in deep shade and out of focus, and nothing reads as floating at site size (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/poison-foreground-half.jpg)",
+   "Minor coverage gap: Smoke (black-habitat.webp) ember clumps away from the base (props 15-22 and 24-28: glow balls at z 0-0.03, no landing). They sit over ground with 0.2 m relief beyond 1.8 m and on the crater rim, so some must float or be buried. They are 1-3 px glows, invisible either way. The rubble and clods (props 13-14) and the Acid, Ember and Fog rocks are lowered by land_scatter if they float, so they cannot hover.",
+   "Pictures: none missed. The eight <tint>-habitat.webp files and their -600 and -th cuts are the only outdoor pictures on the live site. I matched every one of the 24 files against all eight sources: best match at mean 1.8-3.4 levels, next-best at 35 or more. The other 215 pictures are studio, room, bar or brand (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/all-site-contact.jpg). The reviewer's 'checked' heights all hold: Ember -0.018, Dust -0.028, Poison -0.020, Haze, Fog and Smoke -0.012. For Fog, an automatic edge fit locks on the clear top panel's lower face at -0.0325; the visual check confirms the top face at -0.012 (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-habitats-outdoor/fog-topedge-x2.jpg). I removed the full-size source copies to keep only crops, so my scripts need src/<key>.jpg extracted again from r48-biomes."
+  ]
+ },
+ "skeptic:bar-and-rooms": {
+  "verdicts": [
+   {
+    "id": "B1-triangle-sleeve-tropos-bar",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced from git, with my own projector (py/cam.py, re-derived from render.py 155-180) and board model (bar_life.boards: local x \u00b1w/2, y 0..t, z 0..h, about the bottom-front-centre). cover-14 at (6.600, 5.580, 2.285), rot [-4,0,58]: the bottom edge runs from (6.517, 5.446) to (6.684, 5.714), 5.715 with its thickness. The shelving front is y 5.72 (planet_r36.backbar: shelf.box(a0, yf, z-0.022, a1, yb, z)), and the k=3 shelf top is z 2.280. So 0 % of the edge is over a shelf, the front corner is 27.4 cm proud, and the edge is 5 mm above shelf level. Nothing sits under it: the bay niches are at x 5.17-5.93 and 7.87-8.63, the now-playing ledge at x 3.62-4.72, and products_only drops the sconce. Mapping confirmed: tropos-bar.webp against fixed9.png has a mean difference of 1.66 levels; against bar-backbar.png it is 20.5. Visibility is understated. The 16 px figure is measured to the shelf edge at the same world x (I get 16.2). In the same image column, which is what the eye compares, the front corner is 35.3 px above the shelf line at 1600 and the back corner 2.3 px. Crops /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-bar-and-rooms/out/B1-tropos-bar-3x.jpg and B1-tropos-bar-1x-plain.jpg: at site size the white triangle hovers clear of the shelf, with records showing under it. I accept blocking: it is prominent and plainly unsupported, though it could also be read as a sign that has been hung. Cause confirmed: planet_bar._life() sets y = RECORD_WALL['y'] - 0.14 for all three sleeves."
+   },
+   {
+    "id": "B2-mantle-extent-confirmed",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "I confirmed this independently with a least-squares box fit of the reports' box_px over all seven bar frames (py/fit.py). Plinth: local x 0.0100-0.4601, y 0.0101-0.3699, z 0.0687-0.0940, rms 0.25 px. Base layer: 0.045-0.425 x 0.045-0.335, z 0.016-0.029. Feet bbox: x 0.137-0.333, y 0.067-0.313, which gives centres 0.155|0.315, 0.085|0.295 at r 18 mm; pads at z 0-0.004. Hinge blocks: y 0.370-0.379, at the back. The centre is at local (0.235, 0.190), so the origin is 10 mm outside the plinth corner. Every report back-projects to world (8.633, 4.592). Feet: (8.605, 4.463) and (8.750, 4.530) stand on the flat; (8.516, 4.653) and (8.661, 4.720) are 6.3 and 13.0 cm past 4.59. Plinth: 50.5 % past the edge and 41.0 % over the flat; back corners 7.0 and 26.0 cm past. The centre is 10.5 cm behind the line through the two supported feet, so Mantle would tip back. planet_bar.py does use (0.23, 0.21). Mantle is out of frame in bar-pendants (box_px x 3810-4970 in a 2400 px frame) and in core-bar-table (8868-13677 in 3200). Crops out/B2-tropos-bar-2x.jpg and B2-phonehero1200-1x.jpg: the lit stone ends diagonally under the plinth. In B2-mantle-bar-1x.jpg the edge runs under the plinth and the overhang is not evident. Point taken that fixed9.shot.json is a separate file that a planet_bar.py fix will not reach."
+   },
+   {
+    "id": "S1-triangle-sleeve-phone-hero",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Same board and geometry as B1. In bar-backbar-portrait it projects to u 394-628 px in the 2400 px frame. The numbers given are off. Measured to the shelf edge at the same world x, the gap is 22.0 px at 1200 but 14.6 px at 800, not 11; the two figures given do not scale 1.5:1. In the same image column the front corner sits 40.3 px above the lit shelf line at 1200 and 26.9 px at 800; the back corner sits 2.6 and 1.7 px above. In crops out/S1-home-bar-tall-1200-2x.jpg and out/S1-phonehero800-sleeve-2x.jpg (phone size at 2x), the sleeve plainly hovers in the dark upper left with the shelf line well below it. should-fix is defensible because the area is dark and the sleeve is small (about 40 CSS px on a phone). It is still nearer to B1 than '11 px' suggests. It is fixed in the same edit as B1."
+   },
+   {
+    "id": "S2-mantle-bar-nowplaying-over-aisle",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. The walnut box (kit box, bottom-centred) is 0.20x0.05x0.022 at (8.8192, 5.0316, 1.07), rz 35. Its footprint is x 8.723-8.915, y 4.954-5.109, 36.4-51.9 cm past the counter edge (100 % past). The cover-00 board (0.18) stands on it at z 1.092. Nothing is under it, so it is 1.07 m above the aisle floor. Small corrections: the niche ledge (planet_r37.ledges, x0-0.012..x1+0.012) spans x 7.858-8.642, not 7.846-8.654. Its front is at y 5.448, and the back-bar worktop front is at 5.67, not 5.65. The conclusion is unchanged. At 1600 px the stand projects to 1049-1279 x 458-545, hidden behind the platter and plinth. The sleeve projects to 1042-1248 x 235-508, visible behind the tonearm, and reads as standing behind Mantle (crops out/S2-mantle-bar-2x.jpg and S2-mantle-bar-1x.jpg). The stand's offset is 42.4 cm behind the centre in y. With rz 25 and Mantle wholly on the 72.4 cm flat (centre y \u2264 4.304), the stand would land at y \u2264 4.728, still past the edge. So it has to be placed separately, as stated."
+   },
+   {
+    "id": "S3-other-pulled-out-sleeves",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced (py/wall.py); the cause is the same _life() line. cover-10 in the hero (x 9.35, z 1.925, rz -64): the bottom edge runs y 5.438-5.722. The corner away from the wall is 13.2 px above the shelf line at 2400 and 8.8 px at 1600. In crop out/S3-hero2400-cover10-3x.jpg it reads as a sleeve tilted in its cell, with shadow under the lifted corner. cover-03 (4.4, z 1.565, rz 70): 0.7-2.0 px in the hero at 2400 and 5.0 px at the front corner in tropos-bar, same column; the 2 px given is the same-world-x measure (crop out/S3-tropos-bar-cover03-4x.jpg). It reads as standing. In the hero, cover-14 at z 1.565 shows only its apex above the Ember shade (out/S3-hero2400-cover14-3x.jpg). cover-10 is out of frame in tropos-bar and the phone hero (u > 2176 px in 1600), and cover-03 is out of the phone hero. They are physically floating (0-3 % over a shelf) and hard to see, so should-fix is right."
+   },
+   {
+    "id": "S4-mantle-bar-core-over-edge",
+    "stands": true,
+    "severity_ok": false,
+    "reason": "The geometry reproduces. The Core is at (8.287, 4.541). In r32 3e38954b, BASE_ALL (the own_all default; the dock is excluded) puts the skin's foot on the bar as an annulus r 68.5-75 mm. The ball (r 80) is centred 107 mm up. The back of the skirt is at y 4.616: 2.6 cm past 4.59 and 5.4 cm past the flat's end at 4.562. The footprint is 67.6 % on the flat and 11.5 % past the edge. Crop out/S4-mantle-bar-core-2x.jpg: the back of the base is behind the ball and invisible. It is not physically wrong, though. The contact annulus still meets the flat over about 214\u00b0 of its circle, and the centre is 2.1 cm inside the flat's end. So the lamp stands stably, as a real lamp set at the edge would. Nothing floats or intersects. It should be a note; it moves with Mantle anyway, since it is placed from Mantle's assumed centre (-0.33 right, -0.08 front)."
+   },
+   {
+    "id": "S5-hero-glass-inside-ember-core",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. In the hero the drinks are not moved (6.12/6.31). The glass lathe is at (6.31, 4.18, 1.07): r 41 at the foot, 44 at the 92 mm rim. The Ember Core is at (6.30, 4.08), 100.5 mm away. Skirt 75 + foot 41 gives a 15.5 mm overlap. The ball's radius at rim height is 78.6, so the glass is 22 mm into the ball. The opal at that height has radius 68.4, so it is 12 mm into the opal. Footprint overlaps are 7.5 cm\u00b2 with the skirt and 10.8 cm\u00b2 with the ball. Crop out/S5-hero2400-glass-5x.jpg (glass outlines white): the glass sits wholly behind the ball. At most a sliver of about 6 px at 2400 can show at the ball's right edge, and no sign of the intersection is visible. The other frames move the drinks (DRINK_DX 2.0, or 0.78 in pendants), so this is hero-only. should-fix is right."
+   },
+   {
+    "id": "S6-pendants-cloth-through-newspaper",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. The cloth is a kit box (base-standing, kit.py:445) 0.22x0.13x0.014 at (6.62, 4.46, 1.07), rz -14, so z 1.070-1.084. The newspaper board is 0.29x0.40x0.006 at (6.97, 4.36, 1.0765), rot [-90,0,82], so z 1.0705-1.0765, with corners (6.950, 4.216), (6.990, 4.504), (6.594, 4.559), (6.554, 4.272). The plan overlap is 194.6 cm\u00b2 of the cloth's 286, and the cloth stands 7.5 mm proud of the paper. The newspaper also crosses cover-09 by 6.9 cm\u00b2 at the same base height. Crop out/S6-pendants-2x.jpg (and -plain): right of the Ember ball there is an unprinted cream patch on the paper. It reads as a plain area, or as a cloth lying on the paper, not as an error. Physically the two interpenetrate, and it is hard to see, so should-fix is right."
+   },
+   {
+    "id": "S7-drinks-twist-and-ice-float",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. listening_bar.contents() fills to `fill` measured from the foot, so the liquid tops are at 1.115 (45 mm fill) and 1.100 (30 mm fill). The ice kit boxes have their bottoms at 1.106 and 1.112, with tilted corners 1.4-3 mm lower. In the 30 mm glass both cubes therefore hang about 4.5-12 mm above the drink. They touch neither the liquid nor the wall: the cubes reach radius 32 mm, the inner wall is at 40.5. The twist follows kit._catmull: centreline r 32.3-36.2 mm, z +94..+100. With its 3.5 mm radius it comes no closer than 2.5 mm to the rim's inner edge, so it hovers inside the mouth. fixed9's water_glass centres the cubes on their position (create_cube), giving 6.3 and 0.3 mm submerged, as stated. Crops out/S7-bar-pendants-3x.jpg and S7-home-bar-tall-1200-3x.jpg: the twist reads as lying on the rim. In the phone hero's in-frame glass (glass 2, the 30 mm one) the floating ice shows as a pale blob above the drink and does not read as wrong. should-fix is acceptable; the twist alone would be a note."
+   },
+   {
+    "id": "N1-leftover-r36-record-and-sleeve",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. planet_r36.room() calls life() unless props is False; no shot sets that, and no remove list names life-record or life-sleeve. The life_glasses/life_sleeves keys only switch off r37's extra_life. Overlaps from my py/bartop.py: in the hero, the Acid skirt overlaps the sleeve by 103.2 cm\u00b2 and the record by 80.3 cm\u00b2; the Ember skirt overlaps the sleeve by 47.7 cm\u00b2; the glass at (6.12, 4.04) overlaps the sleeve by 60.6 cm\u00b2. In fixed9 the Dust skirt overlaps the sleeve by 176.2 cm\u00b2, its whole skirt. The finding omits that it also overlaps the record by 15.7 cm\u00b2 (in frame). The record and sleeve also cross each other by 96 cm\u00b2, with the record's top 0.7 mm below the sleeve's. In crops out/N1-hero2400-life-3x.jpg and N1-tropos-bar-life-4x.jpg the lamps and glass read as standing on a pale card. Note is right."
+   },
+   {
+    "id": "N2-pendants-napkin-touches-dust-core",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. The fold()'s roll reaches local y L0+rr = 0.126, plus a 2 mm skin (t/2). Its outer surface is 70.4 mm from the Dust Core's axis at 8 mm height, where the skirt radius is 71.7 mm (75 tapering to 61.85 over 32 mm). That is 1.3 mm of overlap plus the ripples; the footprint overlap is 1.6 cm\u00b2. The napkin is in front of the Core from this camera. Note is right."
+   },
+   {
+    "id": "N3-sleeve-stack-and-throw",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. _raise_flat raised only the first board, so the boards span 1.0705-1.0735, then 1.071-1.074, 1.075-1.078 and 1.079-1.082: the second is sunk 2.5 mm and the top two float 1 mm. cover-12's corner is 4 mm past 4.59, with the stack's middle about 15 cm inside the flat. The throw's footprint overlaps the stack by 1.8 + 0.8 cm\u00b2 in fixed9, about 1.7 x 1.1 cm at the corner, with 3 mm of vertical overlap. In the phone hero the stack (moved to x 7.62) overlaps it by 7.0-8.3 cm\u00b2 per board. That happens along the stack's front edge, which projects at x < 0, so it is out of frame as stated. The throw's front edge is 8 mm onto the bevel and at most 1.2 mm above it. Note is right."
+   },
+   {
+    "id": "N4-acid-cord-on-beam-face",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. Beams sit at x 0.75 + 1.22k, 140 wide and 300 deep: the 6.85 beam has faces at 6.78 and 6.92 and spans z 3.10-3.40. The cord at x 6.92 runs on its face. I projected each cord's point at z 3.10: it is above or outside every frame (fixed9 v = -273; portrait x = -656; mantle-bar far off-frame). The hero and pendants cords at 6.93 and 6.75 clear the faces by 1.0 and 3.0 cm. Note is right."
+   },
+   {
+    "id": "N5-core-bar-table-leftover-stand",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. The stand's footprint spans y 4.482-4.598: 7.7 mm past 4.59, 0.9 % of its area. It overlaps Mantle's base-layer footprint by 4.1 cm\u00b2, with 5 mm of vertical overlap (stand top 1.092, base layer bottom 1.087). Both are out of frame. Note is right."
+   },
+   {
+    "id": "N6-inuse-room-minor",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Mapping confirmed: hemisphere-ember-table.webp against r32 8e07dda48b hemisphere-ember-inuse.png has a mean difference of 1.18 levels. The room code is lamp_site.py room() at 8e07. The table checks out: top boards z 0.72-0.75, apron 0.64-0.72, legs 0-0.72 on the floor. The book's page block (9.5 mm solidify, offset -1) is at -5 mm at the gutter, floats 1.4 mm near d = 30 mm, and is at -0.5 mm at the fore-edge. The coffee disc is 36.2 mm against a 35.7 mm wall. My overlay, made with the lamps lane's tilted camera, matches (out/N6-inuse-cup-5x.jpg). One correction: the cup handle is not just 'attached, overlapping the wall by 7.6 mm'. The torus (major 23 mm, scaled 0.85 in x and 1.22 in z, minor 5.8, centre x+46 mm) goes through the 4 mm wall and reaches 13.5 mm into the cavity, 10.6 mm of that above the coffee line (z 68-82 mm). The near rim hides it, so it remains a note. Coverage: a contact sheet of all 40 kinds of site picture (out/contact-others.jpg) confirms the six bar pictures and this one are the only interiors, and every one, with its thumbnail, was covered."
+   }
+  ],
+  "missed": [
+   "bar-pendants.webp and -th (bar-pendants.png): the wooden bowl (wooden_bowl_01 at (6.40, 4.38), base z 1.07) stands with its front half over the flat sleeve cover-09 (6.41, 4.06, rot 0; back edge y 4.375; z 1.0705-1.0735). The bowl's centre is only 5 mm behind the sleeve's edge, so the sleeve's full 3 mm thickness passes into the bowl's base: the bowl is sunk about 3.5 mm, where it should sit up on the sleeve or tilt about 2\u00b0. In the picture the bowl's front silhouette lies over the sleeve and reads as resting on it. Note. The reviewer wrote 'the bowl and limes are seated' and checked cover-09 only against the Ember base. Overlap depth UNVERIFIED (the bowl mesh is not in the repo). The cloth corner (6.498, 4.424) lies 10.7 cm from the bowl's centre along its 30\u00b0 long axis, inside its outline in the picture, so it probably cuts into the bowl's lower side in every frame with both: UNVERIFIED. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-bar-and-rooms/out/X-pendants-bowl-2x.jpg (and -plain).",
+   "hemisphere-ember-table.webp and -th: the cup handle, which N6 and its checked line call 'overlapping the wall by 7.6 mm (attached)', in fact goes through the cup's 4 mm wall and 13.5 mm into the cavity, 10.6 mm of that above the coffee line (lamp_site.py at 8e07: torus at cx+0.046, major 0.023 scaled 0.85 in x and 1.22 in z, minor 0.0058). The near rim hides it. Note. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-bar-and-rooms/out/N6-inuse-cup-5x.jpg.",
+   "tropos-bar.webp (fixed9): besides the leftover sleeve, the Dust Core's skirt also overlaps the leftover r36 life-record (15.7 cm\u00b2, through its 1.8 mm), in frame. In every bar scene the leftover record and sleeve also interpenetrate (96 cm\u00b2; the record's top at 1.0728 is under the sleeve's 1.0735), in frame in the hero and tropos-bar. In bar-pendants the leftover sleeve also crosses cover-09 (17.3 cm\u00b2), but that projects at x \u2248 -200 px, out of frame. Notes adding to N1.",
+   "core-bar-table.webp and -th: its shot builds the old wall (r36 backbar records-sleeves and records-faceout plus bar_life.fill_records), not record_wall.build, so the reviewer's 'by construction (record_wall.build)' check does not apply to this picture. r36's face-out sleeves stand 4 mm above their shelves (fo.box at z+0.004), and its spines up to 3 mm above (z+dz). Separately, in the new wall used by the other bar pictures, record_wall._others' face-out sleeve leans back 6\u00b0 from y 5.77, but its top reaches only y 5.806, 4 mm short of the records it should lean on (5.81). All of this is invisible: far out of focus at f/2, or a few mm. Notes. Preview: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-bar-and-rooms/out/core-bar-table-preview.jpg.",
+   "tropos-bar.webp, the phone-hero edge and bar-pendants: bar_life.fold() puts the layers' mid-surfaces 2\u00b7rr apart. Each upper layer of the wool throw (rr 16, t 10) is therefore held 22 mm clear of the layer below, and each layer of the napkin (rr 6, t 4) 8 mm clear, over its whole length, supported only by the rolls. A real cloth would sag onto the layer below. It reads as a thick loose fold. Note. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-bar-and-rooms/out/X-throw-tropos-bar-3x.jpg."
+  ]
+ },
+ "skeptic:studio-and-lamps": {
+  "verdicts": [
+   {
+    "id": "cluster-cords-end-mid-air",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. Live img/rc/hemisphere-cluster.webp is the full frame of final/hemisphere-cluster.png, resized (blob 8d55f17d99, the same on r32 5e86d76e62, r32 HEAD and main; mean difference 1.15 levels). renders/2026-11-17/.../step2.sh rendered the 'cluster' frame without DOMECAM, so it uses the default camera: (0.30,-1.50,0.36) aimed at (0,0,0.67), 46 mm, 2000x2000, a look-at camera with the sensor on the larger side. lamp-site-meshes/out-dome-pendant/stl/cord.stl at 5e86d76e62 runs from z 126 to 726 mm and is 6 mm across. canopy.stl (z 726-776 mm) exists, but hemisphere() never places it, and the set is only the sweep. My projections of the cord tops: Poison (z 1.206) at (496,147) in the source and (397,118) live; Smoke (z 1.146) at (864,197) and (691,158). The measured topmost dark rows of those cords: Poison 145 in the source and 116 live, Smoke 195 and 156, all within 2 px. Along those cords the frame's top edge is at z 1.309 and 1.279, so they stop 103 and 133 mm short. The other six reach row 0, with spare cord of Ember 90 mm, Acid 111, Haze 221, Fog 128, Dust 18 and Ice 0. The gallery shows the square whole (.fit keeps the image's aspect), so nothing crops the top. At 800 px, Smoke's cord plainly stops in empty grey about 79 px from the top, and Poison's stops beside Ember's, which continues. The cord core is 5-14 against a ground of 36-37 (about 9-12 dE). In the 168 px thumbnail the ends cannot be seen. Blocking is fair, though at its lower edge: these are thin dark lines on a dark ground. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-studio-and-lamps/crops/cluster-live-800-cord-ends.jpg, .../crops/cluster-live-1to1-ends-plain.jpg and .../crops/cluster-live-1to1-ends-x2.jpg (cyan is the model cord, yellow the frame edge, red the ends)."
+   },
+   {
+    "id": "inuse-chair-through-table-top",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced, and no longer only inferred. The camera is the inuse default: mix.sh passed no DOMECAM, and room() is byte-identical from 8e07dda48b to r32 HEAD. Live hemisphere-ember-table.webp is the resized full frame (mean difference 0.89). Across source columns 1160-1720, the lit-to-dark boundary back-projects onto the top (z 0.75) at y 0.329-0.346. That is 0.104-0.121 m in from the far edge, which is at y 0.450: four boards of 223.875 mm and three 1.5 mm joints. The reviewer's 0.4485 is 1.5 mm short. Outside the chair's width (columns below 1160 and above 1780) the oak between y 0.36 and 0.445 is lit at 7-25; inside that width it is 1-2. The lifted crop shows the dark back panel standing on the oak, with lit oak running on to the far edge on both sides of it. Backrest columns 1166-1660 back-projected at y 0.30 give 0.46 m wide, centred at x -0.024 (the chair is placed at -0.02), top at z 0.975. Standing behind the edge at y 0.78, the backrest would need to be 0.62 m wide and centred at x -0.31. The chair's direction is now checked independently. AS.place is the same call the kit's asset path uses. In r32's lamps-campaign dining-dusk and dining-close renders, the chairs at rotate 0 have their backs on the +Y side of their origin (the near chairs' backs at the table's near edge), and the chairs at 180 have them on the -Y side (at the far edge). So room()'s chair (rotation 180 at y 0.58) has its back at about 0.58 - 0.245 = 0.335, the measured line. It passes through the top (z 0.72-0.75) and the apron (y up to 0.37, z 0.64-0.72). A shadow cannot explain the dark strip: the pendant hangs at y 0, and the ceiling panel's shadow of a back at y 0.78 lands at y 0.645 or beyond. At the site's size the area is dark and reads as shadow, so should-fix is right. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-studio-and-lamps/crops/inuse-src-chair-zone-lift.jpg and .../crops/inuse-live-chair-lift-x2-edges.jpg (cyan is the far edge y 0.45, red is y 0.335). Also .../crops/inuse-live-900.jpg, and for the chair's direction .../crops/dining-dusk-chair-hyp.jpg and .../crops/dining-close-chair-hyp.jpg (magenta is the back at local +Y, green at local -Y)."
+   },
+   {
+    "id": "inuse-cord-short-of-ceiling",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. The rim is at 1.25 m (TZ 0.75 + 0.50). The cord's top (cord.stl reaches 726 mm) is at z 1.976 m, with no canopy part. The ceiling box is at z 2.40-2.42, so the gap is 0.424 m. The cord's end projects to row -815 of the 1600 px frame. The frame's top edge along the cord is at z 1.495. The ceiling is not in frame either: the top-centre ray reaches z 2.40 at y 2.97, beyond the far wall at y 1.30. It is invisible, so note is right."
+   },
+   {
+    "id": "core-dock-cable-floats",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Reproduced. dock-cable.stl at both 5fa6ef9464 (the singles and day row) and 5e86d76e62 (the lit row) spans x \u00b12 mm, y 74.6-180 mm and z -4.75 to -0.75 mm. It is placed at z0 = floor + 6.5 mm, so it sits at z 1.75-5.75 mm and floats 1.75 mm. It also touches nothing at its inner end: the skirt's surface at those heights is at r 74.3-72.6, so the cable starts 0.3-1.6 mm short of it. Rays from ORBCAM (0.09,-0.86,0.21) and from the row camera (0,-4.4,1.88) to points on the cable pass through the opaque base skin or the opal core (r 70), for the end lamps too. It is hidden, so note is right."
+   },
+   {
+    "id": "inuse-book-pages-dip-into-table",
+    "stands": true,
+    "severity_ok": true,
+    "reason": "Holds in substance, with one number corrected. The fore-edge (block bottom at -0.47 mm) and mid-page (+3.99 mm over 3 mm boards, so about 1 mm float) reproduce from the code. At the spine, Blender's Solidify (simple mode, even offset off) offsets along the vertex normal, which tilts about 37\u00b0 there (the first 3.75 mm strip rises with slope 0.75). The bottom at the spine is therefore about -3.1 mm, not -5.0, and lies 5.7 mm toward the fore-edge. That is still below the top and through the 3 mm board. 1 mm is under 1 px at the live size, so note is right."
+   }
+  ],
+  "missed": [
+   "No live picture in this lens was left out. Every img/rc file outside the bar set (home-*-wide-*, home-bar-tall-*, bar-pendants, core-bar-table, mantle-bar, tropos-bar) and the habitat set maps to the reviewer's list. Each Hemisphere 'Lit' picture is cut from -direct (mean difference 0.85-1.11, against 22-33 for the DCAM hero). The cluster, the in-use picture and the Mantle frames are resized full frames. img/icon-<k>-light.webp are flat glyphs and img/globe-* a floating globe sprite, so nothing in them stands on anything. The HTML references no images outside img/.",
+   "NOTE (hidden, sub-pixel). Every Core picture (core-<n>, -800, -th, tile-core, home-core, card-core, core-row, core-row-day) is affected. The reviewer wrote 'the ball sits in the lip with 0.48 mm clearance, as in the CAD', which leaves the ball resting on nothing. The outer ball (r 80 mm, centre z 106.95 mm) clears its silicone seat ring by 0.26 mm (seat.stl top z 38.56 at r 42) and the bullnose lip by 0.30 mm. Also, the grommet's shoulder (grommet.stl r 17-26 mm, up to z 39.9 mm) passes through the ball's 6 mm wall around its \u00d840 port: 1345 of 6600 triangle vertices lie between the r 74 and r 80 spheres. All of this sits inside the opaque base skin and under the opal core, so it shows in no live frame.",
+   "COVERAGE NOTE (no defect), closing the reviewer's UNVERIFIED item: the Mantle 'Under a spot' pictures (mantle-<n>, -800, -th) are now verified by projection. The renders' notes (mantle-v3-signed-day-ember-final.txt, inherited by the final-day set) record v3_day.py run with 'dusk ... --pan 0.05 --scale 0.75'. With mantle-r48/scene.py at adacfc79aa that gives a camera at (1.013,-1.150,0.48) aimed at (0.228,0.180,0.07), 85 mm, 1800x1200. The deck (z 68.7-94.1 mm) and base (z 16-28.7 mm) outlines land on mantle-final-day-fog.png within a few px. The feet (z 0-16 mm under the posts) stand on the sweep floor, which is flat at z 0 out to y 1.045 m; the deck spans y 0.01-0.37. It rests properly. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b109/skeptic-studio-and-lamps/crops/mantle-final-day-fog-proj.jpg"
+  ]
+ }
+}
