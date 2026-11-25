@@ -96,8 +96,9 @@ def _cast(bpy, scene, own, x, y, z):
         loc, _n, idx, dist = bvh.ray_cast(o, d, 0.5)
         if loc is None:
             return None, None
-        if owner[idx] not in own:
+        if owner[idx] not in own and _n.z > 0.0:       # an upward face: a top this could rest on
             return z - loc.z, owner[idx]
+        # its own geometry, or the underside of something it starts inside (a sleeve on the one below): look on
         o = Vector((x, y, loc.z - 1e-5))
     return None, None
 
@@ -118,9 +119,9 @@ def check(bpy, scene, groups):
         if len(contact) > 400:
             contact = contact[::len(contact) // 400 + 1]
         on = {}; gaps = []
-        def sup(x, y):
+        def sup(x, y, record=True):
             g, nm = _cast(bpy, scene, own, x, y, zc)
-            if g is not None:
+            if g is not None and record:
                 g -= LIFT                                    # the gap from the lowest point; negative: sunk into it
                 gaps.append((g, nm))
             ok = g is not None and -SINK <= g <= GAP
@@ -133,7 +134,7 @@ def check(bpy, scene, groups):
                 for x0, y0 in [(min(xs), min(ys))]
                 for i in range(int((max(xs) - x0) / STEP) + 1) for j in range(int((max(ys) - y0) / STEP) + 1)]
         grid = [p for p in grid if _inside(h, *p)] or [((min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2)]
-        g_ok = [sup(x, y) for x, y in grid]
+        g_ok = [sup(x, y, False) for x, y in grid]    # the gap and sinking are read at the contact only
         good = [p for p, k in zip(grid, g_ok) if k]; bad = [p for p, k in zip(grid, g_ok) if not k]
         over = max((min(math.hypot(b[0] - g[0], b[1] - g[1]) for g in good) for b in bad), default=0.0) if good else None
         # the edge margin: the outline pushed out along each edge's outward normal (samples every 2 cm on each edge)

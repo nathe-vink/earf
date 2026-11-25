@@ -15,7 +15,7 @@ found the rest). One pass over each live frame's own rendered shot file, so the 
   5. bar-pendants: the cloth moved off the newspaper; the wooden bowl stands on the flat sleeve, not sunk in it.
   6. Every drink: the orange twist rests on the rim (over it, one end inside, one outside), and the ice floats in
      the drink (about 85 % under), or in a glass too shallow to float it, rests on the glass's floor.
-  7. Round 36's 'record out of its sleeve' (life-record, life-sleeve) taken out; the folded napkin and the wool
+  7. The fruit rests in its bowl. Round 36's 'record out of its sleeve' (life-record, life-sleeve) taken out; the folded napkin and the wool
      throw lie layer on layer (rolls of radius t/2); the napkin clear of the Dust Core; the sleeve stack stacked.
 
     python3 spinoffs/barkhorn/campaign/bar_fix.py OUTDIR [FRAME ...]
@@ -179,7 +179,7 @@ def drinks(s, name, log):
             m = tw['points'][1]; a = math.atan2(m[1] - cy, m[0] - cx)
             ux, uy = math.cos(a), math.sin(a); tx, ty = -uy, ux        # out from the axis, and along the rim
             pts = [(0.033, -0.012, -0.006), (0.044, 0.0, 0.0), (0.053, 0.012, -0.009)]   # inside, on the rim, outside
-            tw['points'] = [[round(cx + r * ux + t * tx, 4), round(cy + r * uy + t * ty, 4), round(rim + rr + dz, 4)] for r, t, dz in pts]
+            tw['points'] = [[round(cx + r * ux + t * tx, 4), round(cy + r * uy + t * ty, 4), round(rim + rr + 0.002 + dz, 4)] for r, t, dz in pts]
             log.append(f'twist on the rim of ({cx:.2f}, {cy:.2f})')
 
 
@@ -219,6 +219,19 @@ def pendants(s, log):
             p['y'] = round(p['y'] - 0.015, 4); log.append('napkin 1.5 cm further from the Dust Core')
 
 
+FRUIT_DZ = {('food_lime_01', (0, 20, 0)): -0.009, ('food_lime_01', (30, 0, 90)): 0.0034, ('lemon', (0, 70, 20)): 0.0045}
+
+
+def fruit(s, log):
+    """The fruit in the bowl, on it (the support check: one lime 9.5 mm over the bowl, the other and the lemon about
+    4 mm into it)."""
+    for p in s['set']['props']:
+        k = ((p or {}).get('model'), tuple((p or {}).get('rotate') or ()))
+        if k in FRUIT_DZ:
+            p['position'] = p['position'][:2] + [round(p['position'][2] + FRUIT_DZ[k], 4)]
+            log.append(f'{k[0]} {FRUIT_DZ[k] * 1000:+.1f} mm, on the bowl')
+
+
 def fix(s, name):
     s = copy.deepcopy(s); log = []
     mantle(s, name, log)
@@ -227,6 +240,7 @@ def fix(s, name):
     if name == 'mantle-bar':
         mantle_bar_stand(s, log)
     drinks(s, name, log)
+    fruit(s, log)
     leftovers(s, log)
     if name == 'bar-pendants':
         pendants(s, log)
