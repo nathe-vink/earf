@@ -562,9 +562,9 @@ SPEC = {      # inches first, millimeters in brackets; pounds first; feet first 
                        ('Cap', 'Satin black anodized aluminum, with a quarter-turn catch')]),
         ('Light', [('Output', 'About {lm} lm out of the shade in this color'), ('On the table', 'About 340 lux at 20 in (0.5 m) below, in every color'),
                    ('CRI', '90'), ('Color temperature', '{K} K')]),
-        ('Electrical', [('Power', 'About 7 W at 120 V'), ('Dimming', 'Phase-cut (leading or trailing edge) or 0&ndash;10 V')]),
+        ('Electrical', [('Power', 'About 7 W at 120 V'), ('Dimming', 'Phase-cut (leading or trailing edge)')]),
         ('Size and hanging', [('Size', '7.9 in (200 mm) across; 5.0 in (126 mm) from the rim to the top of the cap; the shade 3.9 in (100 mm) deep'),
-                              ('Weight', 'About 3.5 lb (1.6 kg) hanging; the canopy about 0.9 lb (0.4 kg)'),
+                              ('Weight', 'About 3.5 lb (1.6 kg) hanging; the canopy about 2.3 lb (1.0 kg)'),
                               ('Cord', '10 ft (3 m), black, cloth-braided, cut to the drop at install'),
                               ('Drop', '23.6 in (600 mm) as standard: 30.6 in (776 mm) from the ceiling to the rim'),
                               ('Canopy', 'Satin black anodized aluminum, 5.9 in across, 2.0 in deep (150 x 50 mm)')]),
@@ -1598,8 +1598,15 @@ def fix_12(p, web):
   .hero-names { clip-path: inset(calc(298px - 100svh) -4px -8px -4px) }
   .hero-names a:focus-visible { outline-offset: -2px }      /* C6g-3: the ring inside the name's box, so a name the picture shows has its ring whole */
 }
-@media (aspect-ratio: 1/1) and (min-width: 463px) and (max-width: 473px) { .hero-names a { padding-block: 10px } }
-@media (aspect-ratio: 1/1) and (min-width: 474px) and (max-width: 504px) { .hero-names a { padding-block: 13.5px } }
+/* C6i-2 (WCAG 1.4.12, the C6h gate's tested rules): the 37 and 44 px targets as a min-height, not padding, so a text-spacing
+   override does not push 'Tropos in Acid' off the picture's top */
+@media (aspect-ratio: 1/1) and (min-width: 463px) and (max-width: 473px) { .hero-names a { padding-block: 0; min-height: 37px; align-content: center } }
+@media (aspect-ratio: 1/1) and (min-width: 474px) and (max-width: 504px) { .hero-names a { padding-block: 0; min-height: 44px; align-content: center } }
+/* C6i-1 (HR-1, WCAG 2.2 SC 2.5.8, the gate's tested rules): 24 px targets at 414-441; the spacing exception (3.5 px gaps) at 412-413 */
+@media (aspect-ratio: 1/1) and (min-width: 412px) and (max-width: 413px) { .hero-names { row-gap: 3.5px } .hero-names a { padding-block: 0 } }
+@media (aspect-ratio: 1/1) and (min-width: 414px) and (max-width: 441px) { .hero-names a { min-height: 24px; padding-block: 0; align-content: center } }
+/* C6i-3 (HR-2): room for the focus ring at 463-471 and 482-504 (472-481 left out: 'Hemisphere in Ember' would wrap there) */
+@media (aspect-ratio: 1/1) and (min-width: 463px) and (max-width: 471px), (aspect-ratio: 1/1) and (min-width: 482px) and (max-width: 504px) { .hero-names a { padding-inline: 3px } }
 /* C6h-2 (the C6g gate's one declaration): from 505 a square's one-line row has no side padding, so it fits beside a classic scrollbar */
 @media (aspect-ratio: 1/1) and (min-width: 505px) and (max-width: 559px) { .hero-names { padding-inline: 0 } }
 /* C6e-1 (H-7): every exact square in the upright palette: the headline, the line and the buttons dark on the light page */
@@ -1698,7 +1705,8 @@ def fix_14(p, web):
              "      { const say = document.getElementById('namerow-say'), key = P.id; clearTimeout(window.namerowSay); clearTimeout(window.namerowClear); say.textContent = '';      // C6h-5: the product, so a new tint's row is announced\n"
              "        const words = r.hidden ? '' : [...r.querySelectorAll('a, .self')].map(x => x.textContent.trim()).join(', ');\n"
              "        if (words && window.namerowKey === key) window.namerowSay = setTimeout(() => { say.textContent = words; window.namerowClear = setTimeout(() => { say.textContent = ''; }, 1500); }, 150);\n"
-             "        window.namerowKey = key; }\n"
+             "        window.namerowKey = key;\n"
+             "        if (!window.namerowPH) { window.namerowPH = 1; addEventListener('pagehide', () => { clearTimeout(window.namerowSay); clearTimeout(window.namerowClear); say.textContent = ''; }); } }      // C6i-4: nothing pending into the back/forward cache\n"
              "      }\n"
              "    if (nr) { }")
     _sub_any(p, "    if (nr) { }\n    else if (s.shown && !e.textContent)", "    if (!nr && s.shown && !e.textContent)")
