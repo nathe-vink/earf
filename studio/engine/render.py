@@ -68,6 +68,7 @@ def main():
     ap.add_argument('--threads', type=int, default=0)
     ap.add_argument('--no-render', action='store_true', help='apply and save the shot (--save-shot) without rendering')
     ap.add_argument('--probe', action='append', default=[], help='what a part mirrors into the camera (probe.py); no render')
+    ap.add_argument('--pick', action='append', default=[], help='U,V (0-1 from the top left): what the camera sees there; no render')
     ap.add_argument('--support', action='store_true', help='what each product and prop stands on (support.py); no render')
     ap.add_argument('--mirrors', action='store_true', help='with the masks, the mirror map (probe.py); --masks-only writes it anyway')
     a = ap.parse_args()
@@ -310,6 +311,21 @@ def main():
         scene.render.image_settings.file_format = 'PNG'; scene.render.image_settings.color_depth = '8'
 
     out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
+    if a.pick:
+        bpy.context.view_layer.update()
+        dg = bpy.context.evaluated_depsgraph_get()
+        fr = [cam.matrix_world @ v for v in cam.data.view_frame(scene=scene)]     # top-right, bottom-right, bottom-left, top-left
+        for uv in a.pick:
+            u, v = (float(t) for t in uv.split(','))
+            top = fr[3].lerp(fr[0], u); bot = fr[2].lerp(fr[1], u); pt = top.lerp(bot, v)
+            o = cam.matrix_world.translation; d = (pt - o).normalized(); hits = []
+            for _ in range(6):
+                hit, loc, _n, _i, ob, _m = scene.ray_cast(dg, o, d)
+                if not hit:
+                    break
+                hits.append(f'{ob.name} at ({loc.x:.3f}, {loc.y:.3f}, {loc.z:.3f})'); o = loc + d * 1e-4
+            print(f'PICK {uv}: ' + ' | '.join(hits))
+        return
     if a.support:
         import support as Su
         skip = [i for i, p in enumerate(sh.get('set', {}).get('props', []) or []) if p and p.get('fn') in ('room', 'build')]

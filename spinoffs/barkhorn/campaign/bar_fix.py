@@ -72,6 +72,11 @@ def mantle(s, name, log):
     if not hit:
         return
     log.append(f'Mantle {OLD} -> {NEW}')
+    # the room's votive at (8.55, 3.97) now stands 6 mm off Mantle's front-left corner and reads, from the phone hero,
+    # as a pale candle on the plinth: that one votive out (the room merges all its votives into one mesh)
+    s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/campaign/bar_life/bar_life.py',
+                              'fn': 'remove_near', 'names': ['votives', 'tealights', 'flames'], 'at': [[8.55, 3.97]], 'r': 0.05})
+    log.append("the room's votive at (8.55, 3.97), 6 mm off Mantle's corner, out")
     for k, L in s.get('lights', {}).items():
         if k in ('track-mantle', 'mantle-front', 'mantle-side') and 'target' in L:
             L['target'] = [round(L['target'][0] + dx, 4), round(L['target'][1] + dy, 4)] + L['target'][2:]

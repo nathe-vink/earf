@@ -82,6 +82,26 @@ def remove(bpy, name, p, kit):
     return []
 
 
+def remove_near(bpy, name, p, kit):
+    """Take one piece out of a reused room's merged mesh (all its votives are one object): the faces of each object
+    named in `names` (exactly or with a .NNN suffix) whose vertices all lie within `r` m, in plan, of a point in `at`.
+    (2026-11-25: the bar's votive at Mantle's new front corner.)"""
+    import bmesh
+    gone = 0
+    for o in list(bpy.data.objects):
+        if o.type != 'MESH' or o.name.split('.')[0] not in p['names']:
+            continue
+        bm = bmesh.new(); bm.from_mesh(o.data); mw = o.matrix_world
+        near = lambda v: any(math.hypot((mw @ v.co).x - x, (mw @ v.co).y - y) < p.get('r', 0.06) for x, y in p['at'])
+        faces = [f for f in bm.faces if all(near(v) for v in f.verts)]
+        bmesh.ops.delete(bm, geom=faces, context='FACES')
+        loose = [v for v in bm.verts if not v.link_faces]
+        bmesh.ops.delete(bm, geom=loose, context='VERTS')
+        bm.to_mesh(o.data); bm.free(); gone += len(faces)
+    print('REMOVED NEAR', p['at'], gone, 'faces')
+    return []
+
+
 def fill_records(bpy, name, p, kit):
     """Fill the reused room's record wall (the coordinator, 18:36: "the wall of records is the soul of this room"):
     every cell a ray from the room finds open to its back (the old screens, dark now, and the thin ones) gets dense
