@@ -1,0 +1,2207 @@
+{
+ "legend": {
+  "1": "spk-niche-felt",
+  "2": "spk-niche-oak",
+  "3": "ceiling-deck",
+  "4": "panel horn-card",
+  "5": "beams",
+  "6": "chairs-leather",
+  "7": "banq-back",
+  "8": "concrete-walls",
+  "9": "cord",
+  "10": "screen-banquette-a",
+  "11": "tables36",
+  "12": "tint-orange",
+  "13": "banq-seat",
+  "14": "banq-base",
+  "15": "floor",
+  "16": "tables36-bases",
+  "17": "prop17-kit",
+  "18": "ArmChair_01",
+  "19": "chairs-steel",
+  "20": "tint-red",
+  "21": "banq-cushions",
+  "22": "counter-zinc",
+  "23": "prop19-kit-8",
+  "24": "life-coat",
+  "25": "prop19-kit-3",
+  "26": "prop19-kit-2",
+  "27": "base-skin-B-amber",
+  "28": "ball-amber",
+  "29": "tint-amber",
+  "30": "lamp house-left over concrete-walls",
+  "31": "prop24-kit",
+  "32": "counter-back",
+  "33": "prop12-kit",
+  "34": "wooden_bowl_01",
+  "35": "door-curtain",
+  "36": "lamp track-wall3 over ceiling-deck",
+  "37": "door",
+  "38": "storefront",
+  "39": "door-glass",
+  "40": "lamp house-left over door-curtain",
+  "41": "lamp house-left over beams",
+  "42": "glass",
+  "43": "lamp house over concrete-walls",
+  "44": "transom-glass",
+  "45": "caldera-3",
+  "46": "waveguide",
+  "47": "clamp",
+  "48": "gland",
+  "49": "crown",
+  "50": "lamp track-horn0 over ceiling-deck",
+  "51": "lamp track-mantle over ceiling-deck",
+  "52": "glasses-r36",
+  "53": "banq-frame",
+  "54": "prop2-kit",
+  "55": "ball-red",
+  "56": "base-skin-B-red",
+  "57": "prop7-kit",
+  "58": "potted_plant_02_dirt",
+  "59": "motor-plate.ember",
+  "60": "screen-banquette-b",
+  "61": "potted_plant_02_leaves",
+  "62": "record.ember",
+  "63": "plinth-L1-stack.ember",
+  "64": "lamp house over screen-banquette-b",
+  "65": "cue-bar.ember",
+  "66": "arm-puck.ember",
+  "67": "alcove-fir-0",
+  "68": "alcove-fir-2",
+  "69": "sink-block",
+  "70": "opening",
+  "71": "partition-acrylic",
+  "72": "partition-frames",
+  "73": "tubs",
+  "74": "cue-post.ember",
+  "75": "base-L1-stack.ember",
+  "76": "alcove-fir-1",
+  "77": "zone-limewash",
+  "78": "panel-fabric",
+  "79": "arm-base.ember",
+  "80": "rear-plate.ember",
+  "81": "alcove-head",
+  "82": "panel-frames",
+  "83": "hinge-blocks.ember",
+  "84": "zone-carpet",
+  "85": "pours-r36",
+  "86": "zone-platform",
+  "87": "panel-sleeves",
+  "88": "altar-wall",
+  "89": "tub-tables",
+  "90": "tub-table-stems",
+  "91": "horn-throat",
+  "92": "zone-coat",
+  "93": "altar-cheeks",
+  "94": "hf-adaptor",
+  "95": "hf-exit",
+  "96": "hf-plug",
+  "97": "hf-motor",
+  "98": "lamp house over ceiling-deck",
+  "99": "lamp track-wall2 over ceiling-deck",
+  "100": "right",
+  "101": "top",
+  "102": "strata-collars",
+  "103": "strata-posts",
+  "104": "horn-pads",
+  "105": "carrier",
+  "106": "horn-pod",
+  "107": "lamp track-bay1 over ceiling-deck",
+  "108": "tint-edge-red",
+  "109": "lamp track-bar2 over ceiling-deck",
+  "110": "opal-red",
+  "111": "opal-in-red",
+  "112": "lamp house over screen-banquette-a",
+  "113": "tint-in-red",
+  "114": "opal-edge-red",
+  "115": "rim",
+  "116": "front-panel",
+  "117": "left",
+  "118": "food_lime_01",
+  "119": "screen-window-room",
+  "120": "lamp house over beams",
+  "121": "counter-flutes",
+  "122": "grip-right",
+  "123": "collar",
+  "124": "lamp track-bay0 over ceiling-deck",
+  "125": "lamp track-bay0 over beams",
+  "126": "caldera-1",
+  "127": "caldera-2",
+  "128": "woofer-frame",
+  "129": "door-rail",
+  "130": "woofer-screws",
+  "131": "opal-in-amber",
+  "132": "woofer-surround",
+  "133": "woofer-cone",
+  "134": "spk-ledges",
+  "135": "counter-kick",
+  "136": "opal-edge-amber",
+  "137": "white-disc",
+  "138": "tint-edge-amber",
+  "139": "opal-amber",
+  "140": "tint-edge-orange",
+  "141": "stem",
+  "142": "woofer-cap",
+  "143": "orb-cable",
+  "144": "arm-cw.ember",
+  "145": "puck-screw-2.ember",
+  "146": "lamp track-bar1 over ceiling-deck",
+  "147": "altar-fir-1",
+  "148": "counter-rail",
+  "149": "lamp house-left over ceiling-deck",
+  "150": "altar-fir-0",
+  "151": "opal-in-orange",
+  "152": "alcove-back",
+  "153": "ball-orange",
+  "154": "pulley.ember",
+  "155": "lemon",
+  "156": "platter-disc.ember",
+  "157": "arm-collar.ember",
+  "158": "belt.ember",
+  "159": "phono-stage.ember",
+  "160": "life-label",
+  "161": "spindle.ember",
+  "162": "votives",
+  "163": "post-3.ember",
+  "164": "feet.ember",
+  "165": "foot-pads.ember",
+  "166": "lamp track-wall2 over beams",
+  "167": "lamp house-left over screen-banquette-a",
+  "168": "port-frame-left",
+  "169": "port-frame-right",
+  "170": "port-left",
+  "171": "bottom",
+  "172": "port-right",
+  "173": "prop19-kit-0",
+  "174": "land-bottom",
+  "175": "lining-bottom-1-web",
+  "176": "lining-back-d-web",
+  "177": "rib-back-2",
+  "178": "lining-back-a-web",
+  "179": "lining-back-f-web",
+  "180": "rib-back-1",
+  "181": "feet-stem",
+  "182": "prop19-kit-7",
+  "183": "altar-felt",
+  "184": "land-right",
+  "185": "back",
+  "186": "prop19-kit-1",
+  "187": "brace",
+  "188": "back-boss-1",
+  "189": "lining-back-b-web",
+  "190": "land-left",
+  "191": "back-boss-2",
+  "192": "feet-base",
+  "193": "backbar-doors",
+  "194": "prop1-kit",
+  "195": "records-shelving",
+  "196": "backbar-niche",
+  "197": "arm-yoke.ember",
+  "198": "prop1-kit-face7-0",
+  "199": "arm-stub.ember",
+  "200": "backbar-top",
+  "201": "arm-tube.ember",
+  "202": "arm-bias.ember",
+  "203": "arm-cw-ring.ember",
+  "204": "niche-bottles",
+  "205": "arm-axle.001.ember",
+  "206": "altar-fir-2",
+  "207": "motor.ember",
+  "208": "puck-screw-1.ember",
+  "209": "arm-head.ember",
+  "210": "puck-screw-0.ember",
+  "211": "arm-lift-tab.ember",
+  "212": "hs-screw.ember",
+  "213": "prop1-kit-other",
+  "214": "prop19-kit-5",
+  "215": "cue-lever.ember",
+  "216": "cart-body.ember",
+  "217": "prop19-kit-6",
+  "218": "hs-washer.ember",
+  "219": "cart-screw.ember",
+  "220": "hs-washer.001.ember",
+  "221": "hs-screw.001.ember",
+  "222": "cart-screw.001.ember",
+  "223": "now-playing",
+  "224": "cart-stylus.ember",
+  "225": "cart-cantilever.ember",
+  "226": "lamp track-wall4 over ceiling-deck",
+  "227": "bearing-housing.ember",
+  "228": "bearing-nut.ember",
+  "229": "bearing-spring.ember",
+  "230": "post-1.ember",
+  "231": "bearing-washer.ember",
+  "232": "post-2.ember"
+ },
+ "step": 2,
+ "parts": {
+  "waveguide": {
+   "pixels": 223016,
+   "seen": [
+    [
+     "waveguide",
+     0.528
+    ],
+    [
+     "beams",
+     0.135
+    ],
+    [
+     "ceiling-deck",
+     0.082
+    ],
+    [
+     "floor",
+     0.035
+    ],
+    [
+     "opening",
+     0.031
+    ],
+    [
+     "horn-throat",
+     0.026
+    ]
+   ]
+  },
+  "front-panel": {
+   "pixels": 214648,
+   "seen": [
+    [
+     "concrete-walls",
+     0.219
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.188
+    ],
+    [
+     "banq-back",
+     0.113
+    ],
+    [
+     "counter-zinc",
+     0.084
+    ],
+    [
+     "glass",
+     0.057
+    ],
+    [
+     "left",
+     0.049
+    ]
+   ]
+  },
+  "plinth-L1-stack": {
+   "pixels": 201000,
+   "seen": [
+    [
+     "counter-zinc",
+     0.233
+    ],
+    [
+     "platter-disc.ember",
+     0.17
+    ],
+    [
+     "chairs-leather",
+     0.115
+    ],
+    [
+     "prop1-kit",
+     0.063
+    ],
+    [
+     "banq-base",
+     0.062
+    ],
+    [
+     "woofer-cone",
+     0.04
+    ]
+   ]
+  },
+  "base-L1-stack": {
+   "pixels": 98468,
+   "seen": [
+    [
+     "plinth-L1-stack.ember",
+     0.491
+    ],
+    [
+     "counter-zinc",
+     0.315
+    ],
+    [
+     "bearing-nut.ember",
+     0.033
+    ],
+    [
+     "bearing-spring.ember",
+     0.031
+    ],
+    [
+     "post-2.ember",
+     0.023
+    ],
+    [
+     "post-1.ember",
+     0.022
+    ]
+   ]
+  },
+  "record": {
+   "pixels": 87924,
+   "seen": [
+    [
+     "record.ember",
+     0.269
+    ],
+    [
+     "prop1-kit",
+     0.266
+    ],
+    [
+     "records-shelving",
+     0.153
+    ],
+    [
+     "spk-niche-felt",
+     0.087
+    ],
+    [
+     "spk-niche-oak",
+     0.055
+    ],
+    [
+     "ball-red",
+     0.046
+    ]
+   ]
+  },
+  "woofer-cone": {
+   "pixels": 73436,
+   "seen": [
+    [
+     "woofer-cone",
+     0.174
+    ],
+    [
+     "counter-back",
+     0.172
+    ],
+    [
+     "ceiling-deck",
+     0.14
+    ],
+    [
+     "floor",
+     0.077
+    ],
+    [
+     "beams",
+     0.069
+    ],
+    [
+     "counter-zinc",
+     0.056
+    ]
+   ]
+  },
+  "right": {
+   "pixels": 60520,
+   "seen": [
+    [
+     "spk-niche-felt",
+     0.634
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.143
+    ],
+    [
+     "concrete-walls",
+     0.111
+    ],
+    [
+     "counter-zinc",
+     0.032
+    ],
+    [
+     "ball-red",
+     0.021
+    ],
+    [
+     "beams",
+     0.017
+    ]
+   ]
+  },
+  "caldera-3": {
+   "pixels": 49272,
+   "seen": [
+    [
+     "concrete-walls",
+     0.332
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.197
+    ],
+    [
+     "screen-banquette-a",
+     0.129
+    ],
+    [
+     "glass",
+     0.113
+    ],
+    [
+     "caldera-2",
+     0.094
+    ],
+    [
+     "front-panel",
+     0.069
+    ]
+   ]
+  },
+  "platter-disc": {
+   "pixels": 30060,
+   "seen": [
+    [
+     "plinth-L1-stack.ember",
+     0.491
+    ],
+    [
+     "chairs-leather",
+     0.15
+    ],
+    [
+     "counter-zinc",
+     0.119
+    ],
+    [
+     "banq-base",
+     0.078
+    ],
+    [
+     "floor",
+     0.072
+    ],
+    [
+     "chairs-steel",
+     0.042
+    ]
+   ]
+  },
+  "caldera-2": {
+   "pixels": 27184,
+   "seen": [
+    [
+     "concrete-walls",
+     0.216
+    ],
+    [
+     "caldera-3",
+     0.184
+    ],
+    [
+     "caldera-1",
+     0.172
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.15
+    ],
+    [
+     "front-panel",
+     0.14
+    ],
+    [
+     "screen-banquette-a",
+     0.075
+    ]
+   ]
+  },
+  "woofer-frame": {
+   "pixels": 26768,
+   "seen": [
+    [
+     "screen-banquette-a",
+     0.227
+    ],
+    [
+     "concrete-walls",
+     0.221
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.198
+    ],
+    [
+     "woofer-surround",
+     0.146
+    ],
+    [
+     "caldera-1",
+     0.097
+    ],
+    [
+     "glass",
+     0.038
+    ]
+   ]
+  },
+  "woofer-surround": {
+   "pixels": 26656,
+   "seen": [
+    [
+     "woofer-surround",
+     0.374
+    ],
+    [
+     "woofer-frame",
+     0.102
+    ],
+    [
+     "ceiling-deck",
+     0.089
+    ],
+    [
+     "counter-back",
+     0.058
+    ],
+    [
+     "beams",
+     0.044
+    ],
+    [
+     "floor",
+     0.042
+    ]
+   ]
+  },
+  "caldera-1": {
+   "pixels": 25140,
+   "seen": [
+    [
+     "front-panel",
+     0.204
+    ],
+    [
+     "concrete-walls",
+     0.198
+    ],
+    [
+     "caldera-2",
+     0.19
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.149
+    ],
+    [
+     "woofer-frame",
+     0.119
+    ],
+    [
+     "screen-banquette-a",
+     0.095
+    ]
+   ]
+  },
+  "left": {
+   "pixels": 24352,
+   "seen": [
+    [
+     "front-panel",
+     0.422
+    ],
+    [
+     "screen-banquette-a",
+     0.234
+    ],
+    [
+     "concrete-walls",
+     0.114
+    ],
+    [
+     "counter-zinc",
+     0.061
+    ],
+    [
+     "beams",
+     0.06
+    ],
+    [
+     "banq-back",
+     0.04
+    ]
+   ]
+  },
+  "top": {
+   "pixels": 15864,
+   "seen": [
+    [
+     "beams",
+     0.285
+    ],
+    [
+     "front-panel",
+     0.238
+    ],
+    [
+     "lamp house over ceiling-deck",
+     0.226
+    ],
+    [
+     "transom-glass",
+     0.115
+    ],
+    [
+     "ceiling-deck",
+     0.083
+    ],
+    [
+     "lamp house over beams",
+     0.027
+    ]
+   ]
+  },
+  "bottom": {
+   "pixels": 14132,
+   "seen": [
+    [
+     "counter-back",
+     0.766
+    ],
+    [
+     "front-panel",
+     0.146
+    ],
+    [
+     "glass",
+     0.063
+    ],
+    [
+     "counter-flutes",
+     0.023
+    ],
+    [
+     "left",
+     0.002
+    ]
+   ]
+  },
+  "port-right": {
+   "pixels": 11048,
+   "seen": [
+    [
+     "lining-back-f-web",
+     0.355
+    ],
+    [
+     "port-right",
+     0.228
+    ],
+    [
+     "land-right",
+     0.135
+    ],
+    [
+     "rib-back-2",
+     0.065
+    ],
+    [
+     "land-bottom",
+     0.051
+    ],
+    [
+     "bottom",
+     0.042
+    ]
+   ]
+  },
+  "belt": {
+   "pixels": 10160,
+   "seen": [
+    [
+     "plinth-L1-stack.ember",
+     0.489
+    ],
+    [
+     "chairs-leather",
+     0.179
+    ],
+    [
+     "counter-zinc",
+     0.123
+    ],
+    [
+     "banq-base",
+     0.087
+    ],
+    [
+     "floor",
+     0.063
+    ],
+    [
+     "platter-disc.ember",
+     0.046
+    ]
+   ]
+  },
+  "port-left": {
+   "pixels": 9904,
+   "seen": [
+    [
+     "port-left",
+     0.482
+    ],
+    [
+     "lining-back-a-web",
+     0.111
+    ],
+    [
+     "rib-back-1",
+     0.102
+    ],
+    [
+     "lining-back-d-web",
+     0.086
+    ],
+    [
+     "bottom",
+     0.072
+    ],
+    [
+     "lining-bottom-1-web",
+     0.053
+    ]
+   ]
+  },
+  "woofer-cap": {
+   "pixels": 9840,
+   "seen": [
+    [
+     "woofer-cone",
+     0.219
+    ],
+    [
+     "ceiling-deck",
+     0.162
+    ],
+    [
+     "counter-back",
+     0.157
+    ],
+    [
+     "concrete-walls",
+     0.086
+    ],
+    [
+     "beams",
+     0.075
+    ],
+    [
+     "counter-zinc",
+     0.067
+    ]
+   ]
+  },
+  "port-frame-right": {
+   "pixels": 6956,
+   "seen": [
+    [
+     "counter-zinc",
+     0.22
+    ],
+    [
+     "port-right",
+     0.143
+    ],
+    [
+     "banq-back",
+     0.09
+    ],
+    [
+     "counter-back",
+     0.088
+    ],
+    [
+     "front-panel",
+     0.076
+    ],
+    [
+     "ceiling-deck",
+     0.052
+    ]
+   ]
+  },
+  "arm-tube": {
+   "pixels": 6636,
+   "seen": [
+    [
+     "prop1-kit",
+     0.181
+    ],
+    [
+     "records-shelving",
+     0.098
+    ],
+    [
+     "plinth-L1-stack.ember",
+     0.093
+    ],
+    [
+     "prop1-kit-face7-0",
+     0.078
+    ],
+    [
+     "backbar-doors",
+     0.077
+    ],
+    [
+     "front-panel",
+     0.058
+    ]
+   ]
+  },
+  "arm-base": {
+   "pixels": 5852,
+   "seen": [
+    [
+     "arm-base.ember",
+     0.318
+    ],
+    [
+     "arm-puck.ember",
+     0.258
+    ],
+    [
+     "base-L1-stack.ember",
+     0.081
+    ],
+    [
+     "ceiling-deck",
+     0.058
+    ],
+    [
+     "opening",
+     0.037
+    ],
+    [
+     "prop1-kit",
+     0.029
+    ]
+   ]
+  },
+  "port-frame-left": {
+   "pixels": 5684,
+   "seen": [
+    [
+     "counter-zinc",
+     0.184
+    ],
+    [
+     "port-left",
+     0.14
+    ],
+    [
+     "counter-back",
+     0.089
+    ],
+    [
+     "front-panel",
+     0.07
+    ],
+    [
+     "banq-back",
+     0.067
+    ],
+    [
+     "ceiling-deck",
+     0.053
+    ]
+   ]
+  },
+  "post-2": {
+   "pixels": 3788,
+   "seen": [
+    [
+     "base-L1-stack.ember",
+     0.784
+    ],
+    [
+     "counter-zinc",
+     0.216
+    ]
+   ]
+  },
+  "post-1": {
+   "pixels": 3540,
+   "seen": [
+    [
+     "base-L1-stack.ember",
+     0.768
+    ],
+    [
+     "counter-zinc",
+     0.232
+    ]
+   ]
+  },
+  "horn-throat": {
+   "pixels": 3512,
+   "seen": [
+    [
+     "horn-throat",
+     0.574
+    ],
+    [
+     "waveguide",
+     0.139
+    ],
+    [
+     "hf-plug",
+     0.123
+    ],
+    [
+     "hf-adaptor",
+     0.076
+    ],
+    [
+     "hf-exit",
+     0.064
+    ],
+    [
+     "hf-motor",
+     0.016
+    ]
+   ]
+  },
+  "arm-puck": {
+   "pixels": 3240,
+   "seen": [
+    [
+     "arm-base.ember",
+     0.322
+    ],
+    [
+     "woofer-surround",
+     0.216
+    ],
+    [
+     "woofer-cone",
+     0.132
+    ],
+    [
+     "caldera-3",
+     0.127
+    ],
+    [
+     "left",
+     0.096
+    ],
+    [
+     "front-panel",
+     0.065
+    ]
+   ]
+  },
+  "arm-cw": {
+   "pixels": 2768,
+   "seen": [
+    [
+     "arm-cw.ember",
+     0.137
+    ],
+    [
+     "concrete-walls",
+     0.121
+    ],
+    [
+     "plinth-L1-stack.ember",
+     0.079
+    ],
+    [
+     "ceiling-deck",
+     0.064
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.058
+    ],
+    [
+     "backbar-doors",
+     0.056
+    ]
+   ]
+  },
+  "horn-pod": {
+   "pixels": 2620,
+   "seen": [
+    [
+     "spk-niche-felt",
+     0.846
+    ],
+    [
+     "horn-pads",
+     0.139
+    ],
+    [
+     "strata-collars",
+     0.014
+    ],
+    [
+     "strata-posts",
+     0.002
+    ]
+   ]
+  },
+  "cart-body": {
+   "pixels": 2076,
+   "seen": [
+    [
+     "plinth-L1-stack.ember",
+     0.597
+    ],
+    [
+     "record.ember",
+     0.225
+    ],
+    [
+     "cart-stylus.ember",
+     0.05
+    ],
+    [
+     "platter-disc.ember",
+     0.037
+    ],
+    [
+     "partition-acrylic",
+     0.029
+    ],
+    [
+     "opening",
+     0.027
+    ]
+   ]
+  },
+  "cue-post": {
+   "pixels": 1996,
+   "seen": [
+    [
+     "ceiling-deck",
+     0.222
+    ],
+    [
+     "platter-disc.ember",
+     0.126
+    ],
+    [
+     "plinth-L1-stack.ember",
+     0.122
+    ],
+    [
+     "beams",
+     0.1
+    ],
+    [
+     "arm-tube.ember",
+     0.094
+    ],
+    [
+     "arm-base.ember",
+     0.074
+    ]
+   ]
+  },
+  "foot-pads": {
+   "pixels": 1820,
+   "seen": [
+    [
+     "counter-zinc",
+     1.0
+    ]
+   ]
+  },
+  "arm-head": {
+   "pixels": 1704,
+   "seen": [
+    [
+     "prop1-kit",
+     0.282
+    ],
+    [
+     "counter-zinc",
+     0.153
+    ],
+    [
+     "arm-collar.ember",
+     0.101
+    ],
+    [
+     "record.ember",
+     0.075
+    ],
+    [
+     "ceiling-deck",
+     0.063
+    ],
+    [
+     "arm-tube.ember",
+     0.059
+    ]
+   ]
+  },
+  "woofer-screws": {
+   "pixels": 1212,
+   "seen": [
+    [
+     "caldera-1",
+     0.162
+    ],
+    [
+     "ceiling-deck",
+     0.129
+    ],
+    [
+     "concrete-walls",
+     0.096
+    ],
+    [
+     "counter-back",
+     0.086
+    ],
+    [
+     "beams",
+     0.079
+    ],
+    [
+     "counter-zinc",
+     0.076
+    ]
+   ]
+  },
+  "strata-posts": {
+   "pixels": 1168,
+   "seen": [
+    [
+     "spk-niche-felt",
+     0.353
+    ],
+    [
+     "beams",
+     0.12
+    ],
+    [
+     "waveguide",
+     0.096
+    ],
+    [
+     "opening",
+     0.089
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.089
+    ],
+    [
+     "strata-collars",
+     0.079
+    ]
+   ]
+  },
+  "arm-yoke": {
+   "pixels": 1032,
+   "seen": [
+    [
+     "backbar-top",
+     0.213
+    ],
+    [
+     "arm-axle.001.ember",
+     0.109
+    ],
+    [
+     "arm-tube.ember",
+     0.097
+    ],
+    [
+     "cue-post.ember",
+     0.07
+    ],
+    [
+     "record.ember",
+     0.058
+    ],
+    [
+     "plinth-L1-stack.ember",
+     0.054
+    ]
+   ]
+  },
+  "lining-bottom-1-web": {
+   "pixels": 1024,
+   "seen": [
+    [
+     "lining-back-d-web",
+     0.625
+    ],
+    [
+     "rib-back-2",
+     0.363
+    ],
+    [
+     "land-bottom",
+     0.012
+    ]
+   ]
+  },
+  "horn-pads": {
+   "pixels": 996,
+   "seen": [
+    [
+     "horn-pod",
+     0.398
+    ],
+    [
+     "waveguide",
+     0.217
+    ],
+    [
+     "spk-niche-felt",
+     0.201
+    ],
+    [
+     "strata-posts",
+     0.06
+    ],
+    [
+     "strata-collars",
+     0.052
+    ],
+    [
+     "beams",
+     0.04
+    ]
+   ]
+  },
+  "feet": {
+   "pixels": 988,
+   "seen": [
+    [
+     "counter-zinc",
+     1.0
+    ]
+   ]
+  },
+  "feet-base": {
+   "pixels": 880,
+   "seen": [
+    [
+     "spk-niche-oak",
+     0.677
+    ],
+    [
+     "bottom",
+     0.168
+    ],
+    [
+     "feet-stem",
+     0.095
+    ],
+    [
+     "left",
+     0.041
+    ],
+    [
+     "spk-niche-felt",
+     0.018
+    ]
+   ]
+  },
+  "strata-collars": {
+   "pixels": 836,
+   "seen": [
+    [
+     "waveguide",
+     0.364
+    ],
+    [
+     "spk-niche-felt",
+     0.268
+    ],
+    [
+     "strata-posts",
+     0.086
+    ],
+    [
+     "horn-pod",
+     0.072
+    ],
+    [
+     "top",
+     0.067
+    ],
+    [
+     "beams",
+     0.038
+    ]
+   ]
+  },
+  "arm-cw-ring": {
+   "pixels": 736,
+   "seen": [
+    [
+     "ceiling-deck",
+     0.136
+    ],
+    [
+     "arm-yoke.ember",
+     0.092
+    ],
+    [
+     "arm-stub.ember",
+     0.092
+    ],
+    [
+     "arm-base.ember",
+     0.092
+    ],
+    [
+     "concrete-walls",
+     0.087
+    ],
+    [
+     "record.ember",
+     0.076
+    ]
+   ]
+  },
+  "pulley": {
+   "pixels": 696,
+   "seen": [
+    [
+     "prop1-kit",
+     0.914
+    ],
+    [
+     "counter-zinc",
+     0.034
+    ],
+    [
+     "motor.ember",
+     0.029
+    ],
+    [
+     "ball-red",
+     0.011
+    ],
+    [
+     "prop7-kit",
+     0.011
+    ]
+   ]
+  },
+  "arm-collar": {
+   "pixels": 676,
+   "seen": [
+    [
+     "arm-head.ember",
+     0.278
+    ],
+    [
+     "arm-collar.ember",
+     0.172
+    ],
+    [
+     "ceiling-deck",
+     0.107
+    ],
+    [
+     "banq-seat",
+     0.059
+    ],
+    [
+     "beams",
+     0.053
+    ],
+    [
+     "concrete-walls",
+     0.053
+    ]
+   ]
+  },
+  "hf-plug": {
+   "pixels": 616,
+   "seen": [
+    [
+     "horn-throat",
+     0.266
+    ],
+    [
+     "hf-exit",
+     0.227
+    ],
+    [
+     "hf-motor",
+     0.195
+    ],
+    [
+     "hf-adaptor",
+     0.188
+    ],
+    [
+     "hf-plug",
+     0.071
+    ],
+    [
+     "beams",
+     0.019
+    ]
+   ]
+  },
+  "spindle": {
+   "pixels": 612,
+   "seen": [
+    [
+     "record.ember",
+     0.915
+    ],
+    [
+     "prop1-kit",
+     0.085
+    ]
+   ]
+  },
+  "arm-lift-tab": {
+   "pixels": 452,
+   "seen": [
+    [
+     "ceiling-deck",
+     0.407
+    ],
+    [
+     "record.ember",
+     0.221
+    ],
+    [
+     "arm-head.ember",
+     0.133
+    ],
+    [
+     "panel horn-card",
+     0.08
+    ],
+    [
+     "beams",
+     0.053
+    ],
+    [
+     "counter-zinc",
+     0.044
+    ]
+   ]
+  },
+  "cart-stylus": {
+   "pixels": 352,
+   "seen": [
+    [
+     "plinth-L1-stack.ember",
+     0.352
+    ],
+    [
+     "cart-body.ember",
+     0.239
+    ],
+    [
+     "platter-disc.ember",
+     0.125
+    ],
+    [
+     "partition-acrylic",
+     0.057
+    ],
+    [
+     "ceiling-deck",
+     0.045
+    ],
+    [
+     "door-glass",
+     0.034
+    ]
+   ]
+  },
+  "hf-adaptor": {
+   "pixels": 268,
+   "seen": [
+    [
+     "hf-plug",
+     0.731
+    ],
+    [
+     "horn-throat",
+     0.149
+    ],
+    [
+     "hf-motor",
+     0.119
+    ]
+   ]
+  },
+  "cue-bar": {
+   "pixels": 244,
+   "seen": [
+    [
+     "record.ember",
+     0.361
+    ],
+    [
+     "arm-tube.ember",
+     0.197
+    ],
+    [
+     "plinth-L1-stack.ember",
+     0.098
+    ],
+    [
+     "caldera-3",
+     0.066
+    ],
+    [
+     "lamp house over concrete-walls",
+     0.066
+    ],
+    [
+     "cue-bar.ember",
+     0.066
+    ]
+   ]
+  },
+  "hf-exit": {
+   "pixels": 240,
+   "seen": [
+    [
+     "hf-plug",
+     0.717
+    ],
+    [
+     "horn-throat",
+     0.133
+    ],
+    [
+     "hf-motor",
+     0.133
+    ],
+    [
+     "hf-adaptor",
+     0.017
+    ]
+   ]
+  },
+  "cue-lever": {
+   "pixels": 228,
+   "seen": [
+    [
+     "platter-disc.ember",
+     0.421
+    ],
+    [
+     "plinth-L1-stack.ember",
+     0.211
+    ],
+    [
+     "ceiling-deck",
+     0.105
+    ],
+    [
+     "belt.ember",
+     0.088
+    ],
+    [
+     "prop1-kit-other",
+     0.07
+    ],
+    [
+     "spk-niche-oak",
+     0.053
+    ]
+   ]
+  },
+  "arm-stub": {
+   "pixels": 212,
+   "seen": [
+    [
+     "arm-stub.ember",
+     0.283
+    ],
+    [
+     "ceiling-deck",
+     0.264
+    ],
+    [
+     "arm-cw.ember",
+     0.094
+    ],
+    [
+     "arm-cw-ring.ember",
+     0.094
+    ],
+    [
+     "beams",
+     0.094
+    ],
+    [
+     "records-shelving",
+     0.057
+    ]
+   ]
+  },
+  "arm-axle.001": {
+   "pixels": 204,
+   "seen": [
+    [
+     "arm-yoke.ember",
+     0.275
+    ],
+    [
+     "backbar-top",
+     0.196
+    ],
+    [
+     "backbar-doors",
+     0.137
+    ],
+    [
+     "backbar-niche",
+     0.078
+    ],
+    [
+     "ceiling-deck",
+     0.059
+    ],
+    [
+     "concrete-walls",
+     0.059
+    ]
+   ]
+  },
+  "lining-back-d-web": {
+   "pixels": 180,
+   "seen": [
+    [
+     "lining-bottom-1-web",
+     0.956
+    ],
+    [
+     "bottom",
+     0.044
+    ]
+   ]
+  },
+  "arm-bias": {
+   "pixels": 176,
+   "seen": [
+    [
+     "arm-yoke.ember",
+     0.159
+    ],
+    [
+     "ceiling-deck",
+     0.091
+    ],
+    [
+     "plinth-L1-stack.ember",
+     0.091
+    ],
+    [
+     "counter-zinc",
+     0.091
+    ],
+    [
+     "prop1-kit",
+     0.068
+    ],
+    [
+     "beams",
+     0.068
+    ]
+   ]
+  },
+  "grip-right": {
+   "pixels": 108,
+   "seen": [
+    [
+     "grip-right",
+     1.0
+    ]
+   ]
+  },
+  "feet-stem": {
+   "pixels": 84,
+   "seen": [
+    [
+     "feet-base",
+     0.524
+    ],
+    [
+     "spk-niche-oak",
+     0.381
+    ],
+    [
+     "counter-zinc",
+     0.095
+    ]
+   ]
+  },
+  "puck-screw-2": {
+   "pixels": 80,
+   "seen": [
+    [
+     "woofer-surround",
+     0.25
+    ],
+    [
+     "puck-screw-2.ember",
+     0.25
+    ],
+    [
+     "woofer-cone",
+     0.25
+    ],
+    [
+     "ceiling-deck",
+     0.1
+    ],
+    [
+     "arm-base.ember",
+     0.05
+    ],
+    [
+     "arm-bias.ember",
+     0.05
+    ]
+   ]
+  },
+  "hs-screw.001": {
+   "pixels": 64,
+   "seen": [
+    [
+     "arm-collar.ember",
+     0.25
+    ],
+    [
+     "ceiling-deck",
+     0.25
+    ],
+    [
+     "hs-washer.001.ember",
+     0.25
+    ],
+    [
+     "hs-screw.ember",
+     0.062
+    ],
+    [
+     "prop1-kit",
+     0.062
+    ],
+    [
+     "arm-head.ember",
+     0.062
+    ]
+   ]
+  },
+  "puck-screw-1": {
+   "pixels": 64,
+   "seen": [
+    [
+     "puck-screw-1.ember",
+     0.375
+    ],
+    [
+     "left",
+     0.25
+    ],
+    [
+     "front-panel",
+     0.125
+    ],
+    [
+     "ceiling-deck",
+     0.125
+    ],
+    [
+     "panel horn-card",
+     0.062
+    ],
+    [
+     "arm-base.ember",
+     0.062
+    ]
+   ]
+  },
+  "hs-screw": {
+   "pixels": 60,
+   "seen": [
+    [
+     "prop1-kit",
+     0.2
+    ],
+    [
+     "hs-washer.ember",
+     0.2
+    ],
+    [
+     "ceiling-deck",
+     0.133
+    ],
+    [
+     "arm-head.ember",
+     0.133
+    ],
+    [
+     "front-panel",
+     0.067
+    ],
+    [
+     "glass",
+     0.067
+    ]
+   ]
+  },
+  "motor": {
+   "pixels": 48,
+   "seen": [
+    [
+     "pulley.ember",
+     1.0
+    ]
+   ]
+  },
+  "hf-motor": {
+   "pixels": 32,
+   "seen": [
+    [
+     "hf-plug",
+     1.0
+    ]
+   ]
+  },
+  "hs-washer": {
+   "pixels": 32,
+   "seen": [
+    [
+     "arm-head.ember",
+     0.375
+    ],
+    [
+     "prop1-kit",
+     0.25
+    ],
+    [
+     "screen-banquette-a",
+     0.125
+    ],
+    [
+     "beams",
+     0.125
+    ],
+    [
+     "ceiling-deck",
+     0.125
+    ]
+   ]
+  },
+  "hs-washer.001": {
+   "pixels": 32,
+   "seen": [
+    [
+     "hs-screw.001.ember",
+     0.25
+    ],
+    [
+     "arm-collar.ember",
+     0.125
+    ],
+    [
+     "concrete-walls",
+     0.125
+    ],
+    [
+     "ceiling-deck",
+     0.125
+    ],
+    [
+     "counter-zinc",
+     0.125
+    ],
+    [
+     "opening",
+     0.125
+    ]
+   ]
+  },
+  "waveguide-cap": {
+   "pixels": 12,
+   "seen": [
+    [
+     "top",
+     0.667
+    ],
+    [
+     "strata-collars",
+     0.333
+    ]
+   ]
+  },
+  "land-bottom": {
+   "pixels": 12,
+   "seen": [
+    [
+     "lining-bottom-1-web",
+     1.0
+    ]
+   ]
+  },
+  "cart-cantilever": {
+   "pixels": 12,
+   "seen": [
+    [
+     "arm-head.ember",
+     0.333
+    ],
+    [
+     "panel-fabric",
+     0.333
+    ],
+    [
+     "plinth-L1-stack.ember",
+     0.333
+    ]
+   ]
+  },
+  "hs-socket": {
+   "pixels": 8,
+   "seen": [
+    [
+     "hs-screw.ember",
+     0.5
+    ],
+    [
+     "opening",
+     0.5
+    ]
+   ]
+  },
+  "hs-socket.001": {
+   "pixels": 8,
+   "seen": [
+    [
+     "beams",
+     1.0
+    ]
+   ]
+  },
+  "cart-screw": {
+   "pixels": 4,
+   "seen": [
+    [
+     "arm-collar.ember",
+     1.0
+    ]
+   ]
+  }
+ },
+ "lamps": {
+  "led-orange-0": 18014.1229,
+  "led-orange-1": 18014.1229,
+  "led-orange-2": 18014.1229,
+  "led-orange-3": 18014.1229,
+  "led-orange-4": 18014.1229,
+  "led-orange-5": 18014.1229,
+  "led-orange-6": 18014.1229,
+  "led-orange-7": 18014.1229,
+  "led-orange-8": 18014.1229,
+  "led-orange-9": 18014.1229,
+  "led-orange-10": 18014.1229,
+  "led-orange-11": 18014.1229,
+  "led-orange-12": 18014.1229,
+  "led-orange-13": 18014.1229,
+  "led-orange-14": 18014.1229,
+  "led-orange-15": 18014.1229,
+  "led-orange-16": 18014.1229,
+  "led-orange-17": 18014.1229,
+  "led-orange-18": 18014.1229,
+  "led-orange-19": 18014.1229,
+  "led-orange-20": 18014.1229,
+  "led-orange-21": 18014.1229,
+  "led-orange-22": 18014.1229,
+  "led-orange-23": 18014.1229,
+  "led-red-0": 29217.832,
+  "led-red-1": 29217.832,
+  "led-red-2": 29217.832,
+  "led-red-3": 29217.832,
+  "led-red-4": 29217.832,
+  "led-red-5": 29217.832,
+  "led-red-6": 29217.832,
+  "led-red-7": 29217.832,
+  "led-red-8": 29217.832,
+  "led-red-9": 29217.832,
+  "led-red-10": 29217.832,
+  "led-red-11": 29217.832,
+  "led-red-12": 29217.832,
+  "led-red-13": 29217.832,
+  "led-red-14": 29217.832,
+  "led-red-15": 29217.832,
+  "led-red-16": 29217.832,
+  "led-red-17": 29217.832,
+  "led-red-18": 29217.832,
+  "led-red-19": 29217.832,
+  "led-red-20": 29217.832,
+  "led-red-21": 29217.832,
+  "led-red-22": 29217.832,
+  "led-red-23": 29217.832,
+  "led-amber-0": 18014.1229,
+  "led-amber-1": 18014.1229,
+  "led-amber-2": 18014.1229,
+  "led-amber-3": 18014.1229,
+  "led-amber-4": 18014.1229,
+  "led-amber-5": 18014.1229,
+  "led-amber-6": 18014.1229,
+  "led-amber-7": 18014.1229,
+  "led-amber-8": 18014.1229,
+  "led-amber-9": 18014.1229,
+  "led-amber-10": 18014.1229,
+  "led-amber-11": 18014.1229,
+  "led-amber-12": 18014.1229,
+  "led-amber-13": 18014.1229,
+  "led-amber-14": 18014.1229,
+  "led-amber-15": 18014.1229,
+  "led-amber-16": 18014.1229,
+  "led-amber-17": 18014.1229,
+  "led-amber-18": 18014.1229,
+  "led-amber-19": 18014.1229,
+  "led-amber-20": 18014.1229,
+  "led-amber-21": 18014.1229,
+  "led-amber-22": 18014.1229,
+  "led-amber-23": 18014.1229,
+  "led-red-0.001": 29217.832,
+  "led-red-1.001": 29217.832,
+  "led-red-2.001": 29217.832,
+  "led-red-3.001": 29217.832,
+  "led-red-4.001": 29217.832,
+  "led-red-5.001": 29217.832,
+  "led-red-6.001": 29217.832,
+  "led-red-7.001": 29217.832,
+  "led-red-8.001": 29217.832,
+  "led-red-9.001": 29217.832,
+  "led-red-10.001": 29217.832,
+  "led-red-11.001": 29217.832,
+  "led-red-12.001": 29217.832,
+  "led-red-13.001": 29217.832,
+  "led-red-14.001": 29217.832,
+  "led-red-15.001": 29217.832,
+  "led-red-16.001": 29217.832,
+  "led-red-17.001": 29217.832,
+  "led-red-18.001": 29217.832,
+  "led-red-19.001": 29217.832,
+  "led-red-20.001": 29217.832,
+  "led-red-21.001": 29217.832,
+  "led-red-22.001": 29217.832,
+  "led-red-23.001": 29217.832,
+  "led-orange-0.001": 18014.1229,
+  "led-orange-1.001": 18014.1229,
+  "led-orange-2.001": 18014.1229,
+  "led-orange-3.001": 18014.1229,
+  "led-orange-4.001": 18014.1229,
+  "led-orange-5.001": 18014.1229,
+  "led-orange-6.001": 18014.1229,
+  "led-orange-7.001": 18014.1229,
+  "led-orange-8.001": 18014.1229,
+  "led-orange-9.001": 18014.1229,
+  "led-orange-10.001": 18014.1229,
+  "led-orange-11.001": 18014.1229,
+  "led-orange-12.001": 18014.1229,
+  "led-orange-13.001": 18014.1229,
+  "led-orange-14.001": 18014.1229,
+  "led-orange-15.001": 18014.1229,
+  "led-orange-16.001": 18014.1229,
+  "led-orange-17.001": 18014.1229,
+  "led-orange-18.001": 18014.1229,
+  "led-orange-19.001": 18014.1229,
+  "led-orange-20.001": 18014.1229,
+  "led-orange-21.001": 18014.1229,
+  "led-orange-22.001": 18014.1229,
+  "led-orange-23.001": 18014.1229,
+  "led-amber-0.001": 18014.1229,
+  "led-amber-1.001": 18014.1229,
+  "led-amber-2.001": 18014.1229,
+  "led-amber-3.001": 18014.1229,
+  "led-amber-4.001": 18014.1229,
+  "led-amber-5.001": 18014.1229,
+  "led-amber-6.001": 18014.1229,
+  "led-amber-7.001": 18014.1229,
+  "led-amber-8.001": 18014.1229,
+  "led-amber-9.001": 18014.1229,
+  "led-amber-10.001": 18014.1229,
+  "led-amber-11.001": 18014.1229,
+  "led-amber-12.001": 18014.1229,
+  "led-amber-13.001": 18014.1229,
+  "led-amber-14.001": 18014.1229,
+  "led-amber-15.001": 18014.1229,
+  "led-amber-16.001": 18014.1229,
+  "led-amber-17.001": 18014.1229,
+  "led-amber-18.001": 18014.1229,
+  "led-amber-19.001": 18014.1229,
+  "led-amber-20.001": 18014.1229,
+  "led-amber-21.001": 18014.1229,
+  "led-amber-22.001": 18014.1229,
+  "led-amber-23.001": 18014.1229,
+  "led-red-0.002": 29217.832,
+  "led-red-1.002": 29217.832,
+  "led-red-2.002": 29217.832,
+  "led-red-3.002": 29217.832,
+  "led-red-4.002": 29217.832,
+  "led-red-5.002": 29217.832,
+  "led-red-6.002": 29217.832,
+  "led-red-7.002": 29217.832,
+  "led-red-8.002": 29217.832,
+  "led-red-9.002": 29217.832,
+  "led-red-10.002": 29217.832,
+  "led-red-11.002": 29217.832,
+  "led-red-12.002": 29217.832,
+  "led-red-13.002": 29217.832,
+  "led-red-14.002": 29217.832,
+  "led-red-15.002": 29217.832,
+  "led-red-16.002": 29217.832,
+  "led-red-17.002": 29217.832,
+  "led-red-18.002": 29217.832,
+  "led-red-19.002": 29217.832,
+  "led-red-20.002": 29217.832,
+  "led-red-21.002": 29217.832,
+  "led-red-22.002": 29217.832,
+  "led-red-23.002": 29217.832,
+  "led-red": 1785.6623,
+  "led-orange": 1100.942,
+  "led-amber": 1100.942,
+  "track-wall1": 1535.4019,
+  "track-wall2": 1535.4019,
+  "track-wall3": 1535.4019,
+  "track-wall4": 1535.4019,
+  "track-bar0": 516.0439,
+  "track-bar1": 516.0439,
+  "track-bar2": 516.0439,
+  "track-bay0": 7827.361,
+  "track-bay1": 2779.9755,
+  "track-mantle": 3376.6066,
+  "track-horn0": 1094.0395,
+  "track-horn1": 1094.0396,
+  "house": 5.3603,
+  "house-left": 5.7678
+ }
+}
