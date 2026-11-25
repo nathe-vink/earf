@@ -1,0 +1,27 @@
+blendasset: Mantle Strata Ember 81 parts match the manifest
+RECORD WALL took over 75 cells; removed ['records-faceout', 'records-sleeves']
+RECORD WALL other cell (0, 4) 0
+RECORD WALL other cell (2, 1) 1
+RECORD WALL other cell (3, 0) 2
+RECORD WALL other cell (3, 3) 3
+RECORD WALL other cell (8, 3) 4
+RECORD WALL other cell (10, 3) 5
+RECORD WALL other cell (10, 4) 6
+RECORD WALL other cell (16, 1) 7
+RECORD WALL plain records in cell (18, 1)
+RECORD WALL {"cells": 75, "full": 49, "part": 12, "flat": 6, "other": 8, "per_full": [65, 77.0, 86], "shares": {"lp": 0.697, "gate": 0.153, "thin": 0.106, "box": 0.044}, "records": 4454}
+REMOVED ['dj-knobs', 'dj-labels', 'dj-plinths', 'dj-records', 'life-record', 'life-sleeve', 'screen-boxes', 'screen-frames', 'screen-panels']
+RESTYLED ['backbar-top', 'chairs-brass', 'counter-rail', 'counter-zinc', 'panel-fabric', 'spk-niche-felt']
+LAMPS lamp_site from /home/user/lamps-ecb1 ecb1650c2468c82a0723744be2e3594f39d7fb0e
+LAMPS placed 7 Hemisphere, 0 Core; 168 lamps, 7000 lm at the emitters
+LAMPS lamp_site from /home/user/lamps-ecb1 ecb1650c2468c82a0723744be2e3594f39d7fb0e
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
+LAMPS placed 0 Hemisphere, 3 Core; 3 lamps, 600 lm at the emitters
+CORE cable removed: 3
+LAMPS hemi_scale 1.0 cords to 3.4
+REMOVED NEAR [[8.55, 3.97]] 234 faces
+02:45.622  cycles           | WARNING CUEW initialization failed: Error opening the library
+01:15:54.181  render           | Saved: '/home/user/earf/renders/2026-11-25/barkhorn/bar-fix/bar-backbar-portrait-bandB.png'
+renders/2026-11-25/barkhorn/bar-fix/bar-backbar-portrait-bandB.png  {'build': 165.4, 'render': 4388.6}  samples 224
