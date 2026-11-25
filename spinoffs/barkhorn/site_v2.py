@@ -1342,7 +1342,7 @@ def rc_waves(p, web):
     HAB_ALT = {'violet': 'Tropos in Haze, in dry grass on rolling hills that fade into violet haze, the sun low from the side', 'black': 'Tropos in Smoke, in open grassland at dusk, a meteor just come down behind it: a small crater on fire, a black column of smoke, more meteors falling and two fires far off', 'green': 'Tropos in Poison, standing in ivy and leaf litter in a dark forest with dappled sun', 'red': 'Tropos in Ember, standing on a lava field at dusk with glowing streams', 'blue': 'Tropos in Ice, out on the snow in the last sun', 'orange': 'Tropos in Dust on rippled desert sand at sunset, mesas in the haze behind', 'amber': 'Tropos in Acid on wet dark rock in the rain, its reflection in a pool in front',
                'ice': 'Tropos in Fog, standing in the grass on a foggy hillside at dawn'}
     for k, src in HAB.items():
-        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
+        im = Image.open(_git_src(*src) if isinstance(src, tuple) else os.path.join(web.ROOT, src)).convert('RGB')
         if im.width > 1200:
             im = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
         im.save(os.path.join(web.SITE, f'img/rc/{k}-habitat.webp'), 'WEBP', quality=HAB_Q.get(k, 82), method=6 if k in HAB_Q else 4)
@@ -2011,7 +2011,7 @@ HAB_SRC = {'black': 'renders/2026-11-12/barkhorn/habitats/smoke-f-shower-B-portr
            'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
            'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg',          # the final Ember, finished (r48-biomes 0db25baf)
            'orange': 'renders/2026-11-12/barkhorn/habitats/dust-final-portrait-finish.jpg',          # the final Dust, finished (r48-biomes fa0c5d78)
-           'amber': 'renders/2026-11-12/barkhorn/habitats/acid-b-final-portrait-finish.jpg'}         # the final Acid, finished (r48-biomes e869e99b)
+           'amber': ('e1228da29b', 'renders/2026-11-12/barkhorn/habitats/acid-b-final-portrait-support-finish.jpg')}   # Acid on a level rock shelf (r48-biomes e1228da29b; approved, the coordinator 25 Nov 09:00), read from git
 HAB_Q = {'black': 92}     # Smoke's column: a large smooth dark field (about 20 of 255); 82 blocks it, 90 up holds the grain
 HAB_HELD = 'rc/(?:' + ('|'.join(k for k in ('violet', 'black') if k not in HAB_SRC) or 'none') + ')-habitat'
 
@@ -2180,6 +2180,15 @@ def rc_home(p, web):
 # Core's base in its own color fee3b161; Hemisphere direct, from under, in a group cd703d56)
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
 TROPOS_BAR_GIT = ('2802834a71', 'renders/2026-11-21/barkhorn/b1-test/fixed9.png')   # Tropos in Acid at the bar: fixed-9 (r33-speaker-horn; the coordinator 24 Nov 06:04)
+
+
+def _git_src(sha, path):
+    """A source picture read from git (another branch's commit), not carried in this tree: written to a temp file for the build."""
+    import os, subprocess, tempfile
+    data = subprocess.run(['git', 'show', f'{sha}:{path}'], cwd=os.path.dirname(os.path.abspath(__file__)), check=True, capture_output=True).stdout
+    f = os.path.join(tempfile.gettempdir(), 'earf-' + sha + '-' + os.path.basename(path))
+    open(f, 'wb').write(data)
+    return f
 
 
 def _tropos_bar_src():
