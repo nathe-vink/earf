@@ -2180,6 +2180,18 @@ MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.p
 TROPOS_BAR_GIT = ('2802834a71', 'renders/2026-11-21/barkhorn/b1-test/fixed9.png')   # Tropos in Acid at the bar: fixed-9 (r33-speaker-horn; the coordinator 24 Nov 06:04)
 
 
+# C6h-7: two Hemisphere pictures fixed and approved (the coordinator 25 Nov 09:12), read from r32-lamps-final 48d6ffac5a:
+# the cluster's cords all run out of the top; over a table, the chair faces it, the cord runs to a ceiling canopy, the cup's handle on its wall
+LAMP_GIT = {'renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-cluster.png': '48d6ffac5a',
+            'renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-inuse.png': '48d6ffac5a'}
+
+
+def _lamp_src(web, src):
+    import os
+    rel = os.path.relpath(src, web.ROOT) if os.path.isabs(src) else src
+    return _git_src(LAMP_GIT[rel], rel) if rel in LAMP_GIT else os.path.join(web.ROOT, src)
+
+
 def _git_src(sha, path):
     """A source picture read from git (another branch's commit), not carried in this tree: written to a temp file for the build."""
     import os, subprocess, tempfile
@@ -2232,7 +2244,7 @@ def rc_products(p, web):
     import json, os
     from PIL import Image
     def save(src, name, width, q=82):
-        im = Image.open(os.path.join(web.ROOT, src)).convert('RGB')
+        im = Image.open(_lamp_src(web, src)).convert('RGB')      # C6h-7: a fixed picture read from git
         if im.width > width:
             im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
         im.save(os.path.join(web.IMG, 'rc', name), 'WEBP', quality=q, method=6)
