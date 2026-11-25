@@ -15,11 +15,11 @@ From `render.py --support` (studio/engine/support.py): ray casts straight down f
 | wooden_bowl_01 | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | food_lime_01 | on wooden_bowl_01, **11 mm above it**, contact 0 % | on wooden_bowl_01, contact 100 % |
 | food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, contact 51 % |
-| lemon | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
+| lemon | on counter-zinc, contact 100 % | on wooden_bowl_01, contact 26 % |
 | board cover-09 | on prop19-kit-1, **sunk 3.5 mm**, contact 75 % | on counter-zinc, contact 100 % |
 | board cover-02 | on prop19-kit-0, **sunk 2.5 mm**, contact 50 % | on prop19-kit-0, contact 75 % |
 | board cover-12 | on prop19-kit-1, contact 75 % | on prop19-kit-1, contact 15 % |
-| board cover-07 | on prop19-kit-2, contact 25 % | on prop19-kit-2, contact 50 % |
+| board cover-07 | on prop19-kit-2, contact 25 % | on prop19-kit-2, contact 25 % |
 | board cover-03 | on records-shelving, contact 50 % | on records-shelving, contact 50 % |
 | board cover-10 | on records-shelving, contact 17 % | on records-shelving, contact 50 % |
 | board cover-14 | hangs (lamp) | on records-shelving, contact 50 % |
@@ -29,12 +29,12 @@ From `render.py --support` (studio/engine/support.py): ray casts straight down f
 | lamp lamps #0 | on life-sleeve, **sunk 3.3 mm**, contact 0 % | on counter-zinc, contact 100 % |
 | lamp lamps #4 | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | lamp lamps #8 | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
-| fold | on prop19-kit-2, **sunk 2.9 mm**, contact 2 % | on prop19-kit-0, **sunk 3.2 mm**, contact 99 % |
+| fold | on prop19-kit-2, **sunk 2.9 mm**, contact 2 % | on counter-zinc, contact 100 % |
 | drink (liquid) | on prop2-kit, contact 2 % | on prop2-kit, contact 2 % |
 | ice cube | on prop2-kit, **16 mm above it**, contact 0 % | on prop2-kit, contact 25 % |
 | ice cube | on prop2-kit, contact 33 % | on prop2-kit, **sunk 2.8 mm**, contact 0 % |
 | orange twist | on prop2-kit, contact 7 % | on prop2-kit, contact 15 % |
-| glass | on counter-zinc, contact 45 % | on counter-zinc, contact 55 % |
+| glass | on counter-zinc, contact 45 % | on counter-zinc, contact 45 % |
 | drink (liquid) | on prop7-kit, contact 2 % | on prop7-kit, contact 2 % |
 | ice cube | on prop8-kit, **5 mm above it**, contact 0 % | on prop7-kit, contact 25 % |
 
@@ -65,8 +65,8 @@ From `render.py --support` (studio/engine/support.py): ray casts straight down f
 | box cotton | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | wooden_bowl_01 | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | food_lime_01 | on wooden_bowl_01, **11 mm above it**, contact 0 % | on wooden_bowl_01, contact 100 % |
-| food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, contact 51 % |
-| lemon | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
+| food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, **sunk 2.1 mm**, contact 99 % |
+| lemon | on counter-zinc, contact 100 % | on wooden_bowl_01, **sunk 3.6 mm**, contact 50 % |
 
 ## mantle-bar
 
@@ -82,8 +82,8 @@ From `render.py --support` (studio/engine/support.py): ray casts straight down f
 | box cotton | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | wooden_bowl_01 | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | food_lime_01 | on wooden_bowl_01, **11 mm above it**, contact 0 % | on wooden_bowl_01, contact 100 % |
-| food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, contact 51 % |
-| lemon | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
+| food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, **sunk 2.1 mm**, contact 99 % |
+| lemon | on counter-zinc, contact 100 % | on wooden_bowl_01, **sunk 3.6 mm**, contact 50 % |
 | board cover-03 | on records-shelving, contact 50 % | on records-shelving, contact 50 % |
 | board cover-10 | on records-shelving, contact 17 % | on records-shelving, contact 50 % |
 | board cover-14 | hangs (lamp) | on records-shelving, contact 50 % |
@@ -96,14 +96,14 @@ From `render.py --support` (studio/engine/support.py): ray casts straight down f
 |---|---|---|
 | Mantle Strata Ember | on counter-zinc, contact 50 % | on counter-zinc, contact 100 % |
 | barkhorn-cloud #0 | on spk-niche-oak, contact 82 % | on spk-niche-oak, contact 82 % |
-| barkhorn-cloud #1 | on spk-niche-oak, contact 78 % | on spk-niche-oak, contact 89 % |
+| barkhorn-cloud #1 | on spk-niche-oak, contact 78 % | on spk-niche-oak, contact 79 % |
 | ice cube | on prop7-kit, contact 33 % | on counter-zinc, **20 mm above it**, contact 0 % |
 | orange twist | on prop7-kit, contact 7 % | on prop7-kit, contact 15 % |
 | box cotton | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | wooden_bowl_01 | on prop24-kit-1, **sunk 3.0 mm**, contact 34 % | on prop24-kit-1, contact 100 % |
 | food_lime_01 | on wooden_bowl_01, **11 mm above it**, contact 0 % | on wooden_bowl_01, contact 100 % |
-| food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, contact 51 % |
-| lemon | on counter-zinc, contact 100 % | on prop24-kit-1, contact 100 % |
+| food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, **sunk 2.1 mm**, contact 99 % |
+| lemon | on counter-zinc, contact 100 % | on wooden_bowl_01, **sunk 3.6 mm**, contact 50 % |
 | board cover-09 | on prop19-kit-1, **sunk 3.5 mm**, contact 75 % | on counter-zinc, contact 100 % |
 | board cover-02 | on prop19-kit-0, **sunk 2.5 mm**, contact 70 % | on prop19-kit-0, contact 75 % |
 | board cover-12 | on prop19-kit-1, contact 75 % | on prop19-kit-1, contact 15 % |
@@ -138,8 +138,8 @@ From `render.py --support` (studio/engine/support.py): ray casts straight down f
 | box cotton | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | wooden_bowl_01 | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
 | food_lime_01 | on wooden_bowl_01, **11 mm above it**, contact 0 % | on wooden_bowl_01, contact 100 % |
-| food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, contact 51 % |
-| lemon | on counter-zinc, contact 100 % | on counter-zinc, contact 100 % |
+| food_lime_01 | on wooden_bowl_01, contact 42 % | on wooden_bowl_01, **sunk 2.1 mm**, contact 99 % |
+| lemon | on counter-zinc, contact 100 % | on wooden_bowl_01, **sunk 3.6 mm**, contact 50 % |
 | board cover-09 | on prop19-kit-1, **sunk 3.5 mm**, contact 75 % | on counter-zinc, contact 100 % |
 | board cover-02 | on prop19-kit-0, **sunk 2.5 mm**, contact 70 % | on prop19-kit-0, contact 75 % |
 | board cover-12 | on prop19-kit-1, contact 75 % | on prop19-kit-1, contact 15 % |
@@ -228,4 +228,16 @@ From `render.py --support` (studio/engine/support.py): ray casts straight down f
 | glass | on counter-zinc, contact 52 % |  |
 | drink (liquid) | on prop7-kit, contact 2 % |  |
 | ice cube | on prop8-kit, **5 mm above it**, contact 0 % |  |
+
+## Drinks and fruit
+
+Drinks: see the geometry table in the bar_fix log; ice in the 45 mm drinks floats 79-85 % under, in the 30 mm drinks
+(14 mm of liquid over a 16 mm floor) it rests on the glass's floor, 31-40 % under; each twist's middle lies on the rim.
+The casts cannot read ice inside the lathe-built glasses (their inner floors face down), so those rows above read wrong
+and the geometry is the record. The twists in fixed9 read 'above the water': their inner end hangs over the drink, the
+middle rests on the rim, as meant.
+
+Fruit (the same bowl and fruit in every frame; verified on bar-backbar-portrait after the last trim, the other frames'
+rows above are from the run before it): both limes and the lemon 0.5 mm over the bowl's inner surface (they stood 11 mm
+over, 3.9 mm into and 35 mm into it); the bowl itself 0.5 mm over the counter (pendants: over the flat sleeve).
 

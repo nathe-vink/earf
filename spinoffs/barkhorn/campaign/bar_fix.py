@@ -244,7 +244,7 @@ def pendants(s, log):
 
 # each fruit's lowest point onto the bowl's inner surface under it (the bowl's mesh, wooden_bowl_01_2k: its floor and wall
 # height by radius), 0.5 mm clear: one lime stood 8 mm over it, the other 3 mm into it, the lemon 35 mm into the wood
-FRUIT_DZ = {('food_lime_01', (0, 20, 0)): -0.0082, ('food_lime_01', (30, 0, 90)): -0.0030, ('lemon', (0, 70, 20)): 0.0354}
+FRUIT_DZ = {('food_lime_01', (0, 20, 0)): -0.0106, ('food_lime_01', (30, 0, 90)): -0.0004, ('lemon', (0, 70, 20)): 0.0395}   # then trimmed by the support check's own contact reading
 
 
 def fruit(s, log):
