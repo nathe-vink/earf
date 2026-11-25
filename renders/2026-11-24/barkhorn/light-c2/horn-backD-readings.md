@@ -1,7 +1,7 @@
 # Horn-backs at path depth 32/16/32 beside today's
 
 horn-backD-<tint>: horn-back-<tint> with only the render block changed (bounces 32, glossy 16, transmission 32; it
-was 12, which render.py takes as 12 / 6 glossy / 8 / 8). Same rig, exposure and size (1200 x 900, 128 spp). Rendered
+was 12 with no other keys, which render.py takes as 12 total / 6 diffuse / 8 glossy / 8 transmission). Same rig, exposure and size (1200 x 900, 128 spp). Rendered
 by the eight helpers on fab53bafab and merged here. Every frame: equipment 0, hidden 0, no_glass_shadows.cut 6,
 shadow_ray_links_left.count 0, no crossing. Sheet: sheet-horn-backD.png (today's beside depth, per tint, same size).
 
@@ -20,7 +20,12 @@ Per tint: frame mean L*, the share of pixels that move by 3 and 6 L*, the larges
 | poison | 69.6 -> 69.7 | 1.0 % | 0.1 % | 5.5 | 0.00 -> 0.00 % | 23.9 -> 24.4 (+0.5, p99 +4.9) | 42.1 -> 44.6 (+2.5, p99 +3.9) | 25.7 -> 26.4 (+0.7, p99 +5.3) | 21.9 -> 22.4 (+0.5, p99 +4.5) | 12.6 -> 12.6 (+0.0, p99 +0.6) | 49.9 -> 49.9 (+0.1, p99 +1.1) | 12.3 -> 12.3 (+0.0, p99 +0.4) |
 | smoke | 70.1 -> 70.2 | 0.1 % | 0.0 % | 3.3 | 0.00 -> 0.00 % | 23.2 -> 23.2 (+0.0, p99 +0.5) | 3.7 -> 3.7 (+0.0, p99 +0.4) | 8.3 -> 8.5 (+0.2, p99 +2.1) | 2.5 -> 2.6 (+0.2, p99 +3.5) | 19.9 -> 20.0 (+0.1, p99 +1.2) | 51.3 -> 51.3 (+0.1, p99 +1.5) | 14.8 -> 14.8 (+0.0, p99 +0.4) |
 
-Reading: the thick acrylic (the cabinet's walls and grips, Fog's clear cap) opens up in proportion to how pale and
-clear the tint is: Fog most (right wall +31.8 mean), Dust and Acid plainly (right wall +11.7 and +8.5), Ice a little
-(+4.4), Ember, Haze and Poison only on the left grip (about +2.5), Smoke not at all. The paper and the horn's faces
-do not move, nothing pins, and the horn-pod moves only in Fog (+2.5).
+The mask part 'right' is not the right wall's face: from this camera it is mostly the wall's 20 mm rear edge seen end-on
+(a strip about 13 px wide at x 202-215, with a few stray pixels further right), so its mean mixes edge and background.
+Eroded by 2 px (2,360 px left), the edge reads, today -> depth: Fog 24.8 -> 73.6, Dust 9.6 -> 28.6, Acid 13.4 -> 26.6,
+Ice 6.5 -> 13.3 (L*).
+
+Reading: the 20 mm edges, the frames and the grip opened up, in proportion to how pale and clear the tint is: Fog
+most, Dust and Acid plainly, Ice a little, Ember, Haze and Poison only on the left grip (about +2.5), Smoke not at all.
+At depth 12 the light ran out inside the thick acrylic and its edges rendered near black (the "black edge lines" were
+cut paths). The paper and the horn's faces do not move, nothing pins, and the horn-pod moves only in Fog (+2.5).
