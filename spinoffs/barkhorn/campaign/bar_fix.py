@@ -12,8 +12,8 @@ found the rest). One pass over each live frame's own rendered shot file, so the 
      the records it was pulled from, within its cell, turned to the room as before.
   3. mantle-bar's now-playing sleeve and walnut stand stood over the aisle: on the counter behind Mantle's back-left;
      the room's round-36 glasses, which the camera now sees, out.
-  4. The desktop hero's second drink stood inside the Ember Core: moved clear, its ice and twist with it. In the phone
-     hero and fixed9 the shallow drink moves left, off Mantle's front-left corner in the frame.
+  4. The desktop hero's second drink stood inside the Ember Core: moved clear, its ice and twist with it. The pale
+     'glass' on Mantle's corner in the phone hero is the room's votive (8.55, 3.97): that one votive out.
   5. bar-pendants: the cloth moved off the newspaper; the wooden bowl stands on the flat sleeve, not sunk in it.
   6. Every drink: the orange twist rests on the rim (over it, one end inside, one outside), and the ice floats in
      the drink (about 85 % under), or in a glass too shallow to float it, rests on the glass's floor.
@@ -41,9 +41,8 @@ WALL = dict(x0=3.40, cell=0.36, y=5.72, back=6.08, z0=1.20)   # the record wall 
 DIVIDER = 0.025                  # keep a pulled-out sleeve this far inside its cell's sides
 CORE_SKIRT = 0.075
 STAND_AT = (8.40, 4.43)          # mantle-bar: the walnut stand's new place, behind Mantle's back-left on the counter
-GLASS_MOVE = {'bar-hero': {(6.31, 4.18): (6.44, 4.15)},              # the second drink, out of the Ember Core
-              'bar-backbar-portrait': {(8.31, 4.13): (8.213, 4.059)},  # off Mantle's front-left corner in the frame
-              'fixed9': {(8.31, 4.13): (8.213, 4.059)}}
+GLASS_MOVE = {'bar-hero': {(6.31, 4.18): (6.44, 4.15)}}              # the second drink, out of the Ember Core
+# (the phone hero's 'pale glass' on Mantle's corner was the room's votive, now out; its drinks stay where they were)
 PULL = 0.05                      # a pulled-out sleeve's front corner, this far past the shelf's lip
 PENDANT_CLOTH = (6.40, 4.45)
 PENDANT_CLOTH_RZ = 0.0          # square to the bar, so it clears the flat sleeve in front of it
