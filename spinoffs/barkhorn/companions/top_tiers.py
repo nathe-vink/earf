@@ -8,7 +8,7 @@ import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..', '..', '..', 'studio', 'fabkit'))
 import crystal as C
-from build123d import export_stl, Sphere
+from build123d import export_stl, Sphere, Box, Pos
 
 NAMES = ('clamp', 'crown', 'gland', 'collar', 'white-disc', 'grip', 'gaskets', 'hub', 'ring', 'suspension', 'crown-screws', 'cord', 'lock')
 for top in (None, 'A', 'B'):
@@ -25,7 +25,13 @@ for top in (None, 'A', 'B'):
             print(top or 'today', q.name, 'z', round(bb.min.Z, 2), 'to', round(bb.max.Z, 2), 'Ø', round(bb.max.X - bb.min.X, 2),
                   'volume', round(q.solid.volume / 1000, 1), 'cm3')
             # v6: the bowed cord under its own name (the shared cord.stl, which other renders load, stays)
-            export_stl(q.solid, os.path.join(d, ('cord-v6' if q.name == 'cord' else q.name) + '.stl'), tolerance=0.02, angular_tolerance=0.1)
+            sh_ = q.solid
+            if q.name == 'cord':
+                # V11-18: the render's cord ends at its jacket's end in the canopy (24 above its underside): its two conductors
+                # are left out, so a cord run on past the frame shows no stubs
+                zc_ = next(r.solid for r in parts if r.name == 'canopy').bounding_box().min.Z
+                sh_ = sh_ & (Pos(0, 0, (zc_ + 24.0 - 500.0) / 2) * Box(400, 400, zc_ + 24.0 + 500.0))
+            export_stl(sh_, os.path.join(d, ('cord-v6' if q.name == 'cord' else q.name) + '.stl'), tolerance=0.02, angular_tolerance=0.1)
             if q.name == 'gaskets':
                 R = p['R']
                 export_stl(q.solid & (Sphere(R + 3.0) - Sphere(R - 0.5)), os.path.join(d, 'gasket-out.stl'), tolerance=0.02, angular_tolerance=0.1)

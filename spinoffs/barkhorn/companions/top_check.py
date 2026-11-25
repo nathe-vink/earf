@@ -38,11 +38,12 @@ def check(name):
     out_ = top - 91.0 + 0.5
     # (review 2: it hangs with each notch's top seated on its pin, 0.5 under the drawn position, so the drawn +7.5
     # and +8.5 are lifts of 8.0 and 9.0 from where it hangs)
-    poses = [('hanging (seated)', -0.5, 0), ('lifted 8.0', 7.5, 0), ('lifted 9.0', 8.5, 0), ('lifted 9.0, turned', 8.5, 30)]
+    T_ = 30.0 * (C.TURN_SIGN if p.get('fixings') else 1.0)     # V11-12: the slots mirrored, so the turn off is the other way
+    poses = [('hanging (seated)', -0.5, 0), ('lifted 8.0', 7.5, 0), ('lifted 9.0', 8.5, 0), ('lifted 9.0, turned', 8.5, T_)]
     z = 8.5
     while z > -out_:
-        z = max(z - 2.0, -out_); poses.append((f'turned, lowered to {z:+.1f}', z, 30))
-    poses += [(f'turned, lowered to {-d:+.0f} (off, past the carrier)', -d, 30) for d in (30, 60, 100, 140)]
+        z = max(z - 2.0, -out_); poses.append((f'turned, lowered to {z:+.1f}', z, T_))
+    poses += [(f'turned, lowered to {-d:+.0f} (off, past the carrier)', -d, T_) for d in (30, 60, 100, 140)]
     print(f'## {name}: collar top {top}, lowered {out_ - 0.5:.2f} below the drawn pose ({out_ - 1.0:.2f} below where it hangs) to come off')
     bad = 0
     for lab, dz, rot in poses:
@@ -75,7 +76,7 @@ def check(name):
     # 5 wide slot
     for k in (120, 240):
         # (up the entries the shade is turned 30, as in the turned poses above; the wrong way is 30 + 120 or 30 + 240)
-        kv = max(overl(Pos(0, 0, dz) * (Rot(0, 0, 30 + k) * P['collar']), P['pins']) for dz in (-6.0, -3.0, 0.0, 4.0))
+        kv = max(overl(Pos(0, 0, dz) * (Rot(0, 0, T_ + k) * P['collar']), P['pins']) for dz in (-6.0, -3.0, 0.0, 4.0))
         print(f'  turned {k} deg (the wrong way), up its entries: collar x pins {kv:.0f} mm3 ({"refused, as it must be" if kv > 1 else "FITS: NOT KEYED"})')
 
 

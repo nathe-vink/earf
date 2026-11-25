@@ -39,7 +39,7 @@ def rows(product, parts, recs, library):
                             source='stl/' + p.name + '.stl', finish=p.finish, option=p.option, _sig=sig))
         elif isinstance(m, Machined):
             sm = SOLIDS.get(m.material, {})
-            b = p.solid.bounding_box()
+            b = (p.detail if getattr(p, 'detail', None) is not None else p.solid).bounding_box()   # (a part drawn square on its sheet sized square)
             stock = m.stock or (b.size.X + 10, b.size.Y + 10, b.size.Z + 10)
             cast = m.process in ('cast', 'mould', 'formed')
             blank_cm3 = vol_cm3 * 1.1 if cast else stock[0] * stock[1] * stock[2] / 1000      # a casting pours its own volume, a

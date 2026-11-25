@@ -425,8 +425,33 @@ def build(frame, samples, scale):
                 part(tdir_, 'suspension', SC.principled('cable', '#8E9093', 0.32, 1.0), c)
             cv6_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'cord-v6.stl')
             # v6 (the v5 check's (3)): with the v6 hanging, the cord 2 mm longer than the cables, bowed to one side
-            part(tdir_ if os.path.exists(cv6_) else 'out-dome-pendant', 'cord-v6' if os.path.exists(cv6_) else 'cord',
+            cord_ob_ = part(tdir_ if os.path.exists(cv6_) else 'out-dome-pendant', 'cord-v6' if os.path.exists(cv6_) else 'cord',
                  braid_mat(f'cord-braid-{tint}') if os.environ.get('BRAID', '1') == '1' else SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
+            if os.environ.get('CORD_TOP'):
+                # V11-18 (the V10 check; the support sweep's 5e86d76e patch ported): the cord's and the cables' tops never show
+                # in frame. CORD_TOP (m, world): the cord run on straight from its jacket's end (750 above the rim) and each
+                # cable from its top at r 48 (765.1), up to CORD_TOP; CANOPY=1 puts the 150 x 50 canopy there, at a ceiling
+                zt_ = float(os.environ['CORD_TOP'])
+                rot_ = math.radians(float(os.environ.get('HEMI_ROT', '0')))
+                runs_ = [((0.0, 0.0), rim_z + 0.750, 0.003, cord_ob_.data.materials[0])]
+                if 'suspension' in loaded_:
+                    a0w_ = 105.0 if (tp_ == 'A' and os.environ.get('HEMI_LOCK', '1') == '1') else 0.0
+                    for da_ in (0.0, 180.0):
+                        aw_ = math.radians(a0w_ + da_)
+                        runs_.append(((0.048 * math.cos(aw_), 0.048 * math.sin(aw_)), rim_z + 0.7651, 0.000795,
+                                      SC.principled('cable-run', '#8E9093', 0.32, 1.0)))
+                for (px_, py_), z0_, r_, m_ in runs_:
+                    if zt_ <= z0_:
+                        continue
+                    qx_ = px_ * math.cos(rot_) - py_ * math.sin(rot_); qy_ = px_ * math.sin(rot_) + py_ * math.cos(rot_)
+                    bpy.ops.mesh.primitive_cylinder_add(vertices=48, radius=r_, depth=zt_ - z0_ + 0.001, location=(x + qx_, y + qy_, (z0_ - 0.001 + zt_) / 2))
+                    ex_ = bpy.context.object; ex_.name = 'cord-run'; ex_.data.materials.append(m_)
+                    for f_ in ex_.data.polygons:
+                        f_.use_smooth = True
+                    ex_.select_set(False)
+                if os.environ.get('CANOPY') == '1':
+                    bpy.ops.mesh.primitive_cylinder_add(vertices=128, radius=0.075, depth=0.05, location=(x, y, zt_ + 0.025))
+                    cn_ = bpy.context.object; cn_.name = 'canopy'; cn_.data.materials.append(cap); cn_.select_set(False)
             part('out-dome-pendant', 'carrier', an, c)
             part('out-dome-pendant', 'stem', an, c)
             part('out-dome-pendant', 'board', SC.principled('board', '#E6E4DE', 0.5), c)

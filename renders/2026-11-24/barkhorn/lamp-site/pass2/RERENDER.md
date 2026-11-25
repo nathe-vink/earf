@@ -23,7 +23,7 @@ Also re-render the other lane's bar frames made through lamp_site.py's hemispher
 ## v8 additions (the v7 check's (9))
 
 What pass v2 renders: the top the owner picks (HEMI_TOP=A, or unset for today's top, or B) on the v8 hanging (two 1/16 in
-stainless cables on stop sleeves, the cord 2 mm long, the canopy out of frame), HEMI_COLLAR_CAP=1, the collar's white on
+stainless cables on stop sleeves, the cord 2 mm longer than the cables, the canopy out of frame), HEMI_COLLAR_CAP=1, the collar's white on
 its painted faces. If the owner keeps A's lock, A renders from out-dome-pendant-topA (the lock, its cables at 105/285); if not, from
 out-dome-pendant-topA-nolock (no lock, the cables at 0/180, the detent), chosen with HEMI_LOCK=0. HEMI_LOCK=0 is the
 no-lock answer's switch, not a way to hide the lock in the lock answer's pictures.
@@ -271,3 +271,17 @@ re-rendered.
 - renders/2026-11-24/barkhorn/lamp-site/tests/r2/wb4000gel-black.png
 - renders/2026-11-24/barkhorn/lamp-site/tests/r2/wb4000gel-ice.png
 - renders/2026-11-24/barkhorn/lamp-site/tests/r2/wb4000gel-red.png
+
+## V11 (the V10 check's V11-18): the cord's and the cables' tops
+
+THE RULE: the cord's and the cables' tops never show in frame. Since V10 the cord's mesh (cord-v6) ends its jacket 750 above
+the rim, inside the canopy (V11: the render's mesh leaves out its two conductors), and the cables end at 765.1. That is out of
+frame in every single-lamp frame, but not in a group: the cluster's front-row rims at 0.42 to 0.62 m put the ends at about 1.15
+to 1.39 m, in frame. So either run them on past the frame's edge, or end them at a canopy on a ceiling:
+- lamp_site.py: CORD_TOP=<m> runs the cord and both cables on, straight, to that height (world); CANOPY=1 adds the 150 x 50
+  canopy there (for a frame with a ceiling). The same switches as the support sweep's patch to 5e86d76e (fa2d6ff2b0), which
+  made the live cluster (CORD_TOP=1.75) and the in-use picture (CORD_TOP=2.35 CANOPY=1).
+- The one-way marks (V11-13: a line on the crown's lowest tier at 30 deg, a groove on A's and B's clamp ring or today's collar
+  chamfer at 60 deg) are in the meshes from V11: re-exported with top_tiers.py.
+- After the owner's pick: add the dims drawing on r47-site-next to the list (it shows the cord alone, no cables).
+- For pass v2: show the canopy once, for example "Over a table" with its ceiling.
