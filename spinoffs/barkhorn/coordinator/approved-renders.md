@@ -3609,6 +3609,11 @@ The site, the Brand Book, social, the deck and press use ONLY pictures on this l
        with the labels inside the pictures and with the clear tint (Fog)?
    15. Was each changed page set beside the same kind of page at two reference stores (a lamp: DWR and Louis Poulsen;
        the speaker: KEF and Klipsch), with each difference fixed or kept on purpose?
+   16. (added 25 Nov after the owner found Mantle half off the bar's back edge) Does everything rest on something?
+       For every product and prop in a room or scene picture, its footprint measured from the scene file against
+       the surface it stands on (the asset's origin confirmed from its manifest, not assumed to be its centre): no
+       overhang past the support's edge or onto a rounded edge, nothing floating, nothing sunk; checked again in the
+       render's own depth report.
    20 Nov 11:50 UTC, FIRST RETURNS ON THE 20 NOV ORDERS.
    SITE BUILD 1A (site lane 11:39, r49 a44e64dd54, code r47 473268a4b7, new spinoffs/barkhorn/site_fix.py run last in
    the build): 53 pages changed, 24 new tile files (tile-<hemisphere|core|mantle>-<tint>.webp, 800 x 1000), vercel.json
