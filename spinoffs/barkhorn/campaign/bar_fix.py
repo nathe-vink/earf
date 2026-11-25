@@ -273,6 +273,12 @@ def builds(s, log):
 def fix(s, name):
     s = copy.deepcopy(s); log = []
     builds(s, log)
+    if name == 'bar-hero':
+        # the 14 Nov patch made cell (18, 1), a 7-inch box cut by the right edge, plain records, but only in its blend:
+        # the shot file never carried it, so every rebuild brought the box back (the coordinator, 14:46, BF-1)
+        for p in s['set']['props']:
+            if (p or {}).get('fn') == 'build' and [18, 1] not in p.get('plain', []):
+                p['plain'] = p.get('plain', []) + [[18, 1]]; log.append('record wall: cell (18, 1) plain records')
     mantle(s, name, log)
     pulled_sleeves(s, log, name)
     stack(s, log)
