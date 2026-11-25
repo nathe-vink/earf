@@ -11,6 +11,7 @@ B=$(git rev-parse --abbrev-ref HEAD)
 for n in "$@"; do
   [ -f $O/$n.equipment.txt ] && { echo "$n done before"; continue; }
   t0=$(date +%s)
+  mkdir -p "$(dirname /tmp/lightc2-$n.log)"
   python3 studio/engine/render.py $O/$n.json --out $O/$n.png --masks > /tmp/lightc2-$n.log 2>&1; rc=$?
   grep -v "INFO\|Timer\|^Fra:\|| Sample\|Rendering\|Updating\|Loading" /tmp/lightc2-$n.log > $O/$n.log
   echo "$n exit $rc $(( ($(date +%s)-t0)/60 )) min $(grep -m1 'equipment in frame' $O/$n.log) $(grep -o 'NO GLASS SHADOWS: [0-9]* materials' $O/$n.log)"
