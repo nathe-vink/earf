@@ -6,12 +6,12 @@ from PIL import Image, ImageDraw, ImageFont
 HERE = os.path.dirname(os.path.abspath(__file__))
 FD = os.path.join(os.path.dirname(matplotlib.__file__), 'mpl-data', 'fonts', 'ttf')
 FB = ImageFont.truetype(os.path.join(FD, 'DejaVuSans-Bold.ttf'), 28); F = ImageFont.truetype(os.path.join(FD, 'DejaVuSans.ttf'), 22)
-FR = [('lock9-1-hidden', '1. With the lock, as drawn', 'the knob at the back, behind the crown'),
-      ('lock9-2-profile', '2. With the lock, the lamp turned 79 deg', 'the knob in profile: Ø21, 29 out'),
-      ('lock10-6-45', '3. With the lock, the lamp turned 124 deg', 'the knob 45 deg off the camera'),
-      ('lock9-3-back', '4. With the lock, the lamp turned 169 deg', 'the knob toward the camera'),
+FR = [('lock9-1-hidden', '1. Lock, as drawn', 'the knob at the back, behind the crown'),
+      ('lock9-2-profile', '2. Lock, the lamp turned 79 deg', 'the knob in profile: Ø21, 29 out'),
+      ('lock10-6-45', '3. Lock, the lamp turned 124 deg', 'the knob 45 deg off the camera'),
+      ('lock9-3-back', '4. Lock, the lamp turned 169 deg', 'the knob toward the camera'),
       ('lock10-4-none', '5. No lock, the cables as in 2', 'the J-slot and a detent'),
-      ('lock9-5-below', '6. From 30 deg below, the knob\'s side', '0.75 m off, 100 mm lens, an even dome')]
+      ('lock9-5-below', '6. 30 deg below, the knob\'s side', '0.75 m off, 100 mm lens, an even dome')]
 ims = [Image.open(os.path.join(HERE, f + '.png')).convert('RGB') for f, _, _ in FR]
 W = 600; ims = [im.resize((W, int(im.size[1] * W / im.size[0])), Image.LANCZOS) for im in ims]
 H = max(im.size[1] for im in ims); G = 16; TH = 90
