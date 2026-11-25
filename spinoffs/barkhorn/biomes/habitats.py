@@ -49,9 +49,10 @@ HABITATS = {
 SETS = {
     # 2026-11-25 (the coordinator's support sweep; settle at the foot centres): Ice's field differed by 37 mm under the
     # feet (front right +37, the others 0-6), the speaker on one foot; the snow levelled over the footprint (feet +-0.25 x
-    # +-0.21 m, turned -10 deg as the speaker) at the front-right foot's height, where the speaker already
-    # stands, back to the field over 0.02 m, so all four feet bed 30 mm in it (SINK 0.03) and the speaker does not move
-    'ice': {'set.props.0.pad': [0.0, 0.0, 0.25, 0.21, -10.0, 0.02, 0.037]},   # the feet's own extent, a 2 cm blend: the drift in front stays
+    # +-0.21 m, turned -10 deg as the speaker) at 0.0176 (the highest foot hit 0.0184, the mesh's interpolation): the live final's feet bottom (z -0.0116, the old settle,
+    # scratch f17) plus SINK 0.03, so the speaker stays exactly where it stood and all four feet bed 30 mm (11:38: 0.037
+    # raised it 18.7 mm); back to the field over 0.02 m
+    'ice': {'set.props.0.pad': [0.0, 0.0, 0.25, 0.21, -10.0, 0.02, 0.0176]},   # the feet's own extent, a 2 cm blend: the drift in front stays
     # Ember (c), the coordinator 2026-11-12 on 7cc92de7: the low sun in FRONT, behind the camera's left shoulder, 35 deg
     # off the lens axis (the camera sits at az -12 from the speaker: -12 - 35 = -47), 5 deg high, its warm colour kept; the
     # pink dusk sky behind stays as it is (the sky opposite a sunset). Was az 130, el 11.4, behind the speaker
