@@ -228,5 +228,8 @@ def groups_from_scene(bpy, product_groups, skip_props=(), props=None):
     for i in sorted(by):
         p = (props or [None] * (i + 1))[i] if props and i < len(props) else None
         lbl = f'prop{i} ' + ((p.get('fn') or p.get('shape') or p.get('kind')) if p else '')
-        out += split(lbl.strip(), by[i]) if (p or {}).get('shape') == 'ext' else [(lbl.strip(), by[i])]
+        if (p or {}).get('fn') == 'boards':                 # each sleeve, card and paper on its own
+            out += [(f'{lbl.strip()} {o.name}', [o]) for o in sorted(by[i], key=lambda o: o.name)]
+        else:
+            out += split(lbl.strip(), by[i]) if (p or {}).get('shape') == 'ext' else [(lbl.strip(), by[i])]
     return out
