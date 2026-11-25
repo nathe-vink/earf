@@ -56,18 +56,46 @@ def _inside(h, x, y):
     return True
 
 
+_TREE = {}
+
+
+def _tree(bpy):
+    """One BVH tree of every renderable mesh in the scene (world space, evaluated), built once, and each triangle's
+    object: scene.ray_cast rebuilds its tree on every call, hours for a room."""
+    if 'bvh' in _TREE:
+        return _TREE['bvh'], _TREE['owner']
+    from mathutils.bvhtree import BVHTree
+    dg = bpy.context.evaluated_depsgraph_get()
+    V, T, owner = [], [], []
+    for o in bpy.data.objects:
+        if o.type != 'MESH' or o.hide_render or o.get('engine_light') or o.get('engine_light_body'):
+            continue
+        oe = o.evaluated_get(dg)
+        try:
+            me = oe.to_mesh()
+        except RuntimeError:
+            continue
+        me.calc_loop_triangles()
+        mw = oe.matrix_world; b = len(V)
+        V += [mw @ v.co for v in me.vertices]
+        for t in me.loop_triangles:
+            T.append((t.vertices[0] + b, t.vertices[1] + b, t.vertices[2] + b)); owner.append(o.name)
+        oe.to_mesh_clear()
+    _TREE['bvh'] = BVHTree.FromPolygons(V, T, all_triangles=True); _TREE['owner'] = owner
+    return _TREE['bvh'], owner
+
+
 def _cast(bpy, scene, own, x, y, z):
     """The first surface straight down from (x, y, z) that is not the group's own: (gap, object name) or (None, None)."""
     from mathutils import Vector
-    dg = bpy.context.evaluated_depsgraph_get()
-    o = Vector((x, y, z)); d = Vector((0, 0, -1)); travelled = 0.0
-    for _ in range(8):
-        hit, loc, _n, _i, ob, _m = scene.ray_cast(dg, o, d, distance=0.5 - travelled)
-        if not hit:
+    bvh, owner = _tree(bpy)
+    o = Vector((x, y, z)); d = Vector((0, 0, -1))
+    for _ in range(16):
+        loc, _n, idx, dist = bvh.ray_cast(o, d, 0.5)
+        if loc is None:
             return None, None
-        if ob.name not in own:
-            return z - loc.z, ob.name
-        travelled += (o.z - loc.z) + 1e-5
+        if owner[idx] not in own:
+            return z - loc.z, owner[idx]
         o = Vector((x, y, loc.z - 1e-5))
     return None, None
 
