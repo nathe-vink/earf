@@ -1,0 +1,44 @@
+diff --git a/spinoffs/barkhorn/companions/lamp_site.py b/spinoffs/barkhorn/companions/lamp_site.py
+index 3fc70e4a..e0748c75 100644
+--- a/spinoffs/barkhorn/companions/lamp_site.py
++++ b/spinoffs/barkhorn/companions/lamp_site.py
+@@ -289,7 +289,20 @@ def build(frame, samples, scale):
+             part('out-dome-pendant', 'ring', SC.principled('peek', '#151515', 0.6), c)
+             part('out-dome-pendant', 'pins', steel, c)
+             part('out-dome-pendant', 'gaskets', SC.principled('silicone', '#111111', 0.7), c)
+-            part('out-dome-pendant', 'cord', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
++            cord_ob_ = part('out-dome-pendant', 'cord', SC.principled('braid', '#121212', 0.75, bump=(1200.0, 0.5)), c)
++            if os.environ.get('CORD_TOP'):
++                # 2026-11-25 (the coordinator's support sweep): the cord run on, straight, from its drawn end (726 above the
++                # rim) to CORD_TOP (m, world), so no cord ends in mid-air; CANOPY=1 puts the 150 x 50 canopy there, at a ceiling
++                zt_ = float(os.environ['CORD_TOP']); z0_ = rim_z + 0.726 - 0.001
++                if zt_ > z0_:
++                    bpy.ops.mesh.primitive_cylinder_add(vertices=48, radius=0.003, depth=zt_ - z0_, location=(x, y, (z0_ + zt_) / 2))
++                    ex_ = bpy.context.object; ex_.name = 'cord-run'; ex_.data.materials.append(cord_ob_.data.materials[0])
++                    for f_ in ex_.data.polygons:
++                        f_.use_smooth = True
++                    ex_.select_set(False)
++                if os.environ.get('CANOPY') == '1':
++                    bpy.ops.mesh.primitive_cylinder_add(vertices=128, radius=0.075, depth=0.05, location=(x, y, zt_ + 0.025))
++                    cn_ = bpy.context.object; cn_.name = 'canopy'; cn_.data.materials.append(cap); cn_.select_set(False)
+             part('out-dome-pendant', 'carrier', an, c)
+             part('out-dome-pendant', 'stem', an, c)
+             part('out-dome-pendant', 'board', SC.principled('board', '#E6E4DE', 0.5), c)
+@@ -621,7 +634,7 @@ def build(frame, samples, scale):
+                 SC.box_ob('table-leg', lx, ly, 0.0, lx + 0.04, ly + 0.04, tz - 0.03, apron)
+         # the chair across the table, pushed in under it as a chair is left, its back in the lamp's own spill
+         try:
+-            ch = AS.place(bpy, 'dining_chair_02', '1k', location=(-0.02, 0.58, 0.0), rotation_deg=(0, 0, 180), scale=1.0)
++            ch = AS.place(bpy, 'dining_chair_02', '1k', location=(-0.02, 0.35, 0.0), rotation_deg=(0, 0, 0), scale=1.0)   # 2026-11-25: facing the table, its seat under it, its back 29 clear of the top (it faced away, its back through the top)
+             ch.name = 'chair'
+         except Exception as e:
+             print('CHAIR not placed:', e)
+@@ -651,7 +664,7 @@ def build(frame, samples, scale):
+         cx, cy_ = 0.26, -0.16
+         cup = bpy.data.objects.new('cup', me); bpy.context.scene.collection.objects.link(cup); cup.location = (cx, cy_, tz)
+         bpy.ops.mesh.primitive_torus_add(major_radius=0.023, minor_radius=0.0058, major_segments=64, minor_segments=24,
+-                                         location=(cx + 0.046, cy_, tz + 0.050), rotation=(math.pi / 2, 0, 0))
++                                         location=(cx + 0.0615, cy_, tz + 0.050), rotation=(math.pi / 2, 0, 0))   # 2026-11-25: was cx + 0.046, 13.5 into the cavity
+         hd = bpy.context.object; hd.name = 'cup-handle'; hd.scale = (0.85, 1.22, 1.0); hd.data.materials.append(gl)
+         for f in hd.data.polygons:
+             f.use_smooth = True
