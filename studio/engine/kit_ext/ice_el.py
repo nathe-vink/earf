@@ -373,4 +373,22 @@ def snowfield(bpy, name, p, kit):
                     wa, g = p['windward']
                     k = max(0.25, 1.0 + g * math.cos(math.atan2(ly, lx) - math.radians(wa)))
                 v.co.z += h * k * (t ** 1.6) * (0.75 + 0.5 * noise.noise(Vector((lx * 9.0, ly * 9.0, 1.3))))
+    pad = p.get('pad')
+    if pad:
+        # 2026-11-25 (the coordinator's support sweep, settle at the foot centres): the field under Ice's footprint
+        # differed by 37 mm between the feet, the speaker resting on its front-right foot with the others 16-22 mm up.
+        # `pad` [cx, cy, half_w, half_d, turn_deg, blend, level]: the snow levelled at `level` over the footprint and a
+        # margin, back to the field over `blend` m outside it, so all four feet bed in it as the habitat's sink intends
+        pcx, pcy, phw, phd, pturn, pbl, plev = pad
+        ca, sa = math.cos(math.radians(pturn)), math.sin(math.radians(pturn))
+        ox, oy = ob.location.x, ob.location.y
+        for v in ob.data.vertices:
+            wx, wy = v.co.x + ox - pcx, v.co.y + oy - pcy
+            lx, ly = wx * ca + wy * sa, -wx * sa + wy * ca
+            out = math.hypot(max(0.0, abs(lx) - phw), max(0.0, abs(ly) - phd))
+            if out >= pbl:
+                continue
+            u = out / pbl; w = u * u * (3 - 2 * u)
+            v.co.z = plev * (1 - w) + v.co.z * w
+        ob.data.update()
     return [ob]

@@ -47,6 +47,11 @@ HABITATS = {
 }
 # shot keys set per habitat (habitat.py --set), and samples where the scene is dark (the satin horn's grain)
 SETS = {
+    # 2026-11-25 (the coordinator's support sweep; settle at the foot centres): Ice's field differed by 37 mm under the
+    # feet (front right +37, the others 0-6), the speaker on one foot; the snow levelled over the footprint (feet +-0.25 x
+    # +-0.21 m, turned -10 deg as the speaker, a 3 cm margin) at the front-right foot's height, where the speaker already
+    # stands, back to the field over 0.10 m, so all four feet bed 30 mm in it (SINK 0.03) and the speaker does not move
+    'ice': {'set.props.0.pad': [0.0, 0.0, 0.28, 0.24, -10.0, 0.10, 0.037]},
     # Ember (c), the coordinator 2026-11-12 on 7cc92de7: the low sun in FRONT, behind the camera's left shoulder, 35 deg
     # off the lens axis (the camera sits at az -12 from the speaker: -12 - 35 = -47), 5 deg high, its warm colour kept; the
     # pink dusk sky behind stays as it is (the sky opposite a sunset). Was az 130, el 11.4, behind the speaker
