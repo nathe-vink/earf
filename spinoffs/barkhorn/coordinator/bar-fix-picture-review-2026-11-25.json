@@ -1,0 +1,316 @@
+[
+ {
+  "lens": "support-and-physics",
+  "crit": {
+   "findings": [
+    {
+     "id": "RL-1",
+     "frame": "fixed9",
+     "severity": "should-fix",
+     "claim": "Not confirmed: fixed9's 5-level darkening does not come only from the moved sleeve and Mantle. About 41 % of it is in parts of the room where nothing moved. The cause is the re-aim of three Mantle lights (track-mantle, mantle-front and mantle-side; each target moved 0.34 m in y). The glossy counter's mirror reflections of these lights moved with them. Render settings, exposure (-2.0), samples (512) and light powers are identical, so this is a change of light by aim. The new light is honest (reflections of real lights in the scene, with no glow that lacks a source), but the record entry ('the triangle sleeve ... and the scene round Mantle') is wrong. The new look should be accepted knowingly, or the old pool restored.",
+     "evidence": "Frame mean 40.08 -> 34.90 (-5.18). Split of the total difference (py2/f9regions.py):\n- Mantle's own pixels (both masks +20 px): 51 %.\n- Moved props (boxes): 7.5 %.\n- Record-wall pool box x 560-1010, y 60-640: -10.1 levels over 16.8 % of the frame, 33 % of the total. Blocks reach -25 to -31.\n- Rest of the frame: -1.57 over 53 %. This includes the top of the wall (-2.6 to -6.9) and a lit structure at the far left edge (x 0-130, y 370-480: -8 to -12).\n- New ceiling patch x 300-640, y 0-210: +10.6.\nOutside Mantle and the moved props: 35.53 -> 32.86 (-2.67 over 80 % of the frame).\nA mirror trace of each beam axis off the counter (top 1.07) matches the image. Today, mantle-front (9.7,3.15,1.85) hits the counter at (8.43,4.26) and its reflection lands on the record wall at (6.76,5.72,2.10) = px (752,335), the centre of the lost pool. With the new aim the reflection lands at (5.36,5.72,2.96) = px (528,176), which is the new ceiling patch. Today's mantle-side reflection runs left to px (-13,443), the far-left glow that has now gone dark.\nThe same re-aim takes a blow-out off the amber Core ball: RGB (200,189,127) -> (155,141,54); the red and orange Cores are unchanged. The striped stack and the throw lose their side light.\nCrops: scratchpad/b125/rest-light/v/f9_dmap.jpg, f9_wall.jpg, f9_left.jpg, f9_bowl.jpg, f9_counter.jpg."
+    },
+    {
+     "id": "RL-2",
+     "frame": "bar-backbar-portrait, fixed9",
+     "severity": "should-fix",
+     "claim": "The seated triangle sleeve (cover-14) passes through a solid black 7-inch box. In both pictures the box's front face cuts the triangle print with a hard vertical edge across the middle of the sleeve. This breaks 'nothing passing through anything'. support.md says the sleeve's back 'leans on the records', but this cell holds no LPs. It is still better than today's floating sleeve, but it is not clean.",
+     "evidence": "Every log has cell (8,3) as RECORD WALL 'other' #4, which record_wall._others builds as 'seven': a solid box, x 6.4345-6.6245, y 5.76-5.99, z 2.2802-2.4402, with singles to its left.\nThe sleeve is at (6.5315, 5.8036, 2.2805), rz 58. Its bottom edge runs (6.448,5.670) -> (6.615,5.937) and enters the box front at x 6.504, so 66 % of its width is inside the box below z 2.44.\nProjected: phone hero box px 542-744 x 898-1055, sleeve px 497-714 x 804-1033; fixed9 box px 698-785 x 239-309, sleeve px 679-772 x 201-298. The edge of the black block (px ~573 in the portrait) is the line where the sleeve enters the box.\nAt the phone hero's site size it is small and dark (site_p_c14.jpg). At 1:1 in tropos-bar it is clearer.\nCrops: v/p_c14.jpg, v/f9_c14.jpg, v/site_p_c14.jpg.\ncover-03 also runs into the books at the back of cell (2,1), but the cell's right divider hides that in fixed9 and bar-hero (v/f9_c03.jpg, v/bh_c03.jpg)."
+    },
+    {
+     "id": "RL-3",
+     "frame": "bar-hero (ring sleeve, rz -25)",
+     "severity": "should-fix",
+     "claim": "At rz -25 the ring sleeve (cover-10) stands on its shelf, with its front corner 5 cm past the lip. But the LPs in its cell stand through the left half of the sleeve. In the -25 crop, and in the later full render, records stand in front of the left part of the rings, and one proud record crosses the rings with rings visible on both sides of it. A flat sleeve cannot do that.",
+     "evidence": "Shot at 1631530575: y 5.7366, rz -25. The bottom edge runs (9.207,5.803) -> (9.493,5.670).\nThe front edges of the LPs in this records cell are at y 5.732-5.738 (base_y = yf+0.012..0.018). A few records stand 1.5-3 cm proud of that.\nThe edge crosses y 5.735 at x 9.353, so 51 % of the sleeve's width lies behind the records' front. Projected: sleeve px 2793-2995 x 694-868; crossing at px 2896.\nCrops: v/ring_m25_zoom.jpg (from final/bar-hero-ring-sleeve-turns.jpg) and v/bh_ring25.jpg (699d536751 render, gain 1.8). That render's mask: equipment 0, hidden 0; reaudit 0/0."
+    },
+    {
+     "id": "RL-4",
+     "frame": "bar-hero, fixed9",
+     "severity": "should-fix",
+     "claim": "Round 36's record label ('life-label') was left behind. bar_fix removes life-record and life-sleeve but not the label, so a red 10 cm disc now floats 2.9 mm above the counter with nothing under it. The gap cannot be seen in the dark, and the disc reads as a coaster. The fix is cheap: add 'life-label' to the remove list for the next hero render.",
+     "evidence": "planet_r36.life() builds three pieces at rx,ry = (DJ.x-1.05, C.y0+0.28) = (5.85, 4.13):\n- the record at zt+0.001, 1.8 mm thick;\n- the label at zt+0.0029, r 0.05;\n- the sleeve.\nThe REMOVED lines in all six logs name life-record and life-sleeve, never life-label.\nThe label projects to bar-hero px 529-639 x 1530-1557; the red ellipse is there in both today and new (v/bh_label.jpg, diff empty there). In fixed9 it is a 2-4 px sliver at px 76-118 x 675-679."
+    },
+    {
+     "id": "RL-5",
+     "frame": "bar-backbar-portrait",
+     "severity": "note",
+     "claim": "Phone hero light: above the counter the frame is unchanged. The re-aimed track-mantle spot (target 4.32 -> 3.98) moves its counter pool forward to Mantle's front-left, and it no longer reaches the Ember Core ball, which is now deeper and darker. The change is honest and follows Mantle, but it is a visible light change on a product in the phone hero.",
+     "evidence": "Above y 1950: mean diff -0.16, |diff| about 0.2, with no seam at the band join (rows 1440-1560 |diff| 0.18-0.23).\nLower blocks run from +74 (the lower-left counter, now lit) to -93.\nEmber Core ball (41,144 px): RGB (191.0, 44.5, 29.5) -> (164.6, 25.4, 10.1).\nThe beam axis to the ball was 7.5 deg off today and is 11.5 deg off now, with a 10 deg spread.\nCrops: v/p_dmap.jpg, v/p_core.jpg."
+    },
+    {
+     "id": "RL-6",
+     "frame": "fixed9",
+     "severity": "note",
+     "claim": "In fixed9, Mantle's plinth bottom and feet fall below the frame, so its rest on the counter cannot be seen in the picture. Geometry puts it on the flat top.",
+     "evidence": "New mask: plinth-L1-stack x 578-1149, y 768-899 (cut at the frame edge). base-L1-stack is only a sliver at y 890-899. No feet or foot-pads pixels.\nProjected footprint corners: y 848-1045 in a 900-px frame."
+    },
+    {
+     "id": "RL-7",
+     "frame": "bar-backbar-portrait, fixed9, mantle-bar",
+     "severity": "note",
+     "claim": "Mantle rests wholly on the counter's flat top in all three frames. Its contact shadows agree with the room's lights.",
+     "evidence": "Origin (8.5, 3.98, 1.071), rz 25, corner origin. The plinth spans y 3.993-4.510 (envelope 3.98-4.523) on the flat 3.838-4.562: 5.2 cm from the back edge and 15.5 cm from the front.\nThe footprint model checks against the masks: fixed9 today plinth x 848-1310 vs mask 850-1308; new 575-1150 vs mask 578-1149.\nPhone hero: under the base the counter is black and the red L1 edge sits on it, with no light gap (v/p_feet.jpg, gain 2.2).\nmantle-bar: the camera, the red Hemisphere and the Ember Core moved with Mantle. The Core base is now at y 4.126-4.276, on the flat; today it was 4.466-4.616, past the edge.\nThe walnut stand (y 4.352-4.508) and its sleeve sit on the counter behind Mantle's left and clear of it, with shadows (v/m_stand.jpg). The sleeve leans back 14 deg on a flat 20 x 5 x 2.2 cm block with no slot. That is pre-existing and reads as a stand.\nMatched Mantle parts in mantle-bar: plinth -3.5, record +4.7, Core ball -4 %."
+    },
+    {
+     "id": "RL-8",
+     "frame": "bar-backbar-portrait, mantle-bar, fixed9",
+     "severity": "note",
+     "claim": "The votive is cleanly gone: its glass, its tea light and its flame, which was the votive's only emitter. Its counter highlight in the phone hero went with it. No glow is left, nothing floats where it stood, and no other light stood at that spot.",
+     "evidence": "'REMOVED NEAR [[8.55, 3.97]] 234 faces' appears in every log. planet_den.candles builds votives, tealights and flames, and the flames are an emissive mesh (no lamp object).\nThe spot projects to:\n- phone hero px 116-403 x 2337-2654: its flame highlight is gone (blue dot in the diff, v/p_lowleft.jpg);\n- mantle-bar px 1281-1596 x 1194-1638: an empty counter (v/m_front.jpg);\n- fixed9: under Mantle's corner.\nThe room's other candle, at (4.95, 3.97), is far from every change."
+    },
+    {
+     "id": "RL-9",
+     "frame": "all five",
+     "severity": "note",
+     "claim": "The audits are confirmed. My own counts of the mask PNGs give 0 px equipment and 0 px hidden in all five frames, and in the rz -25 hero. The lane's reaudit.py cast gives hidden 0 / equipment 0 on all six shot files. No CASTCHECK line appears in any bar-fix log, so the figure in the record rests on this reaudit.",
+     "evidence": "The mask pass gives every hidden object past the 74th the shared id 180, and the legend names only the last one ('lamp mantle-side' in fixed9, 'lamp house-left' in the portrait). Those pixels are still counted, and there are 0 at id 180.\nThe channels G=0, A=255 are consistent with this."
+    },
+    {
+     "id": "RL-10",
+     "frame": "bar-backbar-portrait, bar-hero, bar-pendants",
+     "severity": "note",
+     "claim": "The lathe ice: support.md's explanation is wrong, but the pictures pass. The shot glass profile has no inner floor; its inside is a cone from the rim's inner edge down to the centre at 16 mm. The drink cylinder (r 39 mm) and the ice therefore sit inside the glass's solid wall. The defect is pre-existing and also in today's pictures, so it is not a regression. The new ice reads as in the drink rather than hanging above it as before. The twists now touch the rim.",
+     "evidence": "Profile [[0,0],[0.041,0],[0.043,0.006],[0.044,0.092],[0.0405,0.092],[0,0.016]]: kit._lathe joins the rim ring straight to the centre point. The room's own rocks profile has the (0.037, 0.016) floor point that this one lacks.\nFrom above (bar-pendants, glass about 190 px) the inside reads as a ribbed funnel, in both today's and new (v/bp_drinks2.jpg).\nTwists (Catmull-Rom tube): the minimum gap to the rim's inner edge is now 0.01 mm. Today the twist floated 2.3-2.5 mm above the rim. The outer end hangs 7 mm below the rim outside the glass (py2/twist.py, v/p_glass.jpg).\nfixed9's '40 mm above the water' is a measuring artifact: the lowest point is the outer end, outside the glass."
+    },
+    {
+     "id": "RL-11",
+     "frame": "bar-hero, bar-pendants",
+     "severity": "note",
+     "claim": "In the other frames the light is the same apart from deliberate changes. One build difference is also on record.",
+     "evidence": "Hero above y 1350: -0.04. Pendants above y 1700: -0.39, with -1 to -1.5 on the top-right records.\nLit Hemisphere shades agree within 1-2 levels: pendants 219.8/173.5/141.1 -> 220.2/175.0/142.8; hero and portrait the same.\nThe shades' inner lip band sits a few px lower: the shades now come from the lamps build ecb1650c, not the 17 Nov mix composite (v/bp_pend.jpg).\nIn the hero, bar-hero.log has 'RECORD WALL other cell (18, 1) 8', while the other frames have 'plain records in cell (18, 1)'. Neither hero shot has 'plain', and today's plain right-edge cell came from the blended strip in 856c3e9f8b. The new full render therefore puts the 7-inch box back at the right edge (block +3.7).\nThe sleeve stack's back corner (cover-12) reaches y 4.594: 3.2 cm past the flat edge and about 4 mm past the counter's outer edge. This is unchanged from today and sits on the far side, where it cannot be seen."
+    }
+   ],
+   "per_frame": [
+    {
+     "frame": "bar-backbar-portrait (phone hero)",
+     "verdict": "Better than today's live picture, so replace it, with one item to fix. Passes:\n- Mantle sits on the flat top with a dark contact shadow and no light gap.\n- The votive, its flame and its highlight are gone, with nothing left behind.\n- Glass B's twist now touches the rim, and its ice sits in the drink.\n- Masks 0/0, cast 0/0.\n- Above the counter the frame is unchanged (-0.16; no seam at the band join).\nTo fix: the triangle sleeve passes through the black 7-inch box in cell (8,3) (RL-2).\nAccept knowingly: the re-aimed track-mantle moves the counter pool to Mantle's front-left and deepens the Ember Core ball (R 191 -> 165; RL-5)."
+    },
+    {
+     "frame": "bar-hero (desktop hero)",
+     "verdict": "Apart from the sleeve, it passes:\n- The left glass now stands on the counter.\n- The moved drink is clear of the Ember Core, the bowl and Mantle.\n- The lemon now shows, seated on the bowl.\n- Mantle is unchanged.\n- Light unchanged (-0.04 above y 1350). Masks 0/0, cast 0/0.\nLeftovers: round 36's red label floats 2.9 mm over the counter, which cannot be seen (RL-4). The right-edge cell (18,1) is a 7-inch box again (RL-11).\nThe ring sleeve at -25 rests on its shelf, but the LPs of its cell stand through its left half; fix it or accept knowingly (RL-3)."
+    },
+    {
+     "frame": "fixed9 (Tropos 'At the bar')",
+     "verdict": "Support passes, but the light claim does not hold.\nSupport:\n- Mantle is on the flat top by geometry, but its feet are below the frame (RL-6).\n- The twists touch the rims, the throw lies on the counter clear of the stack, and the fruit and Cores rest.\n- Masks 0/0.\nTo fix: the triangle sleeve passes through the 7-inch box (RL-2).\nLight: the -5.2 is not only the sleeve and Mantle. About 41 % comes from the re-aimed Mantle lights' counter reflections: the record-wall pool (-10 over 17 % of the frame) and a far-left glow are gone, a +10.6 ceiling patch appears, and the amber Core is no longer blown out. The light is honest, but it is a light change; decide on it knowingly (RL-1)."
+    },
+    {
+     "frame": "mantle-bar (Mantle 'At the bar')",
+     "verdict": "Passes:\n- Mantle, the camera, the red Hemisphere and the Ember Core moved together, and the Core is now on the flat top.\n- The contact shadows are right.\n- The stand and sleeve sit on the counter behind Mantle's left, clear of it.\n- The votive spot is empty with nothing left, and the r36 glasses are gone.\n- Exposure is the same; matched parts are within a few levels (Core ball -4 %). Masks 0/0, cast 0/0."
+    },
+    {
+     "frame": "bar-pendants",
+     "verdict": "Passes:\n- The bowl sits on the flat sleeve with a contact shadow on the print, and the fruit is seated.\n- The newspaper is 6 mm clear of the sleeve and 3 mm inside the back edge.\n- The cloth and napkin are moved clear, and the twists are draped over the rims.\n- Light above the counter: -0.39. The shades are equal within 1-2 levels, but their inner lip sits a few px lower from the lamp build (RL-11).\n- Masks 0/0, cast 0/0."
+    }
+   ]
+  },
+  "verdicts": {
+   "verdicts": [
+    {
+     "id": "RL-1",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced. Mean RGB 40.08 -> 34.90. The two Mantle masks plus 20 px carry 51.2 % of the loss. The rest of the room, outside Mantle and the moved-prop boxes, carries 39.5 % (-2.71 over 75 % of the frame): the pool box x 560-1010, y 60-640 is -10.2 over 16.6 % (32.8 %), the ceiling box x 300-640, y 0-210 is +11.3, and the far-left lit structure is gone. A diff of the shot files finds only three changes in light: the targets of track-mantle, mantle-front and mantle-side, each moved -0.34 in y. Settings and powers are identical. fixed9 is the only frame with caustics_reflective on and filter_glossy 0, and its counter is restyled to a glossy dark stone (rough 0.16), so mirrored beams do render. My trace puts mantle-front's old reflection at px (753,336), the centre of the lost pool, and its new one at (527,175), the new ceiling patch. mantle-side's old reflection lands at (-13,443), the lost far-left glow. That reflected beam also passed through the amber Core: ball 205/196/135 -> 144/130/34. The record's attribution ('the triangle sleeve ... the scene round Mantle') is therefore incomplete. The light is honest, so it should not hold the swap. Should-fix (accept the new look knowingly and correct the record) is the right grade. Files: py/f9split.py, py/mirror.py, v/f9_wall_t_n_d.jpg, v/f9_farleft.jpg, v/f9_ceiling.jpg, v/f9_amber.jpg in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-support-and-physics/."
+    },
+    {
+     "id": "RL-2",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed from code, logs and pixels. Every log has 'RECORD WALL other cell (8, 3) 4', and record_wall._others gives index 4 the kind 'seven'. Its box is a closed create_cube at x 6.4345-6.6245, y 5.76-5.99, z 2.2802-2.4402; the singles sit to its left at x 6.2955-6.4285 and clear the sleeve. The bottom edge of cover-14 (rz 58) enters the box front at x 6.504 (at x 6.491 at the box top), so 66 % of its width is inside the box below z 2.44. Projections match the reviewer: in the portrait the box is px 542-744 x 898-1055 and the entry line px 567-573; in fixed9 the entry line is px 708-711. Crops at gain 2 show the triangle print cut on that vertical line in both frames. In fixed9 it is clear at 1:1, and tropos-bar is shown at 1:1, which is the frame that matters. It is still better than today's floating sign, so should-fix, not blocking, is right. Files: v/rl2_portrait.jpg, v/rl2_fixed9.jpg."
+    },
+    {
+     "id": "RL-3",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed in the final render (1631530575 / b3fb39ba53). cover-10 is at (9.35, 5.7366, 1.9205), rz -25, in cell (16,2), which holds LPs. Its bottom edge (9.207,5.803)->(9.493,5.670) crosses y 5.735 at x 9.353, so 51 % of it is behind the record fronts (63 % behind y 5.72). In the 2x zoom at gain 1.8, records stand over the left half of the rings. One proud record (px ~2915) crosses the rings with ring showing on both sides of it, which is impossible for a flat sleeve. Should-fix is right. The fix costs nothing extra: the sleeve (px 2794-2995 x 694-867) lies inside BF-1's strip (x >= 0.86 W = 2752, y 0.36-0.70 H = 648-1260), so it can be re-seated in that same strip render. File: v/rl3_ring.jpg."
+    },
+    {
+     "id": "RL-4",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed. planet_r36.life() builds life-label at (DJ.x-1.05, C.y0+0.28) = (5.85, 4.13) on the r37 plan. _cyl(z0, h) makes it span z 1.0729-1.0733, so it sat on the record (top 1.0728). bar_fix.leftovers adds only life-record and life-sleeve; every REMOVED line lacks life-label, and life_sleeves and life_glasses are empty, so nothing is under it. The red ellipse is at the projected px 529-639 x 1530-1557 in the final hero, unchanged from today. In fixed9 it is a sliver at the left edge; in the portrait, pendants and mantle-bar it is out of frame. It fails the 'nothing floating' rule, which the house measures from the scene, so should-fix is defensible. It cannot be seen, though, so it must not hold the swap. It lies outside the BF-1 strip, so fix it only when that region is next rendered. File: v/rl4_bar-hero.jpg."
+    },
+    {
+     "id": "RL-8",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Checked planet_den.candles: it builds only the meshes votives, tealights and flames (the flame is an emitter material); it makes no lamp object. remove_near takes out all three within r 0.05, so no glow is left without a source."
+    },
+    {
+     "id": "RL-10",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "True for the lathe glasses in the portrait, bar-hero and bar-pendants: profile [...,[0.0405,0.092],[0,0.016]] has no floor, and the kit box ice is placed by its bottom. But it says nothing about fixed9, whose glasses are living_ext.water_glass with a real floor, and there the fix made the ice worse (see missed #1)."
+    }
+   ],
+   "missed": [
+    "1 (should-fix, a regression the review did not see). In fixed9, bar_fix sank the ice into the glass floors and put the 45 mm drink's ice fully under the surface. fixed9's two drinks are living_ext.water_glass, which takes each ice dict's 'position' as the CENTRE of the cube (create_cube(size=1) about the origin, then translated). bar_fix.drinks() writes zb, which it means as the cube's BOTTOM ('liquid - 0.85*ICE' for floating; 'floor + 4.5 mm' on the floor), so every cube sits 12 mm lower than intended. Corners after the 'rotate' tilt, against the floor (foot 1.0703 + base 0.016) and the liquid top. 45 mm drink: lowest corners 4.7 and 4.9 mm INTO the floor, tops 7.1 and 3.9 mm BELOW the surface (submerged ice). 30 mm drink: lowest corners 8.8 and 8.5 mm into the 16 mm base. Today the 45 mm drink's ice floated plausibly (corners 6-11 mm over the floor, tops 4-12 mm above the surface); the 30 mm drink's ice hung 6 mm over the floor. support.md's fixed9 table has no ice rows, so the support check never measured them, and the lane's claim that each drink's ice 'floats about 85 % under or rests on the floor' is untrue for fixed9. It is hard to see at site size: the glasses are about 60 px wide and fall in the defocused foreground at the lower left (px 344-629 x 773-888). Fix in the fixed9 re-render that RL-2 needs: for water_glass ice, use centre = intended bottom + 12 mm, plus the tilt allowance. Files: py/ice9.py, v/f9_ice.jpg in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-support-and-physics/.",
+    "2 (should-fix, lower visibility; same defect as RL-3). In the desktop hero, the triangle sleeve cover-14 also stands through LPs. In bar-hero it goes to shelf 1, cell (8,1), at (6.5315, 5.8036, 1.5605), rz 58, and that cell holds records, not the 7-inch box. Its bottom edge crosses the record fronts (y 5.735) at x 6.489, so 76 % of its width lies inside the LP row. In the final render (1631530575), only its front part shows: a grey strip at px ~1348-1383 x 886-1055, just left of the red Hemisphere shade. LP spines then continue where the rest of the sleeve should stand, and the remainder is behind the shade. Today it hung in front of the shelf. The region is outside the BF-1 strip, so it needs its own region render (with RL-4's label if wanted). File: v/c14hero_3.jpg (today | new | new with the sleeve outline).",
+    "3 (root cause, for one fix instead of three). bar_fix.pulled_sleeves seats every pulled-out sleeve at its old turn (rz 58, 70, or -64/-25) with only the front corner 5 cm past the lip, 'the rest among the records'. In any filled cell the back of the sleeve must therefore pass through what is there. Visible cases: portrait and fixed9 cover-14 through the 7-inch box (RL-2); bar-hero cover-10 through LPs (RL-3); bar-hero cover-14 through LPs (#2). cover-03 runs into the books of cell (2,1), but the divider hides that in fixed9 and bar-hero, and it is out of frame elsewhere. One placement rule fixes all of them in the next renders: keep each sleeve wholly in front of its cell's contents, or slide it out parallel to the records. support.md's 'the back leaning on the records' should not be accepted as is: for these sleeves the 'lean' is an overlap with the cell's contents, not contact."
+   ]
+  }
+ },
+ {
+  "lens": "look-and-crops",
+  "crit": {
+   "findings": [
+    {
+     "id": "fixed9-mantle-cut-and-soft",
+     "frame": "fixed9 (Tropos 'At the bar', tropos-bar.webp)",
+     "severity": "blocking",
+     "claim": "In the new fixed9, Mantle is cut off by the frame's bottom edge and out of focus. Only the platter, tonearm and the top of the plinth show. The plinth's front face and the red-lit Ember deck are out of frame. In today's fixed9, Mantle is whole and sharp at the back of the bar. This is the only product in the set that the new renders crop at an edge. The site shows tropos-bar whole (object-fit: contain), so the cut appears on all eight Tropos pages at every width. Fixed9's lower third, which used to be a lit counter, is now a dark band with a blurred, cut-off turntable in it. When the coordinator accepted Mantle 'about 25 % larger at its new spot', the record did not mention a crop. Today's fixed9 has a floating triangle sign, which is worse by the owner's rule, so this fix is acceptable only as a stopgap.",
+     "evidence": "Projection with fixed9's own camera (position 9.3,3.5,1.42, target 7.0,5.7,1.72, 24 mm, 1600x900). As a check, it reproduces today's plinth corner at (850,790), which matches the image. Mantle's front corners move from y 887/944 (today) to y 976/1073 (fix), and the front-right corner at 10 cm height moves to y 918. All of these are below the 900-px frame. Mantle now sits at depth 0.72-1.21 m. Focus is on (8.25,5.5,1.7), 2.28 m away, at f/2.8, which puts the near limit of sharpness at about 1.7 m, so the label is unreadable at 1:1. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/f9-fix-lowright.jpg and /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/f9-mantle-100.jpg (today | fix at 1:1). Site screenshots from local tree13 with my re-cut swapped in: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-tropos-1440.jpg (picture 773x435 at 1440), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/view-tropos-ember-1440.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-pdp-390.jpg (358x201 at 390). For Mantle to be whole with y kept at 3.98, its origin would need x of about 7.9-8.0 (front-right base corner then at y 876-910). The two drinks (8.12,3.99), (8.31,4.13) and the throw (7.86,4.04) stand there, so either those props move too or Mantle leaves this frame. In the second case, drop 'and Mantle in Ember' from the tropos-bar alt text."
+    },
+    {
+     "id": "hero-right-edge-7inch-box-back",
+     "frame": "bar-hero (desktop hero, home-ice-wide-1600/2400)",
+     "severity": "blocking",
+     "claim": "The new bar-hero lost the 14 Nov right-edge patch, which was the condition under which the hero was declared final. Wall cell (18, 1), a 7-inch box cut by the right edge, is back. It shows as a pale sliver at mid-height on the right edge, at 1440 and 1024. The rz -25 re-render on Haze will bring it back again unless that job carries the plain cell.",
+     "evidence": "bar-hero.log line 11 says 'RECORD WALL other cell (18, 1) 8', and there is no 'plain records in cell' line. Neither today's nor the fix's bar-hero shot passes a 'plain' list to record_wall.build. record_wall.py line 198 reads p['plain'], with the comment 'a cell cut by the hero's edge: plain records'. MEASURED.md at 856c3e9f8b says: 'the wall's cell (18, 1), a 7-inch box cut by the right edge, made plain records ... only the strip x 0.86 to 1, y 0.36 to 0.70 re-rendered'. In the fix the sliver is at x 3180-3200, y about 970-1050: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/h-redge2.jpg. At site size it is a light sliver about 5 CSS px wide on the right edge: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-home-1440x900-redge.jpg. Remedy: add \"plain\": [[18, 1]] to the record_wall build in the -25 job, or re-apply the strip patch."
+    },
+    {
+     "id": "mantle-bar-red-disc-beside-core",
+     "frame": "mantle-bar (Mantle 'At the bar', all eight Mantle pages)",
+     "severity": "should-fix",
+     "claim": "The now-playing sleeve on its new walnut stand (on the counter behind Mantle's back-left) stands right next to the Ember Core, and it is lit. Its flat red disc is close to the Core in size and hue and sits at the Core's shoulder. The picture now reads as two red circles side by side, and the eye goes to the Core and sleeve instead of Mantle. In today's frame the same sleeve sat dim behind the tonearm. Physically it reads right: the stand's lip shows under the plinth corner and the sleeve leans back in it. The framing is otherwise the same as today's, because the camera moved with Mantle.",
+     "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/mb-sleeve-sbs.jpg (today | fix, 1:1), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/mb-stand-zoom.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-mantle-1440.jpg (gallery 773x515), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-pdp-390.jpg. Options for the next round: turn the stand so less of the disc faces the camera, put it behind the tonearm side, or keep it out of Mantle's key light."
+    },
+    {
+     "id": "portrait-core-foot-hidden",
+     "frame": "bar-backbar-portrait (phone hero, home-bar-tall-800/1200)",
+     "severity": "note",
+     "claim": "In the phone hero Mantle is now larger, and it hides the Ember Core's foot. The ball's bottom meets the platter's back-left rim, so at 390 the Core seems to sit on the turntable. The old-fashioned glass is half hidden behind the plinth's front-left corner. Both still read as depth, but where today's frame had clear space there is now a tangency. Otherwise the frame reads better than today's: Mantle is whole, rests on the flat top and is legible as a turntable. The triangle sleeve is a small fragment in its cell, and the votive is gone.",
+     "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/p-core-1200.jpg (the 1200 site file, today | fix), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/p-left-100.jpg (1:1), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-home-390x844.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/p-tri-site.jpg. Projected with the portrait camera (sensor fit on width, checked against the image), Mantle's corners fall at x 227-1611 and y 2302-2693 of 2400x3000, so it is whole and clear of every edge."
+    },
+    {
+     "id": "site-crops-and-names-row",
+     "frame": "all five (site crops, home hero names)",
+     "severity": "note",
+     "claim": "The site cuts nothing out of these frames except at the desktop hero. Every product stays whole and clear of the crop's edges at 1440, 1024 and 390 in the new frames, with one exception: fixed9's Mantle. There are no name dots on the hero to move. The names row's four names are all present in both new hero frames, and nothing new lands under the row.",
+     "evidence": "Registration found no offsets: every live file is a whole-frame Lanczos downscale. home-bar-tall-1200/800 and home-ice-wide-2400/1600 are byte-identical to WebP q80 method-6 re-encodes of today's portrait and bar-hero. mantle-bar and bar-pendants (1600 px) are byte-identical at q82. tropos-bar is fixed9 at 1:1 (mean difference 1.66). CSS crops only the desktop hero: object-fit cover at 50% 35%, height clamp(0.88*56.25vw, 100vh-66px, 56.25vw). That means no crop at 1440x900 or 1024x768, and at most 12% at 1440x760 (34 CSS px off the top, 63 off the bottom). The phone hero (4:5), the galleries and /lighting show the whole picture, with the counter and arrows below it. Screenshots of tree13, today | fix with my re-cuts (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/recut/): /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-home-1440x900.jpg, cmp-home-1440x760-foot.jpg, cmp-home-1024x768.jpg, cmp-home-390x844.jpg, cmp-hemi-1440.jpg, cmp-mantle-1440.jpg (same folder). In mantle-bar, Mantle's right corner is 19 px from the edge, unchanged because the camera follows Mantle. No hero dots exist: they were removed in C5, and there are 0 .spot elements on origin/main e6d938b69d or in tree13. The names row sits under the phone picture. On desktop it sits on the picture's foot, under the Cores and Mantle exactly as today, even at the tightest crop (1440x760). The moved drink stays above the row. The alt texts still hold."
+    },
+    {
+     "id": "ring-sleeve-turns",
+     "frame": "bar-hero ring sleeve (cover-10)",
+     "severity": "note",
+     "claim": "At rz -25 the sleeve reads as a sleeve turned partly out of its cell, with its rings two-thirds in the cell's shade. It does not look odd at desktop CSS size (0.45x) or in the 2400 file (0.75x), and it adds a small yellow accent instead of today's floating target. Keeping it hidden is equally clean at site size: the delivered +64 leaves only a thin pale edge, visible at 1:1. -64 leaves a black slot among the records, and -40 shows one dim arc that adds nothing. Use -25, since the hero is being re-rendered anyway. One caveat: at 2x the records stand in front of the sleeve's left third, so the support lens should confirm it does not pass through them. If it does, keep it hidden.",
+     "evidence": "The turn panels are 1:1 crops of the 3200x1800 frame at (2688,720)-(3072,1152). The 'today' panel matches today's frame with a mean difference of 1.41, and the +64 panel matches the fix frame with 1.43. Each turn pasted into the fix frame at that spot: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/ring-site045.jpg (today, +64, -64 / -40, -25 at 1440 CSS scale), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/ring-site075.jpg (2400-file scale), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/ring-zoom2x.jpg (today, -40, -25 at 2x)."
+    },
+    {
+     "id": "fixed9-darker-other-changes",
+     "frame": "fixed9",
+     "severity": "note",
+     "claim": "Apart from Mantle, fixed9 is about 5 levels darker, mostly where the re-aimed Mantle lights no longer reach. The triangle sleeve is now tucked into its cell, a white fragment that reads as art. The throw is thinner and lies flat. The front glasses carry brighter glints. Tropos and the far bay are unchanged. The frame reads moodier, not wrong.",
+     "evidence": "Mean levels, today to fix: whole frame 40.1 to 34.9, record wall middle 56.1 to 49.2, bar top left 51.6 to 40.8, bar top right 28.8 to 23.8. Near speaker -2.1, ceiling +0.4, horn region identical. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/f9-wall.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/f9-throw-2x.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/f9-site.jpg."
+    },
+    {
+     "id": "ember-bowls-blotchier",
+     "frame": "bar-pendants, bar-hero",
+     "severity": "note",
+     "claim": "The Ember Hemisphere bowls carry slightly more blotchy denoiser texture than today's. Today's bowls were 17 Nov region renders at 1152 samples, while the fix frames are full renders: bar-hero at 128 samples and bar-pendants at 256. Colour is unchanged. The texture is visible only when the 1600 and 2400 site files are zoomed, never at page size.",
+     "evidence": "Texture spread inside two bar-pendants Ember bowls (1.5 px band): 1.38/1.49 today against 1.90/2.17 in the fix. Bowl colour means are within 2% (210,101,92 against 208,100,91). Flat-area noise elsewhere is identical. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/shade-sitefile.jpg (site files at 2x), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/h-shade-200.jpg."
+    },
+    {
+     "id": "bar-pendants-props",
+     "frame": "bar-pendants (Hemisphere 'At the bar', /lighting)",
+     "severity": "note",
+     "claim": "The five Hemispheres and two Cores are unchanged and whole, both in the Hemisphere gallery (578 px at 1440, 446 at 1024, 358 at 390) and on /lighting. The bowl now sits on the flat sleeve and covers most of its purple art, which loses a small colour accent. The raised lemon is now visible at the frame's left edge, the same edge that cuts the bowl. The orange twists drape over the rims, which reads as small orange curls at page size. All of these read right.",
+     "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/bp-bowl-100.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/bp-drinks-100.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-hemi-1440.jpg. Note that in tree13 the Core pages' 'At the bar' is core-bar-table.webp, not bar-pendants."
+    },
+    {
+     "id": "hero-other-changes",
+     "frame": "bar-hero",
+     "severity": "note",
+     "claim": "Apart from the ring sleeve and the right-edge box, the desktop hero changes cleanly. The second drink, moved out of the Ember Core, now stands between the Core and the fruit bowl, above the names row even at 1440x760. Round 36's pale board is gone from under the Acid Core, whose foot now stands on the dark bar and reads as resting. The lemon shows in the bowl. The horn bowls differ only by a dimmer throat glint in the left speaker. No product moved, so the crops at every size match today's.",
+     "evidence": "/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/h-front-100.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/h-acidfoot.jpg, /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/work/h-spk.jpg (horn-region means equal within 0.4 levels), /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/site-look/shots/cmp-home-1440x760-foot.jpg."
+    }
+   ],
+   "per_frame": [
+    {
+     "frame": "bar-backbar-portrait (phone hero)",
+     "verdict": "REPLACE today's. Mantle is whole on the flat top, clear of every edge at 390 and 360 (the picture is shown whole and the names row sits below it), and reads better as a turntable. The floating triangle sign is gone. Notes only: the Core's foot is now hidden behind the platter, and the glass sits half behind the plinth corner."
+    },
+    {
+     "frame": "bar-hero (desktop hero)",
+     "verdict": "NOT YET. Wait for the rz -25 re-render, and make that job carry \"plain\": [[18, 1]], because this render lost the 14 Nov patch and the 7-inch box is back as a sliver on the right edge. Everything else is ready to replace today's: no product moved, crops at 1440x900, 1440x760 and 1024x768 and the names row are unchanged, the drink is out of the Ember Core, and the horn bowls are a shade darker."
+    },
+    {
+     "frame": "fixed9 (Tropos 'At the bar')",
+     "verdict": "NOT YET. Mantle is cut off by the bottom edge and soft on every Tropos page. Re-place it whole (x about 7.9-8.0 with the drinks and throw moved, or take it out of this frame) and re-render on a spare helper alongside the hero job. It still beats today's floating sign, so ship this frame only as a stopgap if that re-render misses the push."
+    },
+    {
+     "frame": "mantle-bar (Mantle 'At the bar')",
+     "verdict": "REPLACE today's. The framing is identical, Mantle is whole (19 px from the right edge, as today), and the stand and sleeve now stand on the counter. Should-fix next round: the sleeve's red disc beside the Ember Core pulls the eye off Mantle."
+    },
+    {
+     "frame": "bar-pendants (Hemisphere 'At the bar', /lighting)",
+     "verdict": "REPLACE today's. The products are identical and whole at 1440, 1024 and 390 and on /lighting. The bowl, fruit and twists now rest right. The Ember bowls are a touch blotchier, visible only zoomed."
+    },
+    {
+     "frame": "bar-hero ring sleeve (cover-10)",
+     "verdict": "rz -25 is acceptable: it reads as a turned sleeve in shade, not as anything odd. Hidden is equally clean at site size. Ship -25 with the hero re-render unless the support lens finds it passing through the records in front of its left third; in that case keep it hidden."
+    },
+    {
+     "frame": "home hero names row",
+     "verdict": "Nothing to move. There are no dots on the live site or in tree13 (removed in C5). The four names are all in both new hero frames, and no change lands under the row at 1440x900, 1440x760, 1024x768, 390 or 360."
+    }
+   ]
+  },
+  "verdicts": {
+   "verdicts": [
+    {
+     "id": "fixed9-mantle-cut-and-soft",
+     "stands": true,
+     "severity_ok": false,
+     "reason": "The facts hold. I projected the corners myself with the engine's level camera (shift_y = tan(tilt)*lens/sensor). In the fix the plinth top's front-left corner falls at (558, 849) and its front-right corner at y ~915. The Ember deck's nearest corner is at y ~915, out of frame. Only the platter, the arm, the plinth top and a thin strip of plinth face near the left corner show. In today's frame the deck corner is at y ~881, so Mantle is whole. Crops (brightened): /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-look-and-crops/mine/f9-today-bottom-lift.jpg and .../mine/f9-fix-bottom-lift.jpg. The lit counter right of the glasses (x 600-900, y 780-900) drops from 151.7 to 73.2. Two points are overstated. (1) Today's Mantle is not sharp. The engine's focus distance is the projection onto the view axis, 2.16 m, not 2.28. At f/2.8 the blur circle at the platter centre is ~3.2 px today and ~5.0 px in the fix, so both are soft, and the label is blank in both. (2) The severity should be should-fix, not blocking. The same crop appears in both preview rounds and in the lane's own final/fixed9-crops.jpg, and the coordinator accepted the spot for fixed9 (25 % larger, the least move). A cut, out-of-focus foreground object breaks no house rule and reads as a real photograph. Today's fixed9 breaks the support rule twice: the floating triangle sign, and Mantle hanging over the aisle. The reviewer's own verdict agrees that the fix beats today's. So it should replace today's now, and Mantle can be re-placed in a later round."
+    },
+    {
+     "id": "hero-right-edge-7inch-box-back",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed three ways. (1) Logs: bar-hero.log line 11 reads 'RECORD WALL other cell (18, 1) 8' and has no plain line. The fixed9, mantle-bar, bar-pendants and portrait band logs all print 'RECORD WALL plain records in cell (18, 1)'. (2) Shot files: neither today's planet-bar bar-hero.shot.json (a50e8da167) nor the fix's has a plain list. bar_fix.py builds the hero from that same file (its SRC table), so a -25 job built the same way will bring the box back again. (3) Pixels: the fix's right 40-px strip reads mean 46.6 / p99 207.6 / max 213.2. That is exactly MEASURED.md's pre-patch reading (46.7 / 207.6 / 213.2). Today's reads the patched 46.5 / 193.9 / 208.0. The pale block sits at x 3186-3199, y 970-1119 (luminance above 150), about 6 x 67 CSS px at 1440: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-look-and-crops/mine/h-redge-tf-300.jpg. Blocking for the -25 job is the right level. It quietly undoes a coordinator decision (14 Nov 23:14) on the site's main picture, and fixing it costs nothing: add plain [[18,1]] to the job, then accept when the strip reads 46.5 / 193.9 / 208.0 again."
+    },
+    {
+     "id": "mantle-bar-red-disc-beside-core",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed at 1:1 and at gallery size: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-look-and-crops/mine/mb-fix-stand-100.jpg and .../mine/mb-full-tb.jpg. The lit sleeve's flat disc (hue 6 deg, S 0.86) sits at the Core's shoulder (hue 5 deg, S 0.75). At 773 px the two read as a pair of red circles. Today's sleeve sat dim behind the tonearm. One point is overstated: the disc is ~235 px across against the Core's ~450 px, about a quarter of its area, so not 'close in size'. The support reads right (the walnut lip under the plinth corner: .../mine/mb-fix-lip-2x.jpg). Should-fix for the next round is the right level. No house rule is broken, and the frame still beats today's (stand over the aisle, Core 2.6 cm past the edge). Of the reviewer's options, 'behind the tonearm side' has little room: Mantle's back-right corner is only 6.8 cm from the edge of the flat top."
+    },
+    {
+     "id": "fixed9-darker-other-changes",
+     "stands": false,
+     "severity_ok": false,
+     "reason": "The level means are right: frame 40.1 to 34.9, and the bar halves 51.6 to 40.8 and 28.8 to 23.8. The explanation and the 'ceiling +0.4' reading are wrong. This is a light patch that moved, not a general dimming. The record wall's upper left loses 28 % (sRGB 76.1 to 54.5), while the ceiling above the wall top doubles (x 400-700, y 0-130: 12.0 to 26.1). The coordinator's 22 Nov streak box now reads worse (see missed). The far bay is not unchanged either: +2.2 L* at x 440-560, y 230-330. This needs more than 'moodier, not wrong'."
+    },
+    {
+     "id": "portrait-core-foot-hidden",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-look-and-crops/mine/p-core-tb.jpg: the lower right of the ball is behind the platter's back-left rim. At 1:1 a red-lit sliver of the base still shows left of the platter, but it is lost at 390. A note is the right level. My own projection agrees Mantle is whole (plinth from x ~208 to ~1500, y ~2290-2650 of 3000)."
+    },
+    {
+     "id": "ember-bowls-blotchier",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Visible at 1:1 in bar-pendants (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-look-and-crops/mine/bp-bowl1-tb.jpg). The new isolated bright pixels are concentrated in the bowls and the glasses. Not visible at site size."
+    },
+    {
+     "id": "hero-other-changes",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Checked. The board is gone, and the Acid Core and its glass rest on the dark bar with reflections (/tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-look-and-crops/mine/h-acidfoot-lift.jpg). The moved drink stands in front of the bowl. The shot diff changes only the drink group, the fruit, the sleeves, cover-10, the r36 leftovers and the Tropos build. The headline zone is unchanged (mean 4.8 against 4.9, p99 26.3 against 26.5); the only brighter spot there is 2 px."
+    },
+    {
+     "id": "bar-pendants-props",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed from the shot diff and the pixels. The bowl moved 16 cm forward onto the flat sleeve, in this frame only ((6.40, 4.38) to (6.41, 4.2175), raised 3.5 mm), and the fruit moved with it. The cloth was squared to the bar. The purple art is mostly covered. It reads right at gallery size."
+    }
+   ],
+   "missed": [
+    "fixed9 (Tropos 'At the bar', all eight Tropos pages): the darkening is a moved light patch, not a uniform drop. The record wall's upper left loses 28 % (sRGB 76.1 to 54.5 at x 560-800, y 150-450; L* 35.7 to 17.7 at x 620-780, y 230-330). A new soft, warm wash appears on the ceiling above the wall top (x 400-700, y 0-130: 12.0 to 26.1). The coordinator's 22 Nov streak box (411,71)-(451,85) now reads L* max 16.3 / p99 16.1. Today's frame reads 7.3 / 6.9, which matches the 7.2 / 6.8 accepted on 22 Nov, so my method agrees with theirs. Likely cause: mantle-front was re-aimed 34 cm toward the camera but not moved, so its mirror bounce off the zinc counter and Mantle's top shifted. Today it lands at about (605, 231), on the wall where the triangle sleeve hung, which is why that sleeve read bright. In the fix it lands at about (527, 175) and above, on the wall top and ceiling. The lane's 13:30 explanation (the sleeve is no longer bright, the scene round Mantle) misses this. It reads as a natural wash, not dots, so it does not block replacing today's. But it is a regression of a reading the coordinator tracks, and it dims Tropos's backdrop. In any fixed9 re-render (e.g. the reviewer's Mantle at x 7.9-8.0), move the Mantle lights with Mantle so the light keeps the same angle, and re-read the streak box and the wall. Crops: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-look-and-crops/mine/f9-top-tb-box.jpg (today over fix, streak box in green), .../mine/f9-ceiling-lift-2x.jpg, .../mine/f9-ratio.jpg (red = brighter in fix, blue = darker).",
+    "Phone hero (bar-backbar-portrait): the Ember Core's ball is deeper and darker in the fix. In the box x 520-640, y 1900-2000, RGB goes from 218.6/71.1/58.1 to 194.7/43.4/22.0 (saturation 0.73 to 0.89, value 0.86 to 0.76). The likely reason is that Mantle's platter now blocks the counter's light pool in front of the Core. This is deeper color, not a defect, but it changes how a product looks in the most-seen picture, and the lane's account does not mention it. Crop: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/b125/skeptic-look-and-crops/mine/p-corebal-tb.jpg."
+   ]
+  }
+ }
+]
