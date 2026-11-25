@@ -378,7 +378,9 @@ def snowfield(bpy, name, p, kit):
         # 2026-11-25 (the coordinator's support sweep, settle at the foot centres): the field under Ice's footprint
         # differed by 37 mm between the feet, the speaker resting on its front-right foot with the others 16-22 mm up.
         # `pad` [cx, cy, half_w, half_d, turn_deg, blend, level]: the snow levelled at `level` over the footprint and a
-        # margin, back to the field over `blend` m outside it, so all four feet bed in it as the habitat's sink intends
+        # margin, back to the field over `blend` m outside it, so all four feet bed in it as the habitat's sink intends;
+        # applied after the drift: the 37 mm was the drift itself reaching under the front-right foot (its outline is
+        # turned the other way from the speaker), so the pad covers the feet only and the drift outside the base stays
         pcx, pcy, phw, phd, pturn, pbl, plev = pad
         ca, sa = math.cos(math.radians(pturn)), math.sin(math.radians(pturn))
         ox, oy = ob.location.x, ob.location.y
