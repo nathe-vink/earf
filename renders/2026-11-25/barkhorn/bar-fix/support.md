@@ -239,8 +239,8 @@ From `render.py --support` (studio/engine/support.py): ray casts straight down f
   read at its corners. Supported, not lifted.
 - Pulled-out sleeves, contact 50 %: their bottom edge on the shelf top, the front 5 cm past the lip, the back leaning
   on the records (the 4-degree lean lifts the front edge by the board's thickness).
-- The desktop hero's cover-10, now turned to rz +64 (facing its camera): on its shelf, x 9.281-9.419 inside its cell
-  (9.185-9.495 with the 25 mm side clearance).
+- The desktop hero's cover-10, turned to rz -25 (its face to the hero camera at x 6.9): on its shelf, x 9.35 with
+  its 0.143 m half-width in x inside its cell (9.185-9.495 with the 25 mm side clearance).
 - The two Tropos: on their bays' oak floors; contact 72-89 % (the feet's rounded pads).
 
 Every "after" row is from the job shot files in shots/ (render.py --support on each, 25 Nov).
