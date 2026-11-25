@@ -8,10 +8,12 @@ found the rest). One pass over each live frame's own rendered shot file, so the 
      y 3.993-4.510, 5 cm inside the flat top's back edge (about 4.562). Its lights follow; in mantle-bar so do the
      camera, its Hemisphere and the Ember Core beside it.
   2. The three sleeves 'pulled half out' of the record wall stood 14 cm in front of the shelves, on nothing: each now
-     stands on its shelf (bottom edge on the shelf top, its front corner at the shelf's lip, the rest among the
-     records it was pulled from), within its cell, turned to the room as before.
-  3. mantle-bar's now-playing sleeve and walnut stand stood over the aisle: on the counter at Mantle's right.
-  4. The desktop hero's second drink stood inside the Ember Core: moved clear, its ice and twist with it.
+     stands on its shelf top, its front corner 5 cm past the lip (81 % of the bottom edge on the shelf), the rest among
+     the records it was pulled from, within its cell, turned to the room as before.
+  3. mantle-bar's now-playing sleeve and walnut stand stood over the aisle: on the counter behind Mantle's back-left;
+     the room's round-36 glasses, which the camera now sees, out.
+  4. The desktop hero's second drink stood inside the Ember Core: moved clear, its ice and twist with it. In the phone
+     hero and fixed9 the shallow drink moves left, off Mantle's front-left corner in the frame.
   5. bar-pendants: the cloth moved off the newspaper; the wooden bowl stands on the flat sleeve, not sunk in it.
   6. Every drink: the orange twist rests on the rim (over it, one end inside, one outside), and the ice floats in
      the drink (about 85 % under), or in a glass too shallow to float it, rests on the glass's floor.
@@ -38,8 +40,11 @@ MANTLE_MID = (0.235, 0.190)      # the plinth's middle from the asset's origin (
 WALL = dict(x0=3.40, cell=0.36, y=5.72, back=6.08, z0=1.20)   # the record wall (record_wall.build in these shots)
 DIVIDER = 0.025                  # keep a pulled-out sleeve this far inside its cell's sides
 CORE_SKIRT = 0.075
-STAND_AT = (9.05, 4.40)          # mantle-bar: the walnut stand's new place, at Mantle's right on the counter
-HERO_GLASS = {(6.31, 4.18): (6.44, 4.15)}   # the desktop hero's second drink, out of the Ember Core
+STAND_AT = (8.40, 4.43)          # mantle-bar: the walnut stand's new place, behind Mantle's back-left on the counter
+GLASS_MOVE = {'bar-hero': {(6.31, 4.18): (6.44, 4.15)},              # the second drink, out of the Ember Core
+              'bar-backbar-portrait': {(8.31, 4.13): (8.213, 4.059)},  # off Mantle's front-left corner in the frame
+              'fixed9': {(8.31, 4.13): (8.213, 4.059)}}
+PULL = 0.05                      # a pulled-out sleeve's front corner, this far past the shelf's lip
 PENDANT_CLOTH = (6.40, 4.45)
 ICE = 0.024                      # an ice cube's height (kit box size z)
 
@@ -97,7 +102,7 @@ def pulled_sleeves(s, log):
             cx0, cx1 = WALL['x0'] + i * WALL['cell'] + DIVIDER, WALL['x0'] + (i + 1) * WALL['cell'] - DIVIDER
             x = min(max(bd['x'], cx0 + hx), cx1 - hx)
             old = (bd['x'], bd['y'], bd['z'])
-            bd['x'], bd['y'], bd['z'] = round(x, 4), round(WALL['y'] + hy + 0.006, 4), round(ztop + 0.0005, 4)
+            bd['x'], bd['y'], bd['z'] = round(x, 4), round(WALL['y'] + hy - PULL, 4), round(ztop + 0.0005, 4)
             log.append(f'sleeve {bd["image"]} {tuple(round(v, 3) for v in old)} -> ({bd["x"]}, {bd["y"]}, {bd["z"]}) on shelf {k} (top {ztop:.3f})')
 
 
@@ -123,6 +128,10 @@ def mantle_bar_stand(s, log):
                     if bd['image'] == 'tex/cover-00.png' and math.hypot(bd['x'] - ox, bd['y'] - oy) < 0.05:
                         bd['x'] = round(STAND_AT[0] + (bd['x'] - ox), 4); bd['y'] = round(STAND_AT[1] + (bd['y'] - oy), 4)
             log.append(f'now-playing stand and sleeve ({ox:.3f}, {oy:.3f}) -> {STAND_AT}')
+    for p in props:
+        if (p or {}).get('fn') == 'remove':
+            p['names'] += [n for n in ('glasses-r36', 'pours-r36') if n not in p['names']]
+            log.append("the room's round-36 glasses removed (the camera, moved with Mantle, now sees them)")
 
 
 def _drink_groups(s):
@@ -155,7 +164,7 @@ def drinks(s, name, log):
     gs = _drink_groups(s)
     for g in gs:
         cx, cy = g['c']
-        mv = HERO_GLASS.get((round(cx, 2), round(cy, 2))) if name == 'bar-hero' else None
+        mv = GLASS_MOVE.get(name, {}).get((round(cx, 2), round(cy, 2)))
         if mv:
             dx, dy = mv[0] - cx, mv[1] - cy
             for q in [g['glass'], g.get('contents')] + list(g['ice']) + [g.get('twist')]:
@@ -164,7 +173,7 @@ def drinks(s, name, log):
             if g.get('twist'):
                 g['twist']['points'] = [[round(v[0] + dx, 4), round(v[1] + dy, 4), v[2]] for v in g['twist']['points']]
             cx, cy = mv; g['c'] = mv
-            log.append(f'drink ({g["c"][0] - dx:.2f}, {g["c"][1] - dy:.2f}) -> {mv}, out of the Ember Core')
+            log.append(f'drink ({g["c"][0] - dx:.2f}, {g["c"][1] - dy:.2f}) -> {mv}')
         depth = g['liquid'] - g['floor']
         for j, q in enumerate(g['ice']):
             if depth > ICE * 0.95:           # it floats: about 85 % under
