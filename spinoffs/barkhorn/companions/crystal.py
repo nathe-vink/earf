@@ -222,6 +222,11 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
 # B, its cables at 0/180 and the cap's key and magnet at 90/270; nothing else is redrawn. The env HEMI_LOCK_ON overrides.
 import os as _os
 LOCK_ON = _os.environ.get('HEMI_LOCK_ON', '1') == '1'
+# V10-1 (the v9 check, 2026-11-25): the canopy's wiring as it can be built. The cord can't turn under the driver in v9's
+# 11.8, so two options for the owner, drawn here behind HEMI_WIRING (unset: v9 as it was): O1 the cord's exit 20 off the
+# canopy's centre, beside the driver (150 x 50 kept); O2 the cord centred, the canopy 62 tall (+12)
+WIRING = _os.environ.get('HEMI_WIRING', '')
+WIRE_OPT = dict(O1=dict(cnh=50.0, eh=36.0, cord=(20.0, 0.0)), O2=dict(cnh=62.0, eh=48.0, cord=(0.0, 0.0))).get(WIRING)
 TOP_TIERS = {
     'today': dict(top=None, crown=[(80.0, 100.5, 112.0)], gland=(40.0, 112.0, 126.0)),   # today's top, with check 3's fixings
     'A': dict(top=103.33, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0),
@@ -706,6 +711,12 @@ def north_parts(p=N):
     cord_ = None
     zc = z_cord + p['drop']
     cnd, cnh = p['canopy']
+    if tt_ and WIRE_OPT:
+        cnh = WIRE_OPT['cnh']
+    cwx_, cwy_ = (WIRE_OPT['cord'] if (tt_ and WIRE_OPT) else (0.0, 0.0))     # V10-1: the cord's exit, before turning by a0
+    if tt_:
+        _a0w = math.radians(tt_.get('cables', GRIP['cables'])[0])
+        cwX_, cwY_ = cwx_ * math.cos(_a0w) - cwy_ * math.sin(_a0w), cwx_ * math.sin(_a0w) + cwy_ * math.cos(_a0w)
     if tt_:
         # v6 (the v5 check's (3)): the cord 2 mm longer than the straight run, bowed to one side (+y) in a circular arc of
         # sagitta about 21 mm, from the cap's grip to the canopy's floor
@@ -714,7 +725,8 @@ def north_parts(p=N):
         cps_ = []
         for k_ in range(n_ + 1):
             th_ = -th0_ + 2 * th0_ * k_ / n_
-            cps_.append(V3(0.0, Rb_ * math.cos(th_) - (Rb_ - s_), z_cord + L_ / 2 + Rb_ * math.sin(th_)))
+            t_ = k_ / n_                       # V10-1 O1: the top end moved off the axis, linearly along the run
+            cps_.append(V3(t_ * cwX_, Rb_ * math.cos(th_) - (Rb_ - s_) + t_ * cwY_, z_cord + L_ / 2 + Rb_ * math.sin(th_)))
         cord_len_ = sum((cps_[k_ + 1] - cps_[k_]).length for k_ in range(n_))
         for k_ in range(n_):
             seg_ = _rod(cps_[k_], cps_[k_ + 1], 3.0) + (Pos(cps_[k_ + 1]) * Solid.make_sphere(3.0))
@@ -781,7 +793,8 @@ def north_parts(p=N):
     # The plate carries the load: the grippers' brackets riveted under it, and the driver's steel enclosure on four 6
     # standoffs below it (fitted after the plate is screwed up: the box screws' heads in the gap)
     canopy = cyl('z', (0, 0), cnd, zc, zc + cnh) - cyl('z', (0, 0), cnd - 6, zc + 3.0, zc + cnh + 1)
-    canopy = canopy - cyl('z', (0, 0), 12.5, zc - 1, zc + 4)
+    if not WIRE_OPT:
+        canopy = canopy - cyl('z', (0, 0), 12.5, zc - 1, zc + 4)
     a0_ = cang_[0] if tt_ else 0.0                # the canopy's parts turned with the cables' line
     if tt_:
         for a_ in cang_:
@@ -846,7 +859,96 @@ def north_parts(p=N):
     # THE CANOPY'S BUSHING: no grip at the canopy (the cord's strain relief is the enclosure's); a flush turned grommet,
     # 6061 satin black anodised, Ø12 through the floor with a Ø16 x 1 flange inside, its bore Ø6.6, its face flush below
     cgrip_ = (cyl('z', (0, 0), 12.0, zc, zc + 3.0) + cyl('z', (0, 0), 16.0, zc + 3.0, zc + 4.0)) - cyl('z', (0, 0), 6.6, zc - 1, zc + 5)
-    canopy = canopy - cyl('z', (0, 0), 12.0, zc - 1, zc + 4)
+    if not WIRE_OPT:
+        canopy = canopy - cyl('z', (0, 0), 12.0, zc - 1, zc + 4)
+    xtra_ = []
+    if tt_ and WIRE_OPT:
+        # V10-1, both options (drawn on the x axis, the cables' line, then turned by a0_ with the rest). The driver (ERP
+        # ESS010W, body 40 x 74 x 25, its two mounting tabs 20 x 6 x 1 at its ends on its mounting face, holes at 80 c-c:
+        # a PLACEHOLDER until ERP's outline, datasheet p.11, is read) is screwed flat by its tabs under the enclosure's top,
+        # against its -x wall: two M3 x 6 pan screws up through the tabs and the top into two PEM SO-M3-4 standoffs in the
+        # plate, so they hold the driver and hang the enclosure; two more M4 x 6 serrated screws from inside the top into
+        # PEM SO-M4-4 standoffs in the 22 wide strip beside the driver. Mains: the driver's input leads (300) out of its
+        # input end (+y) and up through a 3/8 in snap bushing in the top at (20, 26) and the plate's Ø16 opening above it
+        # into the outlet box, where they are spliced to the supply (150 of lead in the box, UL 1598 6.15.1.6); no 120 V
+        # splice in the enclosure. Class 2: the cord up through the cover's strain relief (straight through, for round cord
+        # Ø6, Ø12.7 hole, 11.5 overall of which 8.5 inside: as the reviewer read Heyco's table, to confirm), its jacket 6
+        # past it, its two conductors to a lever splice (WAGO 221-412, 18.3 x 13.1 x 8.2) under the driver, the driver's
+        # output leads (-y end) to the same splice. The cover's screws and the strain relief's head need 4.4 under the cover.
+        o_ = WIRE_OPT; eh_ = o_['eh']; cx_, cy_ = o_['cord']
+        ez1_ = ztop - 1.6 - 4.0; ez0_ = ez1_ - eh_
+        rr0_ = cnd / 2 - 3.0 - 0.2
+        strap = (cyl('z', (0, 0), 2 * rr0_, ztop - 1.6, ztop) + (cyl('z', (0, 0), 2 * rr0_, ztop - 12.0, ztop) - cyl('z', (0, 0), 2 * rr0_ - 3.2, ztop - 13, ztop + 1)))
+        for y_ in (-44.45, 44.45):
+            strap = strap - cyl('z', (0, y_), 4.3, ztop - 2, ztop + 1)
+        strap = strap + (cyl('z', (0, 56.0), 8.0, ztop - 1.6 - 2.4, ztop - 1.6) - cyl('z', (0, 56.0), 4.8, ztop - 5, ztop + 1))
+        strap = strap - cyl('z', (0, 56.0), 4.8, ztop - 5, ztop + 1)
+        sup_ = (20.0, 26.0)
+        strap = strap - cyl('z', sup_, 16.0, ztop - 2, ztop + 1)
+        encl = box(-32, -50, ez0_, 32, 50, ez1_) - box(-31, -49, ez0_ - 1, 31, 49, ez1_ - 1)
+        tabs_ = box(-4, 41.0, ez0_, 4, 49.0, ez0_ + 1.0) + box(-4, -49.0, ez0_, 4, -41.0, ez0_ + 1.0)
+        encl = encl + tabs_
+        cover = box(-32, -50, ez0_ - 1.0, 32, 50, ez0_)
+        csc_ = None
+        for y_ in (-45.0, 45.0):                    # M3 x 4 low-head (ISO 7380 button, 1.65 tall) into the tabs, tapped
+            c_ = cyl('z', (0, y_), 3.0, ez0_ - 1.0, ez0_ + 1.0) + cyl('z', (0, y_), 5.7, ez0_ - 1.0 - 1.65, ez0_ - 1.0)
+            cover = cover - cyl('z', (0, y_), 3.0, ez0_ - 2, ez0_ + 0.1)
+            encl = encl - cyl('z', (0, y_), 3.0, ez0_ - 0.1, ez0_ + 2)
+            csc_ = c_ if csc_ is None else csc_ + c_
+        sto_ = None; esc_ = None
+        for (sx_, sy_), m_ in (((20.0, 6.0), 4), ((20.0, -30.0), 4), ((-11.0, 40.0), 3), ((-11.0, -40.0), 3)):
+            hd_, hx_ = (7.14, 7.9) if m_ == 4 else (5.4, 6.4)
+            so_ = (cyl('z', (sx_, sy_), hd_, ztop - 1.6, ztop) + cyl('z', (sx_, sy_), hx_, ez1_, ztop - 1.6)) - cyl('z', (sx_, sy_), m_, ez1_ - 1, ztop + 1)
+            encl = encl - cyl('z', (sx_, sy_), m_, ez1_ - 2, ez1_ + 0.1)
+            strap = strap - cyl('z', (sx_, sy_), hd_, ztop - 2, ztop + 1)
+            if m_ == 4:
+                sc_w = cyl('z', (sx_, sy_), 4.0, ez1_ - 1.0, ez1_ + 3.5) + cyl('z', (sx_, sy_), 7.0, ez1_ - 1.0 - 2.4, ez1_ - 1.0)
+            else:                                   # through the driver's tab (1) and the top (1): M3 x 6
+                sc_w = cyl('z', (sx_, sy_), 3.0, ez1_ - 2.0, ez1_ + 3.5) + cyl('z', (sx_, sy_), 5.5, ez1_ - 2.0 - 1.8, ez1_ - 2.0)
+            sto_ = so_ if sto_ is None else sto_ + so_
+            esc_ = sc_w if esc_ is None else esc_ + sc_w
+        dz1_ = ez1_ - 1.0; dz0_ = dz1_ - 25.0; dzm_ = (dz0_ + dz1_) / 2
+        driver = box(-31, -37, dz0_, 9, 37, dz1_)
+        for sy_ in (-1.0, 1.0):
+            t0_, t1_ = sorted((sy_ * 37.0, sy_ * 43.0))
+            driver = driver + (box(-21, t0_, dz1_ - 1.0, -1, t1_, dz1_) - cyl('z', (-11.0, sy_ * 40.0), 3.4, dz1_ - 2, dz1_ + 1))
+        def _lead(pts, r=1.2):
+            sh = None
+            for k in range(len(pts) - 1):
+                a_w, b_w = V3(*pts[k]), V3(*pts[k + 1]); u_w = (b_w - a_w).normalized()   # rods lapped at the bends (spheres failed in OCC)
+                sg = _rod(a_w - u_w * (0.9 * r if k else 0.0), b_w + u_w * (0.9 * r if k < len(pts) - 2 else 0.0), r)
+                sh = sg if sh is None else sh + sg
+            return sh
+        # the input leads (+y end, mains) up into the snap bushing; the output leads (-y end, Class 2) down to the splice
+        sx0_, sy0_ = sup_
+        for k_, xl_ in enumerate((-15.0, -7.0)):
+            driver = driver + _lead([(xl_, 35.0, dzm_), (xl_, 45.5, dzm_), (sx0_ - 2.0 + 4.0 * k_, 45.5, dz1_ - 4.0),
+                                     (sx0_ - 2.0 + 4.0 * k_, sy0_, dz1_ - 4.0), (sx0_ - 2.0 + 4.0 * k_, sy0_, ztop + 6.0)])
+        spl_ = (-17.5, -34.3, -4.4, -16.0)          # the splice lying flat on the cover under the driver
+        splice = box(spl_[0], spl_[1], ez0_ + 0.3, spl_[2], spl_[3], ez0_ + 8.5)
+        wires = None
+        for k_, xl_ in enumerate((-15.0, -7.0)):
+            w_ = _lead([(xl_, -37.0, dzm_), (xl_, -45.5, dzm_), (xl_, -45.5, ez0_ + 4.4), (xl_, -35.6, ez0_ + 4.4)])
+            wires = w_ if wires is None else wires + w_
+        jz_ = ez0_ + 8.5 + 6.0                       # the jacket's end inside
+        for k_, xl_ in enumerate((-14.0, -8.0)):
+            dxk_ = -1.5 + 3.0 * k_
+            w_ = _lead([(cx_ + dxk_, cy_, jz_), (cx_ + dxk_, cy_, jz_ + 1.5), (cx_ + dxk_, cy_ - 9.5, jz_ + 1.5),
+                        (cx_ + dxk_, cy_ - 9.5, ez0_ + 4.4), (xl_, -14.7, ez0_ + 4.4)])
+            wires = wires + w_
+        # the snap bushing (3/8 in, Ø9.5 hole, Ø12.7 flanges, 1.5 each side) in the top; the strain relief in the cover
+        bush_ = (cyl('z', sup_, 12.7, ez1_ - 1.0 - 1.5, ez1_ - 1.0) + cyl('z', sup_, 9.5, ez1_ - 1.0, ez1_)
+                 + cyl('z', sup_, 12.7, ez1_, ez1_ + 1.5)) - cyl('z', sup_, 7.0, ez1_ - 5, ez1_ + 5)
+        encl = encl - cyl('z', sup_, 9.5, ez1_ - 2, ez1_ + 0.1)
+        sr_ = (cyl('z', (cx_, cy_), 16.0, ez0_ - 1.0 - 3.0, ez0_ - 1.0) + cyl('z', (cx_, cy_), 12.7, ez0_ - 1.0, ez0_)
+               + cyl('z', (cx_, cy_), 14.0, ez0_, ez0_ + 8.5)) - cyl('z', (cx_, cy_), 6.0, ez0_ - 6, ez0_ + 10)
+        cover = cover - cyl('z', (cx_, cy_), 12.7, ez0_ - 2, ez0_ + 0.1)
+        bush_ = bush_ + sr_
+        # the canopy's floor: the flush grommet at the cord's exit
+        cgrip_ = (cyl('z', (cx_, cy_), 12.0, zc, zc + 3.0) + cyl('z', (cx_, cy_), 16.0, zc + 3.0, zc + 4.0)) - cyl('z', (cx_, cy_), 6.6, zc - 1, zc + 5)
+        canopy = canopy - at(a0_, cyl('z', (cx_, cy_), 12.0, zc - 1, zc + 4))
+        cgrip_ = at(a0_, cgrip_) if a0_ else cgrip_
+        xtra_ = [('splice', splice), ('wires', wires)]      # the wires go to the driver (its output leads) and the cord (its conductors) below
     rot_ = (lambda sh: at(a0_, sh)) if a0_ else (lambda sh: sh)
     strap, bscr_, gsc_, encl, cover, csc_, sto_, esc_, driver, bush_ = (rot_(x) for x in (strap, bscr_, gsc_, encl, cover, csc_, sto_, esc_, driver, bush_))
     setsc_ = rot_(setsc_)
@@ -855,7 +957,13 @@ def north_parts(p=N):
         strap = strap - rivets
     cnuts_ = None
     if tt_:
-        cord = cord + cyl('z', (0, 0), 6.0, zc, ez0_ + 1.0)           # v9: the cord up through the canopy's bushing to the enclosure's strain relief
+        if WIRE_OPT:                                                   # V10-1: up through the strain relief, its jacket 6 past it
+            cord = cord + cyl('z', (cwX_, cwY_), 6.0, zc, ez0_ + 8.5 + 6.0)
+            xd_ = dict((n_, rot_(sh_)) for n_, sh_ in xtra_)
+            cord = cord + xd_['wires']
+            xtra_ = [('splice', xd_['splice'])]
+        else:
+            cord = cord + cyl('z', (0, 0), 6.0, zc, ez0_ + 1.0)           # v9: the cord up through the canopy's bushing to the enclosure's strain relief
     parts_ = cover_parts(p) + [
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=[('aluminium 6061, black anodised: the core, turned from bar, solid; the stem bonded and pinned in a Ø16.1 socket '
@@ -976,6 +1084,7 @@ def north_parts(p=N):
                     'z 93, screwed into the ring before the ring slides down over the hub (a groove in the hub takes its end); its '
                     'ball clicks into a dimple in the collar\'s bore when the shade is seated']) if plunger_ is not None else
         (Part('plunger', None, Bought('dome-plunger')) if not nlock_ else None),
+    ] + [Part(n_, sh_, Bought('hemi-' + n_), finish='steel', group='canopy', inside=True, render=False) for n_, sh_ in xtra_] + [
         Part('listing', None, Bought('moon-listing')),
     ]
     if tt_:
