@@ -1,0 +1,317 @@
+[
+ {
+  "lens": "squares-and-hero",
+  "crit": {
+   "findings": [
+    {
+     "id": "HC-1",
+     "severity": "should-fix",
+     "where": "NEW http://127.0.0.1:4187/ and OLD http://127.0.0.1:4186/ alike (pre-existing, outside C6i): the home hero's headline on upright windows under the WCAG 1.4.12 text-spacing override. Every exact square 320-559, plus 390x844, 375x667, 430x932 and 320x568 (iPhone 13 emulation) and 768x1024 (plain). Not at 820x1180, 1024x768, 1366x768, 1440x900 or 844x390, where it wraps to two lines.",
+     "claim": "This is pre-existing, identical on OLD, and not a reason to hold C6i. Under the standard text-spacing override the headline 'A world of sound, in color.' runs past the window's right edge, and the hero's overflow: hidden cuts it off. The headline is `h1.tagline { white-space: nowrap }` (index.html line 104), sized to just fit on one line. It reads '... in c' at 412x412, and 'color.' is lost at 390x844. That is a 1.4.12 failure (content lost) on the most common phones, wider in reach than the names issue C6i-2 fixed. Earlier gates (C6e to C6h) did not report it. Under the same override, both builds also scroll sideways at squares 320-336, 381-388 and at 320x568, and put the buttons below the first screen at squares 329-343 and 505-600.",
+     "evidence": "Fresh loads with the override (out/fresh-ts-phones-{new,old}.jsonl). End of the headline's text against the window width, one line each, identical on OLD:\n- 390x844: 467.5 of 390\n- 375x667: 448.5 of 375\n- 430x932: 518 of 430\n- 320x568: 379.2 of 320\n- 768x1024: 773.7 of 768\n\nIn-place sweep (out/ts-after-{new,old}.jsonl): the headline is past the right edge at every square 320-559 on both builds (at 320, 379.2 of 320).\n\nout/fresh-ts-desk-*: 1440x900, 1366x768, 1024x768 and 844x390 wrap to two lines; 820x1180 fits (796 of 820).\n\nScreenshot: shots/sq412-new-old-default-and-textspacing.jpg, panels 3 and 4.",
+     "steps": "1. iPhone 13 emulation, viewport 390x844, deviceScaleFactor 1, init script sessionStorage 'earf-opened'='1'.\n2. Open http://127.0.0.1:4187/ (then :4186). Wait for document.fonts.ready and the hero image.\n3. page.addStyleTag({ content: '* { line-height: 1.5 !important; letter-spacing: 0.12em !important; word-spacing: 0.16em !important } p { margin-bottom: 2em !important }' }), then wait 400 ms.\n4. The h1's text range ends at x 467.5 in a 390 px window and 'color.' is not shown. There is no sideways scroll: the text is clipped."
+    },
+    {
+     "id": "HC-2",
+     "severity": "note",
+     "where": "NEW http://127.0.0.1:4187/, exact squares 412-441. iPhone 13 emulation with the square as the viewport, DSF 1, 'earf-opened' set. Example: 417x417.",
+     "claim": "C6i-1 passes SC 2.5.8 by box geometry, which is the gate's test, the lane's and axe's. It does not pass by the region that really takes a tap.\n\nWith padding-block 0, the first text line of a two-line name pokes about 1 px above its own box. That strip wins hit-testing over the bottom of the 24 px name above it. The two-line names are 'Hemisphere in Ember' at 412-441 and 'Mantle in Ember' at 412-428.\n\nWhat really takes a tap:\n- 'Tropos in Acid': 22-23 px at 414-441 (19 px at 412-413).\n- 'Core in Ember': 23 px at 414-428.\n\nUnder WCAG's own rule (overlapping areas are left out), those two names still fail 2.5.8, Tropos at 412-441 and Core at 412-428. At 412-413 the spacing exception, which had zero margin by boxes, fails too: the 3.5 px gap shrinks to about 1 px between the real regions.\n\nThis is not worse than OLD. OLD's real regions are 19-23.75 px and fail for Tropos and Core at 412-441 and for Mantle at 429-434. The only exception is Tropos at 439-441, smaller by at most 0.75 px. It concerns exact squares only, and a tap landing in the bottom 1.5-2 px of a 24 px name. So the lane's 'fails at no whole name' holds by boxes only.",
+     "evidence": "Real touchscreen taps (taps.js). A capture listener on window records the link and stops navigation. Each visible name box was tapped 2 px inside its top, at its centre and 2 px inside its bottom, at 412-441 and 463-504.\n- NEW: 19 of 864 taps reach the wrong name. OLD: 0 of 864.\n- 'Tropos in Acid' bottom goes to Hemisphere at 417-422, 429-434 and 441.\n- 'Core in Ember' bottom goes to Mantle at 417-422.\n\nAt 417 (tapdbg.js):\n- NEW: Tropos box y 135.53-159.53, Hemisphere 159.53-193.53. elementFromPoint at y 158.03 (1.5 px inside Tropos) returns Hemisphere, and so does a touch at 157.53. A mouse click at 157.53 still reaches Tropos.\n- OLD: Tropos 138.28-158.09. Hemisphere takes over only 0.5 px inside Tropos, because OLD's Hemisphere has 1.4 px of padding.\n\nHit scan (hitscan.js: elementFromPoint every 0.25 px down five lines per name; out/hitscan-{new,old}.jsonl):\n- NEW's two-line names reach 1.75-1.95 px above their boxes at 414-441; OLD's names 0.8-1.0 px.\n- Strict 2.5.8 on the real regions: NEW fails Tropos at 412-441 and Core at 412-428. OLD fails Tropos and Core at 412-441 and Mantle at 429-434.\n\nA remedy tested in my browser only: '@media (aspect-ratio: 1/1) and (min-width: 412px) and (max-width: 441px) { .hero-names a { clip-path: inset(0 -8px -8px) } }'.\n- At 414-441 it makes each region equal its box, and 360 of 360 taps reach the right name.\n- It changes no pixel without focus.\n- With a name focused, it shifts about one pixel row (91-116 px) of the ring's top edge at 13 of 35 squares (pixdiff.js).\n- 412-413 still fails strictly.\nSo it is not a drop-in fix.",
+     "steps": "1. Context {...devices['iPhone 13'], viewport {width: 417, height: 417}, deviceScaleFactor: 1}. Init scripts: sessionStorage.setItem('earf-opened','1') and a window capture-phase click listener that records e.target.closest('a').getAttribute('href') and calls preventDefault() and stopImmediatePropagation().\n2. Open http://127.0.0.1:4187/, wait for fonts and the hero image, then 500 ms.\n3. 'Tropos in Acid' box: y 135.53-159.53, x 162.6-254.4.\n4. page.touchscreen.tap(208.5, 157.53) (2 px inside its bottom): the click goes to #hemisphere-ember.\n5. On :4186 at 417, the same tap 2 px inside Tropos's bottom (y 156.09) reaches #speaker-acid.\n6. In the lens folder, run 'node hitscan.js new 405-505' and 'node taps.js new 412-441,463-504'."
+    },
+    {
+     "id": "HC-3",
+     "severity": "note",
+     "where": "NEW http://127.0.0.1:4187/ in browsers without align-content on block containers (Safari before 17.4, Chrome before 123, Firefox before 125). Exact squares 414-441 and 463-504, worst at 476-504. Emulated in Chromium with an init style sheet '.hero-names a { align-content: normal !important }' under iPhone 13 emulation. Example: 485x485.",
+     "claim": "Item (d), what an older Safari shows.\n\nUnchanged:\n- the same boxes: 24/34 px at 414-441, 37 px at 463-473, 44 px at 474-504;\n- the same 2.5.8 results;\n- all four names whole, with no glyph ink cut;\n- a focus ring no worse than NEW in Chromium.\n\nWhat changes: each name's text sits at the top of its box instead of the middle. It is 3.5 px higher at 414-441, 10 px higher at 463-473 and 13.5 px higher at 474-504.\n\nAt 474-504 the stack rides up. 'Tropos in Acid' lies across the bright Acid pendant, with an empty dark band under 'Mantle in Ember'.\n- At 476-498, 18-21 % of Tropos's text box is under 4.5:1 (10th percentile about 2:1). OLD, and NEW in a current browser, have 3-5 % (about 15:1).\n- 'Hemisphere in Ember' drops at 491-504: up to 11 % (4.3:1), against 1.3 % (6.6:1).\n\nOLD uses padding, so it is unaffected. For these browsers NEW is worse than OLD at exact squares 476-504. That is very few visitors: an old Safari and an exact square window. The C6h gate's text-spacing rule noted that it needs align-content.",
+     "evidence": "noac sweep 320-600 (out/noac-{new,old}.jsonl, out/table-noac.tsv):\n- OLD with the override equals OLD (0 of 281 squares differ).\n- NEW differs only at 414-441 and 463-504, in the text positions.\n- Tropos at 474: text 136.2-154.2 in its box 137.2-181.2, against 149.7-167.7 on NEW in Chromium and on OLD. At 485: 148.1-166.1, against 161.6-179.6.\n\nclipink.js (row clip removed; names drawn against transparent names): Tropos's top ink is at y 134 with the picture's top at 132.3 (414), and at 139 against 137.2 (474). No ink is above the picture.\n\ncontrast2.js (names transparent, veil kept, background against #F4F1EC). Tropos, share under 4.5:1 and 10th percentile:\n- 485: NEW 4.6 % / 15.1:1; no align-content 21.2 % / 2.0:1; OLD 4.6 % / 15.1:1.\n- 490: 2.8 % / 16.3:1; 18.6 % / 1.9:1; 2.8 %.\n\nRing test without align-content (ringtab, NOAC=1): no square or name worse than NEW.\n\nScreenshot: shots/sq485-new-old-noalign.jpg (NEW | OLD | NEW without align-content).",
+     "steps": "1. iPhone 13 emulation 485x485, DSF 1, 'earf-opened' set. Add an init script that puts a constructed style sheet '.hero-names a { align-content: normal !important }' into document.adoptedStyleSheets.\n2. Open http://127.0.0.1:4187/, wait for fonts and the hero image.\n3. Read Tropos's text range: y 148.1-166.1, top of its 44 px box at 149.1. In Chromium without the sheet it is 161.6-179.6.\n4. In the lens folder: 'NOAC=1 node contrast2.js new 405 504 noac-new' and 'node contrast2.js old 405 504 old'."
+    },
+    {
+     "id": "HC-4",
+     "severity": "note",
+     "where": "NEW http://127.0.0.1:4187/, keyboard focus (Tab) on a two-line name. 'Hemisphere in Ember' at squares 418, 421-441 and 463-465; 'Mantle in Ember' at 417-428. iPhone 13 emulation. Examples: 430x430, 463x463.",
+     "claim": "The inset focus ring's bottom edge lies on the underline of the name's second line. The two-line boxes lost their padding: 34 px for 34 px of text at 414-441, and 37 px for 34 px at 463-471. OLD's ring clears the underline there.\n\nThe gate listed this as the cost of the 'mix' CSS at 414-441. 463-465 is new, caused by C6i-2's 37 px box. Focus stays plainly visible.\n\nElsewhere the ring improves on NEW:\n- its sides clear the letters at 463-471 and 482-504 (C6i-3);\n- one-line names at 414-441 have their top and bottom clear.",
+     "evidence": "ringtab.js: real Tab presses from 'See the colors' through the four names, at every square 412-560 on both builds (out/ringtab-*.jsonl; anring.py). For each side of the ring band it records the share of pixels that are letter ink (names drawn against names made transparent) and the share that focus changed.\n- At 430, 44 of 216 pixels of Hemisphere's bottom band are underline ink (20.4 %); OLD 0.\n- At 463, 45 of 270 (16.7 %); OLD 0.\n- The ring is drawn on all four sides (100 %) for every name at every square, on both builds; 505-560 was re-run with a wider capture.\n- Better on NEW: left and right sides have 0 px of ink for all four names at 463-471 and 482-504 (OLD 5-22 px); the bottom band of one-line names is clear at 414-421.\n\nScreenshots: shots/sq430-tab-hemisphere-core-new-old.jpg and shots/sq463-tab-hemisphere-tropos-new-old.jpg.",
+     "steps": "1. iPhone 13 emulation 430x430, 'earf-opened' set. Open http://127.0.0.1:4187/.\n2. Focus 'See the colors' (the stop before the names), then press Tab twice. 'Hemisphere in Ember' matches :focus-visible: box 108x34, outline 2px, offset -2px.\n3. The ring's bottom edge runs along the 'Ember' underline.\n4. On :4186 the box is 39 px and the ring clears it.\n5. In the lens folder: 'node ringtab.js new 412 560' and 'python3 anring.py new old'."
+    },
+    {
+     "id": "HC-5",
+     "severity": "note",
+     "where": "NEW http://127.0.0.1:4187/ under the WCAG 1.4.12 text-spacing override, squares 412x412 and 413x413 only (iPhone 13 emulation).",
+     "claim": "The lane's one cost is confirmed, and it does not matter.\n\nAt 412-413 NEW shows less of 'Hemisphere in Ember' than OLD:\n- by text: 43.5 % against 49.7 % (412), and 46.6 % against 51.7 % (413);\n- by box: 23 of 42 px seen against 26 of 44 (55 % against 59 %), and 24 of 42 against 26.7 of 44.2 (57 % against 60 %).\nThe lane's 55 % and C6h's 59-60 % are these box shares.\n\nCause: the three 3.5 px row gaps of C6i-1 add up to 10.5 px, 2.5 px more than OLD's 1 px name padding (8 px).\n\nNothing readable is lost: in both builds 'Tropos in Acid' is hidden and only a cut sliver of the word 'Hemisphere' shows above 'in Ember'.\n\nIt is not load-order dependent in my runs, and the lane's 71 % did not reproduce.\n\nEverywhere else under the override NEW shows as much or more:\n- all four names whole at every square 455-600 (OLD: 455-462, 472-473 and 497-600 only);\n- three whole at 423-438 (OLD two);\n- 'Tropos in Acid' whole at 463-504, as C6i-2 intended.",
+     "evidence": "Three full in-place sweeps 320-600 per build: override after load going up (out/ts-after-*), override from an init script before load going up (ts-before-*), and override after load going down (ts-desc-*). 0 of 281 squares differ between them on either build.\n\nFresh loads with the override at 20 squares equal the sweep (40 of 40).\n\ntsorder.js at 412 and 413, five orders, all identical on both builds (out/tsorder-412_413.json):\n- override after load;\n- after load, then window.leadDots() run again;\n- before load;\n- resized up from 406/407;\n- resized down from 418/419.\n\nan258.py: 'less of a name seen' appears only at 412-413 (Hemisphere), and there are never fewer whole names.\n\nScreenshots: shots/sq412-new-old-default-and-textspacing.jpg; shots/sq474-textspacing-new-old.jpg (Tropos whole on NEW, gone on OLD).",
+     "steps": "1. iPhone 13 emulation 412x412, 'earf-opened' set. Open http://127.0.0.1:4187/ and :4186 and wait for fonts and the hero image.\n2. page.addStyleTag with the override, then wait 400 ms.\n3. 'Hemisphere in Ember': NEW box 42 px with 23 px inside the picture; OLD box 44 px with 26 px.\n4. In the lens folder: 'TS=after TAG=ts-after FROM=320 TO=600 node sweep.js squares new,old 400', then 'python3 an258.py ts-after ts-after new old'."
+    },
+    {
+     "id": "HC-6",
+     "severity": "note",
+     "where": "NEW :4187 against OLD :4186 at every exact square 320-1400, default text spacing. iPhone 13 emulation under 600, plain context from 600.",
+     "claim": "Item (a): every square where NEW is worse than OLD, as ranges. None of it makes a name less visible or removes a whole name.\n\n(1) Smaller boxes, all still 24 px or more or passing the spacing exception:\n- 'Hemisphere in Ember': 412-441 (34 px against 36-40.8) and 463-471 (37 against 54).\n- 'Mantle in Ember': 412-428 (34 against 36-38.7).\n- 'Tropos in Acid' and 'Core in Ember': 412-413 (17 against 19-19.2, with 3.5 px gaps).\n\n(2) The names cover a little more of the products:\n- 412-413: +7 points, summed over the products;\n- 429-440: +11 to +13; the red Core lamp is fully under 'Core in Ember' at 429-430 (83 % on OLD);\n- they cover less at 463-471.\n\n(3) 'Tropos in Acid' contrast at 438-441: 4.7 % of its text box under 4.5:1, against 0.1 % (10th percentile 10.9:1 against 16.8:1).\n\n(4) The ring and hit-region items in HC-2 and HC-4.\n\nEverything else is identical: the picture's box and file, the headline, the line, the buttons (position, size, lines), one left edge at 16 px, Tab stops and scroll. There is no lone or line-start dot, no names without a dot, no name under the header, no light ink past the picture and no sideways scroll.",
+     "evidence": "out/squares-{new,old}.jsonl: 1,081 squares per build, in place, 300 ms after each resize, 0 page errors. Fresh loads at 38 squares match it (76 of 76, every field). Analysis: analyze_sq.py, an258.py, compare.py. Per-square, per-name table: out/table-squares.tsv.\n\nBoxes by range, NEW:\n- 412-413: 17/34/17/34\n- 414-428: 24/34/24/34\n- 429-441: 24/34/24/24\n- 463-473: 37/37/37/37\n- 474-504: 44 each\n\nOLD:\n- 412-441: 19-23.8 px (one line) / 36-40.8 px (two lines)\n- 463-471: 37/54/37/37\n\nNEW is better here:\n- 2.5.8 by boxes fails at 45 squares (352-368, 371-393, 407-411; cut names only), against OLD's 75, which adds whole names at 412-441;\n- at 463-471 Tropos sits lower on the veil: 1.7 % under 4.5:1 against 9-17 % (out/contrast-*.jsonl).\n\nScreenshot: shots/sq440-new-old.jpg.",
+     "steps": "In /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/hero/ run 'CONC=3 node sweep.js squares new,old 140' (about 4 minutes), then 'python3 analyze_sq.py squares new,old' and 'python3 an258.py squares squares new old'."
+    }
+   ],
+   "items": [
+    {
+     "item": "C6i-1 small squares' targets (HR-1)",
+     "done": true,
+     "why": "Done as asked. Both rules are in index.html verbatim from the C6h gate's text, each once, at lines 1479-1480. They work as the gate tested:\n- at 412-413, one-line names are 17 px with 3.5 px gaps, which passes the spacing exception at zero margin by boxes;\n- at 414-441, one-line names are 24 px and two-line names 34 px;\n- all four names are whole from 412, as on OLD, and no name is less visible at any square.\n\nBy box geometry 2.5.8 now fails at no whole name. It fails at 45 squares, all cut names (352-368, 371-393, 407-411), against OLD's 75, which include whole names at 412-441. This holds with overlay and with classic 15 px scrollbars.\n\nCaveat (HC-2): by the region that really takes a tap, 'Tropos in Acid' (412-441) and 'Core in Ember' (412-428) are still 1-2 px short. That is not worse than OLD."
+    },
+    {
+     "item": "C6i-2 text spacing (WCAG 1.4.12)",
+     "done": true,
+     "why": "Done as asked. The two fixed steps are replaced by the gate's min-height + align-content rules, verbatim, at lines 1476-1477.\n\nWith default spacing NEW is identical to OLD, except that the two-line 'Hemisphere in Ember' box is 37 px instead of 54 at 463-471. That sets the stack 17 px lower, so Tropos sits on the veil (contrast 1.7 % under 4.5:1 against 9-17 %).\n\nUnder the override, 'Tropos in Acid' is whole at every square 463-504 (OLD loses it at 463-471 and 474-496), and all four names are whole at 455-600.\n\nThe only cost under the override is at 412-413 and comes from C6i-1's gaps (HC-5). The rules need align-content on blocks; an older Safari shows the text at the top of the boxes (HC-3)."
+    },
+    {
+     "item": "C6i-3 the focus ring (optional)",
+     "done": true,
+     "why": "Done as asked: the gate's rule verbatim, at line 1482, for 463-471 and 482-504. By real Tab presses, the ring's left and right sides are clear of the letters for all four names at every square in those ranges (0 px of letter ink; OLD 5-22 px). The ring is drawn on all four sides.\n\nIt costs no name: no change in visibility or wrapping with default spacing, overlay scrollbars or classic 15 px scrollbars. Under the override 'Mantle in Ember' takes two lines instead of one at 466-471, but stays whole.\n\nAt 463-465 the ring's bottom edge lies on Hemisphere's underline (HC-4), which comes from C6i-2's 37 px box. 472-481 is left out as intended; there the sides still cross the first and last letters, as on OLD."
+    },
+    {
+     "item": "Nothing else in the hero moved",
+     "done": true,
+     "why": "Squares outside 412-441 and 463-504 are identical in every measured field, and inside them only the names' boxes and text positions change. The picture, headline, line, buttons, left edges, dots and header clearance are identical at all 1,081 squares.\n\nNon-square windows are identical in every field:\n- all 3,025 grid windows (320-1400 x 300-1400, step 20);\n- 1,602 near-squares (within 1 %, including 74 between 999/1000 and 1001/1000);\n- 113 real-device windows (phones upright and sideways, tablets, desktops);\n- the five named devices: 390x844, 375x667, 768x1024, 1440x900, 1366x768.\n\nTab stops and scrollY from the top are identical at 16 windows. There were 0 page errors in 15,314 measurements."
+    },
+    {
+     "item": "Lane report, hero part",
+     "done": true,
+     "why": "Confirmed:\n- only the 45 HTML pages and site_fix.py change (git diff f0e265013e..b50849e568: 46 files);\n- vercel.json and robots.txt are unchanged, and 'noindex, nofollow' stays;\n- the CSS rules are verbatim;\n- 2.5.8 fails at no whole name, by boxes (see HC-2);\n- no name is less visible, and the whole names match C6h at every square;\n- Tropos is whole at 463-504 under the override;\n- C6i-3 costs no name.\n\nCorrected: the 412-413 cost under the override is real but not load-order dependent in eight orders tested. Its numbers are 43.5-46.6 % of the text against 49.7-51.7 % (23-24 of 42 px against 26-26.7 of 44 px by box). The 71 % did not reproduce."
+    },
+    {
+     "item": "C6i-4, C6i-5, C6i-6 (outside this lens)",
+     "done": false,
+     "why": "Not examined in this lens; false means not checked, not failed. The only script change (C6i-4) is inside the product gallery's names-row function (index.html line 2057) and does not run for the home hero; the hero's measurements are unchanged."
+    }
+   ],
+   "checked": [
+    "Builds served match the named commits by md5:\n- :4186 = tree13 = main f0e265013e (a10ae659...), the same file as tree11, the C6h build gated earlier;\n- :4187 = tree14 = r49 b50849e568 (c1bc79cb...).\n\nThe OLD-to-NEW diff of index.html is the hero rules at lines 1474-1482, one product-page script line (2057), and the Hemisphere specs (SPEC JSON). All home-page CSS and JS is inline.",
+    "Lens folder: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/hero/ (about 60 MB).\n\nScripts:\n- lib.js (copied from the C6h gate's hero lens library, ports updated)\n- sweep.js, fresh.js, an258.py, analyze_sq.py, compare.py\n- ringtab.js, anring.py, tsorder.js, clipink.js, contrast2.js\n- hitscan.js, taps.js, tapdbg.js, pixdiff.js, tabtop.js, shots2.js\n\nData: out/*.jsonl and json, plus out/table-squares.tsv, out/table-ts-after.tsv and out/table-noac.tsv (per square and per name: seen %, lines, box, visible target, 2.5.8 status, dots, header, left edges, buttons).",
+    "(a) Squares 320-1400, 1 px steps, NEW and OLD, in place (setViewportSize, scroll to top, 300 ms): 1,081 x 2. iPhone 13 emulation under 600, plain context from 600, DSF 1, 'earf-opened' set.\n\nPer name: share seen inside the picture, line boxes, box and visible-target height, and the 2.5.8 test. That test uses the visible geometry: a 24 px size, or 24 px circles against every other target in #top.\n\nAlso measured: lone and line-start dots, names under the header, the headline/line/button left edges, the buttons' boxes, the picture, the headline and the line.\n\nFresh loads equal the sweep at 38 squares on each build (76 of 76). Classic 15 px scrollbars at 400-520 give the same conclusions.",
+    "(b) Text-spacing override at 320-600:\n- after load, going up;\n- before load from an init script, going up;\n- after load, going down;\n- fresh loads at 20 squares;\n- five orders at 412-413.\nThe results are identical across orders on both builds.",
+    "(c) Focus ring, 412-560, both builds. Real Tab presses from 'See the colors' through the four names. Pixel bands: ring drawn on all four sides, and letter ink under the band measured with the names drawn against made transparent. The geometric ring check is whole for every whole name. Tab from the top: stops and scrollY are identical NEW/OLD at 16 windows.",
+    "(d) No align-content on blocks: emulated with '.hero-names a { align-content: normal !important }'. Measured with a sweep, a pixel check for clipped ink, a contrast check and the ring test.",
+    "(e) Non-square windows: the grid of 3,025 (320-1400 x 300-1400, step 20), 1,602 near-squares, 113 real-device windows (real.js) and the five named devices. NEW equals OLD in every field.",
+    "Real taps (iPhone 13 touch) at 412-441 and 463-504: 864 per build. A tested remedy, served in my browser only, for the hit-region overlap is in HC-2. No tree, server or repo was touched; git was used read-only.",
+    "(f) Screenshots, small JPEGs, NEW beside OLD, in shots/:\n- sq412-new-old-default-and-textspacing.jpg\n- sq430-tab-hemisphere-core-new-old.jpg\n- sq440-new-old.jpg\n- sq463-tab-hemisphere-tropos-new-old.jpg\n- sq474-textspacing-new-old.jpg\n- sq485-new-old-noalign.jpg",
+    "Not run, reasoned from the CSS only: at fractional square viewports (browser zoom), widths between the new integer ranges (for example 413.5 or 441.5) match none of the C6i rules and behave as OLD does.",
+    "Only Chromium was available; Safari and Firefox were not run. HC-3 is an emulation of their missing align-content support."
+   ]
+  },
+  "verdicts": {
+   "verdicts": [
+    {
+     "id": "HC-1",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced with my own script (hc1.js). Fresh loads, iPhone 13 emulation under 600 wide and a plain context above, DSF 1, 'earf-opened' set; the standard override added after load, then 400 ms.\n\nNEW and OLD give identical numbers at every window. C6g (:4184) and C6f (:4183) are the same at 390x844. End of the headline's text range against the window:\n- 390x844: 467.5 of 390\n- 375x667: 448.5 of 375\n- 430x932: 518 of 430\n- 320x568: 379.2 of 320\n- also 360x800, 393x852, 412x915, 414x896 and 428x926\n- squares 320, 330, 336, 337, 385, 412, 505 and 550\n\nThe clip is section#top.hero (overflow hidden). Screenshots: 390x844 reads 'A world of sound, in c' (shots/hc1-new-390x844-ts.jpg, the same as hc1-old-390x844-ts.jpg); 412x412 reads '... in c'. Sideways overflow on both builds at 320, 330, 336, 385 and 320x568 (iPhone emulation zooms out, innerWidth 329 at 320). The buttons are below the first screen at 330-337 and 505-600 on both.\n\nTwo corrections to its window list:\n- 768x1024 loses nothing. The 773.7 includes 4.8 px of trailing letter-spacing. The period's ink is in columns 761-765 of 768, the same 5 px as the comma (shots/hc1-new-768x1024-ts-rightedge-2x.jpg).\n- Missing from the list: the upright iPad mini 744x1133 ('... in colo', text to 776.8) and the iPad 10.2-inch 810x1080 (the r cut and the period gone, 828.8) (shots/hc1-tablets-744-810-ts-right-1.5x.jpg). 820x1180, 834x1194 and 1024x1366 fit.\n\nShould-fix for a later push is right. It is a real 1.4.12 loss on common phones, but it is older than C6i and identical on OLD, so it is not a reason to hold C6i."
+    },
+    {
+     "id": "HC-2",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced (hc2.js) at 417x417, iPhone 13 emulation, DSF 1.\n- NEW: Tropos box 135.53-159.53. A touch at (208.5, 157.53) goes to #hemisphere-ember; a mouse click at the same point goes to #speaker-acid.\n- OLD: a tap 2 px inside Tropos's bottom (156.09) goes to #speaker-acid.\n\nReal regions by elementFromPoint, 0.25 px steps:\n- NEW Tropos: 22.25 px at 414; 23 px at 417, 430 and 441.\n- NEW Core: 23 px at 414 and 417; 24 px at 430 and 441.\n- OLD Tropos: 19.75 px at 417; 23.75 px at 441, so NEW is 0.75 px smaller there.\n- At 412 the 3.5 px gap is 1.25 px between real regions.\n\nNote is the right severity.\n\nIts 'not worse than OLD' is right for the edges it tested. The 19 wrong taps come from tapping relative to NEW's taller boxes. Against the text, the Tropos/Hemisphere touch boundary at 417 is at y 157.3 on both builds.\n\nIt missed the opposite edge. At 414-441 the underline under 'Ember', the visible bottom of 'Hemisphere in Ember', now opens Core in Ember (see missed). So the claim needs that qualifier."
+    },
+    {
+     "id": "HC-3",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced (spot.js MODE=noac: a constructed sheet '.hero-names a { align-content: normal !important }', iPhone 13 emulation). 'Tropos in Acid' text starts:\n- 485: 148.13, against 161.63 in Chromium (13.5 px higher);\n- 474: 136.2, against 149.7;\n- 414: 131.3, so its text box starts 1 px above the picture's top at 132.31, as the C6h gate predicted.\n\nshots/pic-485-plain-noac-new-old-2x.jpg (NEW | OLD | NEW without align-content) shows Tropos lying across the yellow Acid pendant and an empty dark band under Mantle. NEW and OLD are identical in Chromium.\n\nI did not re-measure the contrast shares. Note is right: older browsers at exact squares only."
+    },
+    {
+     "id": "HC-4",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced with real Tab presses (ring.js: focus 'See the colors', then Tab twice).\n- 430: NEW Hemisphere box 108x34, outline 2px, offset -2px. The ring's bottom edge merges with the 'Ember' underline. OLD's 39 px box keeps the ring clear (shots/ring-430-tab2-new-focus-blur-old-focus-blur-4x.jpg).\n- 463: NEW 37 px against OLD 54 px, the same result (shots/ring-463-tab2-...).\n- 485 (Tab once): NEW's ring sides clear the T and the d; OLD's cross them, so C6i-3 works (shots/ring-485-tab1-...).\n\nFocus stays visible, so note is right. It omits the ring-top case at 414 (see missed)."
+    },
+    {
+     "id": "HC-5",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced (spot.js MODE=ts, and tsbefore.js with the override injected before load).\n- 412: NEW 'Hemisphere in Ember' box 42 px with 22.98 px inside the picture (54.7 %), against OLD's 44 px with 25.98 px (59.0 %).\n- 413: 23.98 of 42 (57.1 %), against 26.67 of 44.16 (60.4 %).\n\nThe numbers are identical with the override injected before load and after it. The lane's 71 % did not reproduce. Both builds show 'in Ember' whole plus a sliver of 'Hemisphere' (shots/hc1-new-412x412-ts.jpg).\n\nMy in-place sweep, 400-520 under the override (sweep2.js, answeep2.py):\n- NEW shows less only of Hemisphere, at 412-413;\n- it has more whole names at 423-439, 463-471 and 474-496;\n- all four are whole at 456-504 (3 at 455, a 1-square difference from the reviewer's 455);\n- Mantle takes 2 lines at 466-471.\n\nNote is right."
+    },
+    {
+     "id": "HC-6",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Spot-checked.\n\nFresh-load boxes match its table:\n- 413: 17/34/17/34\n- 414 and 428: 24/34/24/34\n- 429 and 440: 24/34/24/24\n- 463 and 471: 37 each, with Hemisphere on two lines inside 37\n- 472, 474, 485 and 504: identical to OLD\n\nIn-place sweep 400-520 with default spacing:\n- the same whole names as OLD at every square, and no name less seen;\n- boxes smaller only for Hemisphere (412-441, 463-471), Mantle (412-428), and Tropos and Core (412-413);\n- no sideways overflow and 0 page errors.\n\nNon-square first screens are pixel-identical NEW against OLD (same.js, AE 0) at 390x844, 375x667, 768x1024, 1440x900, 1024x768, 844x390, 500x501, 412x413 and 430x431. 417x417 differs, as expected.\n\nI did not re-measure the contrast and coverage figures. Note is right, but its list of NEW-worse items is incomplete: the underline owner at 414-441 and the ring top at 414 (see missed)."
+    }
+   ],
+   "missed": [
+    "NOTE, NEW WORSE THAN OLD by 1-2 px. HC-2's 'not worse than OLD' misses this. At exact squares 414-441 the underline under 'Ember', the visible bottom of 'Hemisphere in Ember', belongs to 'Core in Ember'.\n\nWhere: http://127.0.0.1:4187/. Plain context for the mouse, or iPhone 13 emulation for touch; the square as the viewport; DSF 1 (the same at DSF 3); 'earf-opened' set.\n\nSteps at 430x430:\n1. Hemisphere's box is 183.61-217.61. Its 'Ember' underline is painted in pixel row 217. Core's box starts at 217.61.\n2. page.mouse.move(215, 217.5). 'Core in Ember' takes the hover: its own underline thickens. A click there opens #core-ember.\n3. On :4186 the underline is row 218 and Hemisphere's box ends at 221.61. The mouse at (215, 218.5) hovers Hemisphere, and a click opens #hemisphere-ember.\n\nEvidence (uline.js: elementFromPoint, a Playwright touch tap, a CDP touch with a 6 px radius and a mouse click, in 0.5 px steps):\n- NEW, at 414, 417, 420, 425, 430, 435 and 441: the underline row and everything below it go to Core, apart from a few touch points on the row's lower half.\n- OLD, at all seven: the underline row and the next 1-2.5 px go to Hemisphere.\n- DSF 3 at 417 and 430 gives the same result.\n- Not at 412-413 (the 3.5 px gap) or 463-471 (Hemisphere keeps its underline with about 1 px to spare).\n\nCause: the two-line names lost their padding (34 px box for 34 px of text), so the underline sits on the box edge, and the centred one-line 24 px Core box takes hits from about 0.75 px above its own top. Against the text, the Hemisphere/Core boundary moved up 2-2.5 px.\n\nScreenshots: shots/hover-430-mouse-on-ember-underline-new-old-4x.jpg and shots/hover-417-mouse-on-ember-underline-new-old-4x.jpg.\n\nNote, not should-fix: exact squares only, and a 1-2 px band. Reasoned from its geometry, not tested: the reviewer's clip-path remedy would still leave the lower half of that underline, which is painted inside Core's box, with Core.",
+    "NOTE, FOCUS AT ONE SQUARE. At 414x414 on NEW, 'Tropos in Acid' (box 132.30-156.30) is flush with the picture's top (132.31). Its inset ring's top band therefore lies on the picture's first two pixel rows, right against the light page.\n\nPixel column (ringtop.js):\n- page gray 241 to row 131;\n- ring rows 132-133 (184-194, then 241);\n- the picture dark from row 134.\nThere is no dark row between the page and the ring, so the ring shows no top edge.\n\nOLD's box starts at 137.05, with 5 dark rows above the ring. On NEW there is 1 dark row at 415 and 1.5 px at 412.\n\nThe C6h gate's skeptic predicted this for the 'mix' CSS (412 and 414-415). HC-4's 'ring drawn on all four sides' is true by pixels only.\n\nSteps: iPhone 13 emulation 414x414 on http://127.0.0.1:4187/; focus 'See the colors'; press Tab once. Screenshot: shots/ring-414-tab1-new-focus-blur-old-focus-blur-4x.jpg.",
+    "HC-1's WINDOW LIST, CORRECTED (identical on OLD):\n- Not 768x1024: the period is whole, 3 px inside the edge.\n- Affected but not listed: the upright iPad mini 744x1133 and the iPad 10.2-inch 810x1080 (shots/hc1-tablets-744-810-ts-right-1.5x.jpg), and phones at 360x800, 393x852, 412x915, 414x896 and 428x926.\n- Fit: 820x1180, 834x1194, 1024x1366, and the landscape and desktop windows tested.",
+    "TRIVIAL NOTE. At 412-413 the spacing exception's gaps leave about 1.25 px between the real regions where a mouse click lands on the picture and opens nothing, and the hover drops. uline.js at 412: y 189.5-190 hits IMG. OLD's names touch. This is by design of the gate's spacing exception.",
+    "ITEM VERDICTS: all are correct.\n\nC6i-1, C6i-2 and C6i-3 are done as wanted:\n- index.html lines 1476-1477, 1479-1480 and 1482 are the gate's text verbatim;\n- the same hunks are in all 45 changed pages; the 40 s/ pages and 404.html are unchanged;\n- the served pages match tree13 and tree14 by md5 (a10ae659 and c1bc79cb);\n- vercel.json is identical, and 'noindex, nofollow' is in all 86 HTML pages.\n\nThe boxes, the whole names and visibility are as the reviewer says, with default spacing and under the override.\n\nC6i-4 to C6i-6 were not examined in this lens.\n\nMy folder: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/skeptic-squares-and-hero/\n- scripts: lib.js, hc1.js, hc2.js, spot.js, sweep2.js, answeep2.py, uline.js, hover.js, ring.js, ringtop.js, pic.js, same.js, tsbefore.js\n- data: out/\n- screenshots: shots/"
+   ]
+  }
+ },
+ {
+  "lens": "delta-and-texts",
+  "crit": {
+   "findings": [
+    {
+     "id": "N1",
+     "severity": "note",
+     "where": "Spec row Size and hanging > Weight on all 8 Hemisphere pages, e.g. http://127.0.0.1:4187/hemisphere/ember. Any window.",
+     "claim": "The new canopy pair 'about 2.3 lb (1.0 kg)' matches the CAD's 1034 g: 2.28 lb rounds to 2.3 and 1.03 kg to 1.0. It is now the only imperial and metric pair on the site whose printed metric figure does not convert back to the printed pounds: 1.0 kg is 2.2 lb. The same row takes 'about 3.5 lb' from the rounded 1.6 kg. The CAD's 1612 g would give 3.6 lb. So the row's two pound figures are rounded by different paths. Both stay within 'about'. Nothing needs fixing unless the owner wants every pair to convert both ways.",
+     "evidence": "units.py ran on NEW's SPEC and SIZEL. It checked about 40 inch, foot and pound pairs against their metric figures. All pass except the new one: '2.3 lb (1.0 kg): 1.0 kg = 2.205 lb, would print 2.2'. Source: coordinator/hemisphere-v12-list-2026-11-25.md line 15 gives 1612 g for today's top and 1034 g for the canopy.",
+     "steps": "python3 -I /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/nochange/units.py <tree14>/spinoffs/barkhorn/site/hemisphere/ember.html"
+    },
+    {
+     "id": "N2",
+     "severity": "note",
+     "where": "Home hero names at http://127.0.0.1:4187/, exact-square windows 414x414 and 474x474, plain desktop context.",
+     "claim": "The C6i-1 and C6i-2 rules center each name with align-content: center on an inline-block box. Only engines from about spring 2024 apply that: Chrome 123, Safari 17.4 and Firefox 125. Older engines ignore it, so the text sits at the top of its 24, 37 or 44 px box. I simulated this on NEW. Every name at squares 405-520 stays as visible as on OLD, except 'Tropos in Acid' at 414 and 474, which drops to 94.4 %. Its 18 px line box starts 1.0 px above the picture's top edge. The letters themselves are probably not touched. The effect is negligible: it needs an outdated browser in an exact-square window.",
+     "evidence": "noac.js: in current Chromium, 0 names are less visible than on OLD. With align-content forced to normal, 2 are. noac2.js at 414: text top 131.3 against picture top 132.3. At 474: 136.2 against 137.2. OLD at 474: text top 149.7.",
+     "steps": "cd /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/nochange && node noac.js 405 520 && node noac2.js"
+    },
+    {
+     "id": "N3",
+     "severity": "note",
+     "where": "How C6i-4 was tested. The gate's shared servers on ports 4183-4187 use gate/serve.js.",
+     "claim": "The lane says headless Chromium does not restore pages from the back/forward cache. That is not right. It does restore once three things change. Launch with chromium.launch({channel:'chromium', ignoreDefaultArgs:['--disable-back-forward-cache']}). Then serve the pages without 'Cache-Control: no-store'. gate/serve.js sends no-store on every response, and that keeps every page out of the cache. The host sends HTML as 'public, max-age=0, must-revalidate', so real Chrome visitors do get the cache. With real restores, C6i-4 works as wanted (see the C6i-4 item). The shared servers cannot show this behavior.",
+     "evidence": "bfprobe2.js. Default headless shell: notRestoredReasons 'masked' and a fresh load. channel 'chromium' on my no-store-free copy at port 4197: same document after Back, pageshow persisted [false, true]. The C6h gate's NR-1 used the same setup.",
+     "steps": "Copy of serve.js with only the Cache-Control header changed: scratchpad/gate/c6i/nochange/serve-cache.js. It runs on 4196 (tree13) and 4197 (tree14), PIDs 17035 and 17037, and can be stopped. Then node bfcache.js (PHONE=1 for 390x844; PROD=hemisphere TINT=ember SW1=dust SW2=acid SW3=poison for the lamp)."
+    },
+    {
+     "id": "N4",
+     "severity": "note",
+     "where": "/tropos/acid on both builds (ports 4186 and 4187), 1440x900. Same on OLD and NEW.",
+     "claim": "Steps: tap a tint on 'At the bar', then within about 50 ms tap the header's 'Lighting'. That is a route inside the page. The pending fill still writes the eight names into #namerow-say about 120 ms later, while #pdp is not rendered, and empties them 1.5 s later. Nothing rendered means nothing is announced. C6i-4 is a pagehide handler, so it does not cover routes inside the page, and it does not need to. I report this only because the lens asks whether the region is ever filled while the row is hidden.",
+     "evidence": "hashleave.js log, NEW: 4120 tint tap; 4162 after the Lighting tap: sayRendered false, pdpShown false; 4285 say-mutation 'Tropos in Acid, Hemisphere in Ember, ...' (sayRendered false); 5786 emptied. OLD has the same sequence (4299 filled, 5799 emptied).",
+     "steps": "node /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/nochange/hashleave.js"
+    },
+    {
+     "id": "N5",
+     "severity": "note",
+     "where": "gate/serve.js, the local stand-in for the host",
+     "claim": "Two parts of the host could not be tested locally. serve.js escapes '/s/:page/(.+)' into a literal pattern, so /s/hemisphere-ember/x answers 404 on both builds; the host redirects it with a 307. serve.js also adds none of vercel.json's headers, such as X-Robots-Tag. vercel.json is byte-identical between OLD and NEW, so the host behaves the same for both.",
+     "evidence": "http.txt: '/s/hemisphere-ember/x  OLD 404  NEW 404'. cmp of the two vercel.json files: identical.",
+     "steps": "node /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/nochange/http.js"
+    }
+   ],
+   "items": [
+    {
+     "item": "C6i-1 small squares' targets (24 px at 414-441; 3.5 px row gap at 412-413)",
+     "done": true,
+     "why": "Both rules match the C6h gate's tested CSS word for word. The gate inserted them before the 463-473 rule; NEW puts them after the 474-504 rule, which has the same effect because the width ranges do not overlap. Spot checks: one-line names are 24 px tall at 414-441 and 17 px at 412-413. With classic 15 px scrollbars at squares 405-520, no name is less visible or wraps onto more lines than on OLD; with overlay scrollbars the same holds. Tapping each of the four names at 412, 413, 414, 430 and 441 opens the product and tint it names. The full WCAG 2.5.8 sweep belongs to the hero lens."
+    },
+    {
+     "item": "C6i-2 text spacing (min-height 37 px at 463-473 and 44 px at 474-504, centered)",
+     "done": true,
+     "why": "Both rules match the gate's text word for word and replace the two fixed padding steps. Boxes measure 37 and 44 px. The only side effect is N2, in older browsers. Checking the 1.4.12 text-spacing override itself belongs to the hero lens."
+    },
+    {
+     "item": "C6i-3 room for the focus ring (3 px side padding at 463-471 and 482-504)",
+     "done": true,
+     "why": "The rule matches the gate's tested 'ringroom482' text word for word. With classic scrollbars, 'Hemisphere in Ember' stays on one line at 472-504 on NEW, and no name is less visible at 405-520."
+    },
+    {
+     "item": "C6i-4 back/forward cache: cancel pending fills and empty the region on pagehide",
+     "done": true,
+     "why": "Tested on real cache restores (setup in N3) at 1440x900 with clicks and at 390x844 (iPhone 13) with taps, on /tropos/acid 'At the bar' and /hemisphere/ember 'At the bar'. Leaving 20 ms after a tint tap: OLD writes the names 4-5 ms after the restore; NEW never does. Leaving 700 ms after: OLD comes back still holding the names; NEW empties the region at pagehide and comes back empty. After a restore, a tint tap on NEW announces the current row 171-192 ms later and empties it 1.5 s later. A tint tap on a view without names writes nothing. Firing pagehide and pageshow by hand, persisted true or false: OLD fills, NEW does not. page.goBack() without the cache gives a fresh load that writes nothing, and the next view or tint change announces. The code matches the gate's one-line fix: registered once, clears both timers and empties #namerow-say."
+    },
+    {
+     "item": "C6i-5 Hemisphere dimming reads 'Phase-cut (leading or trailing edge)' on all pages",
+     "done": true,
+     "why": "Rendered on all 8 Hemisphere pages at 1440x900 and 390x844. The row is exactly 'Phase-cut (leading or trailing edge)', and the word joiner went with the deleted words. No file in NEW contains '0-10 V', '0\u201310', '10 V' or '0&ndash;' in any form; OLD has them in 45 files. The text was removed, not rewritten. It matches the 13:10 decision and the V12 list."
+    },
+    {
+     "item": "C6i-6 Hemisphere canopy weight reads about 2.3 lb (1.0 kg); nothing else in the specs changes",
+     "done": true,
+     "why": "The row reads exactly 'About 3.5 lb (1.6 kg) hanging; the canopy about 2.3 lb (1.0 kg)' on all 8 pages. The other 33 rendered spec lines per page are identical to OLD, with the same heights, in all 8 tints at both sizes. No file says 0.9 lb or 0.4 kg any more. Pounds and kilograms agree with 1034 g (see N1)."
+    },
+    {
+     "item": "Lens (a): nothing else changed",
+     "done": true,
+     "why": "Only 45 HTML pages and site_fix.py change; site_v2.py does not. All 45 pages carry the same three edits: the CSS block (C6i-1, 2 and 3 with their comments), one JavaScript line (C6i-4) and two values in the SPEC data (C6i-5 and 6). site_fix.py has the same three edits. Nothing falls under 'other' except comments that document those items. The 41 unchanged pages (40 share pages and 404) hold none of the changed code. Both local trees are byte-identical to their commits (444 of 444 files each). NEW fast-forwards from OLD, and the local origin/main ref is f0e265013e."
+    },
+    {
+     "item": "Lens (b): new texts everywhere the Hemisphere's dimming or canopy weight appears",
+     "done": true,
+     "why": "The only places are the SPEC data, present in all 45 pages, and an unused 'facts' list that is never rendered. That list says '120 V, dimmable' and gives no canopy weight. The share pages' structured data, every meta tag and every alt text mention neither. The cutaway picture's labels hold no figures. On phones the pages are 23-24 px shorter, entirely because the Dimming row drops from 59.5 to 36.3 px. On desktop the height is unchanged."
+    },
+    {
+     "item": "Lens (c): C6i-4 tested",
+     "done": true,
+     "why": "Covered under the C6i-4 item. Within the cache cases, the region is never filled while the row is hidden and never carries stale names, and no tint change after a restore failed to announce. A route change inside the page fills a hidden region, on both builds (N4)."
+    },
+    {
+     "item": "Lens (d): the whole site still works",
+     "done": true,
+     "why": "Every page answers 200 at its clean address with the noindex tag: 76 addresses, the same on both builds. All seven redirects in vercel.json, the .html and trailing-slash 308s and the 404 match OLD; the one redirect the local server cannot emulate is in N5. vercel.json is identical. 11 pages at 1440x900 and 390x844 on both builds: no console errors or warnings, page errors, failed requests or 4xx responses. Titles, meta, canonical, og and twitter tags and every alt text are the same. No sideways scroll at any scroll step. The fixed ask bar is on one line and sits fully in view (bar 779-844 px, button 790-834 px) at 320, 360, 390 and 414 px wide on both builds."
+    },
+    {
+     "item": "Lens (e): standing checklist questions this build touches",
+     "done": true,
+     "why": "Q7: the hero names, tapped at 11 squares from 412 to 504, open their product and tint on both builds. Q9: the new spec values sit in Specifications, not beside a picture; neither is coined or a mood line; one is a removal and one a corrected figure. Q10: the ask letter names product and tint, e.g. 'Hemisphere in Haze'. Q11 and Q12: addresses, previews and the 'In development. Made to order.' wording are unchanged. Q13: from /lighting into Hemisphere, a view chosen, Dust then Acid keep that view, and one Back returns to /lighting at both sizes on both builds. Q14: every pair agrees within rounding, but see N1; no picture label carries a figure; Fog shows the same rows apart from lumens and color temperature. Q1-6, Q8, Q15 and Q16 are not touched: no pictures or page structure changed. I did not compare stores for Q15, because the change only removes one option and corrects one figure."
+    }
+   ],
+   "checked": [
+    "diff -r OLD tree13 vs NEW tree14: 45 of 444 files differ, all HTML; added 0, missing 0; treediff.py: all 45 pages share one change signature (CSS block, pagehide line, two SPEC values)",
+    "git diff f0e265013e b50849e568: 45 HTML pages plus site_fix.py (3 edits); site_v2.py unchanged; merge 34351c36d2 brings only site_fix.py",
+    "git ls-tree vs git hash-object: tree13 equals f0e265013e and tree14 equals b50849e568, 444 of 444 files each; f0e265013e is an ancestor of b50849e568; local origin/main is f0e265013e",
+    "CSS compared word for word with c6h-gate-2026-11-25.json: C6i-1 'mix', C6i-2 'tsmin' and C6i-3 'ringroom482' are identical; order is equivalent because the width ranges do not overlap",
+    "vercel.json: cmp identical; robots.txt unchanged",
+    "http.js, 276 requests to each build: every page in its clean, .html and trailing-slash form, the 7 redirects, queries kept, 404 pages; one difference, the body length of /hemisphere/ember (expected); the noindex tag on all 76 page addresses that answer 200",
+    "spec.js: Hemisphere Specifications in 8 tints at 1440x900 and 390x844 (iPhone 13), OLD vs NEW: only the Dimming and Weight rows differ; phone page 23-24 px shorter, all of it the Dimming row; screenshots spec-phone-old.jpg and spec-phone-new.jpg",
+    "grep over all of NEW for '10 V' and '0\u201310' in every form, '0.9 lb', '0.4 kg', '1034', ounces: none; the canopy and dimming appear only in SPEC and the unused facts list; JSON-LD exists only on the 40 share pages (name, color, status)",
+    "Pictures: the Hemisphere cutaway and cap images are unchanged; the cutaway's labels carry no figures (hemi-cutaway-cap.jpg)",
+    "units.py: every imperial and metric pair in SPEC and the size labels of all four products (N1)",
+    "bfcache.js with real cache restores (full Chromium, the cache flag dropped, my servers on 4196 and 4197 without no-store): Tropos and Hemisphere at 1440x900, Tropos at 390x844 with taps, leaving 20 ms and 700 ms after the tint tap; logs bfcache-desk.txt, bfcache-phone.txt, bfcache-hemi-desk.txt",
+    "synth.js: pagehide and pageshow fired by hand, persisted true and false, plus page.goBack() without the cache, OLD vs NEW",
+    "hashleave.js: tint tap then a route inside the page within 50 ms, OLD vs NEW (N4)",
+    "sweep.js: /, /tropos/ember, /tropos/smoke, /hemisphere/ember, /hemisphere/fog, /core/acid, /core/ice, /mantle/poison, /mantle/haze, /lighting and /contact at 1440x900 and 390x844 on both builds, scrolled with the mouse wheel: console, page errors, failed requests, 4xx, meta, alt text, sideways scroll, ask bar",
+    "askbar.js: the fixed ask bar at rest at 320, 360, 390 and 414 by 844 on /hemisphere/ember and /tropos/smoke on both builds",
+    "errs404.js: /nope, /s/hemisphere-ember, /s/colour-fog, /colors/ice and /hemisphere in the browser at both sizes: identical; the only console message is the 404 page's own status",
+    "text.js: visible text of /, /lighting, /contact, the 404, /tropos/fog, /mantle/ice, /core/smoke, /hemisphere/haze and /s/hemisphere-ember: identical except the two Hemisphere rows; the ask letters name product and tint",
+    "classic.js: classic 15 px scrollbars, plain context, squares 405-520 resized in place, OLD vs NEW: 0 names less visible, 0 names on more lines, no sideways scroll",
+    "noac.js and noac2.js: NEW with align-content ignored, squares 405-520 (N2)",
+    "q7q13.js: hero names tapped at 11 squares (iPhone 13 emulation), and Q13 from /lighting at 1440x900 and 390x844, OLD vs NEW",
+    "All scripts, logs and small JPEGs are in /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/nochange/ (under 1 MB). Helper servers on 4196 (OLD) and 4197 (NEW), PIDs 17035 and 17037, can be stopped; the shared servers on 4183-4187 were not touched"
+   ]
+  },
+  "verdicts": {
+   "verdicts": [
+    {
+     "id": "N1",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced. I ran units2.py over SPEC and SIZEL of /hemisphere/ember, which covers 43 inch, foot and pound pairs. On NEW only '2.3 lb (1.0 kg)' fails to convert back: 1.0 kg is 2.205 lb, which prints as 2.2. On OLD 0 of 43 fail; '0.9 lb (0.4 kg)' converted both ways. In the other direction the pair agrees: 2.3 lb is 1.04 kg. Both figures come from the V12 list's 1034 g, and the wording is the coordinator's 13:10 decision ('about 2.3 lb (1.0 kg)'). 'About' covers the gap, so note is the right severity. Files: skeptic-delta-and-texts/units2.py."
+    },
+    {
+     "id": "N2",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced exactly. sqnoac.js resized NEW in place through squares 405-520 (iPhone 13 emulation) with '.hero-names a { align-content: normal !important }' added to NEW only. Two names are less visible than on OLD: 'Tropos in Acid' at 414x414 and 474x474, 100% down to 94.4%. Its text box starts 1 px above the clip's top (noac.txt: textTop -1 at both squares). With align-content applied, as in current Chromium 153, no name is less visible. It takes a pre-2024 engine and an exact-square window, so note."
+    },
+    {
+     "id": "N3",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced with bfsetup.js: /tropos/acid, then /contact typed in the address bar, then Back, at 1440x900. (1) Default launch: fresh load. (2) channel 'chromium' with --disable-back-forward-cache dropped, on the no-store server 4187: fresh load; notRestoredReasons includes 'response-cache-control-no-store'. (3) Headless shell with the flag dropped, on a host-like server: fresh load ('masked'). (4) channel 'chromium' with the flag dropped, on my copy of serve.js with only Cache-Control changed to 'public, max-age=0, must-revalidate' (port 4199): same document, pageshow persisted [false, true]. So the lane's 'headless Chromium does not restore' is wrong as stated, and the shared 4183-4187 servers cannot show a restore. This is about test method, so note."
+    },
+    {
+     "id": "N4",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Reproduced with hashleave.js at 1440x900 using real clicks: /tropos/acid, 'At the bar', the Ember dot, then the header's 'Lighting' about 30-85 ms later. OLD: the eight names are written into #namerow-say at t=3940 (166 ms after the dot) with the region not rendered and #pdp hidden, and emptied at 5441. NEW does the same (3799, emptied 5300). A region that is not rendered is not announced, and the behavior is identical on both builds, so note."
+    },
+    {
+     "id": "N5",
+     "stands": true,
+     "severity_ok": true,
+     "reason": "Confirmed. /s/hemisphere-ember/x answers 404 on both 4186 and 4187. The literal path '/s/hemisphere-ember/(.+)' answers 307 to /s/hemisphere-ember, which proves serve.js turns the '(.+)' into literal text. serve.js adds no vercel.json headers (its own header comment says so). cmp shows vercel.json and robots.txt byte-identical between tree13 and tree14. Note."
+    }
+   ],
+   "missed": [
+    "None of the reviewer's item verdicts is wrong. C6i-1 to C6i-6 are each done as wanted; I re-checked every one myself. Delta: git shows 46 files from f0e265013e to b50849e568, the 45 HTML pages and site_fix.py. Both trees match their commits (444 of 444 files by git hash-object). sig.py finds a single change signature across all 45 pages: the CSS block, the one pagehide line and the two SPEC values. The CSS matches the C6h gate JSON's 'mix', 'tsmin' and 'ringroom482' text word for word. C6i-1, 2 and 3: sq.js resized in place through squares 405-520, with overlay scrollbars (iPhone 13) and with classic 15 px scrollbars. No name is less visible than on OLD, none wraps onto more lines, and the whole-name count is 456 on both. Boxes are 17 px at 412-413, 24 at 414-441, 37 at 463-473 and 44 at 474-504. Tapping the centre of each name opens the right product and tint at 8 squares (32 of 32). C6i-4, with real cache restores (channel 'chromium', the cache flag dropped, my own no-store-free servers 4198/4199, since stopped): /tropos/acid 'At the bar' at 1440x900 with clicks and /hemisphere/ember at 390x844 with taps. When the page is left 10-60 ms after a tint tap, OLD writes the names 9-35 ms after every restore. NEW never does. After a restore, the next tint tap on NEW announces. At 10-30 ms leaves, Chrome evicts the page ('IgnoreEventAndEvict') about as often on both builds (bfwhy.txt), so the new listener does not stop the cache from being used. C6i-5 and 6: spec.js, all 8 Hemisphere tints at 1440x900 and 390x844. Only the Dimming and Weight rows differ, and phone pages are 23-24 px shorter (Dimming row 59.5 down to 36.3 px). Lens (d): 279 address forms give 0 status or redirect differences, and there are 0 console errors, page errors or failed requests on 9 pages at both sizes plus the home page at squares 414 and 474.",
+    "NOTE, missed (side effect of the gate's tested CSS behind C6i-1 and C6i-2, so 'the only side effect is N2' under C6i-2 is incomplete). The keyboard focus ring now sits on the letters and underline of the two-line 'Hemisphere in Ember' at exact squares 463-471 and 436-441. Where: http://127.0.0.1:4187/ against :4186, iPhone 13 emulation at 465x465 and 441x441. Steps: load; blur and scrollTo(0,0); press Tab until 'Hemisphere in Ember' in #top .hero-names has focus (focus-visible, outline 2px with offset -2px, so the ring fills the box's outer 2 px); screenshot the box. Evidence (ring.txt): at 465, OLD's box is 136x54 with 9 px between the text and the box edge, NEW's is 136x37 with 0.5 px above and 1.5 px below. At 441, OLD has 2.4 and 3.4 px, NEW -1 and 0 px. ringgeo.js, resized in place through 405-520: the ring clears the text on OLD but not on NEW for 15 name-squares ('Hemisphere in Ember' at 436-441 and 463-471). The opposite holds for 51 name-squares (one-line names at 414-435), so overall NEW is better. Crops, OLD | NEW at 441 on top and at 465 below: /tmp/claude-0/-home-user-super-hot/f4a25b5c-7cd5-585d-b4f3-c7ba36b6c676/scratchpad/gate/c6i/skeptic-delta-and-texts/ring-montage.jpg. Focus stays clearly visible, and only keyboard users in exact-square windows meet this, so note. The gate's tsmin result had noted the 54 to 37 px box but not the ring.",
+    "Wording slip in the C6i-5 'why': it says no NEW file contains '0&ndash;' in any form. All 45 pages do, in the speaker's Power row '100&ndash;120 V / 200&ndash;240 V'. The intended claim holds: no file in NEW matches '0&ndash;10' (with or without &#8288;), '0\u201310', '0-10 V' or '10 V'. The verdict does not change.",
+    "On the record, not regressions, in case another reviewer reports them. (1) A real tap 2 px inside the shared edge between two stacked hero names (tapb.js, iPhone 13 emulation, squares 412-441) opens the neighbor on NEW 7 times in 66 and on OLD 0 times. The cases are the bottom of 'Tropos in Acid' opening Hemisphere at 417, 420, 429, 432 and 441, and the bottom of 'Core in Ember' opening Mantle at 417 and 420. This is Chrome's touch adjustment favoring the two-line neighbor, which has no padding. A tap every 1 px down the stack (tapscan.js) shows each name's tap area on NEW is at least OLD's at 412-438 (at 414, Tropos 24 against 21 and Core 22 against 19) and 1 px smaller only at 441 (Tropos 25 against 26, Core 23 against 24). (2) With the web fonts blocked (fallback fonts), squares 405-520 in both scrollbar modes: whole names 453 on NEW against 452 on OLD. The only loss is 'Tropos in Acid' at 412-413, which is already cut on OLD: 9.6% down to 2.9% and 10.4% down to 4.8%.",
+    "Scope: the commit the coordinator plans to push is 93ce6c773d, not the gated b50849e568. git diff b50849e568 93ce6c773d shows only the C6i-7 files: 10 webp pictures (bar-pendants with its thumbnail, home-bar-tall-800/1200, home-ice-wide-1600/2400, mantle-bar and tropos-bar with their thumbnails) and site_v2.py, with no HTML. Every HTML finding above carries over unchanged. This lens did not cover the new hero pictures behind the square-window names (HR-3 contrast). It also did not cover image caching: the files keep their names and /img is served with max-age=3600, so returning visitors may see the old pictures for up to an hour, as in the C6h gate's NE-4."
+   ]
+  }
+ }
+]
