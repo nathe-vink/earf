@@ -95,12 +95,15 @@ def mantle(s, name, log):
                     h['x'] = round(h['x'] + dx, 4); h['y'] = round(h['y'] + dy, 4); log.append(f'{key[:-1]} {h["tint"]} follows')
 
 
-def pulled_sleeves(s, log):
+def pulled_sleeves(s, log, name=''):
     for p in s['set']['props']:
         for bd in (p or {}).get('boards', []) or []:
             r = bd.get('rot', [0, 0, 0])
             if not (abs(r[0] + 4.0) < 1e-6 and abs(bd['y'] - (WALL['y'] - 0.14)) < 1e-3):
                 continue
+            if name == 'bar-hero' and bd['image'] == 'tex/cover-10.png':
+                r[2] = -r[2]; bd['rot'] = r                  # turned to face the desktop hero's camera (the coordinator, 11:09)
+                log.append('cover-10 turned to rz +64, facing the hero camera')
             k = round((bd['z'] - WALL['z0']) / WALL['cell'])
             ztop = WALL['z0'] + k * WALL['cell']
             a = math.radians(r[2]); hw = bd['w'] / 2
@@ -257,10 +260,19 @@ def fruit(s, log):
             log.append(f'{k[0]} {FRUIT_DZ[k] * 1000:+.1f} mm, on the bowl')
 
 
+def builds(s, log):
+    """The desktop hero rendered Tropos from a scratch detail package (barkhorn-cloud.glb 3862f1973f34d0b7, gone); the
+    coordinator (07:21, 09:01): the current builds, as fixed9 (cloud f80fab61440e5c87, variants c9409ba32d184d39)."""
+    for b in s.get('products', []):
+        if 'detail-pkg' in (b.get('def') or ''):
+            b['def'] = 'studio/products/barkhorn-cloud.json'; log.append('Tropos from the current cloud build (the scratch detail package is gone)')
+
+
 def fix(s, name):
     s = copy.deepcopy(s); log = []
+    builds(s, log)
     mantle(s, name, log)
-    pulled_sleeves(s, log)
+    pulled_sleeves(s, log, name)
     stack(s, log)
     if name == 'mantle-bar':
         mantle_bar_stand(s, log)

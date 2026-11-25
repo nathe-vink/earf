@@ -37,7 +37,7 @@ def what(shot, grp):
 def cell(g):
     if g is None:
         return '-'
-    if not g['standing'] and (g['gap_below_m'] is None or g['gap_below_m'] > 0.2):
+    if not g['standing'] and (g['gap_below_m'] is None or g['gap_below_m'] > 0.2 or (g['z_min'] > 1.2 and g['gap_below_m'] > 0.05)):
         return 'hangs (lamp)' if g['z_min'] > 1.2 else f"nothing under it ({g['gap_below_m']} m)"
     s = f"on {g['below'] if g['below'] else '?'}"
     gap = g['gap_below_m']
