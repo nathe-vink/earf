@@ -2004,7 +2004,7 @@ def rc_intro(p, web):
 # the seated habitats, 4:5, one per tint as each passes (r48-biomes); Haze (violet) and Smoke (black) still to come
 HAB_SRC = {'black': 'renders/2026-11-12/barkhorn/habitats/smoke-f-shower-B-portrait-finish.jpg',     # the seated Smoke, the meteor shower (the owner's pick B 2026-11-18; r48-biomes e3850c91)
            'violet': 'renders/2026-11-12/barkhorn/habitats/haze-b-final-portrait-finish.jpg',          # the seated Haze final, finished (r48-biomes 7895f4d6)
-           'blue': 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-finish.jpg',            # the seated Ice final, finished (r48-biomes 8f4c9fd9)
+           'blue': ('f81bff07cd', 'renders/2026-11-12/barkhorn/habitats/ice-final-portrait-support-finish.jpg'),   # Ice, the feet bedded in level snow (r48-biomes f81bff07cd; approved, the coordinator 25 Nov 11:19), read from git
            'ice': 'renders/2026-11-12/barkhorn/habitats/fog-b-final-portrait-finish.jpg',           # the seated Fog final, finished (r48-biomes ba05aed5)
            'green': 'renders/2026-11-12/barkhorn/habitats/poison-b-final-portrait-2-finish.jpg',     # the final Poison, finished (r48-biomes fe192e62)
            'red': 'renders/2026-11-12/barkhorn/habitats/ember-d-final-portrait-finish.jpg',          # the final Ember, finished (r48-biomes 0db25baf)
