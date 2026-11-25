@@ -894,7 +894,7 @@ def fix_3(p, web):
     lamp += [(f'hemisphere-ember-{d}', f'hemisphere-ember-{d}', 1200) for d in ('off', 'cap', 'rim')]
     lamp += [('hemisphere-cluster', 'hemisphere-cluster', 1600), ('hemisphere-row', 'hemisphere-row', 2000), ('core-row', 'core-row', 2000)]
     for src, dst, w in lamp:
-        im = Image.open(LF.format(f=src)).convert('RGB')
+        im = Image.open(site_v2._lamp_src(web, LF.format(f=src))).convert('RGB')
         im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         out = os.path.join(web.IMG, 'rc', dst + '.webp')
         assert os.path.exists(out), ('fix_3: no lamp file', out)
