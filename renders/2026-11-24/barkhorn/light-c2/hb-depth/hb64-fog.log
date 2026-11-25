@@ -1,0 +1,12 @@
+NO GLASS SHADOWS: 6 materials: ['bark@birch-fog-clear', 'bark@birch-fog-clear.001', 'clear-cast@birch-fog-clear', 'horn-formed@birch-fog-clear', 'horn-lot@birch-fog-clear', 'horn-satin@birch-fog-clear']
+SHADOW RAY LINKS LEFT: 0 []
+00:23.939  cycles           | WARNING CUEW initialization failed: Error opening the library
+13:55.271  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/hb-depth/hb64-fog.png'
+/home/user/earf/studio/engine/render.py:511: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+13:59.600  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/hb-depth/hb64-fog.mask.png'
+equipment in frame: 0 px; hidden in frame: 0 px
+/home/user/earf/studio/engine/render.py:562: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
+14:00.446  render           | Saved: '/home/user/earf/renders/2026-11-24/barkhorn/light-c2/hb-depth/hb64-fog.swatch.png'
+renders/2026-11-24/barkhorn/light-c2/hb-depth/hb64-fog.png  {'build': 23.6, 'render': 811.3}  samples 128
