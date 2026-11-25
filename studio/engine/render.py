@@ -68,6 +68,7 @@ def main():
     ap.add_argument('--threads', type=int, default=0)
     ap.add_argument('--no-render', action='store_true', help='apply and save the shot (--save-shot) without rendering')
     ap.add_argument('--probe', action='append', default=[], help='what a part mirrors into the camera (probe.py); no render')
+    ap.add_argument('--support', action='store_true', help='what each product and prop stands on (support.py); no render')
     ap.add_argument('--mirrors', action='store_true', help='with the masks, the mirror map (probe.py); --masks-only writes it anyway')
     a = ap.parse_args()
     if not a.out and not a.no_render:
@@ -111,12 +112,13 @@ def main():
         fp = Path(ROOT, fp)
         if fp.is_file() and str(fp) not in model_hash:
             model_hash[str(fp.relative_to(ROOT)) if str(fp).startswith(str(ROOT)) else str(fp)] = hashlib.sha256(fp.read_bytes()).hexdigest()[:16]
+    block_objs = []                               # each product block's objects (the support check, support.py)
     for blk in blocks:
         if blk.get('asset_blend'):                # a product taken whole from an approved .blend, checked (blendasset.py)
             import blendasset
             _hash_file(blk['asset_blend'])
             o_, p_ = blendasset.place(bpy, blk, ROOT)
-            objs += o_; part_of.update(p_)
+            objs += o_; part_of.update(p_); block_objs.append((blk.get('collection') or blk['asset_blend'], o_))
             continue
         if 'mantle-strata-v3' in blk['def']:     # (2026-11-11 15:40: the CAD-finish Mantle, steel posts, brass, lid on)
             raise SystemExit('render: the old Mantle embed is not the approved build; Mantle comes from its asset (shots._mantle)')
@@ -137,7 +139,7 @@ def main():
             rules = pdef['normals_from'] if blk.get('normals_refine', True) else [dict(r, refine=0) for r in pdef['normals_from']]
             Pr.normals_from(bpy, templates, rules, pdef['origin_mm'], ROOT)
         o_, p_ = Pr.place(bpy, pdef, templates, {**sh, 'product': blk}, ROOT)
-        objs += o_; part_of.update(p_)
+        objs += o_; part_of.update(p_); block_objs.append((blk['def'].rsplit('/', 1)[-1], o_))
     if objs:
         lo, hi = Pr.bounds(objs)
         centre = (lo + hi) / 2
@@ -308,6 +310,16 @@ def main():
         scene.render.image_settings.file_format = 'PNG'; scene.render.image_settings.color_depth = '8'
 
     out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
+    if a.support:
+        import support as Su
+        skip = [i for i, p in enumerate(sh.get('set', {}).get('props', []) or []) if p and p.get('fn') in ('room', 'build')]
+        pg = [g for lbl, ob in block_objs for g in Su.split(lbl, ob)]
+        res = Su.check(bpy, scene, Su.groups_from_scene(bpy, pg, skip))
+        out.with_suffix('.support.json').write_text(json.dumps({'shot': a.shot, 'groups': res}, indent=1) + '\n')
+        for r in res:
+            print(f"SUPPORT {r['group'][:40]:40s} z {r['z_min']:.3f} standing {r['standing']!s:5s} contact {r['contact_supported']:.2f} "
+                  f"footprint {r['footprint_supported']:.2f} overhang {r['overhang_m']} margin {r['edge_margin_m']} on {r['on'][:2]}")
+        return
     if a.probe:
         import probe as Pb
         res = {}
