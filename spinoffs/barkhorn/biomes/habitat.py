@@ -380,18 +380,25 @@ def settle(bpy_, linked, sink=0.002):
         for o in hide:
             o.hide_viewport = True
         dg = bpy_.context.evaluated_depsgraph_get(); dg.update()
-        hits = []
+        hits = []; what = []
         for cx, cy in centres:
             wp = e.matrix_world @ Vector((cx, cy, 0.0))
-            ok, loc, nrm, idx, obj, mat = sc.ray_cast(dg, Vector((wp.x, wp.y, wp.z + 3.0)), Vector((0, 0, -1)), distance=6.0)
-            hits.append(loc.z if ok else None)
+            o0 = Vector((wp.x, wp.y, wp.z + 3.0))
+            for _ in range(20):
+                ok, loc, nrm, idx, obj, mat = sc.ray_cast(dg, o0, Vector((0, 0, -1)), distance=6.0)
+                # a foot presses grass and leaves flat: look through plant scatter (Poly Haven plants, '_LOD' meshes) to
+                # what it stands on (Fog: a grass clump under one foot read 27 mm high, 2026-11-25)
+                if ok and '_LOD' in obj.name:
+                    o0 = loc + Vector((0, 0, -0.0005)); continue
+                break
+            hits.append(loc.z if ok else None); what.append(obj.name if ok else '-')
         for o, v in was:
             o.hide_viewport = v
         got = [h for h in hits if h is not None]
         if not got:
             continue
         spread = max(got) - min(got)
-        feet_txt = ', '.join(f'({cx:+.3f}, {cy:+.3f}) {"miss" if h is None else f"{h:+.4f}"}' for (cx, cy), h in zip(centres, hits))
+        feet_txt = ', '.join(f'({cx:+.3f}, {cy:+.3f}) {"miss" if h is None else f"{h:+.4f}"} on {w}' for (cx, cy), h, w in zip(centres, hits, what))
         z_new = max(got) - zmin - sink
         print(f'ground: {e.name} {len(centres)} {kind} at {feet_txt}; spread {spread * 1000:.1f} mm '
               f'(from {e.location.z:.4f} to {z_new:.4f})')
