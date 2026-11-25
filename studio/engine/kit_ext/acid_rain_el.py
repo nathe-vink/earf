@@ -458,14 +458,18 @@ def wet_ground(bpy, name, p, kit):
     q = dict(p); q['shape'] = 'ground'; q.pop('module', None); q.pop('fn', None)
     obs = kit.piece(bpy, name, q)
     if p.get('lumps'):
-        _lumps(obs[0], p['lumps'], p.get('flat', [0.0, 0.0, 0.9]), p.get('seed', 2), p.get('dips', []))
+        _lumps(obs[0], p['lumps'], p.get('flat', [0.0, 0.0, 0.9]), p.get('seed', 2), p.get('dips', []), p.get('pad'))
     _wet(obs, p)
     return obs
 
 
-def _lumps(ob, lumps, flat, seed, dips=()):
+def _lumps(ob, lumps, flat, seed, dips=(), pad=None):
     """Lava's forms on a ground: for each [size_m, height_m, kind] a layer of noise ('fbm' rolling, 'ridged' ropes and
-    pressure ridges, 'billow' pillowy pahoehoe), level within `flat` [x, y, r] and rising to full by 2 r."""
+    pressure ridges, 'billow' pillowy pahoehoe), level within `flat` [x, y, r] and rising to full by 2 r.
+    `pad` [cx, cy, half_w, half_d, rot_deg, blend] (2026-11-25, the coordinator's support sweep: Acid's two front dips
+    reached under the cabinet, so it overhung a 7-10 degree slope with its front feet in the air): the dips are held off a
+    rectangle (the speaker's footprint and a margin, turned as the speaker), coming back to full over `blend` m outside it,
+    so the speaker stands on level ground."""
     from mathutils import noise
     rnd = random.Random(seed)
     offs = [Vector((rnd.uniform(-500, 500), rnd.uniform(-500, 500), rnd.uniform(-50, 50))) for _ in lumps]
@@ -478,6 +482,13 @@ def _lumps(ob, lumps, flat, seed, dips=()):
             q = math.hypot(wx - dx, wy - dy) / dr
             if q < 1.0:
                 dz -= dd * (1 - q * q) ** 2
+        if pad and dz:
+            pcx, pcy, phw, phd, prot, pbl = pad
+            ca, sa = math.cos(math.radians(prot)), math.sin(math.radians(prot))
+            lx = (wx - pcx) * ca + (wy - pcy) * sa; ly = -(wx - pcx) * sa + (wy - pcy) * ca
+            out = math.hypot(max(0.0, abs(lx) - phw), max(0.0, abs(ly) - phd))
+            u = min(1.0, out / pbl)
+            dz *= u * u * (3 - 2 * u)
         t = 1.0
         if fr > 0:
             q = min(1.0, max(0.0, (math.hypot(wx - fx, wy - fy) - fr) / fr))

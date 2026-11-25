@@ -96,7 +96,12 @@ SETS = {
                # so the ground under the footprint stays above the water (-0.11; -0.09 at the front face) and the water's
                # edge runs about 0.1 m in front of it
                'set.props.0.dips': [[0.0, -0.95, 1.1, 0.2], [-0.2, -1.2, 1.2, 0.2], [-0.95, -2.7, 1.3, 0.22],
-                                    [-1.25, -4.1, 1.4, 0.22], [-1.1, -5.4, 1.4, 0.2], [2.6, 2.4, 1.6, 0.18]]},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
+                                    [-1.25, -4.1, 1.4, 0.22], [-1.1, -5.4, 1.4, 0.2], [2.6, 2.4, 1.6, 0.18]],
+               # 2026-11-25 (the coordinator's support sweep): the first two dips reached under the cabinet, which stood
+               # level over a 7-10 degree fall with its front feet 22-40 mm in the air; the dips held off its footprint
+               # (feet +-0.25 x +-0.21 m, turned -8 deg, a 3 cm margin) and back to full 0.10 m outside it, at the height
+               # the back feet already stood on, so the speaker does not move
+               'set.props.0.pad': [0.0, 0.0, 0.28, 0.24, -8.0, 0.10]},   # 28 deg off mirrored a wedge (crease 26.7), 10 deg off 13.7: 4 deg, as Ice
     # the polished horn mirrors the bright sky in one wall as a pale wedge (half an X) when it's turned far from the
     # camera; turned to about 10 deg off the camera's line it reads clean, as Ice's does (front-on gives a symmetric X)
     # (at -5, 10 deg off, Haze's narrow side face, seen near grazing, mirrored the bright sky as a flat lavender sheet;
@@ -331,6 +336,7 @@ def main():
     ap.add_argument('--dot', nargs=5, action='append', default=[], help="a grip's dot: D SIZE TX TY TZ (tests)")
     ap.add_argument('--clearing-at', type=float, nargs=2, help="the gap's centre, world X Y (tests)")
     ap.add_argument('--clearing', type=float, help='a treefall gap this many m across in the canopy over the speaker (tests)')
+    ap.add_argument('--settle-only', action='store_true', help='build each set, settle its speaker, print the feet and stop (the support check)')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     for n in a.names or HABITATS:
@@ -376,6 +382,8 @@ def main():
             + (['--meniscus', str(a.meniscus or MENISCUS[n])] if (a.meniscus or n in MENISCUS) else []) \
             + [x for c in a.card for x in ('--card', *c)] \
             + [x for d in a.dot for x in ('--dot', *d)]
+        if a.settle_only:
+            cmd.append('--settle-only')
         with open(out.replace('.png', '.log'), 'w') as log:
             r = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
         print(n, 'ok' if r.returncode == 0 else f'failed ({r.returncode})', flush=True)

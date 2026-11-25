@@ -318,27 +318,62 @@ def land_scatter(bpy_, sink=0.01, edge=0.18, drop=0.04):
     print(f'land: {len(tufts)} tufts on {[n for n, _ in G]}; removed {gone}; the rest moved by '
           f'{moved[0]:+.3f} .. {moved[-1]:+.3f} m (median {moved[len(moved) // 2]:+.3f})' if moved else f'land: removed {gone}')
 
-def settle(bpy_, linked, sink=0.002):
-    """Stand each speaker on the ground under it: a ray down through each of its feet (the asset's lowest points) onto
-    the set, and the instance raised or lowered so the lowest foot touches the highest hit, sunk `sink` m."""
+SETTLE_SPREAD = [0.005]   # m: the most the ground may differ between the feet before a shot is refused (2026-11-25)
+SETTLE_ONLY = [False]     # --settle-only: build the set, settle, print the feet and stop (the support check)
+
+
+def _foot_centres(col, zmin, tol=0.01, join=0.05):
+    """The feet's centres in world space: the vertices within `tol` of the lowest point, grouped where they lie within
+    `join` m of one another (one group per foot pad); with a single group (a plinth), its bound's corners and centre."""
     from mathutils import Vector
-    dg = bpy_.context.evaluated_depsgraph_get()
+    low = []
+    for o in col.all_objects:
+        if o.type != 'MESH':
+            continue
+        mw = o.matrix_world
+        if min((mw @ Vector(v)).z for v in o.bound_box) > zmin + tol:
+            continue
+        for v in o.data.vertices:
+            w = mw @ v.co
+            if w.z < zmin + tol:
+                low.append(w)
+    groups = []
+    for w in low:
+        for g in groups:
+            if any((w.xy - q.xy).length < join for q in g[-8:]):
+                g.append(w); break
+        else:
+            groups.append([w])
+    # merge groups that touch (the greedy pass can split one pad)
+    merged = True
+    while merged:
+        merged = False
+        for i in range(len(groups)):
+            for j in range(i + 1, len(groups)):
+                if min((a.xy - b.xy).length for a in groups[i][::4] for b in groups[j][::4]) < join:
+                    groups[i] += groups.pop(j); merged = True; break
+            if merged:
+                break
+    if len(groups) >= 2:
+        return [(sum(q.x for q in g) / len(g), sum(q.y for q in g) / len(g)) for g in groups], 'feet'
+    xs = [q.x for q in low]; ys = [q.y for q in low]
+    return [(min(xs), min(ys)), (min(xs), max(ys)), (max(xs), min(ys)), (max(xs), max(ys)), (sum(xs) / len(xs), sum(ys) / len(ys))], 'plinth'
+
+
+def settle(bpy_, linked, sink=0.002):
+    """Stand each speaker on the ground under it: a ray down through the centre of each foot onto the set, and the
+    instance raised or lowered so the lowest foot touches the highest hit, sunk `sink` m. Since 2026-11-25 (the
+    coordinator's support sweep: Acid's rays, cast at the feet's outer corners, differed by 71 mm and nothing noticed)
+    the shot is refused when the hits differ by more than SETTLE_SPREAD: the ground under the feet must be level."""
+    from mathutils import Vector
     sc = bpy_.context.scene
     for e in linked:
         col = e.instance_collection
-        pts = []
-        for o in col.all_objects:
-            if o.type != 'MESH':
-                continue
-            for v in o.bound_box:
-                w = o.matrix_world @ Vector(v)
-                pts.append(w)
-        if not pts:
+        zs = [(o.matrix_world @ Vector(v)).z for o in col.all_objects if o.type == 'MESH' for v in o.bound_box]
+        if not zs:
             continue
-        zmin = min(p.z for p in pts)
-        feet_ = [p for p in pts if p.z < zmin + 0.01]
-        xs = [p.x for p in feet_]; ys = [p.y for p in feet_]
-        corners = [(min(xs), min(ys)), (min(xs), max(ys)), (max(xs), min(ys)), (max(xs), max(ys)), (sum(xs) / len(xs), sum(ys) / len(ys))]
+        zmin = min(zs)
+        centres, kind = _foot_centres(col, zmin)
         # the speaker itself, the hidden engine copy and the volumes out of the rays' way while they look for ground
         hide = [o for o in sc.objects if o.hide_render or o.get('volume') or o in linked]
         was = [(o, o.hide_viewport) for o in hide]
@@ -346,17 +381,28 @@ def settle(bpy_, linked, sink=0.002):
             o.hide_viewport = True
         dg = bpy_.context.evaluated_depsgraph_get(); dg.update()
         hits = []
-        for cx, cy in corners:
+        for cx, cy in centres:
             wp = e.matrix_world @ Vector((cx, cy, 0.0))
             ok, loc, nrm, idx, obj, mat = sc.ray_cast(dg, Vector((wp.x, wp.y, wp.z + 3.0)), Vector((0, 0, -1)), distance=6.0)
-            if ok:
-                hits.append(loc.z)
+            hits.append(loc.z if ok else None)
         for o, v in was:
             o.hide_viewport = v
-        if hits:
-            z_new = max(hits) - zmin - sink
-            print(f'ground: {e.name} feet on the set at z {max(hits):.4f} (from {e.location.z:.4f} to {z_new:.4f}; hits {[round(h, 4) for h in hits]})')
-            e.location.z = z_new
+        got = [h for h in hits if h is not None]
+        if not got:
+            continue
+        spread = max(got) - min(got)
+        feet_txt = ', '.join(f'({cx:+.3f}, {cy:+.3f}) {"miss" if h is None else f"{h:+.4f}"}' for (cx, cy), h in zip(centres, hits))
+        z_new = max(got) - zmin - sink
+        print(f'ground: {e.name} {len(centres)} {kind} at {feet_txt}; spread {spread * 1000:.1f} mm '
+              f'(from {e.location.z:.4f} to {z_new:.4f})')
+        if len(got) < len(hits) or spread > SETTLE_SPREAD[0]:
+            raise SystemExit(f'SETTLE FAIL {e.name}: the ground under its feet differs by {spread * 1000:.1f} mm '
+                             f'(limit {SETTLE_SPREAD[0] * 1000:.0f} mm){" and a ray found no ground" if len(got) < len(hits) else ""}; '
+                             'level the ground under the footprint or move the speaker')
+        print(f'SETTLE PASS {e.name}: spread {spread * 1000:.1f} mm')
+        e.location.z = z_new
+    if SETTLE_ONLY[0]:
+        raise SystemExit('SETTLE ONLY: stopped after the feet were checked')
 
 
 def black_flag(bpy_, linked, size):
@@ -1333,6 +1379,8 @@ def main():
     ap.add_argument('--real-set', action='store_true', help='every set object seen by every ray, casting shadows')
     ap.add_argument('--led', type=float, default=1.0, help="scale the amp's power LED (the asset's strength is 6)")
     ap.add_argument('--sink', type=float, default=0.002, help='bed the feet this far into the ground, m')
+    ap.add_argument('--settle-only', action='store_true', help='build, settle the speaker, print its feet and stop (the support check)')
+    ap.add_argument('--settle-spread', type=float, default=0.005, help='refuse the shot if the ground under the feet differs by more, m')
     ap.add_argument('--horn-front', action='store_true', help='direct light stops at the horn (no lampshade from behind)')
     ap.add_argument('--horn-as-cabinet', action='store_true', help="the horn's absorption per mm = the cabinet's")
     ap.add_argument('--horn-close', action='store_true'); ap.add_argument('--horn-rough', type=float)
@@ -1340,7 +1388,7 @@ def main():
     a = ap.parse_args()
     global SURFACE_GLASS
     WELD[0] = not a.no_weld; SURFACE_GLASS = a.surface_glass; FRESNEL_ANGLE[0] = a.fresnel_angle
-    SINK[0] = a.sink; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MANIFEST[0] = json.load(open(a.manifest)) if a.manifest else None; MENISCUS[0] = a.meniscus; LAND[0] = not a.no_land; ROLL[0] = tuple(a.roll_edge) if a.roll_edge else None; CREST[0] = tuple(a.crest) if a.crest else None; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
+    SINK[0] = a.sink; SETTLE_ONLY[0] = a.settle_only; SETTLE_SPREAD[0] = a.settle_spread; LED[0] = a.led; REAL_SET[0] = a.real_set; CANOPY_OPEN[0] = a.canopy_open; CLEARING[0] = a.canopy_clearing; CLEARING_AT[0] = tuple(a.canopy_clearing_at); PLANT_ALPHA[0] = tuple(a.plant_alpha); SCRIM[0] = a.scrim; WET[0] = a.wet; REFLECTORS[0] = [tuple(r) for r in a.reflector]; BERMS[0] = [tuple(b) for b in a.berm]; MANIFEST[0] = json.load(open(a.manifest)) if a.manifest else None; MENISCUS[0] = a.meniscus; LAND[0] = not a.no_land; ROLL[0] = tuple(a.roll_edge) if a.roll_edge else None; CREST[0] = tuple(a.crest) if a.crest else None; DOTS[0] = [tuple(d) for d in a.dot]; CARDS[0] = [(c[0], float(c[1]), float(c[2]), float(c[3]), float(c[4])) for c in a.card]; SPLIT[0] = a.split; GLOSSY_FLAG[0] = a.glossy_flag
     HORN['close'] = a.horn_close; HORN['rough'] = a.horn_rough; HORN['shadows'] = not a.horn_front; HORN['as_cabinet'] = a.horn_as_cabinet
     sh = json.load(open(a.shot))
     scale_lights(sh, {k: float(v) for k, v in (x.split('=', 1) for x in a.light)})
