@@ -46,6 +46,9 @@ GLASS_MOVE = {'bar-hero': {(6.31, 4.18): (6.44, 4.15)},              # the secon
               'fixed9': {(8.31, 4.13): (8.213, 4.059)}}
 PULL = 0.05                      # a pulled-out sleeve's front corner, this far past the shelf's lip
 PENDANT_CLOTH = (6.40, 4.45)
+PENDANT_CLOTH_RZ = 0.0          # square to the bar, so it clears the flat sleeve in front of it
+THROW_DX = {'bar-backbar-portrait': 0.04, 'fixed9': -0.03}   # the wool throw off the sleeve stack's corner
+FOLD_DZ = -0.0055                # its lowest point stood 5.8 mm over the counter (the ripples): down onto it
 ICE = 0.024                      # an ice cube's height (kit box size z)
 
 
@@ -179,7 +182,7 @@ def drinks(s, name, log):
             if depth > ICE * 0.95:           # it floats: about 85 % under
                 zb = g['liquid'] - 0.85 * ICE + (0.0015 if j else 0.0)
             else:                            # too shallow to float: on the glass's floor (its tilt lifts a corner)
-                zb = g['floor'] + 0.0025 + 0.002 * j
+                zb = g['floor'] + 0.0045 + 0.002 * j
             q['position'] = q['position'][:2] + [round(zb, 4)]
         log.append(f'ice in ({cx:.2f}, {cy:.2f}): {"floating" if depth > ICE * 0.95 else "on the floor"} (liquid top {g["liquid"]:.3f})')
         tw = g.get('twist')
@@ -192,7 +195,7 @@ def drinks(s, name, log):
             log.append(f'twist on the rim of ({cx:.2f}, {cy:.2f})')
 
 
-def leftovers(s, log):
+def leftovers(s, log, name=''):
     for p in s['set']['props']:
         if (p or {}).get('fn') == 'remove':
             for n in ('life-record', 'life-sleeve'):
@@ -203,6 +206,9 @@ def leftovers(s, log):
             t = p.get('t', 0.01)
             if p.get('rr', 0.016) > t / 2 + 1e-9:
                 p['rr'] = round(t / 2, 4); log.append(f'fold at ({p["x"]:.2f}, {p["y"]:.2f}): layers on each other (rr {p["rr"]})')
+                if t >= 0.008:                               # the wool throw (the napkin, 4 mm, already lies on the top)
+                    p['z'] = round(p['z'] + FOLD_DZ, 4); p['x'] = round(p['x'] + THROW_DX.get(name, 0.0), 4)
+                    log.append(f'throw down {-FOLD_DZ * 1000:.1f} mm onto the top' + (f', {THROW_DX[name] * 100:+.0f} cm in x off the stack' if name in THROW_DX else ''))
 
 
 def pendants(s, log):
@@ -223,12 +229,16 @@ def pendants(s, log):
         log.append(f'bowl and fruit ({bx:.2f}, {by:.2f}) -> on the sleeve ({sx:.3f}, {sy:.3f}, {sz:.4f})')
     for p in props:
         if (p or {}).get('shape') == 'box' and p.get('material') == 'cotton':
-            p['position'] = [PENDANT_CLOTH[0], PENDANT_CLOTH[1], p['position'][2]]; log.append(f'cloth -> {PENDANT_CLOTH}, off the newspaper')
+            p['position'] = [PENDANT_CLOTH[0], PENDANT_CLOTH[1], p['position'][2]]; p['rotate'] = [0, 0, PENDANT_CLOTH_RZ]
+            log.append(f'cloth -> {PENDANT_CLOTH}, rz {PENDANT_CLOTH_RZ}, off the newspaper and the sleeve')
+        for bd in (p or {}).get('boards', []) or []:
+            if bd['image'] == 'tex/newspaper.png' and abs(bd['x'] - 6.97) < 1e-3:
+                bd['x'] = round(bd['x'] + 0.02, 4); log.append('newspaper 2 cm right, off the sleeve\'s corner')
         if (p or {}).get('fn') == 'fold':
             p['y'] = round(p['y'] - 0.015, 4); log.append('napkin 1.5 cm further from the Dust Core')
 
 
-FRUIT_DZ = {('food_lime_01', (0, 20, 0)): -0.009, ('food_lime_01', (30, 0, 90)): 0.0034, ('lemon', (0, 70, 20)): 0.0045}
+FRUIT_DZ = {('food_lime_01', (0, 20, 0)): -0.009, ('food_lime_01', (30, 0, 90)): -0.0004, ('lemon', (0, 70, 20)): 0.0045}
 
 
 def fruit(s, log):
@@ -250,7 +260,7 @@ def fix(s, name):
         mantle_bar_stand(s, log)
     drinks(s, name, log)
     fruit(s, log)
-    leftovers(s, log)
+    leftovers(s, log, name)
     if name == 'bar-pendants':
         pendants(s, log)
     return s, log
