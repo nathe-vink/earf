@@ -1,33 +1,33 @@
-16:19:48 | INFO: Data are loaded, start creating Blender stuff
-16:19:48 | INFO: Blender create Mesh node Cube.054
-16:19:50 | INFO: glTF import finished in 1.41s
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:627: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+07:16:32 | INFO: Data are loaded, start creating Blender stuff
+07:16:32 | INFO: Blender create Mesh node Cube.054
+07:16:32 | INFO: glTF import finished in 0.03s
+/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/wt17/spinoffs/barkhorn/companions/lamp_site.py:642: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   gl = bpy.data.materials.new('stoneware'); gl.use_nodes = True; nt = gl.node_tree; bs = nt.nodes['Principled BSDF']
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:668: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/wt17/spinoffs/barkhorn/companions/lamp_site.py:683: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   pm = bpy.data.materials.new('page-%d' % sgn); pm.use_nodes = True; nt = pm.node_tree; bs = nt.nodes['Principled BSDF']
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:258: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/wt17/spinoffs/barkhorn/companions/lamp_site.py:260: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   clr = bpy.data.materials.new(f'opal-face-{tint}'); clr.use_nodes = True; ntc_ = clr.node_tree; ntc_.nodes.clear()
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:215: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/wt17/spinoffs/barkhorn/companions/lamp_site.py:217: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   m = bpy.data.materials.new(nm); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
-Timer 'STL Import' took 0.50 ms
-Timer 'STL Import' took 0.49 ms
-Timer 'STL Import' took 4.01 ms
-Timer 'STL Import' took 4.03 ms
-Timer 'STL Import' took 0.86 ms
-/home/user/earf/spinoffs/barkhorn/companions/lamp_site.py:277: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+Timer 'STL Import' took 0.56 ms
+Timer 'STL Import' took 0.53 ms
+Timer 'STL Import' took 5.06 ms
+Timer 'STL Import' took 4.62 ms
+Timer 'STL Import' took 1.02 ms
+/tmp/claude-0/-home-user-earf/e73bd455-48f8-5f69-9a3b-fa1e22e4e1e9/scratchpad/wt17/spinoffs/barkhorn/companions/lamp_site.py:279: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   cm = bpy.data.materials.new(f'collar-{tint}'); cm.use_nodes = True; nt = cm.node_tree
-Timer 'STL Import' took 0.82 ms
-Timer 'STL Import' took 0.41 ms
-Timer 'STL Import' took 0.60 ms
-Timer 'STL Import' took 0.76 ms
-Timer 'STL Import' took 0.74 ms
-Timer 'STL Import' took 0.20 ms
-Timer 'STL Import' took 4.16 ms
-Timer 'STL Import' took 0.41 ms
-Timer 'STL Import' took 0.43 ms
-00:18.555  cycles           | WARNING CUEW initialization failed: Error opening the library
+Timer 'STL Import' took 1.13 ms
+Timer 'STL Import' took 0.46 ms
+Timer 'STL Import' took 0.69 ms
+Timer 'STL Import' took 0.78 ms
+Timer 'STL Import' took 0.83 ms
+Timer 'STL Import' took 0.26 ms
+Timer 'STL Import' took 4.74 ms
+Timer 'STL Import' took 0.45 ms
+Timer 'STL Import' took 0.48 ms
+00:10.185  cycles           | WARNING CUEW initialization failed: Error opening the library
 AUDIT inuse hidden [] no-shadow [] lights [('room-fill', 'AREA', 6.0), ('led-red-0', 'AREA', 0.621), ('led-red-1', 'AREA', 0.621), ('led-red-2', 'AREA', 0.621), ('led-red-3', 'AREA', 0.621), ('led-red-4', 'AREA', 0.621), ('led-red-5', 'AREA', 0.621), ('led-red-6', 'AREA', 0.621), ('led-red-7', 'AREA', 0.621), ('led-red-8', 'AREA', 0.621), ('led-red-9', 'AREA', 0.621), ('led-red-10', 'AREA', 0.621), ('led-red-11', 'AREA', 0.621), ('led-red-12', 'AREA', 0.621), ('led-red-13', 'AREA', 0.621), ('led-red-14', 'AREA', 0.621), ('led-red-15', 'AREA', 0.621), ('led-red-16', 'AREA', 0.621), ('led-red-17', 'AREA', 0.621), ('led-red-18', 'AREA', 0.621), ('led-red-19', 'AREA', 0.621), ('led-red-20', 'AREA', 0.621), ('led-red-21', 'AREA', 0.621), ('led-red-22', 'AREA', 0.621), ('led-red-23', 'AREA', 0.621)]
 HIDDENCAST inuse: 1 hidden, 0 in frame
    out         0.0 %  area lamp (rectangle) room-fill
-00:21.438  render           | Saved: '/home/user/earf/renders/2026-11-16/barkhorn/lamp-site/final-mix/masks/hemisphere-ember-inuse-room-fill.png'
+00:11.505  render           | Saved: '/home/user/earf/renders/2026-11-25/barkhorn/lamp-site/support/masks/hemisphere-ember-inuse-room-fill.png'
 CASTCHECK inuse {'room-fill': 0.0}
