@@ -997,6 +997,13 @@ def north_parts(p=N):
             rb_ = rb_ - box(xe_ - 2.0, 6.0, H_(26.0), xe_ + 2.0, 11.5, H_(29.0))
         for sx_ in (1.0, 16.0):
             rb_ = rb_ - cyl('z', (sx_, 24.5), 3.4, zp_ - 2, zp_ + 1)
+        # (after V11, the coordinator 10:35) the LED leads' tie slots: two 1.0 x 3.0 slots in the ledge either side of each
+        # lead's notch (x 3.0 to 4.0 and 9.8 to 10.8 for the - lead, 16.6 to 17.6 and 23.0 to 24.0 for the +), one tie
+        # (Panduit PLT1M-C) round each lead through its pair; and the side flanges' dimples, Ø3 at (y 8.7, z 37), drawn to
+        # touch the splices (0.35 and 0.75 tall), made 0.5 taller than that for the push fit
+        for x0_ in (3.0, 9.8, 16.6, 23.0):
+            rb_ = rb_ - box(x0_, 6.5, H_(26.0), x0_ + 1.0, 9.5, H_(29.0))
+        rb_ = rb_ + cyl('x', (8.7, H_(37.0)), 3.0, -3.4, -3.05) + cyl('x', (8.7, H_(37.0)), 3.0, 23.65, 24.4)
         clamp_ = cscr_ = None
         for s0_, s1_ in ((7.0, 13.0), (14.0, 20.0)):
             z0s_, z1s_, zs_ = H_(s0_), H_(s1_), H_((s0_ + s1_) / 2)
@@ -1266,10 +1273,10 @@ def north_parts(p=N):
                       '15 (the joint; 8.6 from the bottom, 8.0 from the corner); a flange 12 x 10 off the +y end at the top, Ø3.4 at (-21, '
                       '46.3)',
             'relief-bracket': DC_ + SM_ + '1.6 sheet, a channel: the web across y (y 3 to 4.6), x -5 to 26, z 5 to 48.4; side flanges bent +y to '
-                              'y 13.8, each dimpled 0.5 inward at z 37 (the splices\' push fit); a top flange to y 28.5 under the plate, 2 x '
+                              'y 13.8, each with a Ø3 dimple at (y 8.7, z 37) standing 0.85 (the - side) and 1.25 (the + side) proud of its inner face, so each splice is pressed 0.5 (the push fit); a top flange to y 28.5 under the plate, 2 x '
                               'Ø3.4 at (1, 24.5) and (16, 24.5), 15.0 ±0.05 apart (the plate studs). The web\'s window x -3 to 22, z 21 to '
                               '26.7, its top edge bent out +y as the splices\' ledge (z 26.7 to 28.3, to y 12) with four notches 4 wide at x '
-                              '0.25, 6.75, 13.85, 20.35; the window and the notches deburred and broken 0.3. HOLES in the web (x, z): 2 x '
+                              '0.25, 6.75, 13.85, 20.35, and four 1.0 x 3.0 tie slots (x 3.0, 9.8, 16.6, 23.0 to +1.0; y 6.5 to 9.5) for the LED leads\' two ties; the window, the notches and the slots deburred and broken 0.3. HOLES in the web (x, z): 2 x '
                               'Ø4.22 +0.08 for PEM S-M3-1, nuts on the +y face, at (8, 10) and (8, 17) (the straps; 8 or more from the bends)',
             'gripper-brackets': DC_ + SM_ + 'HOLES: Ø10.5 in each foot at (-+48, 0) (M10, the gripper); 4 x Ø3.4 in each bracket\'s two outward '
                                 'flanges at (-+43.5, -+29.3) and (-+52.5, -+29.3), to each other ±0.05 (the plate\'s studs)',
