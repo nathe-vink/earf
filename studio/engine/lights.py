@@ -99,8 +99,14 @@ def panel(bpy, name, spec, centre):
     that only lights (or only reflects): Cycles honours an object's ray visibility in light sampling, where a Light Path
     node would not (an emitter's shader is evaluated there without a ray type).
     The panel's face looks at its target; its back emits nothing; it casts no shadow. With `receivers` its face is
-    see-through as well (its receivers see it added to what lies behind; every other part sees past it)."""
+    see-through as well (its receivers see it added to what lies behind; every other part sees past it).
+    With `body` it is a real softbox instead: it casts shadows, its back is black cloth and a black box stands behind
+    it; a body with `receivers` is refused, a twin never has one, and each panel is listed in the frame's report
+    (notes.panels: body, body_box, visible_shadow, camera, twins)."""
     import bmesh
+    if spec.get('body') and spec.get('receivers'):
+        # a body is an opaque softbox that shades everything; receivers make the face see-through to all but them
+        raise ValueError(f'panel {name}: body and receivers together make an inconsistent panel (opaque box, see-through face)')
     w, h = spec.get('size_m', [1.0, 0.25])
     me = bpy.data.meshes.new(name)
     # vertices clockwise seen from +z, so the face's normal is local -z: the direction aim() turns toward the target
@@ -203,11 +209,22 @@ def panel(bpy, name, spec, centre):
     twins = []
     for kind, share in (('diffuse', d), ('specular', s)):
         if 0.0 < share < 1.0:
-            tw = panel(bpy, f'{name}.{kind}', dict(spec, strength=peak * share, camera=False,
+            # a twin only lights (or only reflects) from the same place: it never has a body of its own (the main
+            # panel's box already stands there and casts the shadow)
+            tw = panel(bpy, f'{name}.{kind}', dict(spec, strength=peak * share, camera=False, body=False, _twin=True,
                                                    diffuse=kind == 'diffuse', specular=kind == 'specular'), centre)
             tw.visible_transmission = False; tw.visible_volume_scatter = False
             twins.append(tw.name)
     ob['engine_twins'] = ','.join(twins)
+    if not spec.get('_twin'):
+        # the frame's own proof of what each panel was (render.py writes engine_notes into the .report.json): an
+        # engine older than the body option builds a see-through, shadowless strip without a word
+        sc = bpy.context.scene; notes = json.loads(sc.get('engine_notes', '{}'))
+        bo = bpy.data.objects.get(name + '-body') if spec.get('body') else None
+        notes.setdefault('panels', {})[name] = {
+            'body': bool(spec.get('body', False)), 'body_box': bool(bo is not None and bo.parent == ob),
+            'visible_shadow': bool(ob.visible_shadow), 'camera': bool(ob.visible_camera), 'twins': twins}
+        sc['engine_notes'] = json.dumps(notes)
     return ob
 
 
