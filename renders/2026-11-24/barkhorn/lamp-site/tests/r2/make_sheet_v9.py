@@ -42,8 +42,8 @@ FOOT = [
     'Hemisphere, Ember, off. Level views: one camera 1.6 m off, 200 mm lens.',
 ]
 LOCK = [
-    ('lock-1-hidden', 'A WITH THE LOCK, as drawn: its knob behind the crown, its cables on the lock\'s line'),
-    ('lock-2-profile', 'A with the lock, the lamp turned 79 deg: the knob in profile (same camera)'),
+    ('lock9-1-hidden', 'A WITH THE LOCK, as drawn: its knob behind the crown, its cables on the lock\'s line'),
+    ('lock9-2-profile', 'A with the lock, the lamp turned 79 deg: the knob in profile (same camera)'),
 ]
 BELOW = [
     ('v9-below', 'From below: 0.29 m under the rim, 3 cm off the axis, 40 mm lens'),

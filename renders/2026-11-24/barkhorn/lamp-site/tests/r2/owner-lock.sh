@@ -15,10 +15,10 @@ LV="HOUSE_CAM=0.693,-1.442,0.405,0,0,0.405,200"
 LIT="HOUSE_ROOM=0 HOUSE_DOME=1.0 HOUSE_WB=6500,10 STUDIO_OFF=house-key,house-key-face,house-key-housing,house-fill,house-fill-face,house-fill-housing,house-kick,house-kick-face,house-kick-housing,house-horn,house-horn-face,house-horn-housing,house-bg-left,house-bg-right,house-wall_left,house-bg-high,house-wall-ll"
 # v9: all five re-rendered with the lock's real finish (a matte black polyamide knob on a blackened steel body); frame 4
 # (no lock) from A's lock-off meshes (its cables at 0/180); frame 1 rendered, not copied
-X="$G $LV" $T lock-1-hidden hoff red
-X="$G $LV HEMI_ROT=-79" $T lock-2-profile hoff red
-X="$G $LV HEMI_ROT=-169" $T lock-3-back hoff red
-X="$G $LV HEMI_ROT=-79 HEMI_LOCK=0" $T lock-4-none hoff red
+X="$G $LV" $T lock9-1-hidden hoff red
+X="$G $LV HEMI_ROT=-79" $T lock9-2-profile hoff red
+X="$G $LV HEMI_ROT=-169" $T lock9-3-back hoff red
+X="$G $LV HEMI_ROT=-79 HEMI_LOCK=0" $T lock9-4-none hoff red
 # (the first try, 1.6 m off with the 200 mm lens, put the camera under the paper ground: re-shot from 0.75 m, 100 mm lens)
-X="$G $LIT HOUSE_CAM=-0.168,0.628,0.03,0,0,0.38,100,1" $T lock-5-below hoff red
+X="$G $LIT HOUSE_CAM=-0.168,0.628,0.03,0,0,0.38,100,1" $T lock9-5-below hoff red
 date -u
