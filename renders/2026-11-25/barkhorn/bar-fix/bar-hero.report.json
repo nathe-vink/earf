@@ -2,8 +2,8 @@
  "shot": "renders/2026-11-25/barkhorn/bar-fix/shots/bar-hero.json",
  "image": "renders/2026-11-25/barkhorn/bar-fix/bar-hero.png",
  "seconds": {
-  "build": 139.0,
-  "render": 2741.5
+  "build": 111.5,
+  "render": 0.0
  },
  "samples": 128,
  "size": [
@@ -17,7 +17,7 @@
  "sun_aim": null,
  "flags_crossing_set": [],
  "model_hash": {
-  "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb": "81be719c5553be8f",
+  "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb": "f80fab61440e5c87",
   "spinoffs/barkhorn/variants/out/render/barkhorn-variants.glb": "c9409ba32d184d39",
   "studio/assets/cache/mantle/fa0c3a65/mantle-strata.blend": "b6be569d65b13bc1"
  },
@@ -4072,6 +4072,1623 @@
     1470
    ],
    "depth_m": 2.045
+  }
+ },
+ "mirrors": {
+  "image": "renders/2026-11-25/barkhorn/bar-fix/bar-hero.mirror.png",
+  "step": 2,
+  "parts": {
+   "waveguide": {
+    "pixels": 123812,
+    "seen": [
+     [
+      "waveguide",
+      0.598
+     ],
+     [
+      "beams",
+      0.138
+     ],
+     [
+      "ceiling-deck",
+      0.039
+     ],
+     [
+      "horn-throat",
+      0.033
+     ],
+     [
+      "opening",
+      0.032
+     ],
+     [
+      "floor",
+      0.024
+     ]
+    ]
+   },
+   "front-panel": {
+    "pixels": 123748,
+    "seen": [
+     [
+      "concrete-walls",
+      0.387
+     ],
+     [
+      "counter-zinc",
+      0.147
+     ],
+     [
+      "banq-back",
+      0.084
+     ],
+     [
+      "alcove-fir-2",
+      0.064
+     ],
+     [
+      "alcove-fir-0",
+      0.052
+     ],
+     [
+      "screen-banquette-a",
+      0.032
+     ]
+    ]
+   },
+   "woofer-cone": {
+    "pixels": 39932,
+    "seen": [
+     [
+      "ceiling-deck",
+      0.226
+     ],
+     [
+      "floor",
+      0.142
+     ],
+     [
+      "counter-back",
+      0.131
+     ],
+     [
+      "woofer-cone",
+      0.129
+     ],
+     [
+      "beams",
+      0.091
+     ],
+     [
+      "caldera-1",
+      0.034
+     ]
+    ]
+   },
+   "right": {
+    "pixels": 25376,
+    "seen": [
+     [
+      "spk-niche-felt",
+      0.413
+     ],
+     [
+      "alcove-fir-1",
+      0.159
+     ],
+     [
+      "screen-banquette-a",
+      0.13
+     ],
+     [
+      "front-panel",
+      0.103
+     ],
+     [
+      "counter-zinc",
+      0.061
+     ],
+     [
+      "concrete-walls",
+      0.038
+     ]
+    ]
+   },
+   "caldera-3": {
+    "pixels": 25240,
+    "seen": [
+     [
+      "concrete-walls",
+      0.487
+     ],
+     [
+      "alcove-fir-2",
+      0.115
+     ],
+     [
+      "alcove-fir-0",
+      0.078
+     ],
+     [
+      "caldera-2",
+      0.074
+     ],
+     [
+      "screen-banquette-a",
+      0.063
+     ],
+     [
+      "banq-back",
+      0.049
+     ]
+    ]
+   },
+   "left": {
+    "pixels": 24272,
+    "seen": [
+     [
+      "spk-niche-felt",
+      0.432
+     ],
+     [
+      "concrete-walls",
+      0.305
+     ],
+     [
+      "front-panel",
+      0.141
+     ],
+     [
+      "counter-zinc",
+      0.053
+     ],
+     [
+      "banq-back",
+      0.02
+     ],
+     [
+      "counter-back",
+      0.015
+     ]
+    ]
+   },
+   "plinth-L1-stack": {
+    "pixels": 23876,
+    "seen": [
+     [
+      "chairs-leather",
+      0.236
+     ],
+     [
+      "platter-disc.ember",
+      0.173
+     ],
+     [
+      "prop1-kit",
+      0.166
+     ],
+     [
+      "records-shelving",
+      0.104
+     ],
+     [
+      "banq-base",
+      0.094
+     ],
+     [
+      "chairs-steel",
+      0.073
+     ]
+    ]
+   },
+   "woofer-surround": {
+    "pixels": 15204,
+    "seen": [
+     [
+      "woofer-surround",
+      0.453
+     ],
+     [
+      "woofer-frame",
+      0.096
+     ],
+     [
+      "ceiling-deck",
+      0.087
+     ],
+     [
+      "counter-zinc",
+      0.058
+     ],
+     [
+      "beams",
+      0.044
+     ],
+     [
+      "concrete-walls",
+      0.042
+     ]
+    ]
+   },
+   "woofer-frame": {
+    "pixels": 15096,
+    "seen": [
+     [
+      "concrete-walls",
+      0.589
+     ],
+     [
+      "woofer-surround",
+      0.138
+     ],
+     [
+      "alcove-fir-0",
+      0.134
+     ],
+     [
+      "alcove-fir-1",
+      0.05
+     ],
+     [
+      "alcove-fir-2",
+      0.036
+     ],
+     [
+      "caldera-1",
+      0.026
+     ]
+    ]
+   },
+   "base-L1-stack": {
+    "pixels": 14004,
+    "seen": [
+     [
+      "plinth-L1-stack.ember",
+      0.415
+     ],
+     [
+      "counter-zinc",
+      0.294
+     ],
+     [
+      "phono-stage.ember",
+      0.123
+     ],
+     [
+      "motor.ember",
+      0.032
+     ],
+     [
+      "bearing-housing.ember",
+      0.022
+     ],
+     [
+      "prop1-kit",
+      0.022
+     ]
+    ]
+   },
+   "caldera-2": {
+    "pixels": 13820,
+    "seen": [
+     [
+      "concrete-walls",
+      0.379
+     ],
+     [
+      "caldera-3",
+      0.151
+     ],
+     [
+      "caldera-1",
+      0.127
+     ],
+     [
+      "front-panel",
+      0.084
+     ],
+     [
+      "alcove-fir-2",
+      0.069
+     ],
+     [
+      "alcove-fir-0",
+      0.064
+     ]
+    ]
+   },
+   "caldera-1": {
+    "pixels": 12864,
+    "seen": [
+     [
+      "concrete-walls",
+      0.409
+     ],
+     [
+      "front-panel",
+      0.165
+     ],
+     [
+      "caldera-2",
+      0.147
+     ],
+     [
+      "alcove-fir-0",
+      0.073
+     ],
+     [
+      "alcove-fir-2",
+      0.059
+     ],
+     [
+      "woofer-frame",
+      0.05
+     ]
+    ]
+   },
+   "record": {
+    "pixels": 11820,
+    "seen": [
+     [
+      "prop1-kit",
+      0.42
+     ],
+     [
+      "record.ember",
+      0.298
+     ],
+     [
+      "records-shelving",
+      0.177
+     ],
+     [
+      "concrete-walls",
+      0.049
+     ],
+     [
+      "prop1-kit-other",
+      0.017
+     ],
+     [
+      "plinth-L1-stack.ember",
+      0.008
+     ]
+    ]
+   },
+   "bottom": {
+    "pixels": 8220,
+    "seen": [
+     [
+      "counter-back",
+      0.858
+     ],
+     [
+      "front-panel",
+      0.14
+     ],
+     [
+      "left",
+      0.001
+     ],
+     [
+      "right",
+      0.001
+     ]
+    ]
+   },
+   "top": {
+    "pixels": 7056,
+    "seen": [
+     [
+      "concrete-walls",
+      0.946
+     ],
+     [
+      "screen-banquette-a",
+      0.054
+     ]
+    ]
+   },
+   "woofer-cap": {
+    "pixels": 5512,
+    "seen": [
+     [
+      "ceiling-deck",
+      0.195
+     ],
+     [
+      "counter-back",
+      0.194
+     ],
+     [
+      "woofer-cone",
+      0.157
+     ],
+     [
+      "counter-zinc",
+      0.078
+     ],
+     [
+      "beams",
+      0.073
+     ],
+     [
+      "concrete-walls",
+      0.072
+     ]
+    ]
+   },
+   "port-left": {
+    "pixels": 5444,
+    "seen": [
+     [
+      "lining-back-a-web",
+      0.434
+     ],
+     [
+      "rib-back-1",
+      0.126
+     ],
+     [
+      "port-left",
+      0.118
+     ],
+     [
+      "land-left",
+      0.072
+     ],
+     [
+      "land-bottom",
+      0.071
+     ],
+     [
+      "lining-back-d-web",
+      0.07
+     ]
+    ]
+   },
+   "port-right": {
+    "pixels": 5436,
+    "seen": [
+     [
+      "lining-back-f-web",
+      0.432
+     ],
+     [
+      "rib-back-2",
+      0.127
+     ],
+     [
+      "port-right",
+      0.118
+     ],
+     [
+      "land-bottom",
+      0.075
+     ],
+     [
+      "land-right",
+      0.07
+     ],
+     [
+      "lining-back-d-web",
+      0.068
+     ]
+    ]
+   },
+   "platter-disc": {
+    "pixels": 4128,
+    "seen": [
+     [
+      "plinth-L1-stack.ember",
+      0.375
+     ],
+     [
+      "chairs-leather",
+      0.229
+     ],
+     [
+      "banq-seat",
+      0.122
+     ],
+     [
+      "counter-zinc",
+      0.084
+     ],
+     [
+      "wooden_bowl_01",
+      0.043
+     ],
+     [
+      "banq-base",
+      0.029
+     ]
+    ]
+   },
+   "port-frame-left": {
+    "pixels": 3416,
+    "seen": [
+     [
+      "counter-zinc",
+      0.278
+     ],
+     [
+      "port-left",
+      0.133
+     ],
+     [
+      "front-panel",
+      0.109
+     ],
+     [
+      "counter-back",
+      0.098
+     ],
+     [
+      "concrete-walls",
+      0.083
+     ],
+     [
+      "ceiling-deck",
+      0.057
+     ]
+    ]
+   },
+   "port-frame-right": {
+    "pixels": 3400,
+    "seen": [
+     [
+      "counter-zinc",
+      0.281
+     ],
+     [
+      "port-right",
+      0.133
+     ],
+     [
+      "front-panel",
+      0.094
+     ],
+     [
+      "counter-back",
+      0.091
+     ],
+     [
+      "ceiling-deck",
+      0.051
+     ],
+     [
+      "banq-cushions",
+      0.032
+     ]
+    ]
+   },
+   "horn-throat": {
+    "pixels": 2168,
+    "seen": [
+     [
+      "horn-throat",
+      0.55
+     ],
+     [
+      "hf-plug",
+      0.153
+     ],
+     [
+      "hf-adaptor",
+      0.105
+     ],
+     [
+      "waveguide",
+      0.09
+     ],
+     [
+      "hf-exit",
+      0.068
+     ],
+     [
+      "hf-motor",
+      0.02
+     ]
+    ]
+   },
+   "belt": {
+    "pixels": 1512,
+    "seen": [
+     [
+      "plinth-L1-stack.ember",
+      0.434
+     ],
+     [
+      "chairs-leather",
+      0.222
+     ],
+     [
+      "banq-seat",
+      0.114
+     ],
+     [
+      "platter-disc.ember",
+      0.061
+     ],
+     [
+      "counter-zinc",
+      0.061
+     ],
+     [
+      "banq-base",
+      0.021
+     ]
+    ]
+   },
+   "strata-posts": {
+    "pixels": 1300,
+    "seen": [
+     [
+      "spk-niche-felt",
+      0.471
+     ],
+     [
+      "waveguide",
+      0.252
+     ],
+     [
+      "concrete-walls",
+      0.092
+     ],
+     [
+      "strata-collars",
+      0.037
+     ],
+     [
+      "strata-posts",
+      0.034
+     ],
+     [
+      "opening",
+      0.034
+     ]
+    ]
+   },
+   "woofer-screws": {
+    "pixels": 684,
+    "seen": [
+     [
+      "caldera-1",
+      0.181
+     ],
+     [
+      "concrete-walls",
+      0.14
+     ],
+     [
+      "ceiling-deck",
+      0.14
+     ],
+     [
+      "counter-zinc",
+      0.105
+     ],
+     [
+      "counter-back",
+      0.094
+     ],
+     [
+      "beams",
+      0.064
+     ]
+    ]
+   },
+   "post-1": {
+    "pixels": 660,
+    "seen": [
+     [
+      "base-L1-stack.ember",
+      0.618
+     ],
+     [
+      "counter-zinc",
+      0.339
+     ],
+     [
+      "prop19-kit-8",
+      0.03
+     ],
+     [
+      "prop19-kit-7",
+      0.012
+     ]
+    ]
+   },
+   "post-2": {
+    "pixels": 652,
+    "seen": [
+     [
+      "base-L1-stack.ember",
+      0.601
+     ],
+     [
+      "counter-zinc",
+      0.35
+     ],
+     [
+      "prop19-kit-7",
+      0.049
+     ]
+    ]
+   },
+   "lining-back-d-web": {
+    "pixels": 608,
+    "seen": [
+     [
+      "lining-bottom-1-web",
+      0.704
+     ],
+     [
+      "bottom",
+      0.079
+     ],
+     [
+      "rib-back-2",
+      0.072
+     ],
+     [
+      "rib-back-1",
+      0.072
+     ],
+     [
+      "port-left",
+      0.026
+     ],
+     [
+      "front-panel",
+      0.026
+     ]
+    ]
+   },
+   "hf-plug": {
+    "pixels": 564,
+    "seen": [
+     [
+      "horn-throat",
+      0.248
+     ],
+     [
+      "hf-exit",
+      0.191
+     ],
+     [
+      "hf-adaptor",
+      0.191
+     ],
+     [
+      "hf-motor",
+      0.149
+     ],
+     [
+      "concrete-walls",
+      0.085
+     ],
+     [
+      "hf-plug",
+      0.057
+     ]
+    ]
+   },
+   "arm-base": {
+    "pixels": 560,
+    "seen": [
+     [
+      "arm-base.ember",
+      0.393
+     ],
+     [
+      "arm-puck.ember",
+      0.2
+     ],
+     [
+      "base-L1-stack.ember",
+      0.143
+     ],
+     [
+      "ceiling-deck",
+      0.1
+     ],
+     [
+      "records-shelving",
+      0.029
+     ],
+     [
+      "prop1-kit",
+      0.029
+     ]
+    ]
+   },
+   "feet-base": {
+    "pixels": 532,
+    "seen": [
+     [
+      "spk-niche-oak",
+      0.669
+     ],
+     [
+      "bottom",
+      0.173
+     ],
+     [
+      "feet-stem",
+      0.12
+     ],
+     [
+      "right",
+      0.023
+     ],
+     [
+      "left",
+      0.015
+     ]
+    ]
+   },
+   "lining-bottom-1-web": {
+    "pixels": 456,
+    "seen": [
+     [
+      "lining-back-d-web",
+      0.895
+     ],
+     [
+      "rib-back-2",
+      0.079
+     ],
+     [
+      "rib-back-1",
+      0.026
+     ]
+    ]
+   },
+   "strata-collars": {
+    "pixels": 412,
+    "seen": [
+     [
+      "spk-niche-felt",
+      0.301
+     ],
+     [
+      "concrete-walls",
+      0.165
+     ],
+     [
+      "waveguide",
+      0.126
+     ],
+     [
+      "strata-posts",
+      0.068
+     ],
+     [
+      "opening",
+      0.049
+     ],
+     [
+      "spk-niche-oak",
+      0.039
+     ]
+    ]
+   },
+   "arm-tube": {
+    "pixels": 404,
+    "seen": [
+     [
+      "prop1-kit",
+      0.455
+     ],
+     [
+      "records-shelving",
+      0.248
+     ],
+     [
+      "concrete-walls",
+      0.129
+     ],
+     [
+      "arm-tube.ember",
+      0.05
+     ],
+     [
+      "arm-yoke.ember",
+      0.04
+     ],
+     [
+      "backbar-top",
+      0.04
+     ]
+    ]
+   },
+   "feet": {
+    "pixels": 336,
+    "seen": [
+     [
+      "counter-zinc",
+      1.0
+     ]
+    ]
+   },
+   "motor-plate": {
+    "pixels": 316,
+    "seen": [
+     [
+      "prop1-kit",
+      0.494
+     ],
+     [
+      "plinth-L1-stack.ember",
+      0.215
+     ],
+     [
+      "records-shelving",
+      0.215
+     ],
+     [
+      "motor.ember",
+      0.051
+     ],
+     [
+      "motor-screws.ember",
+      0.013
+     ],
+     [
+      "motor-plate.ember",
+      0.013
+     ]
+    ]
+   },
+   "pulley": {
+    "pixels": 312,
+    "seen": [
+     [
+      "prop1-kit",
+      0.269
+     ],
+     [
+      "records-shelving",
+      0.231
+     ],
+     [
+      "belt.ember",
+      0.154
+     ],
+     [
+      "plinth-L1-stack.ember",
+      0.128
+     ],
+     [
+      "platter-disc.ember",
+      0.09
+     ],
+     [
+      "wooden_bowl_01",
+      0.051
+     ]
+    ]
+   },
+   "arm-cw": {
+    "pixels": 276,
+    "seen": [
+     [
+      "concrete-walls",
+      0.217
+     ],
+     [
+      "ceiling-deck",
+      0.174
+     ],
+     [
+      "arm-cw.ember",
+      0.116
+     ],
+     [
+      "counter-zinc",
+      0.072
+     ],
+     [
+      "prop1-kit",
+      0.043
+     ],
+     [
+      "lamp house over concrete-walls",
+      0.043
+     ]
+    ]
+   },
+   "foot-pads": {
+    "pixels": 260,
+    "seen": [
+     [
+      "counter-zinc",
+      1.0
+     ]
+    ]
+   },
+   "cart-body": {
+    "pixels": 232,
+    "seen": [
+     [
+      "plinth-L1-stack.ember",
+      0.31
+     ],
+     [
+      "record.ember",
+      0.241
+     ],
+     [
+      "platter-disc.ember",
+      0.19
+     ],
+     [
+      "counter-zinc",
+      0.086
+     ],
+     [
+      "cart-stylus.ember",
+      0.086
+     ],
+     [
+      "backbar-doors",
+      0.034
+     ]
+    ]
+   },
+   "arm-puck": {
+    "pixels": 204,
+    "seen": [
+     [
+      "prop1-kit",
+      0.647
+     ],
+     [
+      "arm-base.ember",
+      0.314
+     ],
+     [
+      "ceiling-deck",
+      0.02
+     ],
+     [
+      "arm-axle.001.ember",
+      0.02
+     ]
+    ]
+   },
+   "arm-head": {
+    "pixels": 172,
+    "seen": [
+     [
+      "arm-collar.ember",
+      0.186
+     ],
+     [
+      "records-shelving",
+      0.163
+     ],
+     [
+      "record.ember",
+      0.14
+     ],
+     [
+      "backbar-doors",
+      0.093
+     ],
+     [
+      "prop1-kit",
+      0.07
+     ],
+     [
+      "waveguide",
+      0.047
+     ]
+    ]
+   },
+   "cue-post": {
+    "pixels": 144,
+    "seen": [
+     [
+      "cue-post.ember",
+      0.278
+     ],
+     [
+      "backbar-top",
+      0.111
+     ],
+     [
+      "plinth-L1-stack.ember",
+      0.111
+     ],
+     [
+      "counter-zinc",
+      0.111
+     ],
+     [
+      "ceiling-deck",
+      0.111
+     ],
+     [
+      "prop1-kit",
+      0.083
+     ]
+    ]
+   },
+   "hf-adaptor": {
+    "pixels": 136,
+    "seen": [
+     [
+      "hf-plug",
+      0.706
+     ],
+     [
+      "hf-motor",
+      0.206
+     ],
+     [
+      "horn-throat",
+      0.088
+     ]
+    ]
+   },
+   "hf-exit": {
+    "pixels": 120,
+    "seen": [
+     [
+      "hf-plug",
+      0.667
+     ],
+     [
+      "hf-motor",
+      0.2
+     ],
+     [
+      "hf-adaptor",
+      0.1
+     ],
+     [
+      "horn-throat",
+      0.033
+     ]
+    ]
+   },
+   "grip-right": {
+    "pixels": 116,
+    "seen": [
+     [
+      "grip-right",
+      1.0
+     ]
+    ]
+   },
+   "grip-left": {
+    "pixels": 112,
+    "seen": [
+     [
+      "grip-left",
+      1.0
+     ]
+    ]
+   },
+   "spindle": {
+    "pixels": 104,
+    "seen": [
+     [
+      "record.ember",
+      0.923
+     ],
+     [
+      "prop1-kit",
+      0.077
+     ]
+    ]
+   },
+   "arm-yoke": {
+    "pixels": 100,
+    "seen": [
+     [
+      "arm-cw.ember",
+      0.12
+     ],
+     [
+      "concrete-walls",
+      0.12
+     ],
+     [
+      "record.ember",
+      0.12
+     ],
+     [
+      "arm-axle.001.ember",
+      0.12
+     ],
+     [
+      "belt.ember",
+      0.12
+     ],
+     [
+      "cue-bar.ember",
+      0.08
+     ]
+    ]
+   },
+   "land-bottom": {
+    "pixels": 84,
+    "seen": [
+     [
+      "lining-bottom-1-web",
+      1.0
+     ]
+    ]
+   },
+   "arm-cw-ring": {
+    "pixels": 84,
+    "seen": [
+     [
+      "ceiling-deck",
+      0.19
+     ],
+     [
+      "arm-yoke.ember",
+      0.143
+     ],
+     [
+      "beams",
+      0.095
+     ],
+     [
+      "arm-cw.ember",
+      0.095
+     ],
+     [
+      "screen-banquette-a",
+      0.095
+     ],
+     [
+      "lamp house over concrete-walls",
+      0.095
+     ]
+    ]
+   },
+   "rib-back-2": {
+    "pixels": 80,
+    "seen": [
+     [
+      "lining-bottom-1-web",
+      1.0
+     ]
+    ]
+   },
+   "arm-collar": {
+    "pixels": 80,
+    "seen": [
+     [
+      "arm-head.ember",
+      0.35
+     ],
+     [
+      "ceiling-deck",
+      0.15
+     ],
+     [
+      "banq-seat",
+      0.1
+     ],
+     [
+      "arm-collar.ember",
+      0.05
+     ],
+     [
+      "records-shelving",
+      0.05
+     ],
+     [
+      "prop1-kit",
+      0.05
+     ]
+    ]
+   },
+   "hf-motor": {
+    "pixels": 68,
+    "seen": [
+     [
+      "hf-plug",
+      0.529
+     ],
+     [
+      "horn-throat",
+      0.294
+     ],
+     [
+      "hf-adaptor",
+      0.059
+     ],
+     [
+      "hf-exit",
+      0.059
+     ],
+     [
+      "concrete-walls",
+      0.059
+     ]
+    ]
+   },
+   "cue-bar": {
+    "pixels": 56,
+    "seen": [
+     [
+      "lamp house over concrete-walls",
+      0.357
+     ],
+     [
+      "cue-post.ember",
+      0.143
+     ],
+     [
+      "plinth-L1-stack.ember",
+      0.143
+     ],
+     [
+      "record.ember",
+      0.071
+     ],
+     [
+      "arm-tube.ember",
+      0.071
+     ],
+     [
+      "prop1-kit",
+      0.071
+     ]
+    ]
+   },
+   "rib-back-1": {
+    "pixels": 52,
+    "seen": [
+     [
+      "lining-bottom-1-web",
+      1.0
+     ]
+    ]
+   },
+   "arm-lift-tab": {
+    "pixels": 52,
+    "seen": [
+     [
+      "records-shelving",
+      0.462
+     ],
+     [
+      "cart-stylus.ember",
+      0.154
+     ],
+     [
+      "record.ember",
+      0.154
+     ],
+     [
+      "ceiling-deck",
+      0.077
+     ],
+     [
+      "banq-base",
+      0.077
+     ],
+     [
+      "counter-zinc",
+      0.077
+     ]
+    ]
+   },
+   "horn-pads": {
+    "pixels": 44,
+    "seen": [
+     [
+      "spk-niche-felt",
+      0.455
+     ],
+     [
+      "top",
+      0.455
+     ],
+     [
+      "strata-posts",
+      0.091
+     ]
+    ]
+   },
+   "cart-stylus": {
+    "pixels": 44,
+    "seen": [
+     [
+      "beams",
+      0.273
+     ],
+     [
+      "cart-body.ember",
+      0.182
+     ],
+     [
+      "plinth-L1-stack.ember",
+      0.182
+     ],
+     [
+      "prop1-kit",
+      0.091
+     ],
+     [
+      "platter-disc.ember",
+      0.091
+     ],
+     [
+      "cart-cantilever.ember",
+      0.091
+     ]
+    ]
+   },
+   "arm-bias": {
+    "pixels": 28,
+    "seen": [
+     [
+      "ceiling-deck",
+      0.286
+     ],
+     [
+      "spk-niche-oak",
+      0.143
+     ],
+     [
+      "arm-yoke.ember",
+      0.143
+     ],
+     [
+      "plinth-L1-stack.ember",
+      0.143
+     ],
+     [
+      "backbar-doors",
+      0.143
+     ],
+     [
+      "arm-base.ember",
+      0.143
+     ]
+    ]
+   },
+   "arm-axle": {
+    "pixels": 16,
+    "seen": [
+     [
+      "records-shelving",
+      0.25
+     ],
+     [
+      "ceiling-deck",
+      0.25
+     ],
+     [
+      "cue-post.ember",
+      0.25
+     ],
+     [
+      "arm-base.ember",
+      0.25
+     ]
+    ]
+   },
+   "arm-stub": {
+    "pixels": 12,
+    "seen": [
+     [
+      "arm-cw.ember",
+      0.667
+     ],
+     [
+      "arm-stub.ember",
+      0.333
+     ]
+    ]
+   },
+   "arm-axle.001": {
+    "pixels": 12,
+    "seen": [
+     [
+      "white-disc",
+      0.333
+     ],
+     [
+      "concrete-walls",
+      0.333
+     ],
+     [
+      "arm-puck.ember",
+      0.333
+     ]
+    ]
+   },
+   "motor": {
+    "pixels": 8,
+    "seen": [
+     [
+      "pulley.ember",
+      1.0
+     ]
+    ]
+   },
+   "hs-screw": {
+    "pixels": 8,
+    "seen": [
+     [
+      "rim",
+      0.5
+     ],
+     [
+      "ceiling-deck",
+      0.5
+     ]
+    ]
+   },
+   "cart-screw": {
+    "pixels": 8,
+    "seen": [
+     [
+      "arm-head.ember",
+      1.0
+     ]
+    ]
+   },
+   "hs-screw.001": {
+    "pixels": 8,
+    "seen": [
+     [
+      "hs-washer.001.ember",
+      0.5
+     ],
+     [
+      "arm-head.ember",
+      0.5
+     ]
+    ]
+   },
+   "hs-washer.001": {
+    "pixels": 4,
+    "seen": [
+     [
+      "records-shelving",
+      1.0
+     ]
+    ]
+   },
+   "puck-screw-2": {
+    "pixels": 4,
+    "seen": [
+     [
+      "prop1-kit",
+      1.0
+     ]
+    ]
+   },
+   "motor-screws": {
+    "pixels": 4,
+    "seen": [
+     [
+      "prop1-kit",
+      1.0
+     ]
+    ]
+   },
+   "cart-cantilever": {
+    "pixels": 4,
+    "seen": [
+     [
+      "beams",
+      1.0
+     ]
+    ]
+   }
   }
  },
  "masks": {
