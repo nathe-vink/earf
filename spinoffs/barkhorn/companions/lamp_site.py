@@ -365,6 +365,8 @@ def build(frame, samples, scale):
             # clamp, crown, gland, collar and the split white (top_tiers.py's meshes); the audit names the top
             tp_ = os.environ.get('HEMI_TOP')
             tdir_ = f'out-dome-pendant-top{tp_}' if tp_ else 'out-dome-pendant'
+            if tp_ == 'A' and os.environ.get('HEMI_LOCK', '1') == '0' and os.path.isdir(os.path.join(HERE, 'lamp-site-meshes', tdir_ + '-nolock')):
+                tdir_ += '-nolock'                    # v9: A without the lock: its own meshes (cables 0/180, the detent)
             loaded_ = ['clamp', 'crown', 'gland', 'hub', 'collar', 'white-disc', 'ring'] + (['gasket-out'] if os.environ.get('GASKETS', '0') == '1' else []) + \
                 (['suspension'] if os.path.exists(os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'suspension.stl')) else [])
             print('LIGHTSET', 'HOUSE_DOME', os.environ.get('HOUSE_DOME', '-'), '| HOUSE_ROOM', os.environ.get('HOUSE_ROOM', '1'),
@@ -414,7 +416,8 @@ def build(frame, samples, scale):
             lk_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'lock.stl')
             if os.path.exists(lk_) and os.environ.get('HEMI_LOCK', '1') == '1':
                 # v7: A's lock (Ganter GN 617), its knob black, at the back of the clamp ring
-                part(tdir_, 'lock', cap, c); print('HEMI_LOCK', tdir_, '| HEMI_ROT', os.environ.get('HEMI_ROT', '0'))
+                # v9: the knob matte black polyamide on a blackened steel body (JW Winco's GN 617): a matte dielectric black
+                part(tdir_, 'lock', SC.principled('lock-knob', '#0D0D0E', 0.78), c); print('HEMI_LOCK', tdir_, '| HEMI_ROT', os.environ.get('HEMI_ROT', '0'))
             else:
                 print('HEMI_LOCK none | HEMI_ROT', os.environ.get('HEMI_ROT', '0'))
             if 'suspension' in loaded_:

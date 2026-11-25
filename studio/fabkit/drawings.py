@@ -1021,7 +1021,7 @@ def sheet_solids(pg, items):
         vh = {v: hlr([_ds(p)], v, hidden=True) for v in ('front', 'right', 'top')}
         b = {v: _bounds(vh[v][0] + vh[v][1]) for v in vh}
         sz = {v: b[v][1] - b[v][0] for v in vh}
-        notes = textwrap.wrap('; '.join(p.notes), 200)[:3] if p.notes else []
+        notes = textwrap.wrap('; '.join(p.notes), 200)[:8] if p.notes else []      # 2026-11-25: eight lines, was three
         extra = 4.2 * max(0, len(notes) - 1)          # the views step down under a longer note, and fit the less
         k = fit_scale(sz['front'][0] + sz['right'][0] + sz['top'][0], max(s[1] for s in sz.values()), 360 - 110, 64 - extra)
         x = 30.0
@@ -1038,21 +1038,22 @@ def sheet_solids(pg, items):
         m = p.make
         what = (f'{m.material} print' + (f', {m.orient}' if getattr(m, 'orient', '') else '')) if isinstance(m, Printed) else f'{m.process}, {m.material}'
         pg.text(30, ytop - 6, f"{n}. {row['item']}: {what}; {p.solid.volume / 1000:.0f} cm3 each; {row['qty']} for the set; 1:{k}", size=8, fontweight='bold')
-        more = p.notes and len(textwrap.wrap('; '.join(p.notes), 200)) > 3
-        for j, ln in enumerate(notes):        # up to three lines, above the views
-            pg.text(30, ytop - 10.5 - 4.2 * j, ln + (' ...' if j == 2 and more else ''))
-    pg.head('Three views each, hidden edges dashed; STL and STEP files in stl/ and step/. Numbers are the parts list\'s.')
+        more = p.notes and len(textwrap.wrap('; '.join(p.notes), 200)) > 8
+        for j, ln in enumerate(notes):        # up to eight lines, above the views
+            pg.text(30, ytop - 10.5 - 4.2 * j, ln + (' ...' if j == 7 and more else ''))
+    pg.head('Three views each, hidden edges dashed; build.py writes STL and STEP files into stl/ and step/ (not kept in the repo). Numbers are the parts list\'s.')
 
 
 PL_COLS = [(20, 'no.', 4), (30, 'item', 30), (88, 'make', 8), (104, 'qty', 5), (116, 'what', 82), (276, 'size', 40), (360, 'each USD', 12)]
 
 
 def _row_cells(i, r):
-    """A parts list row's cells, each wrapped to its column, and how many lines it takes (three at most)."""
+    """A parts list row's cells, each wrapped to its column, and how many lines it takes (all of them: since 2026-11-25 a
+    row is printed in full, never cut at three lines)."""
     vals = [str(i), r['item'], r['kind'], str(r['qty']), (f"[option: {r['option']}] " if r.get('option') else '') + str(r['what']), str(r['size']),
             f"{r['usd_each']:,.2f}" if isinstance(r['usd_each'], (int, float)) else '[PRICE]']
     wrapped = [textwrap.wrap(v, w) or [''] for v, (_, _, w) in zip(vals, PL_COLS)]
-    return wrapped, min(3, max(len(wl) for wl in wrapped))
+    return wrapped, max(len(wl) for wl in wrapped)
 
 
 def plan_list_sheets(rows, notes):

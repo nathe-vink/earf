@@ -14,7 +14,10 @@ NAMES = ('clamp', 'crown', 'gland', 'collar', 'white-disc', 'grip', 'gaskets', '
 for top in (None, 'A', 'B'):
     p = dict(C.V3, top=top) if top else dict(C.V3)
     parts = C.north_parts(p)
-    d = os.path.join(HERE, 'lamp-site-meshes', f'out-dome-pendant-top{top}' if top else 'out-dome-pendant', 'stl')
+    # v9: with HEMI_LOCK_ON=0, top A's meshes go to their own folder (out-dome-pendant-topA-nolock); the others are the same
+    if not C.LOCK_ON and top != 'A':
+        continue
+    d = os.path.join(HERE, 'lamp-site-meshes', (f'out-dome-pendant-top{top}' if top else 'out-dome-pendant') + ('-nolock' if (top == 'A' and not C.LOCK_ON) else ''), 'stl')
     os.makedirs(d, exist_ok=True)
     for q in parts:
         if q.name in NAMES and q.solid is not None:

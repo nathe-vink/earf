@@ -367,3 +367,74 @@ detent.
   - nothing else is redrawn.
   Checked off as well as on: fixings_check is clean; A comes off, the control holds, and the keyed shade refuses the wrong
   turn. The committed packages are built with the lock on; with it off, rebuild with HEMI_LOCK_ON=0.
+
+## 11. v9 (the v8 check)
+
+The CAD was sound; the package did not match it, and the canopy could not be built, wired or closed. v9:
+- V9-1 THE PACKAGE MATCHES THE CAD.
+  - The pins: two Ø4 pins (M3) and ONE KEY PIN, a Ø6 h9 shoulder on its own M4 thread. It fits only the hub's one M4
+    hole at 30 deg, and its shoulder passes only the collar's one 7 wide slot. The pins' row says so in full; NOTES says
+    Ø6.
+  - The collar's callout gives the slots with the keyed one's heights and a datum (the key's entry at 0 deg).
+  - A's ring orders the CAD's Ø6.4 at z 96.0 with no edge break.
+  - Today's, B's and A-lock-off's hub, ring and collar order the CAD's detent groove (5.4 wide, from z 90.3 open to the
+    hub's top) and the 93.0 to 93.5 dimple slot.
+  - B's crown orders its Ø1.5 magnet pocket and no dowel.
+  - fabkit now prints every parts-list row in full and up to eight lines of a part's notes, the callouts first.
+  - The sheets now say build.py writes the STEP and STL; they are not kept in the repo (they were 38 MB).
+  - A WITHOUT THE LOCK HAS ITS OWN PACKAGE: dome_pendant_topA_nolock.py builds out-dome-pendant-topA-nolock (drawings,
+    BOM, render json) with HEMI_LOCK_ON=0. Its BOM has the detent, no lock and no lock row; its meshes are in
+    lamp-site-meshes/out-dome-pendant-topA-nolock (the cables at 0/180), which lamp_site.py takes with HEMI_LOCK=0.
+- V9-2 THE CANOPY, as built, wired and closed (both variants):
+  - THE ENCLOSURE: 64 x 100 x 38, 1.0 steel, open below, closed by a removable cover on two M3 screws into tabs bent in
+    at its ends. It holds the ERP driver at its real 84 x 40 x 25, leads at its ends, clear of the M4 heads.
+  - SPLICE ROOM: free volume 7.9 in3 against NEC 314.16's 6.0 in3 for the supply's three 14 AWG conductors. The driver's
+    leads are fixture wires and are not counted. UL 1598 sends the count to the NEC; a wired sample confirms.
+  - THE BOX SCREWS go in first: the plate is screwed to the box before the enclosure is hung on its standoffs. To reach
+    them later, the enclosure comes off: its cover off, four screws inside its top.
+  - THE CORD: its strain relief is a listed bushing in the enclosure's cover, which clamps it (the steel cables carry the
+    lamp). The canopy has no grip, only a flush black turned grommet, drawn at size, so nothing new shows.
+  - THE CANOPY'S FIXING: two M4 cup-point set screws with a nylon patch, tapped through its wall after anodising, their
+    cups on the plate's bare rim. Flush as before; they bond it. No clinch nuts.
+  - THE PLATE is Ø143.6 in the CAD and every text.
+  - GROUNDING: a green 10-32 x 3/16 into the plate's downward-extruded tapped hole: five threads, drawn tight, its tip
+    0.8 above the plate.
+  - PEM: standoff holes Ø7.14 (a 7.9 hex, 1.6 sheet, far from the edges); FH-M3-8 studs, so the 4 tall nylon-insert nut
+    is fully on. The Ø22 opening is rolled.
+  - DRAWINGS: the plate, the brackets, the enclosure and its cover are made parts (fabkit's 'steel-sheet-formed'), so
+    each has its drawing. The stale rows are rewritten.
+- V9-3 THE CORD STEP:
+  1. Level the lamp.
+  2. With the canopy still down, mark the cord at the cables' length plus 2 mm plus the fixed run in the canopy.
+  3. Put the strain-relief bushing on at the mark and snap it into the enclosure's cover.
+  4. Wire the driver and close the cover.
+  5. Slide the canopy up and fix its set screws.
+  NOTES and the gripper row say so.
+- V9-4 THE KEYED NOTCH's top is n1 + 1.0. The Ø6 pin's top is 1.0 above a Ø4's, so the shade rests on all three pins at
+  top_check's seated pose; the 7.5 passage stays.
+- V9-5 THE SHEETS.
+  - The top sheet shows A without the lock (cables 0/180) beside today's top and B. A with the lock is in a labelled row:
+    as drawn, and in profile.
+  - The lock sheet's frames are re-rendered with the knob's real finish (matte black polyamide on a blackened steel
+    body), and labelled with the turns used (79 and 169 deg). Frame 4 now uses A's lock-off meshes.
+  - It says the knob shows from about two-thirds of the way round.
+- V9-6 pass2/RERENDER.md:
+  - The live cutaway, its phone cut and the in-use picture are from final/ (site_v2.py's LIGHTS_DIR).
+  - It adds discs/ice6-acid5-old-new.png, off-study/off-table-sheet.png and pass/photometry.md, .raw and .sh.
+  - The 20 paths deleted since are dropped.
+  - HEMI_LOCK=0 is the no-lock answer's switch.
+- Weights (v9): today 1607 g; A 1708 g with the lock, 1688 g without; B 1586 g.
+
+OPEN, ONLY IF THE OWNER KEEPS THE LOCK (to do on his yes; not done):
+- Machine the collar and clamp ring as a pair, seated: the clamp's Ø10.5 and spot face, then Ø9.0 and M10 x 1 through it
+  into the collar. Mark the pair, then anodise. Clocking can't hold the Ø10.5's play: the M96 x 1.5 turns 2.4 deg per
+  0.01 mm of seat. Or a slot round the ring under the nut.
+- The spot face cuts through the clamp's band.
+- The walls: the collar above the M10 is 0.86 to 0.97 against 1.0; the PEEK is 0.8 above the hole.
+- A swap one person can do. One hand can't hold the cap and keep a knob pulled that moves with the shade; GN 617.1 with a
+  rest position is an option to weigh.
+- The lock nut is 16 AF (ISO 8675), so a 16 crowfoot, not 17.
+- The box's screw holes set which way the lamp, and the knob, face: slots in the plate, or say so.
+Notes, no change (the check's own): the PEEK bridge cannot unlatch (the crown stops the pin after 2.2 of lift); the ISO
+10511 M10 nut is 8 tall as drawn; the detent's ball clears at the rest pose; A with the lock is 0.73 off the axis by the
+lock alone. The site texts wait for the owner's pick.

@@ -24,8 +24,9 @@ Also re-render the other lane's bar frames made through lamp_site.py's hemispher
 
 What pass v2 renders: the top the owner picks (HEMI_TOP=A, or unset for today's top, or B) on the v8 hanging (two 1/16 in
 stainless cables on stop sleeves, the cord 2 mm long, the canopy out of frame), HEMI_COLLAR_CAP=1, the collar's white on
-its painted faces. If the owner keeps A's lock, it is in the meshes (out-dome-pendant-topA/stl/lock.stl) and in frame
-where its angle shows it (HEMI_LOCK=0 leaves it out).
+its painted faces. If the owner keeps A's lock, A renders from out-dome-pendant-topA (the lock, its cables at 105/285); if not, from
+out-dome-pendant-topA-nolock (no lock, the cables at 0/180, the detent), chosen with HEMI_LOCK=0. HEMI_LOCK=0 is the
+no-lock answer's switch, not a way to hide the lock in the lock answer's pictures.
 
 The other lane's frames made through hemisphere() (that lane re-renders them):
 - a50e8da167: bar-hero, bar-backbar and its portrait, bar-pendants
@@ -34,10 +35,17 @@ The other lane's frames made through hemisphere() (that lane re-renders them):
 The live site files (each with its -800, -th and -under variants where it has them): hemisphere-<tint> for every tint,
 hemisphere-cluster, hemisphere-<tint>-direct, hemisphere-<tint>-under, and the cutaway.
 
-The cutaway 'How it lights' has three sources, all re-rendered:
-- renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-cutaway.png (with -phone)
-- renders/2026-11-12/barkhorn/lamp-site/legible/hemisphere-ember-cutaway.png (with -phone), the live one
-- lamp_site.py's 'cutaway' frame, which draws them
+The cutaway 'How it lights' (v9, the v8 check's V9-6): the LIVE cutaway, its phone cut and the in-use picture come from
+final/ (site_v2.py:2212, LIGHTS_DIR), not legible/:
+- renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-cutaway.png (live)
+- renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-cutaway-phone.png (live)
+- renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-inuse.png (live)
+- renders/2026-11-12/barkhorn/lamp-site/legible/hemisphere-ember-cutaway.png (with -phone): a later draft, not live
+- lamp_site.py's 'cutaway' and 'inuse' frames draw them
+
+Also re-rendered or rerun (v9): renders/2026-11-16/barkhorn/lamp-site/discs/ice6-acid5-old-new.png,
+renders/2026-11-20/barkhorn/lamp-site/off-study/off-table-sheet.png, and renders/2026-11-21/barkhorn/lamp-site/pass/
+photometry.md, photometry.raw and photometry.sh (the photometry's record, its raw numbers and its script).
 
 The photometry IS rerun (isphere.py), after the re-render, from the same painted faces.
 
@@ -48,6 +56,8 @@ The photometry IS rerun (isphere.py), after the re-render, from the same painted
 - renders/2026-11-16/barkhorn/lamp-site/final-mix/photometry-mix.txt
 
 ## Every Hemisphere picture committed in that window
+
+(v9: the paths are those at HEAD; 20 listed in v7 have since been deleted and are dropped.)
 
 Masks, audits and Core-only frames are left out. Which of them are live is the site's call; any that are live are
 re-rendered.
@@ -105,28 +115,8 @@ re-rendered.
 - renders/2026-11-15/barkhorn/lamp-site/smoke-choice/smoke-choice-sheet.png
 - renders/2026-11-16/barkhorn/lamp-site/discs/smoke-before-after-stretched.png
 - renders/2026-11-16/barkhorn/lamp-site/discs/smoke-before-after.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-acid-direct.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-acid-under.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-acid.png
 - renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-cluster.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-below.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-cap.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-cutaway-phone.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-cutaway.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-direct.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-inuse.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-off.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-rim.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember-under.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ember.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-haze-direct.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-haze-under.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-haze.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ice-direct.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ice-under.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-ice.png
 - renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-row.png
-- renders/2026-11-16/barkhorn/lamp-site/final-mix/hemisphere-smoke.png
 - renders/2026-11-16/barkhorn/lamp-site/hemi-match/hemi-match-sheet.png
 - renders/2026-11-16/barkhorn/lamp-site/mix/mix-sheet.png
 - renders/2026-11-20/barkhorn/lamp-site/checkset/amber/hemi-lit-L2.1.png

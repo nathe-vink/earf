@@ -322,7 +322,7 @@
  "dome-pins": {
   "kind": "hardware",
   "maker": "any",
-  "model": "CUSTOM, turned (check 3, 2026-11-24: no catalogue pin matches): three headless stepped pins, stainless 303, a Ø4 h9 shoulder 4.2 long and an M3 x 0.5 thread 15.8 long with a hex socket in the shoulder's end, from a screw-machine shop to the drawing; the thread through a Ø3.2 clearance in the PEEK ring and 6 into the hub (tapped M3), a pre-applied nylon patch; the shoulder 4.0 into the collar's slots. Secondary retention (v7): on top A, a positive lock (hemi-lock), in place of the 2026-11-01 tether. The pins in M3 holes 7.5 deep for their 6.0 of thread",
+  "model": "CUSTOM, turned (v9): three headless stepped pins from a screw-machine shop to the drawing, stainless 303, each with a hex socket in the shoulder's end and a pre-applied nylon patch. TWO plain pins: a Ø4 h9 shoulder 4.2 long, an M3 x 0.5 thread 15.8 long (through a Ø3.2 clearance in the PEEK ring, 6 into the hub's M3 holes at 150 and 270 deg, 7.5 deep). ONE KEY PIN: a Ø6 h9 shoulder 4.2 long, an M4 x 0.7 thread 15.8 long (through a Ø4.3 clearance, 6 into the hub's one M4 hole at 30 deg, 7.5 deep): its own thread, so it fits only its hole, and its shoulder passes only the collar's one 7 wide slot, so every shade fits one way. The shoulders 4.0 into the collar's slots. Secondary retention (v7): on top A, if the owner keeps it, a positive lock (hemi-lock)",
   "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -777,7 +777,7 @@
  "hemi-canopy-strap": {
   "kind": "hardware",
   "maker": "any (a lighting supplier)",
-  "model": "Zinc-plated steel mounting for the 4 in junction box (review, 2026-11-01) | PROPOSAL 2026-11-24 (v8): a round mounting plate, 1.6 steel, Ø140, its rim turned down 12 (two M4 clinch nuts for the canopy's set screws); screwed to the box by its two 8-32 screws; a Ø22 opening in its centre for the supply; the gripper brackets on PEM studs under it, the driver's enclosure on four PEM standoffs, the green grounding screw at y +56. It carries the load; the canopy is a cover",
+  "model": "Zinc-plated steel mounting for the 4 in junction box (review, 2026-11-01) | v9: now a made part (crystal.py 'strap', drawn): a round mounting plate, 1.6 steel, Ø143.6, rim turned down 12; the box's two 8-32 screws; a rolled Ø22 opening; four PEM SO-M4 standoffs; eight PEM FH-M3-8 studs for the brackets; an extruded 10-32 hole for the grounding screw. It carries the load; the canopy is a cover",
   "usd": 6.0,
   "estimate": true,
   "supplier": "a lighting supplier",
@@ -795,7 +795,7 @@
  "hemi-driver-box": {
   "kind": "hardware",
   "maker": "to make (a sheet-metal shop) or a listed driver enclosure",
-  "model": "Review 2026-11-01: a closed steel enclosure, 92 x 64 x 37, 1.0 wall, zinc-plated, round the driver and the 120 V splices, screwed to the canopy strap; a listed bushing where the Class 2 cord leaves it",
+  "model": "v9: now a made part (crystal.py 'enclosure' and 'enclosure-cover', drawn): 1.0 zinc-plated steel, 64 x 100 x 38, open below with a removable cover on two M3 screws; on four PEM standoffs under the mounting plate; a snap bushing for the supply in its top, a strain-relief bushing for the Class 2 cord in its cover; free volume 7.9 in3",
   "usd": 12.0,
   "estimate": true,
   "supplier": "a sheet-metal shop",
@@ -933,7 +933,7 @@
  "hemi-gripper": {
   "kind": "hardware",
   "maker": "Cable Grippers Inc.",
-  "model": "PROPOSAL 2026-11-24 (v8): MGR-M10-MM mini gripper for 1/16 in cable (their chart: 0.675 in without the plunger, Ø0.47 in body, M10), with its knurled safety nut; plunger down, threaded up through its bracket's foot and held by an M10 nylon-insert nut. LEVELLING: with the canopy hanging on the cables below its plate, loosen each safety nut, push the plunger and slide the cable; read the rim's two sides against a laser line (or measure each from the table below), never by resting a level on the lamp; level to 1 deg (the sides within 3.5 mm); tighten the safety nuts; push the canopy up, fix its set screws; then loosen the canopy grip's dome nut from below, feed the cord until it bows about 2 cm, and tighten it. The price is the pair ($7 each)",
+  "model": "PROPOSAL 2026-11-24 (v8): MGR-M10-MM mini gripper for 1/16 in cable (their chart: 0.675 in without the plunger, Ø0.47 in body, M10), with its knurled safety nut; plunger down, threaded up through its bracket's foot and held by an M10 nylon-insert nut. LEVELLING and the cord: see NOTES (the cord is set at the enclosure's strain relief, before the canopy goes up). The price is the pair ($7 each)",
   "usd": 14.0,
   "estimate": true,
   "supplier": "Cable Grippers Inc.",
@@ -970,7 +970,7 @@
  "hemi-gripper-bracket": {
   "kind": "hardware",
   "maker": "a sheet-metal shop (to make)",
-  "model": "PROPOSAL 2026-11-24 (v8): two U brackets, 1.6 zinc-plated steel, along the cables' line: a 22 x 45 foot with a Ø10.5 hole for the gripper (its M10 nylon-insert nut on top, a 16 open-end spanner from the outside), legs 42 apart, flanges turned out under the plate, each on two PEM FH-M3 studs with nuts (hemi-bracket-studs)",
+  "model": "v9: now a made part (crystal.py 'gripper-brackets', drawn): two U brackets, 1.6 zinc-plated steel, along the cables' line, a 22 x 45 foot with a Ø10.5 hole, legs 42 apart, flanges out under the plate on PEM FH-M3-8 studs with M3 nylon-insert nuts",
   "usd": 6.0,
   "estimate": true,
   "supplier": "a sheet-metal shop",
@@ -979,7 +979,7 @@
  "hemi-canopy-setscrews": {
   "kind": "hardware",
   "maker": "any (PEM for the nuts)",
-  "model": "v7: two M4 x 8 black-oxide flat-point set screws, flush in the canopy's wall at 90/270 deg, into two M4 clinch nuts (PEM S-M4 class) pressed into the mounting plate's rim: the canopy held up",
+  "model": "v9: two M4 x 4 cup-point set screws, black oxide, nylon patch, tapped through the canopy's wall at 90/270 deg (tapped after anodising), their cups on the mounting plate's bare rim: they hold the canopy up and bond it",
   "usd": 1.0,
   "estimate": true,
   "supplier": "any",
@@ -1007,7 +1007,7 @@
  "hemi-bracket-studs": {
   "kind": "hardware",
   "maker": "PEM (Penn Engineering)",
-  "model": "v8: eight PEM FH-M3-6 flush-head self-clinching studs pressed into the mounting plate, and eight M3 nylon-insert nuts under the brackets' flanges (the brackets come off without drilling)",
+  "model": "v9: eight PEM FH-M3-8 flush-head self-clinching studs pressed into the mounting plate (Ø3.0 holes), and eight M3 nylon-insert nuts (4 tall) under the brackets' flanges",
   "usd": 3.0,
   "supplier": "a PEM distributor",
   "estimate": true,
@@ -1016,7 +1016,7 @@
  "hemi-plate-standoffs": {
   "kind": "hardware",
   "maker": "PEM (Penn Engineering)",
-  "model": "v8: four PEM SO-M4 self-clinching standoffs, Ø7 x 4, pressed into the mounting plate: the driver's enclosure hangs on them",
+  "model": "v9: four PEM SO-M4-4 self-clinching standoffs (Ø7.14 +0.08 holes, 7.9 hex, sheet 1.27 or more, 8 or more from an edge) pressed into the mounting plate: the driver's enclosure hangs on them",
   "usd": 2.0,
   "supplier": "a PEM distributor",
   "estimate": true,
@@ -1025,7 +1025,7 @@
  "hemi-enclosure-screws": {
   "kind": "hardware",
   "maker": "any",
-  "model": "v8: four M4 x 6 serrated-flange pan screws, zinc-plated, from inside the enclosure's top into the plate's standoffs (they bond the enclosure to the plate)",
+  "model": "v9: four M4 x 6 serrated-flange pan screws from inside the enclosure's top into the plate's standoffs (they bond it), and two M3 x 4 pan screws for its cover",
   "usd": 0.5,
   "supplier": "any",
   "estimate": true,
@@ -1040,22 +1040,22 @@
   "estimate": true,
   "price_date": "2026-11-24"
  },
- "hemi-canopy-grip": {
-  "kind": "hardware",
-  "maker": "Lapp (SKINTOP family)",
-  "model": "v8: the canopy's cord grip, Lapp 53112005 (M12 x 1.5, cord 3.5 to 7), its body through the canopy's 3 floor, its dome nut under it, black",
-  "usd": 4.0,
-  "supplier": "a Lapp distributor",
-  "estimate": true,
-  "price_date": "2026-11-24"
- },
  "hemi-ground-screw": {
   "kind": "hardware",
   "maker": "any (listed)",
-  "model": "v8: a green hex-washer-head 10-32 grounding screw (UL 467) tapped into the mounting plate at y +56, for the equipment grounding conductor (NEC 410.44); the plate bonds the enclosure (serrated screws into its standoffs) and the canopy (cup-point set screws into the rim)",
+  "model": "v9: a green hex-washer-head 10-32 x 3/16 grounding screw (UL 467) into the mounting plate's downward-extruded tapped hole at y +56 (five threads), for the equipment grounding conductor (NEC 410.44)",
   "usd": 0.5,
   "supplier": "any",
   "estimate": true,
   "price_date": "2026-11-24"
+ },
+ "hemi-canopy-bushing": {
+  "kind": "hardware",
+  "maker": "to make (a turned part)",
+  "model": "v9: a flush grommet for the canopy's floor, 6061 turned, satin black anodised: Ø12 through the 3 floor, a Ø16 x 1 flange inside, its bore Ø6.6; it does not grip (the cord's strain relief is the enclosure's)",
+  "usd": 3.0,
+  "supplier": "a turning shop",
+  "estimate": true,
+  "price_date": "2026-11-25"
  }
 }
