@@ -230,6 +230,15 @@ def build(frame, samples, scale):
     # 2026-11-11 (the bar: one hardware finish, satin black): the cap's turned parts satin black anodized, a soft
     # sheen so each eased edge catches a highlight (was a flat dark grey, read as a lump)
     cap = SC.principled('cap', '#161618', 0.38, metallic=1.0, bump=(4000.0, 0.08))
+    if os.environ.get('CAP_BLACK', 'dielectric') == 'dielectric':
+        # V12-13 (decided): anodized black is an oxide, a dielectric, not a metal: base about 0.025 linear, IOR 1.55, roughness
+        # 0.42. On the metallic black a 0.4 x 0.2 mark moved the pixels 1 to 2 levels in 255; on this it shows about 37 %
+        # darker, as on a real part. To be checked against an anodized sample before pass v2. CAP_BLACK=metal: the old look
+        cap = SC.principled('cap-dielectric', '#2C2C2D', 0.42, metallic=0.0, bump=(4000.0, 0.08))
+        try:
+            cap.node_tree.nodes['Principled BSDF'].inputs['IOR'].default_value = 1.55
+        except Exception:                                    # noqa: BLE001
+            pass
 
     def braid_mat(nm, r_cord=0.003, strands=None):
         """A black textile braid (the coordinator, 2026-11-20: the cord read as a ruler-straight matte rod): two sets of
@@ -450,8 +459,14 @@ def build(frame, samples, scale):
                         f_.use_smooth = True
                     ex_.select_set(False)
                 if os.environ.get('CANOPY') == '1':
-                    bpy.ops.mesh.primitive_cylinder_add(vertices=128, radius=0.075, depth=0.05, location=(x, y, zt_ + 0.025))
-                    cn_ = bpy.context.object; cn_.name = 'canopy'; cn_.data.materials.append(cap); cn_.select_set(False)
+                    # V12-13: the CAD canopy's mesh (its floor holes, grommet and set screws) where top_tiers.py exported it
+                    # (lamp-site-meshes/<top>/stl/canopy-cad.stl, the canopy's underside at its z 0); else the plain 150 x 50
+                    cpath_ = os.path.join(HERE, 'lamp-site-meshes', tdir_, 'stl', 'canopy-cad.stl')
+                    if os.path.exists(cpath_):
+                        cn_ = SC.stl(cpath_, cap, 'canopy'); cn_.location = (x, y, zt_); cn_.rotation_euler = (0.0, 0.0, rot_); cn_.select_set(False)
+                    else:
+                        bpy.ops.mesh.primitive_cylinder_add(vertices=128, radius=0.075, depth=0.05, location=(x, y, zt_ + 0.025))
+                        cn_ = bpy.context.object; cn_.name = 'canopy'; cn_.data.materials.append(cap); cn_.select_set(False)
             part('out-dome-pendant', 'carrier', an, c)
             part('out-dome-pendant', 'stem', an, c)
             part('out-dome-pendant', 'board', SC.principled('board', '#E6E4DE', 0.5), c)
@@ -859,7 +874,7 @@ def build(frame, samples, scale):
                 SC.box_ob('table-leg', lx, ly, 0.0, lx + 0.04, ly + 0.04, tz - 0.03, apron)
         # the chair across the table, pushed in under it as a chair is left, its back in the lamp's own spill
         try:
-            ch = AS.place(bpy, 'dining_chair_02', '1k', location=(-0.02, 0.58, 0.0), rotation_deg=(0, 0, 180), scale=1.0)
+            ch = AS.place(bpy, 'dining_chair_02', '1k', location=(-0.02, 0.35, 0.0), rotation_deg=(0, 0, 0), scale=1.0)   # V12-13 (the support sweep's patch): facing the table, its seat under it, its back 29 clear of the top (it faced away, its back through the top)
             ch.name = 'chair'
         except Exception as e:
             print('CHAIR not placed:', e)
@@ -889,7 +904,7 @@ def build(frame, samples, scale):
         cx, cy_ = 0.26, -0.16
         cup = bpy.data.objects.new('cup', me); bpy.context.scene.collection.objects.link(cup); cup.location = (cx, cy_, tz)
         bpy.ops.mesh.primitive_torus_add(major_radius=0.023, minor_radius=0.0058, major_segments=64, minor_segments=24,
-                                         location=(cx + 0.046, cy_, tz + 0.050), rotation=(math.pi / 2, 0, 0))
+                                         location=(cx + 0.0615, cy_, tz + 0.050), rotation=(math.pi / 2, 0, 0))   # V12-13 (the patch): was cx + 0.046, 13.5 into the cavity
         hd = bpy.context.object; hd.name = 'cup-handle'; hd.scale = (0.85, 1.22, 1.0); hd.data.materials.append(gl)
         for f in hd.data.polygons:
             f.use_smooth = True

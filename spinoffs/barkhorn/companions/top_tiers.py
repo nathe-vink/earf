@@ -35,3 +35,11 @@ for top in (None, 'A', 'B'):
             if q.name == 'gaskets':
                 R = p['R']
                 export_stl(q.solid & (Sphere(R + 3.0) - Sphere(R - 0.5)), os.path.join(d, 'gasket-out.stl'), tolerance=0.02, angular_tolerance=0.1)
+    # V12-13: the CAD canopy (its floor holes, grommet and set screws) for CANOPY=1, its underside at z 0, on the lamp's axis
+    cps_ = [r.solid for r in parts if r.name in ('canopy', 'canopy-bushing', 'canopy-screws') and r.solid is not None]
+    zc_ = next(r.solid for r in parts if r.name == 'canopy').bounding_box().min.Z
+    cn_ = cps_[0]
+    for x_ in cps_[1:]:
+        cn_ = cn_ + x_
+    export_stl(Pos(0, 0, -zc_) * cn_, os.path.join(d, 'canopy-cad.stl'), tolerance=0.02, angular_tolerance=0.1)
+    print(top or 'today', 'canopy-cad.stl, underside at z 0 (was', round(zc_, 2), ')')

@@ -8,8 +8,9 @@
 import os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+os.environ['HEMI_LOCK_ON'] = '1'                                    # V12-11: A with its lock, whatever the shell exports
 import crystal as C                                                 # noqa: E402
 
 PRODUCT = C.Product('earf-dome-pendant-topA', 'Hemisphere, top A (PROPOSAL)', 'Pendant in cast acrylic, its shades swapping by hand',
                     params=dict(C.V3, top='A'), parts=lambda P: C.dome_parts(dict(C.V3, top='A')), count=1, materials=C.MATERIALS,
-                    variants=C.VARIANTS, notes=C.notes_dome('A'), touching=C.TOUCHING_DOME, drawing_prefix='EDP')
+                    variants=C.VARIANTS, notes=C.notes_dome('A'), touching=C.TOUCHING_DOME, drawing_prefix='EDP', text_filter=C._us)

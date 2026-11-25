@@ -281,7 +281,25 @@ to 1.39 m, in frame. So either run them on past the frame's edge, or end them at
 - lamp_site.py: CORD_TOP=<m> runs the cord and both cables on, straight, to that height (world); CANOPY=1 adds the 150 x 50
   canopy there (for a frame with a ceiling). The same switches as the support sweep's patch to 5e86d76e (fa2d6ff2b0), which
   made the live cluster (CORD_TOP=1.75) and the in-use picture (CORD_TOP=2.35 CANOPY=1).
-- The one-way marks (V11-13: a line on the crown's lowest tier at 30 deg, a groove on A's and B's clamp ring or today's collar
-  chamfer at 60 deg) are in the meshes from V11: re-exported with top_tiers.py.
+- The one-way marks (V11-13; V12-8: a line on the crown's lowest tier at 60 deg, was 30; a groove on A's and B's clamp ring or
+  today's collar chamfer at 60 deg) are in the meshes: re-exported with top_tiers.py (V12, below).
 - After the owner's pick: add the dims drawing on r47-site-next to the list (it shows the cord alone, no cables).
 - For pass v2: show the canopy once, for example "Over a table" with its ceiling.
+
+## V12 (the V11 check's V12-13)
+
+- THE ANODIZED BLACK (decided): the anodized parts (the clamp, the crown, the gland, the hub, and the canopy with CANOPY=1)
+  are drawn as a dielectric black, not a metal: lamp_site.py's 'cap' material is now base about 0.025 linear (#2C2C2D),
+  IOR 1.55, roughness 0.42, metallic 0 (CAP_BLACK=metal brings back the old metallic #161618). On the metallic black a 0.4 x
+  0.2 groove moved the pixels by 1 to 2 levels in 255; on the dielectric it reads about 37 % darker, as on a real part. Check
+  it against an anodized sample with a 0.4 x 0.2 dark groove (prototype-list.md) BEFORE pass v2; pass v2's cap, rim and under
+  views then show the marks the real top shows.
+- THE MARKS: the crown's line moved from 30 deg to 60 deg (V12-8), over a seated shade's mark (A's and B's clamp ring at 60;
+  today's collar, its 0.9 x 45 chamfer now cut and the groove across it at 60). Both stay 0.4 x 0.2, dark. Re-export the
+  meshes with top_tiers.py (twice: HEMI_LOCK_ON=0 for A without the lock) before any frame that shows the top.
+- THE IN-USE PICTURE: the support sweep's chair and cup are ported into lamp_site.py (the chair at (-0.02, 0.35) facing the
+  table, its back 29 clear of the top; the cup's handle at cx + 0.0615, out of the cavity). Before V12 a re-render of
+  "inuse" from this code brought both faults back.
+- THE CANOPY IN FRAME: CANOPY=1 now loads the CAD canopy (lamp-site-meshes/<top>/stl/canopy-cad.stl, written by top_tiers.py:
+  its floor holes, grommet and set screws), turned with HEMI_ROT; the plain 150 x 50 cylinder only where that mesh is
+  missing. Use it for "Over a table" with its ceiling.

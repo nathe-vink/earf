@@ -8,6 +8,6 @@ import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import crystal as C                                                 # noqa: E402
 
-PRODUCT = C.Product('earf-dome-pendant-v2', 'Hemisphere v2 (alternative)', 'Pendant in cast acrylic, the tint inside',
+PRODUCT = C.Product('earf-dome-pendant-v2', 'Hemisphere v2 (SUPERSEDED, a record)', 'Pendant in cast acrylic, the tint inside',
                     params=dict(C.D), parts=lambda P: C.north_parts(C.D), count=1, materials=C.MATERIALS,
-                    variants=C.VARIANTS, notes=C.notes_dome(None, record=True), touching=C.TOUCHING_DOME_LEGACY, drawing_prefix='EDP2')
+                    variants=C.VARIANTS, notes=C.notes_dome(None, record=True), touching=C.TOUCHING_DOME_LEGACY, drawing_prefix='EDP2', text_filter=C._us)

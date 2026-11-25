@@ -157,6 +157,8 @@ class Product:
     drawing_style: dict = field(default_factory=dict)   # the drawings' own type, read off a slide as well as a sheet:
                                     # {'face', 'face_bold': TTF paths for the views' names and the figures, 'label_pt',
                                     # 'dim_pt', 'balloon_pt', 'balloon_r' (mm)}; left out, the kit's defaults
+    text_filter: Callable = None    # optional str -> str applied to everything the package prints (a house spelling):
+                                    # the library rows, the materials' titles, the notes (build.py)
 
 
 def make_kind(part):

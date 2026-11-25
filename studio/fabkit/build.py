@@ -21,7 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 ROOT = os.path.dirname(os.path.dirname(HERE))
 
-from model import Printed, Bought  # noqa: E402
+from model import Printed, Bought, SHEETS, PRINTS, SOLIDS  # noqa: E402
 import flats, bom, checks, drawings, render  # noqa: E402
 
 
@@ -59,6 +59,16 @@ def main():
     if dup:
         raise SystemExit(f'part names must be unique: {sorted(dup)}')
     lib = load_library(pdir)
+    tf = getattr(P, 'text_filter', None)
+    if tf:                                           # a house spelling over everything printed (Hemisphere: American)
+        lib = {k: {f: (tf(v) if isinstance(v, str) else v) for f, v in row.items()} for k, row in lib.items()}
+        for tab in (SHEETS, PRINTS, SOLIDS):
+            for row in tab.values():
+                if isinstance(row.get('title'), str):
+                    row['title'] = tf(row['title'])
+        P.notes = [tf(t) for t in P.notes]
+        for q in parts:
+            q.notes = [tf(t) for t in (q.notes or [])]
     geo = [p for p in parts if p.solid is not None]      # bought sets with nothing to draw are only on the parts list
     print(f'{P.title}: {len(parts)} parts ({len(geo)} with solids)', flush=True)
 

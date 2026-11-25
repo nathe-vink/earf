@@ -12,7 +12,8 @@ from build123d import Box, Pos
 BOUGHT = {'pins': 8.0, 'plunger': 8.0, 'gaskets': 1.2, 'board': 2.7, 'grip': 8.5, 'crown-screws': 8.0, 'cap-key': 7.8,
           'white-paint': 1.5, 'slip-washer': 2.2, 'vent': 1.0, 'lock': 7.8, 'suspension': 8.0, 'grippers': 7.8,
           'gripper-nuts': 7.9, 'bracket-studs': 7.8, 'canopy-screws': 7.8, 'box-screws': 7.8, 'driver': 1.9,
-          'tray-screws': 7.8, 'canopy-studs': 7.8, 'lead-bushing': 1.1, 'cord-clamp': 7.8, 'splices': 1.6,
+          'tray-screws': 7.8, 'canopy-studs': 7.8, 'clamp-screws': 7.8, 'cord-clamp': 7.8, 'splices': 1.6,
+          'ties': 1.14, 'lead-sleeve': 1.8,
           'canopy-bushing': 2.7, 'ground-screw': 7.8, 'cord': 1.4}
 tops = [('today', None), ('A' + (' with the lock' if C.LOCK_ON else ' without the lock'), 'A')] + ([('B', 'B')] if C.LOCK_ON else [])
 if not C.LOCK_ON:

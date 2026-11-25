@@ -564,7 +564,7 @@
  "hemi-cord": {
   "kind": "wiring",
   "maker": "any (UL listed)",
-  "model": "V11: a listed SVT 18/2 pendant cord in a black textile braid, round, 6.0 to 6.5 over the braid (from the maker's sheet; to confirm before ordering), one conductor identified, ribbed or printed (UL 1598 5.2.7: + to the driver's red lead), 3 m cut to the drop. Past the driver it carries the LEDs' DC, about 33 V (Class 2). Gripped at the lamp by the listed cord grip under the cap (hemi-cord-grip) and in the canopy by two screwed steel straps on the clamp's channel (the strain relief: each strap stops on the channel, squeezing the cord 1.0 to 1.5; 156 N for 1 min, under 1.6 of movement, UL 1598 17.21.1, on the prototype); set 2 mm longer than the cables, so it bows about 2 to 3 cm and carries no load: the lamp hangs from the two steel cables (hemi-suspension). The cord step: NOTES",
+  "model": "V12: a listed SVT-B 18/2 cloth-covered pendant cord in a black textile braid, round, 6.0 to 6.5 over the braid: about 0.250 in, as Grand Brass sells it (UL E357297; the part number and its sheet to confirm before ordering), one conductor identified, ribbed or printed (UL 1598 5.2.7: + to the driver's red lead), 3 m cut to the drop. Past the driver it carries the LEDs' DC, about 33 V (Class 2). Gripped at the lamp by the listed cord grip under the cap (hemi-cord-grip) and in the canopy by two screwed steel straps on the clamp's channel (the strain relief: each strap stops on the channel, its seat 6.6 wide, squeezing the cord 1.0 to 1.5 in depth only (a 6.5 cord loses about 15 % of its section, a 6.0 none); 156 N for 1 min, under 1.6 of movement, UL 1598 17.21.1, on the prototype list at both ends of the range, 6.0 and 6.5); set 2 mm longer than the cables, so it bows about 2 to 3 cm and carries no load: the lamp hangs from the two steel cables (hemi-suspension). The cord step: NOTES 3 (5).",
   "usd": 16.0,
   "estimate": true,
   "supplier": "a lighting supplier",
@@ -875,7 +875,7 @@
  "hemi-ring-board": {
   "kind": "led",
   "maker": "Samsung (or Lumileds / Nichia equivalent, to choose)",
-  "model": "Hemisphere option 3 (the owner, 2026-11-10: \"Core cut in half\"): a flat Ø50 aluminum-core ring board, 24 mid-power 3030 LEDs (Samsung LM301H EVO class, CRI 90, 2700 K; 3000 K for Ice and Haze) on a Ø38 circle, facing UP into the shade at the mouth's center, in two series strings of 12 at about 90 mA each (the ERP driver's 180 mA split two ways by the board's matched strings). Estimates to confirm on the datasheet [check]: about 42 lm a LED at 90 mA, so about 1,000 lm; Vf about 2.75 V, so about 33 V a string (about 31 V hot, low bin): inside the driver's 24-42 V window with about 7 V over its 24 V floor, about 5.9 W of its 7.6 W. Stock side-emitting (batwing) ring optic: none found with a downloadable IES file in one search (2026-11-10); the board is drawn and rendered bare until one is named | THE LED COLOUR PER TINT (the owner, 2026-11-10: \"some need warm and some need amber\"): amber 2200 K (CRI 90) for Ember; 2700 K for Poison and Fog; 3000 K for Haze; 4000 K for Dust, Acid, Ice and Smoke (the owner, 2026-11-11, on the Core color test: a dye removes only what the source carries); the same lumens in every bin. The lens stays open: the board bare. Heat test needed: the hub about 6 K warmer than today (estimate)",
+  "model": "Hemisphere option 3 (the owner, 2026-11-10: \"Core cut in half\"): a flat Ø50 aluminum-core ring board, 24 mid-power 3030 LEDs (Samsung LM301H EVO class, CRI 90, the CCT by tint: see below) on a Ø38 circle, facing UP into the shade at the mouth's center, in two series strings of 12 at about 90 mA each (the ERP driver's 180 mA split two ways by the board's matched strings). Estimates to confirm on the datasheet [check]: about 42 lm a LED at 90 mA, so about 1,000 lm; Vf about 2.75 V, so about 33 V a string (about 31 V hot, low bin): inside the driver's 24-42 V window with about 7 V over its 24 V floor, about 5.9 W of its 7.6 W. Stock side-emitting (batwing) ring optic: none found with a downloadable IES file in one search (2026-11-10); the board is drawn and rendered bare until one is named | THE LED COLOR PER TINT (the owner, 2026-11-10: \"some need warm and some need amber\"): amber 2200 K (CRI 90) for Ember; 2700 K for Poison and Fog; 3000 K for Haze; 4000 K for Dust, Acid, Ice and Smoke (the owner, 2026-11-11, on the Core color test: a dye removes only what the source carries); the same lumens in every bin. The lens stays open: the board bare. Heat test needed: the hub about 6 K warmer than today (estimate)",
   "usd": 14.0,
   "estimate": true,
   "supplier": "Digi-Key / a board house (custom MCPCB)",
@@ -884,7 +884,7 @@
  "north-driver-ring": {
   "kind": "power",
   "maker": "ERP Power",
-  "model": "ESS010W-0180-42-XL (order this code: the -XL has 300 mm leads; a plain -42's 152 would leave about 110 in the box, under UL 1598 6.15.1.6's 150): constant current 180 mA, 7.6 W, 24-42 V DC out, 120-277 V AC in; forward-phase (TRIAC) and reverse-phase (ELV) dimming at 120 V AC, 1-100 % (it also dims by 0-10 V; here phase-cut only, its 0-10 V leads cut at the factory, ERP p.9); Class 2; FCC 47 CFR Part 15 Class B at 120 V AC (consumer); power factor over 0.9 and THD under 20 % (series figures). It drives the ring board's two strings of 12 in parallel (about 90 mA each) at about 33 V, about 5.9 W: about 7 V over its 24 V floor hot, so the Gen 7 Vero 10's bin-selection caution no longer applies. Check the strings' current share on the bench (matched-Vf strings, or a small ballast resistor each). Mounted on edge in the canopy's steel tray, its two tabs on M3 x 8 button screws from outside the tray's wall, a DIN 433 washer and a plain M3 nut in each of ERP's pockets (no serrations on the plastic tabs; ERP p.11: 84 x 40 x 25.2, two Ø3.2 holes 77 x 33 apart, 3.5 in from the ends and sides, tabs 1.8). FACTORY: its LED leads cut to 136 and 149 (to the two lever splices, with 11 stripped) and its dimming leads cut off (phase-cut only; ERP p.9); the input leads left at 300. OPEN: ERP's OK for mounting it on edge. TIES: its two input leads tied together in the tray's +y end gap (UL 1598 5.1.3, 5.14.1), clear of the joint's edges; its two LED leads each tied to the cord clamp's ledge with one cable tie (Panduit PLT1M-C) through the two slots beside its notch, cut to length so no loop hangs",
+  "model": "ESS010W-0180-42-XL (order this code: the -XL has 300 mm leads; a plain -42's 152 would leave about 110 in the box, under UL 1598 6.15.1.6's 150): constant current 180 mA, 7.6 W, 24-42 V DC out, 120-277 V AC in; forward-phase (TRIAC) and reverse-phase (ELV) dimming at 120 V AC, 1-100 % (it also dims by 0-10 V; here phase-cut only, its 0-10 V leads cut at the factory, ERP p.9); Class 2; FCC 47 CFR Part 15 Class B at 120 V AC (consumer); power factor over 0.9 and THD under 20 % (series figures). It drives the ring board's two strings of 12 in parallel (about 90 mA each) at about 33 V, about 5.9 W: about 7 V over its 24 V floor hot, so the Gen 7 Vero 10's bin-selection caution no longer applies. Check the strings' current share on the bench (matched-Vf strings, or a small ballast resistor each). Mounted on edge in the canopy's steel tray, its two tabs on M3 x 8 button screws from outside the tray's wall, a DIN 433 washer and a plain M3 nut in each of ERP's pockets (no serrations on the plastic tabs; ERP p.11: 84 x 40 x 25.2, two Ø3.2 holes 77 x 33 apart, 3.5 in from the ends and sides, tabs 1.8). FACTORY (V12): its LED leads cut to length from the case, BLACK (-) 158 and RED (+) 170 (each its route plus a slack loop of 22 to 26), stripped 11, passed out of the tray's inner wall together in a glass-fibre sleeve (hemi-lead-sleeve, UL 1598 5.14.1(c)), each slack loop tied through two slots in the clamp channel's lip (hemi-ties), and INSERTED into the outer entries of the two lever splices (black into A, red into B; UL 1598 5.2.1); its dimming leads cut off (phase-cut only; ERP p.9); the input leads left at 300 and tied together in the tray's +y end gap (UL 1598 5.1.3, 5.14.1), clear of the joint's edges. OPEN: ERP's OK for mounting it on edge.",
   "usd": 16.0,
   "estimate": true,
   "supplier": "ERP distributors (Future Electronics, Digi-Key, Mouser)",
@@ -1006,7 +1006,7 @@
  "hemi-bracket-studs": {
   "kind": "hardware",
   "maker": "PEM (Penn Engineering)",
-  "model": "eight PEM FH-M3-8 flush-head studs pressed into the mounting plate (Ø3.0 +0.08 holes), and eight M3 serrated flange nuts (DIN 6923: they bond the brackets) under the brackets' flanges",
+  "model": "eight PEM FH-M3-8 flush-head studs pressed into the mounting plate (Ø3.0 +0.08 holes), and eight M3 serrated hex flange nuts, 5.5 AF, 4 tall, flange Ø8, Class 8, zinc plated (McMaster-Carr 90374A211 or 96194A206; to confirm; DIN 6923 starts at M5): they bond the brackets under the brackets' flanges",
   "usd": 3.0,
   "supplier": "a PEM distributor",
   "estimate": true,
@@ -1042,7 +1042,7 @@
  "hemi-ground-screw": {
   "kind": "hardware",
   "maker": "any (listed)",
-  "model": "V11: a green 10-32 x 3/8 in hex-washer-head grounding screw with a cupped washer (UL 467; the washer per UL 1598 6.14.2.9(d)), from above into a tapped extruded hole in the mounting plate (Ø6.4 x 1.2 down, tapped after plating: about 2 to 2.5 full threads by volume against 6.14.2.11's two, so a first-article test, 17.39 at 1.6 N m, is on the prototype list) at (30, 0), inside the outlet box's opening where the supply connects (6.14.2.2): the equipment grounding conductor (an insulated 12 AWG fits) lands under the washer in the box (NEC 410.46). Its head stands 3.2 above the plate, inside the box; its tip 7.1 under the plate, in free space",
+  "model": "V11: a green 10-32 x 3/8 in hex-washer-head grounding screw with a cupped washer (UL 467; the washer per UL 1598 6.14.2.9(d)), from above into a tapped extruded hole in the mounting plate (Ø6.4 x 1.2 down, tapped after plating: about 2 to 2.5 full threads by volume against 6.14.2.11's two, so a first-article test, 17.39 at 1.6 N m, is on the prototype list, prototype-list.md) at (36, 0), inside the outlet box's opening where the supply connects (6.14.2.2): the equipment grounding conductor (an insulated 12 AWG fits) lands under the washer in the box (NEC 410.46). Its head stands 3.2 above the plate, inside the box; its tip 7.1 under the plate, in free space",
   "usd": 0.5,
   "supplier": "any",
   "estimate": true,
@@ -1051,7 +1051,7 @@
  "hemi-splice": {
   "kind": "wiring",
   "maker": "WAGO",
-  "model": "V11: two WAGO 221-412 lever splices (2 openings, 24-12 AWG, UL 486C; 18.3 x 13.1 x 8.2, a lever open 15.3), one per pole, standing in the cord clamp's channel (located by its web, ledge and top flange, held by a push fit between its dimpled side flanges; their levers face out into free space): the cord's two conductors to the driver's two LED leads (Class 2). WAGO strips 11: the LED leads come stripped 11 from the factory; strip the cord's conductors 11",
+  "model": "V12: two WAGO 221-412 lever splices (2 openings, 24-12 AWG, UL 486C; WAGO's sheets give 13.1 x 8.3 x 18.6 (2018) and 13.2 x 8.6 x 18.8 (2023), drawn at the larger; 17 overall with a lever open), one per pole, entries down on the clamp channel's shelf, levers facing +y into free space (nothing in front of them to 19 from their backs), the noses free over the shelf's edge. HELD by one cable tie round both, through two slots in the channel's web (hemi-ties): it pulls them together and back onto the web; there is no push fit. FACTORY: the driver's LED leads inserted in their outer entries (black into A, red into B). ON SITE: cut the tie, draw them out (the cord's conductors fold about 20), put the cord's conductors into the inner entries (the identified one into B, with the red lead), push them back, fit a new tie. WAGO strips 11",
   "usd": 1.8,
   "estimate": true,
   "supplier": "an electrical distributor",
@@ -1069,7 +1069,7 @@
  "hemi-canopy-studs": {
   "kind": "hardware",
   "maker": "PEM (Penn Engineering)",
-  "model": "V11: four PEM FH-M3-8 flush-head studs pressed into the mounting plate (Ø3.0 +0.08 holes: the tray's two flanges and the cord clamp's channel), each with an M3 serrated flange nut (DIN 6923: it bonds); the driver's two M3 x 8 button screws (ISO 7380) from outside the tray's wall, each with a DIN 433 washer and a plain M3 nut (ISO 4032) in ERP's pocket",
+  "model": "V11: four PEM FH-M3-8 flush-head studs pressed into the mounting plate (Ø3.0 +0.08 holes: the tray's two flanges at (-40.5, -46) and (-21, 46.3), the cord clamp's channel at (-1, -3) and (21, -3)), each with an M3 serrated hex flange nut, 5.5 AF, 4 tall, flange Ø8, Class 8, zinc plated (McMaster-Carr 90374A211 or 96194A206; the number and flange to confirm; DIN 6923 starts at M5): it bonds; the driver's two M3 x 8 button screws (ISO 7380) from outside the tray's wall, each with a DIN 433 washer and a plain M3 nut (ISO 4032) in ERP's pocket",
   "usd": 2.5,
   "estimate": true,
   "supplier": "a PEM distributor",
@@ -1078,7 +1078,7 @@
  "hemi-clamp-screws": {
   "kind": "hardware",
   "maker": "any (PEM for the nuts)",
-  "model": "V11: two M3 x 6 pan screws (ISO 7045), zinc-plated, along y through the cord's two straps into two PEM S-M3-1 self-clinching nuts in the clamp's channel; driven from in front with a screwdriver (120 or more free with the canopy tied down)",
+  "model": "V12: two M3 x 6 pan screws (ISO 7045, cross recess size 1), zinc-plated, along y through the cord's two straps into two PEM S-M3-1 self-clinching nuts in the clamp's channel; driven with a PH1 screwdriver, its shaft 75 or longer and its handle slim (Ø32 or under), from the front (-y, the side away from the splices), tipped a little handle-down at the upper screw (more than 250 free along the axis with the canopy tied down)",
   "usd": 0.4,
   "estimate": true,
   "supplier": "any",
@@ -1092,5 +1092,60 @@
   "supplier": "a turning shop",
   "estimate": true,
   "price_date": "2026-11-25"
+ },
+ "hemi-ties": {
+  "kind": "hardware",
+  "maker": "Panduit (or equal)",
+  "model": "V12: three miniature nylon 6.6 cable ties, 2.5 wide (Panduit PLT.6SM-C class; the part number to confirm), UL 62275: one round both splices through two slots in the channel's web (it holds them back on the web and together; cut it to take a splice out, a new one after), and one round each LED lead's slack loop through two slots in the channel's lip, fitted at the factory",
+  "usd": 0.1,
+  "estimate": true,
+  "supplier": "an electrical distributor",
+  "price_date": "2026-11-25"
+ },
+ "hemi-lead-sleeve": {
+  "kind": "wiring",
+  "maker": "any (UL 1441)",
+  "model": "V12-6: acrylic-coated glass-fibre sleeving, UL 1441 recognized (VW-1), about 4.5 inside, wall 0.3 or more (UL 1598 5.14.1(c): 0.25), 26 long, over both LED leads where they leave the tray through its Ø6 hole (1.0 sheet, its edge plain): fitted at the factory with the leads' cut and insertion (the maker and part number to confirm)",
+  "usd": 0.1,
+  "estimate": true,
+  "supplier": "an electrical distributor",
+  "price_date": "2026-11-25"
+ },
+ "hemi-cord-v9": {
+  "kind": "wiring",
+  "maker": "any (UL listed)",
+  "model": "v2 RECORD (frozen at v9, V12-11): Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip under the cap (Lapp 53112005 through the crown into the hub, 2026-11-24) and one in the canopy, strain relief only: the fixture hangs from the two steel suspension cables (hemi-suspension; v6, 2026-11-24); the cord set 2 mm longer than the cables between its grips, so it bows about 21 mm and carries no load, the cord carries current only (confirm the cord-support test with the lab)",
+  "usd": 16.0,
+  "estimate": true,
+  "supplier": "a lighting supplier",
+  "price_date": "2026-10-22",
+  "note": "The review's L4: the old 3-core 0.75 mm2 was a European spec"
+ },
+ "hemi-suspension-v9": {
+  "kind": "hardware",
+  "maker": "Cable Grippers Inc. (cable, grippers) and Nicopress (stop sleeves)",
+  "model": "v2 RECORD (frozen at v9, V12-11): PROPOSAL 2026-11-24 (v8): TWO 1/16 in 7x7 stainless cables, each on a Nicopress 871-1-C stop sleeve in the hub (about 1.07 kN, Nicopress's 50 %), up through the hub, crown and cap to a Cable Grippers MGR-M10-MM in the canopy (312 lb minimum break, 50 lb a cable). Proof: 90 N for 1 min each. At r 16 (A, today) or 17.6 (B), 0/180 deg (A: 105/285, the lock's line), splayed to the grippers at r 48. LEVELLING: see the gripper row and NOTES",
+  "usd": 14.0,
+  "estimate": true,
+  "supplier": "Cable Grippers Inc. (Las Vegas) and a Nicopress distributor",
+  "price_date": "2026-11-24"
+ },
+ "hemi-canopy-bushing-v9": {
+  "kind": "hardware",
+  "maker": "to make (a turned part)",
+  "model": "v2 RECORD (frozen at v9, V12-11): v9: a flush grommet for the canopy's floor, 6061 turned, satin black anodised: Ø12 through the 3 floor, a Ø16 x 1 flange inside, its bore Ø6.6; it does not grip (the cord's strain relief is the enclosure's)",
+  "usd": 3.0,
+  "supplier": "a turning shop",
+  "estimate": true,
+  "price_date": "2026-11-25"
+ },
+ "hemi-ground-screw-v9": {
+  "kind": "hardware",
+  "maker": "any (listed)",
+  "model": "v2 RECORD (frozen at v9, V12-11): v9: a green hex-washer-head 10-32 x 3/16 grounding screw (UL 467) into the mounting plate's downward-extruded tapped hole at y +56 (five threads), for the equipment grounding conductor (NEC 410.44)",
+  "usd": 0.5,
+  "supplier": "any",
+  "estimate": true,
+  "price_date": "2026-11-24"
  }
 }

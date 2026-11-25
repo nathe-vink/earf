@@ -18,8 +18,8 @@ What to make first, and the tests each must pass before a run is ordered. **The 
 **First articles:**
 - one complete pendant with a **Smoke** shade, the darkest, which absorbs the most heat;
 - one spare **Fog** shade, the palest;
-- three COBs from the production bin;
-- the ERP ESS010W-0180-42 and the EPtronics LD6W120-36-C0170-TL, so the alternate can be swapped in the same hour.
+- three ring boards (option 3, the main build since 2026-11-10; the COB bench is v2's record);
+- the ERP ESS010W-0180-42-XL (the -XL's 300 mm leads; phase-cut only, its 0-10 V leads cut) and the EPtronics LD6W120-36-C0170-TL, so the alternate can be swapped in the same hour.
 
 | Test | How | Pass |
 |---|---|---|
@@ -153,7 +153,7 @@ not returnable.
 | Week of | Item | Supplier type | Amount | If we stop |
 |---|---|---|---|---|
 | 2 Nov | Colour chips, and a 1/2" off-cut each of 2423, 2064, 2074 | sheet retailers (Canal, eStreet, AC) | $150 [E] | spent |
-| 2 Nov | Hemisphere bench: 3 Vero SE 10 COBs, 2 ERP ESS010W-0180-42, 1 EPtronics LD6W, 3 wall dimmers | electronics distributors | $170 [E] | returnable unopened; most will be opened for the test |
+| 2 Nov | Hemisphere bench: 3 ring boards (V12: was 3 Vero SE 10 COBs, v2's record), 2 ERP ESS010W-0180-42-XL, 1 EPtronics LD6W, 3 phase-cut wall dimmers | electronics distributors | $170 [E] | returnable unopened; most will be opened for the test |
 | 2 Nov | Core bench: 12 PSL-FP-IFR18650EC cells, an LTC4162 evaluation kit, 2 Li-ion cells for the misuse test | electronics distributors | $200 [E] | mostly returnable unopened |
 | 2 Nov | Bench equipment: thermocouple logger, lux and flicker meter, USB-C power meter, test LP | instrument retailers | $600 [E] | returnable 30 days; keeps its value |
 | 2 Nov | **Mantle's bought drive:** Rega 24 V motor kit $265, Neo PSU $445, RB330 $675, 2M Blue $220, Phono Box S2 $269 | hi-fi retailers (Audio Advisor, Upscale) | **$1,874** | returnable unopened, 30 days (check each store) |
