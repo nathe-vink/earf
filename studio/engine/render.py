@@ -314,11 +314,11 @@ def main():
         import support as Su
         skip = [i for i, p in enumerate(sh.get('set', {}).get('props', []) or []) if p and p.get('fn') in ('room', 'build')]
         pg = [g for lbl, ob in block_objs for g in Su.split(lbl, ob)]
-        res = Su.check(bpy, scene, Su.groups_from_scene(bpy, pg, skip))
+        res = Su.check(bpy, scene, Su.groups_from_scene(bpy, pg, skip, sh.get('set', {}).get('props', [])))
         out.with_suffix('.support.json').write_text(json.dumps({'shot': a.shot, 'groups': res}, indent=1) + '\n')
         for r in res:
             print(f"SUPPORT {r['group'][:40]:40s} z {r['z_min']:.3f} standing {r['standing']!s:5s} contact {r['contact_supported']:.2f} "
-                  f"footprint {r['footprint_supported']:.2f} overhang {r['overhang_m']} margin {r['edge_margin_m']} on {r['on'][:2]}")
+                  f"footprint {r['footprint_supported']:.2f} gap {r['gap_below_m']} below {r['below']} overhang {r['overhang_m']} margin {r['edge_margin_m']} on {r['on'][:2]}")
         return
     if a.probe:
         import probe as Pb

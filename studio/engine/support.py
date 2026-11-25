@@ -115,9 +115,11 @@ def check(bpy, scene, groups):
         contact = [(v.x, v.y) for v in vs if v.z < z0 + CONTACT]
         if len(contact) > 400:
             contact = contact[::len(contact) // 400 + 1]
-        on = {}
+        on = {}; gaps = []
         def sup(x, y):
             g, nm = _cast(bpy, scene, own, x, y, zc)
+            if g is not None:
+                gaps.append((g, nm))
             ok = g is not None and g <= GAP
             if ok:
                 on[nm] = on.get(nm, 0) + 1
@@ -156,6 +158,7 @@ def check(bpy, scene, groups):
         res.append({'group': label, 'z_min': round(z0, 4),
                     'footprint_xy': [[round(min(xs), 3), round(min(ys), 3)], [round(max(xs), 3), round(max(ys), 3)]],
                     'standing': any(c_ok),
+                    'gap_below_m': round(min(gaps)[0], 4) if gaps else None, 'below': min(gaps)[1] if gaps else None,
                     'on': [nm for nm, _ in top],
                     'contact_supported': round(sum(c_ok) / len(c_ok), 3),
                     'footprint_supported': round(sum(g_ok) / len(g_ok), 3),
@@ -203,22 +206,21 @@ def split(label, objs, pad=0.02):
     return [(f'{label} #{i}' if len(big) > 1 else label, g) for i, g in enumerate(big)]
 
 
-def groups_from_scene(bpy, product_groups, skip_props=()):
-    """The product blocks as given, and every other mesh grouped by its prop (objects named propN-...), its parent
-    chain's root otherwise; props in `skip_props` (indices: the room, the walls) are not checked."""
-    taken = {o.name for _, objs in product_groups for o in objs}
+def groups_from_scene(bpy, product_groups, skip_props=(), props=None):
+    """The product blocks as given, and each set prop's objects (tagged engine_prop by sets.props), a prop that builds
+    many things (an ext: the lamps, the boards) split into its separate pieces; props in `skip_props` (the room, the
+    record wall: the surfaces themselves) are not checked. Objects no prop made (templates, lamps) are left out."""
     by = {}
     for o in bpy.data.objects:
-        if o.type != 'MESH' or o.name in taken or o.hide_render:
+        if o.type != 'MESH' or o.hide_render or 'engine_prop' not in o:
             continue
-        r = o
-        while r.parent:
-            r = r.parent
-        m = re.match(r'prop(\d+)-', r.name) or re.match(r'prop(\d+)-', o.name)
-        if m and int(m.group(1)) in skip_props:
+        i = int(o['engine_prop'])
+        if i in skip_props:
             continue
-        key = f'prop{m.group(1)}' if m else r.name
-        if not m and (o.get('engine_light') or o.get('engine_light_body')):
-            continue
-        by.setdefault(key, []).append(o)
-    return list(product_groups) + sorted(by.items())
+        by.setdefault(i, []).append(o)
+    out = list(product_groups)
+    for i in sorted(by):
+        p = (props or [None] * (i + 1))[i] if props and i < len(props) else None
+        lbl = f'prop{i} ' + ((p.get('fn') or p.get('shape') or p.get('kind')) if p else '')
+        out += split(lbl.strip(), by[i]) if (p or {}).get('shape') == 'ext' else [(lbl.strip(), by[i])]
+    return out

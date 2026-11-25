@@ -147,7 +147,10 @@ def props(bpy, spec, mats):
     objs = []
     for i, p in enumerate(spec.get('props', [])):
         if p and not p.get('off') and p.get('kind'):
+            before = set(bpy.data.objects.keys())
             objs += prop(bpy, f'prop{i}-{p["kind"]}', p, mats)
+            for n in set(bpy.data.objects.keys()) - before:          # which prop made it (the support check)
+                bpy.data.objects[n]['engine_prop'] = i
     return objs
 
 
