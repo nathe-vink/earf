@@ -197,6 +197,8 @@ def split(label, objs, pad=0.02):
     for i in idx:
         cl.setdefault(f(i), []).append(objs[i])
     parts = sorted(cl.values(), key=lambda g: (min((o.matrix_world.translation.x for o in g)), len(g)))
+    if all(len(g) == 1 for g in parts):                 # one object per piece (a board each): every piece its own
+        return [(f'{label} #{i} {g[0].name}' if len(parts) > 1 else label, g) for i, g in enumerate(parts)]
     big = [g for g in parts if len(g) > 1 or len(parts) == 1]
     small = [g for g in parts if not (len(g) > 1 or len(parts) == 1)]
     # a lone piece (a screw) joins the nearest larger piece
