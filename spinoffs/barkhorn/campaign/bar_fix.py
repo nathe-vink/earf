@@ -102,8 +102,10 @@ def pulled_sleeves(s, log, name=''):
             if not (abs(r[0] + 4.0) < 1e-6 and abs(bd['y'] - (WALL['y'] - 0.14)) < 1e-3):
                 continue
             if name == 'bar-hero' and bd['image'] == 'tex/cover-10.png':
-                r[2] = -r[2]; bd['rot'] = r                  # turned to face the desktop hero's camera (the coordinator, 11:09)
-                log.append('cover-10 turned to rz +64, facing the hero camera')
+                # turned more to the room, -25 (from -64), so its face reads to the desktop hero's camera at x 6.9, to its
+                # left (the coordinator, 13:29; +64, tried first, turned it away)
+                r[2] = -25.0; bd['rot'] = r
+                log.append('cover-10 turned to rz -25, its face to the hero camera')
             k = round((bd['z'] - WALL['z0']) / WALL['cell'])
             ztop = WALL['z0'] + k * WALL['cell']
             a = math.radians(r[2]); hw = bd['w'] / 2
