@@ -21,4 +21,9 @@ X="$G $LV HEMI_ROT=-169" $T lock9-3-back hoff red
 X="$G $LV HEMI_ROT=-79 HEMI_LOCK=0" $T lock9-4-none hoff red
 # (the first try, 1.6 m off with the 200 mm lens, put the camera under the paper ground: re-shot from 0.75 m, 100 mm lens)
 X="$G $LIT HOUSE_CAM=-0.168,0.628,0.03,0,0,0.38,100,1" $T lock9-5-below hoff red
+# V10 (the v9 check's V10-12): frame 4 again with the cables kept where frame 2's are (the ceiling box sets their line:
+# HEMI_ROT=26 puts the lock-off cables at 26/206), and a frame with the knob 45 deg off the camera (HEMI_ROT=-124: the knob
+# at -19 deg, the camera at -64)
+X="$G $LV HEMI_ROT=26 HEMI_LOCK=0" $T lock10-4-none hoff red
+X="$G $LV HEMI_ROT=-124" $T lock10-6-45 hoff red
 date -u

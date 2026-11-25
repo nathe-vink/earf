@@ -322,7 +322,7 @@
  "dome-pins": {
   "kind": "hardware",
   "maker": "any",
-  "model": "CUSTOM, turned (v9): three headless stepped pins from a screw-machine shop to the drawing, stainless 303, each with a hex socket in the shoulder's end and a pre-applied nylon patch. TWO plain pins: a Ø4 h9 shoulder 4.2 long, an M3 x 0.5 thread 15.8 long (through a Ø3.2 clearance in the PEEK ring, 6 into the hub's M3 holes at 150 and 270 deg, 7.5 deep). ONE KEY PIN: a Ø6 h9 shoulder 4.2 long, an M4 x 0.7 thread 15.8 long (through a Ø4.3 clearance, 6 into the hub's one M4 hole at 30 deg, 7.5 deep): its own thread, so it fits only its hole, and its shoulder passes only the collar's one 7 wide slot, so every shade fits one way. The shoulders 4.0 into the collar's slots. Secondary retention (v7): on top A, if the owner keeps it, a positive lock (hemi-lock)",
+  "model": "CUSTOM, turned (v9): three headless stepped pins from a screw-machine shop to the drawing, stainless 303, each with a hex socket in the shoulder's end and a pre-applied nylon patch. TWO plain pins: a Ø4 h9 shoulder 4.2 long, an M3 x 0.5 thread 15.8 long (through a Ø3.2 clearance in the PEEK ring, 6 into the hub's M3 holes at 150 and 270 deg, 7.5 deep). ONE KEY PIN: a Ø6 h9 shoulder 4.2 long, an M4 x 0.7 thread 15.8 long (through a Ø4.3 clearance, 6 into the hub's one M4 hole at 30 deg, 7.5 deep): its own thread, so it fits only its hole, and its shoulder passes only the collar's one 7 wide slot, so every shade fits one way. The shoulders 4.0 into the collar's slots.",
   "usd": 6.0,
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
@@ -330,12 +330,12 @@
  },
  "dome-plunger": {
   "kind": "hardware",
-  "maker": "Kipp or Misumi",
-  "model": "A stainless ball spring plunger M5 x 12, light force (about 10 N): the bayonet's detent on today's top and B (v7: threaded through the PEEK ring at 90 deg, z 93, its ball clicking into a dimple in the collar's bore); top A has the lock (hemi-lock) instead",
+  "maker": "Kipp",
+  "model": "V10: Kipp K0310.05, a stainless ball spring plunger M5 x 12 with a Ø3 ball (0.9 travel, about 6 to 11 N): the bayonet's detent, threaded through the PEEK ring at 90 deg, z 93, its ball clicking into a Ø3.1 dimple in the collar's bore as the shade drops home",
   "usd": 4.5,
   "estimate": true,
   "supplier": "Misumi",
-  "price_date": "2026-10-19"
+  "price_date": "2026-11-25"
  },
  "orb-seat": {
   "kind": "hardware",
@@ -516,7 +516,7 @@
  "north-driver-575": {
   "kind": "power",
   "maker": "ERP Power",
-  "model": "ESS010W-0180-42 (round 42; the 575 lm level): constant current 180 mA, 7.6 W, 24-42 V DC out, 120-277 V AC in; forward-phase (TRIAC) and reverse-phase (ELV) dimming at 120 V AC and 0-10 V, 1-100 %; Class 2; FCC 47 CFR Part 15 Class B at 120 V AC (consumer); power factor over 0.9 and THD under 20 % (series figures); 'complies with ENERGY STAR, DLC and CA Title 24 technical requirements' (ERP's series page; JA8 itself is not named). At 180 mA the Vero SE 10 makes about 590 lm (about 3 % over 575) at about 24.6 V, about 4.4 W. CAUTION: 24.6 V is about 0.6 V over the driver's 24 V floor, and the COB's voltage falls as it warms and varies by bin: bench-test the regulation at Tc 25 and 85 C on three COBs from the production bin before committing (not yet tested)",
+  "model": "ESS010W-0180-42 (round 42; the 575 lm level): constant current 180 mA, 7.6 W, 24-42 V DC out, 120-277 V AC in; forward-phase (TRIAC) and reverse-phase (ELV) dimming at 120 V AC, 1-100 % (it also dims by 0-10 V; here phase-cut only, its 0-10 V leads cut at the factory, ERP p.9); Class 2; FCC 47 CFR Part 15 Class B at 120 V AC (consumer); power factor over 0.9 and THD under 20 % (series figures); 'complies with ENERGY STAR, DLC and CA Title 24 technical requirements' (ERP's series page; JA8 itself is not named). At 180 mA the Vero SE 10 makes about 590 lm (about 3 % over 575) at about 24.6 V, about 4.4 W. CAUTION: 24.6 V is about 0.6 V over the driver's 24 V floor, and the COB's voltage falls as it warms and varies by bin: bench-test the regulation at Tc 25 and 85 C on three COBs from the production bin before committing (not yet tested)",
   "usd": 16.0,
   "estimate": true,
   "supplier": "ERP distributors (Future Electronics, Digi-Key, Mouser)",
@@ -564,12 +564,11 @@
  "hemi-cord": {
   "kind": "wiring",
   "maker": "any (UL listed)",
-  "model": "Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip under the cap (Lapp 53112005 through the crown into the hub, 2026-11-24) and one in the canopy, strain relief only: the fixture hangs from the two steel suspension cables (hemi-suspension; v6, 2026-11-24); the cord set 2 mm longer than the cables between its grips, so it bows about 21 mm and carries no load, the cord carries current only (confirm the cord-support test with the lab)",
+  "model": "V10: a listed SVT 18/2 pendant cord in a black textile braid, round, at most Ø6.5 (the canopy's grommet Ø6.6, the clamp's saddle for 5.5 to 6.5), one conductor identified, ribbed or printed (UL 1598 5.2.7: + to the driver's red lead), 3 m cut to the drop. Past the driver it carries the LEDs' DC, about 33 V (Class 2). Gripped at the lamp by the listed cord grip under the cap (hemi-cord-grip) and in the canopy by the screwed saddle on the plate's bracket (hemi-cord-clamp: the strain relief, 156 N for 1 min, under 1.6 of movement, UL 1598 17.21.1); set 2 mm longer than the cables, so it bows about 21 mm and carries no load: the lamp hangs from the two steel cables (hemi-suspension). The cord step: NOTES",
   "usd": 16.0,
   "estimate": true,
   "supplier": "a lighting supplier",
-  "price_date": "2026-10-22",
-  "note": "The review's L4: the old 3-core 0.75 mm2 was a European spec"
+  "price_date": "2026-11-25"
  },
  "hemi-cob": {
   "kind": "led",
@@ -723,7 +722,7 @@
  "hemi-suspension": {
   "kind": "hardware",
   "maker": "Cable Grippers Inc. (cable, grippers) and Nicopress (stop sleeves)",
-  "model": "PROPOSAL 2026-11-24 (v8): TWO 1/16 in 7x7 stainless cables, each on a Nicopress 871-1-C stop sleeve in the hub (about 1.07 kN, Nicopress's 50 %), up through the hub, crown and cap to a Cable Grippers MGR-M10-MM in the canopy (312 lb minimum break, 50 lb a cable). Proof: 90 N for 1 min each. At r 16 (A, today) or 17.6 (B), 0/180 deg (A: 105/285, the lock's line), splayed to the grippers at r 48. LEVELLING: see the gripper row and NOTES",
+  "model": "PROPOSAL 2026-11-24 (v8): TWO 1/16 in 7x7 stainless cables, each on a Nicopress 871-1-C stop sleeve in the hub (about 1.07 kN, Nicopress's 50 %), up through the hub, crown and cap to a Cable Grippers MGR-M10-MM in the canopy (312 lb minimum break, 50 lb a cable). Proof: 90 N for 1 min each. Their radius and angles on the hub's drawing; splayed to the grippers at r 48. LEVELING: see NOTES",
   "usd": 14.0,
   "estimate": true,
   "supplier": "Cable Grippers Inc. (Las Vegas) and a Nicopress distributor",
@@ -777,11 +776,11 @@
  "hemi-canopy-strap": {
   "kind": "hardware",
   "maker": "any (a lighting supplier)",
-  "model": "Zinc-plated steel mounting for the 4 in junction box (review, 2026-11-01) | v9: now a made part (crystal.py 'strap', drawn): a round mounting plate, 1.6 steel, Ø143.6, rim turned down 12; the box's two 8-32 screws; a rolled Ø22 opening; four PEM SO-M4 standoffs; eight PEM FH-M3-8 studs for the brackets; an extruded 10-32 hole for the grounding screw. It carries the load; the canopy is a cover",
+  "model": "V10: a made part (crystal.py 'strap', drawn): a round mounting plate, 1.6 zinc-plated steel, Ø143.6, rim turned down 12; two slots for the box's 8-32 screws; a rolled Ø8 opening for the driver's input leads; a tapped extruded hole for the green screw; twelve PEM FH-M3-8 studs (the gripper brackets, the tray, the cord clamp). It carries the load and closes the driver's tray; the canopy is a cover",
   "usd": 6.0,
   "estimate": true,
   "supplier": "a lighting supplier",
-  "price_date": "2026-11-01"
+  "price_date": "2026-11-25"
  },
  "hemi-swag-supply": {
   "kind": "power",
@@ -885,7 +884,7 @@
  "north-driver-ring": {
   "kind": "power",
   "maker": "ERP Power",
-  "model": "ESS010W-0180-42 (the 1,000 lm level, 2026-11-10; the same driver): constant current 180 mA, 7.6 W, 24-42 V DC out, 120-277 V AC in; forward-phase (TRIAC) and reverse-phase (ELV) dimming at 120 V AC and 0-10 V, 1-100 %; Class 2; FCC 47 CFR Part 15 Class B at 120 V AC (consumer); power factor over 0.9 and THD under 20 % (series figures). It drives the ring board's two strings of 12 in parallel (about 90 mA each) at about 33 V, about 5.9 W: about 7 V over its 24 V floor hot, so the Gen 7 Vero 10's bin-selection caution no longer applies. Check the strings' current share on the bench (matched-Vf strings, or a small ballast resistor each)",
+  "model": "ESS010W-0180-42 (the 1,000 lm level, 2026-11-10; the same driver): constant current 180 mA, 7.6 W, 24-42 V DC out, 120-277 V AC in; forward-phase (TRIAC) and reverse-phase (ELV) dimming at 120 V AC, 1-100 % (it also dims by 0-10 V; here phase-cut only, its 0-10 V leads cut at the factory, ERP p.9); Class 2; FCC 47 CFR Part 15 Class B at 120 V AC (consumer); power factor over 0.9 and THD under 20 % (series figures). It drives the ring board's two strings of 12 in parallel (about 90 mA each) at about 33 V, about 5.9 W: about 7 V over its 24 V floor hot, so the Gen 7 Vero 10's bin-selection caution no longer applies. Check the strings' current share on the bench (matched-Vf strings, or a small ballast resistor each). V10: the -XL version (300 mm leads), stood on edge in the canopy's steel tray, its two tabs on PEM studs in the tray's wall (ERP p.11: 84 x 40 x 25.2, two Ø3.2 holes 77 x 33 apart in diagonal corner pockets, tabs 1.8). OPEN: ERP's OK for mounting it on edge",
   "usd": 16.0,
   "estimate": true,
   "supplier": "ERP distributors (Future Electronics, Digi-Key, Mouser)",
@@ -933,7 +932,7 @@
  "hemi-gripper": {
   "kind": "hardware",
   "maker": "Cable Grippers Inc.",
-  "model": "PROPOSAL 2026-11-24 (v8): MGR-M10-MM mini gripper for 1/16 in cable (their chart: 0.675 in without the plunger, Ø0.47 in body, M10), with its knurled safety nut; plunger down, threaded up through its bracket's foot and held by an M10 nylon-insert nut. LEVELLING and the cord: see NOTES (the cord is set at the enclosure's strain relief, before the canopy goes up). The price is the pair ($7 each)",
+  "model": "PROPOSAL 2026-11-24 (v8): MGR-M10-MM mini gripper for 1/16 in cable (their chart: 0.675 in without the plunger, Ø0.47 in body, M10), with its knurled safety nut; plunger down, threaded up through its bracket's foot and held by an M10 nylon-insert nut. LEVELING and the cord: see NOTES (the cord is clamped in the canopy before the canopy goes up). The price is the pair ($7 each)",
   "usd": 14.0,
   "estimate": true,
   "supplier": "Cable Grippers Inc.",
@@ -979,20 +978,20 @@
  "hemi-canopy-setscrews": {
   "kind": "hardware",
   "maker": "any (PEM for the nuts)",
-  "model": "v9: two M4 x 4 cup-point set screws, black oxide, nylon patch, tapped through the canopy's wall at 90/270 deg (tapped after anodising), their cups on the mounting plate's bare rim: they hold the canopy up and bond it",
+  "model": "V10: two M4 x 3 cup-point set screws (ISO 4029), black oxide, nylon patch, through the canopy's 3.0 wall at 90/270 deg (tapped after anodizing), their cups on the mounting plate's bare rim, 0.2 under the wall's face: they hold the canopy up and bond it",
   "usd": 1.0,
   "estimate": true,
   "supplier": "any",
-  "price_date": "2026-11-24"
+  "price_date": "2026-11-25"
  },
  "hemi-box-screws": {
   "kind": "hardware",
   "maker": "supplied with the junction box",
-  "model": "v7: the 4 in junction box's two 8-32 screws, through the mounting plate at y -+44.45",
+  "model": "the outlet box's two 8-32 screws (supplied with the box), through the mounting plate's two slots (boxes with screws 2-3/4 to 3-1/2 in apart)",
   "usd": 0.0,
   "estimate": true,
   "supplier": "with the box",
-  "price_date": "2026-11-24"
+  "price_date": "2026-11-25"
  },
  "hemi-lock": {
   "kind": "hardware",
@@ -1002,7 +1001,8 @@
   "estimate": true,
   "supplier": "JW Winco or a Ganter distributor",
   "price_date": "2026-11-24",
-  "url": "https://www.jwwinco.com/en-us/products/3.1-Indexing-locking-blocking-with-pins-and-ball-shaped-elements/Indexing-plungers/GN-617-Steel-Indexing-Plunger-Non-Lock-Out"
+  "url": "https://www.jwwinco.com/en-us/products/3.1-Indexing-locking-blocking-with-pins-and-ball-shaped-elements/Indexing-plungers/GN-617-Steel-Indexing-Plunger-Non-Lock-Out",
+  "note": "The price is an estimate, not a quote: JW Winco's page (url) gives no price to us; ask a Ganter distributor"
  },
  "hemi-bracket-studs": {
   "kind": "hardware",
@@ -1043,25 +1043,61 @@
  "hemi-ground-screw": {
   "kind": "hardware",
   "maker": "any (listed)",
-  "model": "v9: a green hex-washer-head 10-32 x 3/16 grounding screw (UL 467) into the mounting plate's downward-extruded tapped hole at y +56 (five threads), for the equipment grounding conductor (NEC 410.44)",
+  "model": "V10: a green 10-32 x 3/8 in hex-washer-head grounding screw with a cupped washer (UL 467; the washer per UL 1598 6.14.2.9(d)), from above into a tapped extruded hole in the mounting plate (Ø6.4 x 1.2 down, about 3.5 threads, tapped after plating) at (20, 30), inside the outlet box's opening where the supply connects (6.14.2.2): the equipment grounding conductor (an insulated 12 AWG fits) lands under the washer in the box (NEC 410.46). Its head stands 3.2 above the plate, inside the box; its tip 7.1 under the plate, in free space",
   "usd": 0.5,
   "supplier": "any",
   "estimate": true,
-  "price_date": "2026-11-24"
+  "price_date": "2026-11-25"
  },
  "hemi-splice": {
   "kind": "wiring",
   "maker": "WAGO",
-  "model": "V10-1 (options O1/O2 only): one WAGO 221-412 lever splice (2 conductors, 24-12 AWG, UL 486C), 18.3 x 13.1 x 8.2, lying flat on the enclosure's cover under the driver: the Class 2 splice of the driver's output leads to the cord's two conductors. No mains splice in the enclosure (they are in the outlet box)",
-  "usd": 0.6,
+  "model": "V10: two WAGO 221-412 lever splices (2 openings, 24-12 AWG, UL 486C), one per pole, standing in a WAGO 221-500 mounting carrier riveted to the cord clamp's channel (the splices' fixed place, UL 1598 6.17.2): the cord's two conductors to the driver's two LED leads (Class 2). WAGO strips 11; ERP's leads come stripped 9.5 and tinned, so re-strip them to 11. No mains splice in the canopy: the driver's input leads are spliced in the outlet box",
+  "usd": 1.8,
   "estimate": true,
   "supplier": "an electrical distributor",
+  "price_date": "2026-11-25"
+ },
+ "hemi-tray-screws": {
+  "kind": "hardware",
+  "maker": "any (PEM for the nuts)",
+  "model": "V10: two M3 x 6 serrated button-head screws (ISO 7380 with a serrated washer), zinc-plated, from outside through the driver tray's outer wall into two PEM S-M3-1 self-clinching nuts in the U's joint flanges: they join and bond the tray's two parts",
+  "usd": 0.6,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-11-25"
+ },
+ "hemi-canopy-studs": {
+  "kind": "hardware",
+  "maker": "PEM (Penn Engineering)",
+  "model": "V10: four PEM FH-M3-8 flush-head studs pressed into the mounting plate (Ø3.0 holes: the tray's two flanges and the cord clamp's channel) with four M3 nylon-insert nuts, and two PEM FH-M3-6 pressed from outside into the tray's outer wall (flush there) with two M3 serrated flange nuts in ERP's tab pockets (the driver's tabs)",
+  "usd": 2.5,
+  "estimate": true,
+  "supplier": "a PEM distributor",
+  "price_date": "2026-11-25"
+ },
+ "hemi-lead-bushing": {
+  "kind": "hardware",
+  "maker": "Heyco",
+  "model": "V10: one Heyco snap bushing for a 1/4 in (Ø6.4) hole in 1.0 sheet (flanges Ø9.5; the exact number from Heyco's table), in the tray's -y end: the driver's two LED leads (Class 2) out of the tray",
+  "usd": 0.2,
+  "estimate": true,
+  "supplier": "a Heyco distributor",
+  "price_date": "2026-11-25"
+ },
+ "hemi-cord-clamp": {
+  "kind": "hardware",
+  "maker": "any (a two-hole strap)",
+  "model": "V10: the cord's strain relief, fitted with a screwdriver (UL 1598 5.2.1): a two-hole steel saddle for a Ø6 cord, 1.0 zinc-plated, its edges rolled, 8 wide, on two M3 x 6 pan screws into PEM S-M3-1 nuts in the clamp's channel (a 1.6 steel channel hung from the plate on two studs: stiff, so its flex counts for little against 17.21.1's 1.6 at 156 N). The saddle's lower edge level with the grippers' lower ends, where the cord's mark goes",
+  "usd": 1.2,
+  "estimate": true,
+  "supplier": "any",
   "price_date": "2026-11-25"
  },
  "hemi-canopy-bushing": {
   "kind": "hardware",
   "maker": "to make (a turned part)",
-  "model": "v9: a flush grommet for the canopy's floor, 6061 turned, satin black anodised: Ø12 through the 3 floor, a Ø16 x 1 flange inside, its bore Ø6.6; it does not grip (the cord's strain relief is the enclosure's)",
+  "model": "a flush grommet for the canopy's floor, 6061 turned, satin black anodized: Ø12 through the 3 floor, a Ø16 x 1 flange inside, its bore Ø6.6; it does not grip (the cord's strain relief is the screwed saddle on the plate)",
   "usd": 3.0,
   "supplier": "a turning shop",
   "estimate": true,

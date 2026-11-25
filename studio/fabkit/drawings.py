@@ -1018,7 +1018,7 @@ def sheet_solids(pg, items):
     """Printed and machined parts, one parts-list line each: front, right and top with hidden lines, their sizes."""
     rows = [266.0, 154.0]
     for ytop, (p, row, n) in zip(rows, items):
-        vh = {v: hlr([_ds(p)], v, hidden=True) for v in ('front', 'right', 'top')}
+        vh = {v: hlr([p.detail if getattr(p, 'detail', None) is not None else _ds(p)], v, hidden=True) for v in ('front', 'right', 'top')}
         b = {v: _bounds(vh[v][0] + vh[v][1]) for v in vh}
         sz = {v: b[v][1] - b[v][0] for v in vh}
         notes = textwrap.wrap('; '.join(p.notes), 200)[:8] if p.notes else []      # 2026-11-25: eight lines, was three

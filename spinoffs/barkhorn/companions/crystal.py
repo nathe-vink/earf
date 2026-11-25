@@ -222,11 +222,6 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
 # B, its cables at 0/180 and the cap's key and magnet at 90/270; nothing else is redrawn. The env HEMI_LOCK_ON overrides.
 import os as _os
 LOCK_ON = _os.environ.get('HEMI_LOCK_ON', '1') == '1'
-# V10-1 (the v9 check, 2026-11-25): the canopy's wiring as it can be built. The cord can't turn under the driver in v9's
-# 11.8, so two options for the owner, drawn here behind HEMI_WIRING (unset: v9 as it was): O1 the cord's exit 20 off the
-# canopy's centre, beside the driver (150 x 50 kept); O2 the cord centred, the canopy 62 tall (+12)
-WIRING = _os.environ.get('HEMI_WIRING', '')
-WIRE_OPT = dict(O1=dict(cnh=50.0, eh=36.0, cord=(20.0, 0.0)), O2=dict(cnh=62.0, eh=48.0, cord=(0.0, 0.0))).get(WIRING)
 TOP_TIERS = {
     'today': dict(top=None, crown=[(80.0, 100.5, 112.0)], gland=(40.0, 112.0, 126.0)),   # today's top, with check 3's fixings
     'A': dict(top=103.33, clamp=104.0, band_r=58.0, taper=1.0, crown=[(80.0, 100.5, 114.67)], gland=(56.0, 114.67, 126.0),
@@ -425,8 +420,9 @@ def cover_parts(p=N):
         # v7 (the v6 check's (9)): the detent's dimple in the bore at 90 deg, z 93, where the pins sit in their notches (cut
         # last, after the shoulder's union); today's top and B only (A has the lock)
         # v8: the dimple where the ball stands with the shade seated (0.5 above, as drawn) and drawn, a short vertical slot
-        collar = collar - at(90.0, cyl('x', (0, p['pin_z'] + 0.5), 2.6, ci / 2 - 1, p['ring'][1] / 2 + 0.9) + cyl('x', (0, p['pin_z']), 2.6, ci / 2 - 1, p['ring'][1] / 2 + 0.9)
-                                   + box(ci / 2 - 1, -1.3, p['pin_z'], p['ring'][1] / 2 + 0.9, 1.3, p['pin_z'] + 0.5))
+        # V10-10: redrawn for Kipp K0310.05's Ø3 ball: the dimple Ø3.1
+        collar = collar - at(90.0, cyl('x', (0, p['pin_z'] + 0.5), 3.1, ci / 2 - 1, p['ring'][1] / 2 + 0.9) + cyl('x', (0, p['pin_z']), 3.1, ci / 2 - 1, p['ring'][1] / 2 + 0.9)
+                                   + box(ci / 2 - 1, -1.55, p['pin_z'], p['ring'][1] / 2 + 0.9, 1.55, p['pin_z'] + 0.5))
     if lock_:
         # v7 (the coordinator's decision): the lock, Ganter GN 617-5-M10X1-AK, radially at 105 deg (opposite the level views'
         # camera, between the pins' notch at 30 and the slot's entry at 120), z 96. Its M10 x 1 tapped through the collar's
@@ -596,7 +592,7 @@ def north_parts(p=N):
         # land into a Ø2.6 dimple in the collar's bore where the pins sit in their notches
         dpa_ = 90.0
         plunger_ = at(dpa_, cyl('x', (0, pz), 5.0, ro / 2 - 12.0, ro / 2) )
-        plunger_ = plunger_ + at(dpa_, cyl('x', (0, pz), 2.5, ro / 2, ro / 2 + 0.8))     # its ball, drawn as its Ø2.5 tip
+        plunger_ = plunger_ + at(dpa_, cyl('x', (0, pz), 3.0, ro / 2, ro / 2 + 0.8))     # its ball (V10-10: Kipp K0310.05, Ø3), drawn as its tip
         ring = ring - at(dpa_, cyl('x', (0, pz), 5.0, ri / 2 - 1, ro / 2 + 1))
         # v8 (the v7 check's (8)): its clearance in the hub a groove 5.4 wide open to the hub's top, so the ring slides down
         # over the hub with the plunger already screwed in
@@ -711,12 +707,6 @@ def north_parts(p=N):
     cord_ = None
     zc = z_cord + p['drop']
     cnd, cnh = p['canopy']
-    if tt_ and WIRE_OPT:
-        cnh = WIRE_OPT['cnh']
-    cwx_, cwy_ = (WIRE_OPT['cord'] if (tt_ and WIRE_OPT) else (0.0, 0.0))     # V10-1: the cord's exit, before turning by a0
-    if tt_:
-        _a0w = math.radians(tt_.get('cables', GRIP['cables'])[0])
-        cwX_, cwY_ = cwx_ * math.cos(_a0w) - cwy_ * math.sin(_a0w), cwx_ * math.sin(_a0w) + cwy_ * math.cos(_a0w)
     if tt_:
         # v6 (the v5 check's (3)): the cord 2 mm longer than the straight run, bowed to one side (+y) in a circular arc of
         # sagitta about 21 mm, from the cap's grip to the canopy's floor
@@ -725,8 +715,7 @@ def north_parts(p=N):
         cps_ = []
         for k_ in range(n_ + 1):
             th_ = -th0_ + 2 * th0_ * k_ / n_
-            t_ = k_ / n_                       # V10-1 O1: the top end moved off the axis, linearly along the run
-            cps_.append(V3(t_ * cwX_, Rb_ * math.cos(th_) - (Rb_ - s_) + t_ * cwY_, z_cord + L_ / 2 + Rb_ * math.sin(th_)))
+            cps_.append(V3(0.0, Rb_ * math.cos(th_) - (Rb_ - s_), z_cord + L_ / 2 + Rb_ * math.sin(th_)))
         cord_len_ = sum((cps_[k_ + 1] - cps_[k_]).length for k_ in range(n_))
         for k_ in range(n_):
             seg_ = _rod(cps_[k_], cps_[k_ + 1], 3.0) + (Pos(cps_[k_ + 1]) * Solid.make_sphere(3.0))
@@ -793,8 +782,7 @@ def north_parts(p=N):
     # The plate carries the load: the grippers' brackets riveted under it, and the driver's steel enclosure on four 6
     # standoffs below it (fitted after the plate is screwed up: the box screws' heads in the gap)
     canopy = cyl('z', (0, 0), cnd, zc, zc + cnh) - cyl('z', (0, 0), cnd - 6, zc + 3.0, zc + cnh + 1)
-    if not WIRE_OPT:
-        canopy = canopy - cyl('z', (0, 0), 12.5, zc - 1, zc + 4)
+    canopy = canopy - cyl('z', (0, 0), 12.5, zc - 1, zc + 4)
     a0_ = cang_[0] if tt_ else 0.0                # the canopy's parts turned with the cables' line
     if tt_:
         for a_ in cang_:
@@ -822,7 +810,7 @@ def north_parts(p=N):
     # and cups bond the canopy to the plate
     setsc_ = None
     for a_ in (90.0, 270.0):
-        ss_ = at(a_, cyl('x', (0, ztop - 6.0), 4.0, rr0_ + 0.05, cnd / 2))
+        ss_ = at(a_, cyl('x', (0, ztop - 6.0), 4.0, rr0_, rr0_ + 3.0))    # V10-5: M4 x 3 cup point, its cup on the rim, 0.2 under the wall's face
         setsc_ = ss_ if setsc_ is None else setsc_ + ss_
     # THE ENCLOSURE: 1.0 zinc-plated steel, 64 x 100 x 38, open below, closed by a removable cover (two M3 screws into
     # tabs bent in at its ends); on four PEM SO-M4 standoffs (Ø7.9 hex, 4 long) under the plate, four serrated M4 x 6
@@ -859,59 +847,31 @@ def north_parts(p=N):
     # THE CANOPY'S BUSHING: no grip at the canopy (the cord's strain relief is the enclosure's); a flush turned grommet,
     # 6061 satin black anodised, Ø12 through the floor with a Ø16 x 1 flange inside, its bore Ø6.6, its face flush below
     cgrip_ = (cyl('z', (0, 0), 12.0, zc, zc + 3.0) + cyl('z', (0, 0), 16.0, zc + 3.0, zc + 4.0)) - cyl('z', (0, 0), 6.6, zc - 1, zc + 5)
-    if not WIRE_OPT:
-        canopy = canopy - cyl('z', (0, 0), 12.0, zc - 1, zc + 4)
-    xtra_ = []
-    if tt_ and WIRE_OPT:
-        # V10-1, both options (drawn on the x axis, the cables' line, then turned by a0_ with the rest). The driver (ERP
-        # ESS010W, body 40 x 74 x 25, its two mounting tabs 20 x 6 x 1 at its ends on its mounting face, holes at 80 c-c:
-        # a PLACEHOLDER until ERP's outline, datasheet p.11, is read) is screwed flat by its tabs under the enclosure's top,
-        # against its -x wall: two M3 x 6 pan screws up through the tabs and the top into two PEM SO-M3-4 standoffs in the
-        # plate, so they hold the driver and hang the enclosure; two more M4 x 6 serrated screws from inside the top into
-        # PEM SO-M4-4 standoffs in the 22 wide strip beside the driver. Mains: the driver's input leads (300) out of its
-        # input end (+y) and up through a 3/8 in snap bushing in the top at (20, 26) and the plate's Ø16 opening above it
-        # into the outlet box, where they are spliced to the supply (150 of lead in the box, UL 1598 6.15.1.6); no 120 V
-        # splice in the enclosure. Class 2: the cord up through the cover's strain relief (straight through, for round cord
-        # Ø6, Ø12.7 hole, 11.5 overall of which 8.5 inside: as the reviewer read Heyco's table, to confirm), its jacket 6
-        # past it, its two conductors to a lever splice (WAGO 221-412, 18.3 x 13.1 x 8.2) under the driver, the driver's
-        # output leads (-y end) to the same splice. The cover's screws and the strain relief's head need 4.4 under the cover.
-        o_ = WIRE_OPT; eh_ = o_['eh']; cx_, cy_ = o_['cord']
-        ez1_ = ztop - 1.6 - 4.0; ez0_ = ez1_ - eh_
-        rr0_ = cnd / 2 - 3.0 - 0.2
-        strap = (cyl('z', (0, 0), 2 * rr0_, ztop - 1.6, ztop) + (cyl('z', (0, 0), 2 * rr0_, ztop - 12.0, ztop) - cyl('z', (0, 0), 2 * rr0_ - 3.2, ztop - 13, ztop + 1)))
-        for y_ in (-44.45, 44.45):
-            strap = strap - cyl('z', (0, y_), 4.3, ztop - 2, ztop + 1)
-        strap = strap + (cyl('z', (0, 56.0), 8.0, ztop - 1.6 - 2.4, ztop - 1.6) - cyl('z', (0, 56.0), 4.8, ztop - 5, ztop + 1))
-        strap = strap - cyl('z', (0, 56.0), 4.8, ztop - 5, ztop + 1)
-        sup_ = (20.0, 26.0)
-        strap = strap - cyl('z', sup_, 16.0, ztop - 2, ztop + 1)
-        encl = box(-32, -50, ez0_, 32, 50, ez1_) - box(-31, -49, ez0_ - 1, 31, 49, ez1_ - 1)
-        tabs_ = box(-4, 41.0, ez0_, 4, 49.0, ez0_ + 1.0) + box(-4, -49.0, ez0_, 4, -41.0, ez0_ + 1.0)
-        encl = encl + tabs_
-        cover = box(-32, -50, ez0_ - 1.0, 32, 50, ez0_)
-        csc_ = None
-        for y_ in (-45.0, 45.0):                    # M3 x 4 low-head (ISO 7380 button, 1.65 tall) into the tabs, tapped
-            c_ = cyl('z', (0, y_), 3.0, ez0_ - 1.0, ez0_ + 1.0) + cyl('z', (0, y_), 5.7, ez0_ - 1.0 - 1.65, ez0_ - 1.0)
-            cover = cover - cyl('z', (0, y_), 3.0, ez0_ - 2, ez0_ + 0.1)
-            encl = encl - cyl('z', (0, y_), 3.0, ez0_ - 0.1, ez0_ + 2)
-            csc_ = c_ if csc_ is None else csc_ + c_
-        sto_ = None; esc_ = None
-        for (sx_, sy_), m_ in (((20.0, 6.0), 4), ((20.0, -30.0), 4), ((-11.0, 40.0), 3), ((-11.0, -40.0), 3)):
-            hd_, hx_ = (7.14, 7.9) if m_ == 4 else (5.4, 6.4)
-            so_ = (cyl('z', (sx_, sy_), hd_, ztop - 1.6, ztop) + cyl('z', (sx_, sy_), hx_, ez1_, ztop - 1.6)) - cyl('z', (sx_, sy_), m_, ez1_ - 1, ztop + 1)
-            encl = encl - cyl('z', (sx_, sy_), m_, ez1_ - 2, ez1_ + 0.1)
-            strap = strap - cyl('z', (sx_, sy_), hd_, ztop - 2, ztop + 1)
-            if m_ == 4:
-                sc_w = cyl('z', (sx_, sy_), 4.0, ez1_ - 1.0, ez1_ + 3.5) + cyl('z', (sx_, sy_), 7.0, ez1_ - 1.0 - 2.4, ez1_ - 1.0)
-            else:                                   # through the driver's tab (1) and the top (1): M3 x 6
-                sc_w = cyl('z', (sx_, sy_), 3.0, ez1_ - 2.0, ez1_ + 3.5) + cyl('z', (sx_, sy_), 5.5, ez1_ - 2.0 - 1.8, ez1_ - 2.0)
-            sto_ = so_ if sto_ is None else sto_ + so_
-            esc_ = sc_w if esc_ is None else esc_ + sc_w
-        dz1_ = ez1_ - 1.0; dz0_ = dz1_ - 25.0; dzm_ = (dz0_ + dz1_) / 2
-        driver = box(-31, -37, dz0_, 9, 37, dz1_)
-        for sy_ in (-1.0, 1.0):
-            t0_, t1_ = sorted((sy_ * 37.0, sy_ * 43.0))
-            driver = driver + (box(-21, t0_, dz1_ - 1.0, -1, t1_, dz1_) - cyl('z', (-11.0, sy_ * 40.0), 3.4, dz1_ - 2, dz1_ + 1))
+    canopy = canopy - cyl('z', (0, 0), 12.0, zc - 1, zc + 4)
+    xtra_ = {}
+    if tt_:
+        # V10 (the coordinator's T1 of 2026-11-25, the skeptic's corrected T1c; the canopy-options check): the canopy kept at
+        # 150 x 50 with the cord on the center. Drawn on the x axis (the cables' line), heights above the canopy's underside
+        # (zc), then turned by a0_ with the rest.
+        # THE DRIVER, ERP ESS010W-0180-42-XL, stood on edge in a 1.0 steel tray beside the axis: its base (84 x 40) on the
+        # tray's outer wall (x -34), 25.2 deep in x, 40 tall, y -51 to 33 (end gaps 6 and 7). ERP's outline (datasheet p.11
+        # fig. 7, read third-angle, not mirrored): two Ø3.2 holes 77 x 33 apart in diagonal corner pockets, tabs 1.8 thick at
+        # the base; the leads low at the base (x -31.5): the input (mains) at the +y end at z 15.4/17.6, the LED output at
+        # the -y end at z 31.0/33.1, the dimming leads beside them, CUT AT THE FACTORY (phase-cut only; ERP p.9 allows it).
+        # The tabs on two PEM FH-M3-6 flush-head studs pressed into the outer wall from outside (flush there, so nothing
+        # stands toward the gripper bracket), M3 serrated nuts in ERP's pockets.
+        # THE TRAY (it and the plate are the mains' enclosure): two parts, both 1.0 zinc-plated steel: the outer wall (with
+        # a flange at its top, y -52 to -40, on a PEM FH-M3-8 stud in the plate) and a U (bottom, inner wall, two ends, with
+        # a flange off its +y end on a second stud), joined at its ends by two M3 x 6 serrated button screws into PEM S-M3-1
+        # nuts on flanges inside the outer wall, so both parts are bonded. Its rim closes on the plate's underside (0 gap,
+        # nothing over 1.6 open, UL 1598 6.17.2.4). The 120 V input leads stay inside it and go up through a rolled Ø8
+        # opening in the plate at (-21, 36.5) into the outlet box, where they are spliced to the supply (150 or more of the
+        # 300 leads in the box, UL 1598 6.15.1.6). The LED leads leave through a 1/4 in snap bushing in its -y end at
+        # (x -29, z 32), outside the tray: the tray is the barrier between the mains and the Class 2 wiring (6.17.2).
+        # THE CORD up the axis from the floor's flush grommet, held by a two-screw steel saddle (screwdriver only, UL 1598
+        # 5.2.1) against a stiff 1.6 steel channel hung from the plate on two PEM FH-M3-8 studs, its jacket ending 4 above the
+        # saddle (z 19); its two conductors to two WAGO 221-412 lever splices (one per pole) held in a WAGO 221-500 mounting
+        # carrier riveted to the channel (the splices' fixed place), with the LED leads from below.
         def _lead(pts, r=1.2):
             sh = None
             for k in range(len(pts) - 1):
@@ -919,51 +879,119 @@ def north_parts(p=N):
                 sg = _rod(a_w - u_w * (0.9 * r if k else 0.0), b_w + u_w * (0.9 * r if k < len(pts) - 2 else 0.0), r)
                 sh = sg if sh is None else sh + sg
             return sh
-        # the input leads (+y end, mains) up into the snap bushing; the output leads (-y end, Class 2) down to the splice
-        sx0_, sy0_ = sup_
-        for k_, xl_ in enumerate((-15.0, -7.0)):
-            driver = driver + _lead([(xl_, 35.0, dzm_), (xl_, 45.5, dzm_), (sx0_ - 2.0 + 4.0 * k_, 45.5, dz1_ - 4.0),
-                                     (sx0_ - 2.0 + 4.0 * k_, sy0_, dz1_ - 4.0), (sx0_ - 2.0 + 4.0 * k_, sy0_, ztop + 6.0)])
-        spl_ = (-17.5, -34.3, -4.4, -16.0)          # the splice lying flat on the cover under the driver
-        splice = box(spl_[0], spl_[1], ez0_ + 0.3, spl_[2], spl_[3], ez0_ + 8.5)
-        wires = None
-        for k_, xl_ in enumerate((-15.0, -7.0)):
-            w_ = _lead([(xl_, -37.0, dzm_), (xl_, -45.5, dzm_), (xl_, -45.5, ez0_ + 4.4), (xl_, -35.6, ez0_ + 4.4)])
-            wires = w_ if wires is None else wires + w_
-        jz_ = ez0_ + 8.5 + 6.0                       # the jacket's end inside
-        for k_, xl_ in enumerate((-14.0, -8.0)):
-            dxk_ = -1.5 + 3.0 * k_
-            w_ = _lead([(cx_ + dxk_, cy_, jz_), (cx_ + dxk_, cy_, jz_ + 1.5), (cx_ + dxk_, cy_ - 9.5, jz_ + 1.5),
-                        (cx_ + dxk_, cy_ - 9.5, ez0_ + 4.4), (xl_, -14.7, ez0_ + 4.4)])
-            wires = wires + w_
-        # the snap bushing (3/8 in, Ø9.5 hole, Ø12.7 flanges, 1.5 each side) in the top; the strain relief in the cover
-        bush_ = (cyl('z', sup_, 12.7, ez1_ - 1.0 - 1.5, ez1_ - 1.0) + cyl('z', sup_, 9.5, ez1_ - 1.0, ez1_)
-                 + cyl('z', sup_, 12.7, ez1_, ez1_ + 1.5)) - cyl('z', sup_, 7.0, ez1_ - 5, ez1_ + 5)
-        encl = encl - cyl('z', sup_, 9.5, ez1_ - 2, ez1_ + 0.1)
-        sr_ = (cyl('z', (cx_, cy_), 16.0, ez0_ - 1.0 - 3.0, ez0_ - 1.0) + cyl('z', (cx_, cy_), 12.7, ez0_ - 1.0, ez0_)
-               + cyl('z', (cx_, cy_), 14.0, ez0_, ez0_ + 8.5)) - cyl('z', (cx_, cy_), 6.0, ez0_ - 6, ez0_ + 10)
-        cover = cover - cyl('z', (cx_, cy_), 12.7, ez0_ - 2, ez0_ + 0.1)
-        bush_ = bush_ + sr_
-        # the canopy's floor: the flush grommet at the cord's exit
-        cgrip_ = (cyl('z', (cx_, cy_), 12.0, zc, zc + 3.0) + cyl('z', (cx_, cy_), 16.0, zc + 3.0, zc + 4.0)) - cyl('z', (cx_, cy_), 6.6, zc - 1, zc + 5)
-        canopy = canopy - at(a0_, cyl('z', (cx_, cy_), 12.0, zc - 1, zc + 4))
-        cgrip_ = at(a0_, cgrip_) if a0_ else cgrip_
-        xtra_ = [('splice', splice), ('wires', wires)]      # the wires go to the driver (its output leads) and the cord (its conductors) below
-    rot_ = (lambda sh: at(a0_, sh)) if a0_ else (lambda sh: sh)
+        H_ = lambda h: zc + h
+        zp_ = ztop - 1.6                                # the plate's underside (z 48.4)
+        rr0_ = cnd / 2 - 3.0 - 0.2
+        strap = (cyl('z', (0, 0), 2 * rr0_, zp_, ztop) + (cyl('z', (0, 0), 2 * rr0_, ztop - 12.0, ztop) - cyl('z', (0, 0), 2 * rr0_ - 3.2, ztop - 13, ztop + 1)))
+        for y_ in (-44.45, 44.45):                  # V10-4: slots 4.3 wide from r 34.9 to 44.45 (boxes' screws 2-3/4 to 3-1/2 in apart)
+            sg_ = math.copysign(1.0, y_)
+            strap = (strap - cyl('z', (0, y_), 4.3, ztop - 2, ztop + 1) - cyl('z', (0, sg_ * 34.925), 4.3, ztop - 2, ztop + 1)
+                     - box(-2.15, min(sg_ * 34.925, y_), ztop - 2, 2.15, max(sg_ * 34.925, y_), ztop + 1))
+        # the input leads' opening, its edge rolled up 1.6 into the box
+        op_ = (-21.0, 36.5)
+        strap = strap + (cyl('z', op_, 11.2, ztop, ztop + 1.6) - cyl('z', op_, 8.0, ztop - 1, ztop + 2))
+        strap = strap - cyl('z', op_, 8.0, ztop - 2, ztop + 2)
+        # the green grounding screw on the plate's top face, inside the box's opening (UL 1598 6.14.2.2): 10-32 x 3/8 hex
+        # washer head, a cupped washer (6.14.2.9(d)), into a downward-extruded tapped hole (Ø6.4 x 1.2 below the sheet: 2.8
+        # of thread, about 3.5 threads), tapped after plating; its tip 7.1 under the plate, in free space
+        gs_ = (20.0, 30.0)
+        strap = strap + (cyl('z', gs_, 6.4, zp_ - 1.2, zp_) - cyl('z', gs_, 4.83, zp_ - 3, ztop + 1))
+        strap = strap - cyl('z', gs_, 4.83, zp_ - 3, ztop + 1)
+        gsc_ = (cyl('z', gs_, 4.83, ztop + 0.8 - 9.5, ztop + 0.8) + cyl('z', gs_, 11.0, ztop, ztop + 0.8)
+                + cyl('z', gs_, 9.5, ztop + 0.8, ztop + 3.2))
+        # the studs in the plate (PEM FH-M3-8: flush on top, 6.4 below it) and their nylon-insert nuts (4 tall)
+        studs_ = None
+        for sx_, sy_ in ((-39.0, -46.0), (-21.0, 45.5), (13.0, -8.0), (13.0, 8.0)):
+            s_ = cyl('z', (sx_, sy_), 3.0, ztop - 8.0, ztop) + (cyl('z', (sx_, sy_), 6.4, zp_ - 1.0 - (0.6 if sx_ > 0 else 0.0) - 4.0,
+                                                                   zp_ - 1.0 - (0.6 if sx_ > 0 else 0.0)) - cyl('z', (sx_, sy_), 3.0, zp_ - 9, zp_))
+            strap = strap - cyl('z', (sx_, sy_), 3.0, ztop - 2, ztop + 1)
+            studs_ = s_ if studs_ is None else studs_ + s_
+        # THE TRAY: x -35 to -7, y -58 to 41, z 6.4 to 48.4
+        tz0_, tz1_ = H_(6.4), zp_
+        twall = box(-35, -58, tz0_, -34, 41, tz1_) + box(-43, -52, tz1_ - 1.0, -35, -40, tz1_)
+        twall = twall - cyl('z', (-39.0, -46.0), 3.4, tz1_ - 2, tz1_ + 1)
+        tu = (box(-34, -58, tz0_, -7, 41, tz0_ + 1.0) + box(-8, -58, tz0_ + 1.0, -7, 41, tz1_)
+              + box(-34, -58, tz0_ + 1.0, -8, -57, tz1_) + box(-34, 40, tz0_ + 1.0, -8, 41, tz1_)
+              + box(-27, 41, tz1_ - 1.0, -15, 49, tz1_))
+        tu = tu - cyl('z', (-21.0, 45.5), 3.4, tz1_ - 2, tz1_ + 1)
+        # the U's two joint flanges inside the outer wall, an M3 x 6 serrated button screw (ISO 7380, head Ø5.7 x 1.65)
+        # from outside into a PEM S-M3-1 nut (drawn Ø5.5 x 1.5) on each
+        tsc_ = None
+        for (y0_, y1_, ys_, zs_) in ((-57.0, -52.0, -54.2, 22.0), (35.0, 40.0, 37.0, 10.2)):
+            fz0_, fz1_ = H_(zs_) - 4.5, H_(zs_) + 4.5
+            tu = tu + box(-34, y0_, max(fz0_, tz0_ + 1.0), -33, y1_, fz1_)
+            twall = twall - cyl('x', (ys_, H_(zs_)), 3.4, -36, -33.5)
+            tu = tu - cyl('x', (ys_, H_(zs_)), 4.22, -34.5, -32)
+            sc_t = (cyl('x', (ys_, H_(zs_)), 3.0, -35, -30.5) + cyl('x', (ys_, H_(zs_)), 5.7, -36.65, -35)
+                    + (cyl('x', (ys_, H_(zs_)), 5.5, -33, -31.5) - cyl('x', (ys_, H_(zs_)), 3.0, -34, -30)))
+            tsc_ = sc_t if tsc_ is None else tsc_ + sc_t
+        # THE DRIVER (on edge) and its tabs' studs and nuts
+        dx0_, dx1_, dy0_, dy1_, dz0_, dz1_ = -34.0, -8.8, -51.0, 33.0, H_(7.9), H_(47.9)
+        driver = box(dx0_, dy0_, dz0_, dx1_, dy1_, dz1_)
+        driver = driver - box(-32.2, 23.5, H_(40.4), dx1_ + 1, dy1_ + 1, dz1_ + 1) - box(-32.2, dy0_ - 1, dz0_ - 1, dx1_ + 1, -45.5, H_(14.8))
+        for hy_, hz_ in ((27.7, 44.4), (-49.7, 11.1)):
+            driver = driver - cyl('x', (hy_, H_(hz_)), 3.2, -35, -30)
+            twall = twall - cyl('x', (hy_, H_(hz_)), 3.0, -36, -33)
+            s_ = (cyl('x', (hy_, H_(hz_)), 3.0, -35, -29.0)
+                  + (cyl('x', (hy_, H_(hz_)), 6.4, -32.2, -29.8) - cyl('x', (hy_, H_(hz_)), 3.0, -33, -29)))
+            studs_ = studs_ + s_
+        # the input leads (mains): out of the +y end, up the 7 gap, through the plate's opening, 30 into the box (drawn)
+        for k_, zl_ in enumerate((15.4, 17.6)):
+            xo_ = op_[0] - 1.2 + 2.4 * k_
+            driver = driver + _lead([(-31.5, dy1_ - 1.0, H_(zl_)), (-31.5, 36.5, H_(zl_)), (xo_, op_[1], H_(42.0)),
+                                     (xo_, op_[1], ztop + 30.0)])
+        # the LED leads (Class 2): out of the -y end, through the snap bushing, round the outside of the tray to the splices
+        wy_ = -61.0
+        for k_, (zl_, ye_, zr_) in enumerate(((31.0, -10.3, 26.0), (33.1, 10.3, 23.5))):
+            xb_ = -30.1 + 2.2 * k_
+            driver = driver + _lead([(-31.5, dy0_ + 1.0, H_(zl_)), (-31.5, -53.0, H_(zl_)), (xb_, -54.5, H_(32.0)),
+                                     (xb_, wy_, H_(32.0)), (-5.6, wy_, H_(zr_)), (-5.6, ye_, H_(zr_)),
+                                     (-2.6, ye_, H_(26.5)), (-2.6, ye_, H_(28.5))], r=1.0)
+        lbush_ = ((cyl('y', (-29.0, H_(32.0)), 9.5, -59.2, -58.0) + cyl('y', (-29.0, H_(32.0)), 6.4, -58.0, -57.0)
+                   + cyl('y', (-29.0, H_(32.0)), 9.5, -57.0, -55.8)) - cyl('y', (-29.0, H_(32.0)), 4.8, -60, -55))
+        tu = tu - cyl('y', (-29.0, H_(32.0)), 6.4, -59, -56)
+        # THE CORD'S CLAMP: the channel (1.6 steel; web x 3 to 4.6, y -14 to 14, z 5 to the plate; side flanges to x 12; a
+        # top flange under the plate to x 20 on the two studs), the saddle (1.0 steel, rounded edges, round the cord's
+        # -x side, z 7 to 15) on two M3 x 6 pan screws into PEM S-M3-1 nuts in the web (y -+8, z 11)
+        rb_ = (box(3.0, -14.0, H_(5.0), 4.6, 14.0, zp_) + box(4.6, -14.0, zp_ - 1.6, 20.0, 14.0, zp_)
+               + box(4.6, -14.0, H_(5.0), 12.0, -12.4, zp_ - 1.6) + box(4.6, 12.4, H_(5.0), 12.0, 14.0, zp_ - 1.6))
+        for sy_ in (-8.0, 8.0):
+            rb_ = rb_ - cyl('z', (13.0, sy_), 3.4, zp_ - 2, zp_ + 1)
+        sa0_, sa1_ = H_(7.0), H_(15.0)      # its lower edge level with the grippers' lower ends (z 7): the cord's mark goes there
+        sad_ = ((cyl('z', (0, 0), 8.0, sa0_, sa1_) - cyl('z', (0, 0), 6.0, sa0_ - 1, sa1_ + 1)) - box(0, -5, sa0_ - 1, 5, 5, sa1_ + 1))
+        sad_ = sad_ + box(0, 3.0, sa0_, 2.0, 4.0, sa1_) + box(0, -4.0, sa0_, 2.0, -3.0, sa1_)
+        sad_ = sad_ + box(2.0, 3.0, sa0_, 3.0, 12.0, sa1_) + box(2.0, -12.0, sa0_, 3.0, -3.0, sa1_)
+        clamp_ = None
+        for sy_ in (-8.0, 8.0):
+            sad_ = sad_ - cyl('x', (sy_, H_(11.0)), 3.4, 1.0, 3.5)
+            rb_ = rb_ - cyl('x', (sy_, H_(11.0)), 4.22, 2.9, 4.7)
+            c_ = (cyl('x', (sy_, H_(11.0)), 3.0, 2.0, 7.0) + cyl('x', (sy_, H_(11.0)), 5.5, 0.2, 2.0)
+                  + (cyl('x', (sy_, H_(11.0)), 5.5, 4.6, 6.1) - cyl('x', (sy_, H_(11.0)), 3.0, 4, 7.5)))
+            clamp_ = c_ if clamp_ is None else clamp_ + c_
+        clamp_ = clamp_ + sad_
+        # the splices: two WAGO 221-412 standing, entries down (18.3 tall, 13.1 wide, 8.2 deep), in a WAGO 221-500 carrier
+        # (drawn as a 1.5 plate) on the web's -x face
+        spl_ = (box(1.5, -14.0, H_(28.5), 3.0, 14.0, H_(46.8)) + box(-6.7, -13.6, H_(28.5), 1.5, -0.5, H_(46.8))
+                + box(-6.7, 0.5, H_(28.5), 1.5, 13.6, H_(46.8)))
+        # the cord's two conductors from the jacket's end (z 19, 4 above the saddle) up into the splices
+        cond_ = None
+        for sy_, ye_ in ((-1.4, -3.8), (1.4, 3.8)):
+            c_ = _lead([(0.0, sy_, H_(19.0)), (0.0, sy_, H_(20.0)), (-2.6, ye_, H_(27.0)), (-2.6, ye_, H_(28.5))], r=1.0)
+            cond_ = c_ if cond_ is None else cond_ + c_
+        xtra_ = dict(twall=twall, tu=tu, tsc=tsc_, studs=studs_, lbush=lbush_, rb=rb_, clamp=clamp_, spl=spl_, cond=cond_)
+        encl = cover = csc_ = sto_ = esc_ = bush_ = None
+    rot_ = (lambda sh: at(a0_, sh) if sh is not None else None) if a0_ else (lambda sh: sh)
     strap, bscr_, gsc_, encl, cover, csc_, sto_, esc_, driver, bush_ = (rot_(x) for x in (strap, bscr_, gsc_, encl, cover, csc_, sto_, esc_, driver, bush_))
     setsc_ = rot_(setsc_)
-    canopy = canopy - setsc_
+    for a_ in (90.0, 270.0):
+        canopy = canopy - rot_(at(a_, cyl('x', (0, ztop - 6.0), 4.0, rr0_ - 0.1, cnd / 2 + 1)))
     if tt_:
         strap = strap - rivets
     cnuts_ = None
     if tt_:
-        if WIRE_OPT:                                                   # V10-1: up through the strain relief, its jacket 6 past it
-            cord = cord + cyl('z', (cwX_, cwY_), 6.0, zc, ez0_ + 8.5 + 6.0)
-            xd_ = dict((n_, rot_(sh_)) for n_, sh_ in xtra_)
-            cord = cord + xd_['wires']
-            xtra_ = [('splice', xd_['splice'])]
-        else:
-            cord = cord + cyl('z', (0, 0), 6.0, zc, ez0_ + 1.0)           # v9: the cord up through the canopy's bushing to the enclosure's strain relief
+        # V10: the cord up the axis through the floor's grommet and the clamp, its jacket ending at z 24, its conductors on
+        xtra_ = dict((n_, rot_(sh_)) for n_, sh_ in xtra_.items())
+        cord = cord + cyl('z', (0, 0), 6.0, zc, zc + 19.0) + xtra_['cond']
     parts_ = cover_parts(p) + [
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=[('aluminium 6061, black anodised: the core, turned from bar, solid; the stem bonded and pinned in a Ø16.1 socket '
@@ -1032,29 +1060,56 @@ def north_parts(p=N):
            Part('gripper-nuts', gnuts, Bought('hemi-gripper-nut'), finish='steel', group='canopy', inside=True,
                 notes=['v7: two M10 nylon-insert nuts (ISO 10511), 16 AF, 8 tall, on the brackets\' feet']),
            Part('gripper-brackets', brackets, Machined('steel-sheet-formed', 'formed'), finish='steel', group='canopy', inside=True,
-                notes=['PROPOSAL (v7): two 1.6 steel U brackets (a foot with an M10 clearance hole, two legs across the cables\' line, '
-                       'their flanges inward under the plate), each riveted to the plate by four Ø3.2 blind rivets']),
+                notes=['PROPOSAL (v8): two 1.6 zinc-plated steel U brackets, each a foot with an M10 clearance hole, two legs across the '
+                       'cables\' line and two flanges turned outward under the plate, held by four PEM FH-M3-8 studs pressed into the plate '
+                       'and M3 nylon-insert nuts']),
            Part('bracket-studs', rivets, Bought('hemi-bracket-studs'), finish='steel', group='canopy', inside=True),
            Part('canopy-screws', setsc_, Bought('hemi-canopy-setscrews'), finish='anodised', group='canopy', inside=True,
-                notes=['v7: two M4 x 8 black-oxide flush set screws through the canopy\'s wall at 90/270 deg into two M4 clinch '
-                       'nuts in the plate\'s rim']),
+                notes=['V10: two M4 x 3 cup-point set screws (ISO 4029), black oxide, nylon patch, through the canopy\'s 3.0 wall at 90/270 '
+                       'deg (tapped after anodizing), their cups on the plate\'s bare rim, 0.2 under the wall\'s face']),
            Part('box-screws', bscr_, Bought('hemi-box-screws'), finish='steel', group='canopy', inside=True,
-                notes=['v7: the junction box\'s two 8-32 screws (supplied with the box), at y -+44.45 through the plate'])]
+                notes=['the outlet box\'s two 8-32 screws (supplied with the box), through the plate\'s two slots'])]
          if tt_ else []) + [
         Part('cord', cord, Bought('hemi-cord'), finish='cord', group='fixture'),
         # review 2 (2026-11-24, (8)): the fixture (about 3.5 lb) hangs from the steel cable by default; the SPT-2 cord's
         # 2.5 lb (UL 153) carries current only
         Part('suspension', susp, Bought('hemi-suspension'), finish=('stainless' if tt_ else 'anodised'), group='fixture'),
         Part('canopy', canopy, Machined('aluminium', 'lathe'), finish='anodised', group='canopy',
-             notes=[('150 x 50, 6061 turned, SATIN black anodised: v6, right side up: open at the top against the ceiling, '
-                     'its 3 floor closed below with the cord\'s gland in its centre (a turned 6061 gland, satin black, its nut '
-                     'flush) and two Ø6 holes at r 40 through which the cables pass and the grippers\' plungers are pushed; a '
-                     'cover only, held to the strap by two flush black set screws in its wall; the strap carries the load') if tt_ else
+             notes=[('150 x 50, 6061 turned, SATIN black anodized: open at the top against the ceiling, its 3 floor closed below '
+                     'with a flush grommet in its center (the cord) and two Ø3 holes at r 48 (the cables); a cover only, held to the '
+                     'mounting plate\'s rim by two flush M4 x 3 cup-point set screws in its wall; the plate carries the load') if tt_ else
                     ('150 x 50, 6061 turned, SATIN black anodised (2026-11-11, the bar: one hardware finish; was polished '
                      'black acrylic): a cover only (review 2026-11-01), screwed to the steel '
                      'strap, which carries the load; the driver and the splices are in the steel enclosure. The bar '
                      '(2026-11-11): the strap\'s screws black oxide, under the canopy\'s closed face, none in view; the cord '
                      'grip where the cord leaves the canopy a turned 6061 gland, satin black anodized, its nut flush')]),
+    ] + ([
+        Part('strap', strap, Machined('steel-sheet-formed', 'formed'), finish='steel', group='canopy', inside=True,
+             notes=['V10: the mounting plate, 1.6 zinc-plated steel, Ø143.6, its rim turned down 12; it carries the load and closes '
+                    'the driver\'s tray (hemi-canopy-strap)']),
+        Part('tray-wall', xtra_['twall'], Machined('steel-sheet-formed', 'formed'), finish='steel', group='canopy', inside=True,
+             notes=['V10: the driver tray\'s outer wall, 1.0 zinc-plated steel, 99 x 42 with a flange at its top on a plate stud; the '
+                    'driver\'s two PEM FH-M3-6 studs pressed in from outside (flush there)']),
+        Part('tray-u', xtra_['tu'], Machined('steel-sheet-formed', 'formed'), finish='steel', group='canopy', inside=True,
+             notes=['V10: the driver tray\'s U (bottom, inner wall, ends), 1.0 zinc-plated steel, a flange off its +y end on a plate '
+                    'stud, two joint flanges with PEM S-M3-1 nuts inside the outer wall; the 1/4 in snap bushing in its -y end']),
+        Part('tray-screws', xtra_['tsc'], Bought('hemi-tray-screws'), finish='steel', group='canopy', inside=True),
+        Part('canopy-studs', xtra_['studs'], Bought('hemi-canopy-studs'), finish='steel', group='canopy', inside=True),
+        Part('driver', driver, Bought('north-driver-ring' if ring_ else 'north-driver-575'), finish='steel', group='canopy', inside=True, render=False),
+        Part('lead-bushing', xtra_['lbush'], Bought('hemi-lead-bushing'), finish='trim', group='canopy', inside=True),
+        Part('relief-bracket', xtra_['rb'], Machined('steel-sheet-formed', 'formed'), finish='steel', group='canopy', inside=True,
+             notes=['V10: the cord clamp\'s channel, 1.6 zinc-plated steel: web 28 x 40.4, side flanges 7.4, a top flange to x 20 on '
+                    'two plate studs; two PEM S-M3-1 nuts for the saddle\'s screws; the splices\' carrier riveted to its web']),
+        Part('cord-clamp', xtra_['clamp'], Bought('hemi-cord-clamp'), finish='steel', group='canopy', inside=True),
+        Part('splices', xtra_['spl'], Bought('hemi-splice'), finish='trim', group='canopy', inside=True, render=False),
+        Part('canopy-bushing', cgrip_, Bought('hemi-canopy-bushing'), finish='anodised', group='canopy',
+             notes=['a flush grommet in the canopy\'s floor (it does not grip: the cord\'s strain relief is the clamp on the plate)']),
+        Part('ground-screw', gsc_, Bought('hemi-ground-screw'), finish='steel', group='canopy', inside=True,
+             notes=['V10: a green 10-32 x 3/8 in hex-washer-head grounding screw with a cupped washer (UL 467; UL 1598 6.14.2.9(d)) '
+                    'on the plate\'s top face at (20, 30), inside the outlet box\'s opening where the supply connects (6.14.2.2; NEC '
+                    '410.46), into a downward-extruded hole tapped after plating; the tray, the clamp\'s channel and the gripper '
+                    'brackets bond through their studs\' serrated nuts, the canopy through its cup-point set screws on the bare rim'])]
+         if tt_ else [
         Part('strap', strap, Machined('steel-sheet-formed', 'formed'), finish='steel', group='canopy', inside=True,
              notes=['v9: the mounting plate, 1.6 zinc-plated steel, Ø143.6, its rim turned down 12; it carries the load (hemi-canopy-strap)']),
         Part('enclosure', encl, Machined('steel-sheet-formed', 'formed'), finish='steel', group='canopy', inside=True,
@@ -1079,12 +1134,13 @@ def north_parts(p=N):
                     'threads; tight, its tip 0.8 above the plate); the equipment grounding conductor lands under its head (NEC '
                     '410.44); the enclosure bonds through its serrated screws and standoffs, the canopy through its cup-point set '
                     'screws, tapped after anodising, onto the plate\'s bare rim']),
+    ]) + [
         Part('plunger', plunger_, Bought('dome-plunger'), finish='steel', group='fixture', inside=True,
              notes=['v7: an M5 x 12 stainless ball spring plunger (light force, about 10 N), radially through the PEEK ring at 90 deg, '
                     'z 93, screwed into the ring before the ring slides down over the hub (a groove in the hub takes its end); its '
                     'ball clicks into a dimple in the collar\'s bore when the shade is seated']) if plunger_ is not None else
         (Part('plunger', None, Bought('dome-plunger')) if not nlock_ else None),
-    ] + [Part(n_, sh_, Bought('hemi-' + n_), finish='steel', group='canopy', inside=True, render=False) for n_, sh_ in xtra_] + [
+    ] + [
         Part('listing', None, Bought('moon-listing')),
     ]
     if tt_:
@@ -1092,35 +1148,72 @@ def north_parts(p=N):
         # major Ø, so the fixings touch and never overlap)
         crq_ = tt_.get('cable_r', GRIP['cable_r'])
         lk6_ = tt_.get('lock')
+        kk_ = tt_['key'] if 'key' in tt_ else GRIP['key']
+        mm_ = tt_.get('magnet', GRIP['magnet'])
+        DZ_ = 'DATUM: z is the height above the shade\'s rim plane (the lamp\'s z 0); angles from the cables\' line (0 deg), counter-clockwise seen from above. '
+        DC_ = ('DATUM: the canopy\'s axis; z is the height above the canopy\'s underside; x along the cables\' line, y across. '
+               + ('Drawn square: in the lamp it sits turned ' + f'{a0_:g}' + ' deg with the cables. ' if a0_ else ''))
         TH_ = {
-            'hub': f'THREADS AND HOLES: M12 x 1.5 tapped 13 deep from the neck\'s top (drill 10.5); 3 x M2.5 tapped 6 deep at r 9.25, '
+            'hub': DZ_ + f'THREADS AND HOLES: M12 x 1.5 tapped 13 deep from the neck\'s top (drill 10.5); 3 x M2.5 tapped 6 deep at r 9.25, '
                    f'90/210/330 deg (drill 2.05 x 7.5); radial at z 93 for the pins: 2 x M3 at 150/270 deg (drill 2.5 x 7.5) and 1 x M4 '
                    f'at 30 deg for the key pin (drill 3.3 x 7.5), each tapped 6; 2 x Ø5.6 x 8 counterbores in the bottom face at r {crq_:g}, '
                    f'{cang_[0]:g}/{cang_[1]:g} deg, then Ø2.4 through to the neck\'s top'
                    + ('' if lk6_ else '; a groove 5.4 wide at 90 deg, r 28.3 to 31, from z 90.3 open to the hub\'s top (the detent plunger\'s end)'),
-            'ring': ('THREADS AND HOLES: Ø6.4 at z 96.0, 105 deg, to r 36.0 (the lock\'s pin), no edge break; through at z 93: 2 x Ø3.2 '
-                     '(the pins, 150/270 deg) and 1 x Ø4.3 (the key pin, 30 deg)') if lk6_ else
-                    ('THREADS AND HOLES: M5 tapped through at z 93, 90 deg (drill 4.2; the detent plunger); through at z 93: 2 x Ø3.2 '
-                     '(the pins, 150/270 deg) and 1 x Ø4.3 (the key pin, 30 deg)'),
-            'collar': ('THREADS AND HOLES: three L-slots from inside, 5 wide; the one whose entry is at 0 deg (the datum) is the key\'s, 7 '
-                       'wide, its turn passage z 81.25 to 88.75 and its notch at 30 deg z 81.25 to 96.5 (the others: 82.5 to 87.5 and '
-                       '82.5 to 95.5)' + ('; M10 x 1 tapped through the wall at z 96.5, 105 deg (drill 9.0; the lock)' if lk6_ else
-                                          '; a Ø2.6 dimple at 90 deg, a short vertical slot z 93.0 to 93.5, 0.7 deep (the detent)')
-                       + ('; M96 x 1.5 outside, 6g, run out into a DIN 76 undercut' if tt_.get('top') else '')),
-            **({'clamp': 'HOLES: Ø10.5 at z 96.5, 105 deg, and a Ø20 spot face for the lock\'s nut, machined before anodising with the '
-                         'ring\'s thread start clocked to the collar\'s, so it lands at that angle on its shoulder'} if lk6_ else {}),
-            'crown': f'HOLES: 3 x Ø2.9 countersunk 90 deg (M2.5, ISO 10642) at r 9.25; 2 x Ø2.4 at r {crq_:g}, their top exits rounded; '
-                     + ('a Ø2 H7 x 3 hole for the dowel and a Ø2 x 2 pocket for the magnet' if tt_.get('key', 1) else
-                        'a Ø1.5 x 2 pocket for the magnet at r 14, 270 deg (no dowel)'),
-            'canopy': 'HOLES: Ø12.5 in the floor\'s centre (the cord\'s bushing); 2 x Ø3 at r 48 (the cables); 2 x M4 tapped in the '
-                      'wall, 6 below its top, at 90/270 deg (the cup-point set screws onto the plate\'s rim)',
-            'strap': 'HOLES: 2 x Ø4.3 for the box\'s 8-32 screws; Ø22 in the centre (rolled edge; the supply); 4 x Ø7.14 +0.08 for '
-                     'PEM SO-M4 standoffs; 8 x Ø3.0 for PEM FH-M3-8 studs; a PEM CLS-032 (10-32) clinch nut for the grounding screw',
-            'gripper-brackets': 'HOLES: Ø10.5 in each foot (M10, the gripper); 4 x Ø3.3 in each bracket\'s flanges (the studs)',
+            'ring': DZ_ + (('THREADS AND HOLES: Ø6.4 at z 96.0, 105 deg, to r 36.0 (the lock\'s pin), no edge break; through at z 93: 2 x Ø3.2 '
+                            '(the pins, 150/270 deg) and 1 x Ø4.3 (the key pin, 30 deg)') if lk6_ else
+                           ('THREADS AND HOLES: M5 tapped through at z 93, 90 deg (drill 4.2; the detent plunger, Kipp K0310.05); through at z 93: 2 x Ø3.2 '
+                            '(the pins, 150/270 deg) and 1 x Ø4.3 (the key pin, 30 deg)'))
+                   + '. LEAD-IN DOWN: laser-mark UP on its top face; fitted flipped, it still takes the pins but its '
+                   + ('lock hole lands at 315 deg, z 90, and the lock never engages' if lk6_ else 'plunger hole lands at 330 deg and will not pass the hub\'s groove'),
+            'collar': DZ_ + ('THREADS AND HOLES: three L-slots from inside, 5 wide, to r 45.5 (Ø91) deep; the one whose entry is at 0 deg (the datum) is the key\'s, 7 '
+                             'wide, its turn passage z 81.25 to 88.75 and its notch at 30 deg z 81.25 to 96.5 (the others: 82.5 to 87.5 and '
+                             '82.5 to 95.5)' + ('; M10 x 1 tapped through the wall at z 96.5, 105 deg (drill 9.0; the lock)' if lk6_ else
+                                                '; a Ø3.1 dimple at 90 deg, a short vertical slot z 93.0 to 93.5, 0.7 deep (the detent, for a Ø3 ball)')
+                             + ('; M96 x 1.5 outside, 6g, run out into a DIN 76 undercut' if tt_.get('top') else '')
+                             + '; ONE-WAY MARK: a laser-marked arrow on the top face over the keyed slot\'s entry (0 deg)'),
+            **({'clamp': DZ_ + 'HOLES: Ø10.5 at z 96.5, 105 deg, and a Ø20 spot face for the lock\'s nut, machined before anodising with the '
+                               'ring\'s thread start clocked to the collar\'s, so it lands at that angle on its shoulder'} if lk6_ else {}),
+            'crown': DZ_ + f'HOLES: 3 x Ø2.9 countersunk 90 deg (M2.5, ISO 10642) at r 9.25, 90/210/330 deg; 2 x Ø2.4 at r {crq_:g}, '
+                     f'{cang_[0]:g}/{cang_[1]:g} deg, their top exits rounded; '
+                     + (f'a Ø2 H7 x 3 hole for the dowel at r {kk_[0]:g}, {kk_[1]:g} deg and a Ø2 x 2 pocket for the magnet at r {mm_[0]:g}, {mm_[1]:g} deg'
+                        if kk_ else f'a Ø{mm_[2]:g} x 2 pocket for the magnet at r {mm_[0]:g}, {mm_[1]:g} deg (no dowel)')
+                     + '; ONE-WAY MARK: a laser line on its lowest tier\'s side at 30 deg, over the key pin',
+            'gland': DZ_ + f'HOLES: Ø{GRIP["cap_pocket"]:g} pocket from below to the {GRIP["lid"]:g} lid, Ø8 through the lid (the cord); '
+                     + (f'2 x Ø2.4 through at r {crq_:g}, {cang_[0]:g}/{cang_[1]:g} deg, their top exits rounded; ' if (tt_['gland'][0] / 2 > crq_ + 2.0) else '')
+                     + (f'a Ø2.05 x 2 hole for the dowel at r {kk_[0]:g}, {kk_[1]:g} deg; ' if kk_ else '')
+                     + f'a Ø{mm_[2]:g} x 0.5 pocket for the steel disc at r {mm_[0]:g}, {mm_[1]:g} deg',
+            'canopy': DC_ + f'HOLES: Ø12.0 in the floor\'s center (the flush grommet); 2 x Ø3 at r 48, 0/180 deg (the cables); 2 x M4 tapped '
+                      'through the wall at z 44, 90/270 deg, TAPPED AFTER ANODIZING (their threads and cups bond it to the plate). FITS: the bore '
+                      'Ø144.0 +0.1/0 (wall 3.0, floor 3.0, 50 overall), a 1.0 x 30 deg lead-in at its top edge; the plate\'s Ø143.6 0/-0.2 in it '
+                      '(0.4 to 0.7 diametral)',
+            'strap': DC_ + 'The plate 1.6, z 48.4 to 50, Ø143.6 0/-0.2, its rim turned down 12 (inside R 2). HOLES (x, y): 2 slots 4.3 wide on the y '
+                     'axis from y -+34.9 to -+44.45 (the box\'s 8-32 screws, boxes 2-3/4 to 3-1/2 in); Ø8 at (-21, 36.5), its edge rolled up '
+                     '1.6, deburred (the driver\'s input leads into the box); 10-32 in an extruded hole at (20, 30), Ø6.4 x 1.2 down, TAPPED '
+                     'AFTER PLATING (the green screw); 4 x Ø3.0 +0.08 for PEM FH-M3-8 at (-39, -46), (-21, 45.5), (13, -8), (13, 8) (the tray '
+                     'and the cord clamp); 8 x Ø3.0 +0.08 for PEM FH-M3-8 at (-+43.5, -+29.3) and (-+52.5, -+29.3) (the gripper brackets)',
+            'tray-wall': DC_ + '1.0 sheet, 99 x 42 (y -58 to 41, z 6.4 to 48.4) at x -35 to -34; a flange 8 x 12 bent out (-x) at its top, y -52 '
+                         'to -40, Ø3.4 at (-39, -46) (the plate stud). HOLES (y, z): 2 x Ø3.0 +0.08 for PEM FH-M3-6 pressed from outside, '
+                         'flush there, at (27.7, 44.4) and (-49.7, 11.1) (ERP\'s tab holes, 77 x 33 apart); 2 x Ø3.4 at (-54.2, 22) and '
+                         '(37, 10.2) (the joint screws)',
+            'tray-u': DC_ + '1.0 sheet: the bottom (x -34 to -7, z 6.4 to 7.4), the inner wall (x -8 to -7) and two ends (y -58 to -57, 40 to 41), '
+                      'to z 48.4; its corners folded, every gap under 0.5, its top edges flat to 0.3, so the rim meets the plate with no '
+                      'opening over 1.6 (UL 1598 6.17.2.4). HOLES: Ø6.4 in the -y end at (x -29, z 32) (the 1/4 in snap bushing); a '
+                      'flange 12 x 8 off the +y end at the top, Ø3.4 at (-21, 45.5); two joint flanges inside the outer wall (y -57 to '
+                      '-52, z 17.5 to 26.5; y 35 to 40, z 7.4 to 14.7), each Ø4.22 +0.08 for a PEM S-M3-1 at (-54.2, 22) and (37, 10.2)',
+            'relief-bracket': DC_ + '1.6 sheet, a channel: the web x 3 to 4.6, y -14 to 14, z 5 to 48.4; side flanges to x 12; a top flange '
+                              'to x 20 under the plate, 2 x Ø3.4 at (13, -+8) (the plate studs). HOLES in the web (y, z): 2 x Ø4.22 +0.08 '
+                              'for PEM S-M3-1, nuts on the +x face, at (-+8, 11) (the saddle); 2 x Ø3.2 at (-+10, 38) (the splice '
+                              'carrier\'s rivets)',
+            'gripper-brackets': DC_ + 'HOLES: Ø10.5 in each foot at (-+48, 0) (M10, the gripper); 4 x Ø3.4 in each bracket\'s two outward '
+                                'flanges at (-+43.5, -+29.3) and (-+52.5, -+29.3) (the plate\'s studs)',
         }
         for q_ in parts_:
             if q_ is not None and q_.name in TH_:
                 q_.notes = [TH_[q_.name]] + list(q_.notes)     # v8: first, so the drawings print them
+        if a0_:                       # V10-3: the canopy's sheet metal drawn square on its sheets (A with the lock turns it 105 deg)
+            for q_ in parts_:
+                if q_ is not None and q_.name in ('canopy', 'strap', 'tray-wall', 'tray-u', 'relief-bracket', 'gripper-brackets') and q_.solid is not None:
+                    q_.detail = at(-a0_, q_.solid)
     return [q_ for q_ in parts_ if q_ is not None]
 
 
@@ -1506,21 +1599,32 @@ NOTES_DOME = [
     'the canopy and the UL 1598 path stay. Without a lens until a stock side-emitting ring optic with an IES file is '
     'named. Heat test needed: the hub about 6 K warmer than today (estimate). The notes below describe the COB build.',
     'Hemisphere (the Dome until round 35; Hemisphere North in rounds 35 to 37): the shade hangs mouth down. Its shades '
-    'swap by hand, with two hands. Hold the shade from below with one; with the other hold the cap (B: its Ø56 tier). If the '
-    'top carries a lock (A, if the owner keeps it), pull its knob at the back of the top with the cap hand and keep it '
-    'pulled. Lift the shade 8.0 to 9.0 mm, turn it 30 degrees and lower it off; let the knob go once the shade is clear. To '
-    'fit one: the one wide (keyed) slot over the Ø6 key pin (it fits one way only), push up, turn 30 degrees, lower it home, then let '
-    'the knob go: it springs into its hole and the shade can no longer be lifted, turned or lowered. Without a lock '
-    '(today\'s top, B) the same moves without the knob, and a ball detent clicks home. Either way the shade\'s weight holds '
-    'each pin up in its notch, so a knock cannot turn it off. No tools, and the shade is never live.',
-    'Hanging and levelling: the plate screwed to the box (its two screws before the enclosure goes on), the enclosure on '
-    'its standoffs, the supply wired in it; the lamp on its two cables, the canopy hanging on them below the plate. Loosen '
-    'each gripper\'s safety nut, push the plunger and slide the cable until the rim reads level to 1 degree against a laser '
-    'line (or measure its two sides from the table), never by resting a level on the lamp; tighten the safety nuts. Then '
-    'set the cord at the enclosure\'s strain relief, in its cover: the cord\'s length from the lamp\'s grip to the strain '
-    'relief is the cables\' length plus 2 mm plus the fixed run inside the canopy (marked on the cord); squeeze the bushing '
-    'on at the mark, snap it into the cover, wire the driver, close the cover; slide the canopy up the cables and the cord '
-    '(its floor bushing does not grip) and fix its two set screws. The cord then bows about 2 cm below.',
+    'swap by hand, with two hands, no tools, and the shade is never live. To take one off: hold the shade from below with one '
+    'hand and the cap (B: its Ø56 tier) with the other; ' + ('pull the lock\'s knob at the back of the top with the cap hand '
+    'and hold it out through the whole swap; ' if LOCK_ON else '') + 'lift the shade 8.0 to 9.0 mm, turn it 30 degrees and lower it off. '
+    'To fit one: line the arrow on its collar up under the line on the crown (the keyed slot over the Ø6 key pin: it fits one '
+    'way only), push up, turn it to the stop and let it down. TURN IT TO THE STOP: IT DROPS 8 MM AND CLICKS. IF IT HAS NOT '
+    'DROPPED, IT IS NOT ON.' + (' Then let the knob go: it springs into its hole, and the shade can no longer be lifted, turned '
+    'or lowered.' if LOCK_ON else ' On today\'s top, on B and on A without the lock, a ball detent clicks as it drops.') + ' Seated, the '
+    'shade\'s weight holds each pin up in its notch, and it cannot be turned without first being lifted 8. A shade let go '
+    'before it dropped rests on the flat band 8 above its seat, held only by friction: a push of about 2 N at its rim (a '
+    'cloth while cleaning) can turn it back to the entries, and it falls.',
+    'Hanging and leveling (a 4 in round or octagon outlet box designed for luminaire support, NEC 314.27(A)(2)): wire it '
+    'first, the plate held under the box: splice the driver\'s two input leads (300, from the tray) to the supply in the box, '
+    '150 or more of each in the box, and land the equipment grounding conductor under the green screw on the plate\'s top '
+    'face (its cupped washer), inside the box\'s opening where the supply connects; screw the plate to the box (its two slots '
+    'take boxes with screws 2-3/4 to 3-1/2 in apart). Hang the lamp on its two cables through the grippers. Tie or tape the '
+    'canopy to the two cables 5 to 15 cm below the plate and keep it there through the leveling and the cord step (left '
+    'loose it binds on the splayed cables, slides down and can lift the lamp onto its cord). Loosen each gripper\'s safety '
+    'nut, push the plunger and slide the cable until the rim reads level to 1 degree against a laser line (or measure its two '
+    'sides from the table), never by resting a level on the lamp; tighten the safety nuts. The rim at least 480 below the '
+    'ceiling (shorter, the canopy cannot be tied clear of the plate). Then the cord: measure along a cable from where it '
+    'leaves the cap to its gripper\'s lower end, mark the cord that length plus 2 mm from where it leaves the cap, feed it '
+    'up through the canopy\'s grommet and clamp it in the saddle with the mark at the saddle\'s lower edge (two screws, a '
+    'screwdriver; the saddle\'s lower edge is level with the grippers\' lower ends); cut it 4 above the saddle\'s top, strip '
+    'the jacket there, and put its two conductors into the two lever splices beside the clamp with the driver\'s LED leads '
+    '(the identified conductor, ribbed or printed, to the red lead: +). Untie the canopy, slide it up the cables and the '
+    'cord (its grommet does not grip) and fix its two set screws. By design the cord bows about 21 mm sideways at mid-drop.',
     'The shade is clamped, not hung on a glue joint: the collar\'s flange sits under the crown inside, a ring screws down '
     'over it outside, the acrylic between two silicone rings. A failed bond cannot drop it.',
     'The wall is tint, opal, tint: a 9 mm tinted shell, a 3 mm volume-diffusing opal liner, a 3 mm tinted skin, each '
@@ -1530,20 +1634,33 @@ NOTES_DOME = [
     'Light: a Bridgelux Vero SE 10 (2700 K, CRI 90) at the top of a 46 bore lined with a reflector, 22 up: the cut-off '
     'about 46 deg from the vertical, and about 85 % of its light out (the black bore passed 52 %). About 575 lm at the '
     'COB (the owner, round 36): about 590 at 180 mA (4.4 W) on an ERP Power ESS010W-0180-42 (Class 2, FCC Part 15 '
-    'Class B), dimmed 100 % to 1 % by a phase-cut (TRIAC or ELV) dimmer or 0-10 V. Not for 1,100 lm: the low top is '
+    'Class B), dimmed 100 % to 1 % by a phase-cut (TRIAC or ELV) dimmer only (its 0-10 V leads cut at the factory). Not for 1,100 lm: the low top is '
     'sized for 575 (1,100 needs the fins of rounds 35 to 39).',
-    'Heat (round 41): round 32f\'s low top is the heat sink, no fins: a black anodised aluminium crown 80 across and '
-    '11.5 tall over the collar, and an aluminium cap 40 x 14 over the cord grip, the cap\'s top 126 above the rim. A '
+    'Heat (round 41): the low top is the heat sink, no fins: a black anodized aluminium crown 80 across over the collar '
+    'and an aluminium cap over the cord grip, the cap\'s top 126 above the rim (today\'s crown 11.5 tall and cap 40 x 14; '
+    'A\'s and B\'s even tiers on their sheets). A '
     'PEEK ring carries the bayonet\'s pins, so the hub reaches the shade only through it and air. At 575 lm the hub '
     'makes 2.7 W of heat; estimated in a 35 C room: the hub 49 C, the COB\'s case 50 C, the collar and the acrylic '
     'beside it 41 C (hemisphere_thermal.py; to measure, README round 35).',
-    'Mains stops at the canopy: the driver is there, and the cord carries the LED\'s 26 V DC (Class 2). The cord is a '
-    'listed 18 AWG 2-conductor in a black textile braid, 2 mm longer than the cables so it carries no load: the lamp '
-    'hangs from two 1/16 in stainless cables, each on a stop sleeve in the hub and a rated cable gripper in the canopy '
-    '(their pull test with the fixture is part of the listing). To be listed to UL 1598 (hardwired) with its own shades, '
-    'each tint in the listing; the canopy\'s strap carries the grippers and the steel enclosure the driver and the '
-    'splices, the canopy a cover only.',
-    'Hang over a bar at 750 to 900 centres, the rim 700 to 800 above the counter; over a table, one a table, the rim '
+    'Wiring: the driver (ERP ESS010W-0180-42-XL, UL 8750 Recognized Class 2) stands on edge in a steel tray beside the '
+    'canopy\'s axis, screwed by its two tabs; the tray and the mounting plate enclose its 120 V input leads, which go up '
+    'through the plate into the outlet box and are spliced there, and the tray is the barrier between them and the Class 2 '
+    'wiring (UL 1598 6.17.2). Past the driver the cord carries the LEDs\' DC, about 33 V (Class 2). The cord: a listed SVT '
+    '18/2 pendant cord in a black textile braid, round, at most Ø6.5 (the grommet Ø6.6, the saddle for 5.5 to 6.5), one '
+    'conductor identified (ribbed or printed, UL 1598 5.2.7); its strain relief is the screwed saddle on the plate\'s '
+    'bracket (it must hold 156 N for a minute, moving under 1.6, 17.21.1); 2 mm longer than the cables, so it carries no '
+    'load: the lamp hangs from two 1/16 in stainless cables, each on a stop sleeve in the hub and a rated cable gripper on '
+    'a bracket under the plate (their pull test with the fixture is part of the listing). The plate carries the grippers, '
+    'the tray and the clamp; the canopy is a cover only. Box fill: the driver\'s two leads do not count (NEC 314.16(B)(1) '
+    'Exception). To be listed to UL 1598 (hardwired) with its own shades, each tint in the listing; rated and marked 120 V.',
+    'OPEN, for the lab and the supplier: (1) ERP\'s OK for mounting the ESS010W on edge (its datasheet names no '
+    'orientation, only "secured on a flat surface through the two mounting tabs"). (2) UL 1598 5.2.1\'s first sentence: '
+    'the cord is cut to length and spliced on site, which relies on the lab accepting it; the fallback is a '
+    'factory-connected cord in set drop lengths. (3) UL 1598 11.5.3: the plate\'s Ø8 lead opening passes neither of its '
+    'rod tests (one opening passing a 44.5 rod, or two of 10 cm2 or more passing a 16 rod); 11.5.1 may exempt a luminaire '
+    'of 4.54 kg or less (this one 2.6 to 2.7 kg with its canopy): the lab\'s call. A large opening is not drawn: it would '
+    'open the Class 2 side to the box.',
+    'Hang over a bar at 750 to 900 centers, the rim 700 to 800 above the counter; over a table, one a table, the rim '
     'about 650 to 750 above it.',
 ]
 NOTES_ORB = [

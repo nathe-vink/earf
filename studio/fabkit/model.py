@@ -125,6 +125,8 @@ class Part:
     inside: bool = False            # hidden in the assembled product (drawn dashed, kept for cutaways)
     draw: object = None             # a simpler solid for the drawings (a driver without its fine detail); left out,
                                     # the solid
+    detail: object = None           # the solid for the part's own detail views only (e.g. a part turned in the assembly,
+                                    # drawn square on its sheet); left out, draw or the solid
     pieces: dict = field(default_factory=dict)   # {piece: (solid, finish)}: what the render shows in its place, each
                                                  # piece in its own finish (a driver's cone, frame and magnet); the
                                                  # solid stays the whole, for the checks and drawings

@@ -438,3 +438,8 @@ OPEN, ONLY IF THE OWNER KEEPS THE LOCK (to do on his yes; not done):
 Notes, no change (the check's own): the PEEK bridge cannot unlatch (the crown stops the pin after 2.2 of lift); the ISO
 10511 M10 nut is 8 tall as drawn; the detent's ball clears at the rest pose; A with the lock is 0.73 off the axis by the
 lock alone. The site texts wait for the owner's pick.
+
+## 12. V10 (2026-11-25)
+
+The canopy wired as T1 (the driver on edge in a steel tray beside the axis, the cord on the axis, 150 x 50 kept) and the v9
+check's V10-2 to V10-12: renders/2026-11-25/barkhorn/lamp-site/v10/V10.md. The owner's lock sheet: lock-sheet-v10.jpg here.

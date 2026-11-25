@@ -13,7 +13,7 @@ stainless. The studio product files are written from the CAD's finishes when eac
 - the house dome views (house-dome-*: the off frames, the lit frames, the from-below views)
 - lamps-domes* (the rows)
 - cluster
-- cutaway ('How it lights', live: renders/2026-11-12/barkhorn/lamp-site/legible/hemisphere-ember-cutaway.png)
+- cutaway ('How it lights'; the LIVE masters are in final/, not legible/: see the v9 section below)
 - inuse
 - trio-*
 - dome (the single dome over its pool)
@@ -34,6 +34,11 @@ The other lane's frames made through hemisphere() (that lane re-renders them):
 
 The live site files (each with its -800, -th and -under variants where it has them): hemisphere-<tint> for every tint,
 hemisphere-cluster, hemisphere-<tint>-direct, hemisphere-<tint>-under, and the cutaway.
+V10 (the v9 check): also derived from the final/ masters by site_fix.py, so the site lane rebuilds them after the re-render:
+card-hemisphere-*, home-hemisphere-* and tile-hemisphere-* (24 files on main), hemisphere-ember-off, -cap, -rim and
+-table, and hemisphere-row. Pass v2's re-renders go back to the owner before they go live: he approved pictures with the
+black collar faces inside the window (coordinator/lamps-final-off-sheet-2026-11-21.jpg, bar-picture-now-and-new-2026-11-22.jpg).
+If the owner keeps A's lock, add one picture that shows the knob: every site camera hides it.
 
 The cutaway 'How it lights' (v9, the v8 check's V9-6): the LIVE cutaway, its phone cut and the in-use picture come from
 final/ (site_v2.py:2212, LIGHTS_DIR), not legible/:
@@ -54,6 +59,7 @@ The photometry IS rerun (isphere.py), after the re-render, from the same painted
 - renders/2026-11-10/barkhorn/lamp-site/final/photometry.txt (the published figures)
 - renders/2026-11-10/barkhorn/lamp-site/final/photometry-hemisphere.txt
 - renders/2026-11-16/barkhorn/lamp-site/final-mix/photometry-mix.txt
+- renders/2026-11-16/barkhorn/lamp-site/final-mix/photometry-mix.raw
 
 ## Every Hemisphere picture committed in that window
 
