@@ -2015,8 +2015,10 @@ HAB_HELD = 'rc/(?:' + ('|'.join(k for k in ('violet', 'black') if k not in HAB_S
 
 
 HOTSPOTS = True    # the hero's point (Tropos in Ice, to its page); off: the picture alone
-HERO_SRC = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-hero.png'           # the bar (r33-speaker-horn a9c41b7a), desktop;
-HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar-portrait.png'   # the bar in 4:5 (r33-speaker-horn 41494d42), on a phone
+HERO_SRC = 'renders/2026-11-25/barkhorn/bar-fix/bar-hero.png'      # C6i-7: the bar fix (r33-speaker-horn 4ff85a4ce0, read from git)
+_OLD_HERO_SRC = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-hero.png'           # the bar (r33-speaker-horn a9c41b7a), desktop;
+HERO_SRC_TALL = 'renders/2026-11-25/barkhorn/bar-fix/bar-backbar-portrait.png'      # C6i-7
+_OLD_HERO_SRC_TALL = 'renders/2026-11-11/barkhorn/product/planet-bar/bar-backbar-portrait.png'   # the bar in 4:5 (r33-speaker-horn 41494d42), on a phone
 HERO_ALT = 'Two Tropos in Acid at a bar, Hemispheres over the counter, Cores and Mantle on it, a wall of records behind'
 HERO_ALT_TALL = 'The EARF bar with a Tropos in Acid in its bay, Mantle and a Core in Ember on the bar, record shelves behind'
 HERO_WIDE = (16 / 9, 0.5, 0.5)     # the desktop: the whole 16:9 picture
@@ -2124,7 +2126,7 @@ def rc_home(p, web):
     import os
     from PIL import Image
     def sizes(path, name, widths):
-        src = Image.open(os.path.join(web.ROOT, path)).convert('RGB')
+        src = Image.open(_lamp_src(web, path)).convert('RGB')      # C6i-7: a fixed picture read from git
         out = {}
         for w in widths:
             n = f'img/rc/{name}-{w}.webp'
@@ -2177,13 +2179,20 @@ def rc_home(p, web):
 # per color (fa0c3a65: satin black hardware, polished bevels); the lamps lit, per tint, and in rows (r32-lamps-final 17a9da5e;
 # Core's base in its own color fee3b161; Hemisphere direct, from under, in a group cd703d56)
 MANTLE_FINAL = 'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-day-{name}.png'
-TROPOS_BAR_GIT = ('2802834a71', 'renders/2026-11-21/barkhorn/b1-test/fixed9.png')   # Tropos in Acid at the bar: fixed-9 (r33-speaker-horn; the coordinator 24 Nov 06:04)
+TROPOS_BAR_GIT = ('4ff85a4ce0', 'renders/2026-11-25/barkhorn/bar-fix/fixed9.png')   # C6i-7: the bar fix (r33-speaker-horn 4ff85a4ce0); was fixed-9 at 2802834a71
+_OLD_TROPOS_BAR_GIT = ('2802834a71', 'renders/2026-11-21/barkhorn/b1-test/fixed9.png')   # Tropos in Acid at the bar: fixed-9 (r33-speaker-horn; the coordinator 24 Nov 06:04)
 
 
 # C6h-7: two Hemisphere pictures fixed and approved (the coordinator 25 Nov 09:12), read from r32-lamps-final 48d6ffac5a:
 # the cluster's cords all run out of the top; over a table, the chair faces it, the cord runs to a ceiling canopy, the cup's handle on its wall
 LAMP_GIT = {'renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-cluster.png': '48d6ffac5a',
-            'renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-inuse.png': '48d6ffac5a'}
+            'renders/2026-11-10/barkhorn/lamp-site/final/hemisphere-ember-inuse.png': '48d6ffac5a',
+            # C6i-7: the bar fix, five frames (r33-speaker-horn 4ff85a4ce0; the coordinator 25 Nov 15:26)
+            'renders/2026-11-25/barkhorn/bar-fix/bar-hero.png': '4ff85a4ce0',
+            'renders/2026-11-25/barkhorn/bar-fix/bar-backbar-portrait.png': '4ff85a4ce0',
+            'renders/2026-11-25/barkhorn/bar-fix/mantle-bar.png': '4ff85a4ce0',
+            'renders/2026-11-25/barkhorn/bar-fix/bar-pendants.png': '4ff85a4ce0',
+}
 
 
 def _lamp_src(web, src):
@@ -2216,14 +2225,15 @@ MANTLE_COVER.update({k: f'renders/2026-11-10/barkhorn/mantle-r48/mantle-final-da
                      (('orange', 'dust'), ('amber', 'acid'), ('blue', 'ice'), ('black', 'smoke'))})                     # (r48-mantle-design 00d873d0)
 MANTLE_COVER_LINE = ('Lift-off dust cover in the deck&rsquo;s own tint: 3 mm cast acrylic, 448 x 358 x 100 mm, about 1.1 kg. '
                      'It rests on four small clear bumpers and lifts straight off; no hinges.')
-MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
+MANTLE_BAR = 'renders/2026-11-25/barkhorn/bar-fix/mantle-bar.png'      # C6i-7: resting on the bar's flat top (4ff85a4ce0, read from git)
+_OLD_MANTLE_BAR = 'renders/2026-11-11/barkhorn/product/planet-bar/mantle-bar.png'   # Mantle in Ember at the bar (r33-speaker-horn 8ebd1690)
 LAMP_FINAL = 'renders/2026-11-10/barkhorn/lamp-site/final/{f}.png'
 NAMES = dict(zip(RC_KEYS, ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']))
 CORE_LM = {'red': 45, 'orange': 51, 'amber': 63, 'green': 38, 'blue': 39, 'violet': 33, 'ice': 95, 'black': 35}      # lm out of the ball (photometry.txt 3205c545)
 HEMI_LM = {'red': 307, 'orange': 353, 'amber': 380, 'green': 282, 'blue': 270, 'violet': 258, 'ice': 521, 'black': 260}   # lm out, the corrected method (r32-lamps-final 3205c545, photometry.txt)
 # the bar (r33-speaker-horn ac342ff0, approved as a direction 2026-11-12; with the new record wall 9e8ddccf): five Hemispheres over the counter, two Cores on it;
 # on /lighting as the room, and an "At the bar" view for the tints in it. More frames join ROOM as they pass.
-ROOM = [('renders/2026-11-11/barkhorn/product/planet-bar/bar-pendants.png', 'bar-pendants',
+ROOM = [('renders/2026-11-25/barkhorn/bar-fix/bar-pendants.png', 'bar-pendants',      # C6i-7: the bar fix (4ff85a4ce0, read from git)
          'Five Hemispheres over a bar in Acid, Ember and Dust, two Cores on the counter, a wall of records behind',
          {'dome': ['red', 'orange', 'amber'], 'orb': ['red', 'orange']}),
         ('renders/2026-11-11/barkhorn/product/planet-bar/core-bar-table.png', 'core-bar-table',   # the Core close-up, final (e833b933)
