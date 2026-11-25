@@ -47,7 +47,7 @@ GLASS_MOVE = {'bar-hero': {(6.31, 4.18): (6.44, 4.15)},              # the secon
 PULL = 0.05                      # a pulled-out sleeve's front corner, this far past the shelf's lip
 PENDANT_CLOTH = (6.40, 4.45)
 PENDANT_CLOTH_RZ = 0.0          # square to the bar, so it clears the flat sleeve in front of it
-THROW_DX = {'bar-backbar-portrait': 0.04, 'fixed9': -0.03}   # the wool throw off the sleeve stack's corner
+THROW_W, THROW_DY = 0.38, -0.01  # the wool throw 4 cm narrower and 1 cm forward: clear of the sleeve stack behind it
 FOLD_DZ = -0.0055                # its lowest point stood 5.8 mm over the counter (the ripples): down onto it
 ICE = 0.024                      # an ice cube's height (kit box size z)
 
@@ -121,8 +121,8 @@ def stack(s, log):
                and b.get('rot', [0])[0] == -90.0 and abs(b['y'] - 4.25) < 0.02]
         if len(bds) == 4:
             for j, b in enumerate(bds):
-                b['z'] = round(TOP + 0.0005 + b.get('t', 0.003) * (j + 1), 4); b['y'] = round(b['y'] - 0.01, 4)
-            log.append('sleeve stack stacked (each on the one below), 1 cm further from the back edge')
+                b['z'] = round(TOP + 0.0005 + b.get('t', 0.003) * (j + 1), 4)
+            log.append('sleeve stack stacked (each on the one below); its back corner stays 4 mm past the edge, its middle 15 cm inside')
 
 
 def mantle_bar_stand(s, log):
@@ -212,8 +212,8 @@ def leftovers(s, log, name=''):
             if p.get('rr', 0.016) > t / 2 + 1e-9:
                 p['rr'] = round(t / 2, 4); log.append(f'fold at ({p["x"]:.2f}, {p["y"]:.2f}): layers on each other (rr {p["rr"]})')
                 if t >= 0.008:                               # the wool throw (the napkin, 4 mm, already lies on the top)
-                    p['z'] = round(p['z'] + FOLD_DZ, 4); p['x'] = round(p['x'] + THROW_DX.get(name, 0.0), 4)
-                    log.append(f'throw down {-FOLD_DZ * 1000:.1f} mm onto the top' + (f', {THROW_DX[name] * 100:+.0f} cm in x off the stack' if name in THROW_DX else ''))
+                    p['z'] = round(p['z'] + FOLD_DZ, 4); p['w'] = THROW_W; p['y'] = round(p['y'] + THROW_DY, 4)
+                    log.append(f'throw down {-FOLD_DZ * 1000:.1f} mm onto the top, {THROW_W} wide, 1 cm forward: clear of the stack')
 
 
 def pendants(s, log):
@@ -243,7 +243,9 @@ def pendants(s, log):
             p['y'] = round(p['y'] - 0.015, 4); log.append('napkin 1.5 cm further from the Dust Core')
 
 
-FRUIT_DZ = {('food_lime_01', (0, 20, 0)): -0.009, ('food_lime_01', (30, 0, 90)): -0.0004, ('lemon', (0, 70, 20)): 0.0045}
+# each fruit's lowest point onto the bowl's inner surface under it (the bowl's mesh, wooden_bowl_01_2k: its floor and wall
+# height by radius), 0.5 mm clear: one lime stood 8 mm over it, the other 3 mm into it, the lemon 35 mm into the wood
+FRUIT_DZ = {('food_lime_01', (0, 20, 0)): -0.0082, ('food_lime_01', (30, 0, 90)): -0.0030, ('lemon', (0, 70, 20)): 0.0354}
 
 
 def fruit(s, log):
