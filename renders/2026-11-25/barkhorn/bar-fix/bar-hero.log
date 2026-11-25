@@ -12,22 +12,22 @@ RECORD WALL other cell (18, 1) 8
 RECORD WALL {"cells": 75, "full": 48, "part": 12, "flat": 6, "other": 9, "per_full": [65, 77.0, 86], "shares": {"lp": 0.696, "gate": 0.153, "thin": 0.106, "box": 0.044}, "records": 4376}
 REMOVED ['dj-knobs', 'dj-labels', 'dj-plinths', 'dj-records', 'glasses-r36', 'life-record', 'life-sleeve', 'pours-r36', 'screen-boxes', 'screen-frames', 'screen-panels']
 RESTYLED ['backbar-top', 'chairs-brass', 'counter-rail', 'counter-zinc', 'panel-fabric', 'spk-niche-felt']
-LAMPS lamp_site from /home/user/lamps-ecb1 ecb1650c2468c82a0723744be2e3594f39d7fb0e
+LAMPS lamp_site from /tmp/claude-0/-home-user-earf/fec9b027-0f19-5237-8a32-b320f2d247db/scratchpad/lamps ecb1650c2468c82a0723744be2e3594f39d7fb0e
 LAMPS placed 5 Hemisphere, 0 Core; 120 lamps, 5000 lm at the emitters
-LAMPS lamp_site from /home/user/lamps-ecb1 ecb1650c2468c82a0723744be2e3594f39d7fb0e
+LAMPS lamp_site from /tmp/claude-0/-home-user-earf/fec9b027-0f19-5237-8a32-b320f2d247db/scratchpad/lamps ecb1650c2468c82a0723744be2e3594f39d7fb0e
 BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
 BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
 BASEFIX inner [(68.51, -6.3), (55.91, 24.16), (50.48, 31.46), (49.53, 31.51)]
 LAMPS placed 0 Hemisphere, 3 Core; 3 lamps, 600 lm at the emitters
 CORE cable removed: 3
 LAMPS hemi_scale 1.0 cords to 3.4
-02:05.478  cycles           | WARNING CUEW initialization failed: Error opening the library
-43:53.908  render           | Saved: '/home/user/earf/renders/2026-11-25/barkhorn/bar-fix/bar-hero.png'
+02:19.314  cycles           | WARNING CUEW initialization failed: Error opening the library
+48:00.809  render           | Saved: '/home/user/earf/renders/2026-11-25/barkhorn/bar-fix/bar-hero.png'
 /home/user/earf/studio/engine/render.py:539: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   m = bpy.data.materials.new('mask-id'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
-44:08.144  render           | Saved: '/home/user/earf/renders/2026-11-25/barkhorn/bar-fix/bar-hero.mask.png'
+48:16.895  render           | Saved: '/home/user/earf/renders/2026-11-25/barkhorn/bar-fix/bar-hero.mask.png'
 equipment in frame: 0 px; hidden in frame: 0 px
 /home/user/earf/studio/engine/render.py:590: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
   m_ = bpy.data.materials.new(name); m_.use_nodes = True; t_ = m_.node_tree; t_.nodes.clear()
-44:13.867  render           | Saved: '/home/user/earf/renders/2026-11-25/barkhorn/bar-fix/bar-hero.swatch.png'
-renders/2026-11-25/barkhorn/bar-fix/bar-hero.png  {'build': 125.2, 'render': 2508.4}  samples 128
+48:23.133  render           | Saved: '/home/user/earf/renders/2026-11-25/barkhorn/bar-fix/bar-hero.swatch.png'
+renders/2026-11-25/barkhorn/bar-fix/bar-hero.png  {'build': 139.0, 'render': 2741.5}  samples 128
