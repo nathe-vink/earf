@@ -13,6 +13,8 @@ A group whose lowest point has nothing within 5 mm under it (a hanging lamp, a w
 import math, re
 
 GAP = 0.005          # a sample within 5 mm of a surface below is supported
+LIFT = 0.004         # casts start 4 mm over the lowest point, so a base sitting exactly on a top (or sunk up to 4 mm) finds it
+SINK = 0.0015        # sunk deeper than this is a fault too (it reads as a thing set into the surface)
 CONTACT = 0.003      # the contact: vertices within 3 mm of the lowest point
 STEP = 0.01          # the footprint's sample grid
 MARGIN_MAX = 0.10    # the edge margin is searched up to 10 cm
@@ -108,7 +110,7 @@ def check(bpy, scene, groups):
         if not vs:
             continue
         own = {o.name for o in objs}
-        z0 = min(v.z for v in vs); zc = z0 - 0.0001
+        z0 = min(v.z for v in vs); zc = z0 + LIFT
         h = _hull([(v.x, v.y) for v in vs])
         if len(h) < 3:
             continue
@@ -119,8 +121,9 @@ def check(bpy, scene, groups):
         def sup(x, y):
             g, nm = _cast(bpy, scene, own, x, y, zc)
             if g is not None:
+                g -= LIFT                                    # the gap from the lowest point; negative: sunk into it
                 gaps.append((g, nm))
-            ok = g is not None and g <= GAP
+            ok = g is not None and -SINK <= g <= GAP
             if ok:
                 on[nm] = on.get(nm, 0) + 1
             return ok
@@ -150,7 +153,7 @@ def check(bpy, scene, groups):
             margin = 0.0
             for s in range(1, int(MARGIN_MAX / STEP) + 1):
                 d = s * STEP
-                if all((lambda r: r[0] is not None and r[0] <= GAP)(_cast(bpy, scene, own, x + d * nx, y + d * ny, zc)) for x, y, nx, ny in edge):
+                if all((lambda r: r[0] is not None and -SINK <= r[0] - LIFT <= GAP)(_cast(bpy, scene, own, x + d * nx, y + d * ny, zc)) for x, y, nx, ny in edge):
                     margin = d
                 else:
                     break
@@ -159,6 +162,7 @@ def check(bpy, scene, groups):
                     'footprint_xy': [[round(min(xs), 3), round(min(ys), 3)], [round(max(xs), 3), round(max(ys), 3)]],
                     'standing': any(c_ok),
                     'gap_below_m': round(min(gaps)[0], 4) if gaps else None, 'below': min(gaps)[1] if gaps else None,
+                    'sunk_m': round(-min(gaps)[0], 4) if gaps and min(gaps)[0] < -SINK else 0.0,
                     'on': [nm for nm, _ in top],
                     'contact_supported': round(sum(c_ok) / len(c_ok), 3),
                     'footprint_supported': round(sum(g_ok) / len(g_ok), 3),
